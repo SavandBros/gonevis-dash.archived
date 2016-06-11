@@ -10,12 +10,12 @@
     "angular-resource": "^1.4.0",
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.4.0",
-    "angular-material": "^1.0.9"
+    "angular-material": "^1.0.9",
+    "angular-aria": "^1.5.6",
+    "font-awesome": "^4.6.3"
   },
   "devDependencies": {
-    "angular-mocks": "^1.4.0",
-    "font-awesome": "^4.6.3",
-    "angular-aria": "^1.5.6"
+    "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
   "moduleName": "gonevisDash",
@@ -26,6 +26,12 @@
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
       ]
+    },
+    "font-awesome": {
+        "main": [
+            "less/font-awesome.less",
+            "css/font-awesome.css"
+        ]
     }
   }
 }

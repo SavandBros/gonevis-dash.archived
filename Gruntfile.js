@@ -394,6 +394,11 @@ module.exports = function (grunt) {
                         cwd: 'bower_components/bootstrap/dist',
                         src: 'fonts/*',
                         dest: '<%= gonevisDash.dist %>'
+                    }, {
+                        expand: true,
+                        cwd: 'bower_components/font-awesome/',
+                        src: 'font/*',
+                        dest: '<% gonevisDash.dist $>'
                     }]
             },
             styles: {
