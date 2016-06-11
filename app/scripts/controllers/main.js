@@ -7,11 +7,13 @@
  * # MainController
  * Controller of the gonevisDash
  */
-angular.module('gonevisDash')
-  .controller('MainController', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+function MainController($scope) {
+    $scope.awesomeThings = [
+        'HTML5 Boilerplate',
+        'AngularJS',
+        'Karma'
     ];
-  });
+}
+
+angular.module('gonevisDash').controller("MainController", MainController);
+MainController.$inject = ['$scope'];
