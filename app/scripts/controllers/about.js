@@ -7,11 +7,13 @@
  * @class AboutController
  * Controller of the gonevisDash
  */
-angular.module('gonevisDash')
-  .controller('AboutController', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+function AboutController($scope) {
+    $scope.awesomeThings = [
+        'HTML5 Boilerplate',
+        'AngularJS',
+        'Karma'
     ];
-  });
+}
+
+angular.module('gonevisDash').controller('AboutController', AboutController);
+AboutController.$inject = ['$scope'];
