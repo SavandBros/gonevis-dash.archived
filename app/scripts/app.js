@@ -9,28 +9,29 @@
  * Main module of the application.
  */
 angular
-  .module('gonevisDash', [
-    'ngAnimate',
-    'ngCookies',
-    'ngMessages',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngMaterial'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutController',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+    .module('gonevisDash', [
+        'ngAnimate',
+        'ngCookies',
+        'ngMessages',
+        'ngResource',
+        'ngRoute',
+        'ngSanitize',
+        'ngMaterial'
+    ])
+    .config(function ($routeProvider) {
+
+        $routeProvider
+            .when('/', {
+                templateUrl: 'views/main.html',
+                controller: 'MainController',
+                controllerAs: 'main'
+            })
+            .when('/about', {
+                templateUrl: 'views/about.html',
+                controller: 'AboutController',
+                controllerAs: 'about'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+    });
