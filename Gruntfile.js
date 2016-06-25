@@ -19,6 +19,8 @@ module.exports = function (grunt) {
         cdnify: 'grunt-google-cdn'
     });
 
+    grunt.loadNpmTasks('grunt-ng-constant');
+
     var serveStatic = require('serve-static');
 
     // Configurable paths for the application
@@ -430,6 +432,35 @@ module.exports = function (grunt) {
                 configFile: 'test/karma.conf.js',
                 singleRun: true
             }
+        },
+        ngconstant: {
+            options: {
+                space: '  ',
+                wrap: '"use strict";\n\n {%= __ngModule %}',
+                name: 'gonevisDash',
+                dest: '<%= gonevisDash.app %>/scripts/configuration.js',
+                constants: {
+                    ENV: {
+                        googleAnalyticsID: 'UA-XXXXXXX-X'
+                    }
+                }
+            },
+            development: {
+                constants: {
+                    ENV: {
+                        name: 'development',
+                        apiEndpoint: 'http://127.0.0.1:8000/api/'
+                    }
+                }
+            },
+            production: {
+                constants: {
+                    ENV: {
+                        name: 'production',
+                        apiEndpoint: 'http://api.gonevis.com/api/v1/'
+                    }
+                }
+            }
         }
     });
 
@@ -441,6 +472,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
+            'ngconstant:development',
             'wiredep',
             'concurrent:server',
             'postcss:server',
@@ -465,6 +497,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'ngconstant:production',
         'wiredep',
         'useminPrepare',
         'concurrent:dist',
