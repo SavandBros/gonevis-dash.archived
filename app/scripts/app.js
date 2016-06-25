@@ -18,8 +18,9 @@ angular
         'ngSanitize',
         'ngMaterial'
     ])
-    .config(function ($routeProvider) {
+    .config(function ($routeProvider, $httpProvider) {
 
+        $httpProvider.interceptors.push('AuthenticationInterceptorService');
         $routeProvider
             .when('/', {
                 templateUrl: 'views/main.html',

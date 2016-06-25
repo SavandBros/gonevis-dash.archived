@@ -182,7 +182,7 @@ function AuthenticationService($rootScope, $http, $log, $window, ENV) {
     };
 }
 
-angular.module('gonevisDash.AuthenticationService')
+angular.module('gonevisDash')
     .factory('AuthenticationService', AuthenticationService);
 
 AuthenticationService.$inject = ['$rootScope', '$http', '$log', '$window', 'ENV'];
