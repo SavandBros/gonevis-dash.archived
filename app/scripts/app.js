@@ -20,7 +20,7 @@ angular
         'ui.router',
         'ui.router.title'
     ])
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         $httpProvider.interceptors.push('AuthenticationInterceptorService');
 
         $stateProvider
