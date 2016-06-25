@@ -16,23 +16,22 @@ angular
         'ngResource',
         'ngRoute',
         'ngSanitize',
-        'ngMaterial'
+        'ngMaterial',
+        'ui.router',
+        'ui.router.title'
     ])
-    .config(function ($routeProvider, $httpProvider) {
-
+    .config(function ($stateProvider, $urlRouterProvider) {
         $httpProvider.interceptors.push('AuthenticationInterceptorService');
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'MainController',
-                controllerAs: 'main'
-            })
-            .when('/about', {
-                templateUrl: 'views/about.html',
-                controller: 'AboutController',
-                controllerAs: 'about'
-            })
-            .otherwise({
-                redirectTo: '/'
+
+        $stateProvider
+            .state('main', {
+                url: '/',
+                views: {
+                    content: {
+                        controller: 'MainController',
+                        templateUrl: 'views/main.html'
+                    }
+                }
             });
+        $urlRouterProvider.otherwise('/');
     });

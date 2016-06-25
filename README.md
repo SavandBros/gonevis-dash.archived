@@ -5,7 +5,7 @@
 
 
 This project is the source code of the [Me Gonevis], the admin area of
-Gonevis Blogging platform.
+Gonevis platform.
 
 ## Build & development
 
