@@ -2,7 +2,7 @@
 /dist
 /.tmp
 /.sass-cache
+/.idea
 /bower_components
 jsconfig.json
 /app/scripts/configuration.js
-
