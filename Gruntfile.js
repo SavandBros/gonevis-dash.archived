@@ -387,21 +387,21 @@ module.exports = function (grunt) {
                         'basement/static/css/fonts/{,*/}*.*'
                     ]
                 }, {
-                        expand: true,
-                        cwd: '.tmp/images',
-                        dest: '<%= gonevisDash.dist %>/basement/static/img',
-                        src: ['generated/*']
-                    }, {
-                        expand: true,
-                        cwd: 'bower_components/bootstrap/dist',
-                        src: 'fonts/*',
-                        dest: '<%= gonevisDash.dist %>'
-                    }, {
-                        expand: true,
-                        cwd: 'bower_components/font-awesome/',
-                        src: 'font/*',
-                        dest: '<% gonevisDash.dist $>'
-                    }]
+                    expand: true,
+                    cwd: '.tmp/images',
+                    dest: '<%= gonevisDash.dist %>/basement/static/img',
+                    src: ['generated/*']
+                }, {
+                    expand: true,
+                    cwd: 'bower_components/bootstrap/dist',
+                    src: 'fonts/*',
+                    dest: '<%= gonevisDash.dist %>'
+                }, {
+                    expand: true,
+                    cwd: 'bower_components/font-awesome/',
+                    src: 'font/*',
+                    dest: '<% gonevisDash.dist $>'
+                }]
             },
             styles: {
                 expand: true,
@@ -436,9 +436,19 @@ module.exports = function (grunt) {
         ngconstant: {
             options: {
                 space: '  ',
-                wrap: '"use strict";\n\n {%= __ngModule %}',
+                wrap: '"use strict";\n\n var app = {%= __ngModule %}',
                 name: 'gonevisDash',
                 dest: '<%= gonevisDash.app %>/configuration.js',
+                deps: [
+                    'ngMaterial',
+                    'ui.router',
+                    'ngAnimate',
+                    'ngCookies',
+                    'ngMessages',
+                    'ngResource',
+                    'ngSanitize',
+                    'gettext'
+                ],
                 constants: {
                     ENV: {
                         googleAnalyticsID: 'UA-XXXXXXX-X'
