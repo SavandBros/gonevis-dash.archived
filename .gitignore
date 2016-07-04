@@ -5,4 +5,4 @@
 .idea/
 /bower_components
 jsconfig.json
-/app/scripts/configuration.js
+/app/configuration.js
