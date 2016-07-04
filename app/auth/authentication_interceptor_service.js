@@ -38,7 +38,6 @@ function AuthenticationInterceptorService($window, ENV) {
   }
 }
 
-angular.module('gonevisDash')
-  .factory('AuthenticationInterceptorService', AuthenticationInterceptorService);
+app.factory('AuthenticationInterceptorService', AuthenticationInterceptorService);
 
 AuthenticationInterceptorService.$inject = ['$window', 'ENV'];

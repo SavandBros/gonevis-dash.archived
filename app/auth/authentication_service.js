@@ -6,14 +6,13 @@
  *
  * @param $rootScope
  * @param $http
- * @param $log
  * @param $window
  * @param ENV
  * @class AuthenticationService
  * @returns [Factory]
  * @namespace gonevisDash.AuthenticationService
  */
-function AuthenticationService($rootScope, $http, $log, $window, ENV) {
+function AuthenticationService($rootScope, $http, $window, ENV) {
   /**
    * Return the currently authenticated user
    *
@@ -182,7 +181,5 @@ function AuthenticationService($rootScope, $http, $log, $window, ENV) {
   };
 }
 
-angular.module('gonevisDash')
-  .factory('AuthenticationService', AuthenticationService);
-
-AuthenticationService.$inject = ['$rootScope', '$http', '$log', '$window', 'ENV'];
+app.factory('AuthenticationService', AuthenticationService);
+AuthenticationService.$inject = ['$rootScope', '$http', '$window', 'ENV'];

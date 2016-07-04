@@ -5,8 +5,8 @@
  * @name gonevisDash.controller:MainController
  * Controller of the gonevisDash
  */
-function MainController($scope, AuthenticationService) {
-
+function MainController($scope) {
+alert('Hello');
   /**
    * constructor
    *
@@ -20,5 +20,5 @@ function MainController($scope, AuthenticationService) {
   }
 }
 
-angular.module('gonevisDash').controller("MainController", MainController);
-MainController.$inject = ['$scope', 'AuthenticationService'];
+app.controller("MainController", MainController);
+MainController.$inject = ['$scope'];
