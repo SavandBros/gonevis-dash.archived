@@ -1,5 +1,35 @@
 /* Global */
 
-/* Improvements */
+body {
+    background-color: #f9f9f9;
+}
 
-/* Components */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+/* Space */
+
+.s-pad {
+    padding: 30px;
+}
+
+/* Opacity */
+
+.o-fade {
+    opacity: 0.6;
+}
+
+.o-fade-hard {
+    opacity: 0.3;
+}
+
+.o-fade-soft {
+    opacity: 0.7;
+}
+
+/* Shadow */
+
+.s-box {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
