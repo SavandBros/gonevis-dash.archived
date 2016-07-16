@@ -6,18 +6,16 @@
  * Controller of the gonevisDash
  */
 function MainController($scope) {
-alert('Hello');
-  /**
-   * constructor
-   *
-   * @method constructor
-   * @desc Init function for controller
-   *
-   * @memberOf EmptyController
-   */
-  function constructor() {
-    alert('Hello');
-  }
+    $scope.imAlive = true;
+    /**
+     * constructor
+     *
+     * @method constructor
+     * @desc Init function for controller
+     *
+     * @memberOf MainController
+     */
+    function constructor() {}
 }
 
 app.controller("MainController", MainController);
