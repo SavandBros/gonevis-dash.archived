@@ -6,3 +6,4 @@
 /bower_components
 jsconfig.json
 /app/configuration.js
+.vscode/
