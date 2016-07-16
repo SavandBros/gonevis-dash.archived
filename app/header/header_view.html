@@ -1,12 +1,18 @@
-<md-toolbar>
-  <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
-      <md-icon class="fa fa-bars"></md-icon>
-    </md-button>
-    <h2><span>Gonevis</span></h2>
-    <span flex></span>
-    <md-button class="md-icon-button" aria-label="Post">
-      <md-icon class="fa fa-plus-circle"></md-icon>
-    </md-button>
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" ui-sref="main">Dash</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+        <p class="navbar-text" ng-if="user.isAuthenticated()">{{ user.name }}</p>
+      </ul>
+    </div>
   </div>
-</md-toolbar>
+</nav>
