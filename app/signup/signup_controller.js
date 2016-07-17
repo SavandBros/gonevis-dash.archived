@@ -4,16 +4,16 @@
  * @ngdoc function
  * @name gonevisDash.controller:SigninController
  * Controller of the gonevisDash
- * 
+ *
  * @param $scope
  * @param $rootScope
  * @param $state
  * @param $mdToast
  * @param AuthenticationService
  */
-function SigninController($scope, $rootScope, $state, $mdToast, AuthenticationService) {
+function SignupController($scope, $rootScope, $state, $mdToast, AuthenticationService) {
 
-    // Signin form
+    // Signup form
     $scope.form = {};
 
     /**
@@ -31,36 +31,42 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthenticationSe
     };
 
     /**
-     * signin
+     * signup
      *
-     * @method signin
-     * @desc Submit signin form to authenticate
-     *
+     * @method signup
+     * @desc Submit signup form
+     * 
      * @param form {object}
      */
-    $scope.signin = function (form) {
+    $scope.signup = function register(form) {
         form.loading = true;
 
-        AuthenticationService.login(form.username, form.password).then(
+        AuthenticationService.register(form.email, form.username, form.password).then(
             function (data, status, headers, config) {
-                form.loading = false;
+                $rootScope.$broadcast('gonevisDash.AuthenticationService:Registered');
                 form.errors = null;
-
-                AuthenticationService.setAuthenticatedUser(data.data.user);
-                AuthenticationService.setToken(data.data.token);
-
-                $rootScope.$broadcast('gonevisDash.AuthenticationService:Authenticated');
-                $mdToast.showSimple('Welcome ' + data.data.user.username);
             },
             function (data, status, headers, config) {
                 form.loading = false;
                 form.errors = data.data;
             }
         );
-    }
+    };
+
+    $scope.$on('gonevisDash.AuthenticationService:Registered', function () {
+        AuthenticationService.login($scope.form.username, $scope.form.password).then(
+            function (data, status, headers, config) {
+                AuthenticationService.setAuthenticatedUser(data.data.user);
+                AuthenticationService.setToken(data.data.token);
+
+                $rootScope.$broadcast('gonevisDash.AuthenticationService:Authenticated');
+                $mdToast.showSimple('Welcome ' + data.data.user.username);
+            }
+        );
+    });
 
     constructor();
 }
 
-app.controller("SigninController", SigninController);
-SigninController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthenticationService'];
+app.controller("SignupController", SignupController);
+SignupController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthenticationService'];
