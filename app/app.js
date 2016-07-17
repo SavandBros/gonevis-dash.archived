@@ -21,6 +21,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             url: '/login',
             controller: 'SigninController',
             templateUrl: 'signin/signin_view.html'
+        })
+        .state('signup', {
+          url:'/register',
+          controller: 'SignupController',
+          templateUrl: 'signup/signup_view.html'
         });
     $urlRouterProvider.otherwise('/');
 });
