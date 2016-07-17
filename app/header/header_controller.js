@@ -13,6 +13,8 @@ function HeaderController($scope, $state, AuthenticationService) {
     $scope.auth = AuthenticationService;
     $scope.user = AuthenticationService.getAuthenticatedUser();
 
+    $scope.state = $state;
+
     /**
      * constructor
      *

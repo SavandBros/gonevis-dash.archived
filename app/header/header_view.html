@@ -10,6 +10,9 @@
       <a class="navbar-brand" ui-sref="main">Dash</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav" ng-if="auth.isAuthenticated()">
+        <li ng-class="{'active': state.includes('new-post')}"><a ui-sref="new-post">New Post</a></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" ng-if="auth.isAuthenticated()">
           <a class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <i class="fa fa-caret-down o-fade-hard"></i></a>
