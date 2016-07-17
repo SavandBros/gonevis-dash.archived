@@ -21,8 +21,6 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthenticationSe
      *
      * @method constructor
      * @desc Init function for controller
-     *
-     * @memberOf SigninController
      */
     function constructor() {
 
@@ -38,6 +36,7 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthenticationSe
      * @method signin
      * @desc Submit signin form to authenticate
      *
+     * @param form {object}
      */
     $scope.signin = function (form) {
         form.loading = true;
