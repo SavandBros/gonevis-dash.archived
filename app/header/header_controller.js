@@ -9,10 +9,6 @@
  * @param AuthenticationService
  */
 function HeaderController($scope, $state, AuthenticationService) {
-    // Get user
-    $scope.auth = AuthenticationService;
-    $scope.user = AuthenticationService.getAuthenticatedUser();
-
     /**
      * constructor
      *
@@ -23,15 +19,22 @@ function HeaderController($scope, $state, AuthenticationService) {
      */
     function constructor() {
 
+        // Get user
+        $scope.auth = AuthenticationService;
+        $scope.user = AuthenticationService.getAuthenticatedUser();
     };
 
     $scope.$on('gonevisDash.AuthenticationService:Authenticated', function () {
-        $state.reload();
+        constructor();
+        $state.go('main');
     });
 
     $scope.$on('gonevisDash.AuthenticationService:SignedOut', function () {
-        $state.reload(true);
+        constructor();
+        $state.go('signin');
     });
+
+    constructor();
 };
 
 app.controller("HeaderController", HeaderController);
