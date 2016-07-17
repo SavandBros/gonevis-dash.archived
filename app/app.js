@@ -17,6 +17,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             controller: 'MainController',
             templateUrl: 'main/main_view.html'
         })
+        .state('new-post', {
+            url: '/post',
+            controller: 'NewPostController',
+            templateUrl: 'new_post/new_post_view.html'
+        })
         .state('signin', {
             url: '/login',
             controller: 'SigninController',
