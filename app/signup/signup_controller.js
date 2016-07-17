@@ -21,8 +21,6 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthenticationSe
      *
      * @method constructor
      * @desc Init function for controller
-     *
-     * @memberOf RegisterController
      */
     function constructor() {
 
@@ -36,22 +34,36 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthenticationSe
      * signup
      *
      * @method signup
-     * @desc Submit signup form to authenticate
-     *
+     * @desc Submit signup form
+     * 
+     * @param form {object}
      */
-     $scope.signup = function register(form) {
+    $scope.signup = function register(form) {
+        form.loading = true;
 
-         AuthenticationService.register(form.email, form.username, form.password).then(
-             function(data, status, headers, config) {
-                 $rootScope.$broadcast('gonevisDash.account.service.AuthenticationService:Registered');
+        AuthenticationService.register(form.email, form.username, form.password).then(
+            function (data, status, headers, config) {
+                $rootScope.$broadcast('gonevisDash.AuthenticationService:Registered');
+                form.errors = null;
+            },
+            function (data, status, headers, config) {
+                form.loading = false;
+                form.errors = data.data;
+            }
+        );
+    };
 
-             },
-             function(data, status, headers, config) {
-                 console.log(data.data);
-                 form.errors = data.data;
-             }
-         );;
-     };
+    $scope.$on('gonevisDash.AuthenticationService:Registered', function () {
+        AuthenticationService.login($scope.form.username, $scope.form.password).then(
+            function (data, status, headers, config) {
+                AuthenticationService.setAuthenticatedUser(data.data.user);
+                AuthenticationService.setToken(data.data.token);
+
+                $rootScope.$broadcast('gonevisDash.AuthenticationService:Authenticated');
+                $mdToast.showSimple('Welcome ' + data.data.user.username);
+            }
+        );
+    });
 
     constructor();
 }
