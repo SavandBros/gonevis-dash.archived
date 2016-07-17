@@ -103,9 +103,9 @@ function AuthenticationService($rootScope, $http, $window, ENV) {
    * @returns {Promise}
    * @memberOf gonevisDash.AuthenticationService
    */
-  function login(email, password) {
+  function login(username, password) {
     return $http.post(ENV.apiEndpoint + 'account/login/', {
-      email: email,
+      username: username,
       password: password
     });
   }
@@ -126,14 +126,12 @@ function AuthenticationService($rootScope, $http, $window, ENV) {
    * Try to register a new user
    *
    * @method register
-   * @param {String} email The email entered by the user
-   * @param {String} password The password entered by the user
+   * @param {String} username The username entered by the user
    * @returns {Promise}
    * @memberOf gonevisDash.AuthenticationService
    */
-  function register(email, name, password) {
+  function register(username, password) {
     return $http.post(ENV.apiEndpoint + 'account/register/', {
-      email: email,
       username: username,
       password: password,
     });
