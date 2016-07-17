@@ -18,10 +18,11 @@ function HeaderController($scope, $state, AuthenticationService) {
      * @memberOf HeaderController
      */
     function constructor() {
-
         // Get user
         $scope.auth = AuthenticationService;
         $scope.user = AuthenticationService.getAuthenticatedUser();
+
+        $scope.state = $state;
     };
 
     $scope.$on('gonevisDash.AuthenticationService:Authenticated', function () {

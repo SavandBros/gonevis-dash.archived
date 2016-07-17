@@ -1,7 +1,7 @@
 /* Global */
 
-body {
-    background-color: #f9f9f9;
+html, body {
+    background-color: #fcfcfc;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -10,6 +10,18 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
     cursor: pointer;
+}
+
+/* Navbar */
+
+.navbar-brand {
+    margin-right: 30px;
+}
+
+/* Forms */
+
+.help-block {
+    margin-left: 10px;
 }
 
 /* Space */
