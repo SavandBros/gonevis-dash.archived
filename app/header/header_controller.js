@@ -3,8 +3,16 @@
  * @ngdoc function
  * @name gonevisDash.controller:HeaderController
  * Controller of the gonevisDash
+ * 
+ * @param $scope
+ * @param $state
+ * @param AuthenticationService
  */
-function HeaderController($scope) {
+function HeaderController($scope, $state, AuthenticationService) {
+    // Get user
+    $scope.auth = AuthenticationService;
+    $scope.user = AuthenticationService.getAuthenticatedUser();
+
     /**
      * constructor
      *
@@ -13,8 +21,18 @@ function HeaderController($scope) {
      *
      * @memberOf HeaderController
      */
-    function constructor() {}
-}
+    function constructor() {
+
+    };
+
+    $scope.$on('gonevisDash.AuthenticationService:Authenticated', function () {
+        $state.reload();
+    });
+
+    $scope.$on('gonevisDash.AuthenticationService:SignedOut', function () {
+        $state.reload(true);
+    });
+};
 
 app.controller("HeaderController", HeaderController);
-HeaderController.$inject = ['$scope'];
+HeaderController.$inject = ['$scope', '$state', 'AuthenticationService'];
