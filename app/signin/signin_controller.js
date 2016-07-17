@@ -44,16 +44,17 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthenticationSe
 
         AuthenticationService.login(form.username, form.password).then(
             function (data, status, headers, config) {
+                form.loading = false;
+                form.errors = null;
+
                 AuthenticationService.setAuthenticatedUser(data.data.user);
                 AuthenticationService.setToken(data.data.token);
 
-                $rootScope.$broadcast('gonevisDash.account.service.AuthenticationService:Authenticated');
+                $rootScope.$broadcast('gonevisDash.AuthenticationService:Authenticated');
                 $mdToast.showSimple('Welcome ' + data.data.user.username);
-                $state.go('main');
             },
             function (data, status, headers, config) {
                 form.loading = false;
-                form.error = true;
                 form.errors = data.data;
             }
         );
