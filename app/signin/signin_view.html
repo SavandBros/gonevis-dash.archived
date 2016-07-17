@@ -15,7 +15,9 @@
                     <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
                         {{ form.errors.non_field_errors[0] }}
                     </div>
-                    <button class="btn btn-primary pull-right btn-lg" ng-disabled="form.loading"><i class="fa fa-sign-in fa-fw"></i></button>
+                    <button class="btn btn-primary btn-block center btn-lg" ng-disabled="form.loading"><i class="fa fa-sign-in"></i> Sign in</button>
+                    <hr>
+                    <p>New to us?<a ui-sref="signup" style="text-decoration:none"> Register</a></p>
                 </form>
             </div>
         </div>
