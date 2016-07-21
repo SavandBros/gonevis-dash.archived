@@ -31,6 +31,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
           url:'/register',
           controller: 'SignupController',
           templateUrl: 'signup/signup_view.html'
+        })
+        .state('settings', {
+          url: '/settings',
+          controller: 'SettingsController',
+          templateUrl: 'settings/settings.html'
+        })
+        .state('profile', {
+          url: '/profile',
+          controller: 'UserProfileController',
+          templateUrl: 'user_profile/user_profile.html'
         });
     $urlRouterProvider.otherwise('/');
 });
