@@ -447,7 +447,8 @@ module.exports = function (grunt) {
                     'ngMessages',
                     'ngResource',
                     'ngSanitize',
-                    'gettext'
+                    'gettext',
+                    'xeditable'
                 ],
                 constants: {
                     ENV: {
