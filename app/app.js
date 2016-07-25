@@ -17,10 +17,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             controller: 'MainController',
             templateUrl: 'main/main_view.html'
         })
-        .state('new-post', {
-            url: '/post',
-            controller: 'NewPostController',
-            templateUrl: 'new_post/new_post_view.html'
+        .state('entry-new', {
+            url: '/new',
+            controller: 'EntryNewController',
+            templateUrl: 'entry_new/entry_new_view.html'
         })
         .state('signin', {
             url: '/login',
@@ -28,19 +28,18 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             templateUrl: 'signin/signin_view.html'
         })
         .state('signup', {
-          url:'/register',
-          controller: 'SignupController',
-          templateUrl: 'signup/signup_view.html'
+            url: '/register',
+            controller: 'SignupController',
+            templateUrl: 'signup/signup_view.html'
         })
-        .state('settings', {
-          url: '/settings',
-          controller: 'SettingsController',
-          templateUrl: 'settings/settings.html'
-        })
-        .state('profile', {
-          url: '/profile',
-          controller: 'UserProfileController',
-          templateUrl: 'user_profile/user_profile.html'
+        .state('user', {
+            url: '/user',
+            controller: 'UserController',
+            templateUrl: 'user/user_view.html'
         });
     $urlRouterProvider.otherwise('/');
+});
+
+app.run(function (editableOptions) {
+    editableOptions.theme = 'bs3';
 });
