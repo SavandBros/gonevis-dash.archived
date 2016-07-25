@@ -205,7 +205,7 @@ module.exports = function (grunt) {
         // Automatically inject Bower components into the app
         wiredep: {
             app: {
-                src: ['<%= gonevisDash.app %>/*/index.html'],
+                src: ['<%= gonevisDash.app %>/index.html'],
                 ignorePath: /\.\.\//
             },
             test: {
