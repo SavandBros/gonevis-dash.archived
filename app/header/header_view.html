@@ -11,14 +11,13 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav" ng-if="auth.isAuthenticated()">
-        <li ng-class="{'active': state.includes('new-post')}"><a ui-sref="new-post">New Post</a></li>
+        <li ng-class="{'active': state.includes('entry-new')}"><a ui-sref="entry-new">Add Entry</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" ng-if="auth.isAuthenticated()">
           <a class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <i class="fa fa-caret-down o-fade-hard"></i></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="profile">Profile</a></li>
-            <li><a ui-sref="settings">Settings</a></li>
+            <li><a ui-sref="user">View Account</a></li>
             <li role="separator" class="divider"></li>
             <li><a ng-click="auth.logout()">Logout</a></li>
           </ul>
