@@ -34,6 +34,18 @@ a {
     margin: 0;
 }
 
+.s-mar-top {
+    margin-top: 30px;
+}
+
+.s-mar-right {
+    margin-right:30px;
+}
+
+.s-mar-right-soft {
+    margin-right: 10px;
+}
+
 /* Opacity */
 
 .o-fade {
@@ -52,4 +64,21 @@ a {
 
 .s-box {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Avatar */
+
+.avatar {
+    width: 128px;
+    height: 128px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 100%;
+    overflow: hidden;
+    line-height: 128px;
+    text-align: center;
+    font-size: 80px;
+    background: cornflowerblue;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    cursor: default;
 }
