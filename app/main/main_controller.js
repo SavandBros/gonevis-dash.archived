@@ -17,6 +17,8 @@ function MainController($scope, $state, $mdToast, AuthenticationService) {
      *
      * @method constructor
      * @desc Init function for controller
+     *
+     * @memberOf MainController
      */
     function constructor() {
 
