@@ -1,0 +1,28 @@
+<div class="container container-light">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default s-box" style="margin-top: 64px">
+      <div class="panel-body s-pad">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="avatar avatar-outside" style="margin-top: -94px">{{ user.name[0] }}</div>
+          </div>
+          <div class="col-md-8">
+            <h3 class="text-right o-fade-soft" editable-text="user.name" onbeforesave="updateProfile('name', $data)">{{ user.name }}</h3>
+          </div>
+        </div>
+        <div class="s-mar-top">
+          <div class="panel panel-default panel-body">
+            <i class="fa fa-border text-info s-mar-right-soft fa-user"></i>
+            <span editable-textarea="user.about" onbeforesave="updateProfile('about', $data)">{{ user.about }}</span>
+            <small class="o-fade pull-right">ABOUT</small>
+          </div>
+          <div class="panel panel-default panel-body s-mar-no">
+            <i class="fa fa-border text-info s-mar-right-soft fa-map-marker"></i>
+            <span editable-text="user.location" onbeforesave="updateProfile('location', $data)">{{ user.location }}</span>
+            <small class="o-fade pull-right">LOCATION</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

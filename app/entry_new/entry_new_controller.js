@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:NewPostController
+ * @name gonevisDash.controller:EntryNewController
  * Controller of the gonevisDash
  * 
  * @param $scope
@@ -11,7 +11,7 @@
  * @param $mdToast
  * @param AuthenticationService
  */
-function NewPostController($scope, $rootScope, $state, $mdToast, AuthenticationService) {
+function EntryNewController($scope, $rootScope, $state, $mdToast, AuthenticationService) {
 
     // New post form
     $scope.form = {};
@@ -22,7 +22,7 @@ function NewPostController($scope, $rootScope, $state, $mdToast, AuthenticationS
      * @method constructor
      * @desc Init function for controller
      *
-     * @memberOf NewPostController
+     * @memberOf EntryNewController
      */
     function constructor() {
 
@@ -38,6 +38,7 @@ function NewPostController($scope, $rootScope, $state, $mdToast, AuthenticationS
      * @method newPost
      * @desc Submit newPost form
      *
+     * @param form {object} Form data to submit
      */
     $scope.newPost = function (form) {
         form.loading = true;
@@ -46,5 +47,5 @@ function NewPostController($scope, $rootScope, $state, $mdToast, AuthenticationS
     constructor();
 }
 
-app.controller("NewPostController", NewPostController);
-NewPostController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthenticationService'];
+app.controller("EntryNewController", EntryNewController);
+EntryNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthenticationService'];
