@@ -1,0 +1,22 @@
+<div class="container container-light pad-top">
+  <div>
+    <div class="panel panel-defaul s-box">
+      <div class="panel-body s-pad">
+        <div ng-repeat="site in sites" class="jumbotron col-md-12">
+          <div class="text-center">
+            <h3><a ui-sref="entry-list({siteId: site.id})">{{site.title}}</a></h3>
+          </div>
+          <hr>
+          <div>
+            <p>Description: {{site.description}}</p>
+          </div>
+          <br>
+          <hr>
+          <div>
+            <p>Published at: {{site.created | date}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
