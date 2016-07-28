@@ -4,14 +4,14 @@
  * @ngdoc function
  * @name gonevisDash.controller:EntryNewController
  * Controller of the gonevisDash
- * 
+ *
  * @param $scope
  * @param $rootScope
  * @param $state
  * @param $mdToast
  * @param AuthenticationService
  */
-function EntryNewController($scope, $rootScope, $state, $mdToast, AuthenticationService) {
+function EntryNewController($scope, $rootScope, $state, $mdToast, AuthenticationService, NewEntryService) {
 
     // New post form
     $scope.form = {};
@@ -40,12 +40,23 @@ function EntryNewController($scope, $rootScope, $state, $mdToast, Authentication
      *
      * @param form {object} Form data to submit
      */
-    $scope.newPost = function (form) {
+    $scope.newPost = function(form) {
         form.loading = true;
+        form.site = "8ee0840d-f95b-4d94-aa78-c2262bb1908e"; // Debug
+        NewEntryService.create(form).then(
+            function(data, status, headers, config) {
+                // Success message
+                $mdToast.showSimple("Entry successfully added !");
+                console.log(data.data);
+            },
+            function(data, status, headers, config) {
+                console.log(data.data);
+            }
+        );
     }
 
     constructor();
 }
 
 app.controller("EntryNewController", EntryNewController);
-EntryNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthenticationService'];
+EntryNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthenticationService', 'NewEntryService'];
