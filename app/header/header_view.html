@@ -13,6 +13,9 @@
       <ul class="nav navbar-nav" ng-if="auth.isAuthenticated()">
         <li ng-class="{'active': state.includes('entry-new')}"><a ui-sref="entry-new">Add Entry</a></li>
       </ul>
+      <ul class="nav navbar-nav" ng-if="auth.isAuthenticated()">
+        <li ng-class="{'active': state.includes('sites')}"><a ui-sref="sites">Sites</a></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" ng-if="auth.isAuthenticated()">
           <a class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <i class="fa fa-caret-down o-fade-hard"></i></a>
