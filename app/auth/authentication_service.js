@@ -161,7 +161,9 @@ function AuthenticationService($rootScope, $http, $window, ENV) {
     $window.localStorage.removeItem('jwtToken');
     $window.localStorage.removeItem('authenticatedUser');
   }
-
+  function updateAuthentication(updatedUser) {
+    $window.localStorage['authenticatedUser'] = JSON.stringify(updatedUser);
+  }
   /**
    * @name AuthenticationService
    * @desc The Factory to be returned
@@ -176,7 +178,8 @@ function AuthenticationService($rootScope, $http, $window, ENV) {
     logout: logout,
     register: register,
     setAuthenticatedUser: setAuthenticatedUser,
-    unAuthenticate: unAuthenticate
+    unAuthenticate: unAuthenticate,
+    updateAuthentication: updateAuthentication
   };
 }
 

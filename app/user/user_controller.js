@@ -21,10 +21,36 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
         $scope.state = $state;
     };
 
-    $scope.updateProfile = function (key, value) {
-        $scope.user[key] = value;
-        
+    function newUser() {
+        UserService.get($scope.user.id).then(
+            function(data, status, headers, config) {
+                // Update user at AuthenticationService
+                AuthenticationService.updateAuthentication(data.data);
+            },
+            function(data, status, headers, config) {
+                console.log("Sorry");
+            }
+        );
+    }
+
+    $scope.updateProfile = function(key, value) {
+        // Loading message
         $mdToast.showSimple('Updating ' + key + '...');
+        // Set payload
+        var payload = {};
+        payload[key] = value;
+        // Send put request
+        UserService.update(payload).then(
+            function(data, status, headers, config) {
+                // Success message
+                $mdToast.showSimple("Profile successfully update.");
+                newUser();
+            },
+            function(data, status, headers, config) {
+                // Fail message
+                $mdToast.showSimple("Sorry, error has occured while updating profile, try again later.");
+            }
+        );
     }
 
     constructor();
