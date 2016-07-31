@@ -1,10 +1,9 @@
 /*global angular*/
 'use strict';
+function EntryNewService($http, $window, ENV) {
 
-function NewEntryService($http, $window, ENV) {
-
-    function create(post) {
-        return $http.post(ENV.apiEndpoint + 'website/entry/', post);
+    function create(entry) {
+        return $http.post(ENV.apiEndpoint + 'website/entry/', entry);
     }
 
     return {
@@ -12,5 +11,5 @@ function NewEntryService($http, $window, ENV) {
     }
 }
 
-app.factory('NewEntryService', NewEntryService);
-NewEntryService.$inject = ['$http', '$window', 'ENV'];
+app.factory('EntryNewService', EntryNewService);
+EntryNewService.$inject = ['$http', '$window', 'ENV'];
