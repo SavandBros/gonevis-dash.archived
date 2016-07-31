@@ -6,14 +6,13 @@
  * Controller of the gonevisDash
  *
  * @param $scope
- * @param $rootScope
  * @param $state
  * @param $mdToast
  * @param AuthenticationService
+ * @param EntryNewService
  */
-function EntryNewController($scope, $rootScope, $state, $mdToast, AuthenticationService, NewEntryService) {
+function EntryNewController($scope, $state, $mdToast, AuthenticationService, EntryNewService) {
 
-    // New post form
     $scope.form = {};
 
     /**
@@ -25,10 +24,9 @@ function EntryNewController($scope, $rootScope, $state, $mdToast, Authentication
      * @memberOf EntryNewController
      */
     function constructor() {
-
         // Check auth
         if (!AuthenticationService.isAuthenticated()) {
-            $state.go('signin');
+            return $state.go('signin');
         }
     };
 
@@ -40,17 +38,16 @@ function EntryNewController($scope, $rootScope, $state, $mdToast, Authentication
      *
      * @param form {object} Form data to submit
      */
-    $scope.newPost = function(form) {
+    $scope.newPost = function (form) {
         form.loading = true;
-        form.site = "8ee0840d-f95b-4d94-aa78-c2262bb1908e"; // Debug
-        NewEntryService.create(form).then(
-            function(data, status, headers, config) {
-                // Success message
-                $mdToast.showSimple("Entry successfully added !");
-                console.log(data.data);
+        form.site = AuthenticationService.getCurrentSite();
+
+        EntryNewService.create(form).then(
+            function (data, status, headers, config) {
+                $mdToast.showSimple("Entry added.");
             },
-            function(data, status, headers, config) {
-                console.log(data.data);
+            function (data, status, headers, config) {
+                $mdToast.showSimple("Failed to add entry.");
             }
         );
     }
@@ -59,4 +56,4 @@ function EntryNewController($scope, $rootScope, $state, $mdToast, Authentication
 }
 
 app.controller("EntryNewController", EntryNewController);
-EntryNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthenticationService', 'NewEntryService'];
+EntryNewController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService', 'EntryNewService'];
