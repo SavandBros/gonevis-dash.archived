@@ -4,7 +4,7 @@
       <div class="panel-body s-pad">
         <div ng-repeat="entry in entries" class="jumbotron col-md-12" ng-hide="entry.isDeleted">
           <div class="text-center">
-            <h3><a ui-sref="entry-edit({siteId: entry.site, entryId: entry.id})">{{entry.title}}</a></h3>
+            <h3><a ui-sref="dash.entry-edit({entryId: entry.id})">{{entry.title}}</a></h3>
           </div>
           <hr>
           <div>
