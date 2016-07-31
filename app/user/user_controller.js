@@ -14,40 +14,35 @@
 function UserController($scope, $state, $mdToast, AuthenticationService, UserService) {
 
     function constructor() {
-        // Get user
-        $scope.auth = AuthenticationService;
-        $scope.user = AuthenticationService.getAuthenticatedUser();
 
+        $scope.user = AuthenticationService.getAuthenticatedUser();
         $scope.state = $state;
+
+        getUser();
     };
 
-    function newUser() {
+    function getUser() {
+
         UserService.get($scope.user.id).then(
-            function(data, status, headers, config) {
-                // Update user at AuthenticationService
-                AuthenticationService.updateAuthentication(data.data);
-            },
-            function(data, status, headers, config) {
-                console.log("Sorry");
+            function (data, status, headers, config) {
+                $scope.user = data.data;
             }
         );
     }
 
-    $scope.updateProfile = function(key, value) {
-        // Loading message
+    $scope.updateProfile = function (key, value) {
+
         $mdToast.showSimple('Updating ' + key + '...');
-        // Set payload
+
         var payload = {};
         payload[key] = value;
-        // Send put request
+
         UserService.update(payload).then(
-            function(data, status, headers, config) {
-                // Success message
-                $mdToast.showSimple("Profile successfully update.");
-                newUser();
+            function (data, status, headers, config) {
+                $scope.user = data.data;
+                $mdToast.showSimple("Profile update.");
             },
-            function(data, status, headers, config) {
-                // Fail message
+            function (data, status, headers, config) {
                 $mdToast.showSimple("Sorry, error has occured while updating profile, try again later.");
             }
         );
