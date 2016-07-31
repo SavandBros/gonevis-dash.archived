@@ -11,36 +11,26 @@
  * @param $mdToast
  * @param AuthenticationService
  */
-function EntryListController($scope, $rootScope, $state, $stateParams, EntriesService, AuthenticationService) {
+function EntryListController($scope, $rootScope, $state, EntryListService, AuthenticationService) {
 
-    var siteId = $stateParams.siteId;
-    $scope.entries = {};
+    var siteId = AuthenticationService.getCurrentSite();
 
     function constructor() {
-        EntriesService.get(siteId).then(
-            function(data, status, headers, config) {
+        loadEntries();
+    }
+
+    function loadEntries() {
+        EntryListService.get(siteId).then(
+            function (data, status, headers, config) {
                 $scope.entries = data.data.results;
-                console.log(data.data.results);
-            },
-            function(data, status, headers, config) {
-                console.log(data.data);
             }
         )
     }
-    // check user auth
-    $scope.$on('gonevisDash.AuthenticationService:Authenticated', function() {
-        constructor();
-        $state.go('main');
-    });
 
-    $scope.deleteEntry = function(entryId, index) {
-        EntriesService.del(entryId).then(
-            function(data, status, headers, config) {
+    $scope.deleteEntry = function (entryId, index) {
+        EntryListService.del(entryId).then(
+            function (data, status, headers, config) {
                 $scope.entries[index].isDeleted = true;
-                console.log(data.data);
-            },
-            function(data, status, headers, config) {
-                console.log(data.data);
             }
         );
     }
@@ -49,4 +39,4 @@ function EntryListController($scope, $rootScope, $state, $stateParams, EntriesSe
 }
 
 app.controller('EntryListController', EntryListController)
-EntryListController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'EntriesService', 'AuthenticationService']
+EntryListController.$inject = ['$scope', '$rootScope', '$state', 'EntryListService', 'AuthenticationService']
