@@ -168,7 +168,7 @@ function AuthenticationService($rootScope, $http, $window, $stateParams, ENV) {
   }
 
   function getCurrentSite() {
-    return getAuthenticatedUser().sites[$stateParams.siteId].id;
+    return getAuthenticatedUser().sites[$stateParams.s].id;
   }
 
   /**

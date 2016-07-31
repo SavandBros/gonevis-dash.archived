@@ -29,7 +29,7 @@ function HeaderController($scope, $state, $stateParams, AuthenticationService) {
 
     $scope.$on('gonevisDash.AuthenticationService:Authenticated', function () {
         constructor();
-        $state.go('dash.main', {siteId: 0});
+        $state.go('dash.main', {s: 0});
     });
 
     $scope.$on('gonevisDash.AuthenticationService:SignedOut', function () {

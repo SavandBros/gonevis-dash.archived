@@ -14,7 +14,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
     $stateProvider
         // Every child of dash state follows site id that user is into
         .state('dash', {
-            url: '/:siteId',
+            url: '/:s',
             abstract: true,
             controller: 'DashController',
             template: '<ui-view/>'

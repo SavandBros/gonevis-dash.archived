@@ -13,7 +13,7 @@
  */
 function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, $window, EntryEditService, AuthenticationService) {
 
-    var siteId = $stateParams.siteId
+    var s = $stateParams.s
 
     // Entry data
     $scope.form = {

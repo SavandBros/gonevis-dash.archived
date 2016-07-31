@@ -13,14 +13,14 @@
  */
 function EntryListController($scope, $rootScope, $state, EntryListService, AuthenticationService) {
 
-    var siteId = AuthenticationService.getCurrentSite();
+    var s = AuthenticationService.getCurrentSite();
 
     function constructor() {
         loadEntries();
     }
 
     function loadEntries() {
-        EntryListService.get(siteId).then(
+        EntryListService.get(s).then(
             function (data, status, headers, config) {
                 $scope.entries = data.data.results;
             }

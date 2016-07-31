@@ -3,8 +3,8 @@
 
 function EntryListService($http, $window, ENV) {
 
-    function get(siteId) {
-        return $http.get(ENV.apiEndpoint + 'website/site/' + siteId + '/entries/');
+    function get(s) {
+        return $http.get(ENV.apiEndpoint + 'website/site/' + s + '/entries/');
     }
 
     function del(entryId) {
