@@ -30,12 +30,12 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
             templateUrl: 'entry_new/entry_new_view.html'
         })
         .state('dash.entry-list', {
-            url: '/site',
+            url: '/entries',
             controller: 'EntryListController',
             templateUrl: 'entry_list/entry_list.html'
         })
         .state('dash.entry-edit', {
-            url: '/site/:entryId',
+            url: '/entry/:entryId',
             controller: 'EntryEditController',
             templateUrl: 'entry_edit/entry_edit_view.html'
         })
