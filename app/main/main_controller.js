@@ -11,7 +11,6 @@
  * @param AuthenticationService
  */
 function MainController($scope, $state, $mdToast, AuthenticationService) {
-    $scope.imAlive = true;
     /**
      * constructor
      *
@@ -21,7 +20,6 @@ function MainController($scope, $state, $mdToast, AuthenticationService) {
      * @memberOf MainController
      */
     function constructor() {
-
         // Check auth
         if (!AuthenticationService.isAuthenticated()) {
             $mdToast.showSimple('Please login to continue.');
