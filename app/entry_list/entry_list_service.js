@@ -1,7 +1,7 @@
 /*global angular*/
 'use strict';
 
-function EntriesService($http, $window, ENV) {
+function EntryListService($http, $window, ENV) {
 
     function get(siteId) {
         return $http.get(ENV.apiEndpoint + 'website/site/' + siteId + '/entries/');
@@ -17,5 +17,5 @@ function EntriesService($http, $window, ENV) {
     }
 }
 
-app.factory('EntriesService', EntriesService);
-EntriesService.$inject = ['$http', '$window', 'ENV'];
+app.factory('EntryListService', EntryListService);
+EntryListService.$inject = ['$http', '$window', 'ENV'];
