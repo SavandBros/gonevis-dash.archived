@@ -39,6 +39,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
             controller: 'EntryEditController',
             templateUrl: 'entry_edit/entry_edit_view.html'
         })
+        .state('dash.site-new', {
+            url: '/site-create',
+            controller: 'SiteNewController',
+            templateUrl: 'site_new/site_new_view.html'
+        })
         .state('dash.user', {
             url: '/user',
             controller: 'UserController',
