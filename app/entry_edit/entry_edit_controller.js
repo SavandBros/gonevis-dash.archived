@@ -20,6 +20,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
         id: $stateParams.entryId
     };
 
+    $scope.statuses = [{name: "Draft", id: 0}, {name: "Hidden", id: 1}, {name: "Published", id: 2}];
+
     function constructor() {
         EntryEditService.get($scope.form.id).then(
             function(data, status, headers, config) {
