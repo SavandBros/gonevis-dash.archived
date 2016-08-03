@@ -45,6 +45,7 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, Ent
         EntryNewService.create(form).then(
             function (data, status, headers, config) {
                 $mdToast.showSimple("Entry added.");
+                $state.go('dash.entry-edit', {entryId: data.data.id});
             },
             function (data, status, headers, config) {
                 $mdToast.showSimple("Failed to add entry.");
