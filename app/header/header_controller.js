@@ -6,9 +6,10 @@
  * 
  * @param $scope
  * @param $state
+ * @param $stateParams
  * @param AuthenticationService
  */
-function HeaderController($scope, $state, AuthenticationService) {
+function HeaderController($scope, $state, $stateParams, AuthenticationService) {
     /**
      * constructor
      *
@@ -23,11 +24,12 @@ function HeaderController($scope, $state, AuthenticationService) {
         $scope.user = AuthenticationService.getAuthenticatedUser();
 
         $scope.state = $state;
+        $scope.param = $stateParams
     };
 
     $scope.$on('gonevisDash.AuthenticationService:Authenticated', function () {
         constructor();
-        $state.go('main');
+        $state.go('dash.main', {s: 0});
     });
 
     $scope.$on('gonevisDash.AuthenticationService:SignedOut', function () {
@@ -39,4 +41,4 @@ function HeaderController($scope, $state, AuthenticationService) {
 };
 
 app.controller("HeaderController", HeaderController);
-HeaderController.$inject = ['$scope', '$state', 'AuthenticationService'];
+HeaderController.$inject = ['$scope', '$state', '$stateParams', 'AuthenticationService'];

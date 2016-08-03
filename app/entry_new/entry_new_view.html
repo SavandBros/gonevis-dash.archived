@@ -1,9 +1,9 @@
-<div class="container container-light pad-top">
+<div class="container container-light">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-body s-pad s-box">
                 <form ng-submit="newPost(form)" name="form">
-                    <h3 class="o-fade-soft">New Post</h3>
+                    <h3 class="o-fade-soft">New Entry</h3>
                     <hr>
                     <div class="form-group" ng-class="{'has-error': form.errors.title}">
                         <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="Title" required/>
@@ -18,15 +18,15 @@
                         <small id="slug" class="help-block">{{ form.errors.slug[0] || "Used to build the entry's URL." }}</small>
                     </div>
                     <div class="form-group" ng-class="{'has-error': form.errors.tags}">
-                        <input id="tags" class="form-control" type="text" ng-model="form.tags" placeholder="Tags" required/>
+                        <input id="tags" class="form-control" type="text" ng-model="form.tags" placeholder="Tags"/>
                         <small id="tags" class="help-block">{{ form.errors.tags[0] || "Tags are separated by commas." }}</small>
                     </div>
                     <div class="form-group" ng-class="{'has-error': form.errors.lead}">
-                        <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph" required></textarea>
+                        <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph"></textarea>
                         <small id="lead" class="help-block" ng-show="form.errors.lead">{{ form.errors.lead[0] }}</small>
                     </div>
                     <div class="form-group" ng-class="{'has-error': form.errors.excerpt}">
-                        <textarea id="excerpt" class="form-control" type="text" ng-model="form.excerpt" placeholder="Excerpt" required></textarea>
+                        <textarea id="excerpt" class="form-control" type="text" ng-model="form.excerpt" placeholder="Excerpt"></textarea>
                         <small id="excerpt" class="help-block">{{ form.errors.excerpt[0] || "Used for SEO purposes." }}</small>
                     </div>
                     <hr>

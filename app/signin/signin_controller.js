@@ -26,7 +26,7 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthenticationSe
 
         // Check auth
         if (AuthenticationService.isAuthenticated()) {
-            $state.go('main');
+            $state.go('dash.main');
         }
     };
 

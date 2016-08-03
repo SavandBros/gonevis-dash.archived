@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/textAngular/dist/textAngular.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -20,7 +23,7 @@
 </head>
 
 <body ng-app="gonevisDash">
-  <!--[if lte IE 8]>
+  <!--[if lte IE 8
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
@@ -53,6 +56,18 @@
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
   <script src="bower_components/angular-ui-router-title/angular-ui-router-title.js"></script>
+  <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+  <script src="bower_components/scopedcss/dist/scopedcss.js"></script>
+  <script src="bower_components/css-lodaer/loader.js"></script>
+  <script src="bower_components/rangy/rangy-core.js"></script>
+  <script src="bower_components/rangy/rangy-classapplier.js"></script>
+  <script src="bower_components/rangy/rangy-highlighter.js"></script>
+  <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+  <script src="bower_components/rangy/rangy-serializer.js"></script>
+  <script src="bower_components/rangy/rangy-textrange.js"></script>
+  <script src="bower_components/textAngular/dist/textAngular.js"></script>
+  <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+  <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -60,11 +75,21 @@
   <script src="app.js"></script>
   <script src="auth/authentication_service.js"></script>
   <script src="auth/authentication_interceptor_service.js"></script>
+  <script src="dash/dash_controller.js"></script>
+  <script src="entry_edit/entry_edit_controller.js"></script>
+  <script src="entry_edit/entry_edit_service.js"></script>
+  <script src="entry_list/entry_list_controller.js"></script>
+  <script src="entry_list/entry_list_service.js"></script>
+  <script src="entry_new/entry_new_controller.js"></script>
+  <script src="entry_new/entry_new_service.js"></script>
   <script src="header/header_controller.js"></script>
   <script src="main/main_controller.js"></script>
-  <script src="new_post/new_post_controller.js"></script>
   <script src="signin/signin_controller.js"></script>
   <script src="signup/signup_controller.js"></script>
+  <script src="site_new/site_new_controller.js"></script>
+  <script src="site_new/site_new_service.js"></script>
+  <script src="user/user_controller.js"></script>
+  <script src="user/user_service.js"></script>
   <!-- endbuild -->
 </body>
 </html>

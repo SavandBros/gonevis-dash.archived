@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:MainController
+ * @name gonevisDash.controller:DashController
  * Controller of the gonevisDash
  *
  * @param $scope
@@ -10,14 +10,12 @@
  * @param $mdToast
  * @param AuthenticationService
  */
-function MainController($scope, $state, $mdToast, AuthenticationService) {
+function DashController($scope, $state, $mdToast, AuthenticationService) {
     /**
      * constructor
      *
      * @method constructor
-     * @desc Init function for controller
-     *
-     * @memberOf MainController
+     * @desc Init function for controlleru
      */
     function constructor() {
         // Check auth
@@ -25,10 +23,10 @@ function MainController($scope, $state, $mdToast, AuthenticationService) {
             $mdToast.showSimple('Please login to continue.');
             $state.go('signin');
         }
-    };
+    }
 
     constructor();
 }
 
-app.controller("MainController", MainController);
-MainController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService'];
+app.controller("DashController", DashController);
+DashController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService'];

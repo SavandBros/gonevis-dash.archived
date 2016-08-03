@@ -7,12 +7,13 @@
  * @param $rootScope
  * @param $http
  * @param $window
+ * @param $stateParams
  * @param ENV
  * @class AuthenticationService
  * @returns [Factory]
  * @namespace gonevisDash.AuthenticationService
  */
-function AuthenticationService($rootScope, $http, $window, ENV) {
+function AuthenticationService($rootScope, $http, $window, $stateParams, ENV) {
   /**
    * Return the currently authenticated user
    *
@@ -162,6 +163,14 @@ function AuthenticationService($rootScope, $http, $window, ENV) {
     $window.localStorage.removeItem('authenticatedUser');
   }
 
+  function updateAuthentication(updatedUser) {
+    $window.localStorage['authenticatedUser'] = JSON.stringify(updatedUser);
+  }
+
+  function getCurrentSite() {
+    return getAuthenticatedUser().sites[$stateParams.s].id;
+  }
+
   /**
    * @name AuthenticationService
    * @desc The Factory to be returned
@@ -176,9 +185,11 @@ function AuthenticationService($rootScope, $http, $window, ENV) {
     logout: logout,
     register: register,
     setAuthenticatedUser: setAuthenticatedUser,
-    unAuthenticate: unAuthenticate
+    unAuthenticate: unAuthenticate,
+    updateAuthentication: updateAuthentication,
+    getCurrentSite: getCurrentSite
   };
 }
 
 app.factory('AuthenticationService', AuthenticationService);
-AuthenticationService.$inject = ['$rootScope', '$http', '$window', 'ENV'];
+AuthenticationService.$inject = ['$rootScope', '$http', '$window', '$stateParams', 'ENV'];

@@ -1,0 +1,22 @@
+<div class="container container-light pad-top">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default s-box">
+            <div class="panel-body s-pad">
+                <form ng-submit="createSite(form)" name="form">
+                    <h3 class="o-fade-soft">Create a new site</h3>
+                    <hr>
+                    <div class="form-group">
+                        <input id="url" class="form-control input-lg" type="text" ng-model="form.url" placeholder="Url" required/>
+                    </div>
+                    <div class="form-group">
+                        <input id="title" class="form-control input-lg" type="text" ng-model="form.title" placeholder="Title" required/>
+                    </div>
+                    <div class="form-group">
+                        <input id="description" class="form-control input-lg" type="text" ng-model="form.description" placeholder="Description" required/>
+                    </div>
+                    <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
