@@ -3,7 +3,7 @@
  * @ngdoc function
  * @name gonevisDash.controller:HeaderController
  * Controller of the gonevisDash
- * 
+ *
  * @param $scope
  * @param $state
  * @param $stateParams
@@ -27,12 +27,17 @@ function HeaderController($scope, $state, $stateParams, AuthenticationService) {
         $scope.param = $stateParams
     };
 
-    $scope.$on('gonevisDash.AuthenticationService:Authenticated', function () {
+    $scope.$on('gonevisDash.AuthenticationService:Authenticated', function() {
         constructor();
-        $state.go('dash.main', {s: 0});
+        if ($scope.user.sites == 0) {
+            $state.go('dash.site-new');
+        } else {
+            $state.go('dash.main', {s: 0});
+        }
+
     });
 
-    $scope.$on('gonevisDash.AuthenticationService:SignedOut', function () {
+    $scope.$on('gonevisDash.AuthenticationService:SignedOut', function() {
         constructor();
         $state.go('signin');
     });
