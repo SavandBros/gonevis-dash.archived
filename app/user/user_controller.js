@@ -10,9 +10,16 @@
  * @param $state
  * @param $mdToast
  * @param AuthenticationService
+ * @param UserService
  */
 function UserController($scope, $state, $mdToast, AuthenticationService, UserService) {
 
+    /**
+     * constructor
+     *
+     * @method constructor
+     * @desc Init function for controller
+     */
     function constructor() {
 
         $scope.user = AuthenticationService.getAuthenticatedUser();
@@ -21,6 +28,14 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
         getUser();
     };
 
+    /**
+     * getUser
+     *
+     * @method getUser
+     * @desc get user data via api call
+     * 
+     * @param $scope.user.id {string}
+     */
     function getUser() {
 
         UserService.get($scope.user.id).then(
@@ -30,8 +45,15 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
         );
     }
 
+    /**
+     * updateProfile
+     *
+     * @method updateProfile
+     * @desc update user profile via api call
+     * 
+     * @param key {string} value {string}
+     */
     $scope.updateProfile = function (key, value) {
-
         $mdToast.showSimple('Updating ' + key + '...');
 
         var payload = {};

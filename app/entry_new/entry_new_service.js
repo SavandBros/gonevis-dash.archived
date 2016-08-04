@@ -2,6 +2,7 @@
 'use strict';
 function EntryNewService($http, $window, ENV) {
 
+    // Api call to post entry
     function create(entry) {
         return $http.post(ENV.apiEndpoint + 'website/entry/', entry);
     }

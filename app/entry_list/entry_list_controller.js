@@ -8,17 +8,32 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
+ * @param EntryListService
  * @param AuthenticationService
  */
 function EntryListController($scope, $rootScope, $state, EntryListService, AuthenticationService) {
 
+    // Return user current site
     var s = AuthenticationService.getCurrentSite();
 
+    /**
+     * constructor
+     *
+     * @method constructor
+     * @desc Init function for controller
+     */
     function constructor() {
         loadEntries();
     }
 
+    /**
+     * loadEntries
+     *
+     * @method loadEntries
+     * @desc load entries via api call
+     * 
+     * @param s {integer}
+     */
     function loadEntries() {
         EntryListService.get(s).then(
             function (data, status, headers, config) {
@@ -27,6 +42,14 @@ function EntryListController($scope, $rootScope, $state, EntryListService, Authe
         )
     }
 
+    /**
+     * deleteEntry
+     *
+     * @method deleteEntry
+     * @desc delete entries via api call
+     * 
+     * @param entryId {string}
+     */
     $scope.deleteEntry = function (entryId, index) {
         EntryListService.del(entryId).then(
             function (data, status, headers, config) {
