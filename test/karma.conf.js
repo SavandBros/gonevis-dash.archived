@@ -34,8 +34,6 @@ module.exports = function(config) {
       'bower_components/angular-gettext/dist/angular-gettext.js',
       'bower_components/angular-ui-router-title/angular-ui-router-title.js',
       'bower_components/angular-xeditable/dist/js/xeditable.js',
-      'bower_components/scopedcss/dist/scopedcss.js',
-      'bower_components/css-lodaer/loader.js',
       'bower_components/rangy/rangy-core.js',
       'bower_components/rangy/rangy-classapplier.js',
       'bower_components/rangy/rangy-highlighter.js',
