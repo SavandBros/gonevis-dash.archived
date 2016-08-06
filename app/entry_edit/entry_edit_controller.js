@@ -24,17 +24,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   // Status data
-  $scope.statuses = [{
-    name: "Draft",
-    id: 0
-  }, {
-    name: "Hidden",
-    id: 1
-  }, {
-    name: "Published",
-    id: 2
-  }];
-
+  $scope.statuses = [{ name: "Draft", id: 0 }, { name: "Hidden", id: 1 }, { name: "Published", id: 2 }];
   /**
    * constructor
    *
@@ -46,12 +36,14 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     EntryEditService.get($scope.form.id).then(
       function (data, status, headers, config) {
         $scope.form = data.data;
+        console.log(data.data);
       },
       function (data, status, headers, config) {
         console.log(data.data);
       }
     );
   }
+
 
   /**
    * updateEntry
