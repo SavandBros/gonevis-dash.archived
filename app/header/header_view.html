@@ -25,7 +25,7 @@
         <li class="dropdown" ng-if="auth.isAuthenticated()">
           <a class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <i class="fa fa-caret-down o-fade-hard"></i></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="dash.user">View Account</a></li>
+            <li><a ui-sref="dash.user({s: param.s})">View Account</a></li>
             <li role="separator" class="divider" ng-if="user.sites"></li>
             <li ng-repeat="site in user.sites" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }} <i class="fa fa-cog" ng-if="param.s == $index" ></i></a>
