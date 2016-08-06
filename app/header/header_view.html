@@ -17,8 +17,8 @@
         <li ng-class="{'active': state.includes('dash.entry-list')}">
           <a ui-sref="dash.entry-list">Entries</a>
         </li>
-        <li ng-class="{'active': state.includes('dash.site-new')}">
-          <a ui-sref="dash.site-new">New site</a>
+        <li ng-class="{'active': state.includes('dash.tag-list')}">
+          <a ui-sref="dash.tag-list">Tags</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -28,7 +28,7 @@
             <li><a ui-sref="dash.user">View Account</a></li>
             <li role="separator" class="divider" ng-if="user.sites"></li>
             <li ng-repeat="site in user.sites" ng-class="{'active': param.s == $index}">
-              <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
+              <a ui-sref="dash.main({s: $index})">{{ site.title }} <i class="fa fa-cog" ng-if="param.s == $index" ></i></a>
             </li>
             <li role="separator" class="divider"></li>
             <li><a ng-click="auth.logout()">Logout</a></li>

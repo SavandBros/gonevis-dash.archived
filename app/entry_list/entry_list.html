@@ -1,35 +1,18 @@
 <div class="container container-light pad-top">
   <div>
     <div class="panel panel-defaul s-box">
-      <div class="panel-body s-pad">
-        <div ng-repeat="entry in entries" class="jumbotron col-md-12" ng-hide="entry.isDeleted">
-          <div class="text-center">
-            <h3><a ui-sref="dash.entry-edit({entryId: entry.id})">{{entry.title}}</a></h3>
+      <div class="panel-body">
+        <div ng-if="!entries.length">
+          <div class="well text-center">
+            <h3 class="s-mar-no o-fade">You have no entries</h3> <a ui-sref="dash.entry-new"><h4>Add entry</h4></a>
           </div>
-          <hr>
-          <div>
-            <p>Content: {{entry.content}}</p>
-          </div>
-          <hr>
-          <div>
-            <span>Slug: {{entry.slug}}</span>
-          </div>
-          <div>
-            <p>Lead: {{entry.lead}}</p>
-          </div>
-          <div>
-            <p>Excerpt: {{entry.excerpt}}</p>
-          </div>
-          <br>
-          <hr>
-          <div>
-            <p>Published at: {{entry.created | date}}</p>
-          </div>
-          <div ng-repeat="tag in entry.tags">
-            Tags: <p>{{tag.name}}</p>
-          </div>
-          <div>
-            <button class="btn btn-danger pull-right s-box" ng-click="deleteEntry(entry.id, $index)"><i class="fa fa-trash"></i> Delete</button>
+        </div>
+        <div ng-repeat="entry in entries" class="col-md-12 well" ng-hide="entry.isDeleted">
+          <a ui-sref="dash.entry-edit({entryId: entry.id})"><i class="fa fa-ellipsis-v"></i></a>
+          <div class="row">
+            <h3 class="col-md-4">{{entry.title}}</h3>
+            <span class="col-md-4">Slug: {{entry.slug}}</span>
+            <p class="col-md-4">Published at: {{entry.created | date}}</p>
           </div>
         </div>
       </div>

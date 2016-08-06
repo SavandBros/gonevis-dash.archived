@@ -167,6 +167,12 @@ function AuthenticationService($rootScope, $http, $window, $stateParams, ENV) {
     $window.localStorage['authenticatedUser'] = JSON.stringify(updatedUser);
   }
 
+  /**
+   * @method getCurrentSite
+   * @desc Return the ID of the current sites
+   *
+   * returns {string} Site id (uuid)
+   */
   function getCurrentSite() {
     return getAuthenticatedUser().sites[$stateParams.s].id;
   }
