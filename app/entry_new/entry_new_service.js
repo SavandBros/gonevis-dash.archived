@@ -1,15 +1,16 @@
 /*global angular*/
 'use strict';
+
 function EntryNewService($http, $window, ENV) {
 
-    // Api call to post entry
-    function create(entry) {
-        return $http.post(ENV.apiEndpoint + 'website/entry/', entry);
-    }
+  // Api call to post entry
+  function create(entry) {
+    return $http.post(ENV.apiEndpoint + 'website/entry/', entry);
+  }
 
-    return {
-        create: create,
-    }
+  return {
+    create: create,
+  }
 }
 
 app.factory('EntryNewService', EntryNewService);

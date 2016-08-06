@@ -13,50 +13,61 @@
  */
 function EntryNewController($scope, $state, $mdToast, AuthenticationService, EntryNewService) {
 
-    $scope.form = {};
+  $scope.form = {};
 
-    // Status data
-    $scope.statuses = [{name: "Draft", id: 0}, {name: "Hidden", id: 1}, {name: "Published", id: 2}];
+  // Status data
+  $scope.statuses = [{
+    name: "Draft",
+    id: 0
+  }, {
+    name: "Hidden",
+    id: 1
+  }, {
+    name: "Published",
+    id: 2
+  }];
 
-    /**
-     * constructor
-     *
-     * @method constructor
-     * @desc Init function for controller
-     *
-     * @memberOf EntryNewController
-     */
-    function constructor() {
-        // Check auth
-        if (!AuthenticationService.isAuthenticated()) {
-            return $state.go('signin');
-        }
-    };
-
-    /**
-     * newPost
-     *
-     * @method newPost
-     * @desc Submit newPost form
-     *
-     * @param form {object} Form data to submit
-     */
-    $scope.newPost = function (form) {
-        form.loading = true;
-        form.site = AuthenticationService.getCurrentSite();
-
-        EntryNewService.create(form).then(
-            function (data, status, headers, config) {
-                $mdToast.showSimple("Entry added.");
-                $state.go('dash.entry-edit', {entryId: data.data.id});
-            },
-            function (data, status, headers, config) {
-                $mdToast.showSimple("Failed to add entry.");
-            }
-        );
+  /**
+   * constructor
+   *
+   * @method constructor
+   * @desc Init function for controller
+   *
+   * @memberOf EntryNewController
+   */
+  function constructor() {
+    // Check auth
+    if (!AuthenticationService.isAuthenticated()) {
+      return $state.go('signin');
     }
+  };
 
-    constructor();
+  /**
+   * newPost
+   *
+   * @method newPost
+   * @desc Submit newPost form
+   *
+   * @param form {object} Form data to submit
+   */
+  $scope.newPost = function (form) {
+    form.loading = true;
+    form.site = AuthenticationService.getCurrentSite();
+
+    EntryNewService.create(form).then(
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Entry added.");
+        $state.go('dash.entry-edit', {
+          entryId: data.data.id
+        });
+      },
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Failed to add entry.");
+      }
+    );
+  }
+
+  constructor();
 }
 
 app.controller("EntryNewController", EntryNewController);

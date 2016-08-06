@@ -10,24 +10,24 @@
  * @namespace tiwun.account.services.UserService
  */
 function UserService($http, ENV) {
-    /**
-     * Gets the account with username `username`
-     */
-    function get(userId) {
-        return $http.get(ENV.apiEndpoint + 'account/users/' + userId + '/');
-    }
+  /**
+   * Gets the account with username `username`
+   */
+  function get(userId) {
+    return $http.get(ENV.apiEndpoint + 'account/users/' + userId + '/');
+  }
 
-    /**
-     * Update the account with username `username`
-     */
-    function update(user) {
-        return $http.put(ENV.apiEndpoint + 'account/update-profile/', user);
-    }
+  /**
+   * Update the account with username `username`
+   */
+  function update(user) {
+    return $http.put(ENV.apiEndpoint + 'account/update-profile/', user);
+  }
 
-    return {
-        get: get,
-        update: update
-    };
+  return {
+    get: get,
+    update: update
+  };
 }
 
 

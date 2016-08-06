@@ -10,39 +10,39 @@
  * @param AuthenticationService
  */
 function HeaderController($scope, $state, $stateParams, AuthenticationService) {
-    /**
-     * constructor
-     *
-     * @method constructor
-     * @desc Init function for controller
-     *
-     * @memberOf HeaderController
-     */
-    function constructor() {
-        // Get user
-        $scope.auth = AuthenticationService;
-        $scope.user = AuthenticationService.getAuthenticatedUser();
+  /**
+   * constructor
+   *
+   * @method constructor
+   * @desc Init function for controller
+   *
+   * @memberOf HeaderController
+   */
+  function constructor() {
+    // Get user
+    $scope.auth = AuthenticationService;
+    $scope.user = AuthenticationService.getAuthenticatedUser();
 
-        $scope.state = $state;
-        $scope.param = $stateParams
-    };
+    $scope.state = $state;
+    $scope.param = $stateParams
+  };
 
-    $scope.$on('gonevisDash.AuthenticationService:Authenticated', function() {
-        constructor();
-        if ($scope.user.sites == 0) {
-            $state.go('dash.site-new');
-        } else {
-            $state.go('dash.main', {s: 0});
-        }
-
-    });
-
-    $scope.$on('gonevisDash.AuthenticationService:SignedOut', function() {
-        constructor();
-        $state.go('signin');
-    });
-
+  $scope.$on('gonevisDash.AuthenticationService:Authenticated', function () {
     constructor();
+    if ($scope.user.sites == 0) {
+      $state.go('dash.site-new');
+    } else {
+      $state.go('dash.main', { s: 0 });
+    }
+
+  });
+
+  $scope.$on('gonevisDash.AuthenticationService:SignedOut', function () {
+    constructor();
+    $state.go('signin');
+  });
+
+  constructor();
 };
 
 app.controller("HeaderController", HeaderController);

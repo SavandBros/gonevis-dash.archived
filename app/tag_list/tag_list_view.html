@@ -1,15 +1,13 @@
 <div class="container container-light pad-top">
-  <div>
-    <div class="panel panel-defaul s-box">
-      <div class="panel-body">
-        <div ng-if="!tags.length" class="text-center o-fade">
-          <h3>Sorry, you have no tags</h3>
-        </div>
-        <div ng-repeat="tag in tags">
-          <h3 style="border-left: 3px solid cornflowerblue"> {{ tag.name }}</h3><span class="label label-success">/{{ tag.slug }} <i class="fa fa-tag"></i></span>
-          <p class="o-fade">{{ tag.description }}</p>
-          <hr>
-        </div>
+  <div class="panel panel-defaul s-box">
+    <div class="panel-body">
+      <div ng-if="!tags.length" class="text-center o-fade">
+        <h3>Sorry, you have no tags</h3>
+      </div>
+      <div ng-repeat="tag in tags">
+        <h3 style="border-left: 3px solid cornflowerblue"> {{ tag.name }}</h3><span class="label label-success">/{{ tag.slug }} <i class="fa fa-tag"></i></span>
+        <p class="o-fade">{{ tag.description }}</p>
+        <hr>
       </div>
     </div>
   </div>

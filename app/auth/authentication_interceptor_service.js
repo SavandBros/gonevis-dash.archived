@@ -1,5 +1,5 @@
 /*global angular*/
-'use strict';
+'use strict'
 
 /**
  * Authentication Interceptor Service
@@ -21,16 +21,15 @@ function AuthenticationInterceptorService($window, ENV) {
    * @returns {Object}
    */
   function request(config) {
-    var token = $window.localStorage['jwtToken'];
+    var token = $window.localStorage['jwtToken']
 
     if (token) {
-
       if (config.url.indexOf(ENV.apiEndPoint === 0 && token)) {
-        config.headers.Authorization = 'JWT ' + token;
+        config.headers.Authorization = 'JWT ' + token
       }
     }
 
-    return config;
+    return config
   }
 
   return {
@@ -38,6 +37,6 @@ function AuthenticationInterceptorService($window, ENV) {
   }
 }
 
-app.factory('AuthenticationInterceptorService', AuthenticationInterceptorService);
+app.factory('AuthenticationInterceptorService', AuthenticationInterceptorService)
 
-AuthenticationInterceptorService.$inject = ['$window', 'ENV'];
+AuthenticationInterceptorService.$inject = ['$window', 'ENV']

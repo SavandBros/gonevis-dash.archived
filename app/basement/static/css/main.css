@@ -1,103 +1,103 @@
 /* Global */
 
-html, body {
-    background-color: #fcfcfc;
+html,
+body {
+  background-color: #fcfcfc;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 
 a {
-    cursor: pointer;
+  cursor: pointer;
 }
+
 
 /* Navbar */
 
 .navbar-brand {
-    margin-right: 30px;
+  margin-right: 30px;
 }
+
 
 /* Forms */
 
 .help-block {
-    margin-left: 10px;
+  margin-left: 10px;
 }
+
 
 /* Space */
 
 .s-pad {
-    padding: 30px;
+  padding: 30px;
 }
 
 .s-mar-no {
-    margin: 0;
+  margin: 0;
 }
 
 .s-mar-top {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .s-mar-right {
-    margin-right:30px;
+  margin-right: 30px;
 }
 
 .s-mar-right-soft {
-    margin-right: 10px;
+  margin-right: 10px;
 }
+
 
 /* Opacity */
 
 .o-fade {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .o-fade-hard {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .o-fade-soft {
-    opacity: 0.7;
+  opacity: 0.7;
 }
+
 
 /* Shadow */
 
 .s-box {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Avatar */
 
 .avatar {
-    width: 128px;
-    height: 128px;
-    border: 2px solid rgba(0,0,0,0.2);
-    border-radius: 100%;
-    overflow: hidden;
-    line-height: 128px;
-    text-align: center;
-    font-size: 80px;
-    background: cornflowerblue;
-    color: #fff;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5);
-    cursor: default;
-}
-.nav-side-menu {
-  overflow: auto;
-  font-family: verdana;
-  font-size: 12px;
-  font-weight: 200;
-  background-color: #303E4D;
-  position: fixed;
-  top: 0px;
-  width: 300px;
-  height: 100%;
-  color: #e1ffff;
-}
-.nav-side-menu .brand {
-  background-color: #23282e;
-  line-height: 50px;
-  display: block;
+  width: 128px;
+  height: 128px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+  overflow: hidden;
+  line-height: 128px;
   text-align: center;
-  font-size: 14px;
+  font-size: 80px;
+  background: cornflowerblue;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  cursor: default;
+}
+
+
+/* Text editor */
+
+.ta-toolbar .btn-group {
+  margin-bottom: 8px;
 }
