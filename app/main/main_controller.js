@@ -11,28 +11,28 @@
  * @param AuthenticationService
  */
 function MainController($scope, $state, $mdToast, $stateParams, AuthenticationService) {
-    /**
-     * constructor
-     *
-     * @method constructor
-     * @desc Init function for controller
-     *
-     * @memberOf MainController
-     */
-    function constructor() {
-        // Check auth
-        if (!AuthenticationService.isAuthenticated()) {
-            $mdToast.showSimple('Please login to continue.');
-            $state.go('signin');
-        }
-        $scope.auth = AuthenticationService;
-        $scope.user = AuthenticationService.getAuthenticatedUser();
+  /**
+   * constructor
+   *
+   * @method constructor
+   * @desc Init function for controller
+   *
+   * @memberOf MainController
+   */
+  function constructor() {
+    // Check auth
+    if (!AuthenticationService.isAuthenticated()) {
+      $mdToast.showSimple('Please login to continue.');
+      $state.go('signin');
+    }
+    $scope.auth = AuthenticationService;
+    $scope.user = AuthenticationService.getAuthenticatedUser();
 
-        $scope.state = $state;
-        $scope.param = $stateParams
-    };
+    $scope.state = $state;
+    $scope.param = $stateParams
+  };
 
-    constructor();
+  constructor();
 }
 
 app.controller("MainController", MainController);

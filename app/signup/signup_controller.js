@@ -13,59 +13,59 @@
  */
 function SignupController($scope, $rootScope, $state, $mdToast, AuthenticationService) {
 
-    // Signup form
-    $scope.form = {};
+  // Signup form
+  $scope.form = {};
 
-    /**
-     * constructor
-     *
-     * @method constructor
-     * @desc Init function for controller
-     */
-    function constructor() {
+  /**
+   * constructor
+   *
+   * @method constructor
+   * @desc Init function for controller
+   */
+  function constructor() {
 
-        // Check auth
-        if (AuthenticationService.isAuthenticated()) {
-            $state.go('main');
-        }
-    };
+    // Check auth
+    if (AuthenticationService.isAuthenticated()) {
+      $state.go('main');
+    }
+  };
 
-    /**
-     * signup
-     *
-     * @method signup
-     * @desc Submit signup form
-     * 
-     * @param form {object}
-     */
-    $scope.signup = function register(form) {
-        form.loading = true;
+  /**
+   * signup
+   *
+   * @method signup
+   * @desc Submit signup form
+   * 
+   * @param form {object}
+   */
+  $scope.signup = function register(form) {
+    form.loading = true;
 
-        AuthenticationService.register(form.email, form.username, form.password).then(
-            function (data, status, headers, config) {
-                $rootScope.$broadcast('gonevisDash.AuthenticationService:Registered');
-                form.errors = null;
-            },
-            function (data, status, headers, config) {
-                form.loading = false;
-                form.errors = data.data;
-            }
-        );
-    };
+    AuthenticationService.register(form.email, form.username, form.password).then(
+      function (data, status, headers, config) {
+        $rootScope.$broadcast('gonevisDash.AuthenticationService:Registered');
+        form.errors = null;
+      },
+      function (data, status, headers, config) {
+        form.loading = false;
+        form.errors = data.data;
+      }
+    );
+  };
 
-    $scope.$on('gonevisDash.AuthenticationService:Registered', function () {
-        AuthenticationService.login($scope.form.username, $scope.form.password).then(
-            function (data, status, headers, config) {
-                AuthenticationService.setAuthenticatedUser(data.data.user);
-                AuthenticationService.setToken(data.data.token);
+  $scope.$on('gonevisDash.AuthenticationService:Registered', function () {
+    AuthenticationService.login($scope.form.username, $scope.form.password).then(
+      function (data, status, headers, config) {
+        AuthenticationService.setAuthenticatedUser(data.data.user);
+        AuthenticationService.setToken(data.data.token);
 
-                $rootScope.$broadcast('gonevisDash.AuthenticationService:Authenticated');
-                $mdToast.showSimple('Welcome ' + data.data.user.username);
-            }
-        );
-    });
+        $rootScope.$broadcast('gonevisDash.AuthenticationService:Authenticated');
+        $mdToast.showSimple('Welcome ' + data.data.user.username);
+      }
+    );
+  });
 
-    constructor();
+  constructor();
 }
 
 app.controller("SignupController", SignupController);

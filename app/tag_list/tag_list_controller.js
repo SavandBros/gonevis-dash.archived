@@ -14,28 +14,28 @@
  */
 function TagListController($scope, $rootScope, $state, $mdToast, TagListService, AuthenticationService) {
 
-    var site = AuthenticationService.getCurrentSite();
+  var site = AuthenticationService.getCurrentSite();
 
-    /**
-     * constructor
-     *
-     * @method constructor
-     * @desc Init function for controller
-     */
-    function constructor() {
-        $scope.user = AuthenticationService.getAuthenticatedUser();
+  /**
+   * constructor
+   *
+   * @method constructor
+   * @desc Init function for controller
+   */
+  function constructor() {
+    $scope.user = AuthenticationService.getAuthenticatedUser();
 
-        TagListService.get(site).then(
-            function(data, status, headers, config) {
-                $scope.tags = data.data.results;
-            },
-            function(data, status, headers, config) {
-                console.log(data.data);
-            }
-        );
-    };
+    TagListService.get(site).then(
+      function (data, status, headers, config) {
+        $scope.tags = data.data.results;
+      },
+      function (data, status, headers, config) {
+        console.log(data.data);
+      }
+    );
+  };
 
-    constructor();
+  constructor();
 }
 
 app.controller("TagListController", TagListController);

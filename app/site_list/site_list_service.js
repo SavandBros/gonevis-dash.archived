@@ -3,14 +3,14 @@
 
 function SiteListService($http, $window, ENV) {
 
-    // Get sites
-    function get() {
-        return json.Parse($window.sites);
-    }
+  // Get sites
+  function get() {
+    return json.Parse($window.sites);
+  }
 
-    return {
-        get: get,
-    }
+  return {
+    get: get,
+  }
 }
 
 app.factory('SiteListService', SiteListService);
