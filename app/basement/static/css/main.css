@@ -18,6 +18,17 @@ a {
   cursor: pointer;
 }
 
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
+}
+
+.open .dropdown-toggle {
+  opacity: 1;
+}
+
 
 /* Navbar */
 
@@ -37,6 +48,19 @@ a {
 
 .s-pad {
   padding: 30px;
+}
+
+.s-pad-soft {
+  padding: 5px;
+}
+
+.s-pad-no {
+  padding: 0;
+}
+
+.s-pad-no-y {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .s-mar-no {
@@ -74,7 +98,58 @@ a {
 /* Shadow */
 
 .s-box {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Border */
+
+.b-no {
+  border: none;
+}
+
+.b-left {
+  border-left: 4px solid rgba(0, 0, 0, 0.2);
+}
+
+.b-left-no {
+  border-left: none;
+}
+
+.b-color-0 {
+  border-color: orange;
+}
+
+.b-color-1 {
+  border-color: limegreen;
+}
+
+
+/* Displays */
+
+.dis-b {
+  display: block;
+}
+
+
+/* Cursors */
+
+.c-p {
+  cursor: pointer;
+}
+
+
+/* Hovers */
+
+.h-opacity:HOVER {
+  opacity: 1;
+}
+
+
+/* Overflows */
+
+.of-hidden {
+  overflow: hidden;
 }
 
 
@@ -100,4 +175,16 @@ a {
 
 .ta-toolbar .btn-group {
   margin-bottom: 8px;
+}
+
+
+/* List */
+
+.list-panel {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.list-panel:last-child {
+  border-bottom: none;
 }
