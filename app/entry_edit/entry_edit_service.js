@@ -17,23 +17,16 @@ function EntryEditService($http, $window, ENV) {
   function put(entry) {
     return $http.put(ENV.apiEndpoint + 'website/entry/' + entry.id + '/', entry)
   }
-  // search        
-  function search(site, query) {
-    return $http.get(ENV.apiEndpoint + 'tagool/' + site + '/search/', {
-      q: query
-    })
-  }
 
   // Api call for adding tag
   function add(site) {
-    return $http.put(ENV.apiEndpoint + 'tagool/' + site + '/', site)
+    return $http.put(ENV.apiEndpoint + 'tagool/' + site + '/tag/', site)
   }
 
   return {
     get: get,
     del: del,
     put: put,
-    search: search,
     add: add
   }
 }
