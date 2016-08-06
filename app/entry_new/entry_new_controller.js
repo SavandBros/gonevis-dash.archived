@@ -15,6 +15,9 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, Ent
 
     $scope.form = {};
 
+    // Status data
+    $scope.statuses = [{name: "Draft", id: 0}, {name: "Hidden", id: 1}, {name: "Published", id: 2}];
+
     /**
      * constructor
      *
