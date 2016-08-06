@@ -5,6 +5,7 @@
         <h3>Sorry, you have no tags</h3>
       </div>
       <div ng-repeat="tag in tags">
+        <a ui-sref="dash.tag-edit({tagId: tag.id})"><i class="fa fa-cog pull-right fa-2x"></i></a>
         <h3 style="border-left: 3px solid cornflowerblue"> {{ tag.name }}</h3><span class="label label-success">/{{ tag.slug }} <i class="fa fa-tag"></i></span>
         <p class="o-fade">{{ tag.description }}</p>
         <hr>

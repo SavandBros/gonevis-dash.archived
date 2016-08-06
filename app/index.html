@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Gonevis Dash</title>
@@ -33,10 +34,12 @@
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
   <script>
-	  !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-    (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-    r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-    }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ! function(A, n, g, u, l, a, r) {
+      A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
+          (A[l].q = A[l].q || []).push(arguments)
+        }, A[l].l = +new Date, a = n.createElement(g),
+        r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
     ga('create', 'UA-XXXXX-X');
     ga('send', 'pageview');
   </script>
@@ -88,10 +91,13 @@
   <script src="site_new/site_new_service.js"></script>
   <script src="site_settings/site_settings_controller.js"></script>
   <script src="site_settings/site_settings_service.js"></script>
+  <script src="tag_edit/tag_edit_controller.js"></script>
+  <script src="tag_edit/tag_edit_service.js"></script>
   <script src="tag_list/tag_list_controller.js"></script>
   <script src="tag_list/tag_list_service.js"></script>
   <script src="user/user_controller.js"></script>
   <script src="user/user_service.js"></script>
   <!-- endbuild -->
 </body>
+
 </html>
