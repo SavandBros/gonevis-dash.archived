@@ -9,6 +9,7 @@
  * @param $rootScope
  * @param $state
  * @param $mdToast
+ * @param $stateParams
  * @param TagEditService
  * @param AuthenticationService
  */
@@ -35,6 +36,14 @@ function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, T
     );
   };
 
+  /**
+   * updateTag
+   *
+   * @method updateTag
+   * @desc for updating tag details
+   * 
+   * @param form {object}
+   */
   $scope.updateTag = function (form) {
     form.loading = true;
 

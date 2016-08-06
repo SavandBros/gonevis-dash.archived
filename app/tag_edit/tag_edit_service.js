@@ -3,12 +3,26 @@
 
 function TagEditService($http, $window, ENV) {
 
-  // Api call for getting tags
+  /**
+   * get
+   *
+   * @method get
+   * @desc an API call for getting tags
+   * 
+   * @param tag {object}
+   */
   function get(tag) {
     return $http.get(ENV.apiEndpoint + 'tagool/' + tag.site + '/tag/' + tag.id + '/');
   }
 
-  // Api call for updating tags
+  /**
+   * put
+   *
+   * @method put
+   * @desc an API call for updating tags
+   * 
+   * @param put {object}
+   */
   function put(tag) {
     return $http.put(ENV.apiEndpoint + 'tagool/' + tag.site + '/tag/' + tag.id + '/', tag);
   }
