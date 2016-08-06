@@ -8,10 +8,12 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param $stateParams
  * @param $mdToast
+ * @param EntryEditService
  * @param AuthenticationService
  */
-function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, $window, EntryEditService, AuthenticationService) {
+function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, EntryEditService, AuthenticationService) {
 
     var s = $stateParams.s
 
@@ -20,9 +22,18 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
         id: $stateParams.entryId
     };
 
+    // Status data
     $scope.statuses = [{name: "Draft", id: 0}, {name: "Hidden", id: 1}, {name: "Published", id: 2}];
 
+    /**
+     * constructor
+     *
+     * @method constructor
+     * @desc Init function for controller
+     */
     function constructor() {
+        
+        // Get Entry data
         EntryEditService.get($scope.form.id).then(
             function(data, status, headers, config) {
                 $scope.form = data.data;
@@ -34,32 +45,52 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
         )
     }
 
+    /**
+     * updateEntry
+     *
+     * @method updateEntry
+     * @desc Submit updateEntry form
+     * 
+     * @param form {object}
+     */
     $scope.updateEntry = function(form) {
         form.loading = true;
+        
+        // Api call for updating entry
         EntryEditService.put(form).then(
             function(data, status, headers, config) {
+                // Succsess message
                 $mdToast.showSimple("Entry successfully updated !");
-                console.log(data.data);
                 form.loading = false;
             },
             function(data, status, headers, config) {
-                console.log(data);
+                // Failure message
+                $mdToast.showSimple("Sorry, couldn't update entry");
             }
         );
     }
+
+    /**
+     * deleteEntry
+     *
+     * @method deleteEntry
+     * @desc delete entry via api call
+     * 
+     * @param entryId {string}
+     */
     $scope.deleteEntry = function(entryId) {
             EntryEditService.del(entryId).then(
                 function(data, status, headers, config) {
                     $mdToast.showSimple("Entry has been deleted !");
-                    $window.history.back();
-                    console.log(data.data);
+                    $state.go('dash.entry-list');
                 },
                 function(data, status, headers, config) {
                     console.log(data.data);
                 }
             );
         }
-        // check user auth
+        
+    // check user auth
     $scope.$on('gonevisDash.AuthenticationService:Authenticated', function() {
         constructor();
         $state.go('main');
@@ -69,4 +100,4 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
 }
 
 app.controller('EntryEditController', EntryEditController)
-EntryEditController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', '$mdToast', '$window','EntryEditService', 'AuthenticationService']
+EntryEditController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', '$mdToast', 'EntryEditService', 'AuthenticationService']

@@ -3,6 +3,7 @@
 
 function SiteListService($http, $window, ENV) {
 
+    // Get sites
     function get() {
         return json.Parse($window.sites);
     }

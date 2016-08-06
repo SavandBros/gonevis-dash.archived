@@ -9,6 +9,7 @@
  * @param $rootScope
  * @param $state
  * @param $mdToast
+ * @param SiteNewService
  * @param AuthenticationService
  */
 function SiteNewController($scope, $rootScope, $state, $mdToast, SiteNewService, AuthenticationService) {
@@ -27,6 +28,14 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, SiteNewService,
         $scope.user = AuthenticationService.getAuthenticatedUser();
     };
 
+    /**
+     * createSite
+     *
+     * @method createSite
+     * @desc create site via api call
+     *
+     * @param form {object}
+     */
     $scope.createSite = function(form) {
         form.loading = true;
 
@@ -37,7 +46,7 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, SiteNewService,
                 $scope.user.sites.push(data.data);
 
                 // Update current user's data
-                console.log(AuthenticationService.updateAuthentication($scope.user));
+                AuthenticationService.updateAuthentication($scope.user);
 
                 // Show success message
                 $mdToast.showSimple('Site ' + data.data.title + ' created');

@@ -10,7 +10,7 @@
  * @param $mdToast
  * @param AuthenticationService
  */
-function MainController($scope, $state, $mdToast, AuthenticationService) {
+function MainController($scope, $state, $mdToast, $stateParams, AuthenticationService) {
     /**
      * constructor
      *
@@ -25,10 +25,15 @@ function MainController($scope, $state, $mdToast, AuthenticationService) {
             $mdToast.showSimple('Please login to continue.');
             $state.go('signin');
         }
+        $scope.auth = AuthenticationService;
+        $scope.user = AuthenticationService.getAuthenticatedUser();
+
+        $scope.state = $state;
+        $scope.param = $stateParams
     };
 
     constructor();
 }
 
 app.controller("MainController", MainController);
-MainController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService'];
+MainController.$inject = ['$scope', '$state', '$mdToast', '$stateParams', 'AuthenticationService'];

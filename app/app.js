@@ -44,6 +44,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
             controller: 'SiteNewController',
             templateUrl: 'site_new/site_new_view.html'
         })
+        .state('dash.site-settings', {
+            url: '/site-settings',
+            controller: 'SiteSettingsController',
+            templateUrl: 'site_settings/site_settings_view.html'
+        })
+        .state('dash.tag-list', {
+            url: '/tag-list',
+            controller: 'TagListController',
+            templateUrl: 'tag_list/tag_list_view.html'
+        })
         .state('dash.user', {
             url: '/user',
             controller: 'UserController',
