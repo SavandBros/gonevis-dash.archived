@@ -16,6 +16,7 @@
 function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, EntryEditService, AuthenticationService) {
 
     var s = $stateParams.s
+    var site = AuthenticationService.getCurrentSite();
 
     // Entry data
     $scope.form = {
@@ -32,17 +33,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
      * @desc Init function for controller
      */
     function constructor() {
-        
         // Get Entry data
         EntryEditService.get($scope.form.id).then(
             function(data, status, headers, config) {
                 $scope.form = data.data;
-                console.log(data.data);
             },
             function(data, status, headers, config) {
                 console.log(data.data);
             }
-        )
+        );
     }
 
     /**
@@ -55,7 +54,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
      */
     $scope.updateEntry = function(form) {
         form.loading = true;
-        
         // Api call for updating entry
         EntryEditService.put(form).then(
             function(data, status, headers, config) {
@@ -66,6 +64,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
             function(data, status, headers, config) {
                 // Failure message
                 $mdToast.showSimple("Sorry, couldn't update entry");
+                form.loading = false;
             }
         );
     }
@@ -88,8 +87,21 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
                     console.log(data.data);
                 }
             );
-        }
-        
+        };
+
+    /* Need to be fixed
+    $scope.search = function(query) {
+        EntryEditService.search(site).then(
+            function(data, status, headers, config) {
+                $scope.result = data.data.results;
+                console.log($scope.result);
+            },
+            function(data, status, headers, config) {
+                console.log(data.data);
+            }
+        );
+    }
+    */
     // check user auth
     $scope.$on('gonevisDash.AuthenticationService:Authenticated', function() {
         constructor();
