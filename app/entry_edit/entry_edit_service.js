@@ -20,7 +20,7 @@ function EntryEditService($http, $window, ENV) {
 
   // Api call for adding tag
   function add(site) {
-    return $http.put(ENV.apiEndpoint + 'tagool/' + site + '/', site)
+    return $http.put(ENV.apiEndpoint + 'tagool/' + site + '/tag/', site)
   }
 
   return {

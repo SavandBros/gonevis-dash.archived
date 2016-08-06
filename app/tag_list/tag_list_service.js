@@ -5,7 +5,7 @@ function TagListService($http, $window, ENV) {
 
   // Api call for comments
   function get(site) {
-    return $http.get(ENV.apiEndpoint + 'tagool/' + site + '/');
+    return $http.get(ENV.apiEndpoint + 'tagool/' + site + '/tag/');
   }
 
 
