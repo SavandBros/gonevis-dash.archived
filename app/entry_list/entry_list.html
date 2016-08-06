@@ -2,6 +2,11 @@
   <div>
     <div class="panel panel-defaul s-box">
       <div class="panel-body">
+        <div ng-if="!entries.length">
+          <div class="well text-center">
+            <h3 class="s-mar-no o-fade">You have no entries</h3> <a ui-sref="dash.entry-new"><h4>Add entry</h4></a>
+          </div>
+        </div>
         <div ng-repeat="entry in entries" class="col-md-12 well" ng-hide="entry.isDeleted">
           <a ui-sref="dash.entry-edit({entryId: entry.id})"><i class="fa fa-ellipsis-v"></i></a>
           <div class="row">

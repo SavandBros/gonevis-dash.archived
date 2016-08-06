@@ -449,7 +449,7 @@ module.exports = function (grunt) {
                     'ngSanitize',
                     'gettext',
                     'xeditable',
-                    'textAngular'
+                    'textAngular',
                 ],
                 constants: {
                     ENV: {
