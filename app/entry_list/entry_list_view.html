@@ -4,7 +4,7 @@
       <div class="panel-body s-pad-no-y">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
-          <li class="row list-panel b-left b-color-{{ e.status }}" ng-repeat="e in entries" ng-class="{'o-fade-hard': e.isDeleted}">
+          <li class="row list-panel b-left b-color-{{ e.status }} fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
               <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
@@ -29,7 +29,7 @@
                   <i class="fa fa-fw fa-lock text-danger"></i> Passworded
                 </li>
                 <li class="divider "></li>
-                <li><a><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
+                <li><a ng-click="delete(e)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
               </ul>
             </div>
           </li>

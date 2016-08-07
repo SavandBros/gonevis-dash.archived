@@ -11,7 +11,7 @@
  * @param EntryListService
  * @param AuthenticationService
  */
-function EntryListController($scope, $rootScope, $state, EntryListService, AuthenticationService) {
+function EntryListController($scope, $rootScope, $state, $mdToast, EntryListService, AuthenticationService) {
 
   /**
    * constructor
@@ -38,17 +38,19 @@ function EntryListController($scope, $rootScope, $state, EntryListService, Authe
   }
 
   /**
-   * deleteEntry
+   * delete
    *
-   * @method deleteEntry
+   * @method delete
    * @desc Delete entries via API call
    * 
-   * @param entryId {string}
+   * @param entry {object}
    */
-  $scope.deleteEntry = function (entryId, index) {
-    EntryListService.del(entryId).then(
+  $scope.delete = function (entry) {
+    EntryListService.del(entry.id).then(
       function (data, status, headers, config) {
-        $scope.entries[index].isDeleted = true;
+        entry.isDeleted = true;
+        $mdToast.showSimple("Entry deleted!");
+        $mdToast.showSimple("Entry deleted!");
       }
     );
   }
@@ -57,4 +59,6 @@ function EntryListController($scope, $rootScope, $state, EntryListService, Authe
 }
 
 app.controller('EntryListController', EntryListController)
-EntryListController.$inject = ['$scope', '$rootScope', '$state', 'EntryListService', 'AuthenticationService']
+EntryListController.$inject = [
+  '$scope', '$rootScope', '$state', '$mdToast', 'EntryListService', 'AuthenticationService'
+]

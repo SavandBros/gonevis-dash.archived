@@ -153,6 +153,25 @@ a {
 }
 
 
+/* Transitions */
+
+.trans-opacity {
+  transition: opacity .3s ease-in-out;
+}
+
+
+/* Animate */
+
+.fade {
+  transition: 0.5s linear all;
+  opacity: 1;
+}
+
+.fade.ng-hide-add-active {
+  opacity: 0;
+}
+
+
 /* Avatar */
 
 .avatar {
