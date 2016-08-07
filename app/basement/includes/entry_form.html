@@ -1,0 +1,41 @@
+<hr>
+<div class="form-group" ng-class="{'has-error': form.errors.title}">
+  <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="Title" required/>
+  <small id="title" class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
+</div>
+<div class="form-group" ng-class="{'has-error': form.errors.content}">
+  <text-angular ng-model="form.content"></text-angular>
+  <small id="content" class="help-block" ng-show="form.errors.content">{{ form.errors.content[0] }}</small>
+</div>
+<div class="form-group" ng-class="{'has-error': form.errors.slug}">
+  <input id="slug" class="form-control" type="text" ng-model="form.slug" placeholder="Slug" />
+  <small id="slug" class="help-block">{{ form.errors.slug[0] || "Used to build the entry's URL." }}</small>
+</div>
+<div class="form-group" ng-class="{'has-error': form.errors.tags}">
+  <input id="tags" class="form-control" type="text" ng-model="form.tags" placeholder="Tags" />
+  <small id="tags" class="help-block">{{ form.errors.tags[0] || "Tags are separated by commas." }}</small>
+</div>
+<div class="form-group" ng-class="{'has-error': form.errors.lead}">
+  <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph"></textarea>
+  <small id="lead" class="help-block" ng-show="form.errors.lead">{{ form.errors.lead[0] }}</small>
+</div>
+<div class="form-group" ng-class="{'has-error': form.errors.excerpt}">
+  <textarea id="excerpt" class="form-control" type="text" ng-model="form.excerpt" placeholder="Excerpt"></textarea>
+  <small id="excerpt" class="help-block">{{ form.errors.excerpt[0] || "Used for SEO purposes." }}</small>
+</div>
+<div class="form-group">
+  <select ng-options="status.id as status.name for status in statuses" class="form-control" ng-value="status" ng-model="form.status"></select>
+</div>
+<hr>
+<div class="checkbox checkbox-primary checkbox-inline">
+  <input id="comments_enabled" type="checkbox" ng-model="comment_enabled">
+  <label for="comments_enabled">Coments enabled</label>
+</div>
+<div class="checkbox checkbox-primary checkbox-inline">
+  <input id="featued" type="checkbox" ng-model="featured">
+  <label for="featued">Featured</label>
+</div>
+<hr>
+<div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
+  {{ form.errors.non_field_errors[0] }}
+</div>
