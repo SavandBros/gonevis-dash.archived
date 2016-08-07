@@ -46,10 +46,9 @@ function EntryListController($scope, $rootScope, $state, $mdToast, EntryListServ
    * @param entry {object}
    */
   $scope.delete = function (entry) {
-    entry.isDeleted = true;
-    return;
     EntryListService.del(entry.id).then(
       function (data, status, headers, config) {
+        entry.isDeleted = true;
         $mdToast.showSimple("Entry deleted!");
         $mdToast.showSimple("Entry deleted!");
       }
