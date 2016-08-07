@@ -1,0 +1,22 @@
+<div class="container container-light pad-top">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default s-box">
+      <div class="panel-body s-pad">
+        <form ng-submit="newTag(form)" name="form">
+          <h3 class="o-fade-soft">New Tag</h3>
+          <hr>
+          <div class="form-group">Name
+            <input id="tag" class="form-control input-lg" type="text" ng-model="form.name" required/>
+          </div>
+          <div class="form-group">Slug
+            <input id="slug" class="form-control input-lg" type="text" ng-model="form.slug" required/>
+          </div>
+          <div class="form-group">Desciption
+            <textarea id="description" class="form-control input-lg" type="text" ng-model="form.description"></textarea>
+          </div>
+          <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">Create tag</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

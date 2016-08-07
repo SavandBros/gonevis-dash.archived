@@ -24,6 +24,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       controller: 'MainController',
       templateUrl: 'main/main_view.html'
     })
+    .state('dash.comment-list', {
+      url: '/comment-list',
+      controller: 'CommmentListController',
+      templateUrl: 'comment_list/comment_list_view.html'
+    })
     .state('dash.entry-new', {
       url: '/new',
       controller: 'EntryNewController',
@@ -49,15 +54,20 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       controller: 'SiteSettingsController',
       templateUrl: 'site_settings/site_settings_view.html'
     })
+    .state('dash.tag-edit', {
+      url: '/tag-list/:tagId',
+      controller: 'TagEditController',
+      templateUrl: 'tag_edit/tag_edit_view.html'
+    })
     .state('dash.tag-list', {
       url: '/tag-list',
       controller: 'TagListController',
       templateUrl: 'tag_list/tag_list_view.html'
     })
-    .state('dash.tag-edit', {
-      url: '/tag-list/:tagId',
-      controller: 'TagEditController',
-      templateUrl: 'tag_edit/tag_edit_view.html'
+    .state('dash.tag-new', {
+      url: '/tag-new',
+      controller: 'TagNewController',
+      templateUrl: 'tag_new/tag_new_view.html'
     })
     .state('dash.user', {
       url: '/user',
