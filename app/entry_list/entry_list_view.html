@@ -4,7 +4,7 @@
       <div class="panel-body s-pad-no-y">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
-          <li class="row list-panel b-left b-color-{{ e.status }}" ng-repeat="e in entries" ng-class="{'o-fade-hard': e.isDeleted}">
+          <li class="row list-panel b-left b-color-{{ e.status }} fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
               <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
