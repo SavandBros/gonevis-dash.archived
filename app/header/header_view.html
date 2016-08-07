@@ -23,6 +23,9 @@
         <li ng-class="{'active': state.includes('dash.tag-new')}">
           <a ui-sref="dash.tag-new">New tag</a>
         </li>
+        <li ng-class="{'active': state.includes('dash.comment-list')}">
+          <a ui-sref="dash.comment-list">Comments</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" ng-if="auth.isAuthenticated()">

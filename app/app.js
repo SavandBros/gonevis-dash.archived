@@ -26,7 +26,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
     })
     .state('dash.comment-list', {
       url: '/comment-list',
-      controller: 'CommmentListController',
+      controller: 'CommentListController',
       templateUrl: 'comment_list/comment_list_view.html'
     })
     .state('dash.entry-new', {
