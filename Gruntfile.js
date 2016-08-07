@@ -443,6 +443,7 @@ module.exports = function (grunt) {
         dest: '<%= gonevisDash.app %>/configuration.js',
         deps: [
           'ngMaterial',
+          'ngAnimate',
           'ui.router',
           'ngAnimate',
           'ngCookies',
