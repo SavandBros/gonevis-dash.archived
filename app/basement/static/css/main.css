@@ -188,3 +188,12 @@ a {
 .list-panel:last-child {
   border-bottom: none;
 }
+
+
+/* MD Toast */
+
+md-toast {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+}
