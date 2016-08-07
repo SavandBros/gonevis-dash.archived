@@ -13,20 +13,6 @@
  */
 function EntryNewController($scope, $state, $mdToast, AuthenticationService, EntryNewService) {
 
-  $scope.form = {};
-
-  // Status data
-  $scope.statuses = [{
-    name: "Draft",
-    id: 0
-  }, {
-    name: "Hidden",
-    id: 1
-  }, {
-    name: "Published",
-    id: 2
-  }];
-
   /**
    * constructor
    *
@@ -40,6 +26,14 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, Ent
     if (!AuthenticationService.isAuthenticated()) {
       return $state.go('signin');
     }
+
+    $scope.form = {};
+
+    $scope.statuses = [
+      { name: "Draft", id: 0 },
+      { name: "Hidden", id: 1 },
+      { name: "Published", id: 2 }
+    ];
   };
 
   /**
@@ -63,6 +57,8 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, Ent
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Failed to add entry.");
+        form.loading = false;
+        form.errors = data.data;
       }
     );
   }
