@@ -15,8 +15,13 @@ function CommentListService($http, $window, ENV) {
     return $http.get(ENV.apiEndpoint + 'sushial/comments/1/');
   }
 
+  function del(commentId) {
+    return $http.delete(ENV.apiEndpoint + 'sushial/comment/' + commentId + '/');
+  }
+
   return {
     get: get,
+    del: del,
   }
 }
 
