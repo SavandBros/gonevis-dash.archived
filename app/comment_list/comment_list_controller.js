@@ -33,6 +33,23 @@ function CommentListController($scope, $rootScope, $state, $mdToast, CommentList
     );
   };
 
+  /**
+   * delete
+   *
+   * @method delete
+   * @desc function for deleting comments
+   * 
+   * @param delete {object}
+   */
+  $scope.delete = function (comment) {
+    CommentListService.del(comment.id).then(
+      function (data, status, headers, config) {
+        comment.isDeleted = true;
+        $mdToast.showSimple("Comment deleted!");
+      }
+    );
+  }
+
   constructor();
 }
 

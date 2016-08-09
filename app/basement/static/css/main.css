@@ -216,3 +216,11 @@ md-toast {
   left: 10px;
   bottom: 10px;
 }
+
+/* Link in Link */
+
+.nav-link-in-link {
+  position: absolute;
+  right: 0;
+  margin-top: -26px;
+}
