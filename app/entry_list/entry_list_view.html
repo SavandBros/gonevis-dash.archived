@@ -2,6 +2,10 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-defaul s-box b-left-no">
       <div class="panel-body s-pad-no-y">
+      <div ng-if="!entries.length" class="text-center">
+        <h2 class="o-fade">No entries here</h2>
+        <a ui-sref="dash.entry-new">Add entry?</a>
+      </div>
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
           <li class="row list-panel b-left b-color-{{ e.status }} fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
