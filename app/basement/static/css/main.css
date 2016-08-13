@@ -217,10 +217,63 @@ md-toast {
   bottom: 10px;
 }
 
+
 /* Link in Link */
 
 .nav-link-in-link {
   position: absolute;
   right: 0;
   margin-top: -26px;
+}
+
+.myButt {
+  outline: none;
+  border: none;
+  display: block;
+  cursor: pointer;
+  background-color: #d9534f;
+  position: relative;
+  border: 2px solid white;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  padding: 10px 16px;
+  font-size: 18px;
+  border-radius: 6px;
+}
+
+.four {
+  overflow: hidden;
+}
+
+.four span {
+  color: #fff;
+  display: inline-block;
+  transition: cubic-bezier(0.88, -0.04, 0, 0.97) 0.3s
+}
+
+.four .icon {
+  position: absolute;
+  left: -60px;
+  top: 0;
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 18px;
+  background-color: #F44336;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+}
+
+.four:hover .icon {
+  left: 0px;
+}
+
+.four:hover span {
+  color: white;
+  margin-left: 50px;
 }

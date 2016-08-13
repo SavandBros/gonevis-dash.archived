@@ -5,12 +5,18 @@
         <form ng-submit="update(form)" name="form">
           <h3 class="o-fade-soft">Edit entry</h3>
           <ng-include src="'basement/includes/entry_form.html'"></ng-include>
-          <div class="btn-group btn-group-lg pull-right">
-            <button class="btn btn-default" ng-click="delete(form.id)" title="Delete entry">
-              <i class="fa fa-trash"></i>
+          <div class="pull-left">
+            <button class='myButt four' type="button" ng-click="delete(form.id)">
+              <div class='icon'><i class="fa fa-trash"></i></div>
+              <span>Delete Entry</span>
             </button>
+          </div>
+          <div class="btn-group btn-group-lg pull-right">
             <button class="btn btn-primary" ng-disabled="form.loading || form.$invalid">
-              <i class="fa fa-check fa-fw"></i> Update Entry
+              <span ng-if="form.loading">
+                <i class="fa fa-circle-o-notch fa-spin" ng-show="form.loading"></i>
+              </span>
+              <i class="fa fa-check fa-fw" ng-hide="form.loading"></i> Update Entry
             </button>
           </div>
         </form>

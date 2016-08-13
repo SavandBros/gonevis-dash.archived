@@ -14,7 +14,10 @@
           <div class="form-group">Desciption
             <textarea id="description" class="form-control input-lg" type="description" ng-model="form.description"></textarea>
           </div>
-          <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">Update</button>
+          <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">
+          <span ng-show="form.loading"><i class="fa fa-circle-o-notch fa-spin"></i></span> Update
+          <span ng-hide="form.loading"><i class="fa fa-check"></i></span>
+          </button>
         </form>
       </div>
     </div>

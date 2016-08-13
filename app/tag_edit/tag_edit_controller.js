@@ -28,13 +28,15 @@ function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, T
    */
   function constructor() {
     $scope.user = AuthenticationService.getAuthenticatedUser();
+    updatedTag();
+  };
 
+  function updatedTag() {
     TagEditService.get($scope.form).then(
       function (data, status, headers, config) {
         $scope.form = data.data;
-      }
-    );
-  };
+      });
+  }
 
   /**
    * updateTag
@@ -50,6 +52,8 @@ function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, T
     TagEditService.put(form).then(
       function (data, status, headers, config) {
         form.loading = false;
+        updatedTag();
+        $mdToast.showSimple("Tag updated.");
       },
       function (data, status, headers, config) {
         form.loading = false;
