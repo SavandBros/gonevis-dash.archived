@@ -41,6 +41,7 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
     UserService.get($scope.user.id).then(
       function (data, status, headers, config) {
         $scope.user = data.data;
+        AuthenticationService.updateAuthentication(data.data);
       }
     );
   }
@@ -63,6 +64,7 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
       function (data, status, headers, config) {
         $scope.user = data.data;
         $mdToast.showSimple("Profile update.");
+        getUser();
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Sorry, error has occured while updating profile, try again later.");
