@@ -41,6 +41,7 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
     UserService.get($scope.user.id).then(
       function (data, status, headers, config) {
         $scope.user = data.data;
+        AuthenticationService.updateAuthentication(data.data);
       }
     );
   }
@@ -62,6 +63,7 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
     UserService.update(payload).then(
       function (data, status, headers, config) {
         $scope.user = data.data;
+        getUser();
         $mdToast.showSimple("Profile update.");
       },
       function (data, status, headers, config) {
