@@ -4,14 +4,16 @@
 /**
  * Authentication Service
  *
+ * @class AuthenticationService
+ * @namespace gonevisDash.AuthenticationService
+ *
  * @param $rootScope
  * @param $http
  * @param $window
  * @param $stateParams
  * @param ENV
- * @class AuthenticationService
+ *
  * @returns [Factory]
- * @namespace gonevisDash.AuthenticationService
  */
 function AuthenticationService($rootScope, $http, $window, $stateParams, ENV) {
   /**
