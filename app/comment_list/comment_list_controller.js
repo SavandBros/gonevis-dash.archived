@@ -22,6 +22,7 @@ function CommentListController($scope, $rootScope, $state, $mdToast, CommentList
    */
   function constructor() {
     $scope.user = AuthenticationService.getAuthenticatedUser();
+    $scope.site = AuthenticationService.getCurrentSite();
 
     CommentListService.get().then(
       function (data, status, headers, config) {
