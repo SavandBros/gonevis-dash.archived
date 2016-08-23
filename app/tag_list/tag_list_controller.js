@@ -9,10 +9,10 @@
  * @param $rootScope
  * @param $state
  * @param $mdToast
- * @param TagListService
+ * @param API
  * @param AuthenticationService
  */
-function TagListController($scope, $rootScope, $state, $mdToast, TagListService, AuthenticationService) {
+function TagListController($scope, $rootScope, $state, $mdToast, API, AuthenticationService) {
 
   var site = AuthenticationService.getCurrentSite();
 
@@ -25,12 +25,12 @@ function TagListController($scope, $rootScope, $state, $mdToast, TagListService,
   function constructor() {
     $scope.user = AuthenticationService.getAuthenticatedUser();
 
-    TagListService.get(site).then(
+    API.Tags.get({ tag_site: site },
       function (data, status, headers, config) {
-        $scope.tags = data.data.results;
+        $scope.tags = data.results;
       },
       function (data, status, headers, config) {
-        console.log(data.data);
+        console.log(data);
       }
     );
   };
@@ -39,4 +39,4 @@ function TagListController($scope, $rootScope, $state, $mdToast, TagListService,
 }
 
 app.controller("TagListController", TagListController);
-TagListController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'TagListService', 'AuthenticationService'];
+TagListController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthenticationService'];

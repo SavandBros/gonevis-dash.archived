@@ -10,10 +10,10 @@
  * @param $state
  * @param $mdToast
  * @param $stateParams
- * @param TagNewService
+ * @param API
  * @param AuthenticationService
  */
-function TagNewController($scope, $rootScope, $state, $mdToast, $stateParams, TagNewService, AuthenticationService) {
+function TagNewController($scope, $rootScope, $state, $mdToast, $stateParams, API, AuthenticationService) {
 
   /**
    * constructor
@@ -43,7 +43,7 @@ function TagNewController($scope, $rootScope, $state, $mdToast, $stateParams, Ta
       description: form.description
     };
 
-    TagNewService.post(payload).then(
+    API.Tags.save({ tag_site: payload.site }, payload,
       function (data, status, headers, config) {
         form.loading = false;
         $mdToast.showSimple("Tag " + form.name + " has been created");
@@ -59,4 +59,4 @@ function TagNewController($scope, $rootScope, $state, $mdToast, $stateParams, Ta
 }
 
 app.controller('TagNewController', TagNewController)
-TagNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', '$stateParams', 'TagNewService', 'AuthenticationService']
+TagNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', '$stateParams', 'API', 'AuthenticationService']

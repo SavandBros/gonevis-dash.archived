@@ -9,10 +9,10 @@
  * @param $state
  * @param $stateParams
  * @param $mdToast
- * @param DolphinService
+ * @param API
  * @param AuthenticationService
  */
-function DolphinController($scope, $state, $stateParams, $mdToast, DolphinService, AuthenticationService) {
+function DolphinController($scope, $state, $stateParams, $mdToast, API, AuthenticationService) {
 
   var site = AuthenticationService.getCurrentSite();
 
@@ -27,13 +27,13 @@ function DolphinController($scope, $state, $stateParams, $mdToast, DolphinServic
      * @desc Init function for controller
      */
   function constructor() {
-    DolphinService.get(site).then(
+    API.Dolphins.get({ site_id: site },
       function (data) {
-        $scope.dolphins = data.data.results;
-        console.log(data.data.results);
+        $scope.dolphins = data.results;
+        console.log(data.results);
       },
       function (data) {
-        console.log(data.data);
+        console.log(data);
       }
     );
   }
@@ -47,7 +47,7 @@ function DolphinController($scope, $state, $stateParams, $mdToast, DolphinServic
    * @param 
    */
   $scope.newFile = function (form) {
-    DolphinService.post(form).then(
+    API.DolphinNew.save({ site_id: site }, form,
       function (data) {
         console.log(data.data);
       },
@@ -61,5 +61,5 @@ function DolphinController($scope, $state, $stateParams, $mdToast, DolphinServic
 
 app.controller('DolphinController', DolphinController)
 DolphinController.$inject = [
-  '$scope', '$state', '$stateParams', '$mdToast', 'DolphinService', 'AuthenticationService'
+  '$scope', '$state', '$stateParams', '$mdToast', 'API', 'AuthenticationService'
 ]

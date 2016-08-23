@@ -9,10 +9,10 @@
  * @param $state
  * @param $stateParams
  * @param $mdToast
- * @param EntryEditService
+ * @param API
  * @param AuthenticationService
  */
-function EntryEditController($scope, $state, $stateParams, $mdToast, EntryEditService, AuthenticationService) {
+function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthenticationService) {
 
   /**
    * constructor
@@ -32,9 +32,11 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, EntryEditSe
       { name: "Published", id: 2 }
     ];
 
-    EntryEditService.get($scope.form.id).then(function (data) {
-      $scope.form = data.data;
-    })
+    API.Entry.get({ entry_id: $scope.form.id },
+      function (data, status, headers, config) {
+        $scope.form = data;
+      }
+    )
   }
 
 
@@ -49,7 +51,7 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, EntryEditSe
   $scope.update = function (form) {
     form.loading = true;
 
-    EntryEditService.put(form).then(
+    API.Entry.put({ entry_id: form.id }, form,
       function (data) {
         $mdToast.showSimple("Entry updated!");
         form.loading = false;
@@ -72,7 +74,7 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, EntryEditSe
    * @param id {string} UUID of entry
    */
   $scope.delete = function (id) {
-    EntryEditService.del(id).then(
+    API.Entry.delete({ entry_id: id },
       function (data) {
         $mdToast.showSimple("Entry has been deleted !");
         $state.go('dash.entry-list');
@@ -88,5 +90,5 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, EntryEditSe
 
 app.controller('EntryEditController', EntryEditController)
 EntryEditController.$inject = [
-  '$scope', '$state', '$stateParams', '$mdToast', 'EntryEditService', 'AuthenticationService'
+  '$scope', '$state', '$stateParams', '$mdToast', 'API', 'AuthenticationService'
 ]

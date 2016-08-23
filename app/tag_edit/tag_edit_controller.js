@@ -10,15 +10,12 @@
  * @param $state
  * @param $mdToast
  * @param $stateParams
- * @param TagEditService
+ * @param API
  * @param AuthenticationService
  */
-function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, TagEditService, AuthenticationService) {
-
-  $scope.form = {
-    site: AuthenticationService.getCurrentSite(),
-    id: $stateParams.tagId
-  }
+function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, API, AuthenticationService) {
+  
+  var site = AuthenticationService.getCurrentSite();
 
   /**
    * constructor
@@ -32,9 +29,9 @@ function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, T
   };
 
   function updatedTag() {
-    TagEditService.get($scope.form).then(
+    API.Tag.get({ tag_site: site, tag_id: $stateParams.tagId },
       function (data, status, headers, config) {
-        $scope.form = data.data;
+        $scope.form = data;
       });
   }
 
@@ -49,7 +46,7 @@ function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, T
   $scope.updateTag = function (form) {
     form.loading = true;
 
-    TagEditService.put(form).then(
+    API.Tag.put({ tag_site: site, tag_id: $stateParams.tagId }, form,
       function (data, status, headers, config) {
         form.loading = false;
         updatedTag();
@@ -65,4 +62,4 @@ function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, T
 }
 
 app.controller("TagEditController", TagEditController);
-TagEditController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', '$stateParams', 'TagEditService', 'AuthenticationService'];
+TagEditController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', '$stateParams', 'API', 'AuthenticationService'];
