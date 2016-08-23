@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $resourceProvider) {
   $httpProvider.interceptors.push('AuthenticationInterceptorService');
 
   $stateProvider
@@ -91,6 +91,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       templateUrl: 'signup/signup_view.html'
     });
   $urlRouterProvider.otherwise('/');
+  $resourceProvider.defaults.stripTrailingSlashes = false;
 });
 
 app.run(function (editableOptions) {

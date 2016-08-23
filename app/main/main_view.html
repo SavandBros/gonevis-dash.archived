@@ -1,1 +1,21 @@
-<h1 class="text-center">Main here</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading s-pad-y-soft"><i class="fa fa-fw text-info fa-comments"></i> Latest Comments</div>
+        <ul class="panel-body panel-list">
+          <li class="panel-list-item fade" ng-repeat="c in Comment.list">
+            <small>{{ c.user.name }}:</small>
+            <a ng-click="!c.isDeleted">{{ c.comment }}</a>
+            <span class="panel-list-item-button">
+              <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
+              <ul class="dropdown-menu">
+                <li><a ng-click="Comment.delete(c)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
+              </ul>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,10 +9,10 @@
  * @param $rootScope
  * @param $state
  * @param $mdToast
- * @param CommentListService
+ * @param API
  * @param AuthenticationService
  */
-function CommentListController($scope, $rootScope, $state, $mdToast, CommentListService, AuthenticationService) {
+function CommentListController($scope, $rootScope, $state, $mdToast, API, AuthenticationService) {
 
   /**
    * constructor
@@ -24,12 +24,12 @@ function CommentListController($scope, $rootScope, $state, $mdToast, CommentList
     $scope.user = AuthenticationService.getAuthenticatedUser();
     $scope.site = AuthenticationService.getCurrentSite();
 
-    CommentListService.get().then(
+    API.Comments.get({ object_type: 1 },
       function (data, status, headers, config) {
-        $scope.comments = data.data.results;
+        $scope.comments = data.results;
       },
       function (data, status, headers, config) {
-        console.log(data.data);
+        console.log(data);
       }
     );
   };
@@ -43,7 +43,7 @@ function CommentListController($scope, $rootScope, $state, $mdToast, CommentList
    * @param delete {object}
    */
   $scope.delete = function (comment) {
-    CommentListService.del(comment.id).then(
+    API.del(comment.id).then(
       function (data, status, headers, config) {
         comment.isDeleted = true;
         $mdToast.showSimple("Comment deleted!");
@@ -55,4 +55,4 @@ function CommentListController($scope, $rootScope, $state, $mdToast, CommentList
 }
 
 app.controller("CommentListController", CommentListController);
-CommentListController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'CommentListService', 'AuthenticationService'];
+CommentListController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthenticationService'];

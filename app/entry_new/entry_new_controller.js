@@ -9,9 +9,9 @@
  * @param $state
  * @param $mdToast
  * @param AuthenticationService
- * @param EntryNewService
+ * @param API
  */
-function EntryNewController($scope, $state, $mdToast, AuthenticationService, EntryNewService) {
+function EntryNewController($scope, $state, $mdToast, AuthenticationService, API) {
 
   /**
    * constructor
@@ -48,17 +48,17 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, Ent
     form.loading = true;
     form.site = AuthenticationService.getCurrentSite();
 
-    EntryNewService.create(form).then(
+    API.EntryAdd.save(form,
       function (data, status, headers, config) {
         $mdToast.showSimple("Entry added.");
         $state.go('dash.entry-edit', {
-          entryId: data.data.id
+          entryId: data.id
         });
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Failed to add entry.");
         form.loading = false;
-        form.errors = data.data;
+        form.errors = data;
       }
     );
   }
@@ -67,4 +67,4 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, Ent
 }
 
 app.controller("EntryNewController", EntryNewController);
-EntryNewController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService', 'EntryNewService'];
+EntryNewController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService', 'API'];

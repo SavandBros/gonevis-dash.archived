@@ -79,6 +79,21 @@ a {
   margin-right: 10px;
 }
 
+.s-pad-x {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.s-pad-y {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.s-pad-y-soft {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 
 /* Opacity */
 
@@ -135,7 +150,7 @@ a {
 /* Cursors */
 
 .c-p {
-  cursor: pointer;
+  cursor: s;
 }
 
 
@@ -217,10 +232,43 @@ md-toast {
   bottom: 10px;
 }
 
+
 /* Link in Link */
 
 .nav-link-in-link {
   position: absolute;
   right: 0;
   margin-top: -26px;
+}
+
+
+/* Panel List */
+
+.panel-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.panel-list .panel-list-item {
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.panel-list .panel-list-item:last-child {
+  border-bottom: none;
+}
+
+.panel-list .panel-list-item-button {
+  position: absolute;
+  right: 18px;
+}
+
+.panel-list .panel-list-item-button > .fa {
+  opacity: 0.6;
+  font-size: 1.3em;
+  cursor: pointer;
 }

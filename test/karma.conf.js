@@ -43,6 +43,8 @@ module.exports = function(config) {
       'bower_components/textAngular/dist/textAngular.js',
       'bower_components/textAngular/dist/textAngular-sanitize.js',
       'bower_components/textAngular/dist/textAngularSetup.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/angular-modal-service/dst/angular-modal-service.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/configuration.js',

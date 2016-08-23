@@ -9,10 +9,10 @@
  * @param $rootScope
  * @param $state
  * @param $mdToast
- * @param SiteNewService
+ * @param API
  * @param AuthenticationService
  */
-function SiteNewController($scope, $rootScope, $state, $mdToast, SiteNewService, AuthenticationService) {
+function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthenticationService) {
 
   // Create Site form
   $scope.form = {};
@@ -38,23 +38,23 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, SiteNewService,
   $scope.createSite = function (form) {
     form.loading = true;
 
-    SiteNewService.post(form).then(
+    API.SiteNew.save(form,
       function (data, status, headers, config) {
         form.loading = false;
         // Update sites
-        $scope.user.sites.push(data.data);
+        $scope.user.sites.push(data);
 
         // Update current user's data
         AuthenticationService.updateAuthentication($scope.user);
 
         // Show success message
-        $mdToast.showSimple('Site ' + data.data.title + ' created');
+        $mdToast.showSimple('Site ' + data.title + ' created');
 
         // Redirect user to the site that just have been created
         $state.go('dash.entry-new', { s: $scope.user.sites.length - 1 });
       },
       function (data, status, headers, config) {
-        console.log(data.data);
+        console.log(data);
       }
     );
   };
@@ -63,4 +63,4 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, SiteNewService,
 }
 
 app.controller("SiteNewController", SiteNewController);
-SiteNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'SiteNewService', 'AuthenticationService'];
+SiteNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthenticationService'];

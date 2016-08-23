@@ -9,10 +9,10 @@
  * @param $rootScope
  * @param $state
  * @param $mdToast
- * @param SiteSettingsService
+ * @param API
  * @param AuthenticationService
  */
-function SiteSettingsController($scope, $rootScope, $state, $mdToast, SiteSettingsService, AuthenticationService) {
+function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthenticationService) {
 
   var site = AuthenticationService.getCurrentSite()
 
@@ -25,13 +25,13 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, SiteSettin
   function constructor() {
     $scope.user = AuthenticationService.getAuthenticatedUser();
 
-    SiteSettingsService.get(site).then(
+    API.Site.get({ site_id: site },
       function (data, status, headers, config) {
-        $scope.siteDetail = data.data;
+        $scope.siteDetail = data;
         console.log($scope.siteDetail);
       },
       function (data, status, headers, config) {
-        console.log(data.data);
+        console.log(data);
       }
     );
   };
@@ -50,14 +50,14 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, SiteSettin
     var payload = {};
     payload[key] = value;
 
-    SiteSettingsService.update(site).then(
+    API.SiteUpdate.put({ site_id: site }, payload,
       function (data, status, headers, config) {
-        $scope.siteDetail = data.data;
+        $scope.siteDetail = data;
         $mdToast.showSimple("Profile update.");
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Sorry, error has occured while updating profile, try again later.");
-        console.log(data.data)
+        console.log(data)
       }
     );
   }
@@ -66,4 +66,4 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, SiteSettin
 }
 
 app.controller("SiteSettingsController", SiteSettingsController);
-SiteSettingsController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'SiteSettingsService', 'AuthenticationService'];
+SiteSettingsController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthenticationService'];

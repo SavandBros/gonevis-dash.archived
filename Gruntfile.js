@@ -453,6 +453,7 @@ module.exports = function (grunt) {
           'gettext',
           'xeditable',
           'textAngular',
+          'angularModalService'
         ],
         constants: {
           ENV: {

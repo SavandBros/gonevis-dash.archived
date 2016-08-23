@@ -10,9 +10,9 @@
  * @param $state
  * @param $mdToast
  * @param AuthenticationService
- * @param UserService
+ * @param API
  */
-function UserController($scope, $state, $mdToast, AuthenticationService, UserService) {
+function UserController($scope, $state, $mdToast, AuthenticationService, API) {
 
   /**
    * constructor
@@ -38,9 +38,9 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
    */
   function getUser() {
 
-    UserService.get($scope.user.id).then(
+    API.User.get( { user_id: $scope.user.id },
       function (data, status, headers, config) {
-        $scope.user = data.data;
+        $scope.user = data;
       }
     );
   }
@@ -59,9 +59,9 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
     var payload = {};
     payload[key] = value;
 
-    UserService.update(payload).then(
+    API.UserUpdate.put(payload,
       function (data, status, headers, config) {
-        $scope.user = data.data;
+        $scope.user = data;
         $mdToast.showSimple("Profile update.");
       },
       function (data, status, headers, config) {
@@ -74,4 +74,4 @@ function UserController($scope, $state, $mdToast, AuthenticationService, UserSer
 }
 
 app.controller("UserController", UserController);
-UserController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService', 'UserService'];
+UserController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService', 'API'];
