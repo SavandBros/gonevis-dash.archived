@@ -453,7 +453,9 @@ module.exports = function (grunt) {
           'gettext',
           'xeditable',
           'textAngular',
-          'angularModalService'
+          'angularModalService',
+          'slugifier',
+          'ngTagsInput'
         ],
         constants: {
           ENV: {

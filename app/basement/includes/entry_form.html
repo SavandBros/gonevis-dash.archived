@@ -12,8 +12,9 @@
   <small id="slug" class="help-block">{{ form.errors.slug[0] || "Used to build the entry's URL." }}</small>
 </div>
 <div class="form-group" ng-class="{'has-error': form.errors.tags}">
-  <input id="tags" class="form-control" type="text" ng-model="form.tags" placeholder="Tags" />
-  <small id="tags" class="help-block">{{ form.errors.tags[0] || "Tags are separated by commas." }}</small>
+  <tags-input ng-model="form.tags" display-property="slug">
+    <auto-complete source="loadTags($query)"></auto-complete>
+  </tags-input>
 </div>
 <div class="form-group" ng-class="{'has-error': form.errors.lead}">
   <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph"></textarea>

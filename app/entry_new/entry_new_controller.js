@@ -11,7 +11,9 @@
  * @param AuthenticationService
  * @param API
  */
-function EntryNewController($scope, $state, $mdToast, AuthenticationService, API) {
+function EntryNewController($scope, $state, $mdToast, AuthenticationService, API, $q) {
+
+  var tags = [];
 
   /**
    * constructor
@@ -22,6 +24,18 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
    * @memberOf EntryNewController
    */
   function constructor() {
+
+    API.Tags.get({ tag_site: AuthenticationService.getCurrentSite() },
+      function (data, status, headers, config) {
+
+        for (var i in data.results) {
+
+          tags.push({ text: data.results[i].slug });
+        }
+        console.log(tags);
+
+      }
+    );
     // Check auth
     if (!AuthenticationService.isAuthenticated()) {
       return $state.go('signin');
@@ -36,6 +50,16 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
     ];
   };
 
+  $scope.loadTags = function (query) {
+    return load();
+  };
+
+  function load() {
+    var deferred = $q.defer();
+    deferred.resolve(tags);
+    return deferred.promise;
+  };
+
   /**
    * newPost
    *
@@ -47,6 +71,7 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
   $scope.newPost = function (form) {
     form.loading = true;
     form.site = AuthenticationService.getCurrentSite();
+    form.tags = tags;
 
     API.EntryAdd.save(form,
       function (data, status, headers, config) {
@@ -67,4 +92,4 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
 }
 
 app.controller("EntryNewController", EntryNewController);
-EntryNewController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService', 'API'];
+EntryNewController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService', 'API', '$q'];
