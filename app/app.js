@@ -79,6 +79,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       controller: 'UserController',
       templateUrl: 'user/user_view.html'
     })
+    .state('dash.password-reset', {
+      url: '/password-reset',
+      controller: 'PasswordResetController',
+      templateUrl: 'password_reset/password_reset_view.html'
+    })
     // Other states that are not a child of dash state
     .state('signin', {
       url: '/login',
