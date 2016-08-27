@@ -50,10 +50,22 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
     ];
   };
 
+  /**
+   * loadTags
+   *
+   * @method loadTags
+   * @desc Load tags via load() function
+   */
   $scope.loadTags = function (query) {
     return load();
   };
 
+  /**
+   * load
+   *
+   * @method load
+   * @desc get tags from var tags and return a promise
+   */
   function load() {
     var deferred = $q.defer();
     deferred.resolve(tags);
