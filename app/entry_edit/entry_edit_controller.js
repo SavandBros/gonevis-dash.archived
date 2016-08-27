@@ -28,7 +28,6 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, Authen
       function (data, status, headers, config) {
 
         for (var i in data.results) {
-
           tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
         }
         console.log(tags);
