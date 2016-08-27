@@ -39,7 +39,7 @@ function TagNewController($scope, $rootScope, $state, $mdToast, $stateParams, AP
     var payload = {
       name: form.name,
       site: AuthenticationService.getCurrentSite(),
-      slug: form.slug,
+      slug: "",
       description: form.description
     };
 

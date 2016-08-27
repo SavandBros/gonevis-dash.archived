@@ -24,7 +24,7 @@ function MainController($scope, $state, $mdToast, $stateParams, AuthenticationSe
     // User
     $scope.auth = AuthenticationService;
     $scope.user = AuthenticationService.getAuthenticatedUser();
-
+    $scope.site = AuthenticationService.getCurrentSite();
     // Check auth
     if (!AuthenticationService.isAuthenticated()) {
       $mdToast.showSimple('Please login to continue.');
@@ -46,6 +46,7 @@ function MainController($scope, $state, $mdToast, $stateParams, AuthenticationSe
       API.Comments.get({ object_type: 1 },
         function (data, status, headers, config) {
           $scope.Comment.list = data.results;
+          console.log($scope.Comment.list)
         }
       )
     },

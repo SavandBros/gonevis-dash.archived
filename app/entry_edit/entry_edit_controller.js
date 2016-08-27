@@ -12,7 +12,9 @@
  * @param API
  * @param AuthenticationService
  */
-function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthenticationService) {
+function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthenticationService, $q) {
+
+  var tags = [];
 
   /**
    * constructor
@@ -21,6 +23,19 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, Authen
    * @desc Init function for controller
    */
   function constructor() {
+
+    API.Tags.get({ tag_site: AuthenticationService.getCurrentSite() },
+      function (data, status, headers, config) {
+
+        for (var i in data.results) {
+
+          tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
+        }
+        console.log(tags);
+
+      }
+    );
+
     $scope.form = {
       id: $stateParams.entryId,
       site: AuthenticationService.getCurrentSite()
@@ -39,7 +54,15 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, Authen
     )
   }
 
+  $scope.loadTags = function (query) {
+    return load();
+  };
 
+  function load() {
+    var deferred = $q.defer();
+    deferred.resolve(tags);
+    return deferred.promise;
+  };
   /**
    * update
    *
@@ -90,5 +113,5 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, Authen
 
 app.controller('EntryEditController', EntryEditController)
 EntryEditController.$inject = [
-  '$scope', '$state', '$stateParams', '$mdToast', 'API', 'AuthenticationService'
+  '$scope', '$state', '$stateParams', '$mdToast', 'API', 'AuthenticationService', '$q'
 ]
