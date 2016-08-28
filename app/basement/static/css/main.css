@@ -226,6 +226,10 @@ a {
 
 /* MD Toast */
 
+.md-toast-animating {
+  overflow: initial !important;
+}
+
 md-toast {
   position: fixed;
   left: 10px;
