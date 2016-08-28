@@ -87,20 +87,9 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
   }
 
   /**
-   * addFile
    *
-   * @method addFile
-   * @desc function to add new file
    *
-   * @param 
    */
-  $scope.newFile = function (form) {
-    API.DolphinNew.save({ site_id: site }, form,
-      function (data) {
-        console.log(data.data);
-      },
-      function (data) {
-        console.log(data.data);
       });
   }
 
