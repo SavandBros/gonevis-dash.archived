@@ -82,6 +82,9 @@ function API($http, $resource, ENV) {
     }, {
       "name": "PasswordReset",
       "endpoint": "account/password-reset/" // POST, OPTIONS
+    }, {
+      "name": "ChangePassword",
+      "endpoint": "account/change-password/" // POST, OPTIONS
     },
     /* Endof User API */
 
