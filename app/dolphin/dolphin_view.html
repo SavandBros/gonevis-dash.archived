@@ -1,22 +1,50 @@
 <div class="container container-light pad-top">
-  <form ng-submit="newFile(form)" class="jumbotron">
-    <input type="file" name="file" ng-model="form.file">
-    <button class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Upload</button>
-  </form>
+
   <div class="row">
-    <div class="col-md-3" ng-repeat="dolphin in dolphins">
-      <div class="thumbnail" ng-if="dolphin.is_image">
-        <img ng-src="{{ dolphin.file }}">
-        <div class="caption text-center">
-          <h4>{{ dolphin.file_name }}</h4>
-        </div>
-      </div>
-      <div class="thumbnail text-center" ng-if="!dolphin.is_image">
-        <h1 class="o-fade">ZIP</h1>
-        <div class="caption text-center">
-          <h4>{{ dolphin.file_name }}</h4>
+
+    <!-- Files -->
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-3" ng-repeat="dolphin in dolphins">
+          <div class="thumbnail" ng-if="dolphin.is_image">
+            <img ng-src="{{ dolphin.file }}">
+            <div class="caption text-center">
+              <h4>{{ dolphin.file_name }}</h4>
+            </div>
+          </div>
+          <div class="thumbnail text-center" ng-if="!dolphin.is_image">
+            <h1 class="o-fade">ZIP</h1>
+            <div class="caption text-center">
+              <h4>{{ dolphin.file_name }}</h4>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Upload -->
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-fw fa-upload text-info"></i> Upload File</div>
+        <div class="panel-body">
+          <button type="file"
+            class="btn btn-primary"
+            ngf-select="uploadFiles($file, $invalidFiles)"
+            ngf-accept="upload.accept"
+            ngf-max-size="25MB">
+            <i class="fa fa-fw fa-plus"></i> Select File
+          </button>
+        </div>
+        <div class="panel-footer fade" ng-show="upload.file.progress">
+          <div class="progress s-mar-no">
+            <div class="progress-bar progress-bar-striped" style="width: {{ upload.file.progress }}%">
+              <span class="sr-only">{{ upload.file.progress }}% Complete</span> <span ng-if="upload.file.progress == 100">Done</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
 </div>
