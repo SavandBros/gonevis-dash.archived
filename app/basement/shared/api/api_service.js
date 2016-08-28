@@ -82,7 +82,7 @@ function API($http, $resource, ENV) {
       "name": "Dolphins",
       "endpoint": "dolphin/:site_id/file/" // GET, POST, OPTIONS 
     }, {
-      "name": "DolphinNew",
+      "name": "Dolphin",
       "endpoint": "dolphin/:site_id/file/:file_id/" // GET, PUT, PATCH, OPTIONS
     },
   ];
