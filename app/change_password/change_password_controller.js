@@ -31,7 +31,7 @@ function ChangePasswordController($scope, $rootScope, $state, $mdToast, $statePa
    * @method changePassword
    * @desc for changing password
    * 
-   * @param form {object}
+   * @param form {Object}
    */
   $scope.changePassword = function (form) {
 
@@ -69,4 +69,12 @@ function ChangePasswordController($scope, $rootScope, $state, $mdToast, $statePa
 }
 
 app.controller('ChangePasswordController', ChangePasswordController);
-ChangePasswordController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', '$stateParams', 'API', 'AuthenticationService'];
+ChangePasswordController.$inject = [
+  '$scope', 
+  '$rootScope', 
+  '$state', 
+  '$mdToast', 
+  '$stateParams', 
+  'API', 
+  'AuthenticationService'
+];
