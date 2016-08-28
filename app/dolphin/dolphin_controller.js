@@ -18,24 +18,21 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
 
   var site = AuthenticationService.getCurrentSite();
 
-  $scope.form = {
-      site: AuthenticationService.getCurrentSite(),
+  /**
+   * constructor
+   *
+   * @method constructor
+   * @desc Init function for controller
+   */
+  function constructor() {
+    $scope.form = {
+      site: site,
       file: null,
     }
-    /**
-     * constructor
-     *
-     * @method constructor
-     * @desc Init function for controller
-     */
-  function constructor() {
+
     API.Dolphins.get({ site_id: site },
       function (data) {
         $scope.dolphins = data.results;
-        console.log(data.results);
-      },
-      function (data) {
-        console.log(data);
       }
     );
 
