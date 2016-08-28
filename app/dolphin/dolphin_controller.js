@@ -10,9 +10,11 @@
  * @param $stateParams
  * @param $mdToast
  * @param API
+ * @param ENV
  * @param AuthenticationService
+ * @param Upload
  */
-function DolphinController($scope, $state, $stateParams, $mdToast, API, AuthenticationService) {
+function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, AuthenticationService, Upload) {
 
   var site = AuthenticationService.getCurrentSite();
 
@@ -64,5 +66,5 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, Authenti
 
 app.controller('DolphinController', DolphinController)
 DolphinController.$inject = [
-  '$scope', '$state', '$stateParams', '$mdToast', 'API', 'AuthenticationService'
+  '$scope', '$state', '$stateParams', '$mdToast', 'API', 'ENV', 'AuthenticationService', 'Upload'
 ]
