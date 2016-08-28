@@ -454,7 +454,8 @@ module.exports = function (grunt) {
           'xeditable',
           'textAngular',
           'angularModalService',
-          'ngTagsInput'
+          'ngTagsInput',
+          'ngFileUpload'
         ],
         constants: {
           ENV: {
