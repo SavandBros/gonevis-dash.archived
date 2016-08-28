@@ -36,6 +36,9 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, Authenti
         console.log(data);
       }
     );
+
+    $scope.upload = {
+    }
   }
 
   /**
