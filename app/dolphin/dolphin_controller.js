@@ -124,5 +124,12 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
 
 app.controller('DolphinController', DolphinController)
 DolphinController.$inject = [
-  '$scope', '$state', '$stateParams', '$mdToast', 'API', 'ENV', 'AuthenticationService', 'Upload'
+  '$scope', 
+  '$state', 
+  '$stateParams', 
+  '$mdToast', 
+  'API', 
+  'ENV', 
+  'AuthenticationService', 
+  'Upload'
 ]
