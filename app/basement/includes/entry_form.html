@@ -11,8 +11,8 @@
   <input id="slug" class="form-control" type="text" ng-model="form.slug" placeholder="Slug" />
   <small id="slug" class="help-block">{{ form.errors.slug[0] || "Used to build the entry's URL." }}</small>
 </div>
-<div class="form-group" ng-class="{'has-error': form.errors.tags}">
-  <tags-input ng-model="form.tags" display-property="slug">
+<div class="form-group" ng-class="{'has-error': form.errors.tag_ids}">
+  <tags-input ng-model="tagsToSubmit" display-property="slug">
     <auto-complete source="loadTags($query)"></auto-complete>
   </tags-input>
 </div>
