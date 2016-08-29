@@ -108,6 +108,7 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
       file.upload.then(
         function (data) {
           console.log(1, data);
+          $scope.dolphins.push(data.data);
         },
         function (data) {
           console.log(2, data);
@@ -124,12 +125,12 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
 
 app.controller('DolphinController', DolphinController)
 DolphinController.$inject = [
-  '$scope', 
-  '$state', 
-  '$stateParams', 
-  '$mdToast', 
-  'API', 
-  'ENV', 
-  'AuthenticationService', 
+  '$scope',
+  '$state',
+  '$stateParams',
+  '$mdToast',
+  'API',
+  'ENV',
+  'AuthenticationService',
   'Upload'
 ]
