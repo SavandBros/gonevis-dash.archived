@@ -43,7 +43,7 @@ function CommentListController($scope, $rootScope, $state, $mdToast, API, Authen
    * @param delete {object}
    */
   $scope.delete = function (comment) {
-    API.del(comment.id).then(
+    API.Comment.delete({ comment_id: comment.id },
       function (data, status, headers, config) {
         comment.isDeleted = true;
         $mdToast.showSimple("Comment deleted!");
