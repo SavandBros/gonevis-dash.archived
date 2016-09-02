@@ -9,13 +9,13 @@
           <div class="thumbnail" ng-if="dolphin.is_image">
             <img ng-src="{{ dolphin.file }}">
             <div class="caption text-center">
-              <h4>{{ dolphin.file_name }}</h4>
+              <a ui-sref="dash.dolphin-edit({fileId: dolphin.id})"><h4>{{ dolphin.file_name }}</h4></a>
             </div>
           </div>
           <div class="thumbnail text-center" ng-if="!dolphin.is_image">
             <h1 class="o-fade">ZIP</h1>
             <div class="caption text-center">
-              <h4>{{ dolphin.file_name }}</h4>
+              <a ui-sref="dash.dolphin-edit({fileId: dolphin.id})"><h4>{{ dolphin.file_name }}</h4></a>
             </div>
           </div>
         </div>
@@ -27,11 +27,7 @@
       <div class="panel panel-default">
         <div class="panel-heading"><i class="fa fa-fw fa-upload text-info"></i> Upload File</div>
         <div class="panel-body">
-          <button type="file"
-            class="btn btn-primary"
-            ngf-select="uploadFiles($file, $invalidFiles)"
-            ngf-accept="upload.accept"
-            ngf-max-size="25MB">
+          <button type="file" class="btn btn-primary" ngf-select="uploadFiles($file, $invalidFiles)" ngf-accept="upload.accept" ngf-max-size="25MB">
             <i class="fa fa-fw fa-plus"></i> Select File
           </button>
         </div>
