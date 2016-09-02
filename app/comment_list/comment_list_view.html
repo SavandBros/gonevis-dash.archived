@@ -1,6 +1,9 @@
 <div class="container container-light pad-top">
   <div class="panel panel-defaul s-box">
     <div class="panel-body">
+      <div ng-show="!comments.length" class="text-center o-fade">
+        <h3>You have no comments</h3>
+      </div>
       <div ng-repeat="comment in comments" ng-show="!comment.isDeleted">
         <div ng-if="comment.site == site">
           <h3 style="border-left: 3px solid cornflowerblue"> {{ comment.comment }}</h3>
