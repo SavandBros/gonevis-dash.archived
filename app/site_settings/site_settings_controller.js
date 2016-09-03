@@ -41,7 +41,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Authe
    *
    * @method updateSite
    * @desc update site via api call
-   * 
+   *
    * @param key {string} value {string} site {string}
    */
   $scope.updateSite = function (key, value) {
@@ -56,8 +56,28 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Authe
         $mdToast.showSimple("Profile update.");
       },
       function (data, status, headers, config) {
-        $mdToast.showSimple("Sorry, error has occured while updating profile, try again later.");
-        console.log(data)
+        $mdToast.showSimple("" + data.data.title + "");
+      }
+    );
+  }
+
+  /**
+   * delete
+   *
+   * @method delete
+   * @desc delete site via api call
+   *
+   * @param siteId {string}
+   */
+  $scope.delete = function (siteId) {
+
+    API.SiteUpdate.delete({ site_id: site },
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Site deleted");
+        $state.go('dash.main', { s: $scope.user.sites.length - 2 });
+      },
+      function (data, status, headers, config) {
+        console.log(data);
       }
     );
   }
