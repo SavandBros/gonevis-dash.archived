@@ -1,6 +1,9 @@
 <div class="container container-light pad-top">
   <div class="panel panel-defaul s-box">
     <div class="panel-body">
+      <div ng-show="!comments.length" class="text-center o-fade">
+        <h3>You have no comments</h3>
+      </div>
       <div ng-repeat="comment in comments" ng-show="!comment.isDeleted">
         <div ng-if="comment.site == site">
           <h3 style="border-left: 3px solid cornflowerblue"> {{ comment.comment }}</h3>
@@ -8,7 +11,7 @@
           <div class="col-md-1 pull-right">
             <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle" style="padding: 4px" data-toggle="dropdown"></i>
             <ul class="dropdown-menu">
-              <li><a ng-click="delete(comment)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
+              <li><a ng-click="delete(comment)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
             </ul>
           </div>
           <hr>
