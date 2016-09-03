@@ -13,7 +13,7 @@
  */
 function EntryNewController($scope, $state, $mdToast, AuthenticationService, API, $q) {
 
-  var tags = [];
+  $scope.tags = [];
 
   /**
    * constructor
@@ -29,10 +29,9 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
       function (data, status, headers, config) {
 
         for (var i in data.results) {
-
-          tags.push({ text: data.results[i].slug });
+          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
         }
-        console.log(tags);
+        console.log($scope.tags);
 
       }
     );
@@ -40,6 +39,8 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
     if (!AuthenticationService.isAuthenticated()) {
       return $state.go('signin');
     }
+
+    $scope.tagsToSubmit = [];
 
     $scope.form = {};
 
@@ -68,9 +69,10 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
    */
   function load() {
     var deferred = $q.defer();
-    deferred.resolve(tags);
+    deferred.resolve($scope.tags);
     return deferred.promise;
   };
+
 
   /**
    * newPost
@@ -83,9 +85,15 @@ function EntryNewController($scope, $state, $mdToast, AuthenticationService, API
   $scope.newPost = function (form) {
     form.loading = true;
     form.site = AuthenticationService.getCurrentSite();
-    form.tags = tags;
 
-    API.EntryAdd.save(form,
+    var payload = form;
+    payload.tag_ids = [];
+
+    for (var i = 0; i < $scope.tagsToSubmit.length; i++) {
+      payload.tag_ids.push($scope.tagsToSubmit[i].id);
+    }
+
+    API.EntryAdd.save(payload,
       function (data, status, headers, config) {
         $mdToast.showSimple("Entry added.");
         $state.go('dash.entry-edit', {

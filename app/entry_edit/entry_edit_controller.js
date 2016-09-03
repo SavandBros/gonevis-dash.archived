@@ -14,7 +14,7 @@
  */
 function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthenticationService, $q) {
 
-  var tags = [];
+  $scope.tags = [];
 
   /**
    * constructor
@@ -23,14 +23,14 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, Authen
    * @desc Init function for controller
    */
   function constructor() {
-
+    console.log($scope.tagsToSubmit);
     API.Tags.get({ tag_site: AuthenticationService.getCurrentSite() },
       function (data, status, headers, config) {
 
         for (var i in data.results) {
-          tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
+          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
         }
-        console.log(tags);
+        console.log($scope.tags);
 
       }
     );
@@ -59,9 +59,11 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, Authen
 
   function load() {
     var deferred = $q.defer();
-    deferred.resolve(tags);
+    deferred.resolve($scope.tags);
     return deferred.promise;
   };
+
+  $scope.tagsToSubmit = [];
   /**
    * update
    *
@@ -73,7 +75,15 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, Authen
   $scope.update = function (form) {
     form.loading = true;
 
-    API.Entry.put({ entry_id: form.id }, form,
+    var payload = form;
+    payload.tag_ids = [];
+
+
+    for (var i = 0; i < $scope.tagsToSubmit.length; i++) {
+      payload.tag_ids.push($scope.tagsToSubmit[i].id);
+    }
+
+    API.Entry.put({ entry_id: payload.id }, payload,
       function (data) {
         $mdToast.showSimple("Entry updated!");
         form.loading = false;
