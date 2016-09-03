@@ -25,10 +25,6 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.form = {
-      site: site,
-      file: null,
-    }
 
     API.Dolphins.get({ site_id: site },
       function (data) {
@@ -82,7 +78,6 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
         'video/3gpp2',
       ]
     }
-
     $scope.upload.accept = $scope.upload.acceptList.join(',');
   }
 
