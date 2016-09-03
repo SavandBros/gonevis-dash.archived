@@ -170,6 +170,11 @@ a {
 
 /* Transitions */
 
+.trans,
+.dolphin {
+  transition: all 0.3s ease-in-out;
+}
+
 .trans-opacity {
   transition: opacity .3s ease-in-out;
 }
@@ -268,11 +273,50 @@ md-toast {
 
 .panel-list .panel-list-item-button {
   position: absolute;
-  right: 18px;
+  right: 16px;
+  background: #fff;
+  width: 24px;
+  box-shadow: -5px 0 10px #fff;
 }
 
 .panel-list .panel-list-item-button > .fa {
   opacity: 0.6;
   font-size: 1.3em;
   cursor: pointer;
+}
+
+
+/* Dolphin */
+
+.dolphin {
+  display: block;
+  border-radius: 2px;
+  height: 200px;
+  margin-bottom: 15px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.dolphin:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+
+.dolphin .caption {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px 5px;
+  font-size: 13px;
+  margin-top: 170px;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  font-weight: bold;
+  white-space: nowrap;
 }
