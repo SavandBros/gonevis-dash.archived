@@ -5,19 +5,11 @@
     <!-- Files -->
     <div class="col-md-9">
       <div class="row">
-        <div class="col-md-3" ng-repeat="dolphin in dolphins">
-          <div class="thumbnail" ng-if="dolphin.is_image">
-            <img ng-src="{{ dolphin.file }}">
-            <div class="caption text-center">
-              <a ui-sref="dash.dolphin-edit({fileId: dolphin.id})"><h4>{{ dolphin.file_name }}</h4></a>
-            </div>
-          </div>
-          <div class="thumbnail text-center" ng-if="!dolphin.is_image">
-            <h1 class="o-fade">ZIP</h1>
-            <div class="caption text-center">
-              <a ui-sref="dash.dolphin-edit({fileId: dolphin.id})"><h4>{{ dolphin.file_name }}</h4></a>
-            </div>
-          </div>
+        <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins">
+          <!-- Dolphin -->
+          <a ui-sref="dash.dolphin-edit({ fileId: d.id })" class="dolphin" style="background-image: url({{ d.file }})">
+            <p class="caption">{{ d.file_name }}</p>
+          </a>
         </div>
       </div>
     </div>
