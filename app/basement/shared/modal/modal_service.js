@@ -9,9 +9,6 @@ function ModalService($scope, ModalService) {
       controller: controller
     }).then(function (modal) {
       modal.element.modal();
-      modal.close.then(function (result) {
-        $rootScope.$broadcast(result.broadcast);
-      });
     });
   };
 
@@ -20,5 +17,5 @@ function ModalService($scope, ModalService) {
   };
 }
 
-app.factory('ModalService', ModalService);
+app.service('ModalService', ModalService);
 ModalService.$inject = ['$scope', 'ModalService'];
