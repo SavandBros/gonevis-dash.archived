@@ -89,29 +89,35 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
    * @param file {File}
    * @param errFiles {File}
    */
-  $scope.uploadFiles = function (file, errFiles) {
-    $scope.upload.file = file;
-    $scope.errFile = errFiles && errFiles[0];
+  $scope.uploadFiles = function (files, errFiles) {
+    $scope.upload.files = files;
+    $scope.errFiles = errFiles;
 
-    if (file) {
-      file.upload = Upload.upload({
-        url: ENV.apiEndpoint + 'dolphin/' + site + '/file/',
-        data: { file: file }
-      });
+    console.log(files, errFiles);
 
-      file.upload.then(
-        function (data) {
-          console.log(1, data);
-          $scope.dolphins.push(data.data);
-        },
-        function (data) {
-          console.log(2, data);
-        },
-        function (event) {
-          file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
-        }
-      );
-    }
+    angular.forEach($scope.upload.files,
+      function (file) {
+        file.upload = Upload.upload({
+          url: ENV.apiEndpoint + 'dolphin/' + site + '/file/',
+          data: { file: file }
+        });
+
+        file.upload.then(
+          function (data) {
+            $mdToast.showSimple("Upload completed.");
+            $scope.dolphins.push(data.data);
+          },
+          function (data) {
+            $mdToast.showSimple("Upload failed.");
+          },
+          function (event) {
+            file.progress = Math.min(
+              100, parseInt(100.0 * event.loaded / event.total)
+            );
+          }
+        );
+      }
+    );
   }
 
   constructor()
