@@ -8,7 +8,7 @@
         <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins">
           <!-- Dolphin -->
           <a ui-sref="dash.dolphin-edit({ fileId: d.id })" class="dolphin" style="background-image: url({{ d.file }})">
-            <p class="caption">{{ d.file_name }}</p>
+            <p class="caption">{{ d.meta_data.name }}</p>
           </a>
         </div>
       </div>
