@@ -84,9 +84,9 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
    * uploadFiles
    *
    * @method uploadFiles
-   * @desc Handle for file upload
+   * @desc Handle for file uploads
    *
-   * @param file {File}
+   * @param files {File}
    * @param errFiles {File}
    */
   $scope.uploadFiles = function (files, errFiles) {
