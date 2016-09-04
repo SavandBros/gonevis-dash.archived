@@ -33,8 +33,7 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
     );
 
     $scope.upload = {
-      file: null,
-      done: false,
+      files: [],
       accept: "",
       acceptList: [
         'image/jpeg',
