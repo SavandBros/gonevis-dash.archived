@@ -56,17 +56,17 @@ function DolphinEditController($scope, $rootScope, $state, $mdToast, $stateParam
   };
 
   /**
-   * updateFile
+   * delete
    *
-   * @method updateFile
-   * @desc for updating tag details
+   * @method delete
+   * @desc for deleting a dolphin
    * 
-   * @param form {object}
+   * @param id {string}
    */
   $scope.delete = function (id) {
     API.Dolphin.delete({ site_id: site, file_id: $stateParams.fileId },
       function (data, status, headers, config) {
-        $mdToast.showSimple("File" + $scope.form.file_name + " deleted.");
+        $mdToast.showSimple("File" + $scope.form.meta_data.name + " deleted.");
         $state.go('dash.dolphin');
       },
       function (data, status, headers, config) {
