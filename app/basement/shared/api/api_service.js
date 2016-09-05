@@ -64,7 +64,7 @@ function API($http, $resource, ENV) {
       "endpoint": "website/site/:site_id/" // GET, PUT, PATCH, OPTIONS
     }, {
       "name": "SiteUpdate",
-      "endpoint": "website/site/:site_id/settings/" // GET, PUT, PATCH, OPTIONS
+      "endpoint": "website/site/:site_id/settings/" // GET, PUT, DELETE, PATCH, OPTIONS
     },
 
     // Tagool
@@ -83,7 +83,7 @@ function API($http, $resource, ENV) {
       "endpoint": "dolphin/:site_id/file/" // GET, POST, OPTIONS 
     }, {
       "name": "Dolphin",
-      "endpoint": "dolphin/:site_id/file/:file_id/" // GET, PUT, PATCH, OPTIONS
+      "endpoint": "dolphin/:site_id/file/:file_id/" // GET, PUT, PATCH, DELETE, OPTIONS
     },
   ];
 
