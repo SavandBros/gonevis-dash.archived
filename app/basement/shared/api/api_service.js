@@ -52,7 +52,7 @@ function API($http, $resource, ENV) {
       "endpoint": "sushial/comment/:comment_id/" // GET, PUT, PATCH, DELETE, OPTIONS
     }, {
       "name": "Comments",
-      "endpoint": "sushial/comments/:object_type/" // GET, OPTIONS
+      "endpoint": "sushial/comments/:site_id/:object_type/" // GET, OPTIONS
     },
 
     // Site
@@ -80,10 +80,10 @@ function API($http, $resource, ENV) {
     // Dolphin
     {
       "name": "Dolphins",
-      "endpoint": "dolphin/:site_id/file/" // GET, POST, OPTIONS 
+      "endpoint": "dolphin/file/" // GET, POST, OPTIONS
     }, {
       "name": "Dolphin",
-      "endpoint": "dolphin/:site_id/file/:file_id/" // GET, PUT, PATCH, OPTIONS
+      "endpoint": "dolphin/file/:file_id/" // GET, PUT, PATCH, DELETE, OPTIONS
     },
   ];
 
