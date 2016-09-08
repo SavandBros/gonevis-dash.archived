@@ -24,7 +24,7 @@ function CommentListController($scope, $rootScope, $state, $mdToast, API, Authen
     $scope.user = AuthenticationService.getAuthenticatedUser();
     $scope.site = AuthenticationService.getCurrentSite();
 
-    API.Comments.get({ object_type: 1 },
+    API.Comments.get({ site_id: $scope.site, object_type: 1 },
       function (data, status, headers, config) {
         $scope.comments = data.results;
       },
