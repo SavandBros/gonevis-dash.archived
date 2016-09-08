@@ -1,0 +1,27 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form ng-submit="updateFile(form)">
+          <h3 class="o-fade-soft">{{ form.file_name }}</h3>
+          <hr>
+          <div class="thumbnail">
+            <img ng-src="{{ form.file }}" alt="form.file_name">
+          </div>
+          <div class="form-group" ng-class="{'has-error': form.errors.file_name}">
+            <input id="name" class="form-control" type="text" ng-model="form.file_name" required/>
+            <small id="name" class="help-block" ng-show="form.errors.file_name">{{ form.errors.file_name[0] }}</small>
+          </div>
+          <div class="btn-group btn-group-lg">
+            <button type="button" class="btn btn-default" ng-click="delete(form.id)" title="Delete File">
+              <i class="fa fa-trash"></i>
+            </button>
+            <button class="btn btn-primary" ng-disabled="form.loadingu">
+              <i class="fa fa-circle-o-notch fa-spin" ng-show="form.loading"></i> Update File
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
