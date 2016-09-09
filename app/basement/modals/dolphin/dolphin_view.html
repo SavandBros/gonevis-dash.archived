@@ -3,22 +3,24 @@
     <div class="modal-content">
       <div class="modal-body">
         <form ng-submit="updateFile(form)">
-          <h3 class="o-fade-soft">{{ form.file_name }}</h3>
+          <h3 class="o-fade-soft">{{ form.meta_data.name }}</h3>
           <hr>
           <div class="thumbnail">
-            <img ng-src="{{ form.file }}" alt="form.file_name">
+            <img ng-src="{{ form.file }}" alt="form.meta_data.name">
           </div>
-          <div class="form-group" ng-class="{'has-error': form.errors.file_name}">
-            <input id="name" class="form-control" type="text" ng-model="form.file_name" required/>
-            <small id="name" class="help-block" ng-show="form.errors.file_name">{{ form.errors.file_name[0] }}</small>
+          <div class="form-group" ng-class="{'has-error': form.errors.meta_data.name}">
+            <input id="name" class="form-control" type="text" ng-model="form.meta_data.name" required/>
+            <small id="name" class="help-block" ng-show="form.errors.file_name">{{ form.errors.meta_data.name[0] }}</small>
+          </div>
+          <div class="form-group" ng-class="{'has-error': form.errors.meta_data.description}">
+            <input id="description" class="form-control" type="text" ng-model="form.meta_data.description">
+            <small id="description" class="help-block" ng-show="form.errors.meta_data.description">{{ form.errors.meta_data.name[0] }}</small>
           </div>
           <div class="btn-group btn-group-lg">
             <button type="button" class="btn btn-default" ng-click="delete(form.id)" title="Delete File">
               <i class="fa fa-trash"></i>
             </button>
-            <button class="btn btn-primary" ng-disabled="form.loadingu">
-              <i class="fa fa-circle-o-notch fa-spin" ng-show="form.loading"></i> Update File
-            </button>
+            <button class="btn btn-primary" ng-disabled="form.loading">Update File</button>
           </div>
         </form>
       </div>
