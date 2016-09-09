@@ -15,7 +15,7 @@
  * @param AuthenticationService
  * @param Upload
  */
-function DolphinListController($scope, $state, $stateParams, $mdToast, ModalsService, API, ENV, AuthenticationService, Upload) {
+function DolphinListController($scope, $rootScope, $state, $stateParams, $mdToast, ModalsService, API, ENV, AuthenticationService, Upload) {
 
   var site = AuthenticationService.getCurrentSite();
 
@@ -26,8 +26,7 @@ function DolphinListController($scope, $state, $stateParams, $mdToast, ModalsSer
    * @desc Init function for controller
    */
   function constructor() {
-
-    API.Dolphins.get({ site_id: site },
+    API.Dolphins.get({},
       function (data) {
         $scope.dolphins = data.results;
       }
@@ -81,6 +80,14 @@ function DolphinListController($scope, $state, $stateParams, $mdToast, ModalsSer
     $scope.upload.accept = $scope.upload.acceptList.join(',');
   }
 
+  $rootScope.$on('getDolphin', function (event, data) {
+    for (var i = 0; i < $scope.dolphins.length; i++) {
+      if ($scope.dolphins[i].id == data.id) {
+        $scope.dolphins[i] = data
+      }
+    }
+  });
+
   /**
    * uploadFiles
    *
@@ -99,8 +106,8 @@ function DolphinListController($scope, $state, $stateParams, $mdToast, ModalsSer
     angular.forEach($scope.upload.files,
       function (file) {
         file.upload = Upload.upload({
-          url: ENV.apiEndpoint + 'dolphin/' + site + '/file/',
-          data: { file: file }
+          url: ENV.apiEndpoint + 'dolphin/file/',
+          data: { file: file, site: site }
         });
 
         file.upload.then(
@@ -139,6 +146,7 @@ function DolphinListController($scope, $state, $stateParams, $mdToast, ModalsSer
 app.controller('DolphinListController', DolphinListController)
 DolphinListController.$inject = [
   '$scope',
+  '$rootScope',
   '$state',
   '$stateParams',
   '$mdToast',
