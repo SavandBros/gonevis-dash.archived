@@ -5,7 +5,7 @@
     <!-- Files -->
     <div class="col-md-9">
       <div class="row">
-        <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins">
+        <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
           <!-- Dolphin -->
           <a ng-click="viewDolphin(d.id)" class="dolphin" style="background-image: url({{ d.file }})">
             <p class="caption">{{ d.meta_data.name }}</p>
