@@ -44,10 +44,11 @@ function DolphinController($scope, $rootScope, $state, $mdToast, $stateParams, i
   $scope.updateFile = function (form) {
     form.loading = true;
 
-    API.Dolphin.put({ site_id: site, file_id: $stateParams.fileId }, form,
+    API.Dolphin.put({ site_id: site, file_id: id }, form,
       function (data, status, headers, config) {
         form.loading = false;
         $mdToast.showSimple("File updated.");
+        $rootScope.$broadcast('getDolphin', data);
       },
       function (data, status, headers, config) {
         form.loading = false;
@@ -64,13 +65,13 @@ function DolphinController($scope, $rootScope, $state, $mdToast, $stateParams, i
    * @param form {object}
    */
   $scope.delete = function (id) {
-    API.Dolphin.delete({ site_id: site, file_id: $stateParams.fileId },
+    API.Dolphin.delete({ site_id: site, file_id: id },
       function (data, status, headers, config) {
-        $mdToast.showSimple("File" + $scope.form.file_name + " deleted.");
-        $state.go('dash.dolphin');
+        $rootScope.$broadcast('getDolphin', { isDeleted: true, id: id });
+        $mdToast.showSimple("File " + $scope.form.meta_data.name + " deleted.");
       },
       function (data, status, headers, config) {
-        $mdToast.showSimple("There have been a problem");
+        $mdToast.showSimple("Sorry, we couldn't delete the file. Try again later.");
       }
     )
   }
