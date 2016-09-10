@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * @ngdoc overview
@@ -9,10 +9,10 @@
  * Main module of the application.
  */
 app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $resourceProvider) {
-  $httpProvider.interceptors.push('AuthenticationInterceptorService');
+  $httpProvider.interceptors.push('AuthenticationInterceptorService')
 
   $stateProvider
-  // Every child of dash state follows site id that user is into
+    // Every child of dash state follows site id that user is into
     .state('dash', {
       url: '/:s',
       abstract: true,
@@ -23,6 +23,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       url: '/',
       controller: 'MainController',
       templateUrl: 'main/main_view.html'
+    })
+    .state('dash.navigation', {
+      url: '/navigation',
+      controller: 'NavigationController',
+      templateUrl: 'navigation/navigation_view.html'
     })
     .state('dash.dolphin', {
       url: '/dolphin',
@@ -94,11 +99,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       url: '/register',
       controller: 'SignupController',
       templateUrl: 'signup/signup_view.html'
-    });
-  $urlRouterProvider.otherwise('/');
-  $resourceProvider.defaults.stripTrailingSlashes = false;
-});
+    })
+  $urlRouterProvider.otherwise('/')
+  $resourceProvider.defaults.stripTrailingSlashes = false
+})
 
 app.run(function (editableOptions) {
-  editableOptions.theme = 'bs3';
-});
+  editableOptions.theme = 'bs3'
+})
