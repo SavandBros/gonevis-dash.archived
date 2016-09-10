@@ -280,7 +280,7 @@ md-toast {
   box-shadow: -5px 0 10px #fff;
 }
 
-.panel-list .panel-list-item-button > .fa {
+.panel-list .panel-list-item-button>.fa {
   opacity: 0.6;
   font-size: 1.3em;
   cursor: pointer;
@@ -379,6 +379,13 @@ md-toast {
   padding: 5px;
   box-shadow: 0 0 10px #bbb;
   text-align: center;
+}
+
+
+/* Navigation */
+
+.navigation {
+  margin-bottom: 6px;
 }
 
 

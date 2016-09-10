@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * @ngdoc overview
@@ -12,7 +12,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
   $httpProvider.interceptors.push('AuthInterceptorService');
 
   $stateProvider
-  // Every child of dash state follows site id that user is into
+    // Every child of dash state follows site id that user is into
     .state('dash', {
       url: '/:s',
       abstract: true,
@@ -23,6 +23,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       url: '/',
       controller: 'MainController',
       templateUrl: 'main/main_view.html'
+    })
+    .state('dash.navigation', {
+      url: '/navigation',
+      controller: 'NavigationController',
+      templateUrl: 'navigation/navigation_view.html'
     })
     .state('dash.dolphin', {
       url: '/dolphin',
@@ -101,5 +106,5 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
 });
 
 app.run(function (editableOptions) {
-  editableOptions.theme = 'bs3';
-});
+  editableOptions.theme = 'bs3'
+})
