@@ -2,19 +2,20 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:DolphinController
+ * @name gonevisDash.controller:DolphinListController
  * Controller of the gonevisDash
  *
  * @param $scope
  * @param $state
  * @param $stateParams
  * @param $mdToast
+ * @param ModalsService
  * @param API
  * @param ENV
  * @param AuthenticationService
  * @param Upload
  */
-function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, AuthenticationService, Upload) {
+function DolphinListController($scope, $rootScope, $state, $stateParams, $mdToast, ModalsService, API, ENV, AuthenticationService, Upload) {
 
   var site = AuthenticationService.getCurrentSite();
 
@@ -25,8 +26,7 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
    * @desc Init function for controller
    */
   function constructor() {
-
-    API.Dolphins.get({ site_id: site },
+    API.Dolphins.get({},
       function (data) {
         $scope.dolphins = data.results;
       }
@@ -80,6 +80,14 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
     $scope.upload.accept = $scope.upload.acceptList.join(',');
   }
 
+  $rootScope.$on('getDolphin', function (event, data) {
+    for (var i = 0; i < $scope.dolphins.length; i++) {
+      if ($scope.dolphins[i].id == data.id) {
+        $scope.dolphins[i] = data
+      }
+    }
+  });
+
   /**
    * uploadFiles
    *
@@ -98,8 +106,8 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
     angular.forEach($scope.upload.files,
       function (file) {
         file.upload = Upload.upload({
-          url: ENV.apiEndpoint + 'dolphin/' + site + '/file/',
-          data: { file: file }
+          url: ENV.apiEndpoint + 'dolphin/file/',
+          data: { file: file, site: site }
         });
 
         file.upload.then(
@@ -120,15 +128,29 @@ function DolphinController($scope, $state, $stateParams, $mdToast, API, ENV, Aut
     );
   }
 
+  /**
+   * viewDolphin
+   *
+   * @method viewDolphin
+   * @desc Open up dolphin detail via modal
+   *
+   * @param id {Number}
+   */
+  $scope.viewDolphin = function (id) {
+    ModalsService.open("dolphin", "DolphinController", { id: id });
+  }
+
   constructor()
 }
 
-app.controller('DolphinController', DolphinController)
-DolphinController.$inject = [
+app.controller('DolphinListController', DolphinListController)
+DolphinListController.$inject = [
   '$scope',
+  '$rootScope',
   '$state',
   '$stateParams',
   '$mdToast',
+  'ModalsService',
   'API',
   'ENV',
   'AuthenticationService',

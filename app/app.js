@@ -26,13 +26,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
     })
     .state('dash.dolphin', {
       url: '/dolphin',
-      controller: 'DolphinController',
-      templateUrl: 'dolphin/dolphin_view.html'
-    })
-    .state('dash.dolphin-edit', {
-      url: '/dolphin/:fileId',
-      controller: 'DolphinEditController',
-      templateUrl: 'dolphin_edit/dolphin_edit_view.html'
+      controller: 'DolphinListController',
+      templateUrl: 'dolphin_list/dolphin_list_view.html'
     })
     .state('dash.comment-list', {
       url: '/comment-list',

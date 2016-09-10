@@ -47,8 +47,8 @@
 
   <!-- build:js(.) scripts/vendor.js -->
   <!-- bower:js -->
-  <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -71,20 +71,24 @@
   <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
   <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
   <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
   <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
-  <script src="bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="configuration.js"></script>
   <script src="app.js"></script>
+
   <script src="basement/shared/api/api_service.js"></script>
+  <script src="basement/shared/modals/modals_service.js"></script>
+  <script src="basement/modals/dolphin/dolphin_controller.js"></script>
+
   <script src="auth/authentication_interceptor_service.js"></script>
   <script src="auth/authentication_service.js"></script>
   <script src="comment_list/comment_list_controller.js"></script>
   <script src="dash/dash_controller.js"></script>
-  <script src="dolphin/dolphin_controller.js"></script>
+  <script src="dolphin_list/dolphin_list_controller.js"></script>
   <script src="entry_edit/entry_edit_controller.js"></script>
   <script src="entry_list/entry_list_controller.js"></script>
   <script src="entry_new/entry_new_controller.js"></script>
@@ -99,7 +103,6 @@
   <script src="tag_new/tag_new_controller.js"></script>
   <script src="user/user_controller.js"></script>
   <script src="change_password/change_password_controller.js"></script>
-  <script src="dolphin_edit/dolphin_edit_controller.js"></script>
   <!-- endbuild -->
 </body>
 

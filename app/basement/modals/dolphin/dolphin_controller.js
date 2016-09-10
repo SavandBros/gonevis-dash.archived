@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:DolphinEditController
+ * @name gonevisDash.controller:DolphinController
  * Controller of the gonevisDash
  *
  * @param $scope
@@ -13,7 +13,7 @@
  * @param API
  * @param AuthenticationService
  */
-function DolphinEditController($scope, $rootScope, $state, $mdToast, $stateParams, API, AuthenticationService) {
+function DolphinController($scope, $rootScope, $state, $mdToast, $stateParams, id, API, AuthenticationService) {
 
   var site = AuthenticationService.getCurrentSite();
 
@@ -26,11 +26,11 @@ function DolphinEditController($scope, $rootScope, $state, $mdToast, $stateParam
   function constructor() {
     $scope.user = AuthenticationService.getAuthenticatedUser();
 
-    API.Dolphin.get({ site_id: site, file_id: $stateParams.fileId },
+    API.Dolphin.get({ site_id: site, file_id: id },
       function (data, status, headers, config) {
         $scope.form = data;
-        console.log($scope.form)
-      })
+      }
+    );
   };
 
   /**
@@ -44,10 +44,11 @@ function DolphinEditController($scope, $rootScope, $state, $mdToast, $stateParam
   $scope.updateFile = function (form) {
     form.loading = true;
 
-    API.Dolphin.put({ site_id: site, file_id: $stateParams.fileId }, form,
+    API.Dolphin.put({ site_id: site, file_id: id }, form,
       function (data, status, headers, config) {
         form.loading = false;
         $mdToast.showSimple("File updated.");
+        $rootScope.$broadcast('getDolphin', data);
       },
       function (data, status, headers, config) {
         form.loading = false;
@@ -64,13 +65,13 @@ function DolphinEditController($scope, $rootScope, $state, $mdToast, $stateParam
    * @param form {object}
    */
   $scope.delete = function (id) {
-    API.Dolphin.delete({ site_id: site, file_id: $stateParams.fileId },
+    API.Dolphin.delete({ site_id: site, file_id: id },
       function (data, status, headers, config) {
-        $mdToast.showSimple("File" + $scope.form.file_name + " deleted.");
-        $state.go('dash.dolphin');
+        $rootScope.$broadcast('getDolphin', { isDeleted: true, id: id });
+        $mdToast.showSimple("File " + $scope.form.meta_data.name + " deleted.");
       },
       function (data, status, headers, config) {
-        $mdToast.showSimple("There have been a problem");
+        $mdToast.showSimple("Sorry, we couldn't delete the file. Try again later.");
       }
     )
   }
@@ -80,5 +81,7 @@ function DolphinEditController($scope, $rootScope, $state, $mdToast, $stateParam
   constructor();
 }
 
-app.controller("DolphinEditController", DolphinEditController);
-DolphinEditController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', '$stateParams', 'API', 'AuthenticationService'];
+app.controller("DolphinController", DolphinController);
+DolphinController.$inject = [
+  '$scope', '$rootScope', '$state', '$mdToast', '$stateParams', 'id', 'API', 'AuthenticationService'
+];
