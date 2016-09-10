@@ -1,9 +1,9 @@
 <div class="container container-light">
   <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-default">
+      <div class="panel-heading"><h3>Edit Entry</h3></div>
       <div class="panel-body s-pad s-box">
         <form ng-submit="update(form)" name="form">
-          <h3 class="o-fade-soft">Edit entry</h3>
           <ng-include src="'entry/includes/entry_form.html'"></ng-include>
           <div class="btn-group btn-group-lg pull-right">
             <button type="button" class="btn btn-default" ng-click="delete(form.id)" title="Delete entry">
