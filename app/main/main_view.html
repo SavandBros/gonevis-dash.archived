@@ -4,17 +4,15 @@
       <div class="panel panel-default">
         <div class="panel-heading s-pad-y-soft"><i class="fa fa-fw text-info fa-comments"></i> Latest Comments</div>
         <ul class="panel-body panel-list">
-          <li class="panel-list-item s-fade" ng-repeat="c in Comment.list">
-            <div ng-if="c.site == site">
-              <small>{{ c.user.name }}:</small>
-              <a ng-click="commentService.view(c)">{{ c.comment }}</a>
-              <span class="panel-list-item-button">
+          <li class="panel-list-item s-fade" ng-repeat="c in Comment.list" ng-show="!c.isDeleted">
+            <small>{{ c.user.name }}:</small>
+            <a ng-click="commentService.view(c)">{{ c.comment }}</a>
+            <span class="panel-list-item-button">
                 <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
                 <ul class="dropdown-menu">
                   <li><a ng-click="commentService.remove(c)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
                 </ul>
               </span>
-            </div>
             <div ng-if="c.site !== site" class="text-center o-fade">
               <h3>You have no comments</h3>
             </div>
