@@ -30,33 +30,55 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
     )
   }
 
+  /**
+   * updateNavigation
+   *
+   * @method updateNavigation
+   * @desc function for updating navigations
+   * 
+   */
   $scope.updateNavigation = function () {
-    $scope.loading = true;
+    $scope.loading = true
     API.Navigation.put({ site_id: site }, {navigation: $scope.navigations},
       function (data, status, headers, config) {
-        $scope.loading = false;
-        $mdToast.showSimple("Navigation updated.");
+        $scope.loading = false
+        $mdToast.showSimple('Navigation updated.')
         console.log(data)
       },
       function (data, status, headers, config) {
-        $scope.loading = false;
-        $mdToast.showSimple("Sorry, we couldn't update navigation, please try again later");
+        $scope.loading = false
+        $mdToast.showSimple("Sorry, we couldn't update navigation, please try again later")
         console.log(data)
       }
     )
   }
 
+  /**
+   * addNav
+   *
+   * @method addNav
+   * @desc function for adding a new navigation
+   * 
+   */
   $scope.addNav = function () {
     $scope.navigations.push(
       {'url': '', 'label': '', 'sort_number': $scope.navigations.length + 1}
     )
-  };
+  }
 
-  $scope.deleteNav = function (id) {
-    for ( var i = 0; i < $scope.navigations.length; i++ ) {
-      if ( $scope.navigations[i].url == id ) {
-        $scope.navigations.splice(i, 1);
-        $scope.updateNavigation();
+  /**
+   * deleteNav
+   *
+   * @method deleteNav
+   * @desc function for deleting a navigation
+   * 
+   * @param num {integer}
+   */
+  $scope.deleteNav = function (num) {
+    for ( var i = 0; i < $scope.navigations.length; i++) {
+      if ($scope.navigations[i].sort_number == num) {
+        $scope.navigations.splice(i, 1)
+        $scope.updateNavigation()
       }
     }
   }
