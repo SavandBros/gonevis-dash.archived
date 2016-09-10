@@ -371,16 +371,16 @@ md-toast {
 }
 
 .editing-mode .close {
-  font-size: 1.5em;
+  font-size: 1.6em;
   border-radius: 100%;
   width: 50px;
   text-align: center;
   height: 50px;
-  line-height: 48px;
+  line-height: 50px;
   padding: 0;
   z-index: 1000;
   position: fixed;
-  top: 5px;
+  top: 45px;
   right: 10px;
 }
 
