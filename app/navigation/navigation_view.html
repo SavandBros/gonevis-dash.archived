@@ -7,7 +7,7 @@
       </button>
       <div ng-repeat="nav in navigations" class="navigation">
         <div class="col-md-4 form-group input-group">
-          <span class="input-group-addon" ng-click="deleteNav(nav.url)"><i class="fa fa-trash text-danger fa-fw"></i></span>
+          <span class="input-group-addon" ng-click="deleteNav(nav.sort_number)"><i class="fa fa-trash text-danger fa-fw"></i></span>
           <input type="text" placeholder="Label" ng-model="nav.label" class="form-control" required>
         </div>
         <div class="input-group col-md-6 form-group">
