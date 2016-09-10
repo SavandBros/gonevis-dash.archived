@@ -211,13 +211,6 @@ a {
 }
 
 
-/* Text editor */
-
-.ta-toolbar .btn-group {
-  margin-bottom: 8px;
-}
-
-
 /* List */
 
 .list-panel {
@@ -286,8 +279,14 @@ md-toast {
   cursor: pointer;
 }
 
-.panel-header {
-  padding: 18px 12px;
+.panel-heading {
+  padding: 18px 12px !important;
+}
+
+.panel-heading h1,
+.panel-heading h2,
+.panel-heading h3 {
+  color: #444;
 }
 
 
@@ -327,7 +326,15 @@ md-toast {
 }
 
 
-/* Editing Mode */
+/* Editing Mode + Text Angular */
+
+.ta-toolbar {
+  display: none;
+}
+
+.ta-toolbar .btn-group {
+  margin-bottom: 8px;
+}
 
 .editing-mode {
   position: absolute;
@@ -339,10 +346,15 @@ md-toast {
   box-shadow: 0 0 0 10000px #fff;
 }
 
+.editing-mode .ta-toolbar {
+  display: block;
+}
+
 .editing-mode .form-control {
   box-shadow: none !important;
   border: none;
   margin-top: 180px !important;
+  min-height: 200px;
 }
 
 .editing-mode .btn {
@@ -393,4 +405,20 @@ md-toast {
 
 .ws-pre {
   white-space: pre-wrap;
+}
+
+
+/* Autocomplete */
+
+tags-input .tags {
+  border-radius: 4px;
+  border-color: #ccc !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  transition: all 0.3s ease-in-out;
+}
+
+tags-input .tags.focused {
+  border-color: #66afe9 !important;
+  outline: 0 !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
 }
