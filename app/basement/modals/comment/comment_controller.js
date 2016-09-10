@@ -6,13 +6,10 @@
  * Controller of the gonevisDash
  *
  * @param $scope
- * @param $rootScope
- * @param $state
  * @param $mdToast
  * @param API
- * @param AuthenticationService
  */
-function CommentController($scope, $rootScope, $state, $mdToast, comment, API, AuthenticationService) {
+function CommentController($scope, $mdToast, comment, API) {
 
   /**
    * constructor
@@ -21,44 +18,8 @@ function CommentController($scope, $rootScope, $state, $mdToast, comment, API, A
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.user = AuthenticationService.getAuthenticatedUser();
-    $scope.site = AuthenticationService.getCurrentSite();
-
-    API.Comment.get({ comment_id: comment },
-      function (data, status, headers, config) {
-        $scope.form = data;
-        console.log(data)
-      },
-      function (data, status, headers, config) {
-        console.log(data);
-      }
-    );
+    $scope.comment = comment;
   };
-
-  /**
-   * updateComment
-   *
-   * @method updateComment
-   * @desc function for updating comment
-   * 
-   * @param updateComment {object}
-   */
-  $scope.updateComment = function (form) {
-    form.loading = true;
-
-    API.Comment.put({ comment_id: comment }, form,
-      function (data, status, headers, config) {
-        form.loading = false;
-        $scope.form = data;
-        $mdToast.showSimple("Comment Updated.");
-      },
-      function (data, status, headers, config) {
-        form.loading = false;
-        $mdToast.showSimple("fail");
-        console.log(data);
-      }
-    );
-  }
 
   /**
    * delete
@@ -66,10 +27,10 @@ function CommentController($scope, $rootScope, $state, $mdToast, comment, API, A
    * @method delete
    * @desc function for deleting comments
    * 
-   * @param delete {object}
+   * @param comment {object}
    */
   $scope.delete = function (comment) {
-    API.Comment.delete({ comment_id: comment },
+    API.Comment.delete({ comment_id: comment.id },
       function (data, status, headers, config) {
         $mdToast.showSimple("Comment deleted!");
       }
@@ -80,4 +41,4 @@ function CommentController($scope, $rootScope, $state, $mdToast, comment, API, A
 }
 
 app.controller("CommentController", CommentController);
-CommentController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'comment', 'API', 'AuthenticationService'];
+CommentController.$inject = ['$scope', '$mdToast', 'comment', 'API'];
