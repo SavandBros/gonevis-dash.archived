@@ -8,7 +8,8 @@
 function ModalsService(ModalService) {
 
   var templates = {
-    dolphin: "basement/modals/dolphin/dolphin_view.html"
+    dolphin: "basement/modals/dolphin/dolphin_view.html",
+    comment: "basement/modals/comment/comment_view.html"
   };
 
   function open(template, controller, data) {

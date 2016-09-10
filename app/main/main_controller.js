@@ -11,7 +11,7 @@
  * @param AuthenticationService
  * @param API
  */
-function MainController($scope, $state, $mdToast, $stateParams, AuthenticationService, API) {
+function MainController($scope, $state, $mdToast, $stateParams, ModalsService, AuthenticationService, API) {
   /**
    * constructor
    *
@@ -65,6 +65,18 @@ function MainController($scope, $state, $mdToast, $stateParams, AuthenticationSe
     }
   }
 
+  /**
+   * viewComment
+   *
+   * @method viewComment
+   * @desc Open up comment detail via modal
+   *
+   * @param comment {Number}
+   */
+  $scope.viewComment = function (comment) {
+    ModalsService.open("comment", "CommentController", { comment: comment });
+  }
+
   constructor();
 }
 
@@ -74,6 +86,7 @@ MainController.$inject = [
   '$state',
   '$mdToast',
   '$stateParams',
+  'ModalsService',
   'AuthenticationService',
   'API',
 ];
