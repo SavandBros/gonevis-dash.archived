@@ -375,3 +375,7 @@ md-toast {
   box-shadow: 0 0 10px #bbb;
   text-align: center;
 }
+
+.navigation {
+    margin-bottom: 6px;
+}
