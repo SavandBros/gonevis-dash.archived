@@ -65,6 +65,9 @@ function API($http, $resource, ENV) {
     }, {
       "name": "SiteUpdate",
       "endpoint": "website/site/:site_id/settings/" // GET, PUT, PATCH, OPTIONS
+    }, {
+      "name": "Navigation",
+      "endpoint": "website/site/:site_id/navigation/" // GET, PUT, PATCH, OPTIONS
     },
 
     // Tagool
