@@ -6,7 +6,9 @@
       </div>
       <div class="modal-body ws-pre">{{ comment.comment }}</div>
       <div class="modal-footer">
-        <button class="btn btn-sm btn-danger" ng-click="delete(comment)" data-dismiss="modal"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-sm btn-danger" ng-click="commentService.remove(comment)" data-dismiss="modal">
+          <i class="fa fa-trash"></i>
+        </button>
       </div>
     </div>
   </div>

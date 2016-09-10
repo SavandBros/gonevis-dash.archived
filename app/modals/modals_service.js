@@ -3,7 +3,12 @@
 /**
  * API Service
  *
- * @returns {{Service: API.service}}
+ * @class API
+ * @namespace gonevisDash:API
+ *
+ * @param ModalService
+ *
+ * @returns [Factory]
  */
 function ModalsService(ModalService) {
 
@@ -12,6 +17,15 @@ function ModalsService(ModalService) {
     comment: "comment/modals/comment/comment_view.html"
   };
 
+  /**
+   * open
+   *
+   * @method open
+   * @desc Open up modal with a template and a controller
+   *
+   * @param template {String} Name of the modal template
+   * @param controller {String} Controller of modal
+   */
   function open(template, controller, data) {
     ModalService.showModal({
       templateUrl: templates[template],
