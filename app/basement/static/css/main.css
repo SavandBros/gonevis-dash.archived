@@ -320,3 +320,58 @@ md-toast {
   font-weight: bold;
   white-space: nowrap;
 }
+
+
+/* Editing Mode */
+
+.editing-mode {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: -60px;
+  background: #fff;
+  z-index: 2000;
+  box-shadow: 0 0 0 10000px #fff;
+}
+
+.editing-mode .form-control {
+  box-shadow: none !important;
+  border: none;
+  margin-top: 180px !important;
+}
+
+.editing-mode .btn {
+  border-color: #eee !important;
+  border-radius: 0 !important;
+}
+
+.editing-mode .btn:hover {
+  opacity: 1;
+  background-color: #eee !important;
+}
+
+.editing-mode .close {
+  font-size: 1.5em;
+  border-radius: 100%;
+  width: 50px;
+  text-align: center;
+  height: 50px;
+  line-height: 48px;
+  padding: 0;
+  z-index: 1000;
+  position: fixed;
+  top: 5px;
+  right: 10px;
+}
+
+.editing-mode .ta-toolbar {
+  background: #eee;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  padding: 5px;
+  box-shadow: 0 0 10px #bbb;
+  text-align: center;
+}
