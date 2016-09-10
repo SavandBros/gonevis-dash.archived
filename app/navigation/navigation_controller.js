@@ -9,10 +9,10 @@
  * @param $rootScope
  * @param $state
  * @param $mdToast
- * @param AuthenticationService
+ * @param AuthService
  */
-function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthenticationService) {
-  var site = AuthenticationService.getCurrentSite()
+function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthService) {
+  var site = AuthService.getCurrentSite()
   $scope.navigations = []
 
   /**
@@ -60,4 +60,4 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, Authen
 }
 
 app.controller('NavigationController', NavigationController)
-NavigationController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthenticationService']
+NavigationController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService']

@@ -53,7 +53,7 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
       },
       styles: {
-        files: ['<%= gonevisDash.app %>/basement/static/css/{,*/}*.css'],
+        files: ['<%= gonevisDash.app %>/assets/css/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss']
       },
       gruntfile: {
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
         files: [
           '<%= gonevisDash.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '<%= gonevisDash.app %>/basement/static/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= gonevisDash.app %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -90,8 +90,8 @@ module.exports = function (grunt) {
                 serveStatic('./bower_components')
               ),
               connect().use(
-                '/app/basement/static/css',
-                serveStatic('./app/basement/static/css')
+                '/app/assets/css',
+                serveStatic('./app/assets/css')
               ),
               serveStatic(appConfig.app)
             ];
@@ -231,9 +231,9 @@ module.exports = function (grunt) {
       dist: {
         src: [
           '<%= gonevisDash.dist %>/{,*/}*.js',
-          '<%= gonevisDash.dist %>/basement/static/css/{,*/}*.css',
-          '<%= gonevisDash.dist %>/basement/static/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= gonevisDash.dist %>/basement/static/css/fonts/*'
+          '<%= gonevisDash.dist %>/assets/css/{,*/}*.css',
+          '<%= gonevisDash.dist %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= gonevisDash.dist %>/assets/css/fonts/*'
         ]
       }
     },
@@ -260,13 +260,13 @@ module.exports = function (grunt) {
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
       html: ['<%= gonevisDash.dist %>/{,*/}*.html'],
-      css: ['<%= gonevisDash.dist %>/basement/static/css/{,*/}*.css'],
+      css: ['<%= gonevisDash.dist %>/assets/css/{,*/}*.css'],
       js: ['<%= gonevisDash.dist %>/{,*/}*.js'],
       options: {
         assetsDirs: [
           '<%= gonevisDash.dist %>',
-          '<%= gonevisDash.dist %>/basement/static/img',
-          '<%= gonevisDash.dist %>/basement/static/css'
+          '<%= gonevisDash.dist %>/assets/img',
+          '<%= gonevisDash.dist %>/assets/css'
         ],
         patterns: {
           js: [
@@ -283,7 +283,7 @@ module.exports = function (grunt) {
     // cssmin: {
     //   dist: {
     //     files: {
-    //       '<%= gonevisDash.dist %>/basement/static/css/main.css': [
+    //       '<%= gonevisDash.dist %>/assets/css/main.css': [
     //         '.tmp/styles/{,*/}*.css'
     //       ]
     //     }
@@ -306,9 +306,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= gonevisDash.app %>/basement/static/img',
+          cwd: '<%= gonevisDash.app %>/assets/img',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= gonevisDash.dist %>/basement/static/img'
+          dest: '<%= gonevisDash.dist %>/assets/img'
         }]
       }
     },
@@ -317,9 +317,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= gonevisDash.app %>/basement/static/img',
+          cwd: '<%= gonevisDash.app %>/assets/img',
           src: '{,*/}*.svg',
-          dest: '<%= gonevisDash.dist %>/basement/static/img'
+          dest: '<%= gonevisDash.dist %>/assets/img'
         }]
       }
     },
@@ -385,13 +385,13 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '*.html',
-            'basement/static/img/{,*/}*.{webp}',
-            'basement/static/css/fonts/{,*/}*.*'
+            'assets/img/{,*/}*.{webp}',
+            'assets/css/fonts/{,*/}*.*'
           ]
         }, {
           expand: true,
           cwd: '.tmp/images',
-          dest: '<%= gonevisDash.dist %>/basement/static/img',
+          dest: '<%= gonevisDash.dist %>/assets/img',
           src: ['generated/*']
         }, {
           expand: true,
@@ -407,7 +407,7 @@ module.exports = function (grunt) {
       },
       styles: {
         expand: true,
-        cwd: '<%= gonevisDash.app %>/basement/static/css',
+        cwd: '<%= gonevisDash.app %>/assets/css',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
       }

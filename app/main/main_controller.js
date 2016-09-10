@@ -8,10 +8,10 @@
  * @param $scope
  * @param $state
  * @param $mdToast
- * @param AuthenticationService
+ * @param AuthService
  * @param API
  */
-function MainController($scope, $state, $mdToast, $stateParams, ModalsService, AuthenticationService, API) {
+function MainController($scope, $state, $mdToast, $stateParams, ModalsService, AuthService, API) {
   /**
    * constructor
    *
@@ -22,11 +22,11 @@ function MainController($scope, $state, $mdToast, $stateParams, ModalsService, A
    */
   function constructor() {
     // User
-    $scope.auth = AuthenticationService;
-    $scope.user = AuthenticationService.getAuthenticatedUser();
-    $scope.site = AuthenticationService.getCurrentSite();
+    $scope.auth = AuthService;
+    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.site = AuthService.getCurrentSite();
     // Check auth
-    if (!AuthenticationService.isAuthenticated()) {
+    if (!AuthService.isAuthenticated()) {
       $mdToast.showSimple('Please login to continue.');
       $state.go('signin');
     }
@@ -87,6 +87,6 @@ MainController.$inject = [
   '$mdToast',
   '$stateParams',
   'ModalsService',
-  'AuthenticationService',
+  'AuthService',
   'API',
 ];
