@@ -8,14 +8,11 @@
             <small>{{ c.user.name }}:</small>
             <a ng-click="commentService.view(c)">{{ c.comment }}</a>
             <span class="panel-list-item-button">
-                <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
-                <ul class="dropdown-menu">
-                  <li><a ng-click="commentService.remove(c)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
-                </ul>
-              </span>
-            <div ng-if="c.site !== site" class="text-center o-fade">
-              <h3>You have no comments</h3>
-            </div>
+              <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
+              <ul class="dropdown-menu">
+                <li><a ng-click="commentService.remove(c)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
+              </ul>
+            </span>
           </li>
         </ul>
       </div>
