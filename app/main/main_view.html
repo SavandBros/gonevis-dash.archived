@@ -7,11 +7,11 @@
           <li class="panel-list-item s-fade" ng-repeat="c in Comment.list">
             <div ng-if="c.site == site">
               <small>{{ c.user.name }}:</small>
-              <a ng-click="viewComment(c)">{{ c.comment }}</a>
+              <a ng-click="commentService.view(c)">{{ c.comment }}</a>
               <span class="panel-list-item-button">
                 <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
                 <ul class="dropdown-menu">
-                  <li><a ng-click="Comment.delete(c)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
+                  <li><a ng-click="commentService.remove(c)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
                 </ul>
               </span>
             </div>
