@@ -333,7 +333,8 @@ md-toast {
 }
 
 .ta-toolbar .btn-group {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  margin-top: 4px;
 }
 
 .editing-mode {
@@ -382,14 +383,13 @@ md-toast {
 }
 
 .editing-mode .ta-toolbar {
-  background: #eee;
+  background: #f9f9f9;
   position: fixed;
-  width: 100%;
+  width: 101%;
   left: 0;
   top: 0;
   z-index: 1;
-  padding: 5px;
-  box-shadow: 0 0 10px #bbb;
+  box-shadow: 0 0 10px #ccc;
   text-align: center;
 }
 
