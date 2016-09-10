@@ -23,7 +23,7 @@
             <i class="fa fa-fw fa-plus"></i> Select File
           </button>
         </div>
-        <div class="panel-footer fade" ng-show="upload.files[0].progress">
+        <div class="panel-footer s-fade" ng-show="upload.files[0].progress">
           <div class="progress" ng-repeat="file in upload.files" ng-class="{'s-mar-no': $last}">
             <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
               <span class="sr-only">{{ file.progress }}% Complete</span> <span ng-if="file.progress == 100">Done</span>
