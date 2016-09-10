@@ -7,7 +7,7 @@
           <li class="panel-list-item s-fade" ng-repeat="c in Comment.list">
             <div ng-if="c.site == site">
               <small>{{ c.user.name }}:</small>
-              <a ng-click="!c.isDeleted">{{ c.comment }}</a>
+              <a ng-click="viewComment(c.id)">{{ c.comment }}</a>
               <span class="panel-list-item-button">
                 <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
                 <ul class="dropdown-menu">
