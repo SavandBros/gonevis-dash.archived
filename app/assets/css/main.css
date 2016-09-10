@@ -149,8 +149,9 @@ a {
 
 /* Cursors */
 
+.dropdown-toggle,
 .c-p {
-  cursor: s;
+  cursor: pointer;
 }
 
 
