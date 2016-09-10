@@ -31,11 +31,16 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
   }
 
   $scope.updateNavigation = function () {
+    $scope.loading = true;
     API.Navigation.put({ site_id: site }, {navigation: $scope.navigations},
       function (data, status, headers, config) {
+        $scope.loading = false;
+        $mdToast.showSimple("Navigation updated.");
         console.log(data)
       },
       function (data, status, headers, config) {
+        $scope.loading = false;
+        $mdToast.showSimple("Sorry, we couldn't update navigation, please try again later");
         console.log(data)
       }
     )
