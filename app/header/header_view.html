@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top" ng-controller="HeaderController">
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -19,9 +19,6 @@
         </li>
         <li ng-class="{'active': state.includes('dash.tag-list')}">
           <a ui-sref="dash.tag-list">Tags</a>
-        </li>
-        <li ng-class="{'active': state.includes('dash.tag-new')}">
-          <a ui-sref="dash.tag-new">New tag</a>
         </li>
         <li ng-class="{'active': state.includes('dash.comment-list')}">
           <a ui-sref="dash.comment-list">Comments</a>
