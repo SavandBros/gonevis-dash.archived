@@ -17,7 +17,7 @@
             <small id="description" class="help-block" ng-show="form.errors.meta_data.description">{{ form.errors.meta_data.name[0] }}</small>
           </div>
           <div class="btn-group btn-group-lg">
-            <button type="button" class="btn btn-default" ng-click="delete(form.id)" title="Delete File">
+            <button type="button" class="btn btn-default" ng-click="delete(form.id)" title="Delete File" data-dismiss="modal">
               <i class="fa fa-trash"></i>
             </button>
             <button class="btn btn-primary" ng-disabled="form.loading">Update File</button>
