@@ -375,3 +375,10 @@ md-toast {
   box-shadow: 0 0 10px #bbb;
   text-align: center;
 }
+
+
+/* White Spaces */
+
+.ws-pre {
+  white-space: pre-wrap;
+}
