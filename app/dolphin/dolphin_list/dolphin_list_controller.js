@@ -113,7 +113,7 @@ function DolphinListController($scope, $rootScope, $state, $stateParams, $mdToas
         file.upload.then(
           function (data) {
             $mdToast.showSimple("Upload completed.");
-            $scope.dolphins.push(data.data);
+            $scope.dolphins.unshift(data.data);
           },
           function (data) {
             $mdToast.showSimple("Upload failed.");
