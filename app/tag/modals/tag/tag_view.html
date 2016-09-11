@@ -1,0 +1,25 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        {{ tag.name }}
+      </div>
+      <div class="modal-body">/{{ tag.slug }}
+        <form ng-submit="tagService.update(tag)">
+          <div class="form-group">
+            <input id="name" class="form-control" type="text" ng-model="tag.name" required/>
+          </div>
+          <div class="form-group">
+            <input id="slug" class="form-control" type="text" ng-model="tag.slug">
+          </div>
+          <div class="form-group">
+            <input id="slug" class="form-control" type="text" ng-model="tag.description">
+          </div>
+          <div class="btn-group btn-group-lg">
+            <button class="btn btn-primary" ng-disabled="form.loading">Update File</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
