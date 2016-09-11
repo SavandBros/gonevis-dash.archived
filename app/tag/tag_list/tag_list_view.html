@@ -11,7 +11,7 @@
           <li class="row list-panel s-fade" ng-repeat="tag in tags">
             <!-- Title and slug -->
             <div class="col-md-3">
-              <a ui-sref="dash.tag-edit({tagId: tag.id})">{{ tag.name }}</a>
+              <a ng-click="tagService.view(tag)">{{ tag.name }}</a>
               <small class="dis-b o-fade">#{{ tag.slug }}</small>
             </div>
             <!-- Date -->

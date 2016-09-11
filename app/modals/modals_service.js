@@ -14,7 +14,8 @@ function ModalsService(ModalService) {
 
   var templates = {
     dolphin: "dolphin/modals/dolphin/dolphin_view.html",
-    comment: "comment/modals/comment/comment_view.html"
+    comment: "comment/modals/comment/comment_view.html",
+    tag: "tag/modals/tag/tag_view.html",
   };
 
   /**
