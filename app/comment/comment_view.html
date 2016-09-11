@@ -1,24 +1,26 @@
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-defaul s-box b-left-no">
-      <div class="panel-body s-pad-no-y">
-        <div ng-if="!comments.length" class="text-center o-fade s-pad-y-soft">
-          <h3>Sorry, you have no comments</h3>
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-comments fa-stack-1x"></i>
-            <i class="fa fa-ban fa-stack-2x text-danger"></i>
+    <div class="panel panel-default">
+      <ul class="panel-body panel-list">
+        <li class="panel-list-item s-fade b-left"
+            ng-class="{'b-color-2': c.is_active, 'b-color-0': c.needs_approval}"
+            ng-repeat="c in comments"
+            ng-show="!c.isDeleted">
+          <!-- User -->
+          <small>{{ c.user.name }}:</small>
+          <!-- Comment -->
+          <a ng-click="commentService.view(c)">{{ c.comment }}</a>
+          <!-- Options -->
+          <span class="panel-list-item-button">
+            <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
+            <ul class="dropdown-menu">
+              <li><a ng-click="commentService.remove(c)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
+            </ul>
           </span>
-        </div>
-        <ul class="list-unstyled s-mar-no">
-            <li class="row list-panel s-fade of-hidden" ng-repeat="c in comments" ng-show="!c.isDeleted">
-              <div class="col-md-12">
-                <small>{{ c.user.name }}: </small><a ng-click="commentService.view(c)">{{ c.comment }}</a>
-                <small class="dis-b o-fade pull-right">{{ c.created | date }}</small>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+          <!-- Extra info -->
+          <small class="dis-b">{{ c.created | date }}</small>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
