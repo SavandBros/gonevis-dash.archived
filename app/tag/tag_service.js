@@ -48,6 +48,39 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
   };
 
   /**
+   * remove
+   *
+   * @method remove
+   * @desc delete tag, notify and broadcast for controllers to use.
+   *
+   * @param tag {Object}
+   * @param toast {Boolean}
+   */
+  function remove(tag, toast) {
+    var toast = toast || true;
+
+    API.Tag.delete({ tag_site: tag.site, tag_id: tag.id },
+      function (data) {
+        if (toast) $mdToast.showSimple("Tag " + tag.name + " Deleted.");
+        tag.isDeleted = true;
+        $rootScope.$broadcast("gonevisDash.TagService:delete", {
+          data: data,
+          tag: tag,
+          success: true,
+        });
+      },
+      function (data) {
+        if (toast) $mdToast.showSimple("Deleting tag failed.");
+        $rootScope.$broadcast("gonevisDash.TagService:delete", {
+          data: data,
+          tag: tag,
+          success: false,
+        });
+      }
+    );
+  };
+
+  /**
    * view
    *
    * @method view
@@ -62,6 +95,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
 
   return {
     update: update,
+    remove: remove,
     view: view,
   };
 }
