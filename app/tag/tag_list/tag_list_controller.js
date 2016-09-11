@@ -52,6 +52,7 @@ function TagListController($scope, $rootScope, $state, $mdToast, API, AuthServic
 
     API.Tags.save({ tag_site: payload.site }, payload,
       function (data, status, headers, config) {
+        $scope.tags.unshift(data);
         form.loading = false;
         $mdToast.showSimple("Tag " + form.name + " has been created");
         $state.go('dash.tag-list');
