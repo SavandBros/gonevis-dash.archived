@@ -1,25 +1,37 @@
 <div class="container container-light pad-top">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-defaul s-box b-left-no">
+  <!-- List -->
+  <div class="col-md-9">
+    <div class="panel panel-defaul s-box">
       <div class="panel-body s-pad-no-y">
         <div ng-if="!tags.length" class="text-center o-fade">
           <h3>Sorry, you have no tags</h3>
         </div>
         <ul class="list-unstyled s-mar-no">
-            <!-- Entry -->
-            <li class="row list-panel s-fade" ng-repeat="tag in tags">
-              <!-- Title and slug -->
-              <div class="col-md-3">
-                <a ui-sref="dash.tag-edit({tagId: tag.id})">{{ tag.name }}</a>
-                <small class="dis-b o-fade">#{{ tag.slug }}</small>
-              </div>
-              <!-- Date -->
-              <div class="col-md-9 text-left o-fade">
-                {{ tag.description }}
-              </div>
+          <!-- Entry -->
+          <li class="row list-panel s-fade" ng-repeat="tag in tags">
+            <!-- Title and slug -->
+            <div class="col-md-3">
+              <a ui-sref="dash.tag-edit({tagId: tag.id})">{{ tag.name }}</a>
+              <small class="dis-b o-fade">#{{ tag.slug }}</small>
+            </div>
+            <!-- Date -->
+            <div class="col-md-9 text-left o-fade">
+              {{ tag.description }}
             </div>
           </li>
         </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Add -->
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><i class="fa text-info fa-plus"></i> Add a Tag</div>
+      <div class="panel-body">
+        <form ng-submit="newTag(form)" name="form">
+          <ng-include src="'tag/includes/tag_form.html'"></ng-include>
+          <button class="btn btn-primary btn-block" ng-disabled="form.loading || form.$invalid">Submit</button>
+        </form>
       </div>
     </div>
   </div>
