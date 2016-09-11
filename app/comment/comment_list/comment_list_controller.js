@@ -29,17 +29,22 @@ function CommentListController($scope, $rootScope, $state, $mdToast, API, AuthSe
     API.Comments.get({ site_id: $scope.site, object_type: CommentService.objectType },
       function (data, status, headers, config) {
         $scope.comments = data.results;
-      },
-      function (data, status, headers, config) {
-        console.log(data);
       }
-    );
+    )
   };
+
+  $rootScope.$on('gonevisDash.CommentService:delete', function (event, data) {
+    for (var i = 0; i < $scope.comments.length; i++) {
+      if ($scope.comments[i].id == data.id) {
+        $scope.comments[i].isDeleted = true;
+      }
+    }
+  });
 
   constructor();
 }
 
-app.controller("CommentListController", CommentListController);
+app.controller('CommentListController', CommentListController)
 CommentListController.$inject = [
   '$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService', 'CommentService'
-];
+]
