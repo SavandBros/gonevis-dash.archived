@@ -28,7 +28,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><i class="fa text-info fa-plus"></i> Add a Tag</div>
       <div class="panel-body">
-        <form ng-submit="newTag(form)" name="form">
+        <form ng-submit="create(form)" name="form">
           <ng-include src="'tag/includes/tag_form.html'"></ng-include>
           <button class="btn btn-primary btn-block" ng-disabled="form.loading || form.$invalid">Submit</button>
         </form>
