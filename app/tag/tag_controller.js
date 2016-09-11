@@ -69,6 +69,14 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     );
   }
 
+  $rootScope.$on('gonevisDash.TagService:delete', function (event, data) {
+    for (var i = 0; i < $scope.tags.length; i++) {
+      if ($scope.tags[i].id == data.id) {
+        $scope.tags[i].isDeleted = true;
+      }
+    }
+  });
+
 
   constructor();
 }
