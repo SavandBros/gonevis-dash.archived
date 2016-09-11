@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading s-pad-y-soft"><i class="fa fa-fw text-info fa-comments"></i> Latest Comments</div>
+        <div class="panel-heading">
+          <i class="fa fa-fw text-info fa-comments"></i> Latest Comments
+        </div>
         <ul class="panel-body panel-list">
           <li class="panel-list-item s-fade" ng-repeat="c in Comment.list" ng-show="!c.isDeleted">
             <small>{{ c.user.name }}:</small>

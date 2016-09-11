@@ -1,18 +1,11 @@
 <div class="container container-light pad-top">
   <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default s-box">
+      <div class="panel-heading"><i class="fa text-info fa-hashtag"></i> {{ form.name }}</div>
       <div class="panel-body s-pad">
         <form ng-submit="updateTag(form)" name="form">
-          <h3 class="o-fade-soft">Edit tag</h3>
           <ng-include src="'tag/includes/tag_form.html'"></ng-include>
-          <button class="btn btn-primary btn-block btn-lg" ng-disabled="form.loading || form.$invalid">
-          <span ng-show="form.loading">
-            <i class="fa fa-circle-o-notch fa-spin"></i>
-          </span>
-          <span ng-hide="form.loading">
-            <i class="fa fa-check"></i>
-          </span> Update
-          </button>
+          <button class="btn btn-primary btn-block" ng-disabled="form.loading || form.$invalid">Update</button>
         </form>
       </div>
     </div>
