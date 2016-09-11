@@ -59,7 +59,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
    * @param comment {Object}
    */
   function view(comment) {
-    ModalsService.open('comment', 'CommentController', { comment: comment });
+    ModalsService.open('comment', 'CommentModalController', { comment: comment });
   };
 
   return {

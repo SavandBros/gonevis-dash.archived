@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:CommentListController
+ * @name gonevisDash.controller:CommentController
  * Controller of the gonevisDash
  *
  * @param $scope
@@ -13,7 +13,7 @@
  * @param AuthService
  * @param CommentService
  */
-function CommentListController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService) {
+function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService) {
 
   /**
    * constructor
@@ -44,7 +44,7 @@ function CommentListController($scope, $rootScope, $state, $mdToast, API, AuthSe
   constructor();
 }
 
-app.controller('CommentListController', CommentListController)
-CommentListController.$inject = [
+app.controller('CommentController', CommentController);
+CommentController.$inject = [
   '$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService', 'CommentService'
 ]

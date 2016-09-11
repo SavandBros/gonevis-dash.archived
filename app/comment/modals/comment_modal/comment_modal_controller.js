@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:CommentController
+ * @name gonevisDash.controller:CommentModalController
  * Controller of the gonevisDash
  *
  * @param $scope
  * @param CommentService
  * @param comment
  */
-function CommentController($scope, CommentService, comment) {
+function CommentModalController($scope, CommentService, comment) {
 
   /**
    * constructor
@@ -25,5 +25,5 @@ function CommentController($scope, CommentService, comment) {
   constructor();
 }
 
-app.controller("CommentController", CommentController);
-CommentController.$inject = ['$scope', 'CommentService', 'comment'];
+app.controller("CommentModalController", CommentModalController);
+CommentModalController.$inject = ['$scope', 'CommentService', 'comment'];

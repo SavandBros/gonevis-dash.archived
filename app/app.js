@@ -35,9 +35,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       templateUrl: 'dolphin/dolphin_list/dolphin_list_view.html'
     })
     .state('dash.comment-list', {
-      url: '/comment-list',
-      controller: 'CommentListController',
-      templateUrl: 'comment/comment_list/comment_list_view.html'
+      url: '/comments',
+      controller: 'CommentController',
+      templateUrl: 'comment/comment_view.html'
     })
     .state('dash.entry-new', {
       url: '/new',
