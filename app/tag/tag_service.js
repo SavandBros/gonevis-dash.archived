@@ -92,7 +92,6 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
     ModalsService.open('tag', 'TagModalController', { tag: tag });
   };
 
-
   return {
     update: update,
     remove: remove,
