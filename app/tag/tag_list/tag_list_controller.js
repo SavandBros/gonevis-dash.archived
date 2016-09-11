@@ -25,6 +25,12 @@ function TagListController($scope, $rootScope, $state, $mdToast, API, AuthServic
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
 
+    $scope.form = {
+      data: null,
+      loading: false,
+      errors: false
+    };
+
     API.Tags.get({ tag_site: site },
       function (data, status, headers, config) {
         $scope.tags = data.results;
@@ -33,32 +39,31 @@ function TagListController($scope, $rootScope, $state, $mdToast, API, AuthServic
   };
 
   /**
-   * newTag
+   * create
    *
-   * @method newTag
-   * @desc for updating tag details
+   * @method create
+   * @desc Create a new tag
    * 
    * @param form {object}
    */
-  $scope.newTag = function (form) {
+  $scope.create = function (form) {
     form.loading = true;
+    form.errors = null;
 
-    var payload = {
-      name: form.name,
-      site: AuthService.getCurrentSite(),
-      slug: "",
-      description: form.description
-    };
+    form.data.slug = form.data.slug || "";
 
-    API.Tags.save({ tag_site: payload.site }, payload,
-      function (data, status, headers, config) {
-        $scope.tags.unshift(data);
+    API.Tags.save({ tag_site: site }, form.data,
+      function (data) {
         form.loading = false;
-        $mdToast.showSimple("Tag " + form.name + " has been created");
-        $state.go('dash.tag-list');
+        form.data = null;
+        $scope.tags.unshift(data);
+        $mdToast.showSimple("Tag " + data.name + " created.");
       },
-      function (data, status, headers, config) {
-        form.loading = false
+      function (data) {
+        form.loading = false;
+        form.data = null;
+        form.errors = data.data;
+        $mdToast.showSimple("Tag creaton failed.");
       }
     );
   }
