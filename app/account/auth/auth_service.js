@@ -176,6 +176,7 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
    * returns {string} Site id (uuid)
    */
   function getCurrentSite() {
+    var siteIndex = $stateParams.s || 0;
     return getAuthenticatedUser().sites[$stateParams.s].id;
   }
 

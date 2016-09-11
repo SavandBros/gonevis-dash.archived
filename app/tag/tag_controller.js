@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:TagListController
+ * @name gonevisDash.controller:TagController
  * Controller of the gonevisDash
  *
  * @param $scope
@@ -12,7 +12,7 @@
  * @param API
  * @param AuthService
  */
-function TagListController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService) {
+function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -73,5 +73,5 @@ function TagListController($scope, $rootScope, $state, $mdToast, TagService, API
   constructor();
 }
 
-app.controller("TagListController", TagListController);
-TagListController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'TagService', 'API', 'AuthService'];
+app.controller("TagController", TagController);
+TagController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'TagService', 'API', 'AuthService'];

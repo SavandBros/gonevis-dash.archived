@@ -70,9 +70,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       templateUrl: 'tag/tag_edit/tag_edit_view.html'
     })
     .state('dash.tag-list', {
-      url: '/tag-list',
-      controller: 'TagListController',
-      templateUrl: 'tag/tag_list/tag_list_view.html'
+      url: '/tags',
+      controller: 'TagController',
+      templateUrl: 'tag/tag_view.html'
     })
     .state('dash.tag-new', {
       url: '/tag-new',

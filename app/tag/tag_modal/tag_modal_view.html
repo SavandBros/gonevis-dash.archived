@@ -2,9 +2,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        {{ tag.name }}
+        {{ tag.name }} #{{ tag.slug }}
       </div>
-      <div class="modal-body">/{{ tag.slug }}
+      <div class="modal-body">
         <form ng-submit="tagService.update(tag)">
           <div class="form-group">
             <input id="name" class="form-control" type="text" ng-model="tag.name" required/>

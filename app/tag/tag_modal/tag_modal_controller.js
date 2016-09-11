@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:TagController
+ * @name gonevisDash.controller:TagModalController
  * Controller of the gonevisDash
  *
  * @param $scope
  * @param TagService
  * @param tag
  */
-function TagController($scope, TagService, tag) {
+function TagModalController($scope, TagService, tag) {
 
   /**
    * constructor
@@ -25,5 +25,5 @@ function TagController($scope, TagService, tag) {
   constructor();
 }
 
-app.controller("TagController", TagController);
-TagController.$inject = ['$scope', 'TagService', 'tag'];
+app.controller("TagModalController", TagModalController);
+TagModalController.$inject = ['$scope', 'TagService', 'tag'];

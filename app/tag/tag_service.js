@@ -15,7 +15,6 @@
  */
 function TagService($rootScope, $mdToast, API, ModalsService) {
 
-
   /**
    * update
    *
@@ -57,7 +56,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
    * @param tag {Object}
    */
   function view(tag) {
-    ModalsService.open('tag', 'TagController', { tag: tag });
+    ModalsService.open('tag', 'TagModalController', { tag: tag });
   };
 
 
