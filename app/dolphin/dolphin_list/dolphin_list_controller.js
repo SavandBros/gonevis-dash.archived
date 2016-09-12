@@ -126,6 +126,34 @@ function DolphinListController($scope, $rootScope, $state, $stateParams, $mdToas
         );
       }
     );
+  };
+
+  /**
+   * delete
+   *
+   * @method delete
+   * @desc delete a file
+   *
+   * @param dolphin{object}
+   */
+  $scope.delete = function (dolphin) {
+    $scope.isDeleted = false;
+
+    API.Dolphin.delete({ site_id: site, file_id: dolphin.id },
+      function (data, status, headers, config) {
+        $scope.isDeleted = true;
+        for (var i = 0; i < $scope.dolphins.length; i++) {
+          if ($scope.dolphins[i].id == dolphin.id) {
+            $scope.dolphins.splice(i, 1);
+          }
+        }
+        $mdToast.showSimple("File " + dolphin.meta_data.name + " deleted.");
+      },
+      function (data, status, headers, config) {
+        isDeleted = false;
+        $mdToast.showSimple("Sorry, we couldn't delete the file. Try again later.");
+      }
+    )
   }
 
   /**
