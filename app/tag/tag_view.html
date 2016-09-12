@@ -26,12 +26,18 @@
   <!-- Add -->
   <div class="col-md-3">
     <div class="panel panel-default">
-      <div class="panel-heading"><i class="fa text-info fa-plus"></i> Add a Tag</div>
-      <div class="panel-body">
-        <form ng-submit="create(form)" name="form">
-          <ng-include src="'tag/includes/tag_form.html'"></ng-include>
-          <button class="btn btn-primary btn-block" ng-disabled="form.loading || form.$invalid">Submit</button>
-        </form>
+      <div class="panel-heading c-p caret-toggle" data-toggle="collapse" data-target="#create">
+        <i class="fa text-info fa-plus"></i> Add a Tag
+        <i class="fa fa-exchange fa-rotate-90 pull-right"></i>
+      </div>
+      <div class="collapse" id="create">
+        <div class="panel-body">
+          <form ng-submit="create(form)" name="form">
+            <ng-include src="'tag/includes/tag_form.html'"></ng-include>
+            <br>
+            <button class="btn btn-primary btn-block" ng-disabled="form.loading || form.$invalid">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
