@@ -69,7 +69,7 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
 
     API.EntryAdd.save(form,
       function (data, status, headers, config) {
-        $mdToast.showSimple("Entry added as draft, don't forget!.");
+        $mdToast.showSimple("Entry drafted.");
         form.title = '';
         form.content = '';
       },
