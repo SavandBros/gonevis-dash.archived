@@ -14,7 +14,7 @@
  * @param API
  * @param CommentService
  */
-function MainController ($scope, $rootScope, $state, $mdToast, $stateParams, AuthService, API, CommentService) {
+function MainController($scope, $rootScope, $state, $mdToast, $stateParams, AuthService, API, CommentService) {
 
   /**
    * constructor
@@ -22,7 +22,7 @@ function MainController ($scope, $rootScope, $state, $mdToast, $stateParams, Aut
    * @method constructor
    * @desc Init function for controller
    */
-  function constructor () {
+  function constructor() {
     $scope.auth = AuthService
     $scope.user = AuthService.getAuthenticatedUser()
     $scope.site = AuthService.getCurrentSite()
@@ -51,6 +51,34 @@ function MainController ($scope, $rootScope, $state, $mdToast, $stateParams, Aut
         }
       )
     }
+  };
+
+  $scope.form = {};
+
+  /**
+   * newPost
+   *
+   * @method newPost
+   * @desc Submit newPost form
+   *
+   * @param form {object} Form data to submit
+   */
+  $scope.newPost = function (form) {
+    form.loading = true;
+    form.site = AuthService.getCurrentSite();
+
+    API.EntryAdd.save(form,
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Entry drafted.");
+        form.title = '';
+        form.content = '';
+      },
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Failed to add entry.");
+        form.loading = false;
+        form.errors = data;
+      }
+    );
   }
 
   $rootScope.$on('gonevisDash.CommentService:delete', function (event, data) {
