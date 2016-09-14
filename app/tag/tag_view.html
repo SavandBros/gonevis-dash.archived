@@ -31,13 +31,18 @@
         <i class="fa fa-exchange fa-rotate-90 pull-right"></i>
       </div>
       <div class="collapse" id="create">
-        <div class="panel-body">
-          <form ng-submit="create(form)" name="form">
+        <form ng-submit="create(form)" name="form">
+          <div class="panel-body">
             <ng-include src="'tag/includes/tag_form.html'"></ng-include>
             <br>
+            <button type="file" class="btn btn-primary btn-sm" ngf-select="uploadFiles($files, $invalidFiles)" ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
+              <i class="fa fa-fw fa-plus"></i> Select a cover
+            </button>
+          </div>
+          <div class="panel-footer">
             <button class="btn btn-primary btn-block" ng-disabled="form.loading || form.$invalid">Submit</button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
