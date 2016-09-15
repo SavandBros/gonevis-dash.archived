@@ -9,7 +9,7 @@
  * @param $stateParams
  * @param AuthService
  */
-function HeaderController($scope, $state, $stateParams, AuthService) {
+function HeaderController($scope, $rootScope, $state, $stateParams, AuthService) {
   /**
    * constructor
    *
@@ -42,8 +42,16 @@ function HeaderController($scope, $state, $stateParams, AuthService) {
     $state.go('signin');
   });
 
+  $rootScope.$on('gonevisDash.SiteSettingsController:delete', function (event, id) {
+    for (var i = 0; i < $scope.user.sites.length; i++) {
+      if ($scope.user.sites[i].id == id) {
+        $scope.user.sites.splice(i, 1);
+      }
+    }
+  });
+
   constructor();
 };
 
 app.controller("HeaderController", HeaderController);
-HeaderController.$inject = ['$scope', '$state', '$stateParams', 'AuthService'];
+HeaderController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'AuthService'];
