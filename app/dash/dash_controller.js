@@ -8,9 +8,9 @@
  * @param $scope
  * @param $state
  * @param $mdToast
- * @param AuthenticationService
+ * @param AuthService
  */
-function DashController($scope, $state, $mdToast, AuthenticationService) {
+function DashController($scope, $state, $mdToast, AuthService) {
   /**
    * constructor
    *
@@ -19,7 +19,7 @@ function DashController($scope, $state, $mdToast, AuthenticationService) {
    */
   function constructor() {
     // Check auth
-    if (!AuthenticationService.isAuthenticated()) {
+    if (!AuthService.isAuthenticated()) {
       $mdToast.showSimple('Please login to continue.');
       $state.go('signin');
     }
@@ -29,4 +29,4 @@ function DashController($scope, $state, $mdToast, AuthenticationService) {
 }
 
 app.controller("DashController", DashController);
-DashController.$inject = ['$scope', '$state', '$mdToast', 'AuthenticationService'];
+DashController.$inject = ['$scope', '$state', '$mdToast', 'AuthService'];

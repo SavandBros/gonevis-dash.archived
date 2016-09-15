@@ -1,0 +1,44 @@
+<div class="container container-light pad-top">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-defaul s-box b-left-no">
+      <div class="panel-body s-pad-y-no">
+        <div ng-if="!entries.length" class="text-center">
+          <h2 class="o-fade">No entries here</h2>
+          <a ui-sref="dash.entry-new">Add entry?</a>
+        </div>
+        <ul class="list-unstyled s-mar-no">
+          <!-- Entry -->
+          <li class="row list-panel b-left b-color-{{ e.status }} s-fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
+            <!-- Title and slug -->
+            <div class="col-md-8">
+              <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
+              <small class="dis-b o-fade">/{{ e.slug }}</small>
+            </div>
+            <!-- Date -->
+            <div class="col-md-3 text-right o-fade">
+              {{ e.status == 2 ? e.publication_date : e.created | date }}
+              <small class="dis-b o-fade">{{ e.status == 2 ? "Publication" : "Creation" }}</small>
+            </div>
+            <!-- Tools -->
+            <div class="col-md-1 text-right">
+              <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle" style="padding: 4px" data-toggle="dropdown"></i>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header" ng-if="e.comment_enabled">
+                  <i class="fa fa-fw fa-comments text-info"></i> Comment enabled
+                </li>
+                <li class="dropdown-header" ng-if="e.featured ">
+                  <i class="fa fa-fw fa-star text-info"></i> Featured
+                </li>
+                <li class="dropdown-header" ng-if="e.password ">
+                  <i class="fa fa-fw fa-lock text-danger"></i> Passworded
+                </li>
+                <li class="divider "></li>
+                <li><a ng-click="delete(e)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,431 @@
+/* Global */
+
+html,
+body {
+  background-color: #fcfcfc;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+}
+
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
+}
+
+.open .dropdown-toggle {
+  opacity: 1;
+}
+
+
+/* Navbar */
+
+.navbar-brand {
+  margin-right: 30px;
+}
+
+
+/* Forms */
+
+.help-block {
+  margin-left: 10px;
+}
+
+
+/* Space */
+
+.s-pad {
+  padding: 30px;
+}
+
+.s-pad-soft {
+  padding: 5px;
+}
+
+.s-pad-no {
+  padding: 0;
+}
+
+.s-pad-y-no {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.s-mar-no {
+  margin: 0;
+}
+
+.s-mar-top {
+  margin-top: 30px;
+}
+
+.s-mar-right {
+  margin-right: 30px;
+}
+
+.s-mar-right-soft {
+  margin-right: 10px;
+}
+
+.s-pad-x {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.s-pad-x-no {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.s-pad-y {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.s-pad-y-soft {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+
+/* Opacity */
+
+.o-fade {
+  opacity: 0.6;
+}
+
+.o-fade-hard {
+  opacity: 0.3;
+}
+
+.o-fade-soft {
+  opacity: 0.7;
+}
+
+
+/* Shadow */
+
+.s-box {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Border */
+
+.b-no {
+  border: none;
+}
+
+.b-left {
+  border-left: 4px solid rgba(0, 0, 0, 0.2);
+}
+
+.b-left-no {
+  border-left: none;
+}
+
+.b-color-0 {
+  border-color: orange;
+}
+
+.b-color-2 {
+  border-color: limegreen;
+}
+
+
+/* Displays */
+
+.dis-b {
+  display: block;
+}
+
+
+/* Cursors */
+
+.dropdown-toggle,
+.c-p {
+  cursor: pointer;
+}
+
+
+/* Hovers */
+
+.h-opacity:HOVER {
+  opacity: 1;
+}
+
+
+/* Overflows */
+
+.of-hidden {
+  overflow: hidden;
+}
+
+
+/* Transitions */
+
+.trans,
+.dolphin {
+  transition: all 0.3s ease-in-out;
+}
+
+.trans-opacity {
+  transition: opacity .3s ease-in-out;
+}
+
+
+/* Animate */
+
+.a-fade {
+  transition: 0.5s linear all;
+  opacity: 1;
+}
+
+.a-fade.ng-hide-add-active {
+  opacity: 0;
+}
+
+
+/* Avatar */
+
+.avatar {
+  width: 128px;
+  height: 128px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+  overflow: hidden;
+  line-height: 128px;
+  text-align: center;
+  font-size: 80px;
+  background: cornflowerblue;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  cursor: default;
+}
+
+
+/* List */
+
+.list-panel {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.list-panel:last-child {
+  border-bottom: none;
+}
+
+
+/* MD Toast */
+
+md-toast {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+}
+
+.md-toast-animating {
+  overflow: initial !important;
+}
+
+
+/* Link in Link */
+
+.nav-link-in-link {
+  position: absolute;
+  right: 0;
+  margin-top: -26px;
+}
+
+
+/* Panels */
+
+.panel-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.panel-list .panel-list-item {
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.panel-list .panel-list-item:last-child {
+  border-bottom: none;
+}
+
+.panel-list .panel-list-item-button {
+  position: absolute;
+  right: 16px;
+  background: #fff;
+  width: 24px;
+  box-shadow: -5px 0 10px #fff;
+}
+
+.panel-list .panel-list-item-button>.fa {
+  opacity: 0.6;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.panel-heading {
+  padding: 18px 12px !important;
+}
+
+.panel-heading h1,
+.panel-heading h2,
+.panel-heading h3 {
+  color: #444;
+}
+
+
+/* Dolphin */
+
+.dolphin {
+  display: block;
+  border-radius: 2px;
+  height: 200px;
+  margin-bottom: 15px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.dolphin:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+
+.dolphin .caption {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px 5px;
+  font-size: 13px;
+  margin-top: 170px;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+
+/* Editing Mode + Text Angular */
+
+.ta-toolbar {
+  display: none;
+}
+
+.ta-toolbar .btn-group {
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+
+.editing-mode {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: -60px;
+  background: #fff;
+  z-index: 2000;
+  box-shadow: 0 0 0 10000px #fff;
+}
+
+.editing-mode .ta-toolbar {
+  display: block;
+}
+
+.editing-mode .form-control {
+  box-shadow: none !important;
+  border: none;
+  margin-top: 180px !important;
+  min-height: 200px;
+}
+
+.editing-mode .btn {
+  border-color: #eee !important;
+  border-radius: 0 !important;
+  color: #777;
+}
+
+.editing-mode .btn:hover {
+  opacity: 1;
+  background-color: #eee !important;
+  color: #222;
+}
+
+.editing-mode .close {
+  font-size: 1.6em;
+  border-radius: 100%;
+  width: 50px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+  z-index: 1000;
+  position: fixed;
+  top: 45px;
+  right: 10px;
+}
+
+.editing-mode .ta-toolbar {
+  background: #f9f9f9;
+  position: fixed;
+  width: 101%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 0 10px #ccc;
+  text-align: center;
+}
+
+
+/* Navigation */
+
+.navigation {
+  margin-bottom: 6px;
+}
+
+
+/* White Spaces */
+
+.ws-pre {
+  white-space: pre-wrap;
+}
+
+
+/* Autocomplete */
+
+tags-input .tags {
+  border-radius: 4px;
+  border-color: #ccc !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  transition: all 0.3s ease-in-out;
+}
+
+tags-input .tags.focused {
+  border-color: #66afe9 !important;
+  outline: 0 !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}

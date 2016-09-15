@@ -1,79 +1,105 @@
-'use strict';
+'use strict'
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:MainController
- * Controller of the gonevisDash
+ * Main Controller
+ * 
+ * @class MainController
+ * @namespace gonevisDash.MainController
  *
  * @param $scope
+ * @param $rootScope
  * @param $state
  * @param $mdToast
- * @param AuthenticationService
+ * @param AuthService
  * @param API
+ * @param CommentService
  */
-function MainController($scope, $state, $mdToast, $stateParams, AuthenticationService, API) {
+function MainController($scope, $rootScope, $state, $mdToast, $stateParams, AuthService, API, CommentService) {
+
   /**
    * constructor
    *
    * @method constructor
    * @desc Init function for controller
-   *
-   * @memberOf MainController
    */
   function constructor() {
-    // User
-    $scope.auth = AuthenticationService;
-    $scope.user = AuthenticationService.getAuthenticatedUser();
-    $scope.site = AuthenticationService.getCurrentSite();
+    $scope.auth = AuthService
+    $scope.user = AuthService.getAuthenticatedUser()
+    $scope.site = AuthService.getCurrentSite()
+    $scope.commentService = CommentService
+
     // Check auth
-    if (!AuthenticationService.isAuthenticated()) {
-      $mdToast.showSimple('Please login to continue.');
-      $state.go('signin');
+    if (!AuthService.isAuthenticated()) {
+      $mdToast.showSimple('Please login to continue.')
+      $state.go('signin')
     }
 
     // State
-    $scope.state = $state;
+    $scope.state = $state
     $scope.param = $stateParams
 
-    $scope.Comment.initialize();
-  };
+    $scope.Comment.initialize()
+  }
 
   $scope.Comment = {
-
     list: [],
 
     initialize: function () {
-      API.Comments.get({ object_type: 1 },
+      API.Comments.get({ site_id: $scope.site, object_type: 1 },
         function (data, status, headers, config) {
-          $scope.Comment.list = data.results;
-          console.log($scope.Comment.list)
+          $scope.Comment.list = data.results
         }
       )
-    },
-
-    delete: function (comment) {
-      API.Comment.delete({ comment_id: comment.id },
-        function (data, status, headers, config) {
-          comment.isDeleted = true;
-          $mdToast.showSimple("Comment deleted!");
-        }
-      );
-    },
-
-    show: function (comment) {
-
     }
+  };
+
+  $scope.form = {};
+
+  /**
+   * newPost
+   *
+   * @method newPost
+   * @desc Submit newPost form
+   *
+   * @param form {object} Form data to submit
+   */
+  $scope.newPost = function (form) {
+    form.loading = true;
+    form.site = AuthService.getCurrentSite();
+
+    API.EntryAdd.save(form,
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Entry drafted.");
+        form.title = '';
+        form.content = '';
+      },
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Failed to add entry.");
+        form.loading = false;
+        form.errors = data;
+      }
+    );
   }
 
-  constructor();
+  $rootScope.$on('gonevisDash.CommentService:delete', function (event, data) {
+    for (var i = 0; i < $scope.Comment.list.length; i++) {
+      if ($scope.Comment.list[i].id == data.id) {
+        $scope.Comment.list[i].isDeleted = true
+      }
+    }
+  })
+
+  constructor()
 }
 
-app.controller("MainController", MainController);
+app.controller('MainController', MainController)
 MainController.$inject = [
   '$scope',
+  '$rootScope',
   '$state',
   '$mdToast',
   '$stateParams',
-  'AuthenticationService',
+  'AuthService',
   'API',
-];
+  'CommentService'
+]

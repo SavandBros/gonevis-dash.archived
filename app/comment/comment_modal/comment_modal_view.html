@@ -1,0 +1,15 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        {{ comment.user.name }}: <small class="pull-right">{{ comment.created | date }}</small>
+      </div>
+      <div class="modal-body ws-pre">{{ comment.comment }}</div>
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-danger" ng-click="commentService.remove(comment)" data-dismiss="modal">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

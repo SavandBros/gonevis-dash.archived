@@ -1,0 +1,26 @@
+<div class="container container-light pad-top">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <ul class="panel-body panel-list">
+        <li class="panel-list-item s-fade b-left"
+            ng-class="{'b-color-2': c.is_active, 'b-color-0': c.needs_approval}"
+            ng-repeat="c in comments"
+            ng-show="!c.isDeleted">
+          <!-- User -->
+          <small>{{ c.user.name }}:</small>
+          <!-- Comment -->
+          <a ng-click="commentService.view(c)">{{ c.comment }}</a>
+          <!-- Options -->
+          <span class="panel-list-item-button">
+            <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
+            <ul class="dropdown-menu">
+              <li><a ng-click="commentService.remove(c)"><i class="fa fa-fw fa-trash text-danger"></i> Delete comment</a></li>
+            </ul>
+          </span>
+          <!-- Extra info -->
+          <small class="dis-b">{{ c.created | date }}</small>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
