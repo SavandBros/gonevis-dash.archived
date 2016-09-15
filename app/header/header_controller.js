@@ -9,6 +9,7 @@
  * @param $stateParams
  * @param AuthService
  */
+
 function HeaderController($scope, $state, $stateParams, AuthService) {
   /**
    * constructor
@@ -40,6 +41,14 @@ function HeaderController($scope, $state, $stateParams, AuthService) {
   $scope.$on('gonevisDash.AuthService:SignedOut', function () {
     constructor();
     $state.go('signin');
+  });
+
+  $scope.$on('gonevisDash.SiteSettingsController:delete', function (event, id) {
+    for (var i = 0; i < $scope.user.sites.length; i++) {
+      if ($scope.user.sites[i].id == id) {
+        $scope.user.sites.splice(i, 1);
+      }
+    }
   });
 
   constructor();
