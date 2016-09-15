@@ -41,11 +41,14 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
     API.SiteNew.save(form,
       function (data, status, headers, config) {
         form.loading = false;
-        // Update sites
-        $scope.user.sites.push(data);
 
         // Update current user's data
-        AuthService.updateAuthentication($scope.user);
+        AuthService.updateAuth($scope.user);
+
+        //
+        $rootScope.$broadcast('getSite', data);
+
+        console.log(data);
 
         // Show success message
         $mdToast.showSimple('Site ' + data.title + ' created');
