@@ -43,7 +43,7 @@ function HeaderController($scope, $state, $stateParams, AuthService) {
     $state.go('signin');
   });
 
-  $rootScope.$on('gonevisDash.SiteSettingsController:delete', function (event, id) {
+  $scope.$on('gonevisDash.SiteSettingsController:delete', function (event, id) {
     for (var i = 0; i < $scope.user.sites.length; i++) {
       if ($scope.user.sites[i].id == id) {
         $scope.user.sites.splice(i, 1);
