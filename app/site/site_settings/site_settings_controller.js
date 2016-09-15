@@ -28,7 +28,6 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
     API.Site.get({ site_id: site },
       function (data, status, headers, config) {
         $scope.siteDetail = data;
-        console.log($scope.siteDetail);
       },
       function (data, status, headers, config) {
         console.log(data);
@@ -41,7 +40,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
    *
    * @method updateSite
    * @desc update site via api call
-   * 
+   *
    * @param key {string} value {string} site {string}
    */
   $scope.updateSite = function (key, value) {
@@ -56,8 +55,30 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
         $mdToast.showSimple("Profile update.");
       },
       function (data, status, headers, config) {
-        $mdToast.showSimple("Sorry, error has occured while updating profile, try again later.");
-        console.log(data)
+        $mdToast.showSimple("" + data.data.title + "");
+      }
+    );
+  }
+
+  /**
+   * remove
+   *
+   * @method remove
+   * @desc delete site via api call
+   *
+   * @param siteId {String}
+   */
+  $scope.remove = function (siteId) {
+    API.SiteUpdate.delete({ site_id: site },
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Site deleted");
+
+        $rootScope.$broadcast('gonevisDash.SiteSettingsController:delete', site);
+
+        $state.go('dash.main', { s: $scope.user.sites.length - 2 });
+      },
+      function (data, status, headers, config) {
+        $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
       }
     );
   }
