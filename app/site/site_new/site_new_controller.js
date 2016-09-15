@@ -45,10 +45,7 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
         // Update current user's data
         AuthService.updateAuth($scope.user);
 
-        //
         $rootScope.$broadcast('getSite', data);
-
-        console.log(data);
 
         // Show success message
         $mdToast.showSimple('Site ' + data.title + ' created');
