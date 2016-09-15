@@ -28,7 +28,6 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
     API.Site.get({ site_id: site },
       function (data, status, headers, config) {
         $scope.siteDetail = data;
-        console.log($scope.siteDetail);
       },
       function (data, status, headers, config) {
         console.log(data);
@@ -74,10 +73,13 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
     API.SiteUpdate.delete({ site_id: site },
       function (data, status, headers, config) {
         $mdToast.showSimple("Site deleted");
+
+        $rootScope.$broadcast('gonevisDash.SiteSettingsController:delete', site);
+
         $state.go('dash.main', { s: $scope.user.sites.length - 2 });
       },
       function (data, status, headers, config) {
-        console.log(data);
+        $mdToast.showSimple("Sorry we couldn't delete the site, please try again latter");
       }
     );
   }
