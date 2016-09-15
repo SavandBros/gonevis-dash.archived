@@ -46,7 +46,7 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
         AuthService.updateAuth($scope.user);
         $rootScope.$broadcast('gonevisDash.SiteNewController:Create');
         $mdToast.showSimple('Site ' + data.title + ' created');
-        $state.go('dash.entry-new', { s: index-1 });
+        $state.go('dash.entry-new', { s: index - 1 });
       },
       function (data, status, headers, config) {
         console.log(data);
@@ -58,4 +58,10 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
 }
 
 app.controller("SiteNewController", SiteNewController);
-SiteNewController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService'];
+SiteNewController.$inject = ['$scope',
+  '$rootScope',
+  '$state',
+  '$mdToast',
+  'API',
+  'AuthService'
+];
