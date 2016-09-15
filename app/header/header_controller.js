@@ -50,4 +50,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
 };
 
 app.controller("HeaderController", HeaderController);
-HeaderController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'AuthService'];
+HeaderController.$inject = [
+  '$scope',
+  '$rootScope',
+  '$state',
+  '$stateParams',
+  'AuthService'
+];
