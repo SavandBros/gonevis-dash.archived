@@ -77,7 +77,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
           }
         };
         AuthService.updateAuth($scope.user);
-        $rootScope.$broadcast('gonevisDash.SiteSettingsController:delete');
+        $rootScope.$broadcast('gonevisDash.SiteSettingsController:remove');
         $mdToast.showSimple("Site deleted");
       },
       function (data, status, headers, config) {
@@ -90,4 +90,11 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
 }
 
 app.controller("SiteSettingsController", SiteSettingsController);
-SiteSettingsController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService'];
+SiteSettingsController.$inject = [
+  '$scope',
+  '$rootScope',
+  '$state',
+  '$mdToast',
+  'API',
+  'AuthService'
+];
