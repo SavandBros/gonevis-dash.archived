@@ -46,7 +46,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
     $state.go('signin');
   });
 
-  $scope.$on('gonevisDash.SiteSettingsController:delete', function (event, id) {
+  $scope.$on('gonevisDash.SiteSettingsController:remove', function (event, id) {
     constructor();
   });
 
