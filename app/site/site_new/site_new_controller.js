@@ -42,16 +42,11 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
       function (data, status, headers, config) {
         form.loading = false;
 
-        // Update current user's data
+        var index = $scope.user.sites.push(data);
         AuthService.updateAuth($scope.user);
-
-        $rootScope.$broadcast('getSite', data);
-
-        // Show success message
+        $rootScope.$broadcast('gonevisDash.SiteNewController:Create');
         $mdToast.showSimple('Site ' + data.title + ' created');
-
-        // Redirect user to the site that just have been created
-        $state.go('dash.entry-new', { s: $scope.user.sites.length - 1 });
+        $state.go('dash.entry-new', { s: index-1 });
       },
       function (data, status, headers, config) {
         console.log(data);
