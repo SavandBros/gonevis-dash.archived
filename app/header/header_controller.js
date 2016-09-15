@@ -9,8 +9,7 @@
  * @param $stateParams
  * @param AuthService
  */
-
-function HeaderController($scope, $state, $stateParams, AuthService) {
+function HeaderController($scope, $rootScope, $state, $stateParams, AuthService) {
   /**
    * constructor
    *
@@ -28,7 +27,7 @@ function HeaderController($scope, $state, $stateParams, AuthService) {
     $scope.param = $stateParams
   };
 
-  $scope.$on('gonevisDash.AuthService:Authenticated', function () {
+  $rootScope.$on('gonevisDash.AuthService:Authenticated', function () {
     constructor();
     if ($scope.user.sites == 0) {
       $state.go('dash.site-new');
@@ -36,6 +35,10 @@ function HeaderController($scope, $state, $stateParams, AuthService) {
       $state.go('dash.main', { s: 0 });
     }
 
+  });
+
+  $scope.$on('getSite', function (event, data) {
+    $scope.user.sites.push(data);
   });
 
   $scope.$on('gonevisDash.AuthService:SignedOut', function () {
@@ -55,4 +58,10 @@ function HeaderController($scope, $state, $stateParams, AuthService) {
 };
 
 app.controller("HeaderController", HeaderController);
-HeaderController.$inject = ['$scope', '$state', '$stateParams', 'AuthService'];
+HeaderController.$inject = [
+  '$scope',
+  '$rootScope',
+  '$state',
+  '$stateParams',
+  'AuthService'
+];
