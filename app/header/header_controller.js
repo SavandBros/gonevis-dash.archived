@@ -9,7 +9,8 @@
  * @param $stateParams
  * @param AuthService
  */
-function HeaderController($scope, $rootScope, $state, $stateParams, AuthService) {
+
+function HeaderController($scope, $state, $stateParams, AuthService) {
   /**
    * constructor
    *
@@ -54,4 +55,4 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
 };
 
 app.controller("HeaderController", HeaderController);
-HeaderController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'AuthService'];
+HeaderController.$inject = ['$scope', '$state', '$stateParams', 'AuthService'];
