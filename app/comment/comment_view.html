@@ -2,6 +2,9 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <ul class="panel-body panel-list">
+        <div ng-if="!comments.length" class="text-center o-fade s-pad-y-soft">
+          <h3>Sorry, you have no comments</h3>
+        </div>
         <li class="panel-list-item s-fade b-left"
             ng-class="{'b-color-2': c.is_active, 'b-color-0': c.needs_approval}"
             ng-repeat="c in comments"
