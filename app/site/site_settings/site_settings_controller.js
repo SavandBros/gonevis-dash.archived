@@ -61,15 +61,14 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
   }
 
   /**
-   * delete
+   * remove
    *
-   * @method delete
+   * @method remove
    * @desc delete site via api call
    *
-   * @param siteId {string}
+   * @param siteId {String}
    */
-  $scope.delete = function (siteId) {
-
+  $scope.remove = function (siteId) {
     API.SiteUpdate.delete({ site_id: site },
       function (data, status, headers, config) {
         $mdToast.showSimple("Site deleted");
@@ -79,7 +78,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
         $state.go('dash.main', { s: $scope.user.sites.length - 2 });
       },
       function (data, status, headers, config) {
-        $mdToast.showSimple("Sorry we couldn't delete the site, please try again latter");
+        $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
       }
     );
   }
