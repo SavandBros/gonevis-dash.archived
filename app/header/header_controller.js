@@ -37,8 +37,8 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
 
   });
 
-  $scope.$on('getSite', function (event, data) {
-    $scope.user.sites.push(data);
+  $scope.$on('gonevisDash.SiteNewController:Create', function () {
+    constructor()
   });
 
   $scope.$on('gonevisDash.AuthService:SignedOut', function () {
@@ -46,12 +46,8 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
     $state.go('signin');
   });
 
-  $scope.$on('gonevisDash.SiteSettingsController:delete', function (event, id) {
-    for (var i = 0; i < $scope.user.sites.length; i++) {
-      if ($scope.user.sites[i].id == id) {
-        $scope.user.sites.splice(i, 1);
-      }
-    }
+  $scope.$on('gonevisDash.SiteSettingsController:remove', function (event, id) {
+    constructor();
   });
 
   constructor();

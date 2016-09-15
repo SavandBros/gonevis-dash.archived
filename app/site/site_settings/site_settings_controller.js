@@ -71,11 +71,14 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
   $scope.remove = function (siteId) {
     API.SiteUpdate.delete({ site_id: site },
       function (data, status, headers, config) {
+        for (var i = 0; i < $scope.user.sites.length; i++) {
+          if ($scope.user.sites[i].id == site) {
+            $scope.user.sites.splice(i, 1);
+          }
+        };
+        AuthService.updateAuth($scope.user);
+        $rootScope.$broadcast('gonevisDash.SiteSettingsController:remove');
         $mdToast.showSimple("Site deleted");
-
-        $rootScope.$broadcast('gonevisDash.SiteSettingsController:delete', site);
-
-        $state.go('dash.main', { s: $scope.user.sites.length - 2 });
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
@@ -87,4 +90,11 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
 }
 
 app.controller("SiteSettingsController", SiteSettingsController);
-SiteSettingsController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService'];
+SiteSettingsController.$inject = [
+  '$scope',
+  '$rootScope',
+  '$state',
+  '$mdToast',
+  'API',
+  'AuthService'
+];
