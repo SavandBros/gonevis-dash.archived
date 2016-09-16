@@ -10,9 +10,10 @@
  * @param $state
  * @param $mdToast
  * @param API
+ * @param ModalsService
  * @param AuthService
  */
-function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthService) {
+function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, ModalsService, AuthService) {
 
   var site = AuthService.getCurrentSite()
 
@@ -79,6 +80,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, AuthS
         AuthService.updateAuth($scope.user);
         $rootScope.$broadcast('gonevisDash.SiteSettingsController:remove');
         $mdToast.showSimple("Site deleted");
+        ModalsService.open("sites", "SiteController");
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
@@ -96,5 +98,6 @@ SiteSettingsController.$inject = [
   '$state',
   '$mdToast',
   'API',
+  'ModalsService',
   'AuthService'
 ];
