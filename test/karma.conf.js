@@ -47,6 +47,7 @@ module.exports = function(config) {
       'bower_components/angular-modal-service/dst/angular-modal-service.js',
       'bower_components/ng-tags-input/ng-tags-input.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
+      'bower_components/ng-dialog/js/ngDialog.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/configuration.js',

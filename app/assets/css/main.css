@@ -440,3 +440,7 @@ tags-input .tags.focused {
 .btn-corner:focus {
   outline: 0px !important;
 }
+
+.confirm-delete {
+  margin-right: 71px;
+}
