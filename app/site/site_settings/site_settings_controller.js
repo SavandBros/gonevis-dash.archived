@@ -13,7 +13,7 @@
  * @param ModalsService
  * @param AuthService
  */
-function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, ModalsService, AuthService) {
+function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, ModalsService, AuthService, ngDialog) {
 
   var site = AuthService.getCurrentSite()
 
@@ -34,6 +34,20 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
         console.log(data);
       }
     );
+  };
+
+  /**
+   * openConfirm
+   *
+   * @method openConfirm
+   * @desc open confirm dialog on delete button
+   */
+  $scope.openConfirm = function () {
+    ngDialog.open({
+      template: 'site/site_settings/confirm.html',
+      className: 'ngdialog-theme-default',
+      controller: 'SiteSettingsController',
+    });
   };
 
   /**
@@ -80,7 +94,12 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
         AuthService.updateAuth($scope.user);
         $rootScope.$broadcast('gonevisDash.SiteSettingsController:remove');
         $mdToast.showSimple("Site deleted");
-        ModalsService.open("sites", "SiteController");
+        if ($scope.user.sites.length == 0) {
+          $state.go('dash.site-new');
+        } else {
+          ngDialog.close();
+          ModalsService.open("sites", "SiteController");
+        };
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
@@ -99,5 +118,6 @@ SiteSettingsController.$inject = [
   '$mdToast',
   'API',
   'ModalsService',
-  'AuthService'
+  'AuthService',
+  'ngDialog'
 ];
