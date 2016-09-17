@@ -29,12 +29,12 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
 
   $rootScope.$on('gonevisDash.AuthService:Authenticated', function () {
     constructor();
-    if ($scope.user.sites == 0) {
-      $state.go('dash.site-new');
+
+    if ($scope.user.sites.length == 0) {
+      $state.go('site-new');
     } else {
       $state.go('dash.main', { s: 0 });
     }
-
   });
 
   $scope.$on('gonevisDash.SiteNewController:Create', function () {
