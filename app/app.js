@@ -12,7 +12,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
   $httpProvider.interceptors.push('AuthInterceptorService');
 
   $stateProvider
-    // Every child of dash state follows site id that user is into
+  // Every child of dash state follows site id that user is into
     .state('dash', {
       url: '/:s',
       abstract: true,
@@ -54,11 +54,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       controller: 'EntryEditController',
       templateUrl: 'entry/entry_edit/entry_edit_view.html'
     })
-    .state('dash.site-new', {
-      url: '/site-create',
-      controller: 'SiteNewController',
-      templateUrl: 'site/site_new/site_new_view.html'
-    })
     .state('dash.site-settings', {
       url: '/site-settings',
       controller: 'SiteSettingsController',
@@ -99,6 +94,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
       url: '/register',
       controller: 'SignupController',
       templateUrl: 'account/signup/signup_view.html'
+    })
+    .state('site-new', {
+      url: '/new-site',
+      controller: 'SiteNewController',
+      templateUrl: 'site/site_new/site_new_view.html'
     });
 
   $urlRouterProvider.otherwise('/');
