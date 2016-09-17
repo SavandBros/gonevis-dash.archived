@@ -77,10 +77,17 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
             $scope.user.sites.splice(i, 1);
           }
         };
+
         AuthService.updateAuth($scope.user);
+
         $rootScope.$broadcast('gonevisDash.SiteSettingsController:remove');
         $mdToast.showSimple("Site deleted");
-        ModalsService.open("sites", "SiteController");
+
+        if ($scope.user.sites.length == 0) {
+          $state.go('site-new');
+        } else {
+          ModalsService.open("sites", "SiteController");
+        };
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
