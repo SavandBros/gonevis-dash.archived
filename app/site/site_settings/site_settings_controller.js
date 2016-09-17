@@ -77,15 +77,15 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
             $scope.user.sites.splice(i, 1);
           }
         };
+
         AuthService.updateAuth($scope.user);
+
         $rootScope.$broadcast('gonevisDash.SiteSettingsController:remove');
         $mdToast.showSimple("Site deleted");
 
-        // If user have no sites, redirect to "create a new site".
         if ($scope.user.sites.length == 0) {
-          $state.go('dash.site-new');
+          $state.go('site-new');
         } else {
-          # Or let user choose a site.
           ModalsService.open("sites", "SiteController");
         };
       },
