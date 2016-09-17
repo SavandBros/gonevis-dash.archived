@@ -81,12 +81,11 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
         $rootScope.$broadcast('gonevisDash.SiteSettingsController:remove');
         $mdToast.showSimple("Site deleted");
 
-        // If user have no sites, redirect him to create a new site.
+        // If user have no sites, redirect to "create a new site".
         if ($scope.user.sites.length == 0) {
           $state.go('dash.site-new');
-        }
-        // Else let him choose a site.
-        else {
+        } else {
+          # Or let user choose a site.
           ModalsService.open("sites", "SiteController");
         };
       },
