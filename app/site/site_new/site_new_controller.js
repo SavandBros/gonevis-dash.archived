@@ -49,7 +49,8 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
         $state.go('dash.entry-new', { s: index - 1 });
       },
       function (data, status, headers, config) {
-        console.log(data);
+        form.errors = data.data;
+        form.loading = false;
       }
     );
   };
