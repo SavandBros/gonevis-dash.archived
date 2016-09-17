@@ -450,3 +450,21 @@ tags-input .tags.focused {
 .btn-corner:active {
   outline: 0 !important;
 }
+
+
+/* Button Circle @btn */
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 100%;
+  outline: 0 !important;
+}
+
+.btn-circle.btn-sm {
+  width: 30px;
+  height: 30px;
+}
+
+
