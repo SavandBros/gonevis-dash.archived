@@ -468,3 +468,23 @@ tags-input .tags.focused {
 }
 
 
+/* Dropdown @override */
+
+.dropdown-menu {
+  min-width: 200px;
+}
+
+.dropdown-menu a {
+  padding: 8px 15px !important;
+}
+
+.dropdown-menu .fa:not([init]) {
+  width: 26px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  position: absolute;
+  right: 10px;
+  height: 20px;
+  padding: 2px;
+}
