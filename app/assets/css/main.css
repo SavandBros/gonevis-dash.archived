@@ -246,7 +246,7 @@ md-toast {
 .nav-link-in-link {
   position: absolute;
   right: 0;
-  margin-top: -26px;
+  margin-top: -36px;
 }
 
 
@@ -328,6 +328,14 @@ md-toast {
   overflow: hidden;
   font-weight: bold;
   white-space: nowrap;
+}
+
+.dolphin+.options {
+  position: absolute;
+  z-index: 10;
+  margin: 5px;
+  right: 15px;
+  top: 0;
 }
 
 
@@ -449,4 +457,50 @@ tags-input .tags.focused {
 .btn-corner:focus,
 .btn-corner:active {
   outline: 0 !important;
+}
+
+
+/* Modal @override */
+
+.modal-header:not([init]) {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 30px 20px;
+}
+
+
+/* Button Circle @btn */
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 100%;
+  outline: 0 !important;
+}
+
+.btn-circle.btn-sm {
+  width: 30px;
+  height: 30px;
+}
+
+
+/* Dropdown @override */
+
+.dropdown-menu {
+  min-width: 200px;
+}
+
+.dropdown-menu a {
+  padding: 8px 15px !important;
+}
+
+.dropdown-menu .fa:not([init]) {
+  width: 26px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  position: absolute;
+  right: 10px;
+  height: 20px;
+  padding: 2px;
 }
