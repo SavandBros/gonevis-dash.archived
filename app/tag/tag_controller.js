@@ -76,6 +76,9 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
       }
     }
   });
+  $rootScope.$on('gonevisDash.TagService:create', function () {
+    constructor();
+  });
 
 
   constructor();
