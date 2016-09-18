@@ -25,11 +25,8 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
-
-    $scope.form = {
-      data: null,
-      loading: false,
-      errors: false
+    $scope.nothing = {
+      text: "It's lonely here... Try adding some tags!"
     };
 
     API.Tags.get({ tag_site: site },
@@ -69,7 +66,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     );
   }
 
-  $rootScope.$on('gonevisDash.TagService:delete', function (event, data) {
+  $rootScope.$on('gonevisDash.TagService:remove', function (event, data) {
     for (var i = 0; i < $scope.tags.length; i++) {
       if ($scope.tags[i].id == data.id) {
         $scope.tags[i].isDeleted = true;
@@ -77,6 +74,12 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     }
   });
 
+  $rootScope.$on('gonevisDash.TagService:create', function (event, data) {
+    var tag = data.tag;
+    tag.slug = data.data.slug;
+    tag.site = data.data.site;
+    $scope.tags.unshift(tag);
+  });
 
   constructor();
 }

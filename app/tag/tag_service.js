@@ -13,7 +13,8 @@
  *
  * @returns [Factory]
  */
-function TagService($rootScope, $mdToast, API, ModalsService) {
+function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
+  var site = AuthService.getCurrentSite();
 
   /**
    * update
@@ -47,11 +48,12 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
     );
   };
 
+
   /**
    * remove
    *
    * @method remove
-   * @desc delete tag, notify and broadcast for controllers to use.
+   * @desc Remove tag, notify and broadcast for controllers to use.
    *
    * @param tag {Object}
    * @param toast {Boolean}
@@ -59,11 +61,11 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
   function remove(tag, toast) {
     var toast = toast || true;
 
-    API.Tag.delete({ tag_site: tag.site, tag_id: tag.id },
+    API.Tag.remove({ tag_site: tag.site, tag_id: tag.id },
       function (data) {
-        if (toast) $mdToast.showSimple("Tag " + tag.name + " Deleted.");
+        if (toast) $mdToast.showSimple("Tag " + tag.name + " removed.");
         tag.isDeleted = true;
-        $rootScope.$broadcast("gonevisDash.TagService:delete", {
+        $rootScope.$broadcast("gonevisDash.TagService:remove", {
           data: data,
           tag: tag,
           success: true,
@@ -71,7 +73,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
       },
       function (data) {
         if (toast) $mdToast.showSimple("Deleting tag failed.");
-        $rootScope.$broadcast("gonevisDash.TagService:delete", {
+        $rootScope.$broadcast("gonevisDash.TagService:remove", {
           data: data,
           tag: tag,
           success: false,
@@ -92,10 +94,41 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
     ModalsService.open('tag', 'TagModalController', { tag: tag });
   };
 
+  /**
+   * viewCreate
+   *
+   * @method viewCreate
+   * @desc Tag creation modal
+   */
+  function viewCreate() {
+    ModalsService.open('tagCreate', 'TagCreateModalController');
+  };
+
+  /**
+   * create
+   *
+   * @method create
+   * @desc Tag creation for broadcast and toast
+   *
+   * @param form {Object}
+   * @param data {Object}
+   */
+  function create(form, data) {
+    $rootScope.$broadcast("gonevisDash.TagService:create", {
+      success: true,
+      data: data,
+      tag: form.data
+    });
+
+    $mdToast.showSimple("Tag " + data.name + " created.");
+  }
+
   return {
     update: update,
     remove: remove,
     view: view,
+    viewCreate: viewCreate,
+    create,
   };
 }
 
@@ -104,5 +137,6 @@ TagService.$inject = [
   '$rootScope',
   '$mdToast',
   'API',
-  'ModalsService'
+  'ModalsService',
+  'AuthService'
 ];
