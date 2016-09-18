@@ -3,7 +3,7 @@
 /**
  * Modals Service
  *
- * @class API
+ * @class ModalsService
  * @namespace gonevisDash.ModalsService
  *
  * @param ModalService
