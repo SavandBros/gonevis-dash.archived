@@ -1,16 +1,24 @@
 <div class="container container-light pad-top">
-
   <div class="row">
 
     <!-- Files -->
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
-          <!-- Dolphin -->
-          <i class="fa fa-trash pull-left text-danger" ng-click="delete(d)" style="position: absolute;top: 8px;left: 22px;font-size: 20px;"></i>
+          <!-- Link -->
           <a ng-click="viewDolphin(d.id)" class="dolphin" style="background-image: url({{ d.file }})">
             <p class="caption">{{ d.meta_data.name }}</p>
           </a>
+          <!-- Options -->
+          <div class="dropdown options" title="options">
+            <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" id="options{{ $index }}" data-toggle="dropdown">
+              <i class="fa fa-fw fa-ellipsis-v"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a ng-click="viewDolphin(d.id)"><i class="fa fa-eye"></i> View</a></li>
+              <li><a ng-click="delete(d)"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -34,5 +42,4 @@
     </div>
 
   </div>
-
 </div>
