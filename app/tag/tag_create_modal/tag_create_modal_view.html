@@ -1,0 +1,23 @@
+<div class="modal fade">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i class="fa fa-hash text-info"></i> Create Tag <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+      </div>
+      <div class="modal-body">
+        <form ng-submit="tagService.create(form)">
+          <div class="form-group">
+            <input id="name" class="form-control" type="text" ng-model="form.name" placeholder="Name" required/>
+          </div>
+          <div class="form-group">
+            <input id="slug" class="form-control" type="text" ng-model="form.slug" placeholder="Slug">
+          </div>
+          <div class="form-group">
+            <textarea id="slug" class="form-control" type="text" ng-model="form.description" placeholder="Descroption"></textarea>
+          </div>
+          <button class="btn btn-success btn-block" ng-disabled="form.loading">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
