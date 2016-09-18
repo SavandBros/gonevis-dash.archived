@@ -1,4 +1,4 @@
-'use strict'
+"use strict"
 
 /**
  * @ngdoc function
@@ -41,7 +41,7 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
     $scope.loading = true
 
     for ( var i = 0; i < $scope.navigations.length; i++) {
-      if (!$scope.navigations[i].url.startsWith('/')) {
+      if (!$scope.navigations[i].url.startsWith("/")) {
         $scope.navigations.splice(i, 1);
       }
     }
@@ -49,7 +49,7 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
     API.Navigation.put({ site_id: site }, {navigation: $scope.navigations},
       function (data, status, headers, config) {
         $scope.loading = false
-        $mdToast.showSimple('Navigation updated.')
+        $mdToast.showSimple("Navigation updated.")
         console.log(data)
       },
       function (data, status, headers, config) {
@@ -69,7 +69,7 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
    */
   $scope.addNav = function () {
     $scope.navigations.push(
-      {'url': '/', 'label': '', 'sort_number': $scope.navigations.length + 1}
+      {"url": "/", "label": "", "sort_number": $scope.navigations.length + 1}
     )
   }
 
@@ -93,5 +93,5 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
   constructor()
 }
 
-app.controller('NavigationController', NavigationController)
-NavigationController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService']
+app.controller("NavigationController", NavigationController)
+NavigationController.$inject = ["$scope", "$rootScope", "$state", "$mdToast", "API", "AuthService"]

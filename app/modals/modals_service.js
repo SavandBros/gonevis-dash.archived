@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * API Service
@@ -43,5 +43,5 @@ function ModalsService(ModalService) {
   };
 }
 
-app.factory('ModalsService', ModalsService);
-ModalsService.$inject = ['ModalService'];
+app.factory("ModalsService", ModalsService);
+ModalsService.$inject = ["ModalService"];

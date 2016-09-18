@@ -1,4 +1,4 @@
-'use strict'
+"use strict"
 
 /**
  * Main Controller
@@ -30,8 +30,8 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
 
     // Check auth
     if (!AuthService.isAuthenticated()) {
-      $mdToast.showSimple('Please login to continue.')
-      $state.go('signin')
+      $mdToast.showSimple("Please login to continue.")
+      $state.go("signin")
     }
 
     // State
@@ -70,8 +70,8 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
     API.EntryAdd.save(form,
       function (data, status, headers, config) {
         $mdToast.showSimple("Entry drafted.");
-        form.title = '';
-        form.content = '';
+        form.title = "";
+        form.content = "";
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Failed to add entry.");
@@ -81,7 +81,7 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
     );
   }
 
-  $rootScope.$on('gonevisDash.CommentService:delete', function (event, data) {
+  $rootScope.$on("gonevisDash.CommentService:delete", function (event, data) {
     for (var i = 0; i < $scope.Comment.list.length; i++) {
       if ($scope.Comment.list[i].id == data.id) {
         $scope.Comment.list[i].isDeleted = true
@@ -92,14 +92,14 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
   constructor()
 }
 
-app.controller('MainController', MainController)
+app.controller("MainController", MainController)
 MainController.$inject = [
-  '$scope',
-  '$rootScope',
-  '$state',
-  '$mdToast',
-  '$stateParams',
-  'AuthService',
-  'API',
-  'CommentService'
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "$stateParams",
+  "AuthService",
+  "API",
+  "CommentService"
 ]

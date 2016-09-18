@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -7,26 +7,26 @@
 // 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
-  process.env.QT_QPA_PLATFORM = '';
+  process.env.QT_QPA_PLATFORM = "";
 
   // Time how long tasks take. Can help when optimizing build times
-  require('time-grunt')(grunt);
+  require("time-grunt")(grunt);
 
   // Automatically load required Grunt tasks
-  require('jit-grunt')(grunt, {
-    useminPrepare: 'grunt-usemin',
-    ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+  require("jit-grunt")(grunt, {
+    useminPrepare: "grunt-usemin",
+    ngtemplates: "grunt-angular-templates",
+    cdnify: "grunt-google-cdn"
   });
 
-  grunt.loadNpmTasks('grunt-ng-constant');
+  grunt.loadNpmTasks("grunt-ng-constant");
 
-  var serveStatic = require('serve-static');
+  var serveStatic = require("serve-static");
 
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    app: require("./bower.json").appPath || "app",
+    dist: "dist"
   };
 
   // Define the configuration for all the tasks
@@ -38,35 +38,35 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
-        files: ['bower.json'],
-        tasks: ['wiredep']
+        files: ["bower.json"],
+        tasks: ["wiredep"]
       },
       js: {
-        files: ['<%= gonevisDash.app %>/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'newer:jscs:all'],
+        files: ["<%= gonevisDash.app %>/{,*/}*.js"],
+        tasks: ["newer:jshint:all", "newer:jscs:all"],
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: "<%= connect.options.livereload %>"
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
+        files: ["test/spec/{,*/}*.js"],
+        tasks: ["newer:jshint:test", "newer:jscs:test", "karma"]
       },
       styles: {
-        files: ['<%= gonevisDash.app %>/assets/css/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'postcss']
+        files: ["<%= gonevisDash.app %>/assets/css/{,*/}*.css"],
+        tasks: ["newer:copy:styles", "postcss"]
       },
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ["Gruntfile.js"]
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: "<%= connect.options.livereload %>"
         },
         files: [
-          '<%= gonevisDash.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= gonevisDash.app %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          "<%= gonevisDash.app %>/{,*/}*.html",
+          ".tmp/styles/{,*/}*.css",
+          "<%= gonevisDash.app %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
         ]
       }
     },
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: "localhost",
         livereload: 35729
       },
       livereload: {
@@ -84,14 +84,14 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-              serveStatic('.tmp'),
+              serveStatic(".tmp"),
               connect().use(
-                '/bower_components',
-                serveStatic('./bower_components')
+                "/bower_components",
+                serveStatic("./bower_components")
               ),
               connect().use(
-                '/app/assets/css',
-                serveStatic('./app/assets/css')
+                "/app/assets/css",
+                serveStatic("./app/assets/css")
               ),
               serveStatic(appConfig.app)
             ];
@@ -103,11 +103,11 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
-              serveStatic('.tmp'),
-              serveStatic('test'),
+              serveStatic(".tmp"),
+              serveStatic("test"),
               connect().use(
-                '/bower_components',
-                serveStatic('./bower_components')
+                "/bower_components",
+                serveStatic("./bower_components")
               ),
               serveStatic(appConfig.app)
             ];
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           open: true,
-          base: '<%= gonevisDash.dist %>'
+          base: "<%= gonevisDash.dist %>"
         }
       }
     },
@@ -125,37 +125,37 @@ module.exports = function (grunt) {
     // Make sure there are no obvious mistakes
     jshint: {
       options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        jshintrc: ".jshintrc",
+        reporter: require("jshint-stylish")
       },
       all: {
         src: [
-          'Gruntfile.js',
-          '<%= gonevisDash.app %>/{,*/}*.js'
+          "Gruntfile.js",
+          "<%= gonevisDash.app %>/{,*/}*.js"
         ]
       },
       test: {
         options: {
-          jshintrc: 'test/.jshintrc'
+          jshintrc: "test/.jshintrc"
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ["test/spec/{,*/}*.js"]
       }
     },
 
     // Make sure code styles are up to par
     jscs: {
       options: {
-        config: '.jscsrc',
-        verbose: true
+        config: ".jscsrc",
+        fix: true
       },
       all: {
         src: [
-          'Gruntfile.js',
-          '<%= gonevisDash.app %>/{,*/}*.js'
+          "Gruntfile.js",
+          "<%= gonevisDash.app %>/{,*/}*.js",
         ]
       },
       test: {
-        src: ['test/spec/{,*/}*.js']
+        src: ["test/spec/{,*/}*.js"]
       }
     },
 
@@ -165,20 +165,20 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
-            '<%= gonevisDash.dist %>/{,*/}*',
-            '!<%= gonevisDash.dist %>/.git{,*/}*'
+            ".tmp",
+            "<%= gonevisDash.dist %>/{,*/}*",
+            "!<%= gonevisDash.dist %>/.git{,*/}*"
           ]
         }]
       },
-      server: '.tmp'
+      server: ".tmp"
     },
 
     // Add vendor prefixed styles
     postcss: {
       options: {
         processors: [
-          require('autoprefixer-core')({ browsers: ['last 1 version'] })
+          require("autoprefixer-core")({ browsers: ["last 1 version"] })
         ]
       },
       server: {
@@ -187,17 +187,17 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
+          cwd: ".tmp/styles/",
+          src: "{,*/}*.css",
+          dest: ".tmp/styles/"
         }]
       },
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
+          cwd: ".tmp/styles/",
+          src: "{,*/}*.css",
+          dest: ".tmp/styles/"
         }]
       }
     },
@@ -205,12 +205,12 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       app: {
-        src: ['<%= gonevisDash.app %>/index.html'],
+        src: ["<%= gonevisDash.app %>/index.html"],
         ignorePath: /\.\.\//
       },
       test: {
         devDependencies: true,
-        src: '<%= karma.unit.configFile %>',
+        src: "<%= karma.unit.configFile %>",
         ignorePath: /\.\.\//,
         fileTypes: {
           js: {
@@ -219,7 +219,7 @@ module.exports = function (grunt) {
               js: /'(.*\.js)'/gi
             },
             replace: {
-              js: '\'{{filePath}}\','
+              js: "'{{filePath}}',"
             }
           }
         }
@@ -230,10 +230,10 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
-          '<%= gonevisDash.dist %>/{,*/}*.js',
-          '<%= gonevisDash.dist %>/assets/css/{,*/}*.css',
-          '<%= gonevisDash.dist %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= gonevisDash.dist %>/assets/css/fonts/*'
+          "<%= gonevisDash.dist %>/{,*/}*.js",
+          "<%= gonevisDash.dist %>/assets/css/{,*/}*.css",
+          "<%= gonevisDash.dist %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}",
+          "<%= gonevisDash.dist %>/assets/css/fonts/*"
         ]
       }
     },
@@ -242,14 +242,14 @@ module.exports = function (grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: '<%= gonevisDash.app %>/index.html',
+      html: "<%= gonevisDash.app %>/index.html",
       options: {
-        dest: '<%= gonevisDash.dist %>',
+        dest: "<%= gonevisDash.dist %>",
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'],
-              css: ['cssmin']
+              js: ["concat", "uglifyjs"],
+              css: ["cssmin"]
             },
             post: {}
           }
@@ -259,18 +259,18 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= gonevisDash.dist %>/{,*/}*.html'],
-      css: ['<%= gonevisDash.dist %>/assets/css/{,*/}*.css'],
-      js: ['<%= gonevisDash.dist %>/{,*/}*.js'],
+      html: ["<%= gonevisDash.dist %>/{,*/}*.html"],
+      css: ["<%= gonevisDash.dist %>/assets/css/{,*/}*.css"],
+      js: ["<%= gonevisDash.dist %>/{,*/}*.js"],
       options: {
         assetsDirs: [
-          '<%= gonevisDash.dist %>',
-          '<%= gonevisDash.dist %>/assets/img',
-          '<%= gonevisDash.dist %>/assets/css'
+          "<%= gonevisDash.dist %>",
+          "<%= gonevisDash.dist %>/assets/img",
+          "<%= gonevisDash.dist %>/assets/css"
         ],
         patterns: {
           js: [
-            [/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']
+            [/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, "Replacing references to images"]
           ]
         }
       }
@@ -306,9 +306,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= gonevisDash.app %>/assets/img',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= gonevisDash.dist %>/assets/img'
+          cwd: "<%= gonevisDash.app %>/assets/img",
+          src: "{,*/}*.{png,jpg,jpeg,gif}",
+          dest: "<%= gonevisDash.dist %>/assets/img"
         }]
       }
     },
@@ -317,9 +317,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= gonevisDash.app %>/assets/img',
-          src: '{,*/}*.svg',
-          dest: '<%= gonevisDash.dist %>/assets/img'
+          cwd: "<%= gonevisDash.app %>/assets/img",
+          src: "{,*/}*.svg",
+          dest: "<%= gonevisDash.dist %>/assets/img"
         }]
       }
     },
@@ -334,9 +334,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= gonevisDash.dist %>',
-          src: ['*.html'],
-          dest: '<%= gonevisDash.dist %>'
+          cwd: "<%= gonevisDash.dist %>",
+          src: ["*.html"],
+          dest: "<%= gonevisDash.dist %>"
         }]
       }
     },
@@ -344,13 +344,13 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'gonevisDash',
-          htmlmin: '<%= htmlmin.dist.options %>',
-          usemin: 'scripts.js'
+          module: "gonevisDash",
+          htmlmin: "<%= htmlmin.dist.options %>",
+          usemin: "scripts.js"
         },
-        cwd: '<%= gonevisDash.app %>',
-        src: 'views/{,*/}*.html',
-        dest: '.tmp/templateCache.js'
+        cwd: "<%= gonevisDash.app %>",
+        src: "views/{,*/}*.html",
+        dest: ".tmp/templateCache.js"
       }
     },
 
@@ -360,9 +360,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
+          cwd: ".tmp/concat/scripts",
+          src: "*.js",
+          dest: ".tmp/concat/scripts"
         }]
       }
     },
@@ -370,7 +370,7 @@ module.exports = function (grunt) {
     // Replace Google CDN references
     cdnify: {
       dist: {
-        html: ['<%= gonevisDash.dist %>/*.html']
+        html: ["<%= gonevisDash.dist %>/*.html"]
       }
     },
 
@@ -380,102 +380,102 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= gonevisDash.app %>',
-          dest: '<%= gonevisDash.dist %>',
+          cwd: "<%= gonevisDash.app %>",
+          dest: "<%= gonevisDash.dist %>",
           src: [
-            '*.{ico,png,txt}',
-            '*.html',
-            'assets/img/{,*/}*.{webp}',
-            'assets/css/fonts/{,*/}*.*'
+            "*.{ico,png,txt}",
+            "*.html",
+            "assets/img/{,*/}*.{webp}",
+            "assets/css/fonts/{,*/}*.*"
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= gonevisDash.dist %>/assets/img',
-          src: ['generated/*']
+          cwd: ".tmp/images",
+          dest: "<%= gonevisDash.dist %>/assets/img",
+          src: ["generated/*"]
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
-          dest: '<%= gonevisDash.dist %>'
+          cwd: "bower_components/bootstrap/dist",
+          src: "fonts/*",
+          dest: "<%= gonevisDash.dist %>"
         }, {
           expand: true,
-          cwd: 'bower_components/font-awesome/',
-          src: 'font/*',
-          dest: '<% gonevisDash.dist $>'
+          cwd: "bower_components/font-awesome/",
+          src: "font/*",
+          dest: "<% gonevisDash.dist $>"
         }]
       },
       styles: {
         expand: true,
-        cwd: '<%= gonevisDash.app %>/assets/css',
-        dest: '.tmp/styles/',
-        src: '{,*/}*.css'
+        cwd: "<%= gonevisDash.app %>/assets/css",
+        dest: ".tmp/styles/",
+        src: "{,*/}*.css"
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'copy:styles'
+        "copy:styles"
       ],
       test: [
-        'copy:styles'
+        "copy:styles"
       ],
       dist: [
-        'copy:styles',
-        'imagemin',
-        'svgmin'
+        "copy:styles",
+        "imagemin",
+        "svgmin"
       ]
     },
 
     // Test settings
     karma: {
       unit: {
-        configFile: 'test/karma.conf.js',
+        configFile: "test/karma.conf.js",
         singleRun: true
       }
     },
     ngconstant: {
       options: {
-        space: '  ',
-        wrap: '"use strict";\n\n var app = {%= __ngModule %}',
-        name: 'gonevisDash',
-        dest: '<%= gonevisDash.app %>/configuration.js',
+        space: "  ",
+        wrap: "\"use strict\";\n\n var app = {%= __ngModule %}",
+        name: "gonevisDash",
+        dest: "<%= gonevisDash.app %>/configuration.js",
         deps: [
-          'ngMaterial',
-          'ngAnimate',
-          'ui.router',
-          'ngAnimate',
-          'ngCookies',
-          'ngMessages',
-          'ngResource',
-          'ngSanitize',
-          'gettext',
-          'xeditable',
-          'textAngular',
-          'angularModalService',
-          'ngTagsInput',
-          'ngFileUpload'
+          "ngMaterial",
+          "ngAnimate",
+          "ui.router",
+          "ngAnimate",
+          "ngCookies",
+          "ngMessages",
+          "ngResource",
+          "ngSanitize",
+          "gettext",
+          "xeditable",
+          "textAngular",
+          "angularModalService",
+          "ngTagsInput",
+          "ngFileUpload"
         ],
         constants: {
           ENV: {
-            googleAnalyticsID: 'UA-XXXXXXX-X'
+            googleAnalyticsID: "UA-XXXXXXX-X"
           }
         }
       },
       development: {
         constants: {
           ENV: {
-            name: 'development',
-            apiEndpoint: 'http://127.0.0.1:8000/api/v1/'
+            name: "development",
+            apiEndpoint: "http://127.0.0.1:8000/api/v1/"
           }
         }
       },
       production: {
         constants: {
           ENV: {
-            name: 'production',
-            apiEndpoint: 'http://api.gonevis.com/api/v1/'
+            name: "production",
+            apiEndpoint: "http://api.gonevis.com/api/v1/"
           }
         }
       }
@@ -483,59 +483,59 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+  grunt.registerTask("serve", "Compile then start a connect web server", function (target) {
+    if (target === "dist") {
+      return grunt.task.run(["build", "connect:dist:keepalive"]);
     }
 
     grunt.task.run([
-      'clean:server',
-      'ngconstant:development',
-      'wiredep',
-      'concurrent:server',
-      'postcss:server',
-      'connect:livereload',
-      'watch'
+      "clean:server",
+      "ngconstant:development",
+      "wiredep",
+      "concurrent:server",
+      "postcss:server",
+      "connect:livereload",
+      "watch"
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
+  grunt.registerTask("server", "DEPRECATED TASK. Use the \"serve\" task instead", function (target) {
+    grunt.log.warn("The `server` task has been deprecated. Use `grunt serve` to start a server.");
+    grunt.task.run(["serve:" + target]);
   });
 
-  grunt.registerTask('test', [
-    'clean:server',
-    'wiredep',
-    'concurrent:test',
-    'postcss',
-    'connect:test',
-    'karma'
+  grunt.registerTask("test", [
+    "clean:server",
+    "wiredep",
+    "concurrent:test",
+    "postcss",
+    "connect:test",
+    "karma"
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'ngconstant:production',
-    'wiredep',
-    'useminPrepare',
-    'concurrent:dist',
-    'postcss',
-    'ngtemplates',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'filerev',
-    'usemin',
-    'htmlmin'
+  grunt.registerTask("build", [
+    "clean:dist",
+    "ngconstant:production",
+    "wiredep",
+    "useminPrepare",
+    "concurrent:dist",
+    "postcss",
+    "ngtemplates",
+    "concat",
+    "ngAnnotate",
+    "copy:dist",
+    "cdnify",
+    "cssmin",
+    "uglify",
+    "filerev",
+    "usemin",
+    "htmlmin"
   ]);
 
-  grunt.registerTask('default', [
-    'newer:jshint',
-    'newer:jscs',
-    'test',
-    'build'
+  grunt.registerTask("default", [
+    "newer:jshint",
+    "newer:jscs",
+    "test",
+    "build"
   ]);
 };

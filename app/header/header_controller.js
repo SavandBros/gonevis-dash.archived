@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * @ngdoc function
  * @name gonevisDash.controller:HeaderController
@@ -27,26 +27,26 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
     $scope.param = $stateParams
   };
 
-  $rootScope.$on('gonevisDash.AuthService:Authenticated', function () {
+  $rootScope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
 
     if ($scope.user.sites.length == 0) {
-      $state.go('site-new');
+      $state.go("site-new");
     } else {
-      $state.go('dash.main', { s: 0 });
+      $state.go("dash.main", { s: 0 });
     }
   });
 
-  $scope.$on('gonevisDash.SiteNewController:Create', function () {
+  $scope.$on("gonevisDash.SiteNewController:Create", function () {
     constructor()
   });
 
-  $scope.$on('gonevisDash.AuthService:SignedOut', function () {
+  $scope.$on("gonevisDash.AuthService:SignedOut", function () {
     constructor();
-    $state.go('signin');
+    $state.go("signin");
   });
 
-  $scope.$on('gonevisDash.SiteSettingsController:remove', function (event, id) {
+  $scope.$on("gonevisDash.SiteSettingsController:remove", function (event, id) {
     constructor();
   });
 
@@ -55,9 +55,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
 
 app.controller("HeaderController", HeaderController);
 HeaderController.$inject = [
-  '$scope',
-  '$rootScope',
-  '$state',
-  '$stateParams',
-  'AuthService'
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$stateParams",
+  "AuthService"
 ];

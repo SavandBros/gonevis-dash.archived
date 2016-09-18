@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Tag Service
@@ -89,7 +89,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
    * @param tag {Object}
    */
   function view(tag) {
-    ModalsService.open('tag', 'TagModalController', { tag: tag });
+    ModalsService.open("tag", "TagModalController", { tag: tag });
   };
 
   return {
@@ -99,10 +99,10 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
   };
 }
 
-app.factory('TagService', TagService);
+app.factory("TagService", TagService);
 TagService.$inject = [
-  '$rootScope',
-  '$mdToast',
-  'API',
-  'ModalsService'
+  "$rootScope",
+  "$mdToast",
+  "API",
+  "ModalsService"
 ];

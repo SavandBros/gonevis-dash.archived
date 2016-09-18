@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Comment Service
@@ -59,7 +59,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
    * @param comment {Object}
    */
   function view(comment) {
-    ModalsService.open('comment', 'CommentModalController', { comment: comment });
+    ModalsService.open("comment", "CommentModalController", { comment: comment });
   };
 
   return {
@@ -69,10 +69,10 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   };
 }
 
-app.factory('CommentService', CommentService);
+app.factory("CommentService", CommentService);
 CommentService.$inject = [
-  '$rootScope',
-  '$mdToast',
-  'API',
-  'ModalsService'
+  "$rootScope",
+  "$mdToast",
+  "API",
+  "ModalsService"
 ];
