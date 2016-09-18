@@ -75,7 +75,10 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   });
 
   $rootScope.$on('gonevisDash.TagService:create', function (event, data) {
-    constructor();
+    var tag = data.tag;
+    tag.slug = data.data.slug;
+    tag.site = data.data.site;
+    $scope.tags.unshift(tag);
   });
 
   constructor();

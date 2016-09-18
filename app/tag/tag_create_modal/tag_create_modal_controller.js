@@ -6,13 +6,12 @@
  * Controller of the gonevisDash
  *
  * @param $scope
- * @param $rootScope
- * @param $mdToast
+ * @param TagService
  * @param API
  * @param AuthService
  * @param ModalsService
  */
-function TagCreateModalController($scope, $rootScope, $mdToast, API, AuthService, ModalsService) {
+function TagCreateModalController($scope, TagService, API, AuthService, ModalsService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -42,15 +41,8 @@ function TagCreateModalController($scope, $rootScope, $mdToast, API, AuthService
 
     API.Tags.save({ tag_site: site }, form.data,
       function (data) {
+        TagService.create(form, data);
         form.loading = false;
-
-        $rootScope.$broadcast("gonevisDash.API:create", {
-          success: true,
-          data: data,
-          tag: form.data
-        });
-
-        $mdToast.showSimple("Tag " + data.name + " created.");
         ModalsService.close('tagCreate');
       },
       function (data) {
@@ -66,8 +58,7 @@ function TagCreateModalController($scope, $rootScope, $mdToast, API, AuthService
 app.controller("TagCreateModalController", TagCreateModalController);
 TagCreateModalController.$inject = [
   '$scope',
-  '$rootScope',
-  '$mdToast',
+  'TagService',
   'API',
   'AuthService',
   'ModalsService'

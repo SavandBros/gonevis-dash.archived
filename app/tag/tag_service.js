@@ -104,11 +104,31 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
     ModalsService.open('tagCreate', 'TagCreateModalController');
   };
 
+  /**
+   * create
+   *
+   * @method create
+   * @desc Tag creation for broadcast and toast
+   *
+   * @param form {Object}
+   * @param data {Object}
+   */
+  function create(form, data) {
+    $rootScope.$broadcast("gonevisDash.TagService:create", {
+      success: true,
+      data: data,
+      tag: form.data
+    });
+
+    $mdToast.showSimple("Tag " + data.name + " created.");
+  }
+
   return {
     update: update,
     remove: remove,
     view: view,
-    viewCreate: viewCreate
+    viewCreate: viewCreate,
+    create,
   };
 }
 
