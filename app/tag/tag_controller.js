@@ -25,11 +25,8 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
-
-    $scope.form = {
-      data: null,
-      loading: false,
-      errors: false
+    $scope.nothing = {
+      text: "It's lonely here... Try adding some tags!"
     };
 
     API.Tags.get({ tag_site: site },
@@ -76,10 +73,10 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
       }
     }
   });
-  $rootScope.$on('gonevisDash.TagService:create', function () {
+
+  $rootScope.$on('gonevisDash.TagService:create', function (event, data) {
     constructor();
   });
-
 
   constructor();
 }

@@ -1,15 +1,16 @@
 <!-- Add button -->
-<button type="button" class="btn btn-success btn-corner" ng-click="tagService.viewCreate()"><i class="fa fa-plus"></i></button>
+<button type="button" class="btn btn-success btn-corner" ng-click="tagService.viewCreate()">
+  <i class="fa fa-plus"></i>
+</button>
 
 <!-- Main -->
 <div class="container container-light pad-top">
-  <!-- List -->
-  <div class="col-md-9">
-    <div class="panel panel-defaul s-box">
+  <div class="col-md-8 col-md-offset-2">
+    <!-- Nothing -->
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="tags.length"></ng-include>
+    <!-- List -->
+    <div class="panel panel-defaul s-box" ng-if="!tags.length">
       <div class="panel-body s-pad-y-no">
-        <div ng-if="!tags.length" class="text-center o-fade">
-          <h3>Sorry, you have no tags</h3>
-        </div>
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
           <li class="row list-panel s-fade" ng-repeat="tag in tags" ng-show="!tag.isDeleted">
@@ -24,29 +25,6 @@
             </div>
           </li>
         </ul>
-      </div>
-    </div>
-  </div>
-  <!-- Add -->
-  <div class="col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-heading c-p caret-toggle" data-toggle="collapse" data-target="#create">
-        <i class="fa text-info fa-plus"></i> Add a Tag
-        <i class="fa fa-exchange fa-rotate-90 pull-right"></i>
-      </div>
-      <div class="collapse" id="create">
-        <form ng-submit="create(form)" name="form">
-          <div class="panel-body">
-            <ng-include src="'tag/includes/tag_form.html'"></ng-include>
-            <br>
-            <button type="file" class="btn btn-primary btn-sm" ngf-select="uploadFiles($files, $invalidFiles)" ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
-              <i class="fa fa-fw fa-plus"></i> Select a cover
-            </button>
-          </div>
-          <div class="panel-footer">
-            <button class="btn btn-primary btn-block" ng-disabled="form.loading || form.$invalid">Submit</button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
