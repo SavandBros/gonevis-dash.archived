@@ -7,9 +7,9 @@
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="tags.length"></ng-include>
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!tags.length"></ng-include>
     <!-- List -->
-    <div class="panel panel-defaul s-box" ng-if="!tags.length">
+    <div class="panel panel-defaul s-box" ng-if="tags.length">
       <div class="panel-body s-pad-y-no">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
