@@ -13,7 +13,8 @@
  *
  * @returns [Factory]
  */
-function TagService($rootScope, $mdToast, API, ModalsService) {
+function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
+  var site = AuthService.getCurrentSite();
 
   /**
    * update
@@ -46,6 +47,34 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
       }
     );
   };
+
+  /**
+   * create
+   *
+   * @method create
+   * @desc Create a new tag
+   *
+   * @param form {object}
+   */
+  function create(form) {
+    form.loading = true;
+    form.errors = null;
+
+    API.Tags.save({ tag_site: site }, form,
+      function (data) {
+        form.loading = false;
+        form.data = null;
+        $rootScope.$broadcast("gonevisDash.TagService:create", data);
+        $mdToast.showSimple("Tag " + data.name + " created.");
+      },
+      function (data) {
+        form.loading = false;
+        form.data = null;
+        form.errors = data.data;
+        $mdToast.showSimple("Tag creaton failed.");
+      }
+    );
+  }
 
   /**
    * remove
@@ -92,10 +121,22 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
     ModalsService.open('tag', 'TagModalController', { tag: tag });
   };
 
+  /**
+   * viewCreate
+   *
+   * @method viewCreate
+   * @desc create tag.
+   */
+  function viewCreate() {
+    ModalsService.open('viewCreate', 'TagCreateModalController');
+  };
+
   return {
     update: update,
+    create: create,
     remove: remove,
     view: view,
+    viewCreate: viewCreate
   };
 }
 
@@ -104,5 +145,6 @@ TagService.$inject = [
   '$rootScope',
   '$mdToast',
   'API',
-  'ModalsService'
+  'ModalsService',
+  'AuthService'
 ];
