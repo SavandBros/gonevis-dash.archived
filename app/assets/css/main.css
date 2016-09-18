@@ -450,3 +450,11 @@ tags-input .tags.focused {
 .btn-corner:active {
   outline: 0 !important;
 }
+
+
+/* Modal @override */
+
+.modal-header:not([init]) {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 30px 20px;
+}
