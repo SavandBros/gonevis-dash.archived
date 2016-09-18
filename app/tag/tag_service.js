@@ -48,39 +48,12 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
     );
   };
 
-  /**
-   * create
-   *
-   * @method create
-   * @desc Create a new tag
-   *
-   * @param form {object}
-   */
-  function create(form) {
-    form.loading = true;
-    form.errors = null;
-
-    API.Tags.save({ tag_site: site }, form,
-      function (data) {
-        form.loading = false;
-        form.data = null;
-        $rootScope.$broadcast("gonevisDash.TagService:create", data);
-        $mdToast.showSimple("Tag " + data.name + " created.");
-      },
-      function (data) {
-        form.loading = false;
-        form.data = null;
-        form.errors = data.data;
-        $mdToast.showSimple("Tag creaton failed.");
-      }
-    );
-  }
 
   /**
    * remove
    *
    * @method remove
-   * @desc delete tag, notify and broadcast for controllers to use.
+   * @desc Remove tag, notify and broadcast for controllers to use.
    *
    * @param tag {Object}
    * @param toast {Boolean}
@@ -88,11 +61,11 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
   function remove(tag, toast) {
     var toast = toast || true;
 
-    API.Tag.delete({ tag_site: tag.site, tag_id: tag.id },
+    API.Tag.remove({ tag_site: tag.site, tag_id: tag.id },
       function (data) {
-        if (toast) $mdToast.showSimple("Tag " + tag.name + " Deleted.");
+        if (toast) $mdToast.showSimple("Tag " + tag.name + " removed.");
         tag.isDeleted = true;
-        $rootScope.$broadcast("gonevisDash.TagService:delete", {
+        $rootScope.$broadcast("gonevisDash.TagService:remove", {
           data: data,
           tag: tag,
           success: true,
@@ -100,7 +73,7 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
       },
       function (data) {
         if (toast) $mdToast.showSimple("Deleting tag failed.");
-        $rootScope.$broadcast("gonevisDash.TagService:delete", {
+        $rootScope.$broadcast("gonevisDash.TagService:remove", {
           data: data,
           tag: tag,
           success: false,
@@ -125,15 +98,14 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
    * viewCreate
    *
    * @method viewCreate
-   * @desc create tag.
+   * @desc Tag creation modal
    */
   function viewCreate() {
-    ModalsService.open('viewCreate', 'TagCreateModalController');
+    ModalsService.open('tagCreate', 'TagCreateModalController');
   };
 
   return {
     update: update,
-    create: create,
     remove: remove,
     view: view,
     viewCreate: viewCreate
