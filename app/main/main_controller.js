@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 /**
  * Main Controller
@@ -23,22 +23,22 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.auth = AuthService
-    $scope.user = AuthService.getAuthenticatedUser()
-    $scope.site = AuthService.getCurrentSite()
-    $scope.commentService = CommentService
+    $scope.auth = AuthService;
+    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.site = AuthService.getCurrentSite();
+    $scope.commentService = CommentService;
 
     // Check auth
     if (!AuthService.isAuthenticated()) {
-      $mdToast.showSimple("Please login to continue.")
-      $state.go("signin")
+      $mdToast.showSimple("Please login to continue.");
+      $state.go("signin");
     }
 
     // State
-    $scope.state = $state
-    $scope.param = $stateParams
+    $scope.state = $state;
+    $scope.param = $stateParams;
 
-    $scope.Comment.initialize()
+    $scope.Comment.initialize();
   }
 
   $scope.Comment = {
@@ -46,10 +46,10 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
 
     initialize: function () {
       API.Comments.get({ site_id: $scope.site, object_type: 1 },
-        function (data, status, headers, config) {
-          $scope.Comment.list = data.results
+        function (data) {
+          $scope.Comment.list = data.results;
         }
-      )
+      );
     }
   };
 
@@ -68,31 +68,31 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
     form.site = AuthService.getCurrentSite();
 
     API.EntryAdd.save(form,
-      function (data, status, headers, config) {
-        $mdToast.showSimple("Entry drafted.");
+      function (data) {
+        $mdToast.showSimple("Entry " + data.title + " drafted.");
         form.title = "";
         form.content = "";
       },
-      function (data, status, headers, config) {
+      function (data) {
         $mdToast.showSimple("Failed to add entry.");
         form.loading = false;
         form.errors = data;
       }
     );
-  }
+  };
 
   $rootScope.$on("gonevisDash.CommentService:delete", function (event, data) {
     for (var i = 0; i < $scope.Comment.list.length; i++) {
-      if ($scope.Comment.list[i].id == data.id) {
-        $scope.Comment.list[i].isDeleted = true
+      if ($scope.Comment.list[i].id === data.id) {
+        $scope.Comment.list[i].isDeleted = true;
       }
     }
-  })
+  });
 
-  constructor()
+  constructor();
 }
 
-app.controller("MainController", MainController)
+app.controller("MainController", MainController);
 MainController.$inject = [
   "$scope",
   "$rootScope",
@@ -102,4 +102,4 @@ MainController.$inject = [
   "AuthService",
   "API",
   "CommentService"
-]
+];
