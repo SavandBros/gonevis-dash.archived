@@ -98,7 +98,7 @@ function API($http, $resource, ENV) {
 
   function setAPIData() {
     for (var i in endpoints) {
-      createResourceObject(endpoints[i].name, BASE_API + endpoints[i].endpoint)
+      createResourceObject(endpoints[i].name, BASE_API + endpoints[i].endpoint);
     }
   }
 
