@@ -40,7 +40,7 @@ function ModalsService(ModalService) {
       modal.element.modal();
       modals[template] = modal;
     });
-  };
+  }
 
   /**
    * close
@@ -52,7 +52,7 @@ function ModalsService(ModalService) {
    */
   function close(template) {
     angular.element("#" + template + " .close").trigger("click");
-  };
+  }
 
   return {
     open: open,
