@@ -13,8 +13,7 @@
  *
  * @returns [Factory]
  */
-function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
-  var site = AuthService.getCurrentSite();
+function TagService($rootScope, $mdToast, API, ModalsService) {
 
   /**
    * update
@@ -26,11 +25,13 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
    * @param toast {Boolean}
    */
   function update(tag, toast) {
-    var toast = toast || true;
+    toast = toast || true;
 
     API.Tag.put({ tag_site: tag.site, tag_id: tag.id }, tag,
       function (data) {
-        if (toast) $mdToast.showSimple("Tag updated.");
+        if (toast) {
+          $mdToast.showSimple("Tag updated.");
+        }
         $rootScope.$broadcast("gonevisDash.TagService:update", {
           data: data,
           tag: tag,
@@ -38,7 +39,9 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
         });
       },
       function (data) {
-        if (toast) $mdToast.showSimple("Tag update failed.");
+        if (toast) {
+          $mdToast.showSimple("Tag update failed.");
+        }
         $rootScope.$broadcast("gonevisDash.TagService:update", {
           data: data,
           tag: tag,
@@ -46,7 +49,7 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
         });
       }
     );
-  };
+  }
 
 
   /**
@@ -59,11 +62,13 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
    * @param toast {Boolean}
    */
   function remove(tag, toast) {
-    var toast = toast || true;
+    toast = toast || true;
 
     API.Tag.remove({ tag_site: tag.site, tag_id: tag.id },
       function (data) {
-        if (toast) $mdToast.showSimple("Tag " + tag.name + " removed.");
+        if (toast) {
+          $mdToast.showSimple("Tag " + tag.name + " removed.");
+        }
         tag.isDeleted = true;
         $rootScope.$broadcast("gonevisDash.TagService:remove", {
           data: data,
@@ -72,7 +77,9 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
         });
       },
       function (data) {
-        if (toast) $mdToast.showSimple("Deleting tag failed.");
+        if (toast) {
+          $mdToast.showSimple("Deleting tag failed.");
+        }
         $rootScope.$broadcast("gonevisDash.TagService:remove", {
           data: data,
           tag: tag,
@@ -80,7 +87,7 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
         });
       }
     );
-  };
+  }
 
   /**
    * view
@@ -92,7 +99,7 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
    */
   function view(tag) {
     ModalsService.open("tag", "TagModalController", { tag: tag });
-  };
+  }
 
   /**
    * viewCreate
@@ -102,7 +109,7 @@ function TagService($rootScope, $mdToast, API, ModalsService, AuthService) {
    */
   function viewCreate() {
     ModalsService.open("tagCreate", "TagCreateModalController");
-  };
+  }
 
   /**
    * create
@@ -138,5 +145,4 @@ TagService.$inject = [
   "$mdToast",
   "API",
   "ModalsService",
-  "AuthService"
 ];
