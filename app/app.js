@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 /**
  * @ngdoc overview
@@ -106,5 +106,5 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
 });
 
 app.run(function (editableOptions) {
-  editableOptions.theme = "bs3"
-})
+  editableOptions.theme = "bs3";
+});
