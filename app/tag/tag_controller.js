@@ -30,11 +30,11 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     };
 
     API.Tags.get({ tag_site: site },
-      function (data, status, headers, config) {
+      function (data) {
         $scope.tags = data.results;
       }
     );
-  };
+  }
 
   /**
    * create
@@ -64,11 +64,11 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
         $mdToast.showSimple("Tag creaton failed.");
       }
     );
-  }
+  };
 
   $rootScope.$on("gonevisDash.TagService:remove", function (event, data) {
     for (var i = 0; i < $scope.tags.length; i++) {
-      if ($scope.tags[i].id == data.id) {
+      if ($scope.tags[i].id === data.id) {
         $scope.tags[i].isDeleted = true;
       }
     }
