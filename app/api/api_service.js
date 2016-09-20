@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * API Service
@@ -37,7 +37,7 @@ function API($http, $resource, ENV) {
     // Entry
     {
       "name": "Entry",
-      'endpoint': "website/entry/:entry_id/" // GET, PUT, PATCH, DELETE, OPTIONS
+      "endpoint": "website/entry/:entry_id/" // GET, PUT, PATCH, DELETE, OPTIONS
     }, {
       "name": "EntryAdd",
       "endpoint": "website/entry/" // POST, OPTIONS
@@ -92,13 +92,13 @@ function API($http, $resource, ENV) {
 
   function createResourceObject(attrName, endpoint) {
     apiData[attrName] = $resource(endpoint, {}, {
-      put: { method: 'PUT' }
+      put: { method: "PUT" }
     });
   }
 
   function setAPIData() {
     for (var i in endpoints) {
-      createResourceObject(endpoints[i].name, BASE_API + endpoints[i].endpoint)
+      createResourceObject(endpoints[i].name, BASE_API + endpoints[i].endpoint);
     }
   }
 
@@ -106,5 +106,5 @@ function API($http, $resource, ENV) {
   return apiData;
 }
 
-app.service('API', API);
-API.$inject = ['$http', '$resource', 'ENV'];
+app.service("API", API);
+API.$inject = ["$http", "$resource", "ENV"];

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Modals Service
@@ -40,7 +40,7 @@ function ModalsService(ModalService) {
       modal.element.modal();
       modals[template] = modal;
     });
-  };
+  }
 
   /**
    * close
@@ -51,8 +51,8 @@ function ModalsService(ModalService) {
    * @param template {String} Name of the modal template
    */
   function close(template) {
-    angular.element('#' + template + ' .close').trigger('click');
-  };
+    angular.element("#" + template + " .close").trigger("click");
+  }
 
   return {
     open: open,
@@ -60,5 +60,5 @@ function ModalsService(ModalService) {
   };
 }
 
-app.factory('ModalsService', ModalsService);
-ModalsService.$inject = ['ModalService'];
+app.factory("ModalsService", ModalsService);
+ModalsService.$inject = ["ModalService"];

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc function
@@ -30,18 +30,18 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     };
 
     API.Tags.get({ tag_site: site },
-      function (data, status, headers, config) {
+      function (data) {
         $scope.tags = data.results;
       }
     );
-  };
+  }
 
   /**
    * create
    *
    * @method create
    * @desc Create a new tag
-   * 
+   *
    * @param form {object}
    */
   $scope.create = function (form) {
@@ -64,17 +64,17 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
         $mdToast.showSimple("Tag creaton failed.");
       }
     );
-  }
+  };
 
-  $rootScope.$on('gonevisDash.TagService:remove', function (event, data) {
+  $rootScope.$on("gonevisDash.TagService:remove", function (event, data) {
     for (var i = 0; i < $scope.tags.length; i++) {
-      if ($scope.tags[i].id == data.id) {
+      if ($scope.tags[i].id === data.id) {
         $scope.tags[i].isDeleted = true;
       }
     }
   });
 
-  $rootScope.$on('gonevisDash.TagService:create', function (event, data) {
+  $rootScope.$on("gonevisDash.TagService:create", function (event, data) {
     var tag = data.tag;
     tag.slug = data.data.slug;
     tag.site = data.data.site;
@@ -85,4 +85,4 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
 }
 
 app.controller("TagController", TagController);
-TagController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'TagService', 'API', 'AuthService'];
+TagController.$inject = ["$scope", "$rootScope", "$state", "$mdToast", "TagService", "API", "AuthService"];

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Comment Service
@@ -27,11 +27,13 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
    * @param toast {Boolean}
    */
   function remove(comment, toast) {
-    var toast = toast || true;
+    toast = toast || true;
 
     API.Comment.delete({ comment_id: comment.id },
       function (data) {
-        if (toast) $mdToast.showSimple("Comment deleted.");
+        if (toast) {
+          $mdToast.showSimple("Comment deleted.");
+        }
         comment.isDeleted = true;
         $rootScope.$broadcast("gonevisDash.CommentService:delete", {
           data: data,
@@ -40,7 +42,9 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
         });
       },
       function (data) {
-        if (toast) $mdToast.showSimple("Deleting comment failed.");
+        if (toast) {
+          $mdToast.showSimple("Deleting comment failed.");
+        }
         $rootScope.$broadcast("gonevisDash.CommentService:delete", {
           data: data,
           comment: comment,
@@ -48,7 +52,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
         });
       }
     );
-  };
+  }
 
   /**
    * view
@@ -59,8 +63,8 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
    * @param comment {Object}
    */
   function view(comment) {
-    ModalsService.open('comment', 'CommentModalController', { comment: comment });
-  };
+    ModalsService.open("comment", "CommentModalController", { comment: comment });
+  }
 
   return {
     objectType: objectType,
@@ -69,10 +73,10 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   };
 }
 
-app.factory('CommentService', CommentService);
+app.factory("CommentService", CommentService);
 CommentService.$inject = [
-  '$rootScope',
-  '$mdToast',
-  'API',
-  'ModalsService'
+  "$rootScope",
+  "$mdToast",
+  "API",
+  "ModalsService"
 ];

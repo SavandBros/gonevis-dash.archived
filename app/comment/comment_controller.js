@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc function
@@ -27,15 +27,15 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     $scope.commentService = CommentService;
 
     API.Comments.get({ site_id: $scope.site, object_type: CommentService.objectType },
-      function (data, status, headers, config) {
+      function (data) {
         $scope.comments = data.results;
       }
-    )
-  };
+    );
+  }
 
-  $rootScope.$on('gonevisDash.CommentService:delete', function (event, data) {
+  $rootScope.$on("gonevisDash.CommentService:delete", function (event, data) {
     for (var i = 0; i < $scope.comments.length; i++) {
-      if ($scope.comments[i].id == data.id) {
+      if ($scope.comments[i].id === data.id) {
         $scope.comments[i].isDeleted = true;
       }
     }
@@ -44,7 +44,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
   constructor();
 }
 
-app.controller('CommentController', CommentController);
+app.controller("CommentController", CommentController);
 CommentController.$inject = [
-  '$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService', 'CommentService'
-]
+  "$scope", "$rootScope", "$state", "$mdToast", "API", "AuthService", "CommentService"
+];
