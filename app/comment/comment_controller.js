@@ -27,7 +27,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     $scope.commentService = CommentService;
 
     API.Comments.get({ site: $scope.site },
-      function (data, status, headers, config) {
+      function (data) {
         $scope.comments = data.results;
       }
     );
