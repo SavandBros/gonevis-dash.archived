@@ -26,7 +26,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     $scope.site = AuthService.getCurrentSite();
     $scope.commentService = CommentService;
 
-    API.Comments.get({ site_id: $scope.site, object_type: CommentService.objectType },
+    API.Comments.get({ site: $scope.site },
       function (data, status, headers, config) {
         $scope.comments = data.results;
       }
