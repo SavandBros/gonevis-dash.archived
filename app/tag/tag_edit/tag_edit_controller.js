@@ -15,8 +15,6 @@
  */
 function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, API, AuthService) {
   
-  var site = AuthService.getCurrentSite();
-
   /**
    * constructor
    *
@@ -29,7 +27,7 @@ function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, A
   };
 
   function updatedTag() {
-    API.Tag.get({ tag_site: site, tag_id: $stateParams.tagId },
+    API.Tag.get({ tag_id: $stateParams.tagId },
       function (data, status, headers, config) {
         $scope.form = data;
       });
@@ -46,7 +44,7 @@ function TagEditController($scope, $rootScope, $state, $mdToast, $stateParams, A
   $scope.updateTag = function (form) {
     form.loading = true;
 
-    API.Tag.put({ tag_site: site, tag_id: $stateParams.tagId }, form,
+    API.Tag.put({ tag_id: $stateParams.tagId }, form,
       function (data, status, headers, config) {
         form.loading = false;
         updatedTag();
