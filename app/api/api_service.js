@@ -43,7 +43,7 @@ function API($http, $resource, ENV) {
       "endpoint": "website/entry/" // POST, OPTIONS
     }, {
       "name": "Entries",
-      "endpoint": "website/site/:site_id/entries/" // GET, OPTIONS
+      "endpoint": "website/entry/" // GET, OPTIONS
     },
 
     // Sushial
@@ -52,7 +52,7 @@ function API($http, $resource, ENV) {
       "endpoint": "sushial/comment/:comment_id/" // GET, PUT, PATCH, DELETE, OPTIONS
     }, {
       "name": "Comments",
-      "endpoint": "sushial/comments/:site_id/:object_type/" // GET, OPTIONS
+      "endpoint": "sushial/comment/" // GET, OPTIONS
     },
 
     // Site
@@ -64,19 +64,22 @@ function API($http, $resource, ENV) {
       "endpoint": "website/site/:site_id/" // GET, PUT, PATCH, OPTIONS
     }, {
       "name": "SiteUpdate",
-      "endpoint": "website/site/:site_id/settings/" // GET, PUT, PATCH, OPTIONS
+      "endpoint": "website/site/:site_id/update-settings/" // GET, PUT, PATCH, OPTIONS
     }, {
       "name": "Navigation",
-      "endpoint": "website/site/:site_id/navigation/" // GET, PUT, PATCH, OPTIONS
+      "endpoint": "website/site/:site_id/navigation/" // GET, OPTIONS
+    }, {
+      "name": "UpdateNavigation",
+      "endpoint": "website/site/:site_id/update-navigation/" // GET, PUT, PATCH, OPTIONS
     },
 
     // Tagool
     {
       "name": "Tag",
-      "endpoint": "tagool/:tag_site/tag/:tag_id/" // GET, PUT, PATCH, OPTIONS
+      "endpoint": "tagool/tag/:tag_id/" // GET, PUT, PATCH, OPTIONS
     }, {
       "name": "Tags",
-      "endpoint": "tagool/:tag_site/tag/" // GET, POST, OPTIONS 
+      "endpoint": "tagool/tag/" // GET, POST, OPTIONS
     },
 
 
