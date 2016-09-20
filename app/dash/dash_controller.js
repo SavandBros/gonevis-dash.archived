@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc function
@@ -20,8 +20,8 @@ function DashController($scope, $state, $mdToast, AuthService) {
   function constructor() {
     // Check auth
     if (!AuthService.isAuthenticated()) {
-      $mdToast.showSimple('Please login to continue.');
-      $state.go('signin');
+      $mdToast.showSimple("Please login to continue.");
+      $state.go("signin");
     }
   }
 
@@ -29,4 +29,4 @@ function DashController($scope, $state, $mdToast, AuthService) {
 }
 
 app.controller("DashController", DashController);
-DashController.$inject = ['$scope', '$state', '$mdToast', 'AuthService'];
+DashController.$inject = ["$scope", "$state", "$mdToast", "AuthService"];

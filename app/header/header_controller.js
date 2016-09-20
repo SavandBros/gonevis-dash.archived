@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * @ngdoc function
  * @name gonevisDash.controller:HeaderController
@@ -24,40 +24,40 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
     $scope.user = AuthService.getAuthenticatedUser();
 
     $scope.state = $state;
-    $scope.param = $stateParams
-  };
+    $scope.param = $stateParams;
+  }
 
-  $rootScope.$on('gonevisDash.AuthService:Authenticated', function () {
+  $rootScope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
 
-    if ($scope.user.sites.length == 0) {
-      $state.go('site-new');
+    if ($scope.user.sites.length === 0) {
+      $state.go("site-new");
     } else {
-      $state.go('dash.main', { s: 0 });
+      $state.go("dash.main", { s: 0 });
     }
   });
 
-  $scope.$on('gonevisDash.SiteNewController:Create', function () {
-    constructor()
-  });
-
-  $scope.$on('gonevisDash.AuthService:SignedOut', function () {
+  $scope.$on("gonevisDash.SiteNewController:Create", function () {
     constructor();
-    $state.go('signin');
   });
 
-  $scope.$on('gonevisDash.SiteSettingsController:remove', function (event, id) {
+  $scope.$on("gonevisDash.AuthService:SignedOut", function () {
+    constructor();
+    $state.go("signin");
+  });
+
+  $scope.$on("gonevisDash.SiteSettingsController:remove", function () {
     constructor();
   });
 
   constructor();
-};
+}
 
 app.controller("HeaderController", HeaderController);
 HeaderController.$inject = [
-  '$scope',
-  '$rootScope',
-  '$state',
-  '$stateParams',
-  'AuthService'
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$stateParams",
+  "AuthService"
 ];
