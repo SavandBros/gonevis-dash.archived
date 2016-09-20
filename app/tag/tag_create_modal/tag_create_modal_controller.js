@@ -38,8 +38,9 @@ function TagCreateModalController($scope, TagService, API, AuthService, ModalsSe
     form.errors = null;
 
     form.data.slug = form.data.slug ? form.data.slug : "";
+    form.data.site = site;
 
-    API.Tags.save({ tag_site: site }, form.data,
+    API.Tags.save({ site: site }, form.data,
       function (data) {
         TagService.create(form, data);
         form.loading = false;

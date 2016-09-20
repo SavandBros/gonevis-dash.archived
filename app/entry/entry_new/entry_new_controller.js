@@ -25,7 +25,7 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
    */
   function constructor() {
 
-    API.Tags.get({ tag_site: AuthService.getCurrentSite() },
+    API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data, status, headers, config) {
 
         for (var i in data.results) {
@@ -85,6 +85,7 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
   $scope.newPost = function (form) {
     form.loading = true;
     form.site = AuthService.getCurrentSite();
+    form.user = AuthService.getAuthenticatedUser();
 
     var payload = form;
     payload.tag_ids = [];

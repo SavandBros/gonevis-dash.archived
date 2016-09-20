@@ -30,7 +30,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    * @desc Load entries via API call
    */
   function loadEntries() {
-    API.Entries.get({ site_id: AuthService.getCurrentSite() },
+    API.Entries.get({ site: AuthService.getCurrentSite() },
       function (data, status, headers, config) {
         $scope.entries = data.results;
       }

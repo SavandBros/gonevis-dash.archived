@@ -29,7 +29,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
       text: "It's lonely here... Try adding some tags!"
     };
 
-    API.Tags.get({ tag_site: site },
+    API.Tags.get({ site: site },
       function (data) {
         $scope.tags = data.results;
       }
@@ -50,7 +50,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
 
     form.data.slug = form.data.slug || "";
 
-    API.Tags.save({ tag_site: site }, form.data,
+    API.Tags.save({ site: site }, form.data,
       function (data) {
         form.loading = false;
         form.data = null;
@@ -85,4 +85,12 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
 }
 
 app.controller("TagController", TagController);
-TagController.$inject = ["$scope", "$rootScope", "$state", "$mdToast", "TagService", "API", "AuthService"];
+TagController.$inject = [
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "TagService",
+  "API",
+  "AuthService"
+];
