@@ -47,10 +47,10 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
     }
 
     API.UpdateNavigation.put({ site_id: site }, {navigation: $scope.navigations},
-      function (data, status, headers, config) {
-        $scope.loading = false
-        $mdToast.showSimple('Navigation updated.')
-        console.log(data)
+      function (data) {
+        $scope.loading = false;
+        $mdToast.showSimple('Navigation updated.');
+        console.log(data);
       },
       function (data) {
         $scope.loading = false;
