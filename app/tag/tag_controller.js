@@ -30,7 +30,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     };
 
     API.Tags.get({ site: site },
-      function (data, status, headers, config) {
+      function (data) {
         $scope.tags = data.results;
       }
     );
