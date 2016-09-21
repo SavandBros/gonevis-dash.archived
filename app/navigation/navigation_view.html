@@ -1,23 +1,27 @@
 <div class="container container-light pad-top">
-  <form class="panel panel-defaul s-box form-inline" name="form" ng-submit="updateNavigation(form)">
-    <div class="panel-body">
-      <button type="button" class="btn btn-success pull-right" ng-click="addNav()" ng-disabled="form.$invalid">
-        <i class="fa fa-plus"></i>
-        Add
-      </button>
-      <div ng-repeat="nav in navigations" class="navigation">
-        <div class="col-md-4 form-group input-group">
-          <span class="input-group-addon" ng-click="deleteNav(nav.sort_number)"><i class="fa fa-trash text-danger fa-fw"></i></span>
-          <input type="text" placeholder="Label" ng-model="nav.label" class="form-control" required />
-        </div>
-        <div class="input-group col-md-6 form-group">
-          <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-          <input type="text" placeholder="/Url" ng-model="nav.url" class="form-control" required />
+  <div class="col-md-8 col-md-offset-2">
+    <!-- Nothing -->
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length"></ng-include>
+    <form class="panel panel-defaul s-box form-inline" name="form" ng-submit="updateNavigation(form)" ng-if="navigations.length">
+      <div class="panel-body">
+        <div ng-repeat="nav in navigations" class="navigation">
+          <div class="form-group">
+            <input type="text" placeholder="Label" ng-model="nav.label" class="form-control navigation-label" required />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control navigation-url" required />
+            <button class="btn btn-success navigation-button" type="button" ng-click="addNav()" ng-disabled="form.$invalid" ng-if="$last">
+              <i class="fa fa-plus"></i>
+            </button>
+            <span class="navigation-trash" ng-if="!$last" ng-click="deleteNav(nav.sort_number)">
+              <i class="fa fa-trash text-danger"></i>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="panel-footer">
-      <button class="btn btn-success btn-block s-box" ng-disabled="loading">Update</button>
-    </div>
-  </form>
+      <div class="panel-footer">
+        <button class="btn btn-success btn-block s-box" ng-disabled="loading">Update</button>
+      </div>
+    </form>
+  </div>
 </div>

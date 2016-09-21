@@ -21,6 +21,9 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    */
   function constructor() {
     loadEntries();
+    $scope.nothing = {
+      text: "It's lonely here... Try adding some entries!"
+    };
   }
 
   /**
