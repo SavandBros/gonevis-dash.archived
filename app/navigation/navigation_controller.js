@@ -28,6 +28,9 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
         console.log(data);
       }
     );
+    $scope.nothing = {
+      text: "It's lonely here... Try adding some navigations!"
+    };
   }
 
   /**
@@ -49,7 +52,7 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
     API.UpdateNavigation.put({ site_id: site }, {navigation: $scope.navigations},
       function (data) {
         $scope.loading = false;
-        $mdToast.showSimple('Navigation updated.');
+        $mdToast.showSimple("Navigation updated.");
         console.log(data);
       },
       function (data) {
