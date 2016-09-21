@@ -3,7 +3,10 @@
 
     <!-- Files -->
     <div class="col-md-9">
-      <div class="row">
+      <!-- Nothing -->
+      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length"></ng-include>
+      <!-- List -->
+      <div class="row" ng-if="dolphins.length">
         <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
           <!-- Link -->
           <a ng-click="viewDolphin(d.id)" class="dolphin" style="background-image: url({{ d.file }})">
