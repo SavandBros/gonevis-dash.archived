@@ -26,6 +26,10 @@ function DolphinListController($scope, $rootScope, $state, $stateParams, $mdToas
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.nothing = {
+      text: "It's lonely here... Try adding some dolphins!"
+    };
+
     API.Dolphins.get({},
       function (data) {
         $scope.dolphins = data.results;
