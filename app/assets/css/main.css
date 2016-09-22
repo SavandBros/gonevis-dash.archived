@@ -409,6 +409,28 @@ md-toast {
   margin-bottom: 6px;
 }
 
+.navigation-url {
+  width: 400px !important;
+  margin-left: 7px;
+}
+
+.navigation-label {
+  width: 235px !important;
+}
+
+.navigation-trash {
+  margin-left: 8px;
+  font-size: 19px;
+}
+
+.navigation-button {
+  border: 0px solid black;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  height: 35px;
+  width: 35px;
+}
+
 
 /* White Spaces */
 
