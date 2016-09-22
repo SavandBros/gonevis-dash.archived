@@ -11,7 +11,7 @@
  * @param $mdToast
  * @param AuthService
  */
-function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthService) {
+function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthService) {
   var site = AuthService.getCurrentSite();
   $scope.navigations = [];
 
@@ -21,7 +21,7 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
    * @method constructor
    * @desc Init function for controller
    */
-  function constructor () {
+  function constructor() {
     API.Navigation.get({ site_id: site },
       function (data) {
         $scope.navigations = data.navigation;
@@ -43,13 +43,13 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
   $scope.updateNavigation = function () {
     $scope.loading = true;
 
-    for ( var i = 0; i < $scope.navigations.length; i++) {
+    for (var i = 0; i < $scope.navigations.length; i++) {
       if (!$scope.navigations[i].url.startsWith("/")) {
         $scope.navigations.splice(i, 1);
       }
     }
 
-    API.UpdateNavigation.put({ site_id: site }, {navigation: $scope.navigations},
+    API.UpdateNavigation.put({ site_id: site }, { navigation: $scope.navigations },
       function (data) {
         $scope.loading = false;
         $mdToast.showSimple("Navigation updated.");
@@ -71,9 +71,7 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
    * 
    */
   $scope.addNav = function () {
-    $scope.navigations.push(
-      {"url": "/", "label": "", "sort_number": $scope.navigations.length + 1}
-    );
+    $scope.navigations.push({ "url": "/", "label": "", "sort_number": $scope.navigations.length + 1 });
   };
 
   /**
@@ -85,10 +83,9 @@ function NavigationController ($scope, $rootScope, $state, $mdToast, API, AuthSe
    * @param num {integer}
    */
   $scope.deleteNav = function (num) {
-    for ( var i = 0; i < $scope.navigations.length; i++) {
+    for (var i = 0; i < $scope.navigations.length; i++) {
       if ($scope.navigations[i].sort_number === num) {
         $scope.navigations.splice(i, 1);
-        $scope.updateNavigation();
       }
     }
   };
