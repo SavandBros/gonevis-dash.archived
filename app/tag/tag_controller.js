@@ -54,7 +54,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
           $scope.noResults = false;
         }
       }
-    )
+    );
   };
 
   /**
