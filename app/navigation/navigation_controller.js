@@ -58,9 +58,10 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
     API.UpdateNavigation.put({ site_id: site }, { navigation: $scope.navigations },
       function (data) {
         $scope.loading = false;
+        $scope.navigations = data.navigation;
         $mdToast.showSimple("Navigation updated.");
       },
-      function (data) {
+      function () {
         $scope.loading = false;
         $mdToast.showSimple("Sorry, we couldn't update navigation, please try again later");
       }
