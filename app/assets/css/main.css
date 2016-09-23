@@ -526,3 +526,12 @@ tags-input .tags.focused {
   height: 20px;
   padding: 2px;
 }
+
+
+/* Tag */
+
+.tag-search {
+  width: 450px;
+  margin-bottom: 20px;
+  margin-left: 318px;
+}
