@@ -36,6 +36,27 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     );
   }
 
+  $scope.filters = { name: "" };
+
+  /**
+   * search
+   *
+   * @method search
+   * @desc Search through tags
+   */
+  $scope.search = function () {
+    API.Tags.get({ search: $scope.filters.name },
+      function (data) {
+        $scope.tags = data.results;
+        if (!data.count) {
+          $scope.noResults = true;
+        } else {
+          $scope.noResults = false;
+        }
+      }
+    )
+  };
+
   /**
    * create
    *
