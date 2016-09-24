@@ -36,6 +36,27 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     );
   }
 
+  $scope.filters = { comment: "" };
+
+  /**
+   * search
+   *
+   * @method search
+   * @desc Search through comments
+   */
+  $scope.search = function () {
+    API.Comments.get({ search: $scope.filters.comment },
+      function (data) {
+        $scope.comments = data.results;
+        if (!data.count) {
+          $scope.noResults = true;
+        } else {
+          $scope.noResults = false;
+        }
+      }
+    );
+  };
+
   $rootScope.$on("gonevisDash.CommentService:delete", function (event, data) {
     for (var i = 0; i < $scope.comments.length; i++) {
       if ($scope.comments[i].id === data.id) {
