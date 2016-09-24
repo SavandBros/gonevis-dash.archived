@@ -97,9 +97,7 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
     API.EntryAdd.save(payload,
       function (data, status, headers, config) {
         $mdToast.showSimple("Entry added.");
-        $state.go('dash.entry-edit', {
-          entryId: data.id
-        });
+        $state.go('dash.entry-edit', { entryId: data.id });
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Failed to add entry.");

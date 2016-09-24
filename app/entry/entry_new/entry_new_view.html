@@ -1,15 +1,10 @@
 <div class="container container-light">
-  <div class="col-md-10 col-md-offset-1">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3>Nevis Entry</h3></div>
-      <div class="panel-body s-pad s-box">
-        <form ng-submit="newPost(form)" name="form">
-          <ng-include src="'entry/includes/entry_form.html'"></ng-include>
-          <button class="btn btn-success pull-right btn-lg" ng-disabled="form.loading || form.$invalid">
-            <i class="fa fa-check fa-fw"></i> Submit Post
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
+  <!-- Form -->
+  <form ng-submit="newPost(form)" name="form">
+    <!-- Title -->
+    <h1 class="col-xs-12 o-fade">Nevis Entry
+      <hr>
+    </h1>
+    <ng-include src="'entry/includes/entry_form.html'"></ng-include>
+  </form>
 </div>
