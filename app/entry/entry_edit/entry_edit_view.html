@@ -1,16 +1,9 @@
 <div class="container container-light">
-
   <form ng-submit="update(form)" name="form">
-    <h1 class="col-xs-12 o-fade">Nevis Entry
+    <h2 class="col-xs-12 o-fade">
+      {{ form.title }}
       <hr>
-    </h1>
+    </h2>
     <ng-include src="'entry/includes/entry_form.html'"></ng-include>
-    <div class="btn-group btn-group-lg pull-right">
-      <button type="button" class="btn btn-default" ng-click="delete(form.id)" title="Delete entry">
-        <i class="fa fa-trash"></i>
-      </button>
-      <button class="btn btn-primary" ng-disabled="form.loading || form.$invalid">Update Entry</button>
-    </div>
   </form>
-
 </div>

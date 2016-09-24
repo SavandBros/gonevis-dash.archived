@@ -17,7 +17,6 @@
     <small id="lead" class="help-block" ng-show="form.errors.lead">{{ form.errors.lead[0] }}</small>
   </div>
 </div>
-
 <!-- Side -->
 <div class="col-md-3">
   <!-- Slug -->
@@ -38,7 +37,26 @@
   </div>
   <!-- Status -->
   <div class="form-group">
-    <select ng-init="form.status = statuses[0].id" ng-options="status.id as status.name for status in statuses" class="form-control" ng-value="status" ng-model="form.status"></select>
+    <select ng-init="form.status = statuses[0].id"
+            ng-options="status.id as status.name for status in statuses"
+            ng-value="status"
+            ng-model="form.status"
+            class="form-control"></select>
+  </div>
+  <!-- Advanced Options -->
+  <div class="form-group">
+    <a data-toggle="collapse" data-target="#advance">
+      Advanced Options <i class="fa fa-caret-down"></i>
+    </a>
+  </div>
+  <!-- Meta Title and Meta Desc -->
+  <div class="collapse" id="advance">
+    <div class=" form-group">
+      <input ng-model="form.meta_title" placeholder="Meta title" class="form-control">
+    </div>
+    <div class="form-group">
+      <input ng-model="form.meta_description" placeholder="Meta description" class="form-control">
+    </div>
   </div>
   <!-- Comments enabled -->
   <div class="checkbox checkbox-primary">
@@ -54,20 +72,12 @@
   <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
     {{ form.errors.non_field_errors[0] }}
   </div>
-  <br>
-  <!-- Advanced Options -->
-  <a data-toggle="collapse" data-target="#advance">
-    Advanced Options <i class="fa fa-caret-down fa-fw"></i>
-  </a>
   <hr>
-  <div class="collapse" id="advance">
-    <div class=" form-group">
-      <input ng-model="form.meta_title" placeholder="Meta title" class="form-control">
-    </div>
-    <div class="form-group">
-      <input ng-model="form.meta_description" placeholder="Meta description" class="form-control">
-    </div>
-  </div>
   <!-- Submit -->
-  <button class="btn btn-success btn-block btn-lg" ng-if="!editing" ng-disabled="form.loading || form.$invalid">SUBMIT</button>
+  <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid"
+          ng-if="!editing">SUBMIT</button>
+  <button class="btn btn-primary btn-block btn-lg" ng-disabled="form.loading || form.$invalid"
+          ng-if="editing">UPDATE</button>
+  <button class="btn btn-default btn-lg pull-right" title="Delete entry" type="button"
+          style="margin-top: 10px" ng-if="editing" ng-click="delete(form.id)"><i class="fa fa-trash"></i></button>
 </div>
