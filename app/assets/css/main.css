@@ -335,11 +335,11 @@ md-toast {
 
 /* Editing Mode + Text Angular */
 
-.ta-toolbar {
-  display: none;
-}
 
 .ta-toolbar .btn-group {
+  margin-bottom: 4px;
+}
+.editing-mode .ta-toolbar .btn-group {
   margin-bottom: 4px;
   margin-top: 4px;
 }
