@@ -46,23 +46,32 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
     for (var i = 0; i < $scope.navigations.length; i++) {
       if (!$scope.navigations[i].url.startsWith("/")) {
         $scope.navigations.splice(i, 1);
+        return $mdToast.showSimple("Navigation URL should start with a slash /");
+      } else if (
+        $scope.navigations[i].url.startsWith("/") &&
+        $scope.newNav.url !== "" &&
+        $scope.newNav.label !== ""
+      ) {
+        $scope.addNav();
       }
     }
-
     API.UpdateNavigation.put({ site_id: site }, { navigation: $scope.navigations },
       function (data) {
         $scope.loading = false;
+        $scope.navigations = data.navigation;
         $mdToast.showSimple("Navigation updated.");
-        console.log(data);
       },
-      function (data) {
+      function () {
         $scope.loading = false;
         $mdToast.showSimple("Sorry, we couldn't update navigation, please try again later");
-        console.log(data);
       }
     );
   };
-
+  $scope.newNav = {
+    "url": "/",
+    "label": "",
+    "sort_number": $scope.navigations.length + 1
+  };
   /**
    * addNav
    *
@@ -71,7 +80,12 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
    * 
    */
   $scope.addNav = function () {
-    $scope.navigations.push({ "url": "/", "label": "", "sort_number": $scope.navigations.length + 1 });
+    $scope.navigations.push($scope.newNav);
+    $scope.newNav = {
+      "url": "/",
+      "label": "",
+      "sort_number": $scope.navigations.length + 1
+    };
   };
 
   /**

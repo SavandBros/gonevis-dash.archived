@@ -2,31 +2,39 @@
   <div class="col-md-8 col-md-offset-2">
     <!-- Nothing -->
     <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length"></ng-include>
-    <form class="panel panel-default s-box form-inline" name="form" ng-submit="updateNavigation(form)" ng-if="navigations.length">
+    <div class="panel panel-default s-box form-inline" ng-if="navigations.length">
       <div class="panel-heading" data-toggle="collapse" data-target="#newPost">
         <h3>
+          <button class="btn btn-primary pull-right" ng-click="updateNavigation(form)">Update</button>
           <i class="fa fa-bars" aria-hidden="true"></i> Navigations
         </h3>
       </div>
       <div class="panel-body">
-        <div ng-repeat="nav in navigations" class="navigation">
+        <form name="form">
+          <div ng-repeat="nav in navigations" class="navigation">
+            <div class="form-group">
+              <input type="text" placeholder="Label" ng-model="nav.label" class="form-control navigation-label" required />
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control navigation-url" required />
+              <span class="navigation-trash" ng-click="deleteNav(nav.sort_number)">
+                <i class="fa fa-trash text-danger"></i>
+              </span>
+            </div>
+          </div>
+        </form>
+        <form name="form">
           <div class="form-group">
-            <input type="text" placeholder="Label" ng-model="nav.label" class="form-control navigation-label" required />
+            <input type="text" placeholder="Label" ng-model="newNav.label" class="form-control navigation-label" required />
           </div>
           <div class="form-group">
-            <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control navigation-url" required />
-            <button class="btn btn-success navigation-button" type="button" ng-click="addNav()" ng-disabled="form.$invalid" ng-if="$last">
+            <input type="text" placeholder="URL" ng-model="newNav.url" class="form-control navigation-url" required />
+            <button class="btn btn-success navigation-button" type="button" ng-click="addNav()" ng-disabled="form.$invalid">
               <i class="fa fa-plus"></i>
             </button>
-            <span class="navigation-trash" ng-if="!$last" ng-click="deleteNav(nav.sort_number)">
-              <i class="fa fa-trash text-danger"></i>
-            </span>
           </div>
-        </div>
+        </form>
       </div>
-      <div class="panel-footer">
-        <button class="btn btn-success btn-block s-box" ng-disabled="loading">Update</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
