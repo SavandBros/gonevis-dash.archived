@@ -1,14 +1,24 @@
+<!-- Search -->
+<form ng-submit="search()" class="comment-search" ng-if="comments.length && !noResults || noResults">
+  <div class="input-group"> <input type="text" class="form-control" placeholder="Search" ng-model="filters.comment">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit" ng-click="search()">
+        <span class="fa fa-search"></span> Search
+      </button>
+    </span>
+  </div>
+</form>
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!comments.length"></ng-include>
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!comments.length && !noResults"></ng-include>
+    <div ng-if="noResults">
+      <p class="alert-danger alert"><i class="fa fa-exclamation-triangle"></i> No results</p>
+    </div>
     <!-- List -->
     <div class="panel panel-default" ng-if="comments.length">
       <ul class="panel-body panel-list">
-        <li class="panel-list-item s-fade b-left"
-            ng-class="{'b-color-2': c.is_active, 'b-color-0': c.needs_approval}"
-            ng-repeat="c in comments"
-            ng-show="!c.isDeleted">
+        <li class="panel-list-item s-fade b-left" ng-class="{'b-color-2': c.is_active, 'b-color-0': c.needs_approval}" ng-repeat="c in comments" ng-show="!c.isDeleted">
           <!-- User -->
           <small>{{ c.user.name }}:</small>
           <!-- Comment -->
