@@ -535,3 +535,12 @@ tags-input .tags.focused {
   margin-left: 318px;
   margin-bottom: 10px;
 }
+
+
+/* Entry */
+
+.entry-search {
+  width: 350px;
+  margin-left: 318px;
+  margin-bottom: 10px;
+}
