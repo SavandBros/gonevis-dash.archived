@@ -1,95 +1,69 @@
 <div class="container container-light">
   <!-- Form -->
   <form ng-submit="newPost(form)" name="form">
+
+    <!-- Title -->
+    <h1 class="col-xs-12 o-fade">Nevis Entry<hr></h1>
+
     <!-- Main -->
     <div class="col-md-9">
-      <div class="panel panel-default">
-        <!-- Title -->
-        <div class="panel-heading"><h3>Nevis Entry</h3></div>
-
-        <!-- Body -->
-        <div class="panel-body s-pad s-box">
-          <!-- Title -->
-          <div class="form-group" ng-class="{'has-error': form.errors.title}">
-            <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="Title" required/>
-            <small id="title" class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
-          </div>
-          <!-- Content -->
-          <div class="form-group" ng-class="{'has-error': form.errors.content, 'editing-mode': editingMode}">
-            <i class="fa fa-close close pull-right" ng-click="editingMode = false" ng-show="editingMode"></i>
-            <text-angular ng-model="form.content" ng-focus="editingMode = true" placeholder="Content"></text-angular>
-            <small id="content" class="help-block" ng-show="form.errors.content">{{ form.errors.content[0] }}</small>
-          </div>
-          <!-- Submit -->
-          <button class="btn btn-success pull-right btn-lg" ng-disabled="form.loading || form.$invalid">
-            <i class="fa fa-check fa-fw"></i> Submit Post
-          </button>
-        </div>
+      <!-- Title -->
+      <div class="form-group" ng-class="{'has-error': form.errors.title}">
+        <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="Title" required/>
+        <small id="title" class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
+      </div>
+      <!-- Content -->
+      <div class="form-group" ng-class="{'has-error': form.errors.content, 'editing-mode': editingMode}">
+        <i class="fa fa-close close pull-right" ng-click="editingMode = false" ng-show="editingMode"></i>
+        <text-angular ng-model="form.content" ng-focus="editingMode = true" placeholder="Content"></text-angular>
+        <small id="content" class="help-block" ng-show="form.errors.content">{{ form.errors.content[0] }}</small>
+      </div>
+      <!-- Lead -->
+      <div class="form-group" ng-class="{'has-error': form.errors.lead}">
+        <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph" rows="5"></textarea>
+        <small id="lead" class="help-block" ng-show="form.errors.lead">{{ form.errors.lead[0] }}</small>
       </div>
     </div>
 
     <!-- Side -->
     <div class="col-md-3">
-      <div class="panel panel-info">
-        <!-- Title -->
-        <h3 class="panel-heading">Advanced</h3>
-
-        <!-- Body -->
-        <div class="panel-body">
-          <!-- Slug -->
-          <div class="form-group" ng-class="{'has-error': form.errors.slug}">
-            <input id="slug" class="form-control" type="text" ng-model="form.slug" placeholder="Slug (URL)" />
-            <small id="slug" class="help-block">{{ form.errors.slug[0] }}</small>
-          </div>
-          <!-- Errors for slug -->
-          <div class="form-group" ng-class="{'has-error': form.errors.tag_ids}">
-            <tags-input ng-model="tagsToSubmit" display-property="slug">
-              <auto-complete source="loadTags($query)"></auto-complete>
-            </tags-input>
-          </div>
-          <!-- Lead -->
-          <div class="form-group" ng-class="{'has-error': form.errors.lead}">
-            <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph"></textarea>
-            <small id="lead" class="help-block" ng-show="form.errors.lead">{{ form.errors.lead[0] }}</small>
-          </div>
-          <!-- Expert -->
-          <div class="form-group" ng-class="{'has-error': form.errors.excerpt}">
-            <textarea id="excerpt" class="form-control" type="text" ng-model="form.excerpt" placeholder="Excerpt (For SEO)"></textarea>
-            <small id="excerpt" class="help-block">{{ form.errors.excerpt[0] }}</small>
-          </div>
-          <hr>
-          <!-- Draft -->
-          <div class="radio">
-            <input name="status" id="draft" type="radio" value="0" ng-model="form.status" ng-checked="true">
-            <label for="draft">Draft</label>
-          </div>
-          <!-- Warning -->
-          <div class="radio radio-warning">
-            <input name="status" id="hidden" type="radio" value="1" ng-model="form.status">
-            <label for="hidden">Hidden</label>
-          </div>
-          <!-- Published -->
-          <div class="radio radio-success last">
-            <input name="status" id="published" type="radio" value="2" ng-model="form.status">
-            <label for="published">Published</label>
-          </div>
-          <hr>
-          <!-- Comments enabled -->
-          <div class="checkbox checkbox-primary">
-            <input id="comments_enabled" type="checkbox" ng-model="form.comment_enabled">
-            <label for="comments_enabled">Coments enabled</label>
-          </div>
-          <!-- Featured -->
-          <div class="checkbox checkbox-primary last">
-            <input id="featued" type="checkbox" ng-model="form.featured">
-            <label for="featued">Featured</label>
-          </div>
-          <!-- Errors -->
-          <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
-            {{ form.errors.non_field_errors[0] }}
-          </div>
-        </div>
+      <!-- Slug -->
+      <div class="form-group" ng-class="{'has-error': form.errors.slug}">
+        <input id="slug" class="form-control" type="text" ng-model="form.slug" placeholder="Slug (URL)" />
+        <small id="slug" class="help-block">{{ form.errors.slug[0] }}</small>
       </div>
+      <!-- Errors for slug -->
+      <div class="form-group" ng-class="{'has-error': form.errors.tag_ids}">
+        <tags-input ng-model="tagsToSubmit" display-property="slug">
+          <auto-complete source="loadTags($query)"></auto-complete>
+        </tags-input>
+      </div>
+      <!-- Expert -->
+      <div class="form-group" ng-class="{'has-error': form.errors.excerpt}">
+        <textarea id="excerpt" class="form-control" type="text" ng-model="form.excerpt" placeholder="Excerpt (For SEO)"></textarea>
+        <small id="excerpt" class="help-block">{{ form.errors.excerpt[0] }}</small>
+      </div>
+      <!-- Status -->
+      <div class="form-group">
+        <select ng-init="form.status = statuses[0].id" ng-options="status.id as status.name for status in statuses" class="form-control" ng-value="status" ng-model="form.status"></select>
+      </div>
+      <!-- Comments enabled -->
+      <div class="checkbox checkbox-primary">
+        <input id="comments_enabled" type="checkbox" ng-model="form.comment_enabled">
+        <label for="comments_enabled">Coments enabled</label>
+      </div>
+      <!-- Featured -->
+      <div class="checkbox checkbox-primary ">
+        <input id="featued" type="checkbox" ng-model="form.featured">
+        <label for="featued">Featured</label>
+      </div>
+      <!-- Errors -->
+      <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
+        {{ form.errors.non_field_errors[0] }}
+      </div>
+      <br>
+      <!-- Submit -->
+      <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">SUBMIT</button>
     </div>
   </form>
 </div>
