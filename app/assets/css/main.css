@@ -528,6 +528,15 @@ tags-input .tags.focused {
 }
 
 
+/* Tag */
+
+.tag-search {
+  width: 450px;
+  margin-bottom: 20px;
+  margin-left: 318px;
+}
+
+
 /* Comment */
 
 .comment-search {
