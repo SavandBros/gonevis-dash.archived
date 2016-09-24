@@ -5,9 +5,11 @@
 <form ng-submit="search()" class="entry-search" ng-if="entries.length && !noResults || noResults">
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Search" ng-model="filters.title">
-    <span class="input-group-addon" ng-click="search()">
-       <i class="fa fa-search fa-fw"></i>
-   </span>
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit" ng-click="search()">
+        <span class="fa fa-search"></span> Search
+      </button>
+    </span>
   </div>
 </form>
 <!-- Main -->
