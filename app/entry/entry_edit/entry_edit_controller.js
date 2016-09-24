@@ -24,6 +24,7 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
    */
   function constructor() {
     console.log($scope.tagsToSubmit);
+    $scope.editing = true;
     API.Tags.get({ tag_site: AuthService.getCurrentSite() },
       function (data, status, headers, config) {
 
