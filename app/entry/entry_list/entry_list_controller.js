@@ -40,6 +40,27 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
     )
   }
 
+  $scope.filters = { title: "" };
+
+  /**
+   * search
+   *
+   * @method search
+   * @desc Search through entries
+   */
+  $scope.search = function () {
+    API.Entries.get({ search: $scope.filters.title },
+      function (data) {
+        $scope.entries = data.results;
+        if (!data.count) {
+          $scope.noResults = true;
+        } else {
+          $scope.noResults = false;
+        }
+      }
+    );
+  };
+
   /**
    * delete
    *
