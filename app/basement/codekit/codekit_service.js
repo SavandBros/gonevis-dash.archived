@@ -12,6 +12,19 @@
  * @returns [Factory]
  */
 function Codekit() {
+
+  /**
+   * getIndex
+   *
+   * @method getIndex
+   * @desc Get index of an item in a data
+   *
+   * @param master {Object} Master data to search in
+   * @param search {Object} Item to find it's index in master object
+   * @param key {String} Property to compare, default is "id"
+   *
+   * @returns {Number} Index of the item found in data via the given key
+   */
   function getIndex(master, search, key) {
     var key = key || "id";
 
