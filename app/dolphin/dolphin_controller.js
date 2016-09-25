@@ -132,6 +132,14 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     };
   });
 
+  $scope.$on('gonevisDash.DolphinService:remove', function (event, dolphin) {
+    if (data.success) {
+      $scope.dolphins.splice(
+        Codekit.getIndex($scope.dolphins, data.dolphin, 1)
+      );
+    }
+  });
+
   constructor();
 }
 
