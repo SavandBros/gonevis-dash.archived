@@ -14,6 +14,16 @@
  * @returns [Factory]
  */
 function DolphinService($rootScope, $mdToast, API, ModalsService) {
+
+  /**
+   * remove
+   *
+   * @method remove
+   * @desc Delete a dolphin and broadcast it
+   *
+   * @param dolphin {Object}
+   * @param toast {Boolean} Toggle show notification (toast) after API call
+   */
   function remove(dolphin, toast) {
 
     var toast = toast || true;
