@@ -51,7 +51,21 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
     )
   };
 
+  /**
+   * view
+   *
+   * @method view
+   * @desc Dolphin view via modal
+   *
+   * @param dolphin {Object}
+   */
+  function view(dolphin) {
+    ModalsService.open("dolphin", "DolphinModalController", { dolphin: dolphin });
+  };
+
   return {
+    remove: remove,
+    view: view,
   };
 }
 
