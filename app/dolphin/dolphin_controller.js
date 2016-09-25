@@ -30,6 +30,9 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.nothing = {
       text: "It's lonely here... Try adding some dolphins!"
     };
+
+    $scope.dolphinService = DolphinService;
+
     API.Dolphins.get({},
       function (data) {
         $scope.dolphins = data.results;
