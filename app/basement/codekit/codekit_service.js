@@ -12,7 +12,19 @@
  * @returns [Factory]
  */
 function Codekit() {
+  function getIndex(master, search, key) {
+    var key = key || "id";
+
+    for (i in master) {
+      if (master[i][key] == search[key]) {
+        return i;
+      };
+    };
+    return -1;
+  };
+
   return {
+    getIndex: getIndex,
   };
 };
 
