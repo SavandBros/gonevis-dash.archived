@@ -124,6 +124,14 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
       }
     );
   };
+
+  $scope.$on('gonevisDash.DolphinService:update', function (event, data) {
+    if (data.success) {
+      var index = Codekit.getIndex($scope.dolphins, data.dolphin);
+      $scope.dolphins[index] = data.dolphin;
+    };
+  });
+
   constructor();
 }
 
