@@ -1,0 +1,48 @@
+<div class="container container-light pad-top">
+  <div class="row">
+
+    <!-- Files -->
+    <div class="col-md-9">
+      <!-- Nothing -->
+      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length"></ng-include>
+      <!-- List -->
+      <div class="row" ng-if="dolphins.length">
+        <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
+          <!-- Link -->
+          <a ng-click="dolphinService.view(d)" class="dolphin" style="background-image: url({{ d.file }})">
+            <p class="caption">{{ d.meta_data.name }}</p>
+          </a>
+          <!-- Options -->
+          <div class="dropdown options" title="options">
+            <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" id="options{{ $index }}" data-toggle="dropdown">
+              <i class="fa fa-fw fa-ellipsis-v"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a ng-click="dolphinService.view(d)"><i class="fa fa-eye"></i> View</a></li>
+              <li><a ng-click="dolphinService.remove(d)"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload -->
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-fw fa-upload text-info"></i> Upload File</div>
+        <div class="panel-body">
+          <button type="file" class="btn btn-primary" ngf-select="uploadFiles($files, $invalidFiles)" ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
+            <i class="fa fa-fw fa-plus"></i> Select File
+          </button>
+          <hr>
+          <div class="progress" ng-repeat="file in upload.files" ng-class="{'s-mar-no': $last}" ng-hide="upload.files[0].progress == 100">
+            <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
+              <span class="sr-only">{{ file.progress }}% Complete</span> <span ng-if="file.progress == 100">Done</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
