@@ -30,18 +30,20 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
 
     API.Dolphin.remove({ site_id: dolphin.site, file_id: dolphin.id },
       function (data) {
-        $scope.isDeleted = true;
+        dolphin.isDeleted = true;
         $rootScope.$broadcast('gonevisDash.DolphinService:remove', {
-          dolphin: data,
+          dolphin: data.data,
+          data: data.data,
           success: true
         });
         if (toast) {
-          $mdToast.showSimple("Deleted " + meta_data.name);
+          $mdToast.showSimple("Deleted " + dolphin.meta_data.name);
         };
       },
       function (data) {
         $rootScope.$broadcast('gonevisDash.DolphinService:remove', {
-          dolphin: data,
+          dolphin: dolphin,
+          data: data.data,
           success: false
         });
         if (toast) {

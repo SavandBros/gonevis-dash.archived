@@ -129,18 +129,24 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   };
 
-  $scope.$on('gonevisDash.DolphinService:update', function (event, data) {
+  /**
+   * update
+   *
+   * @method update
+   *
+   * @param event {Object}
+   * @param data {Object}
+   */
+  function update (event, data) {
     if (data.success) {
       var index = Codekit.getIndex($scope.dolphins, data.dolphin);
       $scope.dolphins[index] = data.dolphin;
+      console.log($scope.dolphins[index]);
     };
-  });
+  };
 
-  $scope.$on('gonevisDash.DolphinService:remove', function (event, dolphin) {
-    if (data.success) {
-      $scope.dolphins.splice(Codekit.getIndex($scope.dolphins, data.dolphin), 1);
-    };
-  });
+  $scope.$on('gonevisDash.DolphinService:update', update);
+  $scope.$on('gonevisDash.DolphinService:remove', update);
 
   constructor();
 }

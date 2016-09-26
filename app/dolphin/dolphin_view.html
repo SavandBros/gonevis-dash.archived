@@ -7,7 +7,7 @@
 
       <!-- List -->
       <div class="row" ng-if="dolphins.length">
-        <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
+        <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
           <!-- Link -->
           <a ng-click="dolphinService.view(d)" class="dolphin" style="background-image: url({{ d.file }})">
             <p class="caption">{{ d.meta_data.name }}</p>
