@@ -25,15 +25,14 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
    * @param toast {Boolean} Toggle show notification (toast) after API call
    */
   function remove(dolphin, toast) {
-
     var toast = toast || true;
 
     API.Dolphin.remove({ site_id: dolphin.site, file_id: dolphin.id },
       function (data) {
         dolphin.isDeleted = true;
         $rootScope.$broadcast('gonevisDash.DolphinService:remove', {
-          dolphin: data.data,
-          data: data.data,
+          dolphin: dolphin,
+          data: data,
           success: true
         });
         if (toast) {
@@ -42,8 +41,8 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
       },
       function (data) {
         $rootScope.$broadcast('gonevisDash.DolphinService:remove', {
-          dolphin: dolphin,
-          data: data.data,
+          dolphin: data,
+          data: data,
           success: false
         });
         if (toast) {

@@ -17,7 +17,7 @@
             <small class="help-block" ng-show="form.errors.meta_data.description">{{ form.errors.meta_data.name[0] }}</small>
           </div>
           <div class="btn-group">
-            <button type="button" class="btn btn-default" ng-click="dolphinService.remove(dolphin)" title="Delete file" data-dismiss="modal">
+            <button type="button" class="btn btn-default" ng-click="dolphinService.remove(form.data)" title="Delete file" data-dismiss="modal">
               <i class="fa fa-trash"></i>
             </button>
             <button class="btn btn-primary" ng-disabled="form.loading">Update File</button>

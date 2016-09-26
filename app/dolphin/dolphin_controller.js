@@ -140,8 +140,10 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   function update (event, data) {
     if (data.success) {
       var index = Codekit.getIndex($scope.dolphins, data.dolphin);
-      $scope.dolphins[index] = data.dolphin;
-      console.log($scope.dolphins[index]);
+
+      $scope.dolphins[index].meta_data.name = data.dolphin.meta_data.name;
+      $scope.dolphins[index].meta_data.description = data.dolphin.meta_data.description;
+      $scope.dolphins[index].isDeleted = data.dolphin.isDeleted;
     };
   };
 

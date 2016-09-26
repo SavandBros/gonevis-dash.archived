@@ -51,6 +51,7 @@ function DolphinModalController($scope, $rootScope, $mdToast, dolphin, DolphinSe
         $mdToast.showSimple("File " + form.data.meta_data.name + " updated.");
         $rootScope.$broadcast('gonevisDash.DolphinService:update', {
           dolphin: data,
+          data: data,
           success: true
         });
       },
