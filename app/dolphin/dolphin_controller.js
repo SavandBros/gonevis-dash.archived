@@ -88,15 +88,15 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   /**
-   * upload
+   * uploadFile
    *
-   * @method upload
+   * @method uploadFile
    * @desc Handle for file uploads
    *
    * @param files {File}
    * @param errFiles {File}
    */
-  $scope.upload = function (files, errFiles) {
+  $scope.uploadFile = function (files, errFiles) {
     $scope.upload.files = files;
     $scope.errFiles = errFiles;
 
@@ -116,9 +116,13 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
             $mdToast.showSimple("Upload failed.");
           },
           function (event) {
-            file.progress = Math.min(
-              100, parseInt(100.0 * event.loaded / event.total)
-            );
+            file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
+
+            if (file.progress == 100) {
+              setTimeout(function () {
+                file.dismiss = true;
+              }, 3000);
+            }
           }
         );
       }
@@ -134,10 +138,8 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
 
   $scope.$on('gonevisDash.DolphinService:remove', function (event, dolphin) {
     if (data.success) {
-      $scope.dolphins.splice(
-        Codekit.getIndex($scope.dolphins, data.dolphin, 1)
-      );
-    }
+      $scope.dolphins.splice(Codekit.getIndex($scope.dolphins, data.dolphin), 1);
+    };
   });
 
   constructor();
