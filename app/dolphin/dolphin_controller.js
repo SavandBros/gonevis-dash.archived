@@ -121,6 +121,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
             if (file.progress == 100) {
               setTimeout(function () {
                 file.dismiss = true;
+                $scope.$apply();
               }, 3000);
             }
           }
