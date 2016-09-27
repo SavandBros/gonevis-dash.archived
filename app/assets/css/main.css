@@ -75,6 +75,14 @@ a {
   margin-top: 15px;
 }
 
+.s-mar-bottom {
+  margin-bottom: 30px;
+}
+
+.s-mar-bottom-soft {
+  margin-bottom: 15px;
+}
+
 .s-mar-right {
   margin-right: 30px;
 }
