@@ -31,8 +31,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
     })
     .state("dash.dolphin", {
       url: "/dolphin",
-      controller: "DolphinListController",
-      templateUrl: "dolphin/dolphin_list/dolphin_list_view.html"
+      controller: "DolphinController",
+      templateUrl: "dolphin/dolphin_view.html"
     })
     .state("dash.comment-list", {
       url: "/comments",

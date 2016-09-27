@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 /**
  * @ngdoc function
@@ -11,8 +11,9 @@
  * @param $mdToast
  * @param API
  * @param AuthService
+ * @oaram DolphinService
  */
-function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthService, $q) {
+function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthService, DolphinService, $q) {
 
   $scope.tags = [];
 
@@ -23,8 +24,9 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
    * @desc Init function for controller
    */
   function constructor() {
-    console.log($scope.tagsToSubmit);
+    $scope.dolphinService = DolphinService;
     $scope.editing = true;
+
     API.Tags.get({ tag_site: AuthService.getCurrentSite() },
       function (data, status, headers, config) {
 
@@ -91,7 +93,7 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
         form.errors = null;
       },
       function (data) {
-        $mdToast.showSimple("Couldn't update entry!");
+        $mdToast.showSimple("Sorry, entry couldn't be updated. Try again.");
         form.loading = false;
         form.errors = data.data;
       }
@@ -110,7 +112,7 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
     API.Entry.delete({ entry_id: id },
       function (data) {
         $mdToast.showSimple("Entry has been deleted !");
-        $state.go('dash.entry-list');
+        $state.go("dash.entry-list");
       },
       function (data) {
         $mdToast.showSimple("Something went wrong... We couldn't delete entry!");
@@ -118,10 +120,21 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
     );
   };
 
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    $scope.form.cover_image = dolphin.id;
+  });
+
   constructor()
 }
 
-app.controller('EntryEditController', EntryEditController)
+app.controller("EntryEditController", EntryEditController);
 EntryEditController.$inject = [
-  '$scope', '$state', '$stateParams', '$mdToast', 'API', 'AuthService', '$q'
-]
+  "$scope",
+  "$state",
+  "$stateParams",
+  "$mdToast",
+  "API",
+  "AuthService",
+  "DolphinService",
+  "$q"
+];

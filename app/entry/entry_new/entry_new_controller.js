@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc function
@@ -11,7 +11,7 @@
  * @param AuthService
  * @param API
  */
-function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
+function EntryNewController($scope, $state, $mdToast, AuthService, API, DolphinService, $q) {
 
   $scope.tags = [];
 
@@ -25,25 +25,18 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
    */
   function constructor() {
 
+    $scope.dolphinService = DolphinService;
+
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data, status, headers, config) {
-
         for (var i in data.results) {
-          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
+          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name });
         }
-        console.log($scope.tags);
-
       }
     );
-    // Check auth
-    if (!AuthService.isAuthenticated()) {
-      return $state.go('signin');
-    }
 
     $scope.tagsToSubmit = [];
-
     $scope.form = {};
-
     $scope.statuses = [
       { name: "Draft", id: 0 },
       { name: "Hidden", id: 1 },
@@ -56,6 +49,8 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
    *
    * @method loadTags
    * @desc Load tags via load() function
+   *
+   * @param query {String}
    */
   $scope.loadTags = function (query) {
     return load();
@@ -65,7 +60,9 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
    * load
    *
    * @method load
-   * @desc get tags from var tags and return a promise
+   * @desc Get tags from var and return a promise
+   *
+   * @returns {Promise}
    */
   function load() {
     var deferred = $q.defer();
@@ -97,7 +94,7 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
     API.EntryAdd.save(payload,
       function (data, status, headers, config) {
         $mdToast.showSimple("Entry added.");
-        $state.go('dash.entry-edit', { entryId: data.id });
+        $state.go("dash.entry-edit", { entryId: data.id });
       },
       function (data, status, headers, config) {
         $mdToast.showSimple("Failed to add entry.");
@@ -105,10 +102,22 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, $q) {
         form.errors = data;
       }
     );
-  }
+  };
+
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    $scope.form.cover_image = dolphin.id;
+  });
 
   constructor();
 }
 
 app.controller("EntryNewController", EntryNewController);
-EntryNewController.$inject = ['$scope', '$state', '$mdToast', 'AuthService', 'API', '$q'];
+EntryNewController.$inject = [
+  "$scope",
+  "$state",
+  "$mdToast",
+  "AuthService",
+  "API",
+  "DolphinService",
+  "$q"
+];

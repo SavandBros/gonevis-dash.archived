@@ -1,9 +1,17 @@
 <!-- Main -->
 <div class="col-md-9">
   <!-- Title -->
-  <div class="form-group" ng-class="{'has-error': form.errors.title}">
-    <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="Title" required/>
-    <small id="title" class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
+  <div class="form-group row" ng-class="{'has-error': form.errors.title}">
+    <div class="col-sm-11 col-xs-10">
+      <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="Title" required/>
+      <small id="title" class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
+    </div>
+    <!-- Cover select -->
+    <div class="col-sm-1 col-xs-2 s-pad-no">
+      <button class="btn btn-default btn-block" ng-click="dolphinService.viewSelection()" type="button" title="Select cover image for entry">
+        <i class="fa fa-fw fa-image"></i>
+      </button>
+    </div>
   </div>
   <!-- Content -->
   <div class="form-group" ng-class="{'has-error': form.errors.content, 'editing-mode': editingMode}">
