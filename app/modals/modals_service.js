@@ -14,6 +14,7 @@ function ModalsService(ModalService) {
 
   var templates = {
     dolphin: "dolphin/dolphin_modal/dolphin_modal_view.html",
+    dolphinSelection: "dolphin/dolphin_selection.html",
     comment: "comment/comment_modal/comment_modal_view.html",
     tag: "tag/tag_modal/tag_modal_view.html",
     tagCreate: "tag/tag_create_modal/tag_create_modal_view.html",
