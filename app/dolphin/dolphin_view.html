@@ -9,12 +9,12 @@
       <div class="row" ng-if="dolphins.length">
         <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
           <!-- Link -->
-          <a ng-click="dolphinService.view(d)" class="dolphin" style="background-image: url({{ d.file }})">
+          <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.file }})">
             <p class="caption">{{ d.meta_data.name }}</p>
           </a>
           <!-- Options -->
           <div class="dropdown options" title="options">
-            <button class="btn btn-default btn-circle dropdown-toggle btn-sm a-fade"
+            <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade"
                     id="options{{ $index }}" data-toggle="dropdown">
               <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
