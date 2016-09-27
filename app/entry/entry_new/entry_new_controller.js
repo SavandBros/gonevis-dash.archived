@@ -102,7 +102,11 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, DolphinS
         form.errors = data;
       }
     );
-  }
+  };
+
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    $scope.form.cover_image = dolphin.id;
+  });
 
   constructor();
 }
