@@ -64,9 +64,21 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
     ModalsService.open("dolphin", "DolphinModalController", { dolphin: dolphin });
   };
 
+  /**
+   * viewSelection
+   *
+   * @method viewSelection
+   * @desc Open the main dolphin component via modal for selection
+   */
+  function viewSelection() {
+    $rootScope.selectionMode = true;
+    ModalsService.open("dolphinSelection", "DolphinController");
+  };
+
   return {
     remove: remove,
     view: view,
+    viewSelection: viewSelection,
   };
 }
 
