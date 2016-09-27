@@ -150,6 +150,21 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
 
   $scope.$on('gonevisDash.DolphinService:update', update);
   $scope.$on('gonevisDash.DolphinService:remove', update);
+  /**
+   * action
+   *
+   * @method action
+   * @desc Action is used to determine the action for the current state.
+   *
+   * @param dolphin {Object}
+   */
+  $scope.action = function (dolphin) {
+    if ($rootScope.selectionMode) {
+      return $rootScope.$broadcast("gonevisDash.DolphinService:select", dolphin);
+    };
+    DolphinService.view(dolphin);
+  };
+
 
   constructor();
 }
