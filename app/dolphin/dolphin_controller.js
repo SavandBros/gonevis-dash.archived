@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 /**
  * @ngdoc function
@@ -86,7 +86,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
       ]
     };
     $scope.upload.accept = $scope.upload.acceptList.join(",");
-  };
+  }
 
   /**
    * uploadFile
@@ -113,7 +113,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
             $mdToast.showSimple("Upload completed.");
             $scope.dolphins.unshift(data.data);
           },
-          function (data) {
+          function () {
             $mdToast.showSimple("Upload failed.");
           },
           function (event) {
@@ -146,8 +146,8 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
       $scope.dolphins[index].meta_data.name = data.dolphin.meta_data.name;
       $scope.dolphins[index].meta_data.description = data.dolphin.meta_data.description;
       $scope.dolphins[index].isDeleted = data.dolphin.isDeleted;
-    };
-  };
+    }
+  }
 
   /**
    * action
@@ -170,7 +170,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   constructor();
 }
 
-app.controller("DolphinController", DolphinController)
+app.controller("DolphinController", DolphinController);
 DolphinController.$inject = [
   "$scope",
   "$rootScope",
@@ -183,4 +183,4 @@ DolphinController.$inject = [
   "ENV",
   "AuthService",
   "Upload"
-]
+];
