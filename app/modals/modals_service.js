@@ -39,9 +39,9 @@ function ModalsService(ModalService) {
       inputs: data
     }).then(function (modal) {
       modals[template] = modal;
-      modals[template].element.modal()
+      modals[template].element.modal();
     });
-  };
+  }
 
   /**
    * close

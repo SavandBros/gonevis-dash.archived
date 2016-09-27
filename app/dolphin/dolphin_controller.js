@@ -31,7 +31,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.dolphinService = DolphinService;
 
     if ($rootScope.selectionMode) {
-      $scope.currentTab = 'dolphin';
+      $scope.currentTab = "dolphin";
     }
 
     API.Dolphins.get({},
@@ -119,7 +119,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
           function (event) {
             file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
 
-            if (file.progress == 100) {
+            if (file.progress === 100) {
               setTimeout(function () {
                 file.dismiss = true;
                 $scope.$apply();
@@ -160,7 +160,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   $scope.action = function (dolphin) {
     if ($rootScope.selectionMode) {
       return $rootScope.$broadcast("gonevisDash.DolphinService:select", dolphin);
-    };
+    }
     DolphinService.view(dolphin);
   };
 
