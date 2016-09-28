@@ -559,3 +559,7 @@ tags-input .tags.focused {
   margin-left: 318px;
   margin-bottom: 10px;
 }
+
+.collapse-y {
+  color: white;
+}
