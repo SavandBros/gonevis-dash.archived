@@ -14,6 +14,25 @@
             <small class="o-fade pull-right">DESCRIPTION</small>
           </div>
         </div>
+        <div class="form-group">
+          <a data-toggle="collapse" data-target="#advance">
+            Advanced Options <i class="fa fa-caret-down"></i>
+          </a>
+        </div>
+        <div class="collapse-y">
+          <div class="collapse" id="advance">
+            <div class="form-group">
+              <i class="fa fa-border text-info s-mar-right-soft fa-user"></i>
+              <span editable-textarea="siteDetail.meta_title" onbeforesave="updateSite('meta_title', $data)">{{ siteDetail.meta_title }}</span>
+              <small class="o-fade pull-right">Meta title</small>
+            </div>
+            <div class="form-group">
+              <i class="fa fa-border text-info s-mar-right-soft fa-user"></i>
+              <span editable-textarea="siteDetail.meta_description" onbeforesave="updateSite('meta_description', $data)">{{ siteDetail.meta_description }}</span>
+              <small class="o-fade pull-right">Meta description</small>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="panel-footer">
         <button class="btn btn-danger btn-sm" ng-click="remove(siteDetail.id)"><i class="fa fa-trash"></i> Delete Site</button>
