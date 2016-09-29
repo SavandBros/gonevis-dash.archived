@@ -28,7 +28,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
 
     API.Site.get({ site_id: site },
       function (data, status, headers, config) {
-        $scope.siteDetail = data;
+        $scope.sietSettings = data;
       },
       function (data, status, headers, config) {
         console.log(data);
