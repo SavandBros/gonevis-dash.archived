@@ -27,6 +27,13 @@
           </span>
           <small class="o-fade pull-right">DESCRIPTION</small>
         </div>
+        <!-- Meta Title -->
+        <div class="panel panel-default panel-body">
+          <span editable-text="siteSettings.meta_title" onbeforesave="updateSite('meta_title', $data)">
+            {{ siteSettings.meta_title || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">META TITLE</small>
+        </div>
         </div>
       </div>
       <div class="panel-footer">
