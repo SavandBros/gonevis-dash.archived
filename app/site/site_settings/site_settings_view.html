@@ -5,16 +5,16 @@
         <div class="row">
           <div class="col-md-12">
             <!-- Title -->
-            <h2 class="o-fade-soft" editable-text="sietSettings.title"
-                onbeforesave="updateSite('title', $data)">{{ sietSettings.title }}</h2>
+            <h2 class="o-fade-soft" editable-text="siteSettings.title"
+                onbeforesave="updateSite('title', $data)">{{ siteSettings.title }}</h2>
           </div>
         </div>
         <div class="s-mar-top">
           <div class="panel panel-default panel-body">
             <!-- Description -->
             <i class="fa fa-border text-info s-mar-right-soft fa-info"></i>
-            <span editable-textarea="sietSettings.description" onbeforesave="updateSite('description', $data)">
-              {{ sietSettings.description }}
+            <span editable-textarea="siteSettings.description" onbeforesave="updateSite('description', $data)">
+              {{ siteSettings.description }}
             </span>
             <small class="o-fade pull-right">DESCRIPTION</small>
           </div>
@@ -27,7 +27,7 @@
           <i class="fa fa-image"></i> Cover Image
         </button>
         <!-- Delete -->
-        <button class="btn btn-danger btn-sm" ng-click="remove(sietSettings.id)">
+        <button class="btn btn-danger btn-sm" ng-click="remove(siteSettings.id)">
           <i class="fa fa-trash"></i> Delete Site
         </button>
       </div>

@@ -30,7 +30,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
 
     API.Site.get({ site_id: site },
       function (data, status, headers, config) {
-        $scope.sietSettings = data;
+        $scope.siteSettings = data;
       }
     );
   };
@@ -51,7 +51,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
 
     API.SiteUpdate.put({ site_id: site }, payload,
       function (data, status, headers, config) {
-        $scope.sietSettings[key] = data[key];
+        $scope.siteSettings[key] = data[key];
         $mdToast.showSimple("Profile update.");
       },
       function (data, status, headers, config) {
