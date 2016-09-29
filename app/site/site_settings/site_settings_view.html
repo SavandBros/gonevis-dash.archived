@@ -34,6 +34,12 @@
           </span>
           <small class="o-fade pull-right">META TITLE</small>
         </div>
+        <!-- Meta Description -->
+        <div class="panel panel-default panel-body">
+          <span editable-textarea="siteSettings.meta_description" onbeforesave="updateSite('meta_description', $data)">
+            {{ siteSettings.meta_description || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">META DESCRIPTION</small>
         </div>
       </div>
       <div class="panel-footer">
