@@ -52,7 +52,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
 
     API.SiteUpdate.put({ site_id: site }, payload,
       function (data, status, headers, config) {
-        $scope.siteDetail = data;
+        $scope.sietSettings[key] = data[key];
         $mdToast.showSimple("Profile update.");
       },
       function (data, status, headers, config) {
