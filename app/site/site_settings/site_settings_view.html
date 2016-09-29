@@ -4,19 +4,24 @@
       <div class="panel-body s-pad">
         <div class="row">
           <div class="col-md-12">
-            <h3 class="text-center o-fade-soft" editable-text="siteDetail.title" onbeforesave="updateSite('title', $data)">{{ siteDetail.title }}</h3>
+            <h2 class="o-fade-soft" editable-text="sietSettings.title"
+                onbeforesave="updateSite('title', $data)">{{ sietSettings.title }}</h2>
           </div>
         </div>
         <div class="s-mar-top">
           <div class="panel panel-default panel-body">
-            <i class="fa fa-border text-info s-mar-right-soft fa-user"></i>
-            <span editable-textarea="siteDetail.description" onbeforesave="updateSite('description', $data)">{{ siteDetail.description }}</span>
+            <i class="fa fa-border text-info s-mar-right-soft fa-info"></i>
+            <span editable-textarea="sietSettings.description" onbeforesave="updateSite('description', $data)">
+              {{ sietSettings.description }}
+            </span>
             <small class="o-fade pull-right">DESCRIPTION</small>
           </div>
         </div>
       </div>
       <div class="panel-footer">
-        <button class="btn btn-danger btn-sm" ng-click="remove(siteDetail.id)"><i class="fa fa-trash"></i> Delete Site</button>
+        <button class="btn btn-danger btn-sm" ng-click="remove(sietSettings.id)">
+          <i class="fa fa-trash"></i> Delete Site
+        </button>
       </div>
     </div>
   </div>
