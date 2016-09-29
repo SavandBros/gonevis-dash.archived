@@ -7,7 +7,7 @@
             <div class="avatar avatar-outside" style="margin-top: -94px">{{ user.name[0] }}</div>
           </div>
           <div class="col-md-8">
-            <h3 class="text-right o-fade-soft" editable-text="user.name" onbeforesave="updateProfile('name', $data)">{{ user.name }}</h3>
+            <h3 class="text-right o-fade-soft" editable-text="user.name" onbeforesave="updateProfile('name', $data)">{{ user.name || "You have no name :-[" }}</h3>
           </div>
         </div>
         <div class="s-mar-top">
