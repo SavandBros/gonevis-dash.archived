@@ -92,7 +92,12 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
         $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
       }
     );
-  }
+  };
+
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    $scope.siteSettings.cover_image = dolphin.id;
+    $scope.updateSite("cover_image", dolphin.id);
+  });
 
   constructor();
 }
