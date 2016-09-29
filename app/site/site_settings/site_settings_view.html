@@ -1,13 +1,24 @@
 <div class="container container-light">
   <div class="col-md-6 col-md-offset-3">
     <div class="panel panel-default s-box s-mar-top">
+      <div class="panel-heading">
+        <h3>
+          <!-- Title -->
+          {{ siteSettings.title }}
+          <!-- Image -->
+          <button class="btn btn-default btn-sm pull-right" ng-click="dolphinService.viewSelection()"
+                  title="Set or Change cover image of site.">
+            <i class="fa fa-image"></i> Cover Image
+          </button>
+        </h3>
+      </div>
       <div class="panel-body s-pad">
-        <div class="row">
-          <div class="col-md-12">
-            <!-- Title -->
-            <h2 class="o-fade-soft" editable-text="siteSettings.title"
-                onbeforesave="updateSite('title', $data)">{{ siteSettings.title }}</h2>
-          </div>
+        <!-- Title -->
+        <div class="panel panel-default panel-body">
+          <span editable-text="siteSettings.title" onbeforesave="updateSite('title', $data)">
+            {{ siteSettings.title || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">TITLE</small>
         </div>
         <div class="s-mar-top">
           <div class="panel panel-default panel-body">
