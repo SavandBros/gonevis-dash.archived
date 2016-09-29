@@ -18,7 +18,7 @@
           </div>
           <div class="panel panel-default panel-body s-mar-no">
             <i class="fa fa-border text-info s-mar-right-soft fa-map-marker"></i>
-            <span editable-text="user.location" onbeforesave="updateProfile('location', $data)">{{ user.location }}</span>
+            <span editable-text="user.location" onbeforesave="updateProfile('location', $data)">{{ user.location || "Nothing here..." }}</span>
             <small class="o-fade pull-right">LOCATION</small>
           </div>
         </div>
