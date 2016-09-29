@@ -20,15 +20,13 @@
           </span>
           <small class="o-fade pull-right">TITLE</small>
         </div>
-        <div class="s-mar-top">
-          <div class="panel panel-default panel-body">
-            <!-- Description -->
-            <i class="fa fa-border text-info s-mar-right-soft fa-info"></i>
-            <span editable-textarea="siteSettings.description" onbeforesave="updateSite('description', $data)">
-              {{ siteSettings.description }}
-            </span>
-            <small class="o-fade pull-right">DESCRIPTION</small>
-          </div>
+        <!-- Description -->
+        <div class="panel panel-default panel-body">
+          <span editable-textarea="siteSettings.description" onbeforesave="updateSite('description', $data)">
+            {{ siteSettings.description || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">DESCRIPTION</small>
+        </div>
         </div>
       </div>
       <div class="panel-footer">
