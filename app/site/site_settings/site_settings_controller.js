@@ -12,8 +12,9 @@
  * @param API
  * @param ModalsService
  * @param AuthService
+ * @param DolphinService
  */
-function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, ModalsService, AuthService) {
+function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, ModalsService, AuthService, DolphinService) {
 
   var site = AuthService.getCurrentSite()
 
@@ -25,13 +26,11 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
+    $scope.dolphinService = DolphinService;
 
     API.Site.get({ site_id: site },
       function (data, status, headers, config) {
         $scope.sietSettings = data;
-      },
-      function (data, status, headers, config) {
-        console.log(data);
       }
     );
   };
@@ -106,5 +105,6 @@ SiteSettingsController.$inject = [
   '$mdToast',
   'API',
   'ModalsService',
-  'AuthService'
+  'AuthService',
+  'DolphinService'
 ];
