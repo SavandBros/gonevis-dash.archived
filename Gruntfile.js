@@ -42,7 +42,7 @@ module.exports = function (grunt) {
         tasks: ["wiredep"]
       },
       js: {
-        files: ["<%= gonevisDash.app %>/{,*/}*.js"],
+        files: ["<%= gonevisDash.app %>/{,*/*/}*.js"],
         tasks: ["newer:jshint:all", "newer:jscs:all"],
         options: {
           livereload: "<%= connect.options.livereload %>"
