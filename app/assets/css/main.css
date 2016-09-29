@@ -566,7 +566,7 @@ tags-input .tags.focused {
 /* Editable */
 
 .editable-hide {
-  display: block !important;
+  display: initial !important;
 }
 
 .editable-wrap {
