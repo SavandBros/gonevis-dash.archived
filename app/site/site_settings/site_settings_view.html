@@ -1,15 +1,17 @@
 <div class="container container-light">
   <div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default s-box" style="margin-top: 64px">
+    <div class="panel panel-default s-box s-mar-top">
       <div class="panel-body s-pad">
         <div class="row">
           <div class="col-md-12">
+            <!-- Title -->
             <h2 class="o-fade-soft" editable-text="sietSettings.title"
                 onbeforesave="updateSite('title', $data)">{{ sietSettings.title }}</h2>
           </div>
         </div>
         <div class="s-mar-top">
           <div class="panel panel-default panel-body">
+            <!-- Description -->
             <i class="fa fa-border text-info s-mar-right-soft fa-info"></i>
             <span editable-textarea="sietSettings.description" onbeforesave="updateSite('description', $data)">
               {{ sietSettings.description }}
@@ -19,6 +21,12 @@
         </div>
       </div>
       <div class="panel-footer">
+        <!-- Image -->
+        <button class="btn btn-default btn-sm pull-right" ng-click="dolphinService.viewSelection()"
+                title="Set or Change cover image of site.">
+          <i class="fa fa-image"></i> Cover Image
+        </button>
+        <!-- Delete -->
         <button class="btn btn-danger btn-sm" ng-click="remove(sietSettings.id)">
           <i class="fa fa-trash"></i> Delete Site
         </button>
