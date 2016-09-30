@@ -51,6 +51,12 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
 
     API.Entry.get({ entry_id: $scope.form.id },
       function (data, status, headers, config) {
+        if (data.start_publication) {
+          data.start_publication = new Date(data.start_publication);
+        }
+        if (data.end_publication) {
+          data.end_publication = new Date(data.end_publication);
+        }
         $scope.form = data;
       }
     )
