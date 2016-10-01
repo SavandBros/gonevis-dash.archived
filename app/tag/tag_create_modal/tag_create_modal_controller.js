@@ -10,8 +10,10 @@
  * @param API
  * @param AuthService
  * @param ModalsService
+ * @param Slug
+ * @param DolphinService
  */
-function TagCreateModalController($scope, TagService, API, AuthService, ModalsService) {
+function TagCreateModalController($scope, TagService, API, AuthService, ModalsService, Slug, DolphinService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -22,7 +24,8 @@ function TagCreateModalController($scope, TagService, API, AuthService, ModalsSe
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.form = {}
+    $scope.form = { data: {} };
+    $scope.dolphinService = DolphinService;
   };
 
   /**
@@ -53,6 +56,14 @@ function TagCreateModalController($scope, TagService, API, AuthService, ModalsSe
     );
   }
 
+  $scope.updateSlug = function () {
+    $scope.form.data.slug = Slug.slugify($scope.form.data.name);
+  }
+
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    $scope.form.data.cover_image = dolphin.id;
+  });
+
   constructor();
 }
 
@@ -62,5 +73,7 @@ TagCreateModalController.$inject = [
   'TagService',
   'API',
   'AuthService',
-  'ModalsService'
+  'ModalsService',
+  'Slug',
+  'DolphinService'
 ];
