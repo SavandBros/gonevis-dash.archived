@@ -11,6 +11,7 @@
  * @param $mdToast
  * @param AuthService
  * @param API
+ * @param DolphinService
  */
 function UserController($scope, $state, $mdToast, AuthService, API, DolphinService) {
 
@@ -26,25 +27,12 @@ function UserController($scope, $state, $mdToast, AuthService, API, DolphinServi
     $scope.state = $state;
     $scope.dolphinService = DolphinService;
 
-    getUser();
-  };
-
-  /**
-   * getUser
-   *
-   * @method getUser
-   * @desc get user data via api call
-   * 
-   * @param $scope.user.id {string}
-   */
-  function getUser() {
-
     API.User.get({ user_id: $scope.user.id },
       function (data, status, headers, config) {
         $scope.user = data;
       }
     );
-  }
+  };
 
   /**
    * updateProfile
@@ -80,4 +68,11 @@ function UserController($scope, $state, $mdToast, AuthService, API, DolphinServi
 }
 
 app.controller("UserController", UserController);
-UserController.$inject = ['$scope', '$state', '$mdToast', 'AuthService', 'API', 'DolphinService'];
+UserController.$inject = [
+  "$scope",
+  "$state",
+  "$mdToast",
+  "AuthService",
+  "API",
+  "DolphinService"
+];
