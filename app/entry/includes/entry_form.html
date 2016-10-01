@@ -45,11 +45,7 @@
   </div>
   <!-- Status -->
   <div class="form-group">
-    <select ng-init="form.status = statuses[0].id"
-            ng-options="status.id as status.name for status in statuses"
-            ng-value="status"
-            ng-model="form.status"
-            class="form-control"></select>
+    <select ng-init="form.status = statuses[0].id" ng-options="status.id as status.name for status in statuses" ng-value="status" ng-model="form.status" class="form-control"></select>
   </div>
   <!-- Advanced Options -->
   <div class="form-group">
@@ -64,6 +60,15 @@
     </div>
     <div class="form-group">
       <input ng-model="form.meta_description" placeholder="Meta description" class="form-control">
+    </div>
+    <!-- Date Picker -->
+    <div class=" form-group">
+      <label for="startDate">Start publication</label>
+      <input id="startDate" ng-model="form.start_publication" type="datetime-local" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="endDate">End publication</label>
+      <input id="endDate" ng-model="form.end_publication" type="datetime-local" class="form-control">
     </div>
   </div>
   <!-- Comments enabled -->
@@ -80,12 +85,10 @@
   <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
     {{ form.errors.non_field_errors[0] }}
   </div>
+
   <hr>
   <!-- Submit -->
-  <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid"
-          ng-if="!editing">SUBMIT</button>
-  <button class="btn btn-primary btn-block btn-lg" ng-disabled="form.loading || form.$invalid"
-          ng-if="editing">UPDATE</button>
-  <button class="btn btn-default btn-lg pull-right" title="Delete entry" type="button"
-          style="margin-top: 10px" ng-if="editing" ng-click="delete(form.id)"><i class="fa fa-trash"></i></button>
+  <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid" ng-if="!editing">SUBMIT</button>
+  <button class="btn btn-primary btn-block btn-lg" ng-disabled="form.loading || form.$invalid" ng-if="editing">UPDATE</button>
+  <button class="btn btn-default btn-lg pull-right" title="Delete entry" type="button" style="margin-top: 10px" ng-if="editing" ng-click="delete(form.id)"><i class="fa fa-trash"></i></button>
 </div>
