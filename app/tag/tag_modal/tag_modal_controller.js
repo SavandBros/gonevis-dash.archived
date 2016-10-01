@@ -8,6 +8,7 @@
  * @param $scope
  * @param TagService
  * @param tag
+ * @param DolphinService
  */
 function TagModalController($scope, TagService, tag, DolphinService) {
 
