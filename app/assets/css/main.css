@@ -14,8 +14,10 @@ h6 {
   margin: 0;
 }
 
-a {
+a,
+button {
   cursor: pointer;
+  outline: 0 !important;
 }
 
 .nav,
@@ -581,4 +583,47 @@ tags-input .tags.focused {
   width: 350px;
   margin-left: 318px;
   margin-bottom: 10px;
+}
+
+
+/* Editable */
+
+.editable-hide {
+  display: initial !important;
+}
+
+.editable-wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5% 20%;
+}
+
+.editable-input {
+  width: 100% !important;
+}
+
+.editable-controls {
+  width: 100% !important;
+}
+
+.editable-buttons {
+  display: block;
+  width: 100% !important;
+  margin-top: 10px;
+}
+
+.editable-buttons .btn {
+  padding: 10px 30px;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.editable-input {
+  font-size: large;
+  padding: 30px;
 }

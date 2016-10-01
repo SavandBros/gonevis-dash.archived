@@ -61,6 +61,15 @@
     <div class="form-group">
       <input ng-model="form.meta_description" placeholder="Meta description" class="form-control">
     </div>
+    <!-- Date Picker -->
+    <div class=" form-group">
+      <label for="startDate">Start publication</label>
+      <input id="startDate" ng-model="form.start_publication" type="datetime-local" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="endDate">End publication</label>
+      <input id="endDate" ng-model="form.end_publication" type="datetime-local" class="form-control">
+    </div>
   </div>
   <!-- Comments enabled -->
   <div class="checkbox checkbox-primary">
@@ -75,13 +84,6 @@
   <!-- Errors -->
   <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
     {{ form.errors.non_field_errors[0] }}
-  </div>
-  <!-- Date Picker -->
-  <div class=" form-group">
-    <input ng-model="form.start_publication" type="datetime-local" placeholder="End publication" class="form-control">
-  </div>
-  <div class="form-group">
-    <input ng-model="form.end_publication" type="datetime-local" placeholder="Start publication" class="form-control">
   </div>
 
   <hr>

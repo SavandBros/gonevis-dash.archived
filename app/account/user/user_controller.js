@@ -11,8 +11,9 @@
  * @param $mdToast
  * @param AuthService
  * @param API
+ * @param DolphinService
  */
-function UserController($scope, $state, $mdToast, AuthService, API) {
+function UserController($scope, $state, $mdToast, AuthService, API, DolphinService) {
 
   /**
    * constructor
@@ -24,26 +25,14 @@ function UserController($scope, $state, $mdToast, AuthService, API) {
 
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.state = $state;
+    $scope.dolphinService = DolphinService;
 
-    getUser();
-  };
-
-  /**
-   * getUser
-   *
-   * @method getUser
-   * @desc get user data via api call
-   * 
-   * @param $scope.user.id {string}
-   */
-  function getUser() {
-
-    API.User.get( { user_id: $scope.user.id },
+    API.User.get({ user_id: $scope.user.id },
       function (data, status, headers, config) {
         $scope.user = data;
       }
     );
-  }
+  };
 
   /**
    * updateProfile
@@ -70,8 +59,20 @@ function UserController($scope, $state, $mdToast, AuthService, API) {
     );
   }
 
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    $scope.user.picture = dolphin.id;
+    $scope.updateProfile("picture", dolphin.id);
+  });
+
   constructor();
 }
 
 app.controller("UserController", UserController);
-UserController.$inject = ['$scope', '$state', '$mdToast', 'AuthService', 'API'];
+UserController.$inject = [
+  "$scope",
+  "$state",
+  "$mdToast",
+  "AuthService",
+  "API",
+  "DolphinService"
+];

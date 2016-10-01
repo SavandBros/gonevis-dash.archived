@@ -12,8 +12,9 @@
  * @param API
  * @param ModalsService
  * @param AuthService
+ * @param DolphinService
  */
-function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, ModalsService, AuthService) {
+function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, ModalsService, AuthService, DolphinService) {
 
   var site = AuthService.getCurrentSite()
 
@@ -25,13 +26,11 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
+    $scope.dolphinService = DolphinService;
 
     API.Site.get({ site_id: site },
       function (data, status, headers, config) {
-        $scope.siteDetail = data;
-      },
-      function (data, status, headers, config) {
-        console.log(data);
+        $scope.siteSettings = data;
       }
     );
   };
@@ -52,7 +51,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
 
     API.SiteUpdate.put({ site_id: site }, payload,
       function (data, status, headers, config) {
-        $scope.siteDetail = data;
+        $scope.siteSettings[key] = data[key];
         $mdToast.showSimple("Profile update.");
       },
       function (data, status, headers, config) {
@@ -70,7 +69,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
    * @param siteId {String}
    */
   $scope.remove = function (siteId) {
-    API.SiteUpdate.delete({ site_id: site },
+    API.Site.delete({ site_id: site },
       function (data, status, headers, config) {
         for (var i = 0; i < $scope.user.sites.length; i++) {
           if ($scope.user.sites[i].id == site) {
@@ -93,7 +92,12 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
         $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
       }
     );
-  }
+  };
+
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    $scope.siteSettings.cover_image = dolphin.id;
+    $scope.updateSite("cover_image", dolphin.id);
+  });
 
   constructor();
 }
@@ -106,5 +110,6 @@ SiteSettingsController.$inject = [
   '$mdToast',
   'API',
   'ModalsService',
-  'AuthService'
+  'AuthService',
+  'DolphinService'
 ];

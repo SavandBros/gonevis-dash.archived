@@ -7,26 +7,27 @@
             <div class="avatar avatar-outside" style="margin-top: -94px">{{ user.name[0] }}</div>
           </div>
           <div class="col-md-8">
-            <h3 class="text-right o-fade-soft" editable-text="user.name" onbeforesave="updateProfile('name', $data)">{{ user.name }}</h3>
+            <h3 class="text-right o-fade-soft" editable-text="user.name" onbeforesave="updateProfile('name', $data)">{{ user.name || "You have no name :-[" }}</h3>
           </div>
         </div>
         <div class="s-mar-top">
           <div class="panel panel-default panel-body">
-            <i class="fa fa-border text-info s-mar-right-soft fa-user"></i>
-            <span editable-textarea="user.about" onbeforesave="updateProfile('about', $data)">{{ user.about }}</span>
+            <span editable-textarea="user.about" onbeforesave="updateProfile('about', $data)">{{ user.about || "Nothing here..." }}</span>
             <small class="o-fade pull-right">ABOUT</small>
           </div>
           <div class="panel panel-default panel-body s-mar-no">
-            <i class="fa fa-border text-info s-mar-right-soft fa-map-marker"></i>
-            <span editable-text="user.location" onbeforesave="updateProfile('location', $data)">{{ user.location }}</span>
+            <span editable-text="user.location" onbeforesave="updateProfile('location', $data)">{{ user.location || "Nothing here..." }}</span>
             <small class="o-fade pull-right">LOCATION</small>
           </div>
         </div>
       </div>
       <div class="panel-footer">
-        <a ui-sref="dash.change-password">
-          <button type="button" class="btn btn-danger">Change Password</button>
+        <a ui-sref="dash.change-password" class="btn btn-danger btn-sm">
+          <i class="fa fa-lock fa-fw"></i> Change Password
         </a>
+        <button class="btn btn-default btn-sm pull-right" ng-click="dolphinService.viewSelection()" title="Set or Change cover image of site.">
+          <i class="fa fa-image"></i> Avatar
+        </button>
       </div>
     </div>
   </div>
