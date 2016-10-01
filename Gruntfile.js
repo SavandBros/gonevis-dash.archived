@@ -455,7 +455,8 @@ module.exports = function (grunt) {
           "textAngular",
           "angularModalService",
           "ngTagsInput",
-          "ngFileUpload"
+          "ngFileUpload",
+          "angular-sortable-view"
         ],
         constants: {
           ENV: {

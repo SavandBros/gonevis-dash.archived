@@ -85,6 +85,10 @@ button {
   margin-bottom: 15px;
 }
 
+.s-mar-bottom-list {
+  margin-bottom: 5px !important;
+}
+
 .s-mar-right {
   margin-right: 30px;
 }
@@ -111,6 +115,25 @@ button {
 .s-pad-y-soft {
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.s-pad-left-no {
+  padding-left: 0;
+}
+
+.s-pad-left-soft {
+  padding-left: 15px;
+}
+
+.s-pad-right-soft {
+  padding-right: 15px;
+}
+
+
+/* Sizes */
+
+.sz-full {
+  width: 100% !important;
 }
 
 
