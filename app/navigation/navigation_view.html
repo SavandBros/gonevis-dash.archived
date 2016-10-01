@@ -1,37 +1,46 @@
+<!-- Add button -->
+<button type="button" class="btn btn-success btn-corner" ng-click="create()">
+  <i class="fa fa-plus"></i>
+</button>
+
+<!-- Content -->
 <div class="container container-light pad-top">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-3">
     <!-- Nothing -->
     <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length"></ng-include>
+    <!-- Main -->
     <div class="panel panel-default s-box form-inline" ng-if="navigations.length">
-      <div class="panel-heading" data-toggle="collapse" data-target="#newPost">
-        <h3>
-          <button class="btn btn-primary pull-right" ng-click="updateNavigation(form)">Update</button>
-          <i class="fa fa-bars" aria-hidden="true"></i> Navigations
-        </h3>
-      </div>
+      <div class="panel-heading">Navigations</div>
       <div class="panel-body">
-        <form name="form">
-          <div ng-repeat="nav in navigations" class="navigation">
-            <div class="form-group">
-              <input type="text" placeholder="Label" ng-model="nav.label" class="form-control navigation-label" required />
+        <!-- Form -->
+        <form name="form" ng-submit="update(form)" sv-root sv-part="navigations">
+          <div class="form-group sz-full s-mar-bottom-list" ng-repeat="nav in navigations" sv-element>
+            <!-- Helper -->
+            <div sv-helper class="helper-left" style="height: 34px">
+              <i class="fa fa-arrows-v fa-border fa-2x"></i>
             </div>
-            <div class="form-group">
-              <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control navigation-url" required />
-              <span class="navigation-trash" ng-click="deleteNav(nav.sort_number)">
-                <i class="fa fa-trash text-danger"></i>
-              </span>
+            <!-- Handle -->
+            <div class="col-xs-1" sv-handle>
+              <i class="fa fa-reorder" style="margin-top: 8px"></i>
+            </div>
+            <!-- Label -->
+            <div class="col-xs-4 s-pad-left-no">
+              <input type="text" placeholder="Label" ng-model="nav.label" class="form-control sz-full" required />
+            </div>
+            <!-- URL -->
+            <div class="col-xs-5 s-pad-no">
+              <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control sz-full" required />
+            </div>
+            <!-- Delete -->
+            <div class="col-xs-2">
+              <button class="btn btn-default btn-block" ng-click="remove($index)" type="button">
+                <i class="fa fa-trash"></i>
+              </button>
             </div>
           </div>
-        </form>
-        <form name="form">
-          <div class="form-group">
-            <input type="text" placeholder="Label" ng-model="newNav.label" class="form-control navigation-label" required />
-          </div>
-          <div class="form-group">
-            <input type="text" placeholder="URL" ng-model="newNav.url" class="form-control navigation-url" required />
-            <button class="btn btn-success navigation-button" type="button" ng-click="addNav()" ng-disabled="form.$invalid">
-              <i class="fa fa-plus"></i>
-            </button>
+          <!-- Update -->
+          <div class="form-group s-pad-right-soft s-mar-top-soft pull-right">
+            <button class="btn btn-primary">Update</button>
           </div>
         </form>
       </div>
