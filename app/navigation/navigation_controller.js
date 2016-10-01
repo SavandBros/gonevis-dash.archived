@@ -12,8 +12,8 @@
  * @param AuthService
  */
 function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthService) {
+
   var site = AuthService.getCurrentSite();
-  $scope.navigations = [];
 
   /**
    * constructor
@@ -22,90 +22,80 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.navigations = [];
+
     API.Navigation.get({ site_id: site },
       function (data) {
         $scope.navigations = data.navigation;
-        console.log(data);
       }
     );
-    $scope.nothing = {
-      text: "It's lonely here... Try adding some navigations!"
-    };
+
+    $scope.nothing = { text: "It's lonely here... Try adding some navigations!" };
   }
 
   /**
-   * updateNavigation
+   * update
    *
-   * @method updateNavigation
+   * @method update
    * @desc function for updating navigations
-   * 
+   *
+   * @param form {Object}
    */
-  $scope.updateNavigation = function () {
-    $scope.loading = true;
+  $scope.update = function (form) {
+    form.loading = true;
 
-    for (var i = 0; i < $scope.navigations.length; i++) {
-      if (!$scope.navigations[i].url.startsWith("/")) {
-        $scope.navigations.splice(i, 1);
-        return $mdToast.showSimple("Navigation URL should start with a slash /");
-      } else if (
-        $scope.navigations[i].url.startsWith("/") &&
-        $scope.newNav.url !== "" &&
-        $scope.newNav.label !== ""
-      ) {
-        $scope.addNav();
-      }
+    for (var n in $scope.navigations) {
+      $scope.navigations[n].sort_number = n;
     }
+
     API.UpdateNavigation.put({ site_id: site }, { navigation: $scope.navigations },
       function (data) {
-        $scope.loading = false;
+        form.loading = false;
         $scope.navigations = data.navigation;
         $mdToast.showSimple("Navigation updated.");
       },
       function () {
-        $scope.loading = false;
-        $mdToast.showSimple("Sorry, we couldn't update navigation, please try again later");
+        form.loading = false;
+        $mdToast.showSimple("Couldn't update navigation, please try again later.");
       }
     );
   };
-  $scope.newNav = {
-    "url": "/",
-    "label": "",
-    "sort_number": $scope.navigations.length + 1
-  };
+
   /**
-   * addNav
+   * create
    *
-   * @method addNav
-   * @desc function for adding a new navigation
-   * 
+   * @method create
+   * @desc Nav creation function
    */
-  $scope.addNav = function () {
-    $scope.navigations.push($scope.newNav);
-    $scope.newNav = {
-      "url": "/",
-      "label": "",
-      "sort_number": $scope.navigations.length + 1
-    };
+  $scope.create = function () {
+    $scope.navigations.push({
+      label: "New Nav",
+      url: "/",
+      sort_number: $scope.navigations.length + 1
+    });
   };
 
   /**
-   * deleteNav
+   * remove
    *
-   * @method deleteNav
-   * @desc function for deleting a navigation
-   * 
-   * @param num {integer}
+   * @method remove
+   * @desc Nav deletion function
+   *
+   * @param index {Number}
    */
-  $scope.deleteNav = function (num) {
-    for (var i = 0; i < $scope.navigations.length; i++) {
-      if ($scope.navigations[i].sort_number === num) {
-        $scope.navigations.splice(i, 1);
-      }
-    }
+  $scope.remove = function (index) {
+    $scope.navigations.splice(index, 1);
   };
 
   constructor();
 }
 
 app.controller("NavigationController", NavigationController);
-NavigationController.$inject = ["$scope", "$rootScope", "$state", "$mdToast", "API", "AuthService"];
+NavigationController.$inject = [
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "API",
+  "AuthService"
+];
