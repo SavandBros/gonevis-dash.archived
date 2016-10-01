@@ -43,7 +43,7 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
    * @param form {Object}
    */
   $scope.update = function (form) {
-    $scope.loading = true;
+    form.loading = true;
 
     for (var n in $scope.navigations) {
       $scope.navigations[n].sort_number = n;
@@ -51,12 +51,12 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
 
     API.UpdateNavigation.put({ site_id: site }, { navigation: $scope.navigations },
       function (data) {
-        $scope.loading = false;
+        form.loading = false;
         $scope.navigations = data.navigation;
         $mdToast.showSimple("Navigation updated.");
       },
       function () {
-        $scope.loading = false;
+        form.loading = false;
         $mdToast.showSimple("Couldn't update navigation, please try again later.");
       }
     );
