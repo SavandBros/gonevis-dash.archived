@@ -2,22 +2,17 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <i class="fa fa-hashtag text-info"></i> {{ tag.name }} <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
-        <button class="btn btn-default btn-sm pull-right" ng-click="dolphinService.viewSelection()" title="Set or Change cover image of site.">
-          <i class="fa fa-image"></i> Cover Image
+        <i class="fa fa-hashtag text-info"></i>
+        {{ form.data.name }}
+        <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+        <button class="btn btn-default btn-xs pull-right" ng-click="dolphinService.viewSelection()"
+          title="Set or Change cover image of site.">
+          Cover Image
         </button>
       </div>
       <div class="modal-body">
-        <form ng-submit="tagService.update(tag)">
-          <div class="form-group">
-            <input id="name" class="form-control" type="text" ng-model="tag.name" placeholder="Name" required/>
-          </div>
-          <div class="form-group">
-            <input id="slug" class="form-control" type="text" ng-model="tag.slug" placeholder="Tag">
-          </div>
-          <div class="form-group">
-            <textarea id="slug" class="form-control" type="text" ng-model="tag.description" placeholder="Descroption"></textarea>
-          </div>
+        <form ng-submit="tagService.update(form.data)">
+          <ng-include src="'tag/includes/tag_form.html'"></ng-include>
           <button class="btn btn-primary btn-block" ng-disabled="form.loading">Update</button>
         </form>
       </div>
