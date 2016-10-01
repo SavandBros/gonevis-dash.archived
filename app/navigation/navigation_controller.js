@@ -10,9 +10,8 @@
  * @param $state
  * @param $mdToast
  * @param AuthService
- * @param Codekit
  */
-function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthService, Codekit) {
+function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -98,6 +97,5 @@ NavigationController.$inject = [
   "$state",
   "$mdToast",
   "API",
-  "AuthService",
-  "Codekit"
+  "AuthService"
 ];
