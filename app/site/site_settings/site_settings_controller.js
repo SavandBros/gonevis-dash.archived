@@ -69,7 +69,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
    * @param siteId {String}
    */
   $scope.remove = function (siteId) {
-    API.SiteUpdate.delete({ site_id: site },
+    API.Site.delete({ site_id: site },
       function (data, status, headers, config) {
         for (var i = 0; i < $scope.user.sites.length; i++) {
           if ($scope.user.sites[i].id == site) {
