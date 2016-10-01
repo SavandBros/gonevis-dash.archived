@@ -160,8 +160,9 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   $scope.action = function (dolphin) {
     if ($rootScope.selectionMode) {
       $rootScope.$broadcast("gonevisDash.DolphinService:select", dolphin);
-      return $rootScope.selectionMode = false;
-    };
+      $rootScope.selectionMode = false;
+      return;
+    }
     DolphinService.view(dolphin);
   };
 
