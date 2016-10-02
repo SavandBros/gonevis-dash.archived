@@ -89,6 +89,15 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   };
 
   $rootScope.$on("gonevisDash.TagService:remove", function (event, data) {
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Load more function for controller
+   */
+  $scope.loadMore = Pagination.loadMore;
+
+  $scope.$on("gonevisDash.TagService:remove", function (event, data) {
     for (var i = 0; i < $scope.tags.length; i++) {
       if ($scope.tags[i].id === data.id) {
         $scope.tags[i].isDeleted = true;
