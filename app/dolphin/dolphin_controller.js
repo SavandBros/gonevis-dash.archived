@@ -14,9 +14,10 @@
  * @param ENV
  * @param AuthService
  * @param Upload
+ * @param Pagination
  */
 function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
-  DolphinService, Codekit, API, ENV, AuthService, Upload) {
+  DolphinService, Codekit, API, ENV, AuthService, Upload, Pagination) {
 
   var site = AuthService.getCurrentSite();
 
@@ -29,6 +30,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   function constructor() {
     $scope.nothing = { text: "It's lonely here... Try adding some dolphins!" };
     $scope.dolphinService = DolphinService;
+    $scope.dolphinForm = {};
 
     if ($rootScope.selectionMode) {
       $scope.currentTab = "dolphin";
@@ -37,6 +39,9 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.Dolphins.get({},
       function (data) {
         $scope.dolphins = data.results;
+        $scope.dolphinForm = Pagination.paginate(
+          $scope.dolphinForm, data, {}
+        );
       }
     );
 
@@ -184,5 +189,6 @@ DolphinController.$inject = [
   "API",
   "ENV",
   "AuthService",
-  "Upload"
+  "Upload",
+  "Pagination"
 ];
