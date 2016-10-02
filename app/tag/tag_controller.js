@@ -89,7 +89,6 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     );
   };
 
-  $rootScope.$on("gonevisDash.TagService:remove", function (event, data) {
   /**
    * loadMore
    *
@@ -106,7 +105,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     }
   });
 
-  $rootScope.$on("gonevisDash.TagService:create", function (event, data) {
+  $scope.$on("gonevisDash.TagService:create", function (event, data) {
     var tag = data.tag;
     tag.slug = data.data.slug;
     tag.site = data.data.site;
