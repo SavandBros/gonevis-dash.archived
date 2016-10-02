@@ -62,6 +62,50 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
   };
 
   /**
+   * removeSelected
+   *
+   * @method removeSelected
+   * @desc Remove selected entries
+   *
+   * @param entry{object}
+   */
+  $scope.removeSelected = function (entry) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      if ($scope.entries[i].selected) {
+        $scope.delete($scope.entries[i])
+      }
+    }
+  }
+
+  $scope.statuses = [
+    { name: "Draft", id: 0, icon: "fa fa-pencil" },
+    { name: "Hidden", id: 1, icon: "fa fa-user-secret" },
+    { name: "Published", id: 2, icon: "fa fa-star" }
+  ];
+
+  /**
+   * setStatus
+   *
+   * @method setStatus
+   * @desc set selected status
+   *
+   * @param status{number}
+   */
+  $scope.setStatus = function (status) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      var entry = $scope.entries[i];
+      if (entry.selected) {
+        API.Entry.patch({ entry_id: entry.id }, { status: status },
+          function (data) {
+            entry = data;
+            $mdToast.showSimple("Status changed!");
+          }
+        );
+      }
+    }
+  }
+
+  /**
    * delete
    *
    * @method delete
