@@ -8,7 +8,7 @@
     <span class="input-group-btn">
       <button class="btn btn-default" type="submit" ng-click="search()">
         <span class="fa fa-search"></span> Search
-      </button>
+    </button>
     </span>
   </div>
 </form>
@@ -21,13 +21,29 @@
       <p class="alert-danger alert"><i class="fa fa-exclamation-triangle"></i> No results</p>
     </div>
     <!-- List -->
-    <div class="panel panel-defaul s-box b-left-no" ng-if="entries.length">
-      <div class="panel-body s-pad-y-no">
+    <div class="panel panel-default s-box" ng-if="entries.length">
+      <div class="panel-heading">
+        <button class="btn btn-default" ng-click="removeSelected(entries)" type="button">
+            <i class="fa fa-trash"></i>
+        </button>
+        <div class="dropdown options pull-right" title="options">
+          <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
+            Set status
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="s in statuses">
+              <a ng-click="setStatus(s.id)"><i class="{{ s.icon }}"></i>{{s.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel-body s-pad-y-no b-left-no">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
           <li class="row list-panel b-left b-color-{{ e.status }} s-fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
+              <input type="checkbox" ng-model="e.selected" ng-click="checked(e)" name="checkbox">
               <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
               <small class="dis-b o-fade">/{{ e.slug }}</small>
             </div>
