@@ -11,6 +11,18 @@
  *
  * @returns [Factory]
  */
+  function paginate(form, data, payload) {
+    form.page = {
+      next: data.next,
+      prev: data.prev,
+      payload: payload,
+      loading: false,
+      noMore: true,
+    };
+    if (data.next) form.page.noMore = false;
+    return form;
+  }
+
 }
 
 app.factory("Pagination", Pagination);
