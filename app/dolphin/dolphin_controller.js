@@ -183,9 +183,10 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   $scope.$on("gonevisDash.DolphinService:remove", update);
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
-    if (!data.success) return;
-    $scope.dolphinForm.page = data.page;
-    $scope.dolphins = $scope.dolphins.concat(data.data.results);
+    if (data.success) {
+      $scope.dolphinForm.page = data.page;
+      $scope.dolphins = $scope.dolphins.concat(data.data.results);
+    }
   });
 
   constructor();

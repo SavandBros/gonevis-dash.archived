@@ -113,9 +113,10 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   });
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
-    if (!data.success) return;
-    $scope.tagForm.page = data.page;
-    $scope.tags = $scope.tags.concat(data.data.results);
+    if (data.success) {
+      $scope.tagForm.page = data.page;
+      $scope.tags = $scope.tags.concat(data.data.results);
+    }
   });
 
   constructor();
