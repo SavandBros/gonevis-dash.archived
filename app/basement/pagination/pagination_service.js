@@ -11,6 +11,7 @@
  *
  * @returns [Factory]
  */
+function Pagination($resource, $rootScope) {
 
   /**
    * paginate
@@ -56,6 +57,11 @@
     form.page.loading = true;
     return form;
   }
+
+  return {
+    paginate: paginate,
+    loadMore: loadMore
+  };
 }
 
 app.factory("Pagination", Pagination);
