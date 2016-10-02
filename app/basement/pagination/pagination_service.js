@@ -34,6 +34,14 @@
     return form;
   }
 
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Loadmore function based on pagination vars in form data
+   *
+   * @param form {Object} Form data for API
+   */
   function loadMore(form) {
     $resource(form.page.next).get(form.page.payload,
       function (data) {
