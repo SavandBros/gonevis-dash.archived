@@ -25,13 +25,14 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
-    $scope.nothing = {
-      text: "It's lonely here... Try adding some tags!"
-    };
+    $scope.tagForm = {};
+    $scope.nothing = { text: "It's lonely here... Try adding some tags!" };
 
-    API.Tags.get({ site: site },
+    var payload = { site: site };
+    API.Tags.get(payload,
       function (data) {
         $scope.tags = data.results;
+        $scope.tagForm = Pagination.paginate($scope.tagForm, data, payload);
       }
     );
   }
