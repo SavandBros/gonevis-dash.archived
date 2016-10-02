@@ -11,6 +11,17 @@
  *
  * @returns [Factory]
  */
+
+  /**
+   * paginate
+   *
+   * @method paginate
+   * @desc Add pagination vars for given form
+   *
+   * @param form {Object} Form data for API
+   * @param data {Object} Data response of API
+   * @param payload {Object}
+   */
   function paginate(form, data, payload) {
     form.page = {
       next: data.next,
