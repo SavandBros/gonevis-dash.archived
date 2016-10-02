@@ -10,3 +10,18 @@
   <textarea id="description" class="form-control" type="text" ng-model="form.data.description" placeholder="Descroption"></textarea>
   <span id="description" class="help-block" ng-show="form.errors.description">{{ form.errors.slug[0] }}</span>
 </div>
+<!-- Advanced Options -->
+<div class="form-group">
+  <a data-toggle="collapse" data-target="#advance">
+      Advanced Options <i class="fa fa-caret-down"></i>
+    </a>
+</div>
+<!-- Meta Title and Meta Desc -->
+<div class="collapse" id="advance">
+  <div class=" form-group">
+    <input ng-model="form.data.meta_title" placeholder="Meta title" class="form-control">
+  </div>
+  <div class="form-group">
+    <input ng-model="form.data.meta_description" placeholder="Meta description" class="form-control">
+  </div>
+</div>
