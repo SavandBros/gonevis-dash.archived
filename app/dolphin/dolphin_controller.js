@@ -171,6 +171,14 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     DolphinService.view(dolphin);
   };
 
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Load more function for controller
+   */
+  $scope.loadMore = Pagination.loadMore;
+
   $scope.$on("gonevisDash.DolphinService:update", update);
   $scope.$on("gonevisDash.DolphinService:remove", update);
 
