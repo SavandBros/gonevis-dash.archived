@@ -34,6 +34,20 @@
     return form;
   }
 
+  function loadMore(form) {
+    $resource(form.page.next).get(form.page.payload,
+      function (data) {
+        form = paginate(form, data, form.page.payload);
+        $rootScope.$broadcast("gonevisDash.Pagination:loadedMore", {
+          success: true,
+          data: data,
+          page: form.page
+        });
+      }
+    );
+    form.page.loading = true;
+    return form;
+  }
 }
 
 app.factory("Pagination", Pagination);
