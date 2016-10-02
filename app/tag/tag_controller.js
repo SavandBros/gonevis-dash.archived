@@ -11,8 +11,9 @@
  * @param $mdToast
  * @param API
  * @param AuthService
+ * @param Pagination
  */
-function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService) {
+function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination) {
 
   var site = AuthService.getCurrentSite();
 
@@ -112,6 +113,12 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     $scope.tags.unshift(tag);
   });
 
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+    if (!data.success) return;
+    $scope.tagForm.page = data.page;
+    $scope.tags = $scope.tags.concat(data.data.results);
+  });
+
   constructor();
 }
 
@@ -123,5 +130,6 @@ TagController.$inject = [
   "$mdToast",
   "TagService",
   "API",
-  "AuthService"
+  "AuthService",
+  "Pagination"
 ];
