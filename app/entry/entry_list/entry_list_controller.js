@@ -42,9 +42,12 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    * @desc Search through entries
    */
   $scope.search = function () {
-    API.Entries.get({ search: $scope.filters.title },
+    var payload = { search: $scope.filters.title };
+
+    API.Entries.get(payload,
       function (data) {
         $scope.entries = data.results;
+        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
         if (!data.count) {
           $scope.noResults = true;
         } else {
