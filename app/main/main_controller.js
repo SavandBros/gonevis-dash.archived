@@ -13,8 +13,9 @@
  * @param AuthService
  * @param API
  * @param CommentService
+ * @param Pagination
  */
-function MainController($scope, $rootScope, $state, $mdToast, $stateParams, AuthService, API, CommentService) {
+function MainController($scope, $rootScope, $state, $mdToast, $stateParams, AuthService, API, CommentService, Pagination) {
 
   /**
    * constructor
@@ -23,6 +24,7 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.commentForm = {};
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.site = AuthService.getCurrentSite();
@@ -45,9 +47,11 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
     list: [],
 
     initialize: function () {
-      API.Comments.get({ site_id: $scope.site, object_type: 1 },
+      var payload = { site_id: $scope.site, object_type: 1 };
+      API.Comments.get(payload,
         function (data) {
           $scope.Comment.list = data.results;
+          $scope.commentForm = Pagination.paginate($scope.commentForm, data, payload);
         }
       );
     }
@@ -81,11 +85,26 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
     );
   };
 
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Load more function for controller
+   */
+  $scope.loadMore = Pagination.loadMore;
+
   $rootScope.$on("gonevisDash.CommentService:delete", function (event, data) {
     for (var i = 0; i < $scope.Comment.list.length; i++) {
       if ($scope.Comment.list[i].id === data.id) {
         $scope.Comment.list[i].isDeleted = true;
       }
+    }
+  });
+
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+    if (data.success) {
+      $scope.commentForm.page = data.page;
+      $scope.Comment.list = $scope.Comment.list.concat(data.data.results);
     }
   });
 
@@ -101,5 +120,6 @@ MainController.$inject = [
   "$stateParams",
   "AuthService",
   "API",
-  "CommentService"
+  "CommentService",
+  "Pagination"
 ];
