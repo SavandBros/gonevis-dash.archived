@@ -11,8 +11,9 @@
  * @param $mdToast
  * @param API
  * @param AuthService
+ * @param Pagination
  */
-function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService) {
+function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination) {
 
   var site = AuthService.getCurrentSite();
 
@@ -25,13 +26,14 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
-    $scope.nothing = {
-      text: "It's lonely here... Try adding some tags!"
-    };
+    $scope.tagForm = {};
+    $scope.nothing = { text: "It's lonely here... Try adding some tags!" };
 
-    API.Tags.get({ site: site },
+    var payload = { site: site };
+    API.Tags.get(payload,
       function (data) {
         $scope.tags = data.results;
+        $scope.tagForm = Pagination.paginate($scope.tagForm, data, payload);
       }
     );
   }
@@ -87,7 +89,15 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     );
   };
 
-  $rootScope.$on("gonevisDash.TagService:remove", function (event, data) {
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Load more function for controller
+   */
+  $scope.loadMore = Pagination.loadMore;
+
+  $scope.$on("gonevisDash.TagService:remove", function (event, data) {
     for (var i = 0; i < $scope.tags.length; i++) {
       if ($scope.tags[i].id === data.id) {
         $scope.tags[i].isDeleted = true;
@@ -95,11 +105,18 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     }
   });
 
-  $rootScope.$on("gonevisDash.TagService:create", function (event, data) {
+  $scope.$on("gonevisDash.TagService:create", function (event, data) {
     var tag = data.tag;
     tag.slug = data.data.slug;
     tag.site = data.data.site;
     $scope.tags.unshift(tag);
+  });
+
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+    if (data.success) {
+      $scope.tagForm.page = data.page;
+      $scope.tags = $scope.tags.concat(data.data.results);
+    }
   });
 
   constructor();
@@ -113,5 +130,6 @@ TagController.$inject = [
   "$mdToast",
   "TagService",
   "API",
-  "AuthService"
+  "AuthService",
+  "Pagination"
 ];

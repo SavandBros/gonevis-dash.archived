@@ -1,0 +1,8 @@
+<div class="load-more">
+  <button class="btn btn-default btn-lg"
+          ng-if="!paginationForm.page.noMore"
+          ng-disabled="paginationForm.page.loading" 
+          ng-click="loadMore(paginationForm)">
+    {{ paginationForm.page.loading ? "LOADING" : "LOAD MORE" }}
+  </button>
+</div>

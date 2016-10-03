@@ -14,9 +14,10 @@
  * @param ENV
  * @param AuthService
  * @param Upload
+ * @param Pagination
  */
 function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
-  DolphinService, Codekit, API, ENV, AuthService, Upload) {
+  DolphinService, Codekit, API, ENV, AuthService, Upload, Pagination) {
 
   var site = AuthService.getCurrentSite();
 
@@ -29,6 +30,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   function constructor() {
     $scope.nothing = { text: "It's lonely here... Try adding some dolphins!" };
     $scope.dolphinService = DolphinService;
+    $scope.dolphinForm = {};
 
     if ($rootScope.selectionMode) {
       $scope.currentTab = "dolphin";
@@ -37,6 +39,9 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.Dolphins.get({},
       function (data) {
         $scope.dolphins = data.results;
+        $scope.dolphinForm = Pagination.paginate(
+          $scope.dolphinForm, data, {}
+        );
       }
     );
 
@@ -166,8 +171,23 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     DolphinService.view(dolphin);
   };
 
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Load more function for controller
+   */
+  $scope.loadMore = Pagination.loadMore;
+
   $scope.$on("gonevisDash.DolphinService:update", update);
   $scope.$on("gonevisDash.DolphinService:remove", update);
+
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+    if (data.success) {
+      $scope.dolphinForm.page = data.page;
+      $scope.dolphins = $scope.dolphins.concat(data.data.results);
+    }
+  });
 
   constructor();
 }
@@ -184,5 +204,6 @@ DolphinController.$inject = [
   "API",
   "ENV",
   "AuthService",
-  "Upload"
+  "Upload",
+  "Pagination"
 ];
