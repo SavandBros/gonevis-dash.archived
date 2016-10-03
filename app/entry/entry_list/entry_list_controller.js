@@ -10,8 +10,9 @@
  * @param $state
  * @param API
  * @param AuthService
+ * @param Pagination
  */
-function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthService) {
+function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthService, Pagination) {
 
   /**
    * constructor
@@ -20,24 +21,16 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    * @desc Init function for controller
    */
   function constructor() {
-    loadEntries();
-    $scope.nothing = {
-      text: "It's lonely here... Try adding some entries!"
-    };
-  }
+    $scope.entryForm = {};
+    $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
 
-  /**
-   * loadEntries
-   *
-   * @method loadEntries
-   * @desc Load entries via API call
-   */
-  function loadEntries() {
-    API.Entries.get({ site: AuthService.getCurrentSite() },
-      function (data, status, headers, config) {
+    var payload = { site: AuthService.getCurrentSite() };
+    API.Entries.get(payload,
+      function (data) {
         $scope.entries = data.results;
+        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
       }
-    )
+    );
   }
 
   $scope.filters = { title: "" };
@@ -49,9 +42,12 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    * @desc Search through entries
    */
   $scope.search = function () {
-    API.Entries.get({ search: $scope.filters.title },
+    var payload = { search: $scope.filters.title };
+
+    API.Entries.get(payload,
       function (data) {
         $scope.entries = data.results;
+        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
         if (!data.count) {
           $scope.noResults = true;
         } else {
@@ -71,17 +67,32 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    */
   $scope.delete = function (entry) {
     API.Entry.delete({ entry_id: entry.id },
-      function (data, status, headers, config) {
+      function (data) {
         entry.isDeleted = true;
         $mdToast.showSimple("Entry deleted!");
       }
     );
   }
 
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Load more function for controller
+   */
+  $scope.loadMore = Pagination.loadMore;
+
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+    if (data.success) {
+      $scope.entryForm.page = data.page;
+      $scope.entries = $scope.entries.concat(data.data.results);
+    }
+  });
+
   constructor()
 }
 
 app.controller('EntryListController', EntryListController)
 EntryListController.$inject = [
-  '$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService'
+  '$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService', 'Pagination'
 ]
