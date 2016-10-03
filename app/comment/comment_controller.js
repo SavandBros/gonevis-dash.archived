@@ -46,9 +46,12 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
    * @desc Search through comments
    */
   $scope.search = function () {
-    API.Comments.get({ search: $scope.filters.comment },
+    var payload = { search: $scope.filters.comment };
+
+    API.Comments.get(payload,
       function (data) {
         $scope.comments = data.results;
+        $scope.commentForm = Pagination.paginate($scope.commentForm, data, payload);
         if (!data.count) {
           $scope.noResults = true;
         } else {
