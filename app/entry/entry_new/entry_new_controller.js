@@ -8,12 +8,12 @@
  * @param $scope
  * @param $state
  * @param $mdToast
+ * @param $q
  * @param AuthService
  * @param API
+ * @param Codekit
  */
-function EntryNewController($scope, $state, $mdToast, AuthService, API, DolphinService, $q) {
-
-  $scope.tags = [];
+function EntryNewController($scope, $state, $mdToast, $q, AuthService, API, DolphinService, Codekit) {
 
   /**
    * constructor
@@ -24,24 +24,17 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, DolphinS
    * @memberOf EntryNewController
    */
   function constructor() {
-
     $scope.dolphinService = DolphinService;
+    $scope.tags = [];
+    $scope.tagsToSubmit = [];
+    $scope.form = {};
+    $scope.statuses = Codekit.entryStatues;
 
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data, status, headers, config) {
-        for (var i in data.results) {
-          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name });
-        }
+        $scope.tags = data.results;
       }
     );
-
-    $scope.tagsToSubmit = [];
-    $scope.form = {};
-    $scope.statuses = [
-      { name: "Draft", id: 0 },
-      { name: "Hidden", id: 1 },
-      { name: "Published", id: 2 }
-    ];
   };
 
   /**
@@ -104,11 +97,11 @@ function EntryNewController($scope, $state, $mdToast, AuthService, API, DolphinS
     );
   };
 
+  constructor();
+
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
     $scope.form.cover_image = dolphin.id;
   });
-
-  constructor();
 }
 
 app.controller("EntryNewController", EntryNewController);
@@ -116,8 +109,9 @@ EntryNewController.$inject = [
   "$scope",
   "$state",
   "$mdToast",
+  "$q",
   "AuthService",
   "API",
   "DolphinService",
-  "$q"
+  "Codekit"
 ];
