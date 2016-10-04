@@ -96,14 +96,14 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
   }
 
   /**
-   * delete
+   * remove
    *
-   * @method delete
+   * @method remove
    * @desc Delete entries via API call
    * 
    * @param entry {object}
    */
-  $scope.delete = function (entry) {
+  $scope.remove = function (entry) {
     API.Entry.delete({ entry_id: entry.id },
       function (data, status, headers, config) {
         entry.isDeleted = true;
