@@ -1,4 +1,4 @@
-'use strict'
+"use strict"
 
 /**
  * @ngdoc function
@@ -10,8 +10,9 @@
  * @param $state
  * @param API
  * @param AuthService
+ * @param Codekit
  */
-function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthService) {
+function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService) {
 
   /**
    * constructor
@@ -20,27 +21,16 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    * @desc Init function for controller
    */
   function constructor() {
-    loadEntries();
-    $scope.nothing = {
-      text: "It's lonely here... Try adding some entries!"
-    };
-  }
+    $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
+    $scope.filters = { title: "" };
+    $scope.statuses = Codekit.entryStatuses;
 
-  /**
-   * loadEntries
-   *
-   * @method loadEntries
-   * @desc Load entries via API call
-   */
-  function loadEntries() {
     API.Entries.get({ site: AuthService.getCurrentSite() },
-      function (data, status, headers, config) {
+      function (data) {
         $scope.entries = data.results;
       }
     )
   }
-
-  $scope.filters = { title: "" };
 
   /**
    * search
@@ -125,7 +115,13 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
   constructor()
 }
 
-app.controller('EntryListController', EntryListController)
+app.controller("EntryListController", EntryListController)
 EntryListController.$inject = [
-  '$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService'
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "Codekit",
+  "API",
+  "AuthService"
 ]
