@@ -28,7 +28,7 @@ function EntryNewController($scope, $state, $mdToast, $q, AuthService, API, Dolp
     $scope.tags = [];
     $scope.tagsToSubmit = [];
     $scope.form = {};
-    $scope.statuses = Codekit.entryStatues;
+    $scope.statuses = Codekit.entryStatuses;
 
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data, status, headers, config) {
