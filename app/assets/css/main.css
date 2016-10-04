@@ -629,3 +629,15 @@ tags-input .tags.focused {
   font-size: large;
   padding: 30px;
 }
+
+
+/* Load more */
+
+.load-more .btn {
+  margin-bottom: 15px;
+}
+
+.load-more {
+  margin: 15px 0;
+  text-align: center;
+}

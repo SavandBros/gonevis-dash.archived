@@ -8,11 +8,12 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param Codekit
  * @param API
  * @param AuthService
- * @param Codekit
+ * @param Pagination
  */
-function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService) {
+function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination) {
 
   /**
    * constructor
@@ -24,12 +25,15 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
     $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
     $scope.filters = { title: "" };
     $scope.statuses = Codekit.entryStatuses;
+    $scope.entryForm = {};
 
-    API.Entries.get({ site: AuthService.getCurrentSite() },
+    var payload = { site: AuthService.getCurrentSite() };
+    API.Entries.get(payload,
       function (data) {
         $scope.entries = data.results;
+        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
       }
-    )
+    );
   }
 
   /**
@@ -39,9 +43,12 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
    * @desc Search through entries
    */
   $scope.search = function () {
-    API.Entries.get({ search: $scope.filters.title },
+    var payload = { search: $scope.filters.title };
+
+    API.Entries.get(payload,
       function (data) {
         $scope.entries = data.results;
+        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
         if (!data.count) {
           $scope.noResults = true;
         } else {
@@ -99,12 +106,27 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
    */
   $scope.remove = function (entry) {
     API.Entry.delete({ entry_id: entry.id },
-      function (data, status, headers, config) {
+      function (data) {
         entry.isDeleted = true;
         $mdToast.showSimple("Entry deleted!");
       }
     );
   }
+
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Load more function for controller
+   */
+  $scope.loadMore = Pagination.loadMore;
+
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+    if (data.success) {
+      $scope.entryForm.page = data.page;
+      $scope.entries = $scope.entries.concat(data.data.results);
+    }
+  });
 
   constructor()
 }
@@ -117,5 +139,6 @@ EntryListController.$inject = [
   "$mdToast",
   "Codekit",
   "API",
-  "AuthService"
+  "AuthService",
+  "Pagination"
 ]

@@ -12,8 +12,9 @@
  * @param API
  * @param AuthService
  * @param CommentService
+ * @param Pagination
  */
-function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService) {
+function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService, Pagination) {
 
   /**
    * constructor
@@ -22,16 +23,16 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.commentForm = {};
     $scope.user = AuthService.getAuthenticatedUser();
-    $scope.site = AuthService.getCurrentSite();
     $scope.commentService = CommentService;
-    $scope.nothing = {
-      text: "You have no comments"
-    };
+    $scope.nothing = { text: "You have no comments" };
 
-    API.Comments.get({ site: $scope.site },
+    var payload = { site: AuthService.getCurrentSite() };
+    API.Comments.get(payload,
       function (data) {
         $scope.comments = data.results;
+        $scope.commentForm = Pagination.paginate($scope.commentForm, data, payload);
       }
     );
   }
@@ -45,9 +46,12 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
    * @desc Search through comments
    */
   $scope.search = function () {
-    API.Comments.get({ search: $scope.filters.comment },
+    var payload = { search: $scope.filters.comment };
+
+    API.Comments.get(payload,
       function (data) {
         $scope.comments = data.results;
+        $scope.commentForm = Pagination.paginate($scope.commentForm, data, payload);
         if (!data.count) {
           $scope.noResults = true;
         } else {
@@ -57,6 +61,14 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     );
   };
 
+  /**
+   * loadMore
+   *
+   * @method loadMore
+   * @desc Load more function for controller
+   */
+  $scope.loadMore = Pagination.loadMore;
+
   $rootScope.$on("gonevisDash.CommentService:delete", function (event, data) {
     for (var i = 0; i < $scope.comments.length; i++) {
       if ($scope.comments[i].id === data.id) {
@@ -65,10 +77,17 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     }
   });
 
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+    if (data.success) {
+      $scope.commentForm.page = data.page;
+      $scope.comments = $scope.comments.concat(data.data.results);
+    }
+  });
+
   constructor();
 }
 
 app.controller("CommentController", CommentController);
 CommentController.$inject = [
-  "$scope", "$rootScope", "$state", "$mdToast", "API", "AuthService", "CommentService"
+  "$scope", "$rootScope", "$state", "$mdToast", "API", "AuthService", "CommentService", "Pagination"
 ];

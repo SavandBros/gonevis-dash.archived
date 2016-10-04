@@ -4,7 +4,7 @@
     <span class="input-group-btn">
       <button class="btn btn-default" type="submit" ng-click="search()">
         <span class="fa fa-search"></span> Search
-      </button>
+    </button>
     </span>
   </div>
 </form>
@@ -35,5 +35,7 @@
         </li>
       </ul>
     </div>
+    <!-- More -->
+    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-init="paginationForm = commentForm"></ng-include>
   </div>
 </div>
