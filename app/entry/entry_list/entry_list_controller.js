@@ -94,6 +94,52 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
         );
       }
     }
+  };
+
+  /**
+   * setComment
+   *
+   * @method setComment
+   * @desc set selected comment status
+   *
+   * @param enable{bool}
+   */
+  $scope.setComment = function (enable) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      var entry = $scope.entries[i];
+      if (entry.isSelected) {
+        API.Entry.patch({ entry_id: entry.id }, { comment_enabled: enable },
+          function (data) {
+            entry = data;
+            entry.isSelected = true;
+            $mdToast.showSimple("Commenting " + (enable ? "enabled" : "disabled"));
+          }
+        );
+      }
+    }
+  };
+
+  /**
+   * setFeature
+   *
+   * @method setFeature
+   * @desc set selected feature status
+   *
+   * @param enable{Boolean}
+   */
+  $scope.setFeature = function (enable) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      var entry = $scope.entries[i];
+      if (entry.isSelected) {
+        API.Entry.patch({ entry_id: entry.id }, { featured: enable },
+          function (data) {
+            entry = data;
+            entry.isSelected = true;
+            $mdToast.showSimple("Feature " + (enable ? "enabled" : "disabled"));
+          }
+        );
+      }
+    }
   }
 
   /**
