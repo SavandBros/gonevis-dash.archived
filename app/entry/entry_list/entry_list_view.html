@@ -26,7 +26,8 @@
     <!-- List -->
     <div class="panel panel-default s-box" ng-if="entries.length">
       <!-- Header -->
-      <div class="panel-heading">
+      <div class="panel-heading a-fade" ng-show="selectCount">
+        <p class="o-fade pull-left"><small>Selected: </small>{{ selectCount }}</p>
         <!-- Action dropdown -->
         <div class="dropdown options pull-right" title="options">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
@@ -60,7 +61,7 @@
           <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
-              <input type="checkbox" ng-model="e.selected" ng-click="checked(e)" name="checkbox">
+              <input type="checkbox" ng-model="e.isSelected" ng-click="checked(e)" ng-change="countSelected(e)" name="checkbox">
               <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
               <small class="dis-b o-fade">/{{ e.slug }}</small>
             </div>
