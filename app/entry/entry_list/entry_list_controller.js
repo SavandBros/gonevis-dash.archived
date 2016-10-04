@@ -68,8 +68,8 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
    */
   $scope.removeSelected = function (entry) {
     for (var i = 0; i < $scope.entries.length; i++) {
-      if ($scope.entries[i].selected) {
-        $scope.delete($scope.entries[i])
+      if ($scope.entries[i].isSelected) {
+        $scope.remove($scope.entries[i]);
       }
     }
   }
@@ -85,13 +85,28 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
   $scope.setStatus = function (status) {
     for (var i = 0; i < $scope.entries.length; i++) {
       var entry = $scope.entries[i];
-      if (entry.selected) {
+      if (entry.isSelected) {
         API.Entry.patch({ entry_id: entry.id }, { status: status },
           function (data) {
             entry = data;
             $mdToast.showSimple("Status changed!");
           }
         );
+      }
+    }
+  }
+
+  /**
+   * countSelected
+   *
+   * @method countSelected
+   * @desc Count selected entries
+   */
+  $scope.countSelected = function () {
+    $scope.selectCount = 0;
+    for (var i in $scope.entries) {
+      if ($scope.entries[i].isSelected) {
+        $scope.selectCount++;
       }
     }
   }
@@ -108,6 +123,8 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
     API.Entry.delete({ entry_id: entry.id },
       function (data) {
         entry.isDeleted = true;
+        entry.isSelected = false;
+        $scope.selectCount = 0;
         $mdToast.showSimple("Entry deleted!");
       }
     );
