@@ -1,5 +1,7 @@
 <!-- Add button -->
-<button type="button" class="btn btn-success btn-corner" ui-sref="dash.entry-new"><i class="fa fa-plus"></i></button>
+<button type="button" class="btn btn-success btn-corner" ui-sref="dash.entry-new">
+  <i class="fa fa-plus"></i>
+</button>
 
 <!-- Search -->
 <form ng-submit="search()" class="entry-search" ng-if="entries.length && !noResults || noResults">
@@ -12,6 +14,7 @@
     </span>
   </div>
 </form>
+
 <!-- Main -->
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
@@ -22,25 +25,39 @@
     </div>
     <!-- List -->
     <div class="panel panel-default s-box" ng-if="entries.length">
+      <!-- Header -->
       <div class="panel-heading">
-        <button class="btn btn-default" ng-click="removeSelected(entries)" type="button">
-            <i class="fa fa-trash"></i>
-        </button>
+        <!-- Action dropdown -->
         <div class="dropdown options pull-right" title="options">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
-            Set status
+            Action <i class="fa fa-caret-down"></i>
           </button>
           <ul class="dropdown-menu">
+            <!-- Status -->
+            <li class="dropdown-header">Set status to</li>
             <li ng-repeat="s in statuses">
-              <a ng-click="setStatus(s.id)"><i class="{{ s.icon }}"></i>{{s.name}}</a>
+              <a ng-click="setStatus(s.id)">
+                <i class="fa fa-{{ s.icon }} text-{{ s.color }}"></i>{{ s.label }}
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Other actions</li>
+            <!-- Delete -->
+            <li>
+              <a ng-click="removeSelected()">
+                <i class="fa fa-trash text-danger"></i> Delete
+              </a>
             </li>
           </ul>
         </div>
+        <div class="clearfix"></div>
       </div>
+
+      <!-- List -->
       <div class="panel-body s-pad-y-no b-left-no">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
-          <li class="row list-panel b-left b-color-{{ e.status }} s-fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
+          <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
               <input type="checkbox" ng-model="e.selected" ng-click="checked(e)" name="checkbox">
@@ -49,8 +66,8 @@
             </div>
             <!-- Date -->
             <div class="col-md-3 text-right o-fade">
-              {{ e.status == 2 ? e.publication_date : e.created | date }}
-              <small class="dis-b o-fade">{{ e.status == 2 ? "Publication" : "Creation" }}</small>
+              {{ e.status = 2 ? e.publication_date : e.created | date }}
+              <small class="dis-b o-fade">{{ e.status = 2 ? "Publication" : "Creation" }}</small>
             </div>
             <!-- Tools -->
             <div class="col-md-1 text-right">
@@ -66,7 +83,7 @@
                   <i init class="fa fa-fw fa-lock text-danger"></i> Passworded
                 </li>
                 <li class="divider "></li>
-                <li><a ng-click="delete(e)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
+                <li><a ng-click="remove(e)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
               </ul>
             </div>
           </li>
