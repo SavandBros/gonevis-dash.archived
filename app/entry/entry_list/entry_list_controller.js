@@ -67,12 +67,6 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
     }
   }
 
-  $scope.statuses = [
-    { name: "Draft", id: 0, icon: "fa fa-pencil" },
-    { name: "Hidden", id: 1, icon: "fa fa-user-secret" },
-    { name: "Published", id: 2, icon: "fa fa-star" }
-  ];
-
   /**
    * setStatus
    *
