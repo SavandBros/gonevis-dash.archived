@@ -22,6 +22,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.selectCount = 0;
     $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
     $scope.filters = { title: "" };
     $scope.statuses = Codekit.entryStatuses;
@@ -154,6 +155,25 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
       if ($scope.entries[i].isSelected) {
         $scope.selectCount++;
       }
+    }
+  }
+
+  /**
+   * selectEntries
+   *
+   * @method selectEntries
+   * @desc Select all entries
+   */
+  $scope.selectEntries = function (entries) {
+    if ($scope.selectAll) {
+      $scope.selectAll = false
+    } else {
+      $scope.selectAll = true;
+    }
+
+    for (var i in $scope.entries) {
+      entries[i].isSelected = $scope.selectAll;
+      $scope.countSelected();
     }
   }
 
