@@ -26,10 +26,11 @@
     <!-- List -->
     <div class="panel panel-default s-box" ng-if="entries.length">
       <!-- Header -->
-      <div class="panel-heading a-fade" ng-show="selectCount">
+      <div class="panel-heading a-fade">
         <p class="o-fade pull-left"><small>Selected: </small>{{ selectCount }}</p>
+        <input type="checkbox" ng-click="selectEntries(entries)" ng-model="selectAll">
         <!-- Action dropdown -->
-        <div class="dropdown options pull-right" title="options">
+        <div class="dropdown options pull-right" title="options" ng-show="selectCount">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
             Action <i class="fa fa-caret-down"></i>
           </button>
