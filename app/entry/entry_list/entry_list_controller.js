@@ -164,7 +164,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
    * @method selectEntries
    * @desc Select all entries
    */
-  $scope.selectEntries = function (entries) {
+  $scope.selectEntries = function () {
     if ($scope.selectAll) {
       $scope.selectAll = false
     } else {
@@ -172,7 +172,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
     }
 
     for (var i in $scope.entries) {
-      entries[i].isSelected = $scope.selectAll;
+      $scope.entries[i].isSelected = $scope.selectAll;
       $scope.countSelected();
     }
   }
