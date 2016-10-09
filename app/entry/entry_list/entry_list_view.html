@@ -27,11 +27,14 @@
     <div class="panel panel-default s-box" ng-if="entries.length">
       <!-- Header -->
       <div class="panel-heading a-fade">
-        <p class="o-fade pull-left"><small>Selected: </small>{{ selectCount }}</p>
-        <input type="checkbox" ng-click="selectEntries(entries)" ng-model="selectAll">
+        <!-- All checkbox -->
+        <div class="checkbox checkbox-primary col-xs-8" style="margin: 0">
+          <input id="selectAll" type="checkbox" ng-model="selectAll" ng-change="selectEntries()">
+          <label for="selectAll"><span class="o-fade-soft">{{ selectCount }} Selected</span></label>
+        </div>
         <!-- Action dropdown -->
-        <div class="dropdown options pull-right" title="options" ng-show="selectCount">
-          <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
+        <div class="dropdown options pull-right" title="options">
+          <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
             Action <i class="fa fa-caret-down"></i>
           </button>
           <ul class="dropdown-menu">
@@ -88,7 +91,7 @@
           <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
-              <input type="checkbox" ng-model="e.isSelected" ng-click="checked(e)" ng-change="countSelected(e)" name="checkbox">
+              <input type="checkbox" ng-model="e.isSelected" ng-change="countSelected(e)" name="checkbox">
               <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
               <small class="dis-b o-fade">/{{ e.slug }}</small>
             </div>
