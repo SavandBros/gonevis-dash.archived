@@ -74,6 +74,10 @@ function Search($rootScope, $resource, Pagination) {
     );
   };
 
+  return {
+    searchify: searchify,
+    submit: submit
+  };
 }
 
 app.factory("Search", Search);
