@@ -41,6 +41,15 @@ function Search($rootScope, $resource, Pagination) {
 
     return form;
   };
+
+  /**
+   * submit
+   *
+   * @method submit
+   * @desc Search data and broadcast
+   *
+   * @param form {Object} Main searchified variable
+   */
   function submit(form) {
     var payload = angular.extend({ search: form.query }, form.payload);
 
