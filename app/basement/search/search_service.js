@@ -36,7 +36,7 @@ function Search($rootScope, $resource, Pagination) {
    * @returns {Object}
    */
   function searchify(form, pageForm, api, data, payload) {
-    data = data || {};
+    data = data || { results: [] };
     payload = payload || {};
 
     form = {
@@ -45,6 +45,10 @@ function Search($rootScope, $resource, Pagination) {
       pageForm: pageForm,
       noResult: false,
       payload: payload,
+    };
+
+    if (!data.results) {
+      form.noResult = true;
     };
 
     return form;
