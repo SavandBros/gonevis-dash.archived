@@ -14,7 +14,7 @@
  * @param CommentService
  * @param Pagination
  */
-function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService, Pagination) {
+function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService, Pagination, Search) {
 
   /**
    * constructor
@@ -23,43 +23,21 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.commentForm = {};
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.commentService = CommentService;
+    $scope.search = Search;
     $scope.nothing = { text: "You have no comments" };
+    $scope.pageForm = {};
 
     var payload = { site: AuthService.getCurrentSite() };
     API.Comments.get(payload,
       function (data) {
         $scope.comments = data.results;
-        $scope.commentForm = Pagination.paginate($scope.commentForm, data, payload);
+        $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
+        $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Comments.get, data, payload);
       }
     );
   }
-
-  $scope.filters = { comment: "" };
-
-  /**
-   * search
-   *
-   * @method search
-   * @desc Search through comments
-   */
-  $scope.search = function () {
-    var payload = { search: $scope.filters.comment };
-
-    API.Comments.get(payload,
-      function (data) {
-        $scope.comments = data.results;
-        $scope.commentForm = Pagination.paginate($scope.commentForm, data, payload);
-        if (!data.count) {
-          $scope.noResults = true;
-        } else {
-          $scope.noResults = false;
-        }
-      }
-    );
-  };
 
   /**
    * loadMore
@@ -77,9 +55,17 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     }
   });
 
+  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+    if (data.success) {
+      $scope.pageForm = data.pageForm;
+      $scope.comments = data.data.results;
+      $scope.searchForm = data.form;
+    }
+  });
+
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
-      $scope.commentForm.page = data.page;
+      $scope.pageForm.page = data.page;
       $scope.comments = $scope.comments.concat(data.data.results);
     }
   });
@@ -89,5 +75,13 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
 
 app.controller("CommentController", CommentController);
 CommentController.$inject = [
-  "$scope", "$rootScope", "$state", "$mdToast", "API", "AuthService", "CommentService", "Pagination"
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "API",
+  "AuthService",
+  "CommentService",
+  "Pagination",
+  "Search"
 ];
