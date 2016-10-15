@@ -5,11 +5,12 @@
 <!-- Main -->
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
+    <!-- Search form -->
+    <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft"></ng-include>
+    <!-- Search noresult -->
+    <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !noResults"></ng-include>
-    <div ng-if="noResults">
-      <p class="alert-danger alert"><i class="fa fa-exclamation-triangle"></i> No results</p>
-    </div>
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult"></ng-include>
     <!-- List -->
     <div class="panel panel-defaul s-box b-left-no" ng-if="entries.length">
       <div class="panel-body s-pad-y-no">
