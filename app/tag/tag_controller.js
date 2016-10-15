@@ -26,14 +26,15 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
-    $scope.tagForm = {};
+    $scope.search = Search;
+    $scope.pageForm = {};
     $scope.nothing = { text: "It's lonely here... Try adding some tags!" };
 
     var payload = { site: site };
     API.Tags.get(payload,
       function (data) {
         $scope.tags = data.results;
-        $scope.tagForm = Pagination.paginate($scope.tagForm, data, payload);
+        $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
       }
     );
   }
@@ -114,7 +115,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
-      $scope.tagForm.page = data.page;
+      $scope.pageForm.page = data.page;
       $scope.tags = $scope.tags.concat(data.data.results);
     }
   });

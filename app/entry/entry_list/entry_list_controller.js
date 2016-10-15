@@ -22,13 +22,13 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    */
   function constructor() {
     $scope.entryForm = {};
-    $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
+    $scope.pageForm = {};
 
     var payload = { site: AuthService.getCurrentSite() };
     API.Entries.get(payload,
       function (data) {
         $scope.entries = data.results;
-        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
+        $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
       }
     );
   }
@@ -100,7 +100,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
-      $scope.entryForm.page = data.page;
+      $scope.pageForm.page = data.page;
       $scope.entries = $scope.entries.concat(data.data.results);
     }
   });
