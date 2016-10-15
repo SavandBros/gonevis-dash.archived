@@ -41,6 +41,30 @@ function Search($rootScope, $resource, Pagination) {
 
     return form;
   };
+  function submit(form) {
+    var payload = angular.extend({ search: form.query }, form.payload);
+
+    form.api(payload,
+      function (data) {
+        form.data = data;
+        form.searchedQuery = form.query;
+
+        if (!data.results.length) {
+          form.noResult = true;
+        } else {
+          form.noResult = false;
+        }
+
+        $rootScope.$broadcast("gonevisDash.Search:submit", {
+          success: true,
+          data: data,
+          pageForm: Pagination.paginate(form.pageForm, data, payload),
+          form: form
+        });
+      }
+    );
+  };
+
 }
 
 app.factory("Search", Search);
