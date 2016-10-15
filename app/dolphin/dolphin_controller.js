@@ -21,6 +21,12 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
 
   var site = AuthService.getCurrentSite();
 
+  $scope.updateDolphins = function () {
+    for (i in $scope.dolphins) {
+      $scope.dolphins[i].extRaw = $scope.dolphins[i].ext.split("/")[1].toUpperCase();
+    }
+  };
+
   /**
    * constructor
    *
@@ -39,6 +45,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.Dolphins.get({},
       function (data) {
         $scope.dolphins = data.results;
+        $scope.updateDolphins();
         $scope.dolphinForm = Pagination.paginate(
           $scope.dolphinForm, data, {}
         );
@@ -93,6 +100,8 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.upload.accept = $scope.upload.acceptList.join(",");
   }
 
+
+
   /**
    * uploadFile
    *
@@ -117,6 +126,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
           function (data) {
             $mdToast.showSimple("Upload completed.");
             $scope.dolphins.unshift(data.data);
+            $scope.updateDolphins();
           },
           function () {
             $mdToast.showSimple("Upload failed.");
