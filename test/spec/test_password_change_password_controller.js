@@ -1,34 +1,37 @@
+"use strict";
+
 describe("ChangePasswordController", function () {
   beforeEach(
     module("gonevisDash")
   );
 
   var $controller;
+  var $scope;
 
-  beforeEach(inject(function (_$controller_) {
+  beforeEach(inject(function (_$controller_, _$rootScope_) {
     $controller = _$controller_;
+    $scope = _$rootScope_;
   }));
 
   describe("$scope.changePassword", function () {
     beforeEach(function () {
-      $scope = {};
-      controller = $controller('ChangePasswordController', { $scope: $scope });
+      var controller = $controller("ChangePasswordController", { $scope: $scope });
     });
 
     it("is a new password", function () {
       var form = {
-        old_password: 'oldalireza',
-        password: 'oldalireza',
+        old_password: "oldalireza",
+        password: "oldalireza",
       };
       var result = $scope.changePassword(form);
-      expect(result).toEqual({ non_field_errors: ['Please, choose a new password.'] });
+      expect(result).toEqual({ non_field_errors: ["Please, choose a new password."] });
     });
 
     it("check if Confirm new password and new password were matched, if so raise an error", function () {
       var form = {
-        old_password: 'oldalireza',
-        password: 'newPassword',
-        confirm_password: 'newPassword1'
+        old_password: "oldalireza",
+        password: "newPassword",
+        confirm_password: "newPassword1"
       };
       var result = $scope.changePassword(form);
 
@@ -37,9 +40,9 @@ describe("ChangePasswordController", function () {
 
     it("change password successfully", function () {
       var form = {
-        old_password: 'oldalireza',
-        password: 'newPassword',
-        confirm_password: 'newPassword'
+        old_password: "oldalireza",
+        password: "newPassword",
+        confirm_password: "newPassword"
       };
       var result = $scope.changePassword(form);
 

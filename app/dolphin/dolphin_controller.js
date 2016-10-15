@@ -22,7 +22,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   var site = AuthService.getCurrentSite();
 
   $scope.updateDolphins = function () {
-    for (i in $scope.dolphins) {
+    for (var i = 0; i < $scope.dolphins.length; i++) {
       $scope.dolphins[i].extRaw = $scope.dolphins[i].ext.split("/")[1].toUpperCase();
     }
   };
