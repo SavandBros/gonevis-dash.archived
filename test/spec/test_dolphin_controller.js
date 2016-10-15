@@ -1,7 +1,8 @@
+"use strict";
+/* global AuthService */
+
 describe("DolphinController", function () {
-  beforeEach(
-    module("gonevisDash")
-  );
+  beforeEach(module("gonevisDash"));
 
   var $controller;
   var $rootScope;
@@ -15,7 +16,7 @@ describe("DolphinController", function () {
       var authService = AuthService;
       authService.getCurrentSite = function () {
         return [];
-      }
+      };
 
     it("slice and set new data", function () {
       var $scope = $rootScope;
@@ -23,7 +24,7 @@ describe("DolphinController", function () {
         { ext: "application/zip" },
       ];
 
-      controller = $controller('DolphinController', {
+      var controller = $controller("DolphinController", { // jshint ignore:line
         $scope: $scope,
         AuthService: authService
       });
