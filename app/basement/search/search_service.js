@@ -13,6 +13,20 @@
  * @returns [Factory]
  */
 function Search($rootScope, $resource, Pagination) {
+
+  /**
+   * searchify
+   *
+   * @method searchify
+   * @desc Turn a variable to a search var and return it
+   *
+   * @param form {Object} Variable to searchify
+   * @param api {API} Api label to query
+   * @param pageForm {Pagination} Pagination form
+   * @param data {Object} API response data
+   *
+   * @returns {Object}
+   */
   function searchify(form, pageForm, api, data, payload) {
     data = data || {};
     payload = payload || {};
