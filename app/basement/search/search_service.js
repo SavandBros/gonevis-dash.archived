@@ -5,6 +5,14 @@
  *
  * @class Search
  * @namespace gonevisDash.Search
+ * @desc Search service for controllers:
+ *       Inject the Search to controller
+ *       Define a scope var to use its search property
+ *       Use that variable after getting the initial items via API using Search.searchify()
+ *       Include the search form template in the view
+ *       Include the search noresult template in the view
+ *       Watch the gonevisDash.Search:submit to update the current data
+ *       Also update controller's pageForm variable to data.form.pageForm
  *
  * @param $rootScope
  * @param $resource
