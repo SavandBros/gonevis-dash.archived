@@ -36,36 +36,52 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
   $scope.filters = { title: "" };
 
   /**
-   * search
+   * removeSelected
    *
-   * @method search
-   * @desc Search through entries
+   * @method removeSelected
+   * @desc Remove selected entries
+   *
+   * @param entry{object}
    */
-  $scope.search = function () {
-    var payload = { search: $scope.filters.title };
-
-    API.Entries.get(payload,
-      function (data) {
-        $scope.entries = data.results;
-        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
-        if (!data.count) {
-          $scope.noResults = true;
-        } else {
-          $scope.noResults = false;
-        }
+  $scope.removeSelected = function (entry) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      if ($scope.entries[i].selected) {
+        $scope.remove($scope.entries[i])
       }
-    );
-  };
+    }
+  }
 
   /**
-   * delete
+   * setStatus
    *
-   * @method delete
+   * @method setStatus
+   * @desc set selected status
+   *
+   * @param status{number}
+   */
+  $scope.setStatus = function (status) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      var entry = $scope.entries[i];
+      if (entry.selected) {
+        API.Entry.patch({ entry_id: entry.id }, { status: status },
+          function (data) {
+            entry = data;
+            $mdToast.showSimple("Status changed!");
+          }
+        );
+      }
+    }
+  }
+
+  /**
+   * remove
+   *
+   * @method remove
    * @desc Delete entries via API call
    * 
    * @param entry {object}
    */
-  $scope.delete = function (entry) {
+  $scope.remove = function (entry) {
     API.Entry.delete({ entry_id: entry.id },
       function (data) {
         entry.isDeleted = true;

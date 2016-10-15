@@ -1,17 +1,7 @@
 <!-- Add button -->
-<button type="button" class="btn btn-success btn-corner" ui-sref="dash.entry-new"><i class="fa fa-plus"></i></button>
-
-<!-- Search -->
-<form ng-submit="search()" class="entry-search" ng-if="entries.length && !noResults || noResults">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search" ng-model="filters.title">
-    <span class="input-group-btn">
-      <button class="btn btn-default" type="submit" ng-click="search()">
-        <span class="fa fa-search"></span> Search
-    </button>
-    </span>
-  </div>
-</form>
+<button type="button" class="btn btn-success btn-corner" ui-sref="dash.entry-new">
+  <i class="fa fa-plus"></i>
+</button>
 <!-- Main -->
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
