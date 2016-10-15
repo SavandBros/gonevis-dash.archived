@@ -37,28 +37,6 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
   }
 
   /**
-   * search
-   *
-   * @method search
-   * @desc Search through entries
-   */
-  $scope.search = function () {
-    var payload = { search: $scope.filters.title };
-
-    API.Entries.get(payload,
-      function (data) {
-        $scope.entries = data.results;
-        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
-        if (!data.count) {
-          $scope.noResults = true;
-        } else {
-          $scope.noResults = false;
-        }
-      }
-    );
-  };
-
-  /**
    * removeSelected
    *
    * @method removeSelected
