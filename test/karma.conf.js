@@ -1,21 +1,28 @@
 // Karma configuration
 // Generated on 2016-06-11
 
+const coverage_reporters = [
+  { type: 'text-summary' },
+];
+const reporters = ['progress', 'coverage'];
+var browsers = ['PhantomJS']; // for local builds
+
+if (process.env.TRAVIS) {
+  console.log('On Travis sending coveralls');
+  coverage_reporters.push( { type : 'lcov', dir : 'coverage' } );
+  reporters.push('coveralls');
+} else {
+  console.log('Not on Travis so not sending coveralls');
+  coverage_reporters.push( { type : 'html', dir : 'coverage', 'subdir' : '.' } );
+}
+
 module.exports = function(config) {
   'use strict';
 
   config.set({
-    // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
-
-    // base path, that will be used to resolve files and exclude
     basePath: '../',
-
-    // testing framework to use (jasmine/mocha/qunit/...)
-    // as well as any additional frameworks (requirejs/chai/sinon/...)
-    frameworks: [
-      'jasmine'
-    ],
+    frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -53,33 +60,25 @@ module.exports = function(config) {
       // endbower
       'app/configuration.js',
       'app/**/*.js',
-      'test/mock/**/*.js',
+      // 'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
-
+    preprocessors: {
+      'app/**/*.js': ['coverage']
+    },
     // list of files / patterns to exclude
-    exclude: [
-    ],
-
-    // web server port
+    exclude: [],
     port: 8080,
-
-    // Start these browsers, currently available:
-    // - Chrome
-    // - ChromeCanary
-    // - Firefox
-    // - Opera
-    // - Safari (only Mac)
-    // - PhantomJS
-    // - IE (only Windows)
-    browsers: [
-      'PhantomJS'
-    ],
-
-    // Which plugins to enable
+    browsers: browsers,
+    reporters: reporters,
+    coverageReporter: {
+      reporters: coverage_reporters,
+    },
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-coverage',
+      'karma-coveralls',
     ],
 
     // Continuous Integration mode
@@ -91,12 +90,5 @@ module.exports = function(config) {
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_INFO,
-
-    // Uncomment the following lines if you are using grunt's server to run the tests
-    // proxies: {
-    //   '/': 'http://localhost:9000/'
-    // },
-    // URL root prevent conflicts with the site root
-    // urlRoot: '_karma_'
   });
 };

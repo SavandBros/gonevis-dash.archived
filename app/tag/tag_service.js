@@ -135,7 +135,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
     remove: remove,
     view: view,
     viewCreate: viewCreate,
-    create,
+    create: create
   };
 }
 
