@@ -12,8 +12,9 @@
  * @param API
  * @param AuthService
  * @param Pagination
+ * @param Search
  */
-function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination) {
+function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination, Search) {
 
   var site = AuthService.getCurrentSite();
 
@@ -35,6 +36,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
       function (data) {
         $scope.tags = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
+        $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Tags.get, data, payload);
       }
     );
   }
@@ -120,6 +122,14 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     }
   });
 
+  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+    if (data.success) {
+      $scope.pageForm = data.pageForm;
+      $scope.tags = data.data.results;
+      $scope.searchForm = data.form;
+    }
+  });
+
   constructor();
 }
 
@@ -132,5 +142,6 @@ TagController.$inject = [
   "TagService",
   "API",
   "AuthService",
-  "Pagination"
+  "Pagination",
+  "Search"
 ];
