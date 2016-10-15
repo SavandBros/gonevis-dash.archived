@@ -173,11 +173,13 @@ button {
   border-left: none;
 }
 
-.b-color-0 {
+.b-color-0,
+.b-color-hidden {
   border-color: orange;
 }
 
-.b-color-2 {
+.b-color-2,
+.b-color-publication {
   border-color: limegreen;
 }
 
@@ -571,15 +573,6 @@ tags-input .tags.focused {
 /* Comment */
 
 .comment-search {
-  width: 350px;
-  margin-left: 318px;
-  margin-bottom: 10px;
-}
-
-
-/* Entry */
-
-.entry-search {
   width: 350px;
   margin-left: 318px;
   margin-bottom: 10px;

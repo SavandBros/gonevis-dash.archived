@@ -1,4 +1,4 @@
-'use strict'
+"use strict"
 
 /**
  * @ngdoc function
@@ -8,11 +8,13 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param Codekit
  * @param API
  * @param AuthService
  * @param Pagination
+ * @param Search
  */
-function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthService, Pagination) {
+function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination, Search) {
 
   /**
    * constructor
@@ -21,51 +23,68 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.entryForm = {};
     $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
+    $scope.statuses = Codekit.entryStatuses;
+    $scope.search = Search;
+    $scope.pageForm = {};
 
     var payload = { site: AuthService.getCurrentSite() };
     API.Entries.get(payload,
       function (data) {
         $scope.entries = data.results;
-        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
+        $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
+        $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Entries.get, data, payload);
       }
     );
   }
 
-  $scope.filters = { title: "" };
-
   /**
-   * search
+   * removeSelected
    *
-   * @method search
-   * @desc Search through entries
+   * @method removeSelected
+   * @desc Remove selected entries
+   *
+   * @param entry{object}
    */
-  $scope.search = function () {
-    var payload = { search: $scope.filters.title };
-
-    API.Entries.get(payload,
-      function (data) {
-        $scope.entries = data.results;
-        $scope.entryForm = Pagination.paginate($scope.entryForm, data, payload);
-        if (!data.count) {
-          $scope.noResults = true;
-        } else {
-          $scope.noResults = false;
-        }
+  $scope.removeSelected = function (entry) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      if ($scope.entries[i].selected) {
+        $scope.delete($scope.entries[i])
       }
-    );
-  };
+    }
+  }
 
   /**
-   * delete
+   * setStatus
    *
-   * @method delete
+   * @method setStatus
+   * @desc set selected status
+   *
+   * @param status{number}
+   */
+  $scope.setStatus = function (status) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      var entry = $scope.entries[i];
+      if (entry.selected) {
+        API.Entry.patch({ entry_id: entry.id }, { status: status },
+          function (data) {
+            entry = data;
+            $mdToast.showSimple("Status changed!");
+          }
+        );
+      }
+    }
+  }
+
+  /**
+   * remove
+   *
+   * @method remove
    * @desc Delete entries via API call
    * 
    * @param entry {object}
    */
-  $scope.delete = function (entry) {
+  $scope.remove = function (entry) {
     API.Entry.delete({ entry_id: entry.id },
       function (data) {
         entry.isDeleted = true;
@@ -84,15 +103,31 @@ function EntryListController($scope, $rootScope, $state, $mdToast, API, AuthServ
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
-      $scope.entryForm.page = data.page;
+      $scope.pageForm.page = data.page;
       $scope.entries = $scope.entries.concat(data.data.results);
+    }
+  });
+
+  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+    if (data.success) {
+      $scope.pageForm = data.pageForm;
+      $scope.entries = data.data.results;
+      $scope.searchForm = data.form;
     }
   });
 
   constructor()
 }
 
-app.controller('EntryListController', EntryListController)
+app.controller("EntryListController", EntryListController)
 EntryListController.$inject = [
-  '$scope', '$rootScope', '$state', '$mdToast', 'API', 'AuthService', 'Pagination'
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "Codekit",
+  "API",
+  "AuthService",
+  "Pagination",
+  "Search"
 ]
