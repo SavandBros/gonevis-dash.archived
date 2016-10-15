@@ -13,6 +13,20 @@
  * @returns [Factory]
  */
 function Search($rootScope, $resource, Pagination) {
+  function searchify(form, pageForm, api, data, payload) {
+    data = data || {};
+    payload = payload || {};
+
+    form = {
+      api: api,
+      data: data,
+      pageForm: pageForm,
+      noResult: false,
+      payload: payload,
+    };
+
+    return form;
+  };
 }
 
 app.factory("Search", Search);
