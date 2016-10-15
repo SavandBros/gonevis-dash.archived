@@ -12,8 +12,9 @@
  * @param API
  * @param AuthService
  * @param Pagination
+ * @param Search
  */
-function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination) {
+function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination, Search) {
 
   /**
    * constructor
@@ -23,9 +24,8 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
    */
   function constructor() {
     $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
-    $scope.filters = { title: "" };
     $scope.statuses = Codekit.entryStatuses;
-    $scope.entryForm = {};
+    $scope.search = Search;
     $scope.pageForm = {};
 
     var payload = { site: AuthService.getCurrentSite() };
@@ -33,6 +33,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
       function (data) {
         $scope.entries = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
+        $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Entries.get, data, payload);
       }
     );
   }
@@ -107,6 +108,14 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
     }
   });
 
+  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+    if (data.success) {
+      $scope.pageForm = data.pageForm;
+      $scope.entries = data.data.results;
+      $scope.searchForm = data.form;
+    }
+  });
+
   constructor()
 }
 
@@ -119,5 +128,6 @@ EntryListController.$inject = [
   "Codekit",
   "API",
   "AuthService",
-  "Pagination"
+  "Pagination",
+  "Search"
 ]
