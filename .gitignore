@@ -7,3 +7,4 @@
 jsconfig.json
 /app/configuration.js
 .vscode/
+coverage/
