@@ -44,7 +44,8 @@
       <div class="panel-body s-pad-y-no b-left-no">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
-          <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade" ng-repeat="e in entries" ng-show="!e.isDeleted">
+          <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade"
+            ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
               <input type="checkbox" ng-model="e.selected" ng-click="checked(e)" name="checkbox">
@@ -58,7 +59,8 @@
             </div>
             <!-- Tools -->
             <div class="col-md-1 text-right">
-              <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle" style="padding: 4px" data-toggle="dropdown"></i>
+              <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle"
+                style="padding: 4px" data-toggle="dropdown"></i>
               <ul class="dropdown-menu">
                 <li class="dropdown-header" ng-if="e.comment_enabled">
                   <i init class="fa fa-fw fa-comments text-info"></i> Comment enabled
