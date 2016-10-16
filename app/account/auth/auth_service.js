@@ -98,47 +98,18 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
   }
 
   /**
-   * Try to log in with email `email` and password `password`
-   *
-   * @method login
-   * @param {String} email The email entered by the user
-   * @param {String} password The password entered by the user
-   * @returns {Promise}
-   * @memberOf gonevisDash.AuthService
-   */
-  function login(username, password) {
-    return $http.post(ENV.apiEndpoint + 'account/login/', {
-      username: username,
-      password: password
-    });
-  }
-
-  /**
-   * Try to log the user out
+   * logout
    *
    * @method logout
+   * @desc Clear credentials (log user out)
+   *
    * @returns {Promise}
+   *
    * @memberOf gonevisDash.AuthService
    */
   function logout() {
     unAuthenticate();
-    $rootScope.$broadcast('gonevisDash.AuthService:SignedOut');
-  }
-
-  /**
-   * Try to register a new user
-   *
-   * @method register
-   * @param {String} username The username entered by the user
-   * @returns {Promise}
-   * @memberOf gonevisDash.AuthService
-   */
-  function register(email, username, password) {
-    return $http.post(ENV.apiEndpoint + 'account/register/', {
-      email: email,
-      username: username,
-      password: password,
-    });
+    $rootScope.$broadcast("gonevisDash.AuthService:SignedOut");
   }
 
   /**
