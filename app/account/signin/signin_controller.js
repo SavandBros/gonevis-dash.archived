@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc function
@@ -10,11 +10,9 @@
  * @param $state
  * @param $mdToast
  * @param AuthService
+ * @param API
  */
-function SigninController($scope, $rootScope, $state, $mdToast, AuthService) {
-
-  // Signin form
-  $scope.form = {};
+function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API) {
 
   /**
    * constructor
@@ -23,11 +21,7 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService) {
    * @desc Init function for controller
    */
   function constructor() {
-
-    // Check auth
-    if (AuthService.isAuthenticated()) {
-      $state.go('dash.main');
-    }
+    $scope.form = {};
   };
 
   /**
@@ -41,18 +35,21 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService) {
   $scope.signin = function (form) {
     form.loading = true;
 
-    AuthService.login(form.username, form.password).then(
-      function (data, status, headers, config) {
+    API.Signin.post({
+        username: form.username,
+        password: form.password
+      },
+      function (data) {
         form.loading = false;
         form.errors = null;
 
         AuthService.setAuthenticatedUser(data.data.user);
         AuthService.setToken(data.data.token);
 
-        $rootScope.$broadcast('gonevisDash.AuthService:Authenticated');
-        $mdToast.showSimple('Welcome ' + data.data.user.username);
+        $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
+        $mdToast.showSimple("Welcome " + data.data.user.username);
       },
-      function (data, status, headers, config) {
+      function (data) {
         form.loading = false;
         form.errors = data.data;
       }
@@ -63,4 +60,10 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService) {
 }
 
 app.controller("SigninController", SigninController);
-SigninController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthService'];
+SigninController.$inject = [
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "AuthService"
+];
