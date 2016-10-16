@@ -93,5 +93,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "site/site_new/site_new_view.html"
     });
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise("/0/");
 })
