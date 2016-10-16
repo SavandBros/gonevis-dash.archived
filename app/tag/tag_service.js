@@ -24,14 +24,16 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
    * @param tag {Object}
    * @param toast {Boolean}
    */
-  function update(tag, toast) {
+  function update(tag, toast, form) {
     toast = toast || true;
+    form.loading = true;
 
     API.Tag.put({ tag_site: tag.site, tag_id: tag.id }, tag,
       function (data) {
         if (toast) {
           $mdToast.showSimple("Tag updated.");
         }
+        form.loading = false;
         $rootScope.$broadcast("gonevisDash.TagService:update", {
           data: data,
           tag: tag,
@@ -42,6 +44,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
         if (toast) {
           $mdToast.showSimple("Tag update failed.");
         }
+        form.loading = false;
         $rootScope.$broadcast("gonevisDash.TagService:update", {
           data: data,
           tag: tag,
