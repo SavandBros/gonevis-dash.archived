@@ -37,7 +37,7 @@ function API($http, $resource, ENV) {
   // Entry
   angular.extend(endpoints, [{
     "name": "Entry",
-    "endpoint": "website/entry/:entry_id/" // GET, PUT, PATCH, DELETE
+    "endpoint": "website/entry/:entry_id/" // GET, PUT, DELETE
   }, {
     "name": "EntryAdd",
     "endpoint": "website/entry/" // POST
@@ -49,7 +49,7 @@ function API($http, $resource, ENV) {
   // Sushial
   angular.extend(endpoints, [{
     "name": "Comment",
-    "endpoint": "sushial/comment/:comment_id/" // GET, PUT, PATCH, DELETE
+    "endpoint": "sushial/comment/:comment_id/" // GET, PUT, DELETE
   }, {
     "name": "Comments",
     "endpoint": "sushial/comment/" // GET
@@ -61,22 +61,22 @@ function API($http, $resource, ENV) {
     "endpoint": "website/site/" // POST
   }, {
     "name": "Site",
-    "endpoint": "website/site/:site_id/" // GET, PUT, PATCH
+    "endpoint": "website/site/:site_id/" // GET, PUT
   }, {
     "name": "SiteUpdate",
-    "endpoint": "website/site/:site_id/update-settings/" // GET, PUT, PATCH
+    "endpoint": "website/site/:site_id/update-settings/" // GET, PUT
   }, {
     "name": "Navigation",
     "endpoint": "website/site/:site_id/navigation/" // GET
   }, {
     "name": "UpdateNavigation",
-    "endpoint": "website/site/:site_id/update-navigation/" // GET, PUT, PATCH
+    "endpoint": "website/site/:site_id/update-navigation/" // GET, PUT
   }]);
 
   // Tagool
   angular.extend(endpoints, [{
     "name": "Tag",
-    "endpoint": "tagool/tag/:tag_id/" // GET, PUT, PATCH
+    "endpoint": "tagool/tag/:tag_id/" // GET, PUT
   }, {
     "name": "Tags",
     "endpoint": "tagool/tag/" // GET, POST
@@ -88,7 +88,7 @@ function API($http, $resource, ENV) {
     "endpoint": "dolphin/file/" // GET, POST
   }, {
     "name": "Dolphin",
-    "endpoint": "dolphin/file/:file_id/" // GET, PUT, PATCH, DELETE
+    "endpoint": "dolphin/file/:file_id/" // GET, PUT, DELETE
   }]);
 
   function createResourceObject(attrName, endpoint) {
