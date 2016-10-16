@@ -43,15 +43,15 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API
         form.loading = false;
         form.errors = null;
 
-        AuthService.setAuthenticatedUser(data.data.user);
-        AuthService.setToken(data.data.token);
+        AuthService.setAuthenticatedUser(data.user);
+        AuthService.setToken(data.token);
 
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
-        $mdToast.showSimple("Welcome " + data.data.user.username);
+        $mdToast.showSimple("Welcome " + data.user.username);
       },
       function (data) {
         form.loading = false;
-        form.errors = data.data;
+        form.errors = data;
       }
     );
   }
@@ -65,5 +65,6 @@ SigninController.$inject = [
   "$rootScope",
   "$state",
   "$mdToast",
-  "AuthService"
+  "AuthService",
+  "API"
 ];
