@@ -4,7 +4,10 @@
       <div class="panel-body s-pad">
         <div class="row">
           <div class="col-md-4">
-            <div class="avatar avatar-outside" style="margin-top: -94px">{{ user.name[0] }}</div>
+            <div class="avatar avatar-outside">
+              <span ng-if="!user.media">{{ user.name[0] }}</span>
+              <img ng-if="user.media && viewloaded" ng-src="{{ user.media.picture.thumbnail }}" />
+            </div>
           </div>
           <div class="col-md-8">
             <h3 class="text-right o-fade-soft" editable-text="user.name" onbeforesave="updateProfile('name', $data)">{{ user.name || "You have no name :-[" }}</h3>
