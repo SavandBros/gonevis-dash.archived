@@ -473,6 +473,14 @@ module.exports = function (grunt) {
           }
         }
       },
+      staging: {
+        constants: {
+          ENV: {
+            name: "staging",
+            apiEndpoint: "http://draft.gonevis.com/api/v1/"
+          }
+        }
+      },
       production: {
         constants: {
           ENV: {
