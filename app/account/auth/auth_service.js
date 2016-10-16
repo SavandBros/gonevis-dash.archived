@@ -171,13 +171,18 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
 
   /**
    * @method getCurrentSite
-   * @desc Return the ID of the current sites
+   * @desc Check and return the ID of the current site
    *
    * returns {string} Site id (uuid)
    */
   function getCurrentSite() {
     var siteIndex = $stateParams.s || 0;
-    return getAuthenticatedUser().sites[$stateParams.s].id;
+
+    if (!$stateParams.s) {
+      $stateParams.s = 0;
+    };
+
+    return getAuthenticatedUser().sites[siteIndex].id;
   }
 
   /**
