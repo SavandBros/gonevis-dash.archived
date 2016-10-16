@@ -58,7 +58,7 @@ function ModalsService(ModalService) {
     setTimeout(function () {
       if (!angular.element(".modal.fade.in").length) {
         angular.element("body.backdrop").removeClass("backdrop");
-      };
+      }
     }, 500);
   }
 
