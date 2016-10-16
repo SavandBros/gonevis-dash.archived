@@ -498,7 +498,7 @@ module.exports = function (grunt) {
       return grunt.task.run(["build", "connect:dist:keepalive"]);
     }
 
-    if (target == 'staging') {
+    if (target === "staging") {
       return grunt.task.run([
         "clean:server",
         "ngconstant:staging",
