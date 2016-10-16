@@ -12,12 +12,12 @@
 </div>
 <!-- Advanced Options -->
 <div class="form-group">
-  <a data-toggle="collapse" data-target="#advance">
+  <button ng-model="showAdvanced" ng-click="showAdvanced = !showAdvanced" class="btn btn-xs btn-default" type="button">
       Advanced Options <i class="fa fa-caret-down"></i>
-    </a>
+  </button>
 </div>
 <!-- Meta Title and Meta Desc -->
-<div class="collapse" id="advance">
+<div ng-if="showAdvanced">
   <div class=" form-group">
     <input ng-model="form.data.meta_title" placeholder="Meta title" class="form-control">
   </div>
