@@ -17,6 +17,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "main/main_view.html",
       auth: true
     })
+    .state("dash.site-new", {
+      url: "/site-create",
+      controller: "SiteNewController",
+      templateUrl: "site/site_new/site_new_view.html",
+      auth: true
+    })
     .state("dash.navigation", {
       url: "/navigation",
       controller: "NavigationController",
@@ -101,12 +107,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
       auth: false,
-    })
-    .state("site-new", {
-      url: "/new-site",
-      controller: "SiteNewController",
-      templateUrl: "site/site_new/site_new_view.html",
-      auth: false
     });
 
   $urlRouterProvider.otherwise("/0/");
