@@ -105,6 +105,12 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
   $resourceProvider.defaults.stripTrailingSlashes = false;
 });
 
-app.run(function (editableOptions) {
+app.run(function ($rootScope, editableOptions, ModalsService) {
   editableOptions.theme = "bs3";
+
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    if (!toParams.s) {
+      ModalsService.open("sites");
+    };
+  });
 });
