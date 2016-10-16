@@ -243,13 +243,28 @@ button {
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 100%;
   overflow: hidden;
-  line-height: 128px;
-  text-align: center;
-  font-size: 80px;
   background: cornflowerblue;
   color: #fff;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   cursor: default;
+}
+
+.avatar span {
+  line-height: 128px;
+  text-align: center;
+  font-size: 80px;
+}
+
+.avatar img {
+  max-width: 100%;
+}
+
+.avatar-outside {
+  margin-top: -94px;
+}
+
+.avatar-outside-wrapper {
+  margin-top: 64px;
 }
 
 
