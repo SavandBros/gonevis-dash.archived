@@ -12,6 +12,25 @@ Gonevis platform.
 
 Run `grunt` for building and `grunt serve` for preview.
 
+### Staging backend API
+
+To run the server that uses GoNevis draft/staging API:
+
+```
+$ grunt serve:staging
+```
+
+### Code Quality
+
+GoNevis Dash uses code quality checkers & linters.
+On each pull request the CI runs them.
+
+Before making a pull patch, be sure to run:
+
+```
+$ grunt jshint jscs
+```
+
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
