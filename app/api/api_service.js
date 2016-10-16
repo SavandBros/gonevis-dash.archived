@@ -14,84 +14,82 @@ function API($http, $resource, ENV) {
   var BASE_API = ENV.apiEndpoint;
   var apiData = {};
 
-  var endpoints = [
+  var endpoints = [];
 
-    // Account
-    {
-      "name": "Profile",
-      "endpoint": "profile/"
-    }, {
-      "name": "User",
-      "endpoint": "account/users/:user_id/" // GET, OPTIONS
-    }, {
-      "name": "UserUpdate",
-      "endpoint": "account/update-profile/" // PUT, OPTIONS
-    }, {
-      "name": "PasswordReset",
-      "endpoint": "account/password-reset/" // POST, OPTIONS
-    }, {
-      "name": "ChangePassword",
-      "endpoint": "account/change-password/" // POST, OPTIONS
-    },
+  // Account
+  angular.extend(endpoints, [{
+    "name": "Profile",
+    "endpoint": "profile/"
+  }, {
+    "name": "User",
+    "endpoint": "account/users/:user_id/" // GET
+  }, {
+    "name": "UserUpdate",
+    "endpoint": "account/update-profile/" // PUT
+  }, {
+    "name": "PasswordReset",
+    "endpoint": "account/password-reset/" // POST
+  }, {
+    "name": "ChangePassword",
+    "endpoint": "account/change-password/" // POST
+  }]);
 
-    // Entry
-    {
-      "name": "Entry",
-      "endpoint": "website/entry/:entry_id/" // GET, PUT, PATCH, DELETE, OPTIONS
-    }, {
-      "name": "EntryAdd",
-      "endpoint": "website/entry/" // POST, OPTIONS
-    }, {
-      "name": "Entries",
-      "endpoint": "website/entry/" // GET, OPTIONS
-    },
+  // Entry
+  angular.extend(endpoints, [{
+    "name": "Entry",
+    "endpoint": "website/entry/:entry_id/" // GET, PUT, PATCH, DELETE
+  }, {
+    "name": "EntryAdd",
+    "endpoint": "website/entry/" // POST
+  }, {
+    "name": "Entries",
+    "endpoint": "website/entry/" // GET
+  }]);
 
-    // Sushial
-    {
-      "name": "Comment",
-      "endpoint": "sushial/comment/:comment_id/" // GET, PUT, PATCH, DELETE, OPTIONS
-    }, {
-      "name": "Comments",
-      "endpoint": "sushial/comment/" // GET, OPTIONS
-    },
+  // Sushial
+  angular.extend(endpoints, [{
+    "name": "Comment",
+    "endpoint": "sushial/comment/:comment_id/" // GET, PUT, PATCH, DELETE
+  }, {
+    "name": "Comments",
+    "endpoint": "sushial/comment/" // GET
+  }]);
 
-    // Site
-    {
-      "name": "SiteNew",
-      "endpoint": "website/site/" // POST, OPTIONS
-    }, {
-      "name": "Site",
-      "endpoint": "website/site/:site_id/" // GET, PUT, PATCH, OPTIONS
-    }, {
-      "name": "SiteUpdate",
-      "endpoint": "website/site/:site_id/update-settings/" // GET, PUT, PATCH, OPTIONS
-    }, {
-      "name": "Navigation",
-      "endpoint": "website/site/:site_id/navigation/" // GET, OPTIONS
-    }, {
-      "name": "UpdateNavigation",
-      "endpoint": "website/site/:site_id/update-navigation/" // GET, PUT, PATCH, OPTIONS
-    },
+  // Site
+  angular.extend(endpoints, [{
+    "name": "SiteNew",
+    "endpoint": "website/site/" // POST
+  }, {
+    "name": "Site",
+    "endpoint": "website/site/:site_id/" // GET, PUT, PATCH
+  }, {
+    "name": "SiteUpdate",
+    "endpoint": "website/site/:site_id/update-settings/" // GET, PUT, PATCH
+  }, {
+    "name": "Navigation",
+    "endpoint": "website/site/:site_id/navigation/" // GET
+  }, {
+    "name": "UpdateNavigation",
+    "endpoint": "website/site/:site_id/update-navigation/" // GET, PUT, PATCH
+  }]);
 
-    // Tagool
-    {
-      "name": "Tag",
-      "endpoint": "tagool/tag/:tag_id/" // GET, PUT, PATCH, OPTIONS
-    }, {
-      "name": "Tags",
-      "endpoint": "tagool/tag/" // GET, POST, OPTIONS
-    },
+  // Tagool
+  angular.extend(endpoints, [{
+    "name": "Tag",
+    "endpoint": "tagool/tag/:tag_id/" // GET, PUT, PATCH
+  }, {
+    "name": "Tags",
+    "endpoint": "tagool/tag/" // GET, POST
+  }, ]);
 
-
-    // Dolphin
-    {
-      "name": "Dolphins",
-      "endpoint": "dolphin/file/" // GET, POST, OPTIONS
-    }, {
-      "name": "Dolphin",
-      "endpoint": "dolphin/file/:file_id/" // GET, PUT, PATCH, DELETE, OPTIONS
-    },
-  ];
+  // Dolphin
+  angular.extend(endpoints, [{
+    "name": "Dolphins",
+    "endpoint": "dolphin/file/" // GET, POST
+  }, {
+    "name": "Dolphin",
+    "endpoint": "dolphin/file/:file_id/" // GET, PUT, PATCH, DELETE
+  }]);
 
   function createResourceObject(attrName, endpoint) {
     apiData[attrName] = $resource(endpoint, {}, {
