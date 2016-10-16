@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc function
@@ -10,8 +10,9 @@
  * @param $state
  * @param $mdToast
  * @param AuthService
+ * @param API
  */
-function SignupController($scope, $rootScope, $state, $mdToast, AuthService) {
+function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API) {
 
   // Signup form
   $scope.form = {};
@@ -26,7 +27,7 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService) {
 
     // Check auth
     if (AuthService.isAuthenticated()) {
-      $state.go('main');
+      $state.go("main");
     }
   };
 
@@ -53,14 +54,14 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService) {
     );
   };
 
-  $scope.$on('gonevisDash.AuthService:Registered', function () {
     AuthService.login($scope.form.username, $scope.form.password).then(
       function (data, status, headers, config) {
         AuthService.setAuthenticatedUser(data.data.user);
         AuthService.setToken(data.data.token);
+  $scope.$on("gonevisDash.AuthService:Registered", function () {
 
-        $rootScope.$broadcast('gonevisDash.AuthService:Authenticated');
-        $mdToast.showSimple('Welcome ' + data.data.user.username);
+        $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
+        $mdToast.showSimple("Welcome " + data.user.username);
       }
     );
   });
@@ -69,4 +70,11 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService) {
 }
 
 app.controller("SignupController", SignupController);
-SignupController.$inject = ['$scope', '$rootScope', '$state', '$mdToast', 'AuthService'];
+SignupController.$inject = [
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "AuthService",
+  "API"
+];

@@ -29,9 +29,8 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
 
   $rootScope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
-
-    if ($scope.user.sites.length === 0) {
-      $state.go("site-new");
+    if (!$scope.user.sites.length) {
+      $state.go("dash.site-new");
     } else {
       $state.go("dash.main", { s: 0 });
     }
@@ -42,7 +41,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
   });
 
   $scope.$on("gonevisDash.AuthService:SignedOut", function () {
-    constructor();
     $state.go("signin");
   });
 

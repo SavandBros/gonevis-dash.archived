@@ -149,8 +149,12 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
    * returns {String} Site id (uuid)
    */
   function getCurrentSite() {
-    var siteIndex = $stateParams.s || 0;
-    return getAuthenticatedUser().sites[siteIndex].id;
+    var sites = getAuthenticatedUser().sites;
+
+    if (sites.length) {
+      var siteIndex = $stateParams.s || 0;
+      return getAuthenticatedUser().sites[siteIndex].id;
+    }
   }
 
   /**
