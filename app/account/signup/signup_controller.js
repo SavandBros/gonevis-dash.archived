@@ -42,26 +42,34 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
   $scope.signup = function register(form) {
     form.loading = true;
 
-    AuthService.register(form.email, form.username, form.password).then(
-      function (data, status, headers, config) {
-        $rootScope.$broadcast('gonevisDash.AuthService:Registered');
-        form.errors = null;
+    API.Signup.post({
+        email: form.email,
+        username: form.username,
+        password: form.password
       },
-      function (data, status, headers, config) {
+      function () {
+        $rootScope.$broadcast("gonevisDash.AuthService:Registered");
+        form.errors = [];
+      },
+      function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
   };
 
-    AuthService.login($scope.form.username, $scope.form.password).then(
-      function (data, status, headers, config) {
-        AuthService.setAuthenticatedUser(data.data.user);
-        AuthService.setToken(data.data.token);
   $scope.$on("gonevisDash.AuthService:Registered", function () {
+    API.Signin.post({
+        username: $scope.form.username,
+        password: $scope.form.password
+      },
+      function (data) {
+        AuthService.setAuthenticatedUser(data.user);
+        AuthService.setToken(data.token);
 
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
         $mdToast.showSimple("Welcome " + data.user.username);
+        $state.go("dash.site-new");
       }
     );
   });
