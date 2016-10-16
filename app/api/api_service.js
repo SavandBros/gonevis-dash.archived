@@ -10,7 +10,6 @@
  * @returns {{Service: API.service}}
  */
 function API($http, $resource, ENV) {
-
   var BASE_API = ENV.apiEndpoint;
   var apiData = {};
 
