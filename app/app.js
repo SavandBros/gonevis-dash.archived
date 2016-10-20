@@ -46,8 +46,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
     })
     .state("dash.entry-list", {
       url: "/entries",
-      controller: "EntryListController",
-      templateUrl: "entry/entry_list/entry_list_view.html"
+      controller: "EntryController",
+      templateUrl: "entry/entry_view.html"
     })
     .state("dash.entry-edit", {
       url: "/entry/:entryId",
