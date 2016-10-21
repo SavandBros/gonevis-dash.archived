@@ -66,7 +66,7 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
   $scope.newPost = function (form) {
     form.loading = true;
     form.site = AuthService.getCurrentSite();
-    if (form.title == null) {
+    if (!form.title) {
       form.loading = false;
       return $mdToast.showSimple("Title is requierd");
     }
