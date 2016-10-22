@@ -51,7 +51,7 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API
       },
       function (data) {
         form.loading = false;
-        form.errors = data;
+        form.errors = data.data;
       }
     );
   }
