@@ -11,7 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form ng-submit="tagService.update(form.data)">
+        <form ng-submit="tagService.update(form.data, true, form)">
           <ng-include src="'tag/includes/tag_form.html'"></ng-include>
           <button class="btn btn-primary btn-block" ng-disabled="form.loading">Update</button>
         </form>
