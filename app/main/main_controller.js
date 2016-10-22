@@ -59,15 +59,21 @@ function MainController($scope, $state, $mdToast, $stateParams, AuthService, API
   $scope.newPost = function (form) {
     form.loading = true;
     form.site = AuthService.getCurrentSite();
+    if (!form.title) {
+      form.loading = false;
+      return $mdToast.showSimple("Title is requierd");
+    }
 
     API.EntryAdd.save(form,
       function (data) {
         $mdToast.showSimple("Entry " + data.title + " drafted.");
+        form.loading = false;
         form.title = "";
         form.content = "";
       },
       function (data) {
         $mdToast.showSimple("Failed to add entry.");
+        form.loading = false;
         form.loading = false;
         form.errors = data;
       }
