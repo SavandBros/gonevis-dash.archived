@@ -9,7 +9,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/:s",
       abstract: true,
       controller: "DashController",
-      template: "<ui-view/>"
+      template: "<ui-view/>",
+      auth: true
     })
     .state("dash.main", {
       url: "/",
