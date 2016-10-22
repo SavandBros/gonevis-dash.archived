@@ -1,4 +1,4 @@
-'use strict'
+"use strict"
 
 /**
  * @ngdoc function
@@ -8,6 +8,7 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param Codekit
  * @param API
  * @param AuthService
  * @param Pagination
@@ -36,8 +37,6 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
       }
     );
   }
-
-  $scope.filters = { title: "" };
 
   /**
    * removeSelected
@@ -78,6 +77,124 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
   }
 
   /**
+   * removeSelected
+   *
+   * @method removeSelected
+   * @desc Remove selected entries
+   *
+   * @param entry{object}
+   */
+  $scope.removeSelected = function (entry) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      if ($scope.entries[i].isSelected) {
+        $scope.remove($scope.entries[i]);
+      }
+    }
+  }
+
+  /**
+   * setStatus
+   *
+   * @method setStatus
+   * @desc set selected status
+   *
+   * @param status{number}
+   */
+  $scope.setStatus = function (status) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      var entry = $scope.entries[i];
+      if (entry.isSelected) {
+        API.Entry.patch({ entry_id: entry.id }, { status: status },
+          function (data) {
+            entry = data;
+            $mdToast.showSimple("Status changed!");
+          }
+        );
+      }
+    }
+  };
+
+  /**
+   * setComment
+   *
+   * @method setComment
+   * @desc set selected comment status
+   *
+   * @param enable{bool}
+   */
+  $scope.setComment = function (enable) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      var entry = $scope.entries[i];
+      if (entry.isSelected) {
+        API.Entry.patch({ entry_id: entry.id }, { comment_enabled: enable },
+          function (data) {
+            entry = data;
+            entry.isSelected = true;
+            $mdToast.showSimple("Commenting " + (enable ? "enabled" : "disabled"));
+          }
+        );
+      }
+    }
+  };
+
+  /**
+   * setFeature
+   *
+   * @method setFeature
+   * @desc set selected feature status
+   *
+   * @param enable{Boolean}
+   */
+  $scope.setFeature = function (enable) {
+    for (var i = 0; i < $scope.entries.length; i++) {
+      var entry = $scope.entries[i];
+      if (entry.isSelected) {
+        API.Entry.patch({ entry_id: entry.id }, { featured: enable },
+          function (data) {
+            entry = data;
+            entry.isSelected = true;
+            $mdToast.showSimple("Feature " + (enable ? "enabled" : "disabled"));
+          }
+        );
+      }
+    }
+  }
+
+  /**
+   * countSelected
+   *
+   * @method countSelected
+   * @desc Count selected entries
+   */
+  $scope.countSelected = function () {
+    $scope.selectCount = 0;
+    for (var i in $scope.entries) {
+      if ($scope.entries[i].isSelected) {
+        $scope.selectCount++;
+      }
+    }
+  }
+
+  /**
+   * selectEntries
+   *
+   * @method selectEntries
+   * @desc Select all entries
+   */
+  $scope.selectEntries = function () {
+    if ($scope.selectAll) {
+      $scope.selectAll = false
+    } else {
+      $scope.selectAll = true;
+    }
+
+    for (var i in $scope.entries) {
+      $scope.entries[i].isSelected = $scope.selectAll;
+      $scope.countSelected();
+    }
+  }
+
+  /**
    * remove
    *
    * @method remove
@@ -89,6 +206,8 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
     API.Entry.delete({ entry_id: entry.id },
       function (data) {
         entry.isDeleted = true;
+        entry.isSelected = false;
+        $scope.selectCount = 0;
         $mdToast.showSimple("Entry deleted!");
       }
     );
@@ -120,7 +239,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
   constructor()
 }
 
-app.controller('EntryListController', EntryListController)
+app.controller("EntryListController", EntryListController)
 EntryListController.$inject = [
   "$scope",
   "$rootScope",

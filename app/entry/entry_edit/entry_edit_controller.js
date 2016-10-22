@@ -3,17 +3,19 @@
 /**
  * @ngdoc function
  * @name gonevisDash.controller:EntryEditController
- * Controller of the gonevisDash
+ * @desc Controller of the gonevisDash
  *
  * @param $scope
  * @param $state
  * @param $stateParams
  * @param $mdToast
+ * @param $q
  * @param API
  * @param AuthService
- * @oaram DolphinService
+ * @param DolphinService
+ * @param Codekit
  */
-function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthService, DolphinService, $q) {
+function EntryEditController($scope, $state, $stateParams, $mdToast, $q, API, AuthService, DolphinService, Codekit) {
 
   $scope.tags = [];
 
@@ -26,28 +28,18 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
   function constructor() {
     $scope.dolphinService = DolphinService;
     $scope.editing = true;
-
-    API.Tags.get({ tag_site: AuthService.getCurrentSite() },
-      function (data, status, headers, config) {
-
-        for (var i in data.results) {
-          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
-        }
-        console.log($scope.tags);
-
-      }
-    );
-
+    $scope.statuses = Codekit.entryStatuses;
     $scope.form = {
       id: $stateParams.entryId,
       site: AuthService.getCurrentSite()
     };
+    $scope.tagsToSubmit = [];
 
-    $scope.statuses = [
-      { name: "Draft", id: 0 },
-      { name: "Hidden", id: 1 },
-      { name: "Published", id: 2 }
-    ];
+    API.Tags.get({ tag_site: $scope.form.site },
+      function (data, status, headers, config) {
+        $scope.tags = data.results;
+      }
+    );
 
     API.Entry.get({ entry_id: $scope.form.id },
       function (data, status, headers, config) {
@@ -72,7 +64,6 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
     return deferred.promise;
   };
 
-  $scope.tagsToSubmit = [];
   /**
    * update
    *
@@ -139,8 +130,9 @@ EntryEditController.$inject = [
   "$state",
   "$stateParams",
   "$mdToast",
+  "$q",
   "API",
   "AuthService",
   "DolphinService",
-  "$q"
+  "Codekit"
 ];

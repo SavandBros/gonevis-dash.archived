@@ -12,21 +12,82 @@
     <!-- Nothing -->
     <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult"></ng-include>
     <!-- List -->
-    <div class="panel panel-defaul s-box b-left-no" ng-if="entries.length">
-      <div class="panel-body s-pad-y-no">
+    <div class="panel panel-default s-box" ng-if="entries.length">
+      <!-- Header -->
+      <div class="panel-heading a-fade">
+        <!-- All checkbox -->
+        <div class="checkbox checkbox-primary col-xs-8" style="margin: 0">
+          <input id="selectAll" type="checkbox" ng-model="selectAll" ng-change="selectEntries()">
+          <label for="selectAll"><span class="o-fade-soft">{{ selectCount }} Selected</span></label>
+        </div>
+        <!-- Action dropdown -->
+        <div class="dropdown options pull-right" title="options">
+          <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
+            Action <i class="fa fa-caret-down"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <!-- Status -->
+            <li class="dropdown-header">Set status to</li>
+            <li ng-repeat="s in statuses">
+              <a ng-click="setStatus(s.id)">
+                <i class="fa fa-{{ s.icon }} text-{{ s.color }}"></i>{{ s.label }}
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Commenting</li>
+            <li>
+              <a ng-click="setComment(true)">
+                <i class="fa fa-check text-danger"></i> Enable comments
+              </a>
+            </li>
+
+            <li>
+              <a ng-click="setComment(false)">
+                <i class="fa fa-times"></i> Disable comments
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Feature</li>
+            <li>
+              <a ng-click="setFeature(true)">
+                <i class="fa fa-check text-danger"></i> Set to feature
+              </a>
+            </li>
+            <li>
+              <a ng-click="setFeature(false)">
+                <i class="fa fa-times"></i> Remove feature
+              </a>
+            </li>
+            </li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Other actions</li>
+            <!-- Delete -->
+            <li>
+              <a ng-click="removeSelected()">
+                <i class="fa fa-trash text-danger"></i> Delete
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <!-- List -->
+      <div class="panel-body s-pad-y-no b-left-no">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
           <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade"
             ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
+              <input type="checkbox" ng-model="e.isSelected" ng-change="countSelected(e)" name="checkbox">
               <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
               <small class="dis-b o-fade">/{{ e.slug }}</small>
             </div>
             <!-- Date -->
             <div class="col-md-3 text-right o-fade">
-              {{ e.status == 2 ? e.publication_date : e.created | date }}
-              <small class="dis-b o-fade">{{ e.status == 2 ? "Publication" : "Creation" }}</small>
+              {{ e.status = 2 ? e.publication_date : e.created | date }}
+              <small class="dis-b o-fade">{{ e.status = 2 ? "Publication" : "Creation" }}</small>
             </div>
             <!-- Tools -->
             <div class="col-md-1 text-right">
