@@ -6,14 +6,25 @@
   <title>Gonevis Dash</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <link rel="icon" href="assets/img/favicon.png">
+  
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/fav/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="assets/img/fav/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="assets/img/fav/manifest.json">
+  <link rel="mask-icon" href="assets/img/fav/safari-pinned-tab.svg" color="#d17200">
+  <link rel="shortcut icon" href="assets/img/fav/favicon.ico">
+  <meta name="apple-mobile-web-app-title" content="Gonevis">
+  <meta name="application-name" content="Gonevis">
+  <meta name="msapplication-config" content="assets/img/fav/browserconfig.xml">
+  <meta name="theme-color" content="#d17200">
+
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
   <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
-  <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/textAngular/dist/textAngular.css" />
   <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css" />
   <!-- endbower -->
@@ -79,8 +90,10 @@
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
-  <script src="configuration.js"></script>
+  <script src="app_config.js"></script>
   <script src="app.js"></script>
+  <script src="app_routes.js"></script>
+  <script src="app_run.js"></script>
 
   <script src="api/api_service.js"></script>
   <script src="modals/modals_service.js"></script>
@@ -100,7 +113,7 @@
 
   <script src="site/site_new/site_new_controller.js"></script>
   <script src="site/site_settings/site_settings_controller.js"></script>
-  <script src="site/sites_modal/site_controller.js"></script>
+  <script src="site/sites_modal/site_modal_controller.js"></script>
 
   <script src="comment/comment_modal/comment_modal_controller.js"></script>
   <script src="comment/comment_controller.js"></script>

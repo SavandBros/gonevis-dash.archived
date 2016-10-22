@@ -1,5 +1,5 @@
 /*global angular*/
-'use strict';
+"use strict";
 
 /**
  * Auth Service
@@ -24,8 +24,8 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
    * @memberOf gonevisDash.AuthService
    */
   function getAuthenticatedUser() {
-    if ($window.localStorage.getItem('authenticatedUser')) {
-      return JSON.parse($window.localStorage.getItem('authenticatedUser'));
+    if ($window.localStorage.getItem("authenticatedUser")) {
+      return JSON.parse($window.localStorage.getItem("authenticatedUser"));
     }
   }
 
@@ -39,8 +39,8 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
    * @returns {Object} Parsed json
    */
   function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace('-', '+').replace('_', '/');
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace("-", "+").replace("_", "/");
 
     return JSON.parse($window.atob(base64));
   }
@@ -55,7 +55,7 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
    * @returns {NaN}
    */
   function setToken(token) {
-    $window.localStorage['jwtToken'] = token;
+    $window.localStorage["jwtToken"] = token;
   }
 
   /**
@@ -67,7 +67,7 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
    * @returns {undefined|String|Object}
    */
   function getToken() {
-    return $window.localStorage['jwtToken'];
+    return $window.localStorage["jwtToken"];
   }
 
   /**
@@ -98,47 +98,18 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
   }
 
   /**
-   * Try to log in with email `email` and password `password`
-   *
-   * @method login
-   * @param {String} email The email entered by the user
-   * @param {String} password The password entered by the user
-   * @returns {Promise}
-   * @memberOf gonevisDash.AuthService
-   */
-  function login(username, password) {
-    return $http.post(ENV.apiEndpoint + 'account/login/', {
-      username: username,
-      password: password
-    });
-  }
-
-  /**
-   * Try to log the user out
+   * logout
    *
    * @method logout
+   * @desc Clear credentials (log user out)
+   *
    * @returns {Promise}
+   *
    * @memberOf gonevisDash.AuthService
    */
   function logout() {
     unAuthenticate();
-    $rootScope.$broadcast('gonevisDash.AuthService:SignedOut');
-  }
-
-  /**
-   * Try to register a new user
-   *
-   * @method register
-   * @param {String} username The username entered by the user
-   * @returns {Promise}
-   * @memberOf gonevisDash.AuthService
-   */
-  function register(email, username, password) {
-    return $http.post(ENV.apiEndpoint + 'account/register/', {
-      email: email,
-      username: username,
-      password: password,
-    });
+    $rootScope.$broadcast("gonevisDash.AuthService:SignedOut");
   }
 
   /**
@@ -150,7 +121,7 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
    * @memberOf gonevisDash.AuthService
    */
   function setAuthenticatedUser(authenticatedUser) {
-    $window.localStorage['authenticatedUser'] = JSON.stringify(authenticatedUser);
+    $window.localStorage["authenticatedUser"] = JSON.stringify(authenticatedUser);
   }
 
   /**
@@ -161,23 +132,29 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
    * @memberOf gonevisDash.AuthService
    */
   function unAuthenticate() {
-    $window.localStorage.removeItem('jwtToken');
-    $window.localStorage.removeItem('authenticatedUser');
+    $window.localStorage.removeItem("jwtToken");
+    $window.localStorage.removeItem("authenticatedUser");
   }
 
   function updateAuth(updatedUser) {
-    $window.localStorage['authenticatedUser'] = JSON.stringify(updatedUser);
+    $window.localStorage["authenticatedUser"] = JSON.stringify(updatedUser);
   }
 
   /**
-   * @method getCurrentSite
-   * @desc Return the ID of the current sites
+   * getCurrentSite
    *
-   * returns {string} Site id (uuid)
+   * @method getCurrentSite
+   * @desc Check and return the ID of the current site
+   *
+   * returns {String} Site id (uuid)
    */
   function getCurrentSite() {
-    var siteIndex = $stateParams.s || 0;
-    return getAuthenticatedUser().sites[$stateParams.s].id;
+    var sites = getAuthenticatedUser().sites;
+
+    if (sites.length) {
+      var siteIndex = $stateParams.s || 0;
+      return getAuthenticatedUser().sites[siteIndex].id;
+    }
   }
 
   /**
@@ -190,9 +167,7 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
     getToken: getToken,
     getAuthenticatedUser: getAuthenticatedUser,
     isAuthenticated: isAuthenticated,
-    login: login,
     logout: logout,
-    register: register,
     setAuthenticatedUser: setAuthenticatedUser,
     unAuthenticate: unAuthenticate,
     updateAuth: updateAuth,
@@ -200,5 +175,5 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
   };
 }
 
-app.factory('AuthService', AuthService);
-AuthService.$inject = ['$rootScope', '$http', '$window', '$stateParams', 'ENV'];
+app.factory("AuthService", AuthService);
+AuthService.$inject = ["$rootScope", "$http", "$window", "$stateParams", "ENV"];

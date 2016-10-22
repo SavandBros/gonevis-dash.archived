@@ -18,7 +18,7 @@ function ModalsService(ModalService) {
     comment: "comment/comment_modal/comment_modal_view.html",
     tag: "tag/tag_modal/tag_modal_view.html",
     tagCreate: "tag/tag_create_modal/tag_create_modal_view.html",
-    sites: "site/sites_modal/site_view.html",
+    sites: "site/sites_modal/site_modal_view.html",
   };
 
   var modals = {};
@@ -52,7 +52,14 @@ function ModalsService(ModalService) {
    * @param template {String} Name of the modal template
    */
   function close(template) {
+    // Trigger the close button
     angular.element("#" + template + " .close").trigger("click");
+    // Make sure backdrop is gone
+    setTimeout(function () {
+      if (!angular.element(".modal.fade.in").length) {
+        angular.element("body.backdrop").removeClass("backdrop");
+      }
+    }, 500);
   }
 
   return {

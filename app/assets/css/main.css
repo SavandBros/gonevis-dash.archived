@@ -243,13 +243,28 @@ button {
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 100%;
   overflow: hidden;
-  line-height: 128px;
-  text-align: center;
-  font-size: 80px;
   background: cornflowerblue;
   color: #fff;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   cursor: default;
+}
+
+.avatar span {
+  line-height: 128px;
+  text-align: center;
+  font-size: 80px;
+}
+
+.avatar img {
+  max-width: 100%;
+}
+
+.avatar-outside {
+  margin-top: -94px;
+}
+
+.avatar-outside-wrapper {
+  margin-top: 64px;
 }
 
 
@@ -629,4 +644,40 @@ tags-input .tags.focused {
 .load-more {
   margin: 15px 0;
   text-align: center;
+}
+
+
+/* Primary color */
+
+.dropdown-menu>.active>a,
+.dropdown-menu>.active>a:hover,
+.dropdown-menu>.active>a:focus,
+.btn-primary {
+  background: #d17100;
+}
+
+.btn-primary {
+  border-color: #b96400 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: #b96400;
+}
+
+.btn-primary:active {
+  background: #ab5c00 !important;
+  border-color: #ab5c00 !important;
+}
+
+a,
+a:hover,
+a:focus,
+.text-primary {
+  color: #d17100;
+}
+
+.form-control:focus {
+  border-color: #ab5c00;
+  box-shadow: 0 0 4px rgba(171, 92, 0, 0.5);
 }

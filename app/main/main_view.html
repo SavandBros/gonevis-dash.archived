@@ -3,7 +3,7 @@
 		<div class="col-md-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-fw text-info fa-comments"></i> Latest Comments
+					<i class="fa fa-fw text-primary fa-comments"></i> Latest Comments
 				</div>
 				<ul class="panel-body panel-list">
 					<li class="panel-list-item s-fade" ng-repeat="c in Comment.list" ng-show="!c.isDeleted">
@@ -23,7 +23,7 @@
 		<div class="col-md-3 pull-right">
 			<div class="panel panel-default">
 				<div class="panel-heading c-p" style="outline: none;" class="btn btn-default btn-sm" type="button" ng-model="newNevis" ng-click="newNevis = !newNevis">
-					<i class="fa text-info fa-plus"></i> Add a quick Entry
+					<i class="fa text-primary fa-plus"></i> Add a quick Entry
 					<i class="fa fa-caret-right pull-right" ng-if="!newNevis"></i>
 					<i class="fa fa-caret-down pull-right" ng-if="newNevis"></i>
 				</div>

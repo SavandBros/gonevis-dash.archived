@@ -29,12 +29,9 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
 
     API.Tags.get({ tag_site: AuthService.getCurrentSite() },
       function (data, status, headers, config) {
-
         for (var i in data.results) {
           $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
         }
-        console.log($scope.tags);
-
       }
     );
 

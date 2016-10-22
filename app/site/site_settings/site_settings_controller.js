@@ -64,7 +64,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
    * remove
    *
    * @method remove
-   * @desc delete site via api call
+   * @desc Delete site via api call
    *
    * @param siteId {String}
    */
@@ -85,7 +85,7 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
         if ($scope.user.sites.length == 0) {
           $state.go('site-new');
         } else {
-          ModalsService.open("sites", "SiteController");
+          ModalsService.open("sites", "SiteModalController");
         };
       },
       function (data, status, headers, config) {
