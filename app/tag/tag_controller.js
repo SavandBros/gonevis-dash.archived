@@ -12,8 +12,9 @@
  * @param API
  * @param AuthService
  * @param Pagination
+ * @param Search
  */
-function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination) {
+function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination, Search) {
 
   var site = AuthService.getCurrentSite();
 
@@ -26,14 +27,16 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
-    $scope.tagForm = {};
+    $scope.search = Search;
+    $scope.pageForm = {};
     $scope.nothing = { text: "It's lonely here... Try adding some tags!" };
 
     var payload = { site: site };
     API.Tags.get(payload,
       function (data) {
         $scope.tags = data.results;
-        $scope.tagForm = Pagination.paginate($scope.tagForm, data, payload);
+        $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
+        $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Tags.get, data, payload);
       }
     );
   }
@@ -114,8 +117,16 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
-      $scope.tagForm.page = data.page;
+      $scope.pageForm.page = data.page;
       $scope.tags = $scope.tags.concat(data.data.results);
+    }
+  });
+
+  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+    if (data.success) {
+      $scope.pageForm = data.pageForm;
+      $scope.tags = data.data.results;
+      $scope.searchForm = data.form;
     }
   });
 
@@ -131,5 +142,6 @@ TagController.$inject = [
   "TagService",
   "API",
   "AuthService",
-  "Pagination"
+  "Pagination",
+  "Search"
 ];
