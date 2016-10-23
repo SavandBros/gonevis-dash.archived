@@ -214,7 +214,7 @@ button {
 /* Transitions */
 
 .trans,
-.dolphin, {
+.dolphin {
   transition: all 0.3s ease-in-out;
 }
 
@@ -638,6 +638,15 @@ tags-input .tags.focused {
   padding: 30px;
 }
 
+.editable-empty,
+.editable-empty:hover,
+.editable-empty:focus,
+a.editable-empty,
+a.editable-empty:hover,
+a.editable-empty:focus {
+  opacity: 0.5;
+}
+
 
 /* Load more */
 
@@ -660,7 +669,10 @@ tags-input .tags.focused {
   background: #d17100;
 }
 
-.btn-primary {
+.btn-primary,
+.text-primary,
+.editable-click,
+a.editable-click {
   border-color: #b96400 !important;
 }
 
@@ -677,7 +689,9 @@ tags-input .tags.focused {
 a,
 a:hover,
 a:focus,
-.text-primary {
+.text-primary,
+.editable-click,
+a.editable-click {
   color: #d17100;
 }
 
@@ -697,6 +711,7 @@ fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary.focus {
   background: #b96400;
 }
+
 
 /* Over flow */
 
