@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:EntryListController
+ * @name gonevisDash.controller:EntryController
  * Controller of the gonevisDash
  *
  * @param $scope
@@ -13,7 +13,7 @@
  * @param Pagination
  * @param Search
  */
-function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination, Search) {
+function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination, Search) {
 
   /**
    * constructor
@@ -120,8 +120,8 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
   constructor()
 }
 
-app.controller('EntryListController', EntryListController)
-EntryListController.$inject = [
+app.controller('EntryController', EntryController)
+EntryController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
