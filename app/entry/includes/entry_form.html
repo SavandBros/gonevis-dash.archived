@@ -8,7 +8,8 @@
     </div>
     <!-- Cover select -->
     <div class="col-sm-1 col-xs-2 s-pad-no">
-      <button class="btn btn-default btn-block" ng-click="dolphinService.viewSelection()" type="button" title="Select cover image for entry">
+      <button class="btn btn-default btn-block" ng-click="dolphinService.viewSelection()"
+        type="button" title="Select cover image for entry">
       <i class="fa fa-fw fa-image"></i>
       </button>
     </div>
@@ -21,7 +22,8 @@
   </div>
   <!-- Lead -->
   <div class="form-group" ng-class="{'has-error': form.errors.lead}">
-    <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph" rows="5"></textarea>
+    <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph" rows="5">
+    </textarea>
     <small id="lead" class="help-block" ng-show="form.errors.lead">{{ form.errors.lead[0] }}</small>
   </div>
 </div>
@@ -59,7 +61,7 @@
     </button>
   </div>
   <!-- Meta Title and Meta Desc -->
-  <div class="animated" ng-show="showAdvanced" ng-class="{fadeInUp: showAdvanced, fadeOutDown: !showAdvanced}" >
+  <div class="animated" ng-show="showAdvanced" ng-class="{fadeInUp: showAdvanced, fadeOutDown: !showAdvanced}">
     <div class=" form-group">
       <input ng-model="form.meta_title" placeholder="Meta title" class="form-control">
     </div>
