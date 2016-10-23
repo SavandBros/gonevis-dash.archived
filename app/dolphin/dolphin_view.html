@@ -9,7 +9,7 @@
       <div class="row" ng-if="dolphins.length">
         <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
           <!-- Link -->
-          <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.file }})">
+          <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail }})">
             <p class="caption">{{ d.meta_data.name }}</p>
           </a>
           <!-- Options -->
