@@ -25,29 +25,27 @@
     </div>
     <!-- Post nevis -->
     <div class="col-md-3 pull-right">
-      <div class="panel panel-default">
-        <div class="panel-heading c-p" style="outline: none;" class="btn btn-default btn-sm"
+      <div class="panel panel-default of">
+        <div class="panel-heading c-p" class="btn btn-default btn-sm"
           type="button" ng-model="newNevis" ng-click="newNevis = !newNevis">
-          <i class="fa text-primary fa-plus"></i> Add a quick Entry
-          <i class="fa fa-caret-right pull-right" ng-if="!newNevis"></i>
-          <i class="fa fa-caret-down pull-right" ng-if="newNevis"></i>
+          <i class="fa text-primary fa-plus"></i> Quick Nevis
+          <i class="fa pull-right" ng-class="{'fa-minus-square-o': newNevis, 'fa-plus-square-o': !newNevis}"></i>
         </div>
-        <div ng-if="newNevis">
-          <div class="panel-body">
-            <form ng-submit="newPost(form)" name="form">
-              <div class="form-group" ng-class="{'has-error': form.errors.title}">
-                <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="Title" required/>
-                <small id="title" class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
-              </div>
-              <div class="form-group" ng-class="{'has-error': form.errors.content}">
-                <textarea ng-model="form.content" placeholder="Content" class="form-control"></textarea>
-                <small id="content" class="help-block" ng-show="form.errors.content">
-                  {{ form.errors.content[0] }}
-                </small>
-              </div>
-              <button class="btn btn-primary btn-block" ng-disabled="form.loading">Submit</button>
-            </form>
-          </div>
+        <div class="panel-body animated" ng-show="newNevis"
+          ng-class="{fadeInUp: newNevis, fadeOutDown: !newNevis}">
+          <form ng-submit="newPost(form)" name="form">
+            <div class="form-group" ng-class="{'has-error': form.errors.title}">
+              <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="Title" required/>
+              <small id="title" class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
+            </div>
+            <div class="form-group" ng-class="{'has-error': form.errors.content}">
+              <textarea ng-model="form.content" placeholder="Content" class="form-control"></textarea>
+              <small id="content" class="help-block" ng-show="form.errors.content">
+                {{ form.errors.content[0] }}
+              </small>
+            </div>
+            <button class="btn btn-primary btn-block" ng-disabled="form.loading">Submit</button>
+          </form>
         </div>
       </div>
     </div>

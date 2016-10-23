@@ -234,6 +234,10 @@ button {
   opacity: 0;
 }
 
+.a-fade.ng-hide-remove {
+  opacity: 0;
+}
+
 
 /* Avatar */
 
@@ -680,4 +684,11 @@ a:focus,
 .form-control:focus {
   border-color: #ab5c00;
   box-shadow: 0 0 4px rgba(171, 92, 0, 0.5);
+}
+
+
+/* Over flow */
+
+.of {
+  overflow: hidden;
 }
