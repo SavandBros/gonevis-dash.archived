@@ -214,7 +214,7 @@ button {
 /* Transitions */
 
 .trans,
-.dolphin {
+.dolphin, {
   transition: all 0.3s ease-in-out;
 }
 
