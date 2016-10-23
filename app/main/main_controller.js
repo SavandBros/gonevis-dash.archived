@@ -7,14 +7,13 @@
  * @namespace gonevisDash.MainController
  *
  * @param $scope
- * @param $rootScope
  * @param $state
  * @param $mdToast
  * @param AuthService
  * @param API
  * @param CommentService
  */
-function MainController($scope, $rootScope, $state, $mdToast, $stateParams, AuthService, API, CommentService) {
+function MainController($scope, $state, $mdToast, $stateParams, AuthService, API, CommentService) {
 
   /**
    * constructor
@@ -26,17 +25,11 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.site = AuthService.getCurrentSite();
-    $scope.commentService = CommentService;
 
-    // Check auth
-    if (!AuthService.isAuthenticated()) {
-      $mdToast.showSimple("Please login to continue.");
-      $state.go("signin");
-    }
-
-    // State
     $scope.state = $state;
     $scope.param = $stateParams;
+
+    $scope.commentService = CommentService;
 
     $scope.Comment.initialize();
   }
@@ -66,22 +59,28 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
   $scope.newPost = function (form) {
     form.loading = true;
     form.site = AuthService.getCurrentSite();
+    if (!form.title) {
+      form.loading = false;
+      return $mdToast.showSimple("Title is requierd");
+    }
 
     API.EntryAdd.save(form,
       function (data) {
         $mdToast.showSimple("Entry " + data.title + " drafted.");
+        form.loading = false;
         form.title = "";
         form.content = "";
       },
       function (data) {
         $mdToast.showSimple("Failed to add entry.");
         form.loading = false;
+        form.loading = false;
         form.errors = data;
       }
     );
   };
 
-  $rootScope.$on("gonevisDash.CommentService:delete", function (event, data) {
+  $scope.$on("gonevisDash.CommentService:delete", function (event, data) {
     for (var i = 0; i < $scope.Comment.list.length; i++) {
       if ($scope.Comment.list[i].id === data.id) {
         $scope.Comment.list[i].isDeleted = true;
@@ -95,7 +94,6 @@ function MainController($scope, $rootScope, $state, $mdToast, $stateParams, Auth
 app.controller("MainController", MainController);
 MainController.$inject = [
   "$scope",
-  "$rootScope",
   "$state",
   "$mdToast",
   "$stateParams",

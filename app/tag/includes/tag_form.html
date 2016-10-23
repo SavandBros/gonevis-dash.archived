@@ -1,27 +1,29 @@
 <div class="form-group" ng-class="{'has-error': form.errors.name}">
-  <input id="name" class="form-control" type="text" ng-model="form.data.name" placeholder="Name" ng-change="updateSlug()" required/>
-  <span id="name" class="help-block" ng-show="form.errors.name">{{ form.errors.name[0] }}</span>
+	<input id="name" class="form-control" type="text" ng-model="form.data.name" placeholder="Name" ng-change="updateSlug()" required/>
+	<span id="name" class="help-block" ng-show="form.errors.name">{{ form.errors.name[0] }}</span>
 </div>
 <div class="form-group" ng-class="{'has-error': form.errors.slug}">
-  <input id="slug" class="form-control" type="text" ng-model="form.data.slug" placeholder="Tag">
-  <span id="slug" class="help-block" ng-show="form.errors.slug">{{ form.errors.slug[0] }}</span>
+	<input id="slug" class="form-control" type="text" ng-model="form.data.slug" placeholder="Tag">
+	<span id="slug" class="help-block" ng-show="form.errors.slug">{{ form.errors.slug[0] }}</span>
 </div>
 <div class="form-group" ng-class="{'has-error': form.errors.description}">
-  <textarea id="description" class="form-control" type="text" ng-model="form.data.description" placeholder="Descroption"></textarea>
-  <span id="description" class="help-block" ng-show="form.errors.description">{{ form.errors.slug[0] }}</span>
+	<textarea id="description" class="form-control" type="text" ng-model="form.data.description" placeholder="Descroption"></textarea>
+	<span id="description" class="help-block" ng-show="form.errors.description">{{ form.errors.slug[0] }}</span>
 </div>
 <!-- Advanced Options -->
 <div class="form-group">
-  <a data-toggle="collapse" data-target="#advance">
-      Advanced Options <i class="fa fa-caret-down"></i>
-    </a>
+	<button ng-model="showAdvanced" ng-click="showAdvanced = !showAdvanced" class="btn btn-xs btn-default" type="button">
+      Advanced Options
+      <i class="fa fa-caret-right" ng-if="!showAdvanced"></i>
+      <i class="fa fa-caret-down" ng-if="showAdvanced"></i>
+  </button>
 </div>
 <!-- Meta Title and Meta Desc -->
-<div class="collapse" id="advance">
-  <div class=" form-group">
-    <input ng-model="form.data.meta_title" placeholder="Meta title" class="form-control">
-  </div>
-  <div class="form-group">
-    <input ng-model="form.data.meta_description" placeholder="Meta description" class="form-control">
-  </div>
+<div ng-if="showAdvanced">
+	<div class=" form-group">
+		<input ng-model="form.data.meta_title" placeholder="Meta title" class="form-control">
+	</div>
+	<div class="form-group">
+		<input ng-model="form.data.meta_description" placeholder="Meta description" class="form-control">
+	</div>
 </div>

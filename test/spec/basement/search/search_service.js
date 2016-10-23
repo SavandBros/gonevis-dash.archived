@@ -25,16 +25,4 @@ describe("search service", function () {
     expect(searchForm.noResult).toEqual(false);
     expect(searchForm.data.results.length).toEqual(1);
   });
-
-  it("should submit query with results", function () {
-    var searchForm = search.searchify(searchForm, {}, apiToQuery.get, {}, {});
-    search.submit(searchForm);
-    $httpBackend.flush();
-
-    expect(searchForm.noResult).toEqual(false);
-    expect(searchForm.data.results.length).toEqual(1);
-
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-  });
 });
