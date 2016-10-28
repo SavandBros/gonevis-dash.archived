@@ -1,0 +1,43 @@
+<!-- Main -->
+<div class="container container-light pad-top">
+	<div class="col-md-8 col-md-offset-2">
+		<!-- Nothing -->
+		<ng-include src="'basement/nothing/nothing.html'" ng-if="!team.team.length && !searchForm.noResult"></ng-include>
+		<!-- List -->
+		<div class="panel panel-default s-box" ng-if="team.team.length">
+			<div class="panel-heading">
+				<h3>Team</h3>
+			</div>
+			<br>
+			<div class="panel-body s-pad-y-no">
+				<a class="btn btn-success pull-right" ui-sref="dash.invite">
+					<i class="fa fa-paper-plane"></i> Invite
+				</a>
+				<ul class="nav nav-tabs s-mar-bottom-soft">
+					<li ng-class="{active: currentTab == 'team'}">
+						<a ng-click="currentTab = 'team'">
+							<i class="fa fa-users"></i> Team</a>
+					</li>
+					<li ng-class="{active: currentTab == 'pending'}">
+						<a ng-click="currentTab = 'pending'">
+							<i class="fa fa-dot-circle-o"></i> Pending</a>
+					</li>
+				</ul>
+				<!-- Team -->
+				<div ng-show="currentTab == 'team'" class="list-group">
+					<a class="list-group-item" ng-repeat="t in team.team" ng-show="!t.isDeleted">
+						<img style="width: 64px; height: 64px; border-radius: 100%; box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);" ng-src="{{t.user.media.picture.thumbnail}}">
+						{{ t.user.username }}<span class="pull-right"> {{ role[t.role] }}</span>
+					</a>
+				</div>
+				<!-- Invite -->
+				<div ng-show="currentTab == 'pending'" class="list-group">
+					<a class="list-group-item" ng-repeat="tp in team.team_pending" ng-show="!t.isDeleted">
+						{{ tp.user.username }}<span class="pull-right"> {{ role[tp.role] }}</span>
+            <span>{{ tp.email }}</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
