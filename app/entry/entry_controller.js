@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 /**
  * @ngdoc function
@@ -45,16 +45,14 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
    *
    * @method removeSelected
    * @desc Remove selected entries
-   *
-   * @param entry{object}
    */
-  $scope.removeSelected = function (entry) {
+  $scope.removeSelected = function () {
     for (var i = 0; i < $scope.entries.length; i++) {
       if ($scope.entries[i].selected) {
-        $scope.remove($scope.entries[i])
+        $scope.remove($scope.entries[i]);
       }
     }
-  }
+  };
 
   /**
    * setStatus
@@ -76,7 +74,7 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
         );
       }
     }
-  }
+  };
 
   /**
    * remove
@@ -130,10 +128,10 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
     }
   });
 
-  constructor()
+  constructor();
 }
 
-app.controller('EntryController', EntryController)
+app.controller('EntryController', EntryController);
 EntryController.$inject = [
   "$scope",
   "$rootScope",
@@ -144,4 +142,4 @@ EntryController.$inject = [
   "AuthService",
   "Pagination",
   "Search"
-]
+];
