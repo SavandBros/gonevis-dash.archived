@@ -87,12 +87,12 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
    */
   $scope.remove = function (entry) {
     API.Entry.delete({ entry_id: entry.id },
-      function (data) {
+      function () {
         entry.isDeleted = true;
         $mdToast.showSimple("Entry deleted!");
       }
     );
-  }
+  };
 
   /**
    * cacheEntry
