@@ -36,9 +36,26 @@ function Codekit() {
     return -1;
   }
 
+  /**
+   * Entry statuses
+   *
+   * @desc All statuses available for entries.
+   * @type Array<{
+   *  label: String,
+   *  id: Number,
+   *  icon: String,
+   *  color: String
+   * }>
+   */
+  var entryStatuses = [
+    { label: "Draft", id: 0, icon: "pencil", color: "warning" },
+    { label: "Hidden", id: 1, icon: "lock", color: "default" },
+    { label: "Published", id: 2, icon: "globe", color: "success" }
+  ];
 
   return {
     getIndex: getIndex,
+    entryStatuses: entryStatuses
   };
 };
 
