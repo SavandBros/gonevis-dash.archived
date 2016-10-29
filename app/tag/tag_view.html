@@ -6,13 +6,16 @@
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
     <!-- Search form -->
-    <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft"></ng-include>
+    <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft animated fadeIn"
+      ng-if="initialled">
+    </ng-include>
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!tags.length && !searchForm.noResult"></ng-include>
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!tags.length && !searchForm.noResult && initialled">
+    </ng-include>
     <!-- List -->
-    <div class="panel panel-defaul s-box" ng-if="tags.length">
+    <div class="panel panel-defaul s-box animated fadeInUp" ng-if="tags.length">
       <div class="panel-body s-pad-y-no">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
@@ -31,6 +34,6 @@
       </div>
     </div>
     <!-- More -->
-    <ng-include src="'basement/pagination/pagination_loadmore.html'"></ng-include>
+    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
   </div>
 </div>
