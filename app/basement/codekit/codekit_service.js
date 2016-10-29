@@ -26,15 +26,16 @@ function Codekit() {
    * @returns {Number} Index of the item found in data via the given key
    */
   function getIndex(master, search, key) {
-    var key = key || "id";
+    key = key || "id";
 
-    for (i in master) {
-      if (master[i][key] == search[key]) {
+    for (var i in master) {
+      if (master[i][key] === search[key]) {
         return i;
-      };
-    };
+      }
+    }
     return -1;
-  };
+  }
+
 
   return {
     getIndex: getIndex,
