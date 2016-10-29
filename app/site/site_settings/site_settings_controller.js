@@ -8,15 +8,16 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param $stateParams
  * @param $mdToast
  * @param API
  * @param ModalsService
  * @param AuthService
  * @param DolphinService
  */
-function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, ModalsService, AuthService, DolphinService) {
+function SiteSettingsController($scope, $rootScope, $state, $stateParams, $mdToast, API, ModalsService, AuthService, DolphinService) {
 
-  var site = AuthService.getCurrentSite()
+  var site = AuthService.getCurrentSite();
 
   /**
    * constructor
@@ -26,14 +27,15 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
+    $scope.siteSettings = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
 
     API.Site.get({ site_id: site },
-      function (data, status, headers, config) {
-        $scope.siteSettings = data;
+      function (data) {
+          $scope.siteSettings = data;
       }
     );
-  };
+  }
 
   /**
    * updateSite
@@ -50,11 +52,11 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
     payload[key] = value;
 
     API.SiteUpdate.put({ site_id: site }, payload,
-      function (data, status, headers, config) {
+      function (data) {
         $scope.siteSettings[key] = data[key];
         $mdToast.showSimple("Profile update.");
       },
-      function (data, status, headers, config) {
+      function (data) {
         $mdToast.showSimple("" + data.data.title + "");
       }
     );
@@ -70,12 +72,12 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
    */
   $scope.remove = function (siteId) {
     API.Site.delete({ site_id: site },
-      function (data, status, headers, config) {
+      function () {
         for (var i = 0; i < $scope.user.sites.length; i++) {
           if ($scope.user.sites[i].id == site) {
             $scope.user.sites.splice(i, 1);
           }
-        };
+        }
 
         AuthService.updateAuth($scope.user);
 
@@ -86,9 +88,9 @@ function SiteSettingsController($scope, $rootScope, $state, $mdToast, API, Modal
           $state.go('site-new');
         } else {
           ModalsService.open("sites", "SiteModalController");
-        };
+        }
       },
-      function (data, status, headers, config) {
+      function (data) {
         $mdToast.showSimple("Sorry we couldn't delete the site, please try again later");
       }
     );
@@ -107,6 +109,7 @@ SiteSettingsController.$inject = [
   '$scope',
   '$rootScope',
   '$state',
+  "$stateParams",
   '$mdToast',
   'API',
   'ModalsService',
