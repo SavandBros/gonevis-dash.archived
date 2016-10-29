@@ -3,11 +3,12 @@
     <!-- Files -->
     <div class="col-md-9">
       <!-- Nothing -->
-      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length"></ng-include>
+      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && initialled"></ng-include>
 
       <!-- List -->
-      <div class="row" ng-if="dolphins.length">
-        <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins" ng-show="!d.isDeleted">
+      <div class="row animated fadeInUp" ng-if="dolphins.length">
+        <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins"
+          ng-show="!d.isDeleted" ng-class="{'animated zoomOut': d.isDeleted}">
           <!-- Link -->
           <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail }})">
             <p class="caption">{{ d.meta_data.name }}</p>
@@ -15,7 +16,7 @@
           <!-- Options -->
           <div class="dropdown options" title="options">
             <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade"
-                    id="options{{ $index }}" data-toggle="dropdown">
+              id="options{{ $index }}" data-toggle="dropdown">
               <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
             <ul class="dropdown-menu">
@@ -27,7 +28,8 @@
       </div>
 
       <!-- More -->
-      <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-init="pageForm = dolphinForm">
+      <ng-include src="'basement/pagination/pagination_loadmore.html'"
+        ng-init="pageForm = dolphinForm" ng-if="initialled">
       </ng-include>
     </div>
 

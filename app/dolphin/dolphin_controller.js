@@ -44,6 +44,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
 
     API.Dolphins.get({},
       function (data) {
+        $scope.initialled = true;
         $scope.dolphins = data.results;
         $scope.updateDolphins();
         $scope.dolphinForm = Pagination.paginate(
