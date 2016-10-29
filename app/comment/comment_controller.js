@@ -32,6 +32,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     var payload = { site: AuthService.getCurrentSite() };
     API.Comments.get(payload,
       function (data) {
+        $scope.initialled = true;
         $scope.comments = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Comments.get, data, payload);

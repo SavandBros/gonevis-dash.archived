@@ -6,16 +6,17 @@
  * Controller of the gonevisDash
  *
  * @param $scope
+ * @param $rootScope
  * @param $state
  * @param $stateParams
  * @param $mdToast
+ * @param Codekit
  * @param API
  * @param AuthService
  * @oaram DolphinService
  */
-function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthService, DolphinService, $q) {
-
-  $scope.tags = [];
+function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
+  Codekit, API, AuthService, DolphinService, $q) {
 
   /**
    * constructor
@@ -26,28 +27,24 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
   function constructor() {
     $scope.dolphinService = DolphinService;
     $scope.editing = true;
+    $scope.tags = [];
+    $scope.tagsToSubmit = [];
+    $scope.statuses = Codekit.entryStatuses;
+    $scope.form = {
+      id: $stateParams.entryId,
+      site: AuthService.getCurrentSite(),
+    };
 
     API.Tags.get({ tag_site: AuthService.getCurrentSite() },
-      function (data, status, headers, config) {
+      function (data) {
         for (var i in data.results) {
           $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
         }
       }
     );
 
-    $scope.form = {
-      id: $stateParams.entryId,
-      site: AuthService.getCurrentSite()
-    };
-
-    $scope.statuses = [
-      { name: "Draft", id: 0 },
-      { name: "Hidden", id: 1 },
-      { name: "Published", id: 2 }
-    ];
-
     API.Entry.get({ entry_id: $scope.form.id },
-      function (data, status, headers, config) {
+      function (data) {
         if (data.start_publication) {
           data.start_publication = new Date(data.start_publication);
         }
@@ -56,7 +53,7 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
         }
         $scope.form = data;
       }
-    )
+    );
   }
 
   $scope.loadTags = function (query) {
@@ -67,9 +64,8 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
     var deferred = $q.defer();
     deferred.resolve($scope.tags);
     return deferred.promise;
-  };
+  }
 
-  $scope.tagsToSubmit = [];
   /**
    * update
    *
@@ -90,7 +86,7 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
     }
 
     API.Entry.put({ entry_id: payload.id }, payload,
-      function (data) {
+      function () {
         $mdToast.showSimple("Entry updated!");
         form.loading = false;
         form.errors = null;
@@ -104,20 +100,20 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
   }
 
   /**
-   * delete
+   * remove
    *
-   * @method delete
-   * @desc delete entry via api call
+   * @method remove
+   * @desc remove entry via api call
    * 
    * @param id {string} UUID of entry
    */
-  $scope.delete = function (id) {
+  $scope.remove = function (id) {
     API.Entry.delete({ entry_id: id },
-      function (data) {
+      function () {
         $mdToast.showSimple("Entry has been deleted !");
         $state.go("dash.entry-list");
       },
-      function (data) {
+      function () {
         $mdToast.showSimple("Something went wrong... We couldn't delete entry!");
       }
     );
@@ -133,9 +129,11 @@ function EntryEditController($scope, $state, $stateParams, $mdToast, API, AuthSe
 app.controller("EntryEditController", EntryEditController);
 EntryEditController.$inject = [
   "$scope",
+  "$rootScope",
   "$state",
   "$stateParams",
   "$mdToast",
+  "Codekit",
   "API",
   "AuthService",
   "DolphinService",

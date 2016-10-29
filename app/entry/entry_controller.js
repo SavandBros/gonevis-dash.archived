@@ -1,8 +1,8 @@
-'use strict'
+"use strict";
 
 /**
  * @ngdoc function
- * @name gonevisDash.controller:EntryListController
+ * @name gonevisDash.controller:EntryController
  * Controller of the gonevisDash
  *
  * @param $scope
@@ -13,7 +13,7 @@
  * @param Pagination
  * @param Search
  */
-function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination, Search) {
+function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination, Search) {
 
   /**
    * constructor
@@ -30,6 +30,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
     var payload = { site: AuthService.getCurrentSite() };
     API.Entries.get(payload,
       function (data) {
+        $scope.initialled = true;
         $scope.entries = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Entries.get, data, payload);
@@ -44,16 +45,14 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
    *
    * @method removeSelected
    * @desc Remove selected entries
-   *
-   * @param entry{object}
    */
-  $scope.removeSelected = function (entry) {
+  $scope.removeSelected = function () {
     for (var i = 0; i < $scope.entries.length; i++) {
       if ($scope.entries[i].selected) {
-        $scope.remove($scope.entries[i])
+        $scope.remove($scope.entries[i]);
       }
     }
-  }
+  };
 
   /**
    * setStatus
@@ -75,7 +74,7 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
         );
       }
     }
-  }
+  };
 
   /**
    * remove
@@ -87,12 +86,24 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
    */
   $scope.remove = function (entry) {
     API.Entry.delete({ entry_id: entry.id },
-      function (data) {
+      function () {
         entry.isDeleted = true;
         $mdToast.showSimple("Entry deleted!");
       }
     );
-  }
+  };
+
+  /**
+   * cacheEntry
+   *
+   * @method cacheEntry
+   * @desc Save all data of entry so entry-edit can load it instantly
+   *
+   * @param entry {Object}
+   */
+  $scope.cacheEntry = function (entry) {
+    $rootScope.cachedEntryTitle = entry.title;
+  };
 
   /**
    * loadMore
@@ -117,11 +128,11 @@ function EntryListController($scope, $rootScope, $state, $mdToast, Codekit, API,
     }
   });
 
-  constructor()
+  constructor();
 }
 
-app.controller('EntryListController', EntryListController)
-EntryListController.$inject = [
+app.controller('EntryController', EntryController);
+EntryController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
@@ -131,4 +142,4 @@ EntryListController.$inject = [
   "AuthService",
   "Pagination",
   "Search"
-]
+];

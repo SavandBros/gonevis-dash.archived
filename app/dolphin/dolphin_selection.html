@@ -9,10 +9,10 @@
       </div>
       <div class="modal-body">
         <!-- Nothing -->
-        <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length"></ng-include>
+        <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && initialled"></ng-include>
 
         <!-- Content -->
-        <div ng-if="dolphins.length">
+        <div>
           <!-- Tabs -->
           <ul class="nav nav-tabs s-mar-bottom-soft">
             <li ng-class="{active: currentTab == 'dolphin'}">
@@ -25,10 +25,10 @@
           </ul>
 
           <!-- List -->
-          <div class="row a-fade" ng-show="currentTab == 'dolphin'">
+          <div class="row a-fade" ng-show="currentTab == 'dolphin'" ng-if="dolphins.length">
             <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins"
-                 ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
-              <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.file }})">
+              ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
+              <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail }})">
                 <p class="caption">{{ d.meta_data.name }}</p>
               </a>
             </div>
