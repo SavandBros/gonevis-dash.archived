@@ -1,7 +1,7 @@
 <div class="container container-light">
   <form ng-submit="update(form)" name="form">
     <h2 class="col-xs-12 o-fade">
-      {{ form.title }}
+      {{ form.title || cachedEntryTitle }}
       <hr>
     </h2>
     <ng-include src="'entry/includes/entry_form.html'"></ng-include>

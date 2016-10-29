@@ -48,7 +48,7 @@
   </div>
   <!-- Status -->
   <div class="form-group">
-    <select ng-init="form.status = statuses[0].id" ng-options="status.id as status.name for status in statuses"
+    <select ng-init="form.status = statuses[0].id" ng-options="status.id as status.label for status in statuses"
 			ng-value="status" ng-model="form.status" class="form-control">
 		</select>
   </div>
@@ -102,7 +102,7 @@
 	</button>
 	<br>
   <button class="btn btn-default btn-lg pull-right" title="Delete entry" type="button" ng-if="editing"
-    ng-click="delete(form.id)">
+    ng-click="remove(form.id)">
 		<i class="fa fa-trash"></i>
 	</button>
 </div>

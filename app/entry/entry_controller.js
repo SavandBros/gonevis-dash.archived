@@ -30,6 +30,7 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
     var payload = { site: AuthService.getCurrentSite() };
     API.Entries.get(payload,
       function (data) {
+        $scope.initialled = true;
         $scope.entries = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Entries.get, data, payload);
