@@ -93,6 +93,15 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
       }
     );
   }
+
+  /**
+   * cacheEntry
+   *
+   * @method cacheEntry
+   * @desc Save all data of entry so entry-edit can load it instantly
+   *
+   * @param entry {Object}
+   */
   $scope.cacheEntry = function (entry) {
     $rootScope.cachedEntryTitle = entry.title;
   };
