@@ -6,12 +6,12 @@
 <!-- Content -->
 <div class="container container-light pad-top">
   <div class="col-md-6 col-md-offset-3">
-    <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length && initialled"></ng-include>
     <!-- Main -->
-    <div class="panel panel-default s-box form-inline animated fadeInUp" ng-if="navigations.length">
+    <div class="panel panel-default s-box form-inline animated fadeIn">
       <div class="panel-heading">Navigations</div>
       <div class="panel-body">
+        <!-- Nothing -->
+        <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length && initialled"></ng-include>
         <!-- Form -->
         <form name="form" ng-submit="update(form)" sv-root sv-part="navigations">
           <div class="form-group sz-full s-mar-bottom-list" ng-repeat="nav in navigations" sv-element>
