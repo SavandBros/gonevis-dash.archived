@@ -93,6 +93,9 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
       }
     );
   }
+  $scope.cacheEntry = function (entry) {
+    $rootScope.cachedEntryTitle = entry.title;
+  };
 
   /**
    * loadMore
