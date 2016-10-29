@@ -7,9 +7,9 @@
 <div class="container container-light pad-top">
   <div class="col-md-6 col-md-offset-3">
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length"></ng-include>
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length && initialled"></ng-include>
     <!-- Main -->
-    <div class="panel panel-default s-box form-inline" ng-if="navigations.length">
+    <div class="panel panel-default s-box form-inline animated fadeInUp" ng-if="navigations.length">
       <div class="panel-heading">Navigations</div>
       <div class="panel-body">
         <!-- Form -->
