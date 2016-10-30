@@ -2,7 +2,7 @@
 <div class="container container-light pad-top">
 	<div class="col-md-8 col-md-offset-2">
 		<!-- Nothing -->
-		<ng-include src="'basement/nothing/nothing.html'" ng-if="!team.team.length && !searchForm.noResult"></ng-include>
+		<ng-include src="'basement/nothing/nothing.html'" ng-if="!team.team.length && initialled"></ng-include>
 		<!-- List -->
 		<div class="panel panel-default s-box" ng-if="team.team.length">
 			<div class="panel-heading">

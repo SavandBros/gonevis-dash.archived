@@ -23,12 +23,11 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.team = [];
-    $scope.currentTab = "team";
     $scope.teamRoles = Codekit.teamRoles;
 
     API.Team.get({ site_id: site },
       function (data) {
+        $scope.initialed = true;
         $scope.team = data;
       }
     );
