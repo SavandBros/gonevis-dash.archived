@@ -721,6 +721,14 @@ fieldset[disabled] .btn-primary.focus {
 
 .of {
   overflow: hidden;
+}
+
+/* Text */
+
+.t-small {
+  font-size: 12px;
+}
+
 /* Outline */
 
 .outline {
