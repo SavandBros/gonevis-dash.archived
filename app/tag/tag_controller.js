@@ -34,6 +34,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     var payload = { site: site };
     API.Tags.get(payload,
       function (data) {
+        $scope.initialled = true;
         $scope.tags = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Tags.get, data, payload);

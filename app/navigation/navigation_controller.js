@@ -26,6 +26,7 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
 
     API.Navigation.get({ site_id: site },
       function (data) {
+        $scope.initialled = true;
         $scope.navigations = data.navigation;
       }
     );

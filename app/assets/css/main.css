@@ -234,6 +234,14 @@ button {
   opacity: 0;
 }
 
+.a-fade.ng-hide-remove {
+  opacity: 0;
+}
+
+.animated.ng-leave {
+  display: none !important;
+}
+
 
 /* Avatar */
 
@@ -634,6 +642,15 @@ tags-input .tags.focused {
   padding: 30px;
 }
 
+.editable-empty,
+.editable-empty:hover,
+.editable-empty:focus,
+a.editable-empty,
+a.editable-empty:hover,
+a.editable-empty:focus {
+  opacity: 0.5;
+}
+
 
 /* Load more */
 
@@ -656,7 +673,10 @@ tags-input .tags.focused {
   background: #d17100;
 }
 
-.btn-primary {
+.btn-primary,
+.text-primary,
+.editable-click,
+a.editable-click {
   border-color: #b96400 !important;
 }
 
@@ -673,11 +693,32 @@ tags-input .tags.focused {
 a,
 a:hover,
 a:focus,
-.text-primary {
+.text-primary,
+.editable-click,
+a.editable-click {
   color: #d17100;
 }
 
 .form-control:focus {
   border-color: #ab5c00;
   box-shadow: 0 0 4px rgba(171, 92, 0, 0.5);
+}
+
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus {
+  background: #b96400;
+}
+
+
+/* Over flow */
+
+.of {
+  overflow: hidden;
 }

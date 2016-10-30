@@ -10,6 +10,7 @@
   "strict": true,
   "undef": true,
   "unused": true,
+  "loopfunc": true,
   "globals": {
     "angular": false,
     "app": false
