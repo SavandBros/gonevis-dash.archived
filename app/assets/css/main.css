@@ -69,6 +69,10 @@ button {
   margin: 0;
 }
 
+.s-mar-left {
+  margin-left: 15px;
+}
+
 .s-mar-top {
   margin-top: 30px;
 }
@@ -186,6 +190,10 @@ button {
 
 .dis-b {
   display: block;
+}
+
+.dis-ib {
+  display: inline-block;
 }
 
 
