@@ -10,15 +10,11 @@
  * @param $state
  * @param $mdToast
  * @param AuthService
+ * @param Codekit
  */
-function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService) {
+function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, Codekit) {
 
   var site = AuthService.getCurrentSite();
-  $scope.role = {
-    0: "Owner",
-    1: "Administrator",
-    2: "Editor"
-  };
 
   /**
    * constructor
@@ -29,6 +25,7 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService) 
   function constructor() {
     $scope.team = [];
     $scope.currentTab = "team";
+    $scope.teamRoles = Codekit.teamRoles;
 
     API.Team.get({ site_id: site },
       function (data) {
@@ -47,5 +44,6 @@ TeamController.$inject = [
   "$state",
   "$mdToast",
   "API",
-  "AuthService"
+  "AuthService",
+  "Codekit"
 ];
