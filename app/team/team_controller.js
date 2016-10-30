@@ -29,6 +29,12 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
       function (data) {
         $scope.initialled = true;
         $scope.team = data;
+        $scope.team.list = data.team;
+
+        for (var i in data.team_pending) {
+          data.team_pending[i].isPending = true;
+          $scope.team.list.push(data.team_pending[i]);
+        }
       }
     );
   }
