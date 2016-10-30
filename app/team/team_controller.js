@@ -27,7 +27,7 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
 
     API.Team.get({ site_id: site },
       function (data) {
-        $scope.initialed = true;
+        $scope.initialled = true;
         $scope.team = data;
       }
     );

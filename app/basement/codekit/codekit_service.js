@@ -72,7 +72,7 @@ function Codekit() {
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
-    return: teamRoles
+    teamRoles: teamRoles
   };
 };
 
