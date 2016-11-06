@@ -46,7 +46,18 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "postinstall": "npm install -g bower grunt-cli && bower install && grunt rock"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SavandBros/gonevis-dash"
+  },
+  "author": "Savand Bros <hello@savandbros.com>",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/SavandBros/gonevis-dash/issues"
+  },
+  "homepage": "https://github.com/SavandBros/gonevis-dash"
 }
