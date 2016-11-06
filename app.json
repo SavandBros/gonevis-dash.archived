@@ -1,0 +1,21 @@
+{
+  "name": "gonevis-dash",
+  "description": "This project is the source code of the [Me Gonevis], the admin area of Gonevis platform.",
+  "scripts": {
+  },
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "papertrail"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
