@@ -492,6 +492,45 @@ module.exports = function (grunt) {
     }
   });
 
+  // release
+  grunt.registerTask('release', [
+    "clean:dist",
+    "ngconstant:production",
+    "wiredep",
+    "useminPrepare",
+    "concurrent:dist",
+    "postcss",
+    "ngtemplates",
+    "concat",
+    "ngAnnotate",
+    "copy:dist",
+    "cdnify",
+    "cssmin",
+    "uglify",
+    "filerev",
+    "usemin",
+    "htmlmin"
+  ]);
+
+  grunt.registerTask('staging', [
+    "clean:dist",
+    "ngconstant:staging",
+    "wiredep",
+    "useminPrepare",
+    "concurrent:dist",
+    "postcss",
+    "ngtemplates",
+    "concat",
+    "ngAnnotate",
+    "copy:dist",
+    "cdnify",
+    "cssmin",
+    "uglify",
+    "filerev",
+    "usemin",
+    "htmlmin"
+  ]);
+
 
   grunt.registerTask("serve", "Compile then start a connect web server", function (target) {
     if (target === "dist") {
