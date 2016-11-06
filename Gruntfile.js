@@ -349,7 +349,7 @@ module.exports = function (grunt) {
           usemin: "scripts.js"
         },
         cwd: "<%= gonevisDash.app %>",
-        src: "views/{,*/}*.html",
+        src: ["{,*/}{,*/}*.html", '{,*/}{,*/}{,*/}.html', "{,*/}*.html"],
         dest: ".tmp/templateCache.js"
       }
     },
