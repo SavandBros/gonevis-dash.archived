@@ -3,6 +3,7 @@
   "private": true,
   "devDependencies": {
     "autoprefixer-core": "^6.0.1",
+    "express": "^4.14.0",
     "grunt": "^1.0.1",
     "grunt-angular-templates": "^1.0.4",
     "grunt-concurrent": "^2.3.0",
@@ -27,6 +28,7 @@
     "grunt-svgmin": "^3.2.0",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^3.0.1",
+    "gzippo": "^0.2.0",
     "jasmine-core": "^2.5.2",
     "jit-grunt": "^0.10.0",
     "jshint-stylish": "^2.2.0",
@@ -35,6 +37,7 @@
     "karma-coveralls": "^1.1.2",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.2",
+    "morgan": "^1.7.0",
     "phantomjs-prebuilt": "^2.1.13",
     "serve-static": "^1.11.1",
     "time-grunt": "^1.0.0"
