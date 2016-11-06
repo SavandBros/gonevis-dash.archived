@@ -556,4 +556,15 @@ module.exports = function (grunt) {
     "test",
     "build"
   ]);
+
+  // Rock'nRolla
+  grunt.registerTask('rock', function () {
+    if (process.env.NPM_CONFIG_PRODUCTION === 'false') {
+      console.log('Rocking on draft!');
+      return grunt.task.run(['staging']);
+    }
+
+    console.log('Rock to Release!');
+    return grunt.task.run(['release']);
+  });
 };
