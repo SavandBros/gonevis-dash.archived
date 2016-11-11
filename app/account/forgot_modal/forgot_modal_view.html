@@ -1,16 +1,17 @@
-<div class="modal fade">
+<div class="modal fade" id="forgotPassword">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
+      <div class="modal-header">
+        Forgot password
+        <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+      </div>
       <div class="modal-body">
-        <div class="alert" ng-if="success">
-          <span><i class="fa fa-check text-success fa-2x"></i> Please check your email, instruction to reset your password has been sent to the email address you provided.</span>
-        </div>
-        <form ng-submit="forgotPassword(form)" name="form" ng-if="!success">
+        <form ng-submit="forgotPassword(form)" name="form">
           <div class="form-group" ng-class="{'has-error': form.errors.email}">
-            <input class="form-control input-lg" type="email" ng-model="form.email" placeholder="Email" required/>
+            <input class="form-control input-lg" type="email" ng-model="form.data.email" placeholder="Email" required/>
             <span class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</span>
           </div>
-          <button class="btn btn-success btn-lg btn-block">Submit</button>
+          <button class="btn btn-primary btn-lg btn-block">Get reset link</button>
         </form>
       </div>
     </div>

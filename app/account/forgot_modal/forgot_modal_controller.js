@@ -4,14 +4,13 @@
  * @ngdoc function
  * @name gonevisDash.controller:ForgotModalController
  * Controller of the gonevisDash
- * 
+ *
  * @param $scope
- * @param $rootScope
- * @param $state
  * @param $mdToast
  * @param API
+ * @param ModalsService
  */
-function ForgotModalController($scope, $rootScope, $state, $mdToast, API) {
+function ForgotModalController($scope, $mdToast, API, ModalsService) {
 
   /**
    * forgotPassword
@@ -24,13 +23,20 @@ function ForgotModalController($scope, $rootScope, $state, $mdToast, API) {
   $scope.forgotPassword = function (form) {
     form.loading = true;
 
-    API.ForgotPassword.save(form,
+    API.ForgotPassword.save(form.data,
       function (data) {
-        form.loading = false;
-        form.errors = null;
-        $scope.success = true;
+        ModalsService.close("forgotPassword");
 
-        $mdToast.showSimple("Validation link sended!");
+        var toast = $mdToast.simple()
+          .content(
+            'Please check your email, instruction to reset your password has been sent to the email address you provided'
+          )
+          .action('OK')
+          .highlightAction(true)
+          .hideDelay(8000)
+
+        $mdToast.show(toast).then(function () {
+        });
       },
       function (data) {
         form.loading = false;
@@ -44,8 +50,7 @@ function ForgotModalController($scope, $rootScope, $state, $mdToast, API) {
 app.controller("ForgotModalController", ForgotModalController);
 ForgotModalController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "$mdToast",
   "API",
+  "ModalsService"
 ];
