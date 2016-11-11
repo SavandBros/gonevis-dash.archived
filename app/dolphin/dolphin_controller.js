@@ -42,7 +42,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
       $scope.currentTab = "dolphin";
     }
 
-    API.Dolphins.get({},
+    API.Dolphins.get({ site: site },
       function (data) {
         $scope.initialled = true;
         $scope.dolphins = data.results;
