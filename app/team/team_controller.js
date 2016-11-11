@@ -42,9 +42,9 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
 
   $scope.invite = function () {
     ModalsService.open("invite", "TeamInviteModalController");
-  }
+  };
 
-  $scope.$on("gonevisDash.inviteService.invite", function (event, data) {
+  $scope.$on("gonevisDash.inviteService.invite", function () {
     constructor();
   });
 
