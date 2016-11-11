@@ -1,5 +1,5 @@
 <div class="modal fade">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
         <div class="alert" ng-if="success">
@@ -7,10 +7,10 @@
         </div>
         <form ng-submit="forgotPassword(form)" name="form" ng-if="!success">
           <div class="form-group" ng-class="{'has-error': form.errors.email}">
-            <input id="email" class="form-control input-lg" type="email" ng-model="form.email" placeholder="Email" required/>
-            <span id="email" class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</span>
+            <input class="form-control input-lg" type="email" ng-model="form.email" placeholder="Email" required/>
+            <span class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</span>
           </div>
-          <button class="btn btn-success">Submit</button>
+          <button class="btn btn-success btn-lg btn-block">Submit</button>
         </form>
       </div>
     </div>
