@@ -31,11 +31,14 @@ function API($http, $resource, ENV) {
       name: "UserUpdate",
       endpoint: "account/update-profile/" // PUT
     }, {
-      name: "PasswordReset",
-      endpoint: "account/password-reset/" // POST
+      name: "ForgotPassword",
+      endpoint: "account/forgot-password/" // POST
     }, {
       name: "ChangePassword",
       endpoint: "account/change-password/" // POST
+    }, {
+      name: "ResetPassword",
+      endpoint: "account/password-reset/" // POST
     },
     // Entry
     {

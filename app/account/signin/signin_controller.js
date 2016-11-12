@@ -11,8 +11,9 @@
  * @param $mdToast
  * @param AuthService
  * @param API
+ * @param ModalsService
  */
-function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API) {
+function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API, ModalsService) {
 
   /**
    * constructor
@@ -56,6 +57,10 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API
     );
   }
 
+  $scope.forgotPassword = function () {
+    ModalsService.open("forgotPassword", "ForgotModalController");
+  }
+
   constructor();
 }
 
@@ -66,5 +71,6 @@ SigninController.$inject = [
   "$state",
   "$mdToast",
   "AuthService",
-  "API"
+  "API",
+  "ModalsService",
 ];

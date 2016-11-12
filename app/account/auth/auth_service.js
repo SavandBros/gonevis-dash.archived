@@ -1,27 +1,23 @@
-/*global angular*/
 "use strict";
 
 /**
- * Auth Service
- *
  * @class AuthService
  * @namespace gonevisDash.AuthService
  *
+ * @param $state
  * @param $rootScope
  * @param $http
  * @param $window
  * @param $stateParams
- * @param ENV
  *
  * @returns [Factory]
  */
-function AuthService($rootScope, $http, $window, $stateParams, ENV) {
+function AuthService($state, $rootScope, $http, $window, $stateParams) {
   /**
-   * Return the currently authenticated user
-   *
    * @method getAuthenticatedUser
-   * @returns {object|undefined} Account if authenticated, else `undefined`
-   * @memberOf gonevisDash.AuthService
+   * @desc Return the currently authenticated user
+   *
+   * @returns {object|undefined}
    */
   function getAuthenticatedUser() {
     if ($window.localStorage.getItem("authenticatedUser")) {
@@ -30,13 +26,12 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
   }
 
   /**
-   * parseJwt
-   * Parse JWT from token
-   *
    * @method parseJwt
-   * @param {String }token
-   * @memberOf gonevisDash.AuthService
-   * @returns {Object} Parsed json
+   * @desc Parse JWT from token
+   *
+   * @param {String} token
+   *
+   * @returns {Object}
    */
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
@@ -46,82 +41,33 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
   }
 
   /**
-   * setToken
-   * Set token to localStorage
-   *
    * @method setToken
-   * @param {String } token
-   * @memberOf gonevisDash.AuthService
-   * @returns {NaN}
+   * @desc Set token to localStorage
+   *
+   * @param {String} token
    */
   function setToken(token) {
-    $window.localStorage["jwtToken"] = token;
+    $window.localStorage.setItem("jwtToken", token);
   }
 
   /**
-   * getToken
-   * Return token from localStorage
-   *
    * @method getToken
-   * @memberOf gonevisDash.AuthService
-   * @returns {undefined|String|Object}
+   * @desc Return token from localStorage
+   *
+   * @returns {String}
    */
   function getToken() {
-    return $window.localStorage["jwtToken"];
+    return $window.localStorage.getItem("jwtToken");
   }
 
   /**
-   * Check if the current user is authenticated
-   *
-   * @method isAuthenticated
-   * @returns {boolean} True is user is authenticated, else false.
-   * @memberOf gonevisDash.AuthService
-   */
-  function isAuthenticated() {
-    //return !!$cookies.authenticatedUser;
-    var token = getToken();
-    var isValid;
-
-    if (token) {
-      var params = parseJwt(token);
-
-      isValid = Math.round(new Date().getTime() / 1000) <= params.exp;
-    } else {
-      isValid = false;
-    }
-
-    if (!isValid) {
-      unAuthenticate();
-    }
-
-    return isValid;
-  }
-
-  /**
-   * logout
-   *
-   * @method logout
-   * @desc Clear credentials (log user out)
-   *
-   * @returns {Promise}
-   *
-   * @memberOf gonevisDash.AuthService
-   */
-  function logout() {
-    unAuthenticate();
-    $rootScope.$broadcast("gonevisDash.AuthService:SignedOut");
-  }
-
-  /**
-   * Stringify the account object and store it in a cookie
-   *
    * @method setAuthenticatedUser
-   * @param {Object} authenticatedUser The account object to be stored
-   * @returns {undefined}
-   * @memberOf gonevisDash.AuthService
+   * @desc Stringify the account object and store it in a cookie
+   *
+   * @param {Object} authenticatedUser
    */
   function setAuthenticatedUser(authenticatedUser) {
-    $window.localStorage["authenticatedUser"] = JSON.stringify(authenticatedUser);
+    $window.localStorage.setItem("authenticatedUser", JSON.stringify(authenticatedUser));
   }
 
   /**
@@ -136,17 +82,57 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
     $window.localStorage.removeItem("authenticatedUser");
   }
 
-  function updateAuth(updatedUser) {
-    $window.localStorage["authenticatedUser"] = JSON.stringify(updatedUser);
+  /**
+   * @method isAuthenticated
+   * @desc Check if the current user is authenticated
+   *
+   * @returns {boolean}
+   */
+  function isAuthenticated() {
+    if ($state.current.auth === -1) {
+      return false;
+    }
+
+    var token = getToken();
+    var isValid;
+
+    if (token) {
+      isValid = Math.round(new Date().getTime() / 1000) <= parseJwt(token).exp;
+    } else {
+      isValid = false;
+    }
+
+    if (!isValid) {
+      unAuthenticate();
+    }
+
+    return isValid;
   }
 
   /**
-   * getCurrentSite
+   * @method logout
+   * @desc Clear credentials (log user out)
+   */
+  function logout() {
+    unAuthenticate();
+    $rootScope.$broadcast("gonevisDash.AuthService:SignedOut");
+  }
+
+  /**
+   * @method updateAuth
+   * @desc Update authentication data instantly
    *
+   * @param {Object} updatedUser
+   */
+  function updateAuth(updatedUser) {
+    $window.localStorage.setItem("authenticatedUser", JSON.stringify(updatedUser));
+  }
+
+  /**
    * @method getCurrentSite
    * @desc Check and return the ID of the current site
    *
-   * returns {String} Site id (uuid)
+   * @returns {String} Site id (uuid)
    */
   function getCurrentSite() {
     var sites = getAuthenticatedUser().sites;
@@ -166,14 +152,20 @@ function AuthService($rootScope, $http, $window, $stateParams, ENV) {
     setToken: setToken,
     getToken: getToken,
     getAuthenticatedUser: getAuthenticatedUser,
-    isAuthenticated: isAuthenticated,
-    logout: logout,
     setAuthenticatedUser: setAuthenticatedUser,
     unAuthenticate: unAuthenticate,
+    isAuthenticated: isAuthenticated,
+    logout: logout,
     updateAuth: updateAuth,
     getCurrentSite: getCurrentSite
   };
 }
 
 app.factory("AuthService", AuthService);
-AuthService.$inject = ["$rootScope", "$http", "$window", "$stateParams", "ENV"];
+AuthService.$inject = [
+  "$state",
+  "$rootScope",
+  "$http",
+  "$window",
+  "$stateParams"
+];
