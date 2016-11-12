@@ -1,9 +1,7 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:ForgotModalController
- * Controller of the gonevisDash
+ * @class ForgotModalController
  *
  * @param $scope
  * @param $mdToast
@@ -12,11 +10,13 @@
  */
 function ForgotModalController($scope, $mdToast, API, ModalsService) {
 
+  var toast = $mdToast.simple().content(
+    "Please check your email, instruction to reset your password has been sent to the email address you provided."
+  ).hideDelay(10000);
+
   /**
-   * forgotPassword
-   *
    * @method forgotPassword
-   * @desc forgot password handler
+   * @desc Sends password link to provided email.
    *
    * @param form {object}
    */
@@ -24,27 +24,16 @@ function ForgotModalController($scope, $mdToast, API, ModalsService) {
     form.loading = true;
 
     API.ForgotPassword.save(form.data,
-      function (data) {
+      function () {
         ModalsService.close("forgotPassword");
-
-        var toast = $mdToast.simple()
-          .content(
-            'Please check your email, instruction to reset your password has been sent to the email address you provided'
-          )
-          .action('OK')
-          .highlightAction(true)
-          .hideDelay(8000)
-
-        $mdToast.show(toast).then(function () {
-        });
+        $mdToast.show(toast);
       },
       function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
-  }
-
+  };
 }
 
 app.controller("ForgotModalController", ForgotModalController);
