@@ -64,7 +64,7 @@ module.exports = function (grunt) {
           livereload: "<%= connect.options.livereload %>"
         },
         files: [
-          "<%= gonevisDash.app %>/*/{,*/}*.html",
+          "<%= gonevisDash.app %>/*/{,*/,*/}*.html",
           ".tmp/styles/{,*/}*.css",
           "<%= gonevisDash.app %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
         ]
@@ -131,7 +131,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           "Gruntfile.js",
-          "<%= gonevisDash.app %>/{,*/}*.js"
+          "<%= gonevisDash.app %>/{,*/,*/}*.js"
         ]
       },
       test: {
