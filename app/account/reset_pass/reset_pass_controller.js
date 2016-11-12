@@ -9,6 +9,13 @@
  * @param API
  */
 function ResetPassController($scope, $state, AuthService, API) {
+
+  /**
+   * @method resetPassword
+   * @desc Reset password handler
+   *
+   * @param form {Object}
+   */
   $scope.resetPassword = function (form) {
     // Save token to reset password
     AuthService.setToken($state.params.token);
