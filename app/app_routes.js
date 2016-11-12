@@ -92,9 +92,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("dash.change-password", {
       url: "/change-password",
-      controller: "ChangePasswordController",
-      templateUrl: "account/change_password/change_password_view.html",
-      auth: true,
+      controller: "ChangePassController",
+      templateUrl: "account/change_pass/change_pass_view.html",
+      auth: true
     })
     // Other states that are not a child of dash state
     .state("signin", {
@@ -107,7 +107,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/register",
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
-      auth: false,
+      auth: false
+    })
+    .state("reset-pass", {
+      url: "/reset-password/:token",
+      controller: "ResetPassController",
+      templateUrl: "account/reset_pass/reset_pass_view.html",
+      auth: -1
     });
 
   $urlRouterProvider.otherwise("/0/");
