@@ -53,9 +53,26 @@ function Codekit() {
     { label: "Published", id: 2, icon: "globe", color: "success" }
   ];
 
+  /**
+   * Team roles
+   *
+   * @desc All roles for team.
+   * @type Array<{
+   *  label: String,
+   *  id: Number,
+   *  color: String
+   * }>
+   */
+  var teamRoles = [
+    { id: 0, color: "text-primary", label: "Owner"},
+    { id: 1, color: "text-info", label: "Administrator"},
+    { id: 2, color: "text-warning", label: "Editor"}
+  ];
+
   return {
     getIndex: getIndex,
-    entryStatuses: entryStatuses
+    entryStatuses: entryStatuses,
+    teamRoles: teamRoles
   };
 };
 

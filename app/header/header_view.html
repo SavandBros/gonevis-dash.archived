@@ -29,6 +29,9 @@
         <li ng-class="{'active': state.includes('dash.navigation')}">
           <a ui-sref="dash.navigation">Navigations</a>
         </li>
+        <li ng-class="{'active': state.includes('dash.team')}">
+          <a ui-sref="dash.team">Team</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" ng-if="auth.isAuthenticated()">

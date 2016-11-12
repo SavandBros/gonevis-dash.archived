@@ -1,0 +1,36 @@
+<!-- Add button -->
+<button type="button" class="btn btn-primary btn-corner" ng-click="invite()">
+  <i class="fa fa-user-plus"></i>
+</button>
+
+<!-- Main -->
+<div class="container container-light pad-top">
+  <div class="col-md-6 col-md-offset-3">
+    <!-- List -->
+    <div class="panel panel-default s-box animated fadeInUp" ng-if="initialled">
+      <div class="panel-heading">Team</div>
+      <div class="panel-body s-pad-no">
+        <!-- Team -->
+        <div class="list-group s-mar-no">
+          <a class="list-group-item b-no" ng-repeat="t in team.list">
+            <h4>
+              <img ng-class="{'o-fade-max': t.isPending || !t.user.media.picture}"
+                   ng-src="{{ !t.isPending ? t.user.media.picture.thumbnail : '' }}"
+                   width="64" height="64"
+                   class="img-circle">
+              <span class="s-mar-left">
+                {{ !t.isPending ? t.user.name : t.email }}
+              </span>
+              <span class="pull-right t-small outline {{ teamRoles[t.role].color }}" style="margin-top: 22px">
+              	{{ teamRoles[t.role].label | uppercase }}
+              </span>
+              <span class="pull-right t-small outline text-muted" style="margin: 22px 5px" ng-if="t.isPending">
+              	PENDING
+              </span>
+            </h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -75,6 +75,12 @@ function API($http, $resource, ENV) {
     }, {
       name: "UpdateNavigation",
       endpoint: "website/site/:site_id/update-navigation/" // GET, PUT
+    }, {
+      name: "Team",
+      endpoint: "website/site/:site_id/team/" // GET
+    }, {
+      name: "TeamInvite",
+      endpoint: "website/site/:site_id/promote-user/" // PUT
     },
     // Tagool
     {

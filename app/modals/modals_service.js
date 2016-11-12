@@ -19,7 +19,8 @@ function ModalsService(ModalService) {
     tag: "tag/tag_modal/tag_modal_view.html",
     tagCreate: "tag/tag_create_modal/tag_create_modal_view.html",
     sites: "site/sites_modal/site_modal_view.html",
-    forgotPassword: "account/forgot_modal/forgot_modal_view.html",
+    invite: "team/invite_modal/invite_modal_view.html",
+    forgotPassword: "account/forgot_modal/forgot_modal_view.html"
   };
 
   var modals = {};

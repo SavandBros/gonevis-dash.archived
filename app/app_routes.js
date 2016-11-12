@@ -96,6 +96,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "account/change_pass/change_pass_view.html",
       auth: true
     })
+    .state("dash.team", {
+      url: "/team",
+      controller: "TeamController",
+      templateUrl: "team/team_view.html",
+      auth: true,
+    })
     // Other states that are not a child of dash state
     .state("signin", {
       url: "/login",
