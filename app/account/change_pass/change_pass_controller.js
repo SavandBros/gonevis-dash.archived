@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller ChangePasswordController
- * Controller of the gonevisDash
+ * @class ChangePassController
  *
  * @param $scope
  * @param $rootScope
@@ -13,21 +11,17 @@
  * @param API
  * @param AuthService
  */
-function ChangePasswordController($scope, $rootScope, $state, $mdToast, $stateParams, API, AuthService) {
+function ChangePassController($scope, $rootScope, $state, $mdToast, $stateParams, API, AuthService) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
-  };
+  }
 
   /**
-   * changePassword
-   *
    * @method changePassword
    * @desc for changing password
    * 
@@ -36,45 +30,47 @@ function ChangePasswordController($scope, $rootScope, $state, $mdToast, $statePa
   $scope.changePassword = function (form) {
 
     // Is a new password
-    if (form.old_password == form.password) {
-      return form.errors = {
+    if (form.old_password === form.password) {
+      form.errors = {
         non_field_errors: ["Please, choose a new password."]
       };
+      return;
     }
     // Check if Confirm new password and new password were matched, if so raise an error
     if (form.password !== form.confirm_password) {
-      return form.errors = {
+      form.errors = {
         non_field_errors: ["Confirm password does not match."]
       };
+      return;
     }
 
     form.loading = true;
     form.errors = null;
 
     API.ChangePassword.save(form,
-      function (data, status, headers, config) {
+      function () {
         form.loading = false;
-        $mdToast.showSimple('Password Changed !');
+        $mdToast.showSimple("Password changed.");
         form.errors = null;
-        $state.go('dash.user');
+        $state.go("dash.user");
       },
-      function (data, status, headers, config) {
+      function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
-  }
+  };
 
   constructor();
 }
 
-app.controller('ChangePasswordController', ChangePasswordController);
-ChangePasswordController.$inject = [
-  '$scope', 
-  '$rootScope', 
-  '$state', 
-  '$mdToast', 
-  '$stateParams', 
-  'API', 
-  'AuthService'
+app.controller("ChangePassController", ChangePassController);
+ChangePassController.$inject = [
+  "$scope", 
+  "$rootScope", 
+  "$state", 
+  "$mdToast", 
+  "$stateParams", 
+  "API", 
+  "AuthService"
 ];

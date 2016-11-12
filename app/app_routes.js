@@ -92,9 +92,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state("dash.change-password", {
       url: "/change-password",
-      controller: "ChangePasswordController",
-      templateUrl: "account/change_password/change_password_view.html",
-      auth: true,
+      controller: "ChangePassController",
+      templateUrl: "account/change_pass/change_pass_view.html",
+      auth: true
     })
     // Other states that are not a child of dash state
     .state("signin", {
