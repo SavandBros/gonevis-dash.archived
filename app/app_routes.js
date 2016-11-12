@@ -107,7 +107,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/register",
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
-      auth: false,
+      auth: false
+    })
+    .state("reset-pass", {
+      url: "/reset-password/:token",
+      controller: "ResetPassController",
+      templateUrl: "account/reset_pass/reset_pass_view.html",
+      auth: -1
     });
 
   $urlRouterProvider.otherwise("/0/");
