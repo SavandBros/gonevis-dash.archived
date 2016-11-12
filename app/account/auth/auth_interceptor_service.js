@@ -1,5 +1,4 @@
-/*global angular*/
-'use strict'
+"use strict";
 
 /**
  * Auth Interceptor Service
@@ -21,22 +20,24 @@ function AuthInterceptorService($window, ENV) {
    * @returns {Object}
    */
   function request(config) {
-    var token = $window.localStorage['jwtToken']
+    var token = $window.localStorage.getItem("jwtToken");
 
     if (token) {
       if (config.url.indexOf(ENV.apiEndPoint === 0 && token)) {
-        config.headers.Authorization = 'JWT ' + token
+        config.headers.Authorization = "JWT " + token;
       }
     }
 
-    return config
+    return config;
   }
 
   return {
     request: request
-  }
+  };
 }
 
-app.factory('AuthInterceptorService', AuthInterceptorService)
-
-AuthInterceptorService.$inject = ['$window', 'ENV']
+app.factory("AuthInterceptorService", AuthInterceptorService);
+AuthInterceptorService.$inject = [
+  "$window",
+  "ENV"
+];
