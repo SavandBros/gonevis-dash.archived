@@ -33,7 +33,8 @@ function ForgotModalController($scope, $mdToast, API, ModalsService) {
         form.errors = data.data;
       }
     );
-  };
+  }
+
 }
 
 app.controller("ForgotModalController", ForgotModalController);
