@@ -131,7 +131,7 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
   constructor();
 }
 
-app.controller('EntryController', EntryController);
+app.controller("EntryController", EntryController);
 EntryController.$inject = [
   "$scope",
   "$rootScope",
