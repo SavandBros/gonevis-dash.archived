@@ -1,6 +1,6 @@
 "use strict";
 
-describe("ChangePasswordController", function () {
+describe("ChangePassController", function () {
   beforeEach(
     module("gonevisDash")
   );
@@ -15,7 +15,7 @@ describe("ChangePasswordController", function () {
 
   describe("$scope.changePassword", function () {
     beforeEach(function () {
-      var controller = $controller("ChangePasswordController", { $scope: $scope });
+      var controller = $controller("ChangePassController", { $scope: $scope });
     });
 
     it("is a new password", function () {
