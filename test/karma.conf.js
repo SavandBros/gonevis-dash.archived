@@ -2,7 +2,7 @@
 // Generated on 2016-06-11
 
 const coverage_reporters = [
-  { type: 'text-summary' },
+  { type: 'text-summary' }
 ];
 const reporters = ['progress', 'coverage'];
 var browsers = ['PhantomJS']; // for local builds
@@ -10,7 +10,7 @@ var browsers = ['PhantomJS']; // for local builds
 if (process.env.TRAVIS) {
   console.log('On Travis sending coveralls');
   coverage_reporters.push( { type : 'lcov', dir : 'coverage' } );
-  reporters.push('coveralls');
+  // reporters.push('coveralls');
 } else {
   console.log('Not on Travis so not sending coveralls');
   coverage_reporters.push( { type : 'html', dir : 'coverage', 'subdir' : '.' } );
@@ -80,8 +80,8 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-jasmine',
-      'karma-coverage',
-      'karma-coveralls',
+      'karma-coverage'
+      // 'karma-coveralls',
     ],
 
     // Continuous Integration mode
@@ -92,6 +92,6 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_INFO
   });
 };
