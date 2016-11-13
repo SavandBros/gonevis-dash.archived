@@ -346,10 +346,10 @@ module.exports = function (grunt) {
         options: {
           module: "gonevisDash",
           htmlmin: "<%= htmlmin.dist.options %>",
-          usemin: "scripts.js"
+          usemin: "scripts/scripts.js"
         },
         cwd: "<%= gonevisDash.app %>",
-        src: ["{,*/}{,*/}*.html", '{,*/}{,*/}{,*/}.html', "{,*/}*.html"],
+        src: ["{,*/}*/{,*/}*.html", "{,*/}*.html", "{,*/}*/{,*/}*/{,*/}*.html"],
         dest: ".tmp/templateCache.js"
       }
     },
