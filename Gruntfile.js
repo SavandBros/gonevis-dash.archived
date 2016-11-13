@@ -400,9 +400,9 @@ module.exports = function (grunt) {
           dest: "<%= gonevisDash.dist %>"
         }, {
           expand: true,
-          cwd: "bower_components/font-awesome/",
-          src: "font/*",
-          dest: "<% gonevisDash.dist $>"
+          cwd: "bower_components/font-awesome",
+          src: "fonts/*",
+          dest: "<%= gonevisDash.dist %>"
         }]
       },
       styles: {
