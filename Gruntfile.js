@@ -346,10 +346,10 @@ module.exports = function (grunt) {
         options: {
           module: "gonevisDash",
           htmlmin: "<%= htmlmin.dist.options %>",
-          usemin: "scripts.js"
+          usemin: "scripts/scripts.js"
         },
         cwd: "<%= gonevisDash.app %>",
-        src: "views/{,*/}*.html",
+        src: ["{,*/}*/{,*/}*.html", "{,*/}*.html", "{,*/}*/{,*/}*/{,*/}*.html", "!index.html"],
         dest: ".tmp/templateCache.js"
       }
     },
@@ -400,9 +400,9 @@ module.exports = function (grunt) {
           dest: "<%= gonevisDash.dist %>"
         }, {
           expand: true,
-          cwd: "bower_components/font-awesome/",
-          src: "font/*",
-          dest: "<% gonevisDash.dist $>"
+          cwd: "bower_components/font-awesome",
+          src: "fonts/*",
+          dest: "<%= gonevisDash.dist %>"
         }]
       },
       styles: {
@@ -492,6 +492,45 @@ module.exports = function (grunt) {
     }
   });
 
+  // release
+  grunt.registerTask('release', [
+    "clean:dist",
+    "ngconstant:production",
+    "wiredep",
+    "useminPrepare",
+    "concurrent:dist",
+    "postcss",
+    "ngtemplates",
+    "concat",
+    "ngAnnotate",
+    "copy:dist",
+    "cdnify",
+    "cssmin",
+    "uglify",
+    "filerev",
+    "usemin",
+    "htmlmin"
+  ]);
+
+  grunt.registerTask('staging', [
+    "clean:dist",
+    "ngconstant:staging",
+    "wiredep",
+    "useminPrepare",
+    "concurrent:dist",
+    "postcss",
+    "ngtemplates",
+    "concat",
+    "ngAnnotate",
+    "copy:dist",
+    "cdnify",
+    "cssmin",
+    "uglify",
+    "filerev",
+    "usemin",
+    "htmlmin"
+  ]);
+
 
   grunt.registerTask("serve", "Compile then start a connect web server", function (target) {
     if (target === "dist") {
@@ -556,4 +595,15 @@ module.exports = function (grunt) {
     "test",
     "build"
   ]);
+
+  // Rock'nRolla
+  grunt.registerTask('rock', function () {
+    if (process.env.NPM_CONFIG_PRODUCTION === 'false') {
+      console.log('Rocking on draft!');
+      return grunt.task.run(['staging']);
+    }
+
+    console.log('Rock to Release!');
+    return grunt.task.run(['release']);
+  });
 };
