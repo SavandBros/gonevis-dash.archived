@@ -8,11 +8,11 @@ const reporters = ['progress', 'coverage'];
 var browsers = ['PhantomJS']; // for local builds
 
 if (process.env.TRAVIS) {
-  console.log('On Travis sending coveralls');
+  console.log('On Travis; pushing coverage reports');
   coverage_reporters.push( { type : 'lcov', dir : 'coverage' } );
   // reporters.push('coveralls');
 } else {
-  console.log('Not on Travis so not sending coveralls');
+  console.log('Not on Travis so not coverage reports');
   coverage_reporters.push( { type : 'html', dir : 'coverage', 'subdir' : '.' } );
 }
 
