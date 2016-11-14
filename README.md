@@ -1,7 +1,7 @@
 # Gonevis Dash
 
 [![Build Status](https://travis-ci.org/SavandBros/gonevis-dash.svg?branch=master)](https://travis-ci.org/SavandBros/gonevis-dash)
-[![Coverage Status](https://coveralls.io/repos/github/SavandBros/gonevis-dash/badge.svg?branch=master)](https://coveralls.io/github/SavandBros/gonevis-dash?branch=master)
+[![codecov](https://codecov.io/gh/SavandBros/gonevis-dash/branch/master/graph/badge.svg)](https://codecov.io/gh/SavandBros/gonevis-dash)
 [![Dependency Status](https://gemnasium.com/badges/github.com/SavandBros/gonevis-dash.svg)](https://gemnasium.com/github.com/SavandBros/gonevis-dash)
 
 
