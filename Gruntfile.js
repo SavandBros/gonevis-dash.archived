@@ -598,12 +598,14 @@ module.exports = function (grunt) {
 
   // Rock'nRolla
   grunt.registerTask('rock', function () {
-    if (process.env.NPM_CONFIG_PRODUCTION === 'false') {
-      console.log('Rocking on draft!');
-      return grunt.task.run(['staging']);
-    }
+    var isProduction = (process.env.PRODUCTION !== undefined && process.env.PRODUCTION === 'true');
 
-    console.log('Rock to Release!');
-    return grunt.task.run(['release']);
+    if (isProduction) {
+      console.log('Rock to Release!');
+      grunt.task.run(['release']);
+    } else {
+      console.log('Rocking on draft!');
+      grunt.task.run(['staging']);
+    }
   });
 };
