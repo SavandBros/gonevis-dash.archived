@@ -15,7 +15,7 @@
           <a class="list-group-item b-no" ng-repeat="t in team.list">
             <h4>
               <img ng-class="{'o-fade-max': t.isPending || !t.user.media.picture}"
-                   ng-src="{{ !t.isPending ? t.user.media.picture.thumbnail : '' }}"
+                   ng-src="{{ !t.isPending ? t.user.media.picture.thumbnail : ' ' }}"
                    width="64" height="64"
                    class="img-circle">
               <span class="s-mar-left">
