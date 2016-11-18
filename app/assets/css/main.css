@@ -708,6 +708,10 @@ fieldset[disabled] .btn-primary.focus {
     font-size: 12px;
 }
 
+.t-bold {
+    font-weight: bold;
+}
+
 /* Outline */
 
 .outline {
