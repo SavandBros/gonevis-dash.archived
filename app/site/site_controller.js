@@ -106,6 +106,22 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   };
 
+  /**
+   * @method selectImage
+   * @desc Select image for logo/cover
+   *
+   * @param image {String} Image property of site (logo, cover, etc)
+   */
+  $scope.selectImage = function (image) {
+    $scope.editing = image;
+    $scope.dolphinService.viewSelection();
+  };
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    $scope.site[$scope.editing] = dolphin.id;
+    $scope.updateSite($scope.editing, dolphin.id);
+  });
+
+  constructor();
 }
 
 app.controller("SiteController", SiteController);
