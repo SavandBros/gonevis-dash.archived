@@ -116,6 +116,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.editing = image;
     $scope.dolphinService.viewSelection();
   };
+
+  /**
+   * @method saveConfig
+   * @desc Save template config
+   */
+  $scope.saveConfig = function () {
+    // TODO: Save config
+  };
+
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
     $scope.site[$scope.editing] = dolphin.id;
     $scope.updateSite($scope.editing, dolphin.id);
