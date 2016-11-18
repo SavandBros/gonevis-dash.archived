@@ -67,6 +67,45 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   };
 
+  /**
+   * @method remove
+   * @desc Delete site via API call
+   */
+  $scope.remove = function () {
+    // How sure? Like confirm-a-confirm sure?
+    if (window.prompt(
+        "Delete site?\nDeleting site can not be undone!\n\nType in the site title to confirm:"
+      ) !== $scope.site.title) {
+      return;
+    }
+
+    API.Site.delete({
+        site_id: site
+      },
+      function () {
+        for (var i = 0; i < $scope.user.sites.length; i++) {
+          if ($scope.user.sites[i].id === site) {
+            $scope.user.sites.splice(i, 1);
+          }
+        }
+
+        AuthService.updateAuth($scope.user);
+
+        $rootScope.$broadcast("gonevisDash.SiteController:remove");
+        $mdToast.showSimple("Site deleted");
+
+        if ($scope.user.sites.length === 0) {
+          $state.go("site-new");
+        } else {
+          ModalsService.open("sites", "SiteModalController");
+        }
+      },
+      function () {
+        $mdToast.showSimple("Oh... Something went wrong, couldn't delete site.");
+      }
+    );
+  };
+
 }
 
 app.controller("SiteController", SiteController);
