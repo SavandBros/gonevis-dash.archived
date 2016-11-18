@@ -30,9 +30,9 @@ function SiteSettingsController($scope, $rootScope, $state, $stateParams, $mdToa
     $scope.siteSettings = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
 
-    API.Site.get({ site_id: site },
+    API.Site.get({site_id: site},
       function (data) {
-          $scope.siteSettings = data;
+        $scope.siteSettings = data;
       }
     );
   }
@@ -51,16 +51,16 @@ function SiteSettingsController($scope, $rootScope, $state, $stateParams, $mdToa
     var payload = {};
     payload[key] = value;
 
-    API.SiteUpdate.put({ site_id: site }, payload,
+    API.SiteUpdate.put({site_id: site}, payload,
       function (data) {
-        $scope.siteSettings[key] = data[key];
+        $scope.siteSettings = data;
         $mdToast.showSimple("Profile update.");
       },
       function (data) {
         $mdToast.showSimple("" + data.data.title + "");
       }
     );
-  }
+  };
 
   /**
    * remove
@@ -71,7 +71,7 @@ function SiteSettingsController($scope, $rootScope, $state, $stateParams, $mdToa
    * @param siteId {String}
    */
   $scope.remove = function (siteId) {
-    API.Site.delete({ site_id: site },
+    API.Site.delete({site_id: site},
       function () {
         for (var i = 0; i < $scope.user.sites.length; i++) {
           if ($scope.user.sites[i].id == site) {
@@ -96,9 +96,19 @@ function SiteSettingsController($scope, $rootScope, $state, $stateParams, $mdToa
     );
   };
 
+  $scope.selectImage = function (image) {
+    $scope.editing = image;
+    $scope.dolphinService.viewSelection();
+  };
+
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.siteSettings.cover_image = dolphin.id;
-    $scope.updateSite("cover_image", dolphin.id);
+    if ($scope.editing == "cover") {
+      $scope.siteSettings.cover_image = dolphin.id;
+      $scope.updateSite("cover_image", dolphin.id);
+    } else if ($scope.editing == "logo") {
+      $scope.siteSettings.logo = dolphin.id;
+      $scope.updateSite("logo", dolphin.id);
+    }
   });
 
   constructor();

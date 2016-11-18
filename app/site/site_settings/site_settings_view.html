@@ -6,10 +6,16 @@
           <!-- Title -->
           {{ siteSettings.title }}
           <!-- Image -->
-          <button class="btn btn-default btn-sm pull-right" ng-click="dolphinService.viewSelection()"
-                  title="Set or Change cover image of site.">
-            <i class="fa fa-image"></i> Cover Image
-          </button>
+          <div class="btn-group pull-right" role="group">
+            <button class="btn btn-default btn-sm" ng-click="selectImage('logo')"
+                    title="Set or Change logo of site.">
+              <i class="fa fa-image"></i> Logo
+            </button>
+            <button class="btn btn-default btn-sm" ng-click="selectImage('cover')"
+                    title="Set or Change cover image of site.">
+              <i class="fa fa-image"></i> Cover Image
+            </button>
+          </div>
         </h3>
       </div>
       <div class="panel-body s-pad">
