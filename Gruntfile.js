@@ -493,7 +493,7 @@ module.exports = function (grunt) {
   });
 
   // release
-  grunt.registerTask('release', [
+  grunt.registerTask("release", [
     "clean:dist",
     "ngconstant:production",
     "wiredep",
@@ -512,7 +512,7 @@ module.exports = function (grunt) {
     "htmlmin"
   ]);
 
-  grunt.registerTask('staging', [
+  grunt.registerTask("staging", [
     "clean:dist",
     "ngconstant:staging",
     "wiredep",
@@ -597,15 +597,15 @@ module.exports = function (grunt) {
   ]);
 
   // Rock'nRolla
-  grunt.registerTask('rock', function () {
-    var isProduction = (process.env.PRODUCTION !== undefined && process.env.PRODUCTION === 'true');
+  grunt.registerTask("rock", function () {
+    var isProduction = (process.env.PRODUCTION !== undefined && process.env.PRODUCTION === "true");
 
     if (isProduction) {
-      console.log('Rock to Release!');
-      grunt.task.run(['release']);
+      console.log("Rock to Release!");
+      grunt.task.run(["release"]);
     } else {
-      console.log('Rocking on draft!');
-      grunt.task.run(['staging']);
+      console.log("Rocking on draft!");
+      grunt.task.run(["staging"]);
     }
   });
 };
