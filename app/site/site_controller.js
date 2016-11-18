@@ -40,6 +40,33 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   }
 
+  /**
+   * @method updateSite
+   * @desc update site via api call
+   *
+   * @param key {String}
+   * @param value {String}
+   */
+  $scope.updateSite = function (key, value) {
+
+    var keyString = key.replace("_", " ");
+
+    $mdToast.showSimple("Updating " + keyString + "...");
+
+    var payload = {};
+    payload[key] = value;
+
+    API.SiteUpdate.put({ site_id: site }, payload,
+      function (data) {
+        $scope.site[key] = data[key];
+        $mdToast.showSimple("Site" + keyString + " updated");
+      },
+      function () {
+        $mdToast.showSimple("Oh... Couldn't update " + keyString);
+      }
+    );
+  };
+
 }
 
 app.controller("SiteController", SiteController);
