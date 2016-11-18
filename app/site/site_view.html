@@ -1,0 +1,96 @@
+<div class="container container-light">
+  <!-- Site settings -->
+  <div class="col-md-6 col-md-offset-1">
+    <div class="panel panel-default s-box s-mar-top">
+      <h3 class="panel-heading">
+        <!-- Title -->
+        {{ site.title }}
+        <!-- Image -->
+        <div class="btn-group pull-right" role="group">
+          <button class="btn btn-default btn-sm" ng-click="selectImage('logo')"
+            title="Set or Change logo of site.">
+            <i class="fa fa-image"></i> Logo
+          </button>
+          <button class="btn btn-default btn-sm" ng-click="selectImage('cover_image')"
+            title="Set or Change cover image of site.">
+            <i class="fa fa-image"></i> Cover Image
+          </button>
+        </div>
+      </h3>
+      <div class="panel-body s-pad">
+        <!-- Title -->
+        <div class="panel panel-default panel-body">
+          <span editable-text="site.title" onbeforesave="updateSite('title', $data)">
+            {{ site.title || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">TITLE</small>
+        </div>
+        <!-- Description -->
+        <div class="panel panel-default panel-body">
+          <span editable-textarea="site.description" onbeforesave="updateSite('description', $data)">
+            {{ site.description || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">DESCRIPTION</small>
+        </div>
+        <!-- Meta Title -->
+        <div class="panel panel-default panel-body">
+          <span editable-text="site.meta_title" onbeforesave="updateSite('meta_title', $data)">
+            {{ site.meta_title || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">META TITLE</small>
+        </div>
+        <!-- Meta Description -->
+        <div class="panel panel-default panel-body">
+          <span editable-textarea="site.meta_description" onbeforesave="updateSite('meta_description', $data)">
+            {{ site.meta_description || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">META DESCRIPTION</small>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <!-- Delete -->
+        <button class="btn btn-danger btn-sm" ng-click="remove(site.id)">
+          <i class="fa fa-trash"></i> Delete Site
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Template -->
+  <div class="col-md-4">
+    <form class="panel panel-default s-box s-mar-top">
+      <h3 class="panel-heading">
+        <!-- Title -->
+        Appearance
+        <!-- Update button -->
+        <button class="btn btn-sm btn-success pull-right" ng-click="saveConfig()">
+          <i class="fa fa-fw fa-check"></i> Save Changes
+        </button>
+      </h3>
+      <div class="panel-body">
+        <!-- Template name -->
+        <div class="form-grop">
+          <label for="template">Template</label>
+          <input name="template" type="text" class="form-control"
+            placeholder="Template name" ng-model="siteTemplate.name">
+        </div>
+      </div>
+      <div class="panel-footer">
+        <!-- Template fields -->
+        <div class="form-grop" ng-repeat="(key, field) in siteTemplate.fields"
+          ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
+          <hr ng-if="!$first">
+          <!-- Char and boolean field -->
+          <input id="{{ key }}" name="{{ key }}" type="{{ field.type === 'char' ? 'text' : 'checkbox' }}"
+            class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
+            ng-model="siteTemplate.fields[key].value">
+          <!-- Field label -->
+          <label for="{{ key }}">{{ field.verbose_name }}</label>
+          <!-- Text field -->
+          <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
+            placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value"></textarea>
+          <span class="help-block">{{ field.help_text }}</span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
