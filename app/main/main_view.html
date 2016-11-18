@@ -29,6 +29,7 @@
           <i class="fa fa-fw text-primary fa-pencil-square-o"></i> Latest Entries
         </div>
         <ul class="panel-body panel-list">
+          <ng-include src="'basement/nothing/nothing.html'" ng-init="nothing.text = 'You have no entries'" ng-if="!Entry.list.length"></ng-include>
           <li class="panel-list-item s-fade" ng-repeat="e in Entry.list" ng-show="!e.isDeleted">
             <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
           </li>
