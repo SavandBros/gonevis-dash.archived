@@ -87,7 +87,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     for (var i = 0; i < $scope.tagsToSubmit.length; i++) {
       payload.tag_ids.push($scope.tagsToSubmit[i].id);
     }
-    payload.tags = $scope.tagsToSubmit;
 
     API.Entry.put({entry_id: payload.id}, payload,
       function () {
