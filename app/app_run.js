@@ -31,10 +31,10 @@ function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsServi
 
 app.run(RunForestRun);
 RunForestRun.$inject = [
-    '$rootScope',
-    '$mdToast',
-    '$state',
-    'editableOptions',
-    'ModalsService',
-    'AuthService'
+    "$rootScope",
+    "$mdToast",
+    "$state",
+    "editableOptions",
+    "ModalsService",
+    "AuthService"
 ];
