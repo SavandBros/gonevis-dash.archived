@@ -79,9 +79,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
       return;
     }
 
-    API.Site.delete({
-        site_id: site
-      },
+    API.Site.delete({ site_id: site },
       function () {
         for (var i = 0; i < $scope.user.sites.length; i++) {
           if ($scope.user.sites[i].id === site) {
@@ -101,7 +99,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
         }
       },
       function () {
-        $mdToast.showSimple("Oh... Something went wrong, couldn't delete site.");
+        $mdToast.showSimple("Oh... Something went wrong, couldn't delete site");
       }
     );
   };
