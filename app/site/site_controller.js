@@ -59,7 +59,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.SiteUpdate.put({ site_id: site }, payload,
       function (data) {
         $scope.site[key] = data[key];
-        $mdToast.showSimple("Site" + keyString + " updated");
+        $mdToast.showSimple("Site " + keyString + " updated");
       },
       function () {
         $mdToast.showSimple("Oh... Couldn't update " + keyString);
@@ -134,7 +134,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.site[$scope.editing] = dolphin.id;
+    $scope.site.media[$scope.editing] = dolphin;
     $scope.updateSite($scope.editing, dolphin.id);
   });
 
