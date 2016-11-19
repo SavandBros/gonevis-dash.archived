@@ -120,7 +120,17 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
    * @desc Save template config
    */
   $scope.saveConfig = function () {
-    // TODO: Save config
+    var payload = {
+      config_fields: $scope.siteTemplate.fields
+    };
+    API.SetSiteTemplateConfig.put({ site_id: site }, payload,
+      function () {
+        $mdToast.showSimple("Site template updated");
+      },
+      function () {
+        $mdToast.showSimple("Oh... Something went wrong, couldn't update site template");
+      }
+    );
   };
 
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
