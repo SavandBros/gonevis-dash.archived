@@ -716,3 +716,15 @@ fieldset[disabled] .btn-primary.focus {
     border-radius: 2px;
     font-weight: bold;
 }
+
+/* Tag */
+
+.tag-item {
+    background: #eee !important;
+    border: none !important;
+    color: #666 !important;
+}
+
+.tag-item.selected {
+    background: #faa !important;
+}
