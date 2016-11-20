@@ -1,20 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
+      <!-- Latest comments -->
       <div class="panel panel-default">
-        <div class="panel-heading">
-          <i class="fa fa-fw text-primary fa-comments"></i> Latest Comments
-        </div>
+        <div class="panel-heading"><i class="fa fa-fw text-primary fa-comments"></i> Latest Comments</div>
         <ul class="panel-body panel-list">
+          <!-- Comment -->
           <li class="panel-list-item s-fade" ng-repeat="c in Comment.list" ng-show="!c.isDeleted">
+            <!-- Username -->
             <small>{{ c.user.name }}:</small>
+            <!-- Content -->
             <a ng-click="commentService.view(c)">{{ c.comment }}</a>
+            <!-- Options -->
             <span class="panel-list-item-button">
               <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
               <ul class="dropdown-menu">
+                <!-- Delete -->
                 <li>
                   <a ng-click="commentService.remove(c)">
-                    <i class="fa fa-fw fa-trash text-danger"></i> Delete comment
+                    <i class="fa fa-fw fa-trash text-danger"></i> Delete
                   </a>
                 </li>
               </ul>
@@ -24,12 +28,14 @@
       </div>
     </div>
     <div class="col-md-6">
+      <!-- Latest entries -->
       <div class="panel panel-default">
-        <div class="panel-heading">
-          <i class="fa fa-fw text-primary fa-pencil-square-o"></i> Latest Entries
-        </div>
+        <div class="panel-heading"><i class="fa fa-fw text-primary fa-pencil-square-o"></i> Latest Entries</div>
         <ul class="panel-body panel-list">
-          <ng-include src="'basement/nothing/nothing.html'" ng-init="nothing.text = 'You have no entries'" ng-if="!Entry.list.length"></ng-include>
+          <!-- Nothing -->
+          <ng-include src="'basement/nothing/nothing.html'" ng-init="nothing.text = 'No entries yet'"
+            ng-if="!Entry.list.length"></ng-include>
+            <!-- Entry -->
           <li class="panel-list-item s-fade" ng-repeat="e in Entry.list" ng-show="!e.isDeleted">
             <a ui-sref="dash.entry-edit({entryId: e.id})">{{ e.title }}</a>
           </li>
