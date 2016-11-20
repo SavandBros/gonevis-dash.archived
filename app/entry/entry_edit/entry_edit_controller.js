@@ -13,7 +13,8 @@
  * @param Codekit
  * @param API
  * @param AuthService
- * @oaram DolphinService
+ * @param DolphinService
+ * @param $q
  */
 function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
   Codekit, API, AuthService, DolphinService, $q) {
@@ -32,13 +33,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.statuses = Codekit.entryStatuses;
     $scope.form = {
       id: $stateParams.entryId,
-      site: AuthService.getCurrentSite(),
+      site: AuthService.getCurrentSite()
     };
 
     API.Tags.get({ tag_site: AuthService.getCurrentSite() },
       function (data) {
         for (var i in data.results) {
-          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name, });
+          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name });
         }
       }
     );
@@ -52,6 +53,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
           data.end_publication = new Date(data.end_publication);
         }
         $scope.form = data;
+        for (var i = 0; i < $scope.form.tags.length; i++) {
+          $scope.tagsToSubmit.push($scope.form.tags[i]);
+        }
       }
     );
   }
@@ -71,7 +75,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
    *
    * @method update
    * @desc Update entry API callback
-   * 
+   *
    * @param form {object}
    */
   $scope.update = function (form) {
@@ -79,7 +83,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
 
     var payload = form;
     payload.tag_ids = [];
-
 
     for (var i = 0; i < $scope.tagsToSubmit.length; i++) {
       payload.tag_ids.push($scope.tagsToSubmit[i].id);
@@ -97,14 +100,14 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
         form.errors = data.data;
       }
     );
-  }
+  };
 
   /**
    * remove
    *
    * @method remove
    * @desc remove entry via api call
-   * 
+   *
    * @param id {string} UUID of entry
    */
   $scope.remove = function (id) {
