@@ -17,7 +17,7 @@
  * @param $q
  */
 function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
-                             Codekit, API, AuthService, DolphinService, $q) {
+  Codekit, API, AuthService, DolphinService, $q) {
 
   /**
    * constructor
@@ -36,15 +36,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
       site: AuthService.getCurrentSite()
     };
 
-    API.Tags.get({tag_site: AuthService.getCurrentSite()},
+    API.Tags.get({ tag_site: AuthService.getCurrentSite() },
       function (data) {
         for (var i in data.results) {
-          $scope.tags.push({slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name});
+          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name });
         }
       }
     );
 
-    API.Entry.get({entry_id: $scope.form.id},
+    API.Entry.get({ entry_id: $scope.form.id },
       function (data) {
         if (data.start_publication) {
           data.start_publication = new Date(data.start_publication);
@@ -88,7 +88,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
       payload.tag_ids.push($scope.tagsToSubmit[i].id);
     }
 
-    API.Entry.put({entry_id: payload.id}, payload,
+    API.Entry.put({ entry_id: payload.id }, payload,
       function () {
         $mdToast.showSimple("Entry updated!");
         form.loading = false;
@@ -111,7 +111,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
    * @param id {string} UUID of entry
    */
   $scope.remove = function (id) {
-    API.Entry.delete({entry_id: id},
+    API.Entry.delete({ entry_id: id },
       function () {
         $mdToast.showSimple("Entry has been deleted !");
         $state.go("dash.entry-list");
