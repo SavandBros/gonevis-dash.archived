@@ -67,6 +67,12 @@ function API($http, $resource, ENV) {
       name: "Site",
       endpoint: "website/site/:site_id/" // GET, PUT
     }, {
+      name: "SiteTemplateConfig",
+      endpoint: "website/site/:site_id/template-config/" // GET
+    }, {
+      name: "SetSiteTemplateConfig",
+      endpoint: "website/site/:site_id/set-template-config/" // PUT
+    }, {
       name: "SiteUpdate",
       endpoint: "website/site/:site_id/update-settings/" // GET, PUT
     }, {

@@ -32,6 +32,17 @@ button {
 }
 
 
+/* Image container */
+
+.container-image {
+    height: 300px;
+    margin-bottom: -180px;
+    margin-top: -20px;
+    background-size: 100%;
+    background-position: center;
+}
+
+
 /* Navbar */
 
 .navbar-brand {
@@ -742,6 +753,10 @@ fieldset[disabled] .btn-primary.focus {
     font-size: 12px;
 }
 
+.t-bold {
+    font-weight: bold;
+}
+
 
 /* Outline */
 
@@ -750,4 +765,17 @@ fieldset[disabled] .btn-primary.focus {
     padding: 2px 6px;
     border-radius: 2px;
     font-weight: bold;
+}
+
+
+/* Tag */
+
+.tag-item {
+    background: #eee !important;
+    border: none !important;
+    color: #666 !important;
+}
+
+.tag-item.selected {
+    background: #faa !important;
 }
