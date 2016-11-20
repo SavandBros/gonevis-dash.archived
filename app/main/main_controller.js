@@ -2,7 +2,7 @@
 
 /**
  * Main Controller
- * 
+ *
  * @class MainController
  * @namespace gonevisDash.MainController
  *
@@ -32,13 +32,14 @@ function MainController($scope, $state, $mdToast, $stateParams, AuthService, API
     $scope.commentService = CommentService;
 
     $scope.Comment.initialize();
+    $scope.Entry.initialize();
   }
 
   $scope.Comment = {
     list: [],
 
     initialize: function () {
-      API.Comments.get({ site_id: $scope.site, object_type: 1 },
+      API.Comments.get({site_id: $scope.site, object_type: 1},
         function (data) {
           $scope.Comment.list = data.results;
         }
@@ -46,39 +47,19 @@ function MainController($scope, $state, $mdToast, $stateParams, AuthService, API
     }
   };
 
-  $scope.form = {};
+  $scope.Entry = {
+    list: [],
 
-  /**
-   * newPost
-   *
-   * @method newPost
-   * @desc Submit newPost form
-   *
-   * @param form {object} Form data to submit
-   */
-  $scope.newPost = function (form) {
-    form.loading = true;
-    form.site = AuthService.getCurrentSite();
-    if (!form.title) {
-      form.loading = false;
-      return $mdToast.showSimple("Title is requierd");
+    initialize: function () {
+      API.Entries.get({site: $scope.site},
+        function (data) {
+          $scope.Entry.list = data.results;
+        }
+      );
     }
-
-    API.EntryAdd.save(form,
-      function (data) {
-        $mdToast.showSimple("Entry " + data.title + " drafted.");
-        form.loading = false;
-        form.title = "";
-        form.content = "";
-      },
-      function (data) {
-        $mdToast.showSimple("Failed to add entry.");
-        form.loading = false;
-        form.loading = false;
-        form.errors = data;
-      }
-    );
   };
+
+  $scope.form = {};
 
   $scope.$on("gonevisDash.CommentService:delete", function (event, data) {
     for (var i = 0; i < $scope.Comment.list.length; i++) {
