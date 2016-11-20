@@ -60,10 +60,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "entry/entry_edit/entry_edit_view.html",
       auth: true
     })
-    .state("dash.site-settings", {
-      url: "/site-settings",
-      controller: "SiteSettingsController",
-      templateUrl: "site/site_settings/site_settings_view.html",
+    .state("dash.site", {
+      url: "/site",
+      controller: "SiteController",
+      templateUrl: "site/site_view.html",
       auth: true
     })
     .state("dash.tag-edit", {

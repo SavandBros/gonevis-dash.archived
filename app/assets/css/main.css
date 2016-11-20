@@ -31,6 +31,16 @@ button {
     opacity: 1;
 }
 
+/* Image container */
+
+.container-image {
+    height: 300px;
+    margin-bottom: -180px;
+    margin-top: -20px;
+    background-size: 100%;
+    background-position: center;
+}
+
 /* Navbar */
 
 .navbar-brand {
@@ -706,6 +716,10 @@ fieldset[disabled] .btn-primary.focus {
 
 .t-small {
     font-size: 12px;
+}
+
+.t-bold {
+    font-weight: bold;
 }
 
 /* Outline */
