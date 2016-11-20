@@ -31,17 +31,20 @@ button {
     opacity: 1;
 }
 
+
 /* Navbar */
 
 .navbar-brand {
     margin-right: 30px;
 }
 
+
 /* Forms */
 
 .help-block {
     margin-left: 10px;
 }
+
 
 /* Space */
 
@@ -130,11 +133,13 @@ button {
     padding-right: 15px;
 }
 
+
 /* Sizes */
 
 .sz-full {
     width: 100% !important;
 }
+
 
 /* Opacity */
 
@@ -154,11 +159,13 @@ button {
     opacity: 0;
 }
 
+
 /* Shadow */
 
 .s-box {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Border */
 
@@ -182,6 +189,7 @@ button {
     border-color: limegreen;
 }
 
+
 /* Displays */
 
 .dis-b {
@@ -192,6 +200,7 @@ button {
     display: inline-block;
 }
 
+
 /* Cursors */
 
 .dropdown-toggle,
@@ -199,17 +208,20 @@ button {
     cursor: pointer;
 }
 
+
 /* Hovers */
 
 .h-opacity:HOVER {
     opacity: 1;
 }
 
+
 /* Overflows */
 
 .of-hidden {
     overflow: hidden;
 }
+
 
 /* Transitions */
 
@@ -221,6 +233,7 @@ button {
 .trans-opacity {
     transition: opacity .3s ease-in-out;
 }
+
 
 /* Animate */
 
@@ -240,6 +253,7 @@ button {
 .animated.ng-leave {
     display: none !important;
 }
+
 
 /* Avatar */
 
@@ -273,6 +287,7 @@ button {
     margin-top: 64px;
 }
 
+
 /* List */
 
 .list-panel {
@@ -283,6 +298,7 @@ button {
 .list-panel:last-child {
     border-bottom: none;
 }
+
 
 /* MD Toast */
 
@@ -296,6 +312,7 @@ md-toast {
     overflow: initial !important;
 }
 
+
 /* Link in Link */
 
 .nav-link-in-link {
@@ -303,6 +320,7 @@ md-toast {
     right: 0;
     margin-top: -36px;
 }
+
 
 /* Panels */
 
@@ -332,7 +350,7 @@ md-toast {
     box-shadow: -5px 0 10px #fff;
 }
 
-.panel-list .panel-list-item-button > .fa {
+.panel-list .panel-list-item-button>.fa {
     opacity: 0.6;
     font-size: 1.3em;
     cursor: pointer;
@@ -341,6 +359,7 @@ md-toast {
 .panel-heading {
     padding: 18px 12px !important;
 }
+
 
 /* Dolphin */
 
@@ -377,13 +396,14 @@ md-toast {
     white-space: nowrap;
 }
 
-.dolphin + .options {
+.dolphin+.options {
     position: absolute;
     z-index: 10;
     margin: 5px;
     right: 15px;
     top: 0;
 }
+
 
 /* Editing Mode + Text Angular */
 
@@ -454,6 +474,7 @@ md-toast {
     text-align: center;
 }
 
+
 /* Navigation */
 
 .navigation {
@@ -482,11 +503,13 @@ md-toast {
     width: 35px;
 }
 
+
 /* White Spaces */
 
 .ws-pre {
     white-space: pre-wrap;
 }
+
 
 /* Autocomplete */
 
@@ -502,6 +525,7 @@ tags-input .tags.focused {
     outline: 0 !important;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
 }
+
 
 /* Button Corner @btn */
 
@@ -523,12 +547,14 @@ tags-input .tags.focused {
     outline: 0 !important;
 }
 
+
 /* Modal @override */
 
 .modal-header:not([init]) {
     background: rgba(0, 0, 0, 0.05);
     padding: 30px 20px;
 }
+
 
 /* Button Circle @btn */
 
@@ -544,6 +570,7 @@ tags-input .tags.focused {
     width: 30px;
     height: 30px;
 }
+
 
 /* Dropdown @override */
 
@@ -566,6 +593,7 @@ tags-input .tags.focused {
     padding: 2px;
 }
 
+
 /* Tag */
 
 .tag-search {
@@ -574,6 +602,7 @@ tags-input .tags.focused {
     margin-left: 318px;
 }
 
+
 /* Comment */
 
 .comment-search {
@@ -581,6 +610,7 @@ tags-input .tags.focused {
     margin-left: 318px;
     margin-bottom: 10px;
 }
+
 
 /* Editable */
 
@@ -633,6 +663,7 @@ a.editable-empty:focus {
     opacity: 0.5;
 }
 
+
 /* Load more */
 
 .load-more .btn {
@@ -644,11 +675,12 @@ a.editable-empty:focus {
     text-align: center;
 }
 
+
 /* Primary color */
 
-.dropdown-menu > .active > a,
-.dropdown-menu > .active > a:hover,
-.dropdown-menu > .active > a:focus,
+.dropdown-menu>.active>a,
+.dropdown-menu>.active>a:hover,
+.dropdown-menu>.active>a:focus,
 .btn-primary {
     background: #d17100;
 }
@@ -696,17 +728,20 @@ fieldset[disabled] .btn-primary.focus {
     background: #b96400;
 }
 
+
 /* Over flow */
 
 .of {
     overflow: hidden;
 }
 
+
 /* Text */
 
 .t-small {
     font-size: 12px;
 }
+
 
 /* Outline */
 
