@@ -40,6 +40,29 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
     );
   }
 
+  $scope.remove = function (team) {
+    var api, payload = {};
+
+    if (team.isPending) {
+      api = API.RemoveTeamPending;
+      payload = { email: team.email };
+
+    } else if (!team.isPending) {
+      api = API.RemoveTeam;
+      payload = { team_member_id: team.user.id };
+    }
+
+    api.put({ site_id: site }, payload,
+      function () {
+        team.isRemoved = true;
+        $mdToast.showSimple("user removed from team");
+      },
+      function () {
+        $mdToast.showSimple("Something went wrong... We couldn't remove team");
+      }
+    );
+  };
+
   $scope.invite = function () {
     ModalsService.open("invite", "TeamInviteModalController");
   };
