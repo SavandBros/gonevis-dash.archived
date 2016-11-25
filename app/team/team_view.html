@@ -12,7 +12,7 @@
       <div class="panel-body s-pad-no">
         <!-- Team -->
         <div class="list-group s-mar-no">
-          <a class="list-group-item b-no" ng-repeat="t in team.list">
+          <a class="list-group-item b-no" ng-repeat="t in team.list" ng-show="!t.isRemoved">
             <h4>
               <img ng-class="{'o-fade-max': t.isPending || !t.user.media.picture}"
                    ng-src="{{ !t.isPending ? t.user.media.picture.thumbnail : ' ' }}"
@@ -21,6 +21,7 @@
               <span class="s-mar-left">
                 {{ !t.isPending ? t.user.name : t.email }}
               </span>
+              <button class="btn btn-danger btn-sm" ng-click="remove(t)">Delete</button>
               <span class="pull-right t-small outline {{ teamRoles[t.role].color }}" style="margin-top: 22px">
               	{{ teamRoles[t.role].label | uppercase }}
               </span>
