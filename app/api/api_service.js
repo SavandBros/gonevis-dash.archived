@@ -87,6 +87,12 @@ function API($http, $resource, ENV) {
     }, {
       name: "TeamInvite",
       endpoint: "website/site/:site_id/promote-user/" // PUT
+    }, {
+      name: "RemoveTeam",
+      endpoint: "website/site/:site_id/remove-team-member/" // PUT
+    }, {
+      name: "RemoveTeamPending",
+      endpoint: "website/site/:site_id/remove-pending-member/" // PUT
     },
     // Tagool
     {
