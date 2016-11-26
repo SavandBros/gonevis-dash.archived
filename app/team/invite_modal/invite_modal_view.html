@@ -1,24 +1,24 @@
 <div class="modal fade" id="invite">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header">
-				Invite
-				<i class="fa fa-close close pull-right" data-dismiss="modal"></i>
-			</div>
-			<div class="modal-body">
-				<form ng-submit="invite(form)" name="form">
-					<!-- Email -->
-					<div class="form-group" ng-class="{'has-error': form.errors.email}">
-						<input type="email" class="form-control" type="text" ng-model="form.email" placeholder="Email" required/>
-						<small class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</small>
-					</div>
-					<!-- Roles -->
-					<div class="form-group">
-						<select ng-options="role.id as role.label for role in teamRoles" ng-model="form.role" class="form-control"></select>
-					</div>
-					<button class="btn btn-success"><i class="fa fa-paper-plane"></i> Invite</button>
-				</form>
-			</div>
-		</div>
-	</div>
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <!-- Title -->
+      <h4 class="modal-header">Invite <i class="fa fa-close close pull-right" data-dismiss="modal"></i></h4>
+      <!-- Body -->
+      <div class="modal-body">
+        <form ng-submit="invite(form)">
+          <!-- Email -->
+          <div class="form-group" ng-class="{'has-error': form.errors.email}">
+            <input type="email" class="form-control" type="text" ng-model="form.data.email" placeholder="Email" required/>
+            <small class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</small>
+          </div>
+          <!-- Roles -->
+          <div class="form-group">
+            <select ng-options="role.id as role.label for role in teamRoles"
+	            ng-model="form.data.role" class="form-control"></select>
+          </div>
+          <button class="btn btn-primary btn-block s-bold">Invite</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
