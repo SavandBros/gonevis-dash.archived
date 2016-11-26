@@ -20,9 +20,13 @@ function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, Au
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.teamRoles = Codekit.teamRoles;
+    $scope.form = {
+      data: {}
+    };
+
+    $scope.teamRoles = angular.copy(Codekit.teamRoles);
     $scope.teamRoles.splice(0, 1);
-    $scope.form.role = $scope.teamRoles[1].id;
+    $scope.form.data.role = $scope.teamRoles[1].id;
   }
 
   /**
