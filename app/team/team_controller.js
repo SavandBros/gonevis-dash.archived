@@ -20,6 +20,7 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.user = AuthService.getAuthenticatedUser();
     $scope.teamRoles = Codekit.teamRoles;
 
     API.Team.get({ site_id: site },
