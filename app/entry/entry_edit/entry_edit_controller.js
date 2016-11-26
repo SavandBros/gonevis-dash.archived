@@ -39,7 +39,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.Tags.get({ tag_site: AuthService.getCurrentSite() },
       function (data) {
         for (var i in data.results) {
-          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name });
+          $scope.tags.push({
+            slug: data.results[i].slug,
+            id: data.results[i].id,
+            name: data.results[i].name,
+          });
         }
       }
     );
@@ -60,15 +64,20 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   }
 
-  $scope.loadTags = function (query) {
-    return load();
-  };
-
   function load() {
     var deferred = $q.defer();
     deferred.resolve($scope.tags);
     return deferred.promise;
   }
+
+  $scope.loadTags = function (query) {
+    return load().then(function (response) {
+      $scope.tags = response;
+      return $scope.tags.filter(function (tag) {
+        return tag.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      });
+    });
+  };
 
   /**
    * update
