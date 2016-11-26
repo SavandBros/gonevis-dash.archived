@@ -34,17 +34,17 @@ function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, Au
   $scope.invite = function (form) {
     form.loading = true;
 
-    API.TeamInvite.put({ site_id: site }, form,
+    API.TeamInvite.put({ site_id: site }, form.data,
       function (data) {
-        form.errors = null;
-        form.loading = true;
-        $mdToast.showSimple("Invite completed");
-        $rootScope.$broadcast('gonevisDash.inviteService.invite', data);
+        $rootScope.$broadcast("gonevisDash.TeamService.invite", data);
+        ModalsService.close("invite");
+        $mdToast.showSimple(
+          "Invited "+form.data.email+" as "+$scope.teamRoles[form.data.role-1].label.toLowerCase()+" into the team."
+        );
       },
       function (data) {
-        form.errors = true;
-        $mdToast.showSimple("Sorry, couldn't invite");
-        console.log(data);
+        form.errors = data.data;
+        form.loading = false;
       }
     );
   };
