@@ -37,6 +37,12 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
     );
   }
 
+  /**
+   * @method remove
+   * @desc Remove a user from team
+   *
+   * @param team {Object}
+   */
   $scope.remove = function (team) {
     team.title = team.email ? team.email : team.user.name;
 
