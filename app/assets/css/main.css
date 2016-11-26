@@ -589,8 +589,13 @@ tags-input .tags.focused {
     min-width: 200px;
 }
 
-.dropdown-menu a {
+.dropdown-menu a,
+.dropdown-menu [ng-click] {
     padding: 8px 15px !important;
+}
+
+.dropdown-menu [ng-click]:hover {
+    background-color: #f5f5f5;
 }
 
 .dropdown-menu .fa:not([init]) {
@@ -602,6 +607,10 @@ tags-input .tags.focused {
     right: 10px;
     height: 20px;
     padding: 2px;
+}
+
+.dropdown-menu>[ng-click]>.fa {
+    top: 10px;
 }
 
 
