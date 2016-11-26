@@ -38,13 +38,16 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
   }
 
   $scope.remove = function (team) {
-    var api, payload = {};
+    team.title = team.email ? team.email : team.user.name;
 
-    if (team.isPending) {
-      api = API.RemoveTeamPending;
-      payload = { email: team.email };
+    if (!confirm("Remove from team?\n\nAre you sure you want to remove '" + team.title + "' from team?")) {
+      return;
+    }
 
-    } else if (!team.isPending) {
+    var api = API.RemoveTeamPending;
+    var payload = { email: team.email };
+
+    if (!team.isPending) {
       api = API.RemoveTeam;
       payload = { team_member_id: team.user.id };
     }
@@ -52,10 +55,12 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
     api.put({ site_id: site }, payload,
       function () {
         team.isRemoved = true;
-        $mdToast.showSimple("user removed from team");
+        $mdToast.showSimple(
+          "Removed " + team.title + " (" + $scope.teamRoles[team.role].label.toLowerCase() + ") from team."
+        );
       },
       function () {
-        $mdToast.showSimple("Something went wrong... We couldn't remove team");
+        $mdToast.showSimple("Something went wrong... We couldn't remove team.");
       }
     );
   };
