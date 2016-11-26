@@ -13,6 +13,7 @@
   "loopfunc": true,
   "globals": {
     "angular": false,
-    "app": false
+    "app": false,
+    "confirm": false
   }
 }
