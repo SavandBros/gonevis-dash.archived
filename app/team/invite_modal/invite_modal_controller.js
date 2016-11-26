@@ -1,9 +1,7 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:TeamInviteModalController
- * Controller of the gonevisDash
+ * @name TeamInviteModalController
  *
  * @param $scope
  * @param $rootScope
@@ -11,14 +9,13 @@
  * @param $mdToast
  * @param AuthService
  * @param Codekit
+ * @param ModalsService
  */
-function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, AuthService, Codekit) {
+function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, AuthService, Codekit, ModalsService) {
 
   var site = AuthService.getCurrentSite();
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -29,10 +26,8 @@ function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, Au
   }
 
   /**
-   * invite
-   *
    * @method invite
-   * @desc for inviting users
+   * @desc Invite people into the team
    * 
    * @param form {Object}
    */
@@ -52,7 +47,7 @@ function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, Au
         console.log(data);
       }
     );
-  }
+  };
 
   constructor();
 }
@@ -65,5 +60,6 @@ TeamInviteModalController.$inject = [
   "$mdToast",
   "API",
   "AuthService",
-  "Codekit"
+  "Codekit",
+  "ModalsService"
 ];
