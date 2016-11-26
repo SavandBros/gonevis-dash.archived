@@ -1,9 +1,7 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:TeamController
- * Controller of the gonevisDash
+ * @class TeamController
  *
  * @param $scope
  * @param $rootScope
@@ -18,8 +16,6 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
   var site = AuthService.getCurrentSite();
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -63,11 +59,15 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
     );
   };
 
+  /**
+   * @method invite
+   * @desc Open up invite modal
+   */
   $scope.invite = function () {
     ModalsService.open("invite", "TeamInviteModalController");
   };
 
-  $scope.$on("gonevisDash.inviteService.invite", function () {
+  $scope.$on("gonevisDash.TeamService.invite", function () {
     constructor();
   });
 
