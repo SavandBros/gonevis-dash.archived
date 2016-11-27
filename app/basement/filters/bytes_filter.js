@@ -1,6 +1,11 @@
 "use strict";
 
-app.filter("bytes", function () {
+/**
+ * @class BytesFilter
+ *
+ * @returns {Function}
+ */
+function BytesFilter() {
   return function (bytes, precision) {
     if (bytes === 0) {
       return "0 bytes";
@@ -20,4 +25,6 @@ app.filter("bytes", function () {
 
     return (val.match(/\.0*$/) ? val.substr(0, val.indexOf(".")) : val) + " " + units[number];
   };
-});
+}
+
+app.filter("bytes", BytesFilter);
