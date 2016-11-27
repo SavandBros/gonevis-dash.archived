@@ -152,7 +152,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
    *
    * @method update
    *
-   * @param event {Object}
+   * @param event {Event}
    * @param data {Object}
    */
   function update(event, data) {
