@@ -27,15 +27,19 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.tags = [];
     $scope.tagsToSubmit = [];
     $scope.statuses = Codekit.entryStatuses;
-    $scope.form = {
-      id: $stateParams.entryId,
-      site: AuthService.getCurrentSite()
-    };
 
-    API.Tags.get({ tag_site: AuthService.getCurrentSite() },
+    $scope.form = $rootScope.cache.entry ? $rootScope.cache.entry : {};
+    $scope.form.id = $stateParams.entryId;
+    $scope.form.site = AuthService.getCurrentSite();
+
+    API.Tags.get({ tag_site: $scope.form.site },
       function (data) {
         for (var i in data.results) {
-          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name });
+          $scope.tags.push({
+            id: data.results[i].id,
+            slug: data.results[i].slug,
+            name: data.results[i].name
+          });
         }
       }
     );
