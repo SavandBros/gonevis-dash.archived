@@ -1,25 +1,18 @@
 "use strict";
 
 /**
- * Comment Service
- *
  * @class CommentService
- * @namespace gonevisDash.CommentService
  *
  * @param $rootScope
  * @param $mdToast
  * @param API
  * @param ModalsService
  *
- * @returns [Factory]
+ * @return [Factory]
  */
 function CommentService($rootScope, $mdToast, API, ModalsService) {
 
-  var objectType = 1;
-
   /**
-   * remove
-   * 
    * @method remove
    * @desc Delete comment, notify and broadcast for controllers to use.
    * 
@@ -35,7 +28,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
           $mdToast.showSimple("Comment deleted.");
         }
         comment.isDeleted = true;
-        $rootScope.$broadcast("gonevisDash.CommentService:delete", {
+        $rootScope.$broadcast("gonevisDash.CommentService:remove", {
           data: data,
           comment: comment,
           success: true
@@ -45,7 +38,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
         if (toast) {
           $mdToast.showSimple("Deleting comment failed.");
         }
-        $rootScope.$broadcast("gonevisDash.CommentService:delete", {
+        $rootScope.$broadcast("gonevisDash.CommentService:remove", {
           data: data,
           comment: comment,
           success: false
@@ -55,8 +48,6 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   }
 
   /**
-   * view
-   * 
    * @method view
    * @desc View comment as modal (detailed mode).
    * 
@@ -67,7 +58,6 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   }
 
   return {
-    objectType: objectType,
     remove: remove,
     view: view,
   };
