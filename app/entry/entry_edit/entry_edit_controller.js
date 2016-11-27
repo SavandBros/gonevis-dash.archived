@@ -64,12 +64,26 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   }
 
+  /**
+   * load
+   *
+   * @method load
+   * @desc query tags
+   */
   function load() {
     var deferred = $q.defer();
     deferred.resolve($scope.tags);
     return deferred.promise;
   }
 
+  /**
+   * loadTags
+   *
+   * @method loadTags
+   * @desc Load tags and filter them
+   *
+   * @param query {String}
+   */
   $scope.loadTags = function (query) {
     return load().then(function (response) {
       $scope.tags = response;

@@ -38,6 +38,12 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
     );
   }
 
+  /**
+   * load
+   *
+   * @method load
+   * @desc query tags
+   */
   function load() {
     var deferred = $q.defer();
     deferred.resolve($scope.tags);
@@ -48,7 +54,7 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
    * loadTags
    *
    * @method loadTags
-   * @desc Load tags via load() function and filters them
+   * @desc Load tags and filter them
    *
    * @param query {String}
    */
