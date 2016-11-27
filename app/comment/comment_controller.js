@@ -48,7 +48,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
    */
   $scope.loadMore = Pagination.loadMore;
 
-  $rootScope.$on("gonevisDash.CommentService:delete", function (event, data) {
+  $rootScope.$on("gonevisDash.CommentService:remove", function (event, data) {
     for (var i = 0; i < $scope.comments.length; i++) {
       if ($scope.comments[i].id === data.id) {
         $scope.comments[i].isDeleted = true;
