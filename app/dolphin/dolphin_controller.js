@@ -17,7 +17,7 @@
  * @param Pagination
  */
 function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
-  DolphinService, Codekit, API, ENV, AuthService, Upload, Pagination) {
+  DolphinService, Codekit, API, ENV, AuthService, Upload, Pagination, Search) {
 
   var site = AuthService.getCurrentSite();
 
@@ -37,12 +37,13 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.nothing = { text: "It's lonely here... Try adding some dolphins!" };
     $scope.dolphinService = DolphinService;
     $scope.dolphinForm = {};
+    $scope.search = Search;
 
     if ($rootScope.selectionMode) {
       $scope.currentTab = "dolphin";
     }
-
-    API.Dolphins.get({ site: site },
+    var payload = { site: site };
+    API.Dolphins.get(payload,
       function (data) {
         $scope.initialled = true;
         $scope.dolphins = data.results;
@@ -50,6 +51,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
         $scope.dolphinForm = Pagination.paginate(
           $scope.dolphinForm, data, {}
         );
+        $scope.searchForm = Search.searchify($scope.searchForm, $scope.dolphinForm, API.Dolphins.get, data, payload);
       }
     );
 
@@ -200,6 +202,14 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     }
   });
 
+  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+    if (data.success) {
+      $scope.dolphinForm = data.dolphinForm;
+      $scope.dolphins = data.data.results;
+      $scope.searchForm = data.form;
+    }
+  });
+
   constructor();
 }
 
@@ -216,5 +226,6 @@ DolphinController.$inject = [
   "ENV",
   "AuthService",
   "Upload",
-  "Pagination"
+  "Pagination",
+  "Search"
 ];
