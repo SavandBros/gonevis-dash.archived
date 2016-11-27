@@ -64,26 +64,28 @@ function MainController($scope, $state, $mdToast, $stateParams,
    * @type {Object}
    */
   $scope.Entry = {
-    list: [],
     /**
      * @name service
      * @desc Object service
      * @type {Service}
      */
+    service: EntryService,
     /**
      * @method initialize
      * @desc Initialize entries
      */
     initialize: function () {
-      API.Entries.get({site: $scope.site},
+      $scope.Entry.loading = true;
+
+      API.Entries.get({ site: $scope.site },
         function (data) {
+          $scope.Entry.loading = true;
           $scope.Entry.list = data.results;
         }
       );
     }
   };
 
-  $scope.form = {};
   /**
    * @name Metrics
    * @type {Object}
