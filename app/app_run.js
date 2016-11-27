@@ -13,6 +13,11 @@
 function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsService, AuthService) {
 
   /**
+   * @desc We'll be using $rootScope.cache as an object, so we need to predefine it
+   */
+  $rootScope.cache = {};
+
+  /**
    * @desc Editable texts config
    */
   editableOptions.theme = "bs3";
