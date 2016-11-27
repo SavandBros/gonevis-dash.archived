@@ -788,3 +788,8 @@ fieldset[disabled] .btn-primary.focus {
 .tag-item.selected {
     background: #faa !important;
 }
+
+img.tag {
+    width: 32px;
+    margin: 1px;
+}
