@@ -48,7 +48,7 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "npm install -g bower grunt-cli && bower install && grunt rock"
+    "postinstall": "npm install -g bower grunt-cli && bower install && ./bower-postinstall.sh && grunt rock"
   },
   "repository": {
     "type": "git",

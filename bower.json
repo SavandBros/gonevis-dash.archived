@@ -46,6 +46,13 @@
         "less/font-awesome.less",
         "css/font-awesome.css"
       ]
+    },
+    "quill": {
+      "main": [
+        "dist/css/quill.snow.css",
+        "dist/css/quill.bubble.css",
+        "dist/js/quill.js"
+      ]
     }
   },
   "resolutions": {
