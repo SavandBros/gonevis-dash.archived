@@ -1,33 +1,34 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:EntryController
- * Controller of the gonevisDash
+ * @class EntryController
  *
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param EntryService
  * @param API
  * @param AuthService
  * @param Pagination
  * @param Search
  */
-function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, AuthService, Pagination, Search) {
+function EntryController($scope, $rootScope, $state, $mdToast,
+  EntryService, Codekit, API, AuthService, Pagination, Search) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
     $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
+    $scope.filters = { title: "" };
+    $scope.entryService = EntryService;
     $scope.statuses = Codekit.entryStatuses;
     $scope.search = Search;
     $scope.pageForm = {};
 
     var payload = { site: AuthService.getCurrentSite() };
+
     API.Entries.get(payload,
       function (data) {
         $scope.initialled = true;
@@ -38,11 +39,7 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
     );
   }
 
-  $scope.filters = { title: "" };
-
   /**
-   * removeSelected
-   *
    * @method removeSelected
    * @desc Remove selected entries
    */
@@ -55,12 +52,10 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
   };
 
   /**
-   * setStatus
-   *
    * @method setStatus
-   * @desc set selected status
+   * @desc Set selected status
    *
-   * @param status{number}
+   * @param status {Number}
    */
   $scope.setStatus = function (status) {
     for (var i = 0; i < $scope.entries.length; i++) {
@@ -77,8 +72,6 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
   };
 
   /**
-   * remove
-   *
    * @method remove
    * @desc Delete entries via API call
    * 
@@ -113,6 +106,13 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
    */
   $scope.loadMore = Pagination.loadMore;
 
+  /**
+   * @event gonevisDash.Pagination:loadedMore
+   * @desc Load more callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
@@ -120,6 +120,13 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
     }
   });
 
+  /**
+   * @event gonevisDash.Search:submit
+   * @desc Search callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
@@ -137,6 +144,7 @@ EntryController.$inject = [
   "$rootScope",
   "$state",
   "$mdToast",
+  "EntryService",
   "Codekit",
   "API",
   "AuthService",
