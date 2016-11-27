@@ -17,7 +17,10 @@
   <!-- Content -->
   <div class="form-group" ng-class="{'has-error': form.errors.content, 'editing-mode': editingMode}">
     <i class="fa fa-close close pull-right" ng-click="editingMode = false" ng-show="editingMode"></i>
-    <text-angular ng-model="form.content" ng-focus="editingMode = true" placeholder="Content"></text-angular>
+    <ng-quill-editor ng-model="title"
+        on-editor-created="editorCreated(editor)"
+        on-content-changed="contentChanged(editor, html, text)"></ng-quill-editor>
+
     <small id="content" class="help-block" ng-show="form.errors.content">{{ form.errors.content[0] }}</small>
   </div>
   <!-- Lead -->
