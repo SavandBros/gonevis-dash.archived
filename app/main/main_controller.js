@@ -37,20 +37,22 @@ function MainController($scope, $state, $mdToast, $stateParams,
    * @type {Object}
    */
   $scope.Comment = {
-    list: [],
-
     /**
      * @name service
      * @desc Object service
      * @type {Service}
      */
+    service: CommentService,
     /**
      * @method initialize
      * @desc initialize comments
      */
     initialize: function () {
-      API.Comments.get({site_id: $scope.site, object_type: 1},
+      $scope.Comment.loading = true;
+
+      API.Comments.get({ site_id: $scope.site },
         function (data) {
+          $scope.Comment.loading = true;
           $scope.Comment.list = data.results;
         }
       );
