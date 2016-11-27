@@ -457,7 +457,8 @@ module.exports = function (grunt) {
           "ngTagsInput",
           "ngFileUpload",
           "slugifier",
-          "angular-sortable-view"
+          "angular-sortable-view",
+          "ngQuill"
         ],
         constants: {
           ENV: {
