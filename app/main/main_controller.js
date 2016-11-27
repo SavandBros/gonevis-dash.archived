@@ -90,16 +90,22 @@ function MainController($scope, $state, $mdToast, $stateParams,
    * @name Metrics
    * @type {Object}
    */
+  $scope.Metrics = {
     /**
      * @method initialize
      * @desc Initialize metrics
      */
+    initialize: function () {
+      $scope.Metrics.loading = true;
 
-  $scope.$on("gonevisDash.CommentService:delete", function (event, data) {
-    for (var i = 0; i < $scope.Comment.list.length; i++) {
-      if ($scope.Comment.list[i].id === data.id) {
-        $scope.Comment.list[i].isDeleted = true;
-      }
+      API.SiteMetrics.get({ site_id: $scope.site },
+        function (data) {
+          $scope.Metrics.loading = false;
+          $scope.Metrics.list = data.metrics;
+        }
+      );
+    }
+  };
 
   /**
    * @event gonevisDash.CommentService:remove
