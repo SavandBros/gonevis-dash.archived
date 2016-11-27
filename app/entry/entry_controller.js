@@ -87,20 +87,6 @@ function EntryController($scope, $rootScope, $state, $mdToast,
   };
 
   /**
-   * cacheEntry
-   *
-   * @method cacheEntry
-   * @desc Save all data of entry so entry-edit can load it instantly
-   *
-   * @param entry {Object}
-   */
-  $scope.cacheEntry = function (entry) {
-    $rootScope.cachedEntryTitle = entry.title;
-  };
-
-  /**
-   * loadMore
-   *
    * @method loadMore
    * @desc Load more function for controller
    */
