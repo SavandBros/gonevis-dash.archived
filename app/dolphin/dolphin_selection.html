@@ -8,9 +8,6 @@
         </h4>
       </div>
       <div class="modal-body">
-        <!-- Nothing -->
-        <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && initialled"></ng-include>
-
         <!-- Content -->
         <div>
           <!-- Tabs -->
@@ -25,7 +22,16 @@
           </ul>
 
           <!-- List -->
-          <div class="row a-fade" ng-show="currentTab == 'dolphin'" ng-if="dolphins.length">
+          <div class="row a-fade" ng-show="currentTab == 'dolphin'">
+            <!-- Search form -->
+            <ng-include src="'basement/search/search_form.html'"
+              class="dis-b s-mar-soft s-mar-top-no animated fadeIn" ng-if="initialled">
+            </ng-include>
+            <!-- Search noresult -->
+            <ng-include src="'basement/search/search_noresult.html'" class="dis-b s-mar-soft"></ng-include>
+            <!-- Nothing -->
+            <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled"></ng-include>
+            <!-- Dolphins -->
             <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins"
               ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
               <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail }})">
@@ -37,8 +43,11 @@
           <!-- Upload -->
           <div class="a-fade text-center" ng-show="currentTab == 'upload'">
             <!-- Select -->
-            <button type="file" class="btn btn-primary btn-lg" ngf-select="uploadFile($files, $invalidFiles)" 
-                    ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
+            <button type="file" class="btn btn-primary btn-lg"
+              ngf-select="uploadFile($files, $invalidFiles)"
+              ngf-accept="upload.accept"
+              ngf-max-size="25MB"
+              ngf-multiple="true">
               <i class="fa fa-fw fa-plus"></i> Select File
             </button>
             <!-- Progress Bars -->
