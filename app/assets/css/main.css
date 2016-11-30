@@ -631,6 +631,13 @@ tags-input .tags.focused {
     margin-bottom: 10px;
 }
 
+img.comment {
+  width: 32px;
+  height: 32px;
+  margin-left: -9px;
+  margin-right: 9px;
+  margin-top: 2px;
+}
 
 /* Editable */
 
