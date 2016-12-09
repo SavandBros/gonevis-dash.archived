@@ -6,9 +6,25 @@
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
     <!-- Search form -->
-    <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft animated fadeIn"
-      ng-show="initialled">
-    </ng-include>
+    <div class="row">
+      <div class="col-md-9">
+        <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft animated fadeIn"
+          ng-show="initialled">
+        </ng-include>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"
+          ng-click="setView('grid')"
+          ng-class="{active: view == 'grid'}">
+          <i class="fa fa-th-large"></i>
+        </button>
+        <button type="button" class="btn btn-default"
+          ng-click="setView('list')"
+          ng-class="{active: view == 'list'}">
+          <i class="fa fa-th-list"></i>
+        </button>
+      </div>
+    </div>
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
@@ -18,38 +34,72 @@
     <div class="panel panel-defaul s-box b-left-no animated fadeInUp" ng-if="entries.length">
       <div class="panel-body s-pad-y-no">
         <ul class="list-unstyled s-mar-no">
-          <!-- Entry -->
-          <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade"
-            ng-repeat="e in entries" ng-show="!e.isDeleted">
-            <!-- Title and slug -->
-            <div class="col-md-8">
-              <a ui-sref="dash.entry-edit({entryId: e.id})" ng-click="cacheEntry(e)">{{ e.title }}</a>
-              <small class="dis-b o-fade">/{{ e.slug }}</small>
+          <!-- Entry grid -->
+          <div ng-if="view == 'grid'">
+            <div class="row">
+              <div class="col-sm-6 col-md-4"  ng-repeat="e in entries" ng-show="!e.isDeleted">
+                <div class="thumbnail">
+                  <img ng-src="{{
+                      e.media.cover_image.thumbnail ? e.media.cover_image.thumbnail : 'http://placehold.it/256x256'
+                    }}">
+                  <div class="caption">
+                    <a ui-sref="dash.entry-edit({entryId: e.id})" ng-click="cacheEntry(e)">{{ e.title }}</a>
+                    <div class="col-md-1 pull-right">
+                      <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle"
+                        style="padding: 3px" data-toggle="dropdown"></i>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-header" ng-if="e.comment_enabled">
+                          <i init class="fa fa-fw fa-comments text-primary"></i> Comment enabled
+                        </li>
+                        <li class="dropdown-header" ng-if="e.featured ">
+                          <i init class="fa fa-fw fa-star text-primary"></i> Featured
+                        </li>
+                        <li class="dropdown-header" ng-if="e.password ">
+                          <i init class="fa fa-fw fa-lock text-danger"></i> Passworded
+                        </li>
+                        <li class="divider "></li>
+                        <li><a ng-click="remove(e)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- Date -->
-            <div class="col-md-3 text-right o-fade">
-              {{ e.status == 2 ? e.publication_date : e.created | date }}
-              <small class="dis-b o-fade">{{ e.status == 2 ? "Publication" : "Creation" }}</small>
-            </div>
-            <!-- Tools -->
-            <div class="col-md-1 text-right">
-              <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle"
-                style="padding: 4px" data-toggle="dropdown"></i>
-              <ul class="dropdown-menu">
-                <li class="dropdown-header" ng-if="e.comment_enabled">
-                  <i init class="fa fa-fw fa-comments text-primary"></i> Comment enabled
-                </li>
-                <li class="dropdown-header" ng-if="e.featured ">
-                  <i init class="fa fa-fw fa-star text-primary"></i> Featured
-                </li>
-                <li class="dropdown-header" ng-if="e.password ">
-                  <i init class="fa fa-fw fa-lock text-danger"></i> Passworded
-                </li>
-                <li class="divider "></li>
-                <li><a ng-click="remove(e)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
-              </ul>
-            </div>
-          </li>
+          </div>
+          <!-- Entry list -->
+          <div ng-if="view == 'list'">
+              <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade"
+              ng-repeat="e in entries" ng-show="!e.isDeleted">
+              <!--Title and slug-->
+              <div class="col-md-8">
+                <a ui-sref="dash.entry-edit({entryId: e.id})" ng-click="cacheEntry(e)">{{ e.title }}</a>
+                <small class="dis-b o-fade">/{{ e.slug }}</small>
+              </div>
+              <!--Date-->
+              <div class="col-md-3 text-right o-fade">
+                {{ e.status == 2 ? e.publication_date : e.created | date }}
+                <small class="dis-b o-fade">{{ e.status == 2 ? "Publication" : "Creation" }}</small>
+              </div>
+              <!--Tools-->
+              <div class="col-md-1 text-right">
+                <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle"
+                  style="padding: 4px" data-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header" ng-if="e.comment_enabled">
+                    <i init class="fa fa-fw fa-comments text-primary"></i> Comment enabled
+                  </li>
+                  <li class="dropdown-header" ng-if="e.featured ">
+                    <i init class="fa fa-fw fa-star text-primary"></i> Featured
+                  </li>
+                  <li class="dropdown-header" ng-if="e.password ">
+                    <i init class="fa fa-fw fa-lock text-danger"></i> Passworded
+                  </li>
+                  <li class="divider "></li>
+                  <li><a ng-click="remove(e)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
+                </ul>
+              </div>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
