@@ -22,6 +22,7 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.view = localStorage.entryView || "list";
     $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
     $scope.statuses = Codekit.entryStatuses;
     $scope.search = Search;
@@ -37,6 +38,11 @@ function EntryController($scope, $rootScope, $state, $mdToast, Codekit, API, Aut
       }
     );
   }
+
+  $scope.setView = function (view) {
+    $scope.view = view;
+    localStorage.entryView = view;
+  };
 
   $scope.filters = { title: "" };
 
