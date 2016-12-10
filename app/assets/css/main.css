@@ -80,8 +80,16 @@ button {
     padding-bottom: 0;
 }
 
+.s-mar-soft {
+    margin: 15px;
+}
+
 .s-mar-no {
     margin: 0;
+}
+
+.s-mar-top-no {
+    margin-top: 0;
 }
 
 .s-mar-left {
@@ -523,6 +531,13 @@ md-toast {
 
 .ws-pre {
     white-space: pre-wrap;
+}
+
+
+/* Borders */
+
+.br-r-no {
+    border-radius: 0 !important;
 }
 
 
