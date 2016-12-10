@@ -1,27 +1,23 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:EntryEditController
- * Controller of the gonevisDash
+ * @name EntryEditController
  *
  * @param $scope
  * @param $rootScope
  * @param $state
  * @param $stateParams
  * @param $mdToast
+ * @param $q
  * @param Codekit
  * @param API
  * @param AuthService
  * @param DolphinService
- * @param $q
  */
-function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
-  Codekit, API, AuthService, DolphinService, $q) {
+function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, $q,
+  Codekit, API, AuthService, DolphinService) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -31,12 +27,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.tags = [];
     $scope.tagsToSubmit = [];
     $scope.statuses = Codekit.entryStatuses;
-    $scope.form = {
-      id: $stateParams.entryId,
-      site: AuthService.getCurrentSite()
-    };
 
-    API.Tags.get({ tag_site: AuthService.getCurrentSite() },
+    $scope.form = $rootScope.cache.entry ? $rootScope.cache.entry : {};
+    $scope.form.id = $stateParams.entryId;
+    $scope.form.site = AuthService.getCurrentSite();
+
+    API.Tags.get({ tag_site: $scope.form.site },
       function (data) {
         for (var i in data.results) {
           $scope.tags.push({
@@ -65,8 +61,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
   }
 
   /**
-   * load
-   *
    * @method load
    * @desc query tags
    */
@@ -76,9 +70,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     return deferred.promise;
   }
 
+  $scope.loadTags = function () {
+    return load();
+  };
+
   /**
-   * loadTags
-   *
    * @method loadTags
    * @desc Load tags and filter them
    *
@@ -94,12 +90,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   /**
-   * update
-   *
    * @method update
    * @desc Update entry API callback
    *
-   * @param form {object}
+   * @param form {Object}
    */
   $scope.update = function (form) {
     form.loading = true;
@@ -126,12 +120,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   /**
-   * remove
-   *
    * @method remove
    * @desc remove entry via api call
    *
-   * @param id {string} UUID of entry
+   * @param id {String} UUID of entry
    */
   $scope.remove = function (id) {
     API.Entry.delete({ entry_id: id },
@@ -145,11 +137,18 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   };
 
-  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+  /**
+   * @event gonevisDash.DolphinService:select
+   * @desc Image selection callback
+   *
+   * @param event {Event}
+   * @param dolphin {Object}
+   */
+  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
     $scope.form.cover_image = dolphin.id;
   });
 
-  constructor()
+  constructor();
 }
 
 app.controller("EntryEditController", EntryEditController);
@@ -159,9 +158,9 @@ EntryEditController.$inject = [
   "$state",
   "$stateParams",
   "$mdToast",
+  "$q",
   "Codekit",
   "API",
   "AuthService",
-  "DolphinService",
-  "$q"
+  "DolphinService"
 ];

@@ -23,7 +23,7 @@
             ng-repeat="e in entries" ng-show="!e.isDeleted">
             <!-- Title and slug -->
             <div class="col-md-8">
-              <a ui-sref="dash.entry-edit({entryId: e.id})" ng-click="cacheEntry(e)">{{ e.title }}</a>
+              <a ui-sref="dash.entry-edit({entryId: e.id})" ng-click="entryService.cache(e)">{{ e.title }}</a>
               <small class="dis-b o-fade">/{{ e.slug }}</small>
             </div>
             <!-- Date -->

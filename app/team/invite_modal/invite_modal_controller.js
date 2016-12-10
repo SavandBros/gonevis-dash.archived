@@ -1,9 +1,7 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:TeamInviteModalController
- * Controller of the gonevisDash
+ * @name TeamInviteModalController
  *
  * @param $scope
  * @param $rootScope
@@ -11,48 +9,49 @@
  * @param $mdToast
  * @param AuthService
  * @param Codekit
+ * @param ModalsService
  */
-function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, AuthService, Codekit) {
+function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, AuthService, Codekit, ModalsService) {
 
   var site = AuthService.getCurrentSite();
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.teamRoles = Codekit.teamRoles;
+    $scope.form = {
+      data: {}
+    };
+
+    $scope.teamRoles = angular.copy(Codekit.teamRoles);
     $scope.teamRoles.splice(0, 1);
-    $scope.form.role = $scope.teamRoles[1].id;
+    $scope.form.data.role = $scope.teamRoles[1].id;
   }
 
   /**
-   * invite
-   *
    * @method invite
-   * @desc for inviting users
+   * @desc Invite people into the team
    * 
    * @param form {Object}
    */
   $scope.invite = function (form) {
     form.loading = true;
 
-    API.TeamInvite.put({ site_id: site }, form,
+    API.TeamInvite.put({ site_id: site }, form.data,
       function (data) {
-        form.errors = null;
-        form.loading = true;
-        $mdToast.showSimple("Invite completed");
-        $rootScope.$broadcast('gonevisDash.inviteService.invite', data);
+        $rootScope.$broadcast("gonevisDash.TeamService.invite", data);
+        ModalsService.close("invite");
+        $mdToast.showSimple(
+          "Invited "+form.data.email+" as "+$scope.teamRoles[form.data.role-1].label.toLowerCase()+" into the team."
+        );
       },
       function (data) {
-        form.errors = true;
-        $mdToast.showSimple("Sorry, couldn't invite");
-        console.log(data);
+        form.errors = data.data;
+        form.loading = false;
       }
     );
-  }
+  };
 
   constructor();
 }
@@ -65,5 +64,6 @@ TeamInviteModalController.$inject = [
   "$mdToast",
   "API",
   "AuthService",
-  "Codekit"
+  "Codekit",
+  "ModalsService"
 ];
