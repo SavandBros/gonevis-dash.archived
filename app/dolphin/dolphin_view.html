@@ -9,7 +9,8 @@
       <!-- Search noresult -->
       <ng-include src="'basement/search/search_noresult.html'"></ng-include>
       <!-- Nothing -->
-      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled"></ng-include>
+      <ng-include src="'basement/nothing/nothing.html'"
+        ng-if="!dolphins.length && !searchForm.noResult && initialled"></ng-include>
 
       <!-- List -->
       <div class="row animated fadeInUp" ng-if="dolphins.length">
