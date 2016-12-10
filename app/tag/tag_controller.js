@@ -14,7 +14,7 @@
  * @param Pagination
  * @param Search
  */
-function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination, Search) {
+function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination, Search, Codekit) {
 
   var site = AuthService.getCurrentSite();
 
@@ -122,6 +122,13 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     $scope.tags.unshift(tag);
   });
 
+  $scope.$on("gonevisDash.TagService:update", function (event, data) {
+    if (data.success) {
+      var index = Codekit.getIndex($scope.tags, data.tag);
+      $scope.tags[index] = data.data;
+    }
+  });
+
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
@@ -150,5 +157,6 @@ TagController.$inject = [
   "API",
   "AuthService",
   "Pagination",
-  "Search"
+  "Search",
+  "Codekit"
 ];
