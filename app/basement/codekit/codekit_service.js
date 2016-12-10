@@ -1,10 +1,7 @@
 "use strict";
 
 /**
- * Codekit
- *
  * @class Codekit
- * @namespace gonevisDash.Codekit
  * @desc Codekit service is a basement filled with useful function and constant data,
  *       It stops repeating code such as functions, static variables, etc...
  *       Using this provider is highly recommended, even got a short name to be used quickly :P
@@ -14,8 +11,6 @@
 function Codekit() {
 
   /**
-   * getIndex
-   *
    * @method getIndex
    * @desc Get index of an item in a data
    *
@@ -37,15 +32,10 @@ function Codekit() {
   }
 
   /**
-   * Entry statuses
-   *
+   * @name entryStatuses
    * @desc All statuses available for entries.
-   * @type Array<{
-   *  label: String,
-   *  id: Number,
-   *  icon: String,
-   *  color: String
-   * }>
+   *
+   * @type {Array}
    */
   var entryStatuses = [
     { label: "Draft", id: 0, icon: "pencil", color: "warning" },
@@ -54,14 +44,10 @@ function Codekit() {
   ];
 
   /**
-   * Team roles
-   *
+   * @name teamRoles
    * @desc All roles for team.
-   * @type Array<{
-   *  label: String,
-   *  id: Number,
-   *  color: String
-   * }>
+   *
+   * @type {Array}
    */
   var teamRoles = [
     { id: 0, color: "text-primary", label: "Owner"},
@@ -69,10 +55,21 @@ function Codekit() {
     { id: 2, color: "text-warning", label: "Editor"}
   ];
 
+  /**
+   * @name objectTypes
+   * @desc API object types
+   *
+   * @type {Object}
+   */
+  var objectTypes = {
+    comment: 1
+  };
+
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
-    teamRoles: teamRoles
+    teamRoles: teamRoles,
+    objectTypes: objectTypes
   };
 };
 

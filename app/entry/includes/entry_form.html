@@ -8,8 +8,10 @@
     </div>
     <!-- Cover select -->
     <div class="col-sm-1 col-xs-2 s-pad-no">
-      <button class="btn btn-default btn-block" ng-click="dolphinService.viewSelection()"
-        type="button" title="Select cover image for entry">
+      <button class="btn btn-default btn-block"
+        ng-click="dolphinService.viewSelection()"
+        type="button"
+        title="Select cover image for entry">
       <i class="fa fa-fw fa-image"></i>
       </button>
     </div>
@@ -36,26 +38,32 @@
   </div>
   <!-- Errors for slug -->
   <div class="form-group" ng-class="{'has-error': form.errors.tag_ids}">
-    <tags-input ng-model="tagsToSubmit" display-property="slug">
-      <auto-complete source="loadTags($query)"></auto-complete>
+    <tags-input ng-model="tagsToSubmit" display-property="name"
+      replace-spaces-with-dashes="false"
+      add-from-autocomplete-only="true">
+      <auto-complete source="loadTags($query)"
+        min-length="0"
+        max-results-to-show="10"></auto-complete>
     </tags-input>
   </div>
   <!-- Expert -->
   <div class="form-group" ng-class="{'has-error': form.errors.excerpt}">
-    <textarea id="excerpt" class="form-control" type="text" ng-model="form.excerpt"placeholder="Excerpt (For SEO)">
+    <textarea id="excerpt" class="form-control" type="text" ng-model="form.excerpt" placeholder="Excerpt (For SEO)">
 		</textarea>
     <small id="excerpt" class="help-block">{{ form.errors.excerpt[0] }}</small>
   </div>
   <!-- Status -->
   <div class="form-group">
     <select ng-init="form.status = statuses[0].id" ng-options="status.id as status.label for status in statuses"
-			ng-value="status" ng-model="form.status" class="form-control">
+      ng-value="status"
+      ng-model="form.status"
+      class="form-control">
 		</select>
   </div>
   <!-- Advanced Options -->
   <div class="form-group">
     <button class="btn btn-default btn-sm" type="button" ng-model="showAdvanced"
-			ng-click="showAdvanced = !showAdvanced">
+      ng-click="showAdvanced = !showAdvanced">
 			<i class="fa" ng-class="{'fa-minus-square-o': showAdvanced, 'fa-plus-square-o': !showAdvanced}"></i>
 			Advanced Options
     </button>
@@ -100,8 +108,11 @@
   <button class="btn btn-primary btn-block btn-lg" ng-disabled="form.loading || form.$invalid" ng-if="editing">
 		UPDATE
 	</button>
-	<br>
-  <button class="btn btn-default btn-lg pull-right" title="Delete entry" type="button" ng-if="editing"
+  <br>
+  <button class="btn btn-default btn-lg pull-right"
+    title="Delete entry"
+    type="button"
+    ng-if="editing"
     ng-click="remove(form.id)">
 		<i class="fa fa-trash"></i>
 	</button>

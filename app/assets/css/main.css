@@ -71,13 +71,25 @@ button {
     padding: 0;
 }
 
+.s-pad-no-force {
+    padding: 0 !important;
+}
+
 .s-pad-y-no {
     padding-top: 0;
     padding-bottom: 0;
 }
 
+.s-mar-soft {
+    margin: 15px;
+}
+
 .s-mar-no {
     margin: 0;
+}
+
+.s-mar-top-no {
+    margin-top: 0;
 }
 
 .s-mar-left {
@@ -522,6 +534,13 @@ md-toast {
 }
 
 
+/* Borders */
+
+.br-r-no {
+    border-radius: 0 !important;
+}
+
+
 /* Autocomplete */
 
 tags-input .tags {
@@ -564,6 +583,13 @@ tags-input .tags.focused {
 .modal-header:not([init]) {
     background: rgba(0, 0, 0, 0.05);
     padding: 30px 20px;
+}
+
+img.modal-image {
+    margin: -20px 0;
+    border-radius: 100%;
+    margin-right: 8px;
+    width: 48px;
 }
 
 
@@ -629,6 +655,14 @@ tags-input .tags.focused {
     width: 350px;
     margin-left: 318px;
     margin-bottom: 10px;
+}
+
+img.comment {
+    width: 32px;
+    height: 32px;
+    margin-left: -9px;
+    margin-right: 9px;
+    margin-top: 2px;
 }
 
 
@@ -708,7 +742,10 @@ a.editable-empty:focus {
 .btn-primary,
 .text-primary,
 .editable-click,
-a.editable-click {
+a.editable-click,
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
     border-color: #b96400 !important;
 }
 
@@ -729,6 +766,7 @@ a:focus,
 .editable-click,
 a.editable-click {
     color: #d17100;
+    text-decoration: none;
 }
 
 .form-control:focus {
@@ -791,5 +829,6 @@ fieldset[disabled] .btn-primary.focus {
 
 img.tag {
     width: 32px;
-    margin: 1px;
+    float: left;
+    margin-right: 10px;
 }
