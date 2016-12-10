@@ -36,9 +36,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
       function (data) {
         for (var i in data.results) {
           $scope.tags.push({
-            id: data.results[i].id,
             slug: data.results[i].slug,
-            name: data.results[i].name
+            id: data.results[i].id,
+            name: data.results[i].name,
           });
         }
       }
@@ -60,6 +60,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   }
 
+  /**
+   * @method load
+   * @desc query tags
+   */
   function load() {
     var deferred = $q.defer();
     deferred.resolve($scope.tags);
@@ -68,6 +72,21 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
 
   $scope.loadTags = function () {
     return load();
+  };
+
+  /**
+   * @method loadTags
+   * @desc Load tags and filter them
+   *
+   * @param query {String}
+   */
+  $scope.loadTags = function (query) {
+    return load().then(function (response) {
+      $scope.tags = response;
+      return $scope.tags.filter(function (tag) {
+        return tag.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      });
+    });
   };
 
   /**
