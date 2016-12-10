@@ -1,23 +1,21 @@
 "use strict";
 
 /**
- * Main Controller
- *
  * @class MainController
- * @namespace gonevisDash.MainController
  *
  * @param $scope
  * @param $state
  * @param $mdToast
  * @param AuthService
  * @param API
+ * @param Codekit
  * @param CommentService
+ * @param EntryService
  */
-function MainController($scope, $state, $mdToast, $stateParams, AuthService, API, CommentService) {
+function MainController($scope, $state, $mdToast, $stateParams,
+  AuthService, API, Codekit, CommentService, EntryService) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -29,43 +27,97 @@ function MainController($scope, $state, $mdToast, $stateParams, AuthService, API
     $scope.state = $state;
     $scope.param = $stateParams;
 
-    $scope.commentService = CommentService;
-
     $scope.Comment.initialize();
     $scope.Entry.initialize();
+    $scope.Metrics.initialize();
   }
 
+  /**
+   * @name Comment
+   * @type {Object}
+   */
   $scope.Comment = {
-    list: [],
-
+    /**
+     * @name service
+     * @desc Object service
+     * @type {Service}
+     */
+    service: CommentService,
+    /**
+     * @method initialize
+     * @desc initialize comments
+     */
     initialize: function () {
-      API.Comments.get({site_id: $scope.site, object_type: 1},
+      $scope.Comment.loading = true;
+
+      API.Comments.get({ site_id: $scope.site },
         function (data) {
+          $scope.Comment.loading = true;
           $scope.Comment.list = data.results;
         }
       );
     }
   };
 
+  /**
+   * @name Entry
+   * @type {Object}
+   */
   $scope.Entry = {
-    list: [],
-
+    /**
+     * @name service
+     * @desc Object service
+     * @type {Service}
+     */
+    service: EntryService,
+    /**
+     * @method initialize
+     * @desc Initialize entries
+     */
     initialize: function () {
-      API.Entries.get({site: $scope.site},
+      $scope.Entry.loading = true;
+
+      API.Entries.get({ site: $scope.site },
         function (data) {
+          $scope.Entry.loading = true;
           $scope.Entry.list = data.results;
         }
       );
     }
   };
 
-  $scope.form = {};
+  /**
+   * @name Metrics
+   * @type {Object}
+   */
+  $scope.Metrics = {
+    /**
+     * @method initialize
+     * @desc Initialize metrics
+     */
+    initialize: function () {
+      $scope.Metrics.loading = true;
 
-  $scope.$on("gonevisDash.CommentService:delete", function (event, data) {
-    for (var i = 0; i < $scope.Comment.list.length; i++) {
-      if ($scope.Comment.list[i].id === data.id) {
-        $scope.Comment.list[i].isDeleted = true;
-      }
+      API.SiteMetrics.get({ site_id: $scope.site },
+        function (data) {
+          $scope.Metrics.loading = false;
+          $scope.Metrics.list = data.metrics;
+        }
+      );
+    }
+  };
+
+  /**
+   * @event gonevisDash.CommentService:remove
+   * @desc Remove comment callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
+  $scope.$on("gonevisDash.CommentService:remove", function (event, data) {
+    if (data.success) {
+      var index = Codekit.getIndex($scope.Comment.list, data);
+      $scope.Comment.list[index].isDeleted = true;
     }
   });
 
@@ -80,5 +132,7 @@ MainController.$inject = [
   "$stateParams",
   "AuthService",
   "API",
-  "CommentService"
+  "Codekit",
+  "CommentService",
+  "EntryService"
 ];
