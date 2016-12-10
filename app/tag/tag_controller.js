@@ -25,6 +25,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.view = localStorage.tagView || "list";
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
     $scope.search = Search;
@@ -41,6 +42,11 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
       }
     );
   }
+
+  $scope.setView = function (view) {
+    $scope.view = view;
+    localStorage.tagView = view;
+  };
 
   $scope.filters = { name: "" };
 
