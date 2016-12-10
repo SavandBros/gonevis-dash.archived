@@ -658,11 +658,11 @@ img.modal-image {
 }
 
 img.comment {
-  width: 32px;
-  height: 32px;
-  margin-left: -9px;
-  margin-right: 9px;
-  margin-top: 2px;
+    width: 32px;
+    height: 32px;
+    margin-left: -9px;
+    margin-right: 9px;
+    margin-top: 2px;
 }
 
 
@@ -742,7 +742,10 @@ a.editable-empty:focus {
 .btn-primary,
 .text-primary,
 .editable-click,
-a.editable-click {
+a.editable-click,
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
     border-color: #b96400 !important;
 }
 
@@ -763,6 +766,7 @@ a:focus,
 .editable-click,
 a.editable-click {
     color: #d17100;
+    text-decoration: none;
 }
 
 .form-control:focus {
