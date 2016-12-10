@@ -6,9 +6,27 @@
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
     <!-- Search form -->
-    <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft animated fadeIn"
-      ng-if="initialled">
-    </ng-include>
+    <div class="row">
+      <div class="col-md-10">
+        <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft animated fadeIn"
+          ng-show="initialled">
+        </ng-include>
+      </div>
+      <div class="col-md-2">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default"
+            ng-click="setView('grid')"
+            ng-class="{active: view == 'grid'}">
+            <i class="fa fa-th-large"></i>
+          </button>
+          <button type="button" class="btn btn-default"
+            ng-click="setView('list')"
+            ng-class="{active: view == 'list'}">
+            <i class="fa fa-th-list"></i>
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
@@ -19,17 +37,33 @@
       <div class="panel-body s-pad-y-no">
         <ul class="list-unstyled s-mar-no">
           <!-- Entry -->
-          <li class="row list-panel s-fade" ng-repeat="tag in tags" ng-show="!tag.isDeleted">
-            <!-- Title and slug -->
-            <div class="col-md-3">
-              <a ng-click="tagService.view(tag)">{{ tag.name }}</a>
-              <small class="dis-b o-fade">#{{ tag.slug }}</small>
+          <div ng-if="view == 'grid'">
+            <div class="row">
+              <div class="col-sm-4 col-md-3 col-xs-6"  ng-repeat="tag in tags" ng-show="!e.isDeleted">
+                <div class="thumbnail">
+                  <img ng-src="{{
+                      tag.media.cover_image.thumbnail ? tag.media.cover_image.thumbnail : 'http://placehold.it/256x256'
+                    }}">
+                  <div class="caption">
+                    <a ng-click="tagService.view(tag)">{{ tag.name }}</a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- Date -->
-            <div class="col-md-9 text-left o-fade">
-              {{ tag.description }}
-            </div>
-          </li>
+          </div>
+          <div ng-if="view == 'list'">
+            <li class="row list-panel s-fade" ng-repeat="tag in tags" ng-show="!tag.isDeleted">
+              <!-- Title and slug -->
+              <div class="col-md-3">
+                <a ng-click="tagService.view(tag)">{{ tag.name }}</a>
+                <small class="dis-b o-fade">#{{ tag.slug }}</small>
+              </div>
+              <!-- Date -->
+              <div class="col-md-9 text-left o-fade">
+                {{ tag.description }}
+              </div>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
