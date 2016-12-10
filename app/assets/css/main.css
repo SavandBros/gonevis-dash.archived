@@ -530,6 +530,13 @@ md-toast {
 }
 
 
+/* Borders */
+
+.br-r-no {
+    border-radius: 0 !important;
+}
+
+
 /* Autocomplete */
 
 tags-input .tags {
