@@ -71,6 +71,10 @@ button {
     padding: 0;
 }
 
+.s-pad-no-force {
+    padding: 0 !important;
+}
+
 .s-pad-y-no {
     padding-top: 0;
     padding-bottom: 0;
@@ -581,6 +585,13 @@ tags-input .tags.focused {
     padding: 30px 20px;
 }
 
+img.modal-image {
+    margin: -20px 0;
+    border-radius: 100%;
+    margin-right: 8px;
+    width: 48px;
+}
+
 
 /* Button Circle @btn */
 
@@ -644,6 +655,14 @@ tags-input .tags.focused {
     width: 350px;
     margin-left: 318px;
     margin-bottom: 10px;
+}
+
+img.comment {
+  width: 32px;
+  height: 32px;
+  margin-left: -9px;
+  margin-right: 9px;
+  margin-top: 2px;
 }
 
 
