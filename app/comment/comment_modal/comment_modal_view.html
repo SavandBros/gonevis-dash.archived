@@ -2,7 +2,10 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        {{ comment.user.name }}: <small class="pull-right">{{ comment.created | date }}</small>
+        <img class="modal-image" ng-src="{{
+            comment.user.media.picture.thumbnail ? comment.user.media.picture.thumbnail : 'assets/img/avatar.svg'
+          }}">
+        {{ comment.user.name }} <small class="pull-right">{{ comment.created | date }}</small>
       </div>
       <div class="modal-body ws-pre">{{ comment.comment }}</div>
       <div class="modal-footer">

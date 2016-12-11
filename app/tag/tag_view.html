@@ -5,32 +5,71 @@
 <!-- Main -->
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
-    <!-- Search form -->
-    <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft animated fadeIn"
-      ng-if="initialled">
-    </ng-include>
+    <!-- Top bar -->
+    <div class="row animated fadeIn s-mar-bottom-soft" ng-show="initialled">
+      <!-- Search form -->
+      <div class="col-sm-9">
+        <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft">
+        </ng-include>
+      </div>
+      <!-- View buttons -->
+      <div class="col-sm-3 text-right">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default" ng-click="setView('grid')" ng-class="{active: view == 'grid'}">
+            <i class="fa fa-th-large"></i>
+          </button>
+          <button type="button" class="btn btn-default" ng-click="setView('list')" ng-class="{active: view == 'list'}">
+            <i class="fa fa-th-list"></i>
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
     <ng-include src="'basement/nothing/nothing.html'" ng-if="!tags.length && !searchForm.noResult && initialled">
     </ng-include>
     <!-- List -->
-    <div class="panel panel-defaul s-box animated fadeInUp" ng-if="tags.length">
-      <div class="panel-body s-pad-y-no">
+    <div ng-if="tags.length" class="animated fadeInUp">
+      <!-- Grid view -->
+      <div class="panel-body s-pad-y-no" ng-show="view == 'grid'">
         <ul class="list-unstyled s-mar-no">
-          <!-- Entry -->
-          <li class="row list-panel s-fade" ng-repeat="tag in tags" ng-show="!tag.isDeleted">
-            <!-- Title and slug -->
-            <div class="col-md-3">
-              <a ng-click="tagService.view(tag)">{{ tag.name }}</a>
-              <small class="dis-b o-fade">#{{ tag.slug }}</small>
+          <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4"  ng-repeat="t in tags" ng-show="!e.isDeleted">
+              <!-- Tag (thumbnail) -->
+              <a class="thumbnail s-pad-no" ng-click="tagService.view(t)">
+                <img ng-src="{{ t.media.cover_image.thumbnail_128x128 ?
+                    t.media.cover_image.thumbnail_128x128 : 'http://placehold.it/128x128/eee/eee'
+                  }}">
+                <div class="caption">
+                  <small class="text-primary">{{ t.name }}</small>
+                </div>
+              </a>
             </div>
-            <!-- Date -->
-            <div class="col-md-9 text-left o-fade">
-              {{ tag.description }}
-            </div>
-          </li>
+          </div>
         </ul>
+      </div>
+      <!-- List view -->
+      <div ng-show="view == 'list'" class="panel panel-defaul s-box">
+        <div class="panel-body s-pad-y-no">
+          <ul class="list-unstyled s-mar-no">
+            <!-- Tag (List) -->
+            <li class="row list-panel s-fade" ng-repeat="t in tags" ng-show="!t.isDeleted">
+              <!-- Title and slug -->
+              <div class="col-md-3">
+                <img class="tag img-rounded" ng-src="{{ t.media.cover_image.thumbnail_48x48 ?
+                    t.media.cover_image.thumbnail_48x48 : 'http://placehold.it/48x48/eee/eee'
+                  }}">
+                <a ng-click="tagService.view(t)">{{ t.name }}</a>
+                <small class="dis-b o-fade">#{{ t.slug }}</small>
+              </div>
+              <!-- Date -->
+              <div class="col-md-9 text-left o-fade">
+                {{ t.description }}
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <!-- More -->
