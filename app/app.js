@@ -10,7 +10,20 @@
  * @param $locationProvider
  * @param $resourceProvider
  */
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $resourceProvider) {
+function AppConfig($stateProvider, $urlRouterProvider, $httpProvider,
+    $locationProvider, $resourceProvider, ngQuillConfigProvider) {
+
   $httpProvider.interceptors.push("AuthInterceptorService");
   $resourceProvider.defaults.stripTrailingSlashes = false;
-});
+  ngQuillConfigProvider.set();
+}
+
+AppConfig.$inject = [
+  "$stateProvider",
+  "$urlRouterProvider",
+  "$httpProvider",
+  "$locationProvider",
+  "$resourceProvider",
+  "ngQuillConfigProvider"
+];
+app.config(AppConfig);

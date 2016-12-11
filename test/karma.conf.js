@@ -56,6 +56,8 @@ module.exports = function(config) {
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/angular-slugify/angular-slugify.js',
       'bower_components/angular-sortable-view/src/angular-sortable-view.js',
+      'bower_components/quill/dist/js/quill.js',
+      'bower_components/ngQuill/src/ng-quill.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/app_config.js',
