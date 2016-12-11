@@ -20,6 +20,10 @@ button {
     outline: 0 !important;
 }
 
+hr[soft] {
+    margin: 10px 0;
+}
+
 .nav,
 .pagination,
 .carousel,

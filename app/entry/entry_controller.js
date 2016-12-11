@@ -20,6 +20,7 @@ function EntryController($scope, $rootScope, $state, $mdToast,
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.view = localStorage.entryView || "list";
     $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
     $scope.filters = { title: "" };
     $scope.entryService = EntryService;
@@ -38,6 +39,17 @@ function EntryController($scope, $rootScope, $state, $mdToast,
       }
     );
   }
+
+  /**
+   * @method setView
+   * @desc Set item view style
+   *
+   * @param view {String}
+   */
+  $scope.setView = function (view) {
+    $scope.view = view;
+    localStorage.entryView = view;
+  };
 
   /**
    * @method removeSelected
