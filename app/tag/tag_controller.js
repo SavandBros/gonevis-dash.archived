@@ -19,8 +19,6 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   var site = AuthService.getCurrentSite();
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -28,6 +26,7 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     $scope.view = localStorage.tagView || "list";
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
+    $scope.filters = { name: "" };
     $scope.search = Search;
     $scope.pageForm = {};
     $scope.nothing = { text: "It's lonely here... Try adding some tags!" };
@@ -43,16 +42,18 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     );
   }
 
+  /**
+   * @method setView
+   * @desc Set item view style
+   *
+   * @param view {String}
+   */
   $scope.setView = function (view) {
     $scope.view = view;
     localStorage.tagView = view;
   };
 
-  $scope.filters = { name: "" };
-
   /**
-   * search
-   *
    * @method search
    * @desc Search through tags
    */
@@ -70,12 +71,10 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   };
 
   /**
-   * create
-   *
    * @method create
    * @desc Create a new tag
    *
-   * @param form {object}
+   * @param form {Object}
    */
   $scope.create = function (form) {
     form.loading = true;
@@ -100,8 +99,6 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   };
 
   /**
-   * loadMore
-   *
    * @method loadMore
    * @desc Load more function for controller
    */
