@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "dependencies": {
     "jquery": "^3.1.0",
-    "angular": "^1.5.7",
+    "angular": "=1.5.7",
     "bootstrap": "^3.3.6",
-    "angular-animate": "^1.5.7",
-    "angular-cookies": "^1.5.7",
-    "angular-messages": "^1.5.7",
-    "angular-resource": "^1.5.7",
-    "angular-sanitize": "^1.5.7",
+    "angular-animate": "=1.5.7",
+    "angular-cookies": "=1.5.7",
+    "angular-messages": "=1.5.7",
+    "angular-resource": "=1.5.7",
+    "angular-sanitize": "=1.5.7",
     "angular-material": "^1.0.9",
-    "angular-aria": "^1.5.7",
+    "angular-aria": "=1.5.7",
     "font-awesome": "^4.6.3",
     "angular-ui-router": "^0.3.1",
     "angular-gettext": "^2.3.4",
@@ -29,7 +29,7 @@
     "ngQuill": "ngquill#^2.0.0"
   },
   "devDependencies": {
-    "angular-mocks": "^1.5.7"
+    "angular-mocks": "=1.5.7"
   },
   "appPath": "app",
   "moduleName": "gonevisDash",
@@ -56,6 +56,7 @@
     }
   },
   "resolutions": {
-    "angular": "^1.5.7"
+    "angular": "=1.5.7",
+    "jquery": "^3.1.0"
   }
 }

@@ -36,32 +36,35 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
         }
       }
     );
-  };
-
-  /**
-   * loadTags
-   *
-   * @method loadTags
-   * @desc Load tags via load() function
-   *
-   * @param query {String}
-   */
-  $scope.loadTags = function (query) {
-    return load();
-  };
+  }
 
   /**
    * load
    *
    * @method load
-   * @desc Get tags from var and return a promise
-   *
-   * @returns {Promise}
+   * @desc query tags
    */
   function load() {
     var deferred = $q.defer();
     deferred.resolve($scope.tags);
     return deferred.promise;
+  }
+
+  /**
+   * loadTags
+   *
+   * @method loadTags
+   * @desc Load tags and filter them
+   *
+   * @param query {String}
+   */
+  $scope.loadTags = function (query) {
+    return load().then(function (response) {
+      $scope.tags = response;
+      return $scope.tags.filter(function (tag) {
+        return tag.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      });
+    });
   };
 
 

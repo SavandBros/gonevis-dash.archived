@@ -14,19 +14,19 @@
  * @param Pagination
  * @param Search
  */
-function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination, Search) {
+function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination, Search, Codekit) {
 
   var site = AuthService.getCurrentSite();
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.view = localStorage.tagView || "list";
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.tagService = TagService;
+    $scope.filters = { name: "" };
     $scope.search = Search;
     $scope.pageForm = {};
     $scope.nothing = { text: "It's lonely here... Try adding some tags!" };
@@ -42,11 +42,18 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     );
   }
 
-  $scope.filters = { name: "" };
+  /**
+   * @method setView
+   * @desc Set item view style
+   *
+   * @param view {String}
+   */
+  $scope.setView = function (view) {
+    $scope.view = view;
+    localStorage.tagView = view;
+  };
 
   /**
-   * search
-   *
    * @method search
    * @desc Search through tags
    */
@@ -64,12 +71,10 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   };
 
   /**
-   * create
-   *
    * @method create
    * @desc Create a new tag
    *
-   * @param form {object}
+   * @param form {Object}
    */
   $scope.create = function (form) {
     form.loading = true;
@@ -94,8 +99,6 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   };
 
   /**
-   * loadMore
-   *
    * @method loadMore
    * @desc Load more function for controller
    */
@@ -114,6 +117,13 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     tag.slug = data.data.slug;
     tag.site = data.data.site;
     $scope.tags.unshift(tag);
+  });
+
+  $scope.$on("gonevisDash.TagService:update", function (event, data) {
+    if (data.success) {
+      var index = Codekit.getIndex($scope.tags, data.tag);
+      $scope.tags[index] = data.data;
+    }
   });
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
@@ -144,5 +154,6 @@ TagController.$inject = [
   "API",
   "AuthService",
   "Pagination",
-  "Search"
+  "Search",
+  "Codekit"
 ];
