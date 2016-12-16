@@ -285,8 +285,8 @@ hr[soft] {
 /* Avatar */
 
 .avatar {
-    width: 128px;
-    height: 128px;
+    width: 132px;
+    height: 132px;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 100%;
     overflow: hidden;
