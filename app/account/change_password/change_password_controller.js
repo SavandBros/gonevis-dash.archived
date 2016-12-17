@@ -11,9 +11,10 @@
  * @param $mdToast
  * @param $stateParams
  * @param API
+ * @param ModalsService
  * @param AuthService
  */
-function ChangePasswordController($scope, $rootScope, $state, $mdToast, $stateParams, API, AuthService) {
+function ChangePasswordController($scope, $rootScope, $state, $mdToast, $stateParams, API, ModalsService, AuthService) {
 
   /**
    * constructor
@@ -65,16 +66,21 @@ function ChangePasswordController($scope, $rootScope, $state, $mdToast, $statePa
     );
   }
 
+  $scope.forgotPassword = function () {
+    ModalsService.open("forgotPassword", "ForgotModalController");
+  }
+
   constructor();
 }
 
 app.controller('ChangePasswordController', ChangePasswordController);
 ChangePasswordController.$inject = [
-  '$scope', 
-  '$rootScope', 
-  '$state', 
-  '$mdToast', 
-  '$stateParams', 
-  'API', 
+  '$scope',
+  '$rootScope',
+  '$state',
+  '$mdToast',
+  '$stateParams',
+  'API',
+  'ModalsService',
   'AuthService'
 ];
