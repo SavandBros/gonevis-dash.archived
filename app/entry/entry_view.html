@@ -36,7 +36,7 @@
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <div class="row">
-              <div class="col-md-4 col-sm-6"  ng-repeat="e in entries" ng-show="!e.isDeleted">
+              <div class="col-md-4 col-sm-6" ng-repeat="e in entries" ng-show="!e.isDeleted">
                 <a class="thumbnail s-pad-no" ui-sref="dash.entry-edit({ entryId: e.id })" ng-click="cacheEntry(e)">
                   <img ng-src="{{ e.media.cover_image.thumbnail_256x256 ?
                       e.media.cover_image.thumbnail_256x256 : 'http://placehold.it/256x256/eee/eee'
