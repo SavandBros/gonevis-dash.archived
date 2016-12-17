@@ -134,8 +134,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.site.media[$scope.editing] = dolphin;
-    $scope.updateSite($scope.editing, dolphin.id);
+    $scope.site.media[$scope.editing] = dolphin ? dolphin.id : null;
+    $scope.updateSite($scope.editing, dolphin ? dolphin.id : null);
   });
 
   constructor();

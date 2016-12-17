@@ -145,7 +145,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
    * @param dolphin {Object}
    */
   $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
-    $scope.form.cover_image = dolphin.id;
+    $scope.form.cover_image = dolphin ? dolphin.id : null;
   });
 
   constructor();
