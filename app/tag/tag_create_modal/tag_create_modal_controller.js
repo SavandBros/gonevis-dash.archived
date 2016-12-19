@@ -61,7 +61,7 @@ function TagCreateModalController($scope, TagService, API, AuthService, ModalsSe
   }
 
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.form.data.cover_image = dolphin.id;
+    $scope.form.data.cover_image = dolphin ? dolphin.id : null;
   });
 
   constructor();
