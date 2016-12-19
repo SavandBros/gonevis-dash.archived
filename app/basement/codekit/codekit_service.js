@@ -6,9 +6,11 @@
  *       It stops repeating code such as functions, static variables, etc...
  *       Using this provider is highly recommended, even got a short name to be used quickly :P
  *
+ * @param $timeout
+ *
  * @returns [Factory]
  */
-function Codekit() {
+function Codekit($timeout) {
 
   /**
    * @method getIndex
@@ -65,12 +67,36 @@ function Codekit() {
     comment: 1
   };
 
+  /**
+   * @method timeoutSlice
+   * @desc Delete an item if has property isDeleted
+   *
+   * @param master {Object} Master data to search in
+   * @param key {String} Deleted property
+   */
+  function timeoutSlice(master, key, delay) {
+    $timeout(function () {
+      key = key || "isDeleted";
+      delay = delay || 1000;
+
+      for (var i in master) {
+        if (master[i][key] === true) {
+          master.splice(i, 1);
+        }
+      }
+    }, delay);
+  }
+
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
     teamRoles: teamRoles,
-    objectTypes: objectTypes
+    objectTypes: objectTypes,
+    timeoutSlice: timeoutSlice
   };
 };
 
 app.factory("Codekit", Codekit);
+Codekit.$inject = [
+  "$timeout"
+];
