@@ -979,3 +979,13 @@ img.tag {
     float: left;
     margin-right: 10px;
 }
+
+/* Stack element */
+
+.stack-element {
+    margin: 0 -15px;
+    width: calc(100% + 30px);
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}
