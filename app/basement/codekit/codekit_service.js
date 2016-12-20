@@ -6,9 +6,11 @@
  *       It stops repeating code such as functions, static variables, etc...
  *       Using this provider is highly recommended, even got a short name to be used quickly :P
  *
+ * @param $timeout
+ *
  * @returns [Factory]
  */
-function Codekit() {
+function Codekit($timeout) {
 
   /**
    * @method getIndex
@@ -37,11 +39,19 @@ function Codekit() {
    *
    * @type {Array}
    */
-  var entryStatuses = [
-    { label: "Draft", id: 0, icon: "pencil", color: "warning" },
-    { label: "Hidden", id: 1, icon: "lock", color: "default" },
-    { label: "Published", id: 2, icon: "globe", color: "success" }
-  ];
+  var entryStatuses = [{
+    label: "Draft",
+    id: 0,
+    icon: "edit",
+    color: "warning",
+    title: "Set as draft (hidden)"
+  }, {
+    label: "Published",
+    id: 1,
+    icon: "globe",
+    color: "success",
+    title: "Set as Published"
+  }];
 
   /**
    * @name teamRoles
@@ -50,9 +60,9 @@ function Codekit() {
    * @type {Array}
    */
   var teamRoles = [
-    { id: 0, color: "text-primary", label: "Owner"},
-    { id: 1, color: "text-info", label: "Administrator"},
-    { id: 2, color: "text-warning", label: "Editor"}
+    { id: 0, color: "text-primary", label: "Owner" },
+    { id: 1, color: "text-info", label: "Administrator" },
+    { id: 2, color: "text-warning", label: "Editor" }
   ];
 
   /**
@@ -65,12 +75,36 @@ function Codekit() {
     comment: 1
   };
 
+  /**
+   * @method timeoutSlice
+   * @desc Delete an item if has property isDeleted
+   *
+   * @param master {Object} Master data to search in
+   * @param key {String} Deleted property
+   */
+  function timeoutSlice(master, key, delay) {
+    $timeout(function () {
+      key = key || "isDeleted";
+      delay = delay || 1000;
+
+      for (var i in master) {
+        if (master[i][key] === true) {
+          master.splice(i, 1);
+        }
+      }
+    }, delay);
+  }
+
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
     teamRoles: teamRoles,
-    objectTypes: objectTypes
+    objectTypes: objectTypes,
+    timeoutSlice: timeoutSlice
   };
 };
 
 app.factory("Codekit", Codekit);
+Codekit.$inject = [
+  "$timeout"
+];

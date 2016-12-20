@@ -6,24 +6,7 @@
 <div class="container container-light pad-top">
   <div class="col-md-8 col-md-offset-2">
     <!-- Top bar -->
-    <div class="row animated fadeIn s-mar-bottom-soft" ng-show="initialled">
-      <!-- Search form -->
-      <div class="col-sm-9">
-        <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft">
-        </ng-include>
-      </div>
-      <!-- View buttons -->
-      <div class="col-sm-3 text-right">
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default" ng-click="setView('grid')" ng-class="{active: view == 'grid'}">
-            <i class="fa fa-th-large"></i>
-          </button>
-          <button type="button" class="btn btn-default" ng-click="setView('list')" ng-class="{active: view == 'list'}">
-            <i class="fa fa-th-list"></i>
-          </button>
-        </div>
-      </div>
-    </div>
+    <ng-include src="'basement/view/top_bar.html'"></ng-include>
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
@@ -37,11 +20,13 @@
           <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4"  ng-repeat="t in tags" ng-show="!e.isDeleted">
               <!-- Tag (thumbnail) -->
-              <a class="thumbnail s-pad-no" ng-click="tagService.view(t)">
+              <a class="thumbnail text-center s-pad-no" ng-click="tagService.view(t)">
+                <!-- Image -->
                 <img ng-src="{{ t.media.cover_image.thumbnail_128x128 ?
                     t.media.cover_image.thumbnail_128x128 : 'http://placehold.it/128x128/eee/eee'
                   }}">
-                <div class="caption">
+                <!-- Name -->
+                <div class="caption t-line">
                   <small class="text-primary">{{ t.name }}</small>
                 </div>
               </a>
@@ -50,7 +35,7 @@
         </ul>
       </div>
       <!-- List view -->
-      <div ng-show="view == 'list'" class="panel panel-defaul s-box">
+      <div ng-show="view == 'list'" class="panel panel-defaul s-box s-mar-soft s-mar-top-no">
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <!-- Tag (List) -->

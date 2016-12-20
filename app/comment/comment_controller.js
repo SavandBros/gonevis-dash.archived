@@ -13,8 +13,9 @@
  * @param AuthService
  * @param CommentService
  * @param Pagination
+ * @param Codekit
  */
-function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService, Pagination, Search) {
+function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService, Pagination, Search, Codekit) {
 
   /**
    * constructor
@@ -54,6 +55,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
         $scope.comments[i].isDeleted = true;
       }
     }
+    Codekit.timeoutSlice($scope.comments);
   });
 
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
@@ -84,5 +86,6 @@ CommentController.$inject = [
   "AuthService",
   "CommentService",
   "Pagination",
-  "Search"
+  "Search",
+  "Codekit"
 ];
