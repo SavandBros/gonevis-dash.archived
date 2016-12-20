@@ -38,7 +38,7 @@
             <i class="fa fa-5x" ng-class="{
               'fa-file-archive-o': d.extRaw == 'ZIP',
               'fa-file-pdf-o': d.extRaw == 'PDF'
-              }">
+              }" ng-if="!d.is_image">
             </i>
             <!-- Caption -->
             <p class="caption">{{ d.meta_data.name }}</p>
