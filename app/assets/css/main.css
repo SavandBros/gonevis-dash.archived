@@ -147,6 +147,14 @@ hr[soft] {
     margin-right: 10px;
 }
 
+.s-mar-left {
+    margin-left: 30px;
+}
+
+.s-mar-left-soft {
+    margin-left: 10px;
+}
+
 .s-pad-x {
     padding-right: 30px;
     padding-left: 30px;
