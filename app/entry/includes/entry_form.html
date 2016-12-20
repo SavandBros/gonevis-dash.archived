@@ -5,6 +5,14 @@
 </button>
 
 <!-- Main -->
+<div class="col-md-12">
+  <!-- Nevis -->
+  <div class="form-group editor" ng-class="{'editingContent': editingContent}">
+    <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="TITLE">
+    <br>
+    <text-angular ng-model="form.content" placeholder="CONTENT"
+      ng-focus="editingContent = true" ng-blur="editingContent = false" >
+    </text-angular>
   </div>
 </div>
       </div>
