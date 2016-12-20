@@ -37,11 +37,19 @@ function Codekit() {
    *
    * @type {Array}
    */
-  var entryStatuses = [
-    { label: "Draft", id: 0, icon: "pencil", color: "warning" },
-    { label: "Hidden", id: 1, icon: "lock", color: "default" },
-    { label: "Published", id: 2, icon: "globe", color: "success" }
-  ];
+  var entryStatuses = [{
+    label: "Draft",
+    id: 0,
+    icon: "edit",
+    color: "warning",
+    title: "Set as draft (hidden)"
+  }, {
+    label: "Published",
+    id: 1,
+    icon: "globe",
+    color: "success",
+    title: "Set as Published"
+  }];
 
   /**
    * @name teamRoles
@@ -50,9 +58,9 @@ function Codekit() {
    * @type {Array}
    */
   var teamRoles = [
-    { id: 0, color: "text-primary", label: "Owner"},
-    { id: 1, color: "text-info", label: "Administrator"},
-    { id: 2, color: "text-warning", label: "Editor"}
+    { id: 0, color: "text-primary", label: "Owner" },
+    { id: 1, color: "text-info", label: "Administrator" },
+    { id: 2, color: "text-warning", label: "Editor" }
   ];
 
   /**

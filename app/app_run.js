@@ -10,17 +10,36 @@
  * @param ModalsService
  * @param AuthService
  */
-function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsService, AuthService) {
+function RunForestRun($rootScope, $mdToast, $state,
+  editableOptions, ModalsService, AuthService, taOptions, taRegisterTool) {
 
   /**
+   * @name cache
    * @desc We'll be using $rootScope.cache as an object, so we need to predefine it
+   *
+   * @type {Object}
    */
   $rootScope.cache = {};
 
-  /**
-   * @desc Editable texts config
-   */
+  // Editable texts config
   editableOptions.theme = "bs3";
+
+  taRegisterTool("code", {
+    iconclass: "fa fa-code t-bold",
+    tooltiptext: "Insert code (Preformatted text)",
+    action: function () {
+      return this.$editor().wrapSelection("formatBlock", "<pre>");
+    },
+    activeState: function () { return this.$editor().queryFormatBlockState("pre"); }
+  });
+
+  taOptions.toolbar = [
+    ["h1", "h2", "h3", "code", "quote"],
+    ["bold", "italics", "underline", "strikeThrough"],
+    ["ul", "ol", "clear"],
+    ["justifyLeft", "justifyCenter", "justifyRight", "indent", "outdent"],
+    ["html", "insertImage", "insertLink", "insertVideo"]
+  ];
 
   /**
    * @event $stateChangeStart
@@ -57,6 +76,13 @@ function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsServi
       }
     }
   });
+
+  angular.element("*").on("click", function (event) {
+    var el = angular.element(event.target);
+    if (el.hasClass("preIn")) {
+      angular.element("[ng-click='sidebar = false']").trigger("click");
+    }
+  });
 }
 
 app.run(RunForestRun);
@@ -66,5 +92,7 @@ RunForestRun.$inject = [
   "$state",
   "editableOptions",
   "ModalsService",
-  "AuthService"
+  "AuthService",
+  "taOptions",
+  "taRegisterTool"
 ];
