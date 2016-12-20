@@ -858,15 +858,6 @@ img.comment {
     padding: 30px;
 }
 
-.editable-empty,
-.editable-empty:hover,
-.editable-empty:focus,
-a.editable-empty,
-a.editable-empty:hover,
-a.editable-empty:focus {
-    opacity: 0.5;
-}
-
 
 /* Load more */
 
