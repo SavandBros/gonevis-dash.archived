@@ -24,6 +24,23 @@ function RunForestRun($rootScope, $mdToast, $state,
   // Editable texts config
   editableOptions.theme = "bs3";
 
+  taRegisterTool("code", {
+    iconclass: "fa fa-code t-bold",
+    tooltiptext: "Insert code (Preformatted text)",
+    action: function () {
+      return this.$editor().wrapSelection("formatBlock", "<pre>");
+    },
+    activeState: function () { return this.$editor().queryFormatBlockState("pre"); }
+  });
+
+  taOptions.toolbar = [
+    ["h1", "h2", "h3", "code", "quote"],
+    ["bold", "italics", "underline", "strikeThrough"],
+    ["ul", "ol", "clear"],
+    ["justifyLeft", "justifyCenter", "justifyRight", "indent", "outdent"],
+    ["html", "insertImage", "insertLink", "insertVideo"]
+  ];
+
   /**
    * @event $stateChangeStart
    * @desc Starting to change state callback
