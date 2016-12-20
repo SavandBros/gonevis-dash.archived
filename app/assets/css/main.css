@@ -470,7 +470,11 @@ md-toast {
     padding: 50px 0;
 }
 
-.dolphin .fa-file-pdf-o {
+.fa-file-archive-o {
+    color: #d17100;
+}
+
+.fa-file-pdf-o {
     color: red;
 }
 
