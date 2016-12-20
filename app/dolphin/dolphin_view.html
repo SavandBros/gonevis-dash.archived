@@ -29,10 +29,18 @@
       <!-- List -->
       <div class="row animated fadeInUp" ng-if="dolphins.length">
         <!-- Grid view -->
-        <div class="col-md-3 col-sm-3 col-xs-6" ng-repeat="d in dolphins"
+        <div class="col-md-3 col-sm-3 col-xs-6 text-center" ng-repeat="d in dolphins"
           ng-show="!d.isDeleted" ng-class="{'animated zoomOut': d.isDeleted}" ng-if="view == 'grid'">
           <!-- Link -->
-          <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})">
+          <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})"
+            ng-class="{'not-image': !d.is_image}">
+            <!-- Icon -->
+            <i class="fa fa-5x" ng-class="{
+              'fa-file-archive-o': d.extRaw == 'ZIP',
+              'fa-file-pdf-o': d.extRaw == 'PDF'
+              }">
+            </i>
+            <!-- Caption -->
             <p class="caption">{{ d.meta_data.name }}</p>
           </a>
           <!-- Options -->
