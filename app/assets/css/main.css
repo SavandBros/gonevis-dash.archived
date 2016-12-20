@@ -945,6 +945,12 @@ fieldset[disabled] .btn-primary.focus {
     font-weight: bold;
 }
 
+.t-line {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 
 /* Outline */
 
