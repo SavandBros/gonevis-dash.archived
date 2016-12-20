@@ -980,6 +980,18 @@ img.tag {
     margin-right: 10px;
 }
 
+
+/* Tooltip @tooltip */
+
+.tooltip .tooltip-inner {
+    background: #d17100;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: #d17100;
+}
+
+
 /* Stack element */
 
 .stack-element {
