@@ -94,6 +94,7 @@ function EntryController($scope, $rootScope, $state, $mdToast,
       function () {
         entry.isDeleted = true;
         $mdToast.showSimple("Entry deleted!");
+        Codekit.timeoutSlice($scope.entries);
       }
     );
   };

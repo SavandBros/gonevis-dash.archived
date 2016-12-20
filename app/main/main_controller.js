@@ -107,20 +107,6 @@ function MainController($scope, $state, $mdToast, $stateParams,
     }
   };
 
-  /**
-   * @event gonevisDash.CommentService:remove
-   * @desc Remove comment callback
-   *
-   * @param event {Event}
-   * @param data {Object}
-   */
-  $scope.$on("gonevisDash.CommentService:remove", function (event, data) {
-    if (data.success) {
-      var index = Codekit.getIndex($scope.Comment.list, data);
-      $scope.Comment.list[index].isDeleted = true;
-    }
-  });
-
   constructor();
 }
 
