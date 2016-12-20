@@ -731,6 +731,34 @@ img.modal-image {
 }
 
 
+/* Button Group Stack @btn-group */
+
+.btn-group.stack {
+    width: 100%;
+    padding: 0;
+}
+
+.btn-group.stack .btn:first-child {
+    width: 80%;
+}
+
+.btn-group.stack .btn:last-child {
+    width: 20%;
+}
+
+.btn-group.stack.stack-equal .btn {
+    width: 50%;
+}
+
+.btn-group.stack.stack-active .btn {
+    width: 20%;
+}
+
+.btn-group.stack.stack-active .btn.active {
+    width: 80%;
+}
+
+
 /* Dropdown @override */
 
 .dropdown-menu {
