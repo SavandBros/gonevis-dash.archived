@@ -15,14 +15,15 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
   /**
    * @method constructor
    * @desc Init function for controller
-   * @memberOf EntryNewController
    */
   function constructor() {
     $scope.tags = [];
     $scope.dolphinService = DolphinService;
     $scope.tagsToSubmit = [];
-    $scope.form = {};
     $scope.statuses = Codekit.entryStatuses;
+    $scope.form = {
+      status: $scope.statuses[0].id
+    };
 
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data) {
