@@ -1,33 +1,16 @@
 <div class="container container-light pad-top">
   <div class="row">
-    <!-- Files -->
+    <!-- Left side -->
     <div class="col-md-9">
-       <!-- Search form -->
-       <div class="row">
-         <div class="col-md-10">
-            <ng-include src="'basement/search/search_form.html'" class="dis-b s-mar-bottom-soft animated fadeIn"
-              ng-if="initialled">
-            </ng-include>
-         </div>
-          <!-- View buttons -->
-          <div class="col-md-2">
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default" ng-click="setView('grid')" ng-class="{active: view == 'grid'}">
-                <i class="fa fa-th-large"></i>
-              </button>
-              <button type="button" class="btn btn-default" ng-click="setView('list')" ng-class="{active: view == 'list'}">
-                <i class="fa fa-th-list"></i>
-              </button>
-            </div>
-          </div>
-       </div>
+      <!-- Top bar -->
+      <ng-include src="'basement/view/top_bar.html'"></ng-include>
       <!-- Search noresult -->
       <ng-include src="'basement/search/search_noresult.html'"></ng-include>
       <!-- Nothing -->
       <ng-include src="'basement/nothing/nothing.html'"
         ng-if="!dolphins.length && !searchForm.noResult && initialled"></ng-include>
       <!-- List -->
-      <div class="row animated fadeInUp" ng-if="dolphins.length">
+      <div class="animated fadeInUp" ng-if="initialled">
         <!-- Grid view -->
         <div class="col-md-3 col-sm-3 col-xs-6 text-center" ng-repeat="d in dolphins"
           ng-show="!d.isDeleted" ng-class="{'animated zoomOut': d.isDeleted}" ng-if="view == 'grid'">
@@ -56,20 +39,32 @@
           </div>
         </div>
         <!-- List view -->
-        <div ng-if="view == 'list'" class="panel panel-default s-box">
+        <div ng-if="view == 'list'" class="panel panel-default s-box s-mar-soft s-mar-top-no">
           <div class="panel-body s-pad-y-no">
             <ul class="list-unstyled s-mar-no">
+              <!-- List -->
               <li class="row list-panel s-fade" ng-repeat="d in dolphins"
                 ng-show="!d.isDeleted" ng-class="{'animated zoomOut': d.isDeleted}">
-                <div class="col-md-4">
-                  <img class="img-rounded" ng-src="{{ d.thumbnail_48x48 }}">
-                  <a ng-click="action(d)">{{ d.meta_data.name }}</a>
-                </div>
-                <div class="col-md-7">
-                  <small class="dis-b o-fade">{{ d.meta_data.description }}</small>
+                <!-- Left -->
+                <div class="col-md-11 row s-pad-no">
+                  <!-- Image -->
+                  <div class="col-xs-1">
+                    <img ng-src="{{ d.thumbnail_48x48 }}" class="s-pad-right-soft">
+                  </div>
+                  <!-- Title and info -->
+                  <div class="col-xs-11">
+                    <!-- Title -->
+                    <a ng-click="action(d)" class="t-line">{{ d.meta_data.name }}</a>
+                    <br>
+                    <!-- Info -->
+                    <small class="o-fade-soft">
+                      <i class="fa fa-fw fa-hdd-o" title="Size"></i> {{ d.size_human }}
+                      <i class="fa fa-fw fa-file-o s-mar-left-soft" title="Extension"></i> {{ d.ext }}
+                    </small>
+                  </div>
                 </div>
                 <!-- Options -->
-                <div class="dropdown options col-md-1" title="options">
+                <div class="dropdown options options-mid col-md-1 text-right s-pad-no" title="Options">
                   <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade"
                     id="options{{ $index }}" data-toggle="dropdown">
                     <i class="fa fa-fw fa-ellipsis-v"></i>
@@ -100,7 +95,6 @@
             ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
             <i class="fa fa-fw fa-plus"></i> Select File
           </button>
-
           <!-- Progress -->
           <div class="progress s-mar-top-soft s-mar-no a-fade" ng-class="{active: file.progress != 100}" 
                ng-repeat="file in upload.files" ng-hide="file.dismiss">

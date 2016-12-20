@@ -147,6 +147,14 @@ hr[soft] {
     margin-right: 10px;
 }
 
+.s-mar-left {
+    margin-left: 30px;
+}
+
+.s-mar-left-soft {
+    margin-left: 10px;
+}
+
 .s-pad-x {
     padding-right: 30px;
     padding-left: 30px;
@@ -1012,4 +1020,13 @@ img.tag {
     border-right: 0;
     border-left: 0;
     border-radius: 0;
+}
+
+
+/* Options button */
+
+.options.options-mid {
+    margin: 9px;
+    position: relative;
+    right: -20px;
 }
