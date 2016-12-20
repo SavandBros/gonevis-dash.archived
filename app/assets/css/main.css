@@ -435,71 +435,102 @@ md-toast {
 
 /* Editing Mode + Text Angular */
 
-.ta-toolbar .btn-group {
-    margin-bottom: 4px;
-}
-
-.editing-mode .ta-toolbar .btn-group {
-    margin-bottom: 4px;
-    margin-top: 4px;
-}
-
-.editing-mode {
+.editor {
     position: absolute;
     width: 100%;
     left: 0;
     top: -60px;
     background: #fff;
-    z-index: 2000;
+    z-index: 9;
     box-shadow: 0 0 0 10000px #fff;
 }
 
-.editing-mode .ta-toolbar {
-    display: block;
+.editor.editingContent {
+    z-index: 10;
 }
 
-.editing-mode .form-control {
+.editor [contenteditable] {
+    outline: none !important;
+}
+
+.editor .ta-toolbar {
+    position: fixed;
+    top: 0;
+    background: #fff;
+    padding: 10px 0;
+    padding-top: 20px;
+    width: 100%;
+    margin-top: -10px;
+    opacity: 0;
+    z-index: 1;
+}
+
+.editingContent .ta-toolbar {
+    margin-top: 0;
+    opacity: 1;
+}
+
+.editor .ta-toolbar .btn-group {
+    margin: 0 5px;
+}
+
+.editor .form-control {
     box-shadow: none !important;
     border: none;
-    margin-top: 180px !important;
-    min-height: 200px;
+    min-height: 400px;
+    font-size: 1.2em;
 }
 
-.editing-mode .btn {
-    border-color: #eee !important;
+.editor #title {
+    min-height: initial;
+    font-size: 2em;
+}
+
+.form-control .ng-empty {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.editor .btn,
+.editor .btn.active {
+    border-color: none !important;
+    background: none !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    box-shadow: none !important;
     border-radius: 0 !important;
     color: #777;
-}
-
-.editing-mode .btn:hover {
     opacity: 1;
-    background-color: #eee !important;
-    color: #222;
+    font-weight: bold;
 }
 
-.editing-mode .close {
-    font-size: 1.6em;
-    border-radius: 100%;
-    width: 50px;
-    text-align: center;
-    height: 50px;
-    line-height: 50px;
-    padding: 0;
-    z-index: 1000;
-    position: fixed;
-    top: 45px;
-    right: 10px;
+.editor .btn:hover,
+.editor .btn.active {
+    color: #d17100;
 }
 
-.editing-mode .ta-toolbar {
-    background: #f9f9f9;
-    position: fixed;
-    width: 101%;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    box-shadow: 0 0 10px #ccc;
-    text-align: center;
+.editor .btn.active {
+    border-bottom-color: #d17100 !important;
+}
+
+.editor p {
+    font-size: 1.7rem;
+    line-height: 18px !important;
+}
+
+.editor h1 {
+    line-height: 80px !important;
+}
+
+.editor h2 {
+    line-height: 70px !important;
+}
+
+.editor h3 {
+    line-height: 60px !important;
+}
+
+.editor h4 {
+    line-height: 50px !important;
 }
 
 
