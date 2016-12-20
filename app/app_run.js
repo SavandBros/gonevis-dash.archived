@@ -76,6 +76,13 @@ function RunForestRun($rootScope, $mdToast, $state,
       }
     }
   });
+
+  angular.element("*").on("click", function (event) {
+    var el = angular.element(event.target);
+    if (el.hasClass("preIn")) {
+      angular.element("[ng-click='sidebar = false']").trigger("click");
+    }
+  });
 }
 
 app.run(RunForestRun);
