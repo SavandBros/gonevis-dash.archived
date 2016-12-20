@@ -14,14 +14,14 @@
 </div>
 <!-- Advanced Options -->
 <div class="form-group">
-  <button class="btn btn-default btn-sm" type="button" ng-model="showAdvanced"
-    ng-click="showAdvanced = !showAdvanced">
-		<i class="fa" ng-class="{'fa-minus-square-o': showAdvanced, 'fa-plus-square-o': !showAdvanced}"></i>
+  <button class="btn btn-default btn-sm" type="button" ng-model="advanced"
+    ng-click="advanced = !advanced">
+		<i class="fa" ng-class="{'fa-minus-square-o': advanced, 'fa-plus-square-o': !advanced}"></i>
 		Advanced Options
   </button>
 </div>
 <!-- Meta Title and Meta Desc -->
-<div ng-show="showAdvanced">
+<div uib-collapse="advanced">
   <div class=" form-group">
     <input ng-model="form.data.meta_title" placeholder="Meta title" class="form-control">
   </div>
