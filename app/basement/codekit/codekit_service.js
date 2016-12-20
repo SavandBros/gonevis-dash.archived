@@ -50,9 +50,9 @@ function Codekit() {
    * @type {Array}
    */
   var teamRoles = [
-    { id: 0, color: "text-primary", label: "Owner"},
-    { id: 1, color: "text-info", label: "Administrator"},
-    { id: 2, color: "text-warning", label: "Editor"}
+    { id: 0, color: "text-primary", label: "Owner" },
+    { id: 1, color: "text-info", label: "Administrator" },
+    { id: 2, color: "text-warning", label: "Editor" }
   ];
 
   /**
