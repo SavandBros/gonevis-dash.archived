@@ -10,16 +10,18 @@
  * @param ModalsService
  * @param AuthService
  */
-function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsService, AuthService) {
+function RunForestRun($rootScope, $mdToast, $state,
+  editableOptions, ModalsService, AuthService, taOptions, taRegisterTool) {
 
   /**
+   * @name cache
    * @desc We'll be using $rootScope.cache as an object, so we need to predefine it
+   *
+   * @type {Object}
    */
   $rootScope.cache = {};
 
-  /**
-   * @desc Editable texts config
-   */
+  // Editable texts config
   editableOptions.theme = "bs3";
 
   /**
@@ -66,5 +68,7 @@ RunForestRun.$inject = [
   "$state",
   "editableOptions",
   "ModalsService",
-  "AuthService"
+  "AuthService",
+  "taOptions",
+  "taRegisterTool"
 ];
