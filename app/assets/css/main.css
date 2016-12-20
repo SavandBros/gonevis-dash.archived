@@ -424,6 +424,7 @@ md-toast {
     display: block;
     border-radius: 2px;
     height: 200px;
+    text-align: center;
     margin-bottom: 15px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -446,11 +447,14 @@ md-toast {
     font-size: 13px;
     margin-top: 170px;
     text-overflow: ellipsis;
-    text-align: center;
     width: 100%;
     overflow: hidden;
     font-weight: bold;
     white-space: nowrap;
+}
+
+.dolphin.not-image .caption {
+    margin-top: 0;
 }
 
 .dolphin+.options {
@@ -459,6 +463,19 @@ md-toast {
     margin: 5px;
     right: 15px;
     top: 0;
+}
+
+.dolphin .fa {
+    opacity: 0.5;
+    padding: 50px 0;
+}
+
+.fa-file-archive-o {
+    color: #d17100;
+}
+
+.fa-file-pdf-o {
+    color: red;
 }
 
 
@@ -998,7 +1015,6 @@ img.tag {
 .tooltip.top .tooltip-arrow {
     border-top-color: #d17100;
 }
-
 
 /* Stack element */
 

@@ -1,8 +1,6 @@
-<div class="load-more">
-  <button class="btn btn-default btn-lg"
-          ng-if="!pageForm.page.noMore"
-          ng-disabled="pageForm.page.loading"
-          ng-click="loadMore(pageForm)">
+<div class="load-more dis-b">
+  <button class="btn btn-default btn-lg s-pad-x" ng-if="!pageForm.page.noMore"
+    ng-disabled="pageForm.page.loading" ng-click="loadMore(pageForm)">
     {{ pageForm.page.loading ? "LOADING" : "LOAD MORE" }}
   </button>
 </div>
