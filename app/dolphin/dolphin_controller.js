@@ -176,6 +176,8 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
       $scope.dolphins[index].meta_data.name = data.dolphin.meta_data.name;
       $scope.dolphins[index].meta_data.description = data.dolphin.meta_data.description;
       $scope.dolphins[index].isDeleted = data.dolphin.isDeleted;
+
+      Codekit.timeoutSlice($scope.dolphins);
     }
   }
 
@@ -197,8 +199,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   /**
-   * loadMore
-   *
    * @method loadMore
    * @desc Load more function for controller
    */

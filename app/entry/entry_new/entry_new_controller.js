@@ -1,9 +1,7 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:EntryNewController
- * Controller of the gonevisDash
+ * @class EntryNewController
  *
  * @param $scope
  * @param $state
@@ -15,19 +13,17 @@
 function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API, DolphinService, $q) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
-   *
-   * @memberOf EntryNewController
    */
   function constructor() {
     $scope.tags = [];
     $scope.dolphinService = DolphinService;
     $scope.tagsToSubmit = [];
-    $scope.form = {};
     $scope.statuses = Codekit.entryStatuses;
+    $scope.form = {
+      status: $scope.statuses[0].id
+    };
 
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data) {
@@ -39,8 +35,6 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
   }
 
   /**
-   * load
-   *
    * @method load
    * @desc query tags
    */
@@ -51,8 +45,6 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
   }
 
   /**
-   * loadTags
-   *
    * @method loadTags
    * @desc Load tags and filter them
    *
@@ -69,8 +61,6 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
 
 
   /**
-   * newPost
-   *
    * @method newPost
    * @desc Submit newPost form
    *

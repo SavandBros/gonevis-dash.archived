@@ -445,6 +445,7 @@ module.exports = function (grunt) {
           "ngMaterial",
           "ngAnimate",
           "ui.router",
+          "ui.bootstrap",
           "ngAnimate",
           "ngCookies",
           "ngMessages",
