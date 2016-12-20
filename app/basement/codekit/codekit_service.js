@@ -37,11 +37,19 @@ function Codekit() {
    *
    * @type {Array}
    */
-  var entryStatuses = [
-    { label: "Draft", id: 0, icon: "pencil", color: "warning" },
-    { label: "Hidden", id: 1, icon: "lock", color: "default" },
-    { label: "Published", id: 2, icon: "globe", color: "success" }
-  ];
+  var entryStatuses = [{
+    label: "Draft",
+    id: 0,
+    icon: "edit",
+    color: "warning",
+    title: "Set as draft (hidden)"
+  }, {
+    label: "Published",
+    id: 1,
+    icon: "globe",
+    color: "success",
+    title: "Set as Published"
+  }];
 
   /**
    * @name teamRoles
