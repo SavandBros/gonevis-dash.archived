@@ -26,7 +26,7 @@ function TagModalController($scope, TagService, tag, DolphinService, Slug) {
   };
 
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.form.data.cover_image = dolphin.id;
+    $scope.form.data.cover_image = dolphin ? dolphin.id : null;
   });
 
   $scope.updateSlug = function () {

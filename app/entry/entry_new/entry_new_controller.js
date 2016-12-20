@@ -92,7 +92,7 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
   };
 
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.form.cover_image = dolphin.id;
+    $scope.form.cover_image = dolphin ? dolphin.id : null;
   });
 
   constructor();

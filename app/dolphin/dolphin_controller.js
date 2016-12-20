@@ -34,6 +34,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.view = localStorage.dolphinView || "list";
     $scope.nothing = { text: "It's lonely here... Try adding some dolphins!" };
     $scope.dolphinService = DolphinService;
     $scope.dolphinForm = {};
@@ -54,6 +55,17 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.dolphinForm, API.Dolphins.get, data, payload);
       }
     );
+
+    /**
+     * @method setView
+     * @desc Set item view style
+     *
+     * @param view {String}
+     */
+    $scope.setView = function (view) {
+      $scope.view = view;
+      localStorage.dolphinView = view;
+    };
 
     $scope.upload = {
       files: [],

@@ -58,7 +58,7 @@ function UserController($scope, $mdToast, AuthService, API, DolphinService) {
   }
 
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.updateProfile("picture", dolphin.id);
+    $scope.updateProfile("picture", dolphin ? dolphin.id : null);
   });
 
   constructor();
