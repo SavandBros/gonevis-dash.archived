@@ -56,6 +56,10 @@ hr[soft] {
 
 /* Navbar */
 
+.navbar {
+    z-index: 10;
+}
+
 .navbar-brand {
     margin-right: 30px;
 }
@@ -111,6 +115,10 @@ hr[soft] {
     margin-top: 30px;
 }
 
+.s-mar-top-hard {
+    margin-top: 80px;
+}
+
 .s-mar-top-soft {
     margin-top: 15px;
 }
@@ -120,6 +128,10 @@ hr[soft] {
 }
 
 .s-mar-bottom-soft {
+    margin-bottom: 15px;
+}
+
+.s-child-mar-bottom-soft>* {
     margin-bottom: 15px;
 }
 
@@ -260,7 +272,9 @@ hr[soft] {
 /* Transitions */
 
 .trans,
-.dolphin {
+.dolphin,
+.ta-toolbar,
+.modal.sidebar.pre {
     transition: all 0.3s ease-in-out;
 }
 
@@ -613,6 +627,15 @@ tags-input .tags.focused {
     padding: 0;
     line-height: 60px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    z-index: 11;
+}
+
+.btn-corner.btn-corner-navbar {
+    color: rgba(0, 0, 0, 0.5);
+    box-shadow: none;
+    bottom: initial;
+    top: 20px;
+    right: 30px;
 }
 
 .btn-corner:focus,
@@ -623,9 +646,19 @@ tags-input .tags.focused {
 
 /* Modal @override */
 
-.modal-header:not([init]) {
+.modal-header:not(.modal-header-clickable) {
     background: rgba(0, 0, 0, 0.05);
     padding: 30px 20px;
+}
+
+.modal-header-clickable {
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-header-clickable:hover {
+    background: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 img.modal-image {
@@ -633,6 +666,52 @@ img.modal-image {
     border-radius: 100%;
     margin-right: 8px;
     width: 48px;
+}
+
+.modal.sidebar .modal-dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    width: 320px;
+    height: 100%;
+}
+
+.modal.sidebar.sidebar-small .modal-dialog {
+    width: 280px;
+}
+
+.modal.sidebar .modal-content {
+    border-radius: 0;
+    height: 100%;
+    border: 0;
+    overflow-y: scroll;
+}
+
+.modal.right:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(25%, 0, 0);
+    transform: translate3d(25%, 0, 0);
+}
+
+.modal.sidebar.pre {
+    display: block;
+    position: fixed;
+    right: -320px !important;
+    z-index: 0;
+    opacity: 0;
+}
+
+.modal.sidebar.pre.preIn {
+    right: 0 !important;
+    z-index: 1000;
+    opacity: 1;
+}
+
+.modal.sidebar.pre .modal-dialog {
+    position: absolute;
+    box-shadow: 0 0 0 100000px rgba(0, 0, 0, 0.1);
+    right: 0;
 }
 
 
