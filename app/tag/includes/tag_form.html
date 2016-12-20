@@ -14,10 +14,10 @@
 </div>
 <!-- Advanced Options -->
 <div class="form-group">
-  <button class="btn btn-default btn-sm" type="button" ng-model="advanced"
-    ng-click="advanced = !advanced">
-		<i class="fa" ng-class="{'fa-minus-square-o': advanced, 'fa-plus-square-o': !advanced}"></i>
-		Advanced Options
+  <button class="btn btn-default btn-sm btn-block"
+    type="button" ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
+    <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
+    Advanced Options
   </button>
 </div>
 <!-- Meta Title and Meta Desc -->
