@@ -1,5 +1,12 @@
 /* Global */
 
+*,
+*:focus,
+*:hover,
+*:active {
+    outline: 0 !important;
+}
+
 html,
 body {
     background-color: #fcfcfc;
