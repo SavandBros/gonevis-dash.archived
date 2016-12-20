@@ -1009,3 +1009,12 @@ img.tag {
     border-left: 0;
     border-radius: 0;
 }
+
+
+/* Options button */
+
+.options.options-mid {
+    margin: 9px;
+    position: relative;
+    right: -20px;
+}
