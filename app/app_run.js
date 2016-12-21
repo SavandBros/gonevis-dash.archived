@@ -120,6 +120,15 @@ function RunForestRun($rootScope, $mdToast, $state,
     var el = angular.element(event.target);
     if (el.hasClass("preIn")) {
       angular.element("[ng-click='sidebar = false']").trigger("click");
+  /**
+   * @event document.mousemove
+   * @desc Mouse movement callback, depends on state @mousemoveEvent
+   */
+  angular.element(document).on("mousemove", function (event) {
+    if ($state.current.mousemoveEvent) {
+      $rootScope.set.pageX = event.pageX;
+      $rootScope.set.pageY = event.pageY - angular.element("body").scrollTop();
+      $rootScope.$apply();
     }
   });
 }
