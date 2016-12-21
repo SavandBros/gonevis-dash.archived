@@ -15,9 +15,9 @@
   <div class="form-group editor" ng-class="{'editingContent': editingContent}">
     <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="TITLE">
     <br>
-    <text-angular ng-model="form.content" placeholder="CONTENT"
-      ng-focus="editingContent = true" ng-blur="editingContent = false" >
-    </text-angular>
+    <div text-angular ng-model="form.content" placeholder="CONTENT" name="editor"
+      ng-focus="editingContent = true" ng-blur="editingContent = false">
+    </div>
   </div>
 </div>
 
