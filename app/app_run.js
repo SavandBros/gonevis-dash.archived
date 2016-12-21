@@ -116,10 +116,31 @@ function RunForestRun($rootScope, $mdToast, $state,
     }
   });
 
+  /**
+   * @event document.click
+   * @desc Click callback, depends on state @clickEvent
+   */
   angular.element("*").on("click", function (event) {
-    var el = angular.element(event.target);
-    if (el.hasClass("preIn")) {
-      angular.element("[ng-click='sidebar = false']").trigger("click");
+    if ($state.current.clickEvent) {
+      var el = angular.element(event.target);
+
+      // Sidebar handler
+      if (el.hasClass("preIn")) {
+        angular.element("[ng-click='sidebar = false']").trigger("click");
+      }
+
+      // Dolphin insert handler
+      if (el.attr("contenteditable") === "true" || el.parent().attr("contenteditable") === "true") {
+        if ($rootScope.set.editor.dolphin) {
+          $rootScope.set.editor.this.$editor().wrapSelection(
+            "insertImage", $rootScope.set.editor.dolphin.file, false
+          );
+          $rootScope.set.editor = {};
+        }
+      }
+    }
+  });
+
   /**
    * @event document.mousemove
    * @desc Mouse movement callback, depends on state @mousemoveEvent
