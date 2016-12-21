@@ -9,13 +9,18 @@
  * @param editableOptions
  * @param ModalsService
  * @param AuthService
+ * @param taOptions
+ * @param taRegisterTool
+ * @param taToolFunctions
+ * @param DolphinService
+ * @param textAngularManager
  */
-function RunForestRun($rootScope, $mdToast, $state,
-  editableOptions, ModalsService, AuthService, taOptions, taRegisterTool) {
+function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsService, AuthService,
+  taOptions, taRegisterTool, taToolFunctions, DolphinService, textAngularManager) {
 
   /**
    * @name cache
-   * @desc We'll be using $rootScope.cache as an object, so we need to predefine it
+   * @desc Predefined rootscope variable
    *
    * @type {Object}
    */
@@ -163,5 +168,8 @@ RunForestRun.$inject = [
   "ModalsService",
   "AuthService",
   "taOptions",
-  "taRegisterTool"
+  "taRegisterTool",
+  "taToolFunctions",
+  "DolphinService",
+  "textAngularManager"
 ];
