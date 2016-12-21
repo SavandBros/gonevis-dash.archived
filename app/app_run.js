@@ -21,6 +21,16 @@ function RunForestRun($rootScope, $mdToast, $state,
    */
   $rootScope.cache = {};
 
+  /**
+   * @name set
+   * @desc Predefined rootscope variable
+   *
+   * @type {Object}
+   */
+  $rootScope.set = {
+    editor: {}
+  };
+
   // Editable texts config
   editableOptions.theme = "bs3";
 
