@@ -103,6 +103,19 @@ function RunForestRun($rootScope, $mdToast, $state,
     }
   });
 
+  /**
+   * @event gonevisDash.DolphinService:select
+   * @desc Dolphin selection callback, depends on state @editor
+   */
+  $rootScope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
+    if ($state.current.editor) {
+      if ($rootScope.set.editor.selecting === true) {
+        $rootScope.set.editor.dolphin = dolphin;
+        $rootScope.set.editor.selecting = false;
+      }
+    }
+  });
+
   angular.element("*").on("click", function (event) {
     var el = angular.element(event.target);
     if (el.hasClass("preIn")) {
