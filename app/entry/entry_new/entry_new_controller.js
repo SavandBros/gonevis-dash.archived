@@ -4,13 +4,14 @@
  * @class EntryNewController
  *
  * @param $scope
+ * @param $rootScope
  * @param $state
  * @param $mdToast
  * @param Codekit
  * @param AuthService
  * @param API
  */
-function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API, DolphinService, $q) {
+function EntryNewController($scope, $rootScope, $state, $mdToast, Codekit, AuthService, API, DolphinService, $q) {
 
   /**
    * @method constructor
@@ -91,8 +92,21 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
     );
   };
 
+  /**
+   * @event gonevisDash.DolphinService:select
+   * @desc Image selection callback
+   *
+   * @param event {Event}
+   * @param dolphin {Object}
+   */
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.form.cover_image = dolphin ? dolphin.id : null;
+    if ($rootScope.set.editor === null) {
+      $scope.form.cover_image = dolphin ? dolphin.id : null;
+    } else if ($scope.form.content.length < 20) {
+      $rootScope.set.editor.scope.displayElements.text.focus();
+      $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.file, false);
+      $rootScope.set.editor = {};
+    }
   });
 
   constructor();
@@ -101,6 +115,7 @@ function EntryNewController($scope, $state, $mdToast, Codekit, AuthService, API,
 app.controller("EntryNewController", EntryNewController);
 EntryNewController.$inject = [
   "$scope",
+  "$rootScope",
   "$state",
   "$mdToast",
   "Codekit",

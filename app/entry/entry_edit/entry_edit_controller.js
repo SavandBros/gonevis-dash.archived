@@ -144,8 +144,14 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
    * @param event {Event}
    * @param dolphin {Object}
    */
-  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
-    $scope.form.cover_image = dolphin ? dolphin.id : null;
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+    if ($rootScope.set.editor === null) {
+      $scope.form.cover_image = dolphin ? dolphin.id : null;
+    } else if ($scope.form.content.length < 20) {
+      $rootScope.set.editor.scope.displayElements.text.focus();
+      $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.file, false);
+      $rootScope.set.editor = {};
+    }
   });
 
   constructor();
