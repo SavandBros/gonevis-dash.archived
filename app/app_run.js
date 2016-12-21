@@ -64,7 +64,7 @@ function RunForestRun($rootScope, $mdToast, $state,
     ["bold", "italics", "underline", "strikeThrough"],
     ["ul", "ol", "clear"],
     ["justifyLeft", "justifyCenter", "justifyRight", "indent", "outdent"],
-    ["html", "insertImage", "insertLink", "insertVideo"]
+    ["html", "addImage", "insertLink", "insertVideo"]
   ];
 
   /**
