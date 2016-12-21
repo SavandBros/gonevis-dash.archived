@@ -42,6 +42,22 @@ function RunForestRun($rootScope, $mdToast, $state,
     },
     activeState: function () { return this.$editor().queryFormatBlockState("pre"); }
   });
+  taRegisterTool("addImage", {
+    iconclass: "fa fa-picture-o",
+    tooltiptext: "Insert Image",
+    action: function () {
+      $rootScope.set.editor = {
+        scope: textAngularManager.retrieveEditor("editor").scope,
+        this: this,
+        selecting: true
+      };
+      DolphinService.viewSelection();
+    },
+    onElementSelect: {
+      element: "img",
+      action: taToolFunctions.imgOnSelectAction
+    }
+  });
 
   taOptions.toolbar = [
     ["h1", "h2", "h3", "code", "quote"],
