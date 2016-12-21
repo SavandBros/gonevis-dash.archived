@@ -100,7 +100,7 @@ function EntryNewController($scope, $rootScope, $state, $mdToast, Codekit, AuthS
    * @param dolphin {Object}
    */
   $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    if ($rootScope.set.editor === null) {
+    if (Codekit.isEmptyObj($rootScope.set.editor)) {
       $scope.form.cover_image = dolphin ? dolphin.id : null;
     } else if ($scope.form.content.length < 20) {
       $rootScope.set.editor.scope.displayElements.text.focus();
