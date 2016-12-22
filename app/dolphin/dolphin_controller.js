@@ -218,6 +218,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     if (data.success) {
       $scope.dolphinForm = data.dolphinForm;
       $scope.dolphins = data.data.results;
+      $scope.updateDolphins();
       $scope.searchForm = data.form;
     }
   });
