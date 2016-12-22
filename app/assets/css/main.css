@@ -239,7 +239,8 @@ hr[soft] {
     border-color: orange;
 }
 
-.b-color-2 {
+.b-color-2,
+.b-color-success {
     border-color: limegreen;
 }
 
