@@ -42,7 +42,7 @@
       <div class="panel panel-defaul s-box b-left-no s-mar-soft s-mar-top-no" ng-if="view == 'list'">
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
-            <li class="row list-panel b-left b-color-{{ e.status | lowercase }} s-fade"
+            <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': e.status == 1}"
               ng-repeat="e in entries" ng-show="!e.isDeleted">
               <!--Title and slug-->
               <div class="col-md-8">
