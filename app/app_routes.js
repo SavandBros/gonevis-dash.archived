@@ -46,7 +46,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/new",
       controller: "EntryNewController",
       templateUrl: "entry/entry_new/entry_new_view.html",
-      auth: true
+      auth: true,
+      editor: true,
+      mousemoveEvent: true,
+      clickEvent: true
     })
     .state("dash.entry-list", {
       url: "/entries",
@@ -58,7 +61,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/entry/:entryId",
       controller: "EntryEditController",
       templateUrl: "entry/entry_edit/entry_edit_view.html",
-      auth: true
+      auth: true,
+      editor: true,
+      mousemoveEvent: true,
+      clickEvent: true
     })
     .state("dash.site", {
       url: "/site",

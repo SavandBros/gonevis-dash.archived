@@ -95,12 +95,23 @@ function Codekit($timeout) {
     }, delay);
   }
 
+  /**
+   * @method isEmptyObj
+   * @desc is object empty
+   *
+   * @param object {Object}
+   */
+  function isEmptyObj(object) {
+    return (Object.getOwnPropertyNames(object).length === 0);
+  }
+
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
     teamRoles: teamRoles,
     objectTypes: objectTypes,
-    timeoutSlice: timeoutSlice
+    timeoutSlice: timeoutSlice,
+    isEmptyObj: isEmptyObj
   };
 };
 

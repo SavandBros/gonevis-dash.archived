@@ -4,15 +4,20 @@
   <i class="fa fa-chevron-right"></i>
 </button>
 
+<!-- Selected dolphin preview -->
+<img class="o-fade-soft" ng-if="set.editor.dolphin" width="100" ng-src="{{ set.editor.dolphin.thumbnail_128x128 }}"
+  style="position: fixed;top: {{ set.pageY+10 }}px;left: {{ set.pageX+10 }}px;z-index: 10000">
+</img>
+
 <!-- Main -->
 <div class="col-md-12">
   <!-- Nevis -->
   <div class="form-group editor" ng-class="{'editingContent': editingContent}">
     <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="TITLE">
     <br>
-    <text-angular ng-model="form.content" placeholder="CONTENT"
-      ng-focus="editingContent = true" ng-blur="editingContent = false" >
-    </text-angular>
+    <div text-angular ng-model="form.content" placeholder="CONTENT" name="editor"
+      ng-focus="editingContent = true" ng-blur="editingContent = false">
+    </div>
   </div>
 </div>
 
