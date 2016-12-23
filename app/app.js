@@ -9,8 +9,15 @@
  * @param $httpProvider
  * @param $locationProvider
  * @param $resourceProvider
+ * @param cfpLoadingBarProvider
  */
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $resourceProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $resourceProvider,
+  cfpLoadingBarProvider) {
+
+  // Http config
   $httpProvider.interceptors.push("AuthInterceptorService");
   $resourceProvider.defaults.stripTrailingSlashes = false;
+
+  // Loading config
+  cfpLoadingBarProvider.includeSpinner = false;
 });
