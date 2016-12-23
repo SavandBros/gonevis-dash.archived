@@ -143,7 +143,7 @@ function EntryController($scope, $rootScope, $state, $mdToast,
         $scope.selectCount++;
       }
     }
-  }
+  };
 
   /**
    * @method loadMore

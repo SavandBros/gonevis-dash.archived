@@ -23,7 +23,7 @@ function EntryService($rootScope, API) {
     payload[key] = value;
 
     API.Entry.patch({ entry_id: entry.id }, payload,
-      function(data) {
+      function() {
         entry[key] = value;
         entry.isSelected = true;
       }
