@@ -444,21 +444,21 @@ module.exports = function (grunt) {
         deps: [
           "ngMaterial",
           "ngAnimate",
-          "ui.router",
-          "ui.bootstrap",
-          "ngAnimate",
-          "ngCookies",
           "ngMessages",
           "ngResource",
+          "ngCookies",
           "ngSanitize",
+          "ngTagsInput",
+          "ngFileUpload",
+          "ui.router",
+          "ui.bootstrap",
           "gettext",
           "xeditable",
           "textAngular",
-          "angularModalService",
-          "ngTagsInput",
-          "ngFileUpload",
           "slugifier",
-          "angular-sortable-view"
+          "angularModalService",
+          "angular-sortable-view",
+          "angular-loading-bar"
         ],
         constants: {
           ENV: {
