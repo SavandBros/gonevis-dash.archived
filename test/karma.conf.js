@@ -56,6 +56,7 @@ module.exports = function(config) {
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/angular-slugify/angular-slugify.js',
       'bower_components/angular-sortable-view/src/angular-sortable-view.js',
+      'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/app_config.js',
