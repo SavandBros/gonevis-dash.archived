@@ -27,11 +27,42 @@ function EntryController($scope, $rootScope, $state, $mdToast,
     $scope.statuses = Codekit.entryStatuses;
     $scope.search = Search;
     $scope.pageForm = {};
+    $scope.actions = [{
+      label: "Draft",
+      icon: "edit",
+      property: "status",
+      value: 0
+    }, {
+      label: "Published",
+      icon: "globe",
+      property: "status",
+      value: 1,
+    }, {
+      label: "Set to featured",
+      icon: "star",
+      property: "featured",
+      value: true
+    }, {
+      label: "Remove from Featured",
+      icon: "close",
+      property: "featured",
+      value: false
+    }, {
+      label: "Enable comments",
+      icon: "comments",
+      property: "comment_enabled",
+      value: true
+    }, {
+      label: "Disable comments",
+      icon: "close",
+      property: "comment_enabled",
+      value: false
+    }];
 
     var payload = { site: AuthService.getCurrentSite() };
 
     API.Entries.get(payload,
-      function (data) {
+      function(data) {
         $scope.initialled = true;
         $scope.entries = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
@@ -41,12 +72,27 @@ function EntryController($scope, $rootScope, $state, $mdToast,
   }
 
   /**
+   * @method setProperty
+   * @desc set property of selected entries
+   *
+   * @param key {String}
+   * @param value {Boolian|Number}
+   */
+  $scope.setProperty = function(key, value) {
+    angular.forEach($scope.entries, function(entry) {
+      if (entry.isSelected) {
+        EntryService.setProperty(entry, key, value);
+      }
+    });
+  };
+
+  /**
    * @method setView
    * @desc Set item view style
    *
    * @param view {String}
    */
-  $scope.setView = function (view) {
+  $scope.setView = function(view) {
     $scope.view = view;
     localStorage.entryView = view;
   };
@@ -55,31 +101,16 @@ function EntryController($scope, $rootScope, $state, $mdToast,
    * @method removeSelected
    * @desc Remove selected entries
    */
-  $scope.removeSelected = function () {
-    for (var i = 0; i < $scope.entries.length; i++) {
-      if ($scope.entries[i].selected) {
-        $scope.remove($scope.entries[i]);
-      }
-    }
-  };
+  $scope.removeSelected = function() {
 
-  /**
-   * @method setStatus
-   * @desc Set selected status
-   *
-   * @param status {Number}
-   */
-  $scope.setStatus = function (status) {
-    for (var i = 0; i < $scope.entries.length; i++) {
-      var entry = $scope.entries[i];
-      if (entry.selected) {
-        API.Entry.patch({ entry_id: entry.id }, { status: status },
-          function (data) {
-            entry = data;
-            $mdToast.showSimple("Status changed!");
-          }
-        );
+    if (confirm("Delete selected entries?\nDeleting entries can not be undone!") === true) {
+      for (var i = 0; i < $scope.entries.length; i++) {
+        if ($scope.entries[i].isSelected) {
+          $scope.remove($scope.entries[i]);
+        }
       }
+    } else {
+      return;
     }
   };
 
@@ -89,15 +120,30 @@ function EntryController($scope, $rootScope, $state, $mdToast,
    * 
    * @param entry {object}
    */
-  $scope.remove = function (entry) {
+  $scope.remove = function(entry) {
     API.Entry.delete({ entry_id: entry.id },
-      function () {
+      function() {
         entry.isDeleted = true;
         $mdToast.showSimple("Entry deleted!");
         Codekit.timeoutSlice($scope.entries);
       }
     );
   };
+
+  /**
+   * countSelected
+   *
+   * @method countSelected
+   * @desc Count selected entries
+   */
+  $scope.countSelected = function() {
+    $scope.selectCount = 0;
+    for (var i in $scope.entries) {
+      if ($scope.entries[i].isSelected) {
+        $scope.selectCount++;
+      }
+    }
+  }
 
   /**
    * @method loadMore
@@ -112,7 +158,7 @@ function EntryController($scope, $rootScope, $state, $mdToast,
    * @param event {Event}
    * @param data {Object}
    */
-  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+  $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
       $scope.entries = $scope.entries.concat(data.data.results);
@@ -126,7 +172,7 @@ function EntryController($scope, $rootScope, $state, $mdToast,
    * @param event {Event}
    * @param data {Object}
    */
-  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+  $scope.$on("gonevisDash.Search:submit", function(event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
       $scope.entries = data.data.results;
