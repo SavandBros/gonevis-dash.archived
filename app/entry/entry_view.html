@@ -39,13 +39,36 @@
         </div>
       </div>
       <!-- Entry list -->
-      <div class="panel panel-default s-box b-left-no s-mar-soft s-mar-top-no" ng-if="view == 'list'">
+      <div class="panel panel-default s-box s-mar-soft s-mar-top-no" ng-if="view == 'list'">
+        <div class="panel-heading">
+            <!-- Action dropdown -->
+          <div class="dropdown options pull-right" title="options">
+            <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
+              Action <i class="fa fa-caret-down"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li ng-repeat="a in actions">
+                <a ng-click="setProperty(a.property, a.value)">
+                  <i class="fa fa-{{ a.icon }}"></i>{{ a.label }}
+                </a>
+              </li>
+              <hr>
+              <li>
+                <a ng-click="removeSelected()">
+                  <i class="fa fa-trash text-danger"></i> Remove selected
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': e.status == 1}"
               ng-repeat="e in entries" ng-show="!e.isDeleted">
               <!--Title and slug-->
               <div class="col-md-8">
+                <input type="checkbox" ng-model="e.isSelected" ng-change="countSelected(e)">
                 <a ui-sref="dash.entry-edit({entryId: e.id})"ng-click="entryService.cache(e)">{{ e.title }}</a>
                 <small class="dis-b o-fade">/{{ e.slug }}</small>
               </div>
