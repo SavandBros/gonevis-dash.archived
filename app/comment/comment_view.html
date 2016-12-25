@@ -7,7 +7,8 @@
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!comments.length && !searchForm.noResult && initialled">
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!comments.length && !searchForm.noResult && initialled"
+      ng-init="nothingText = 'You have no comments.'">
     </ng-include>
     <!-- List -->
     <div class="panel panel-default animated fadeInUp" ng-if="comments.length">
