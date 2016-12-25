@@ -25,12 +25,12 @@
           </ul>
 
           <!-- List -->
-          <div class="row a-fade" ng-show="currentTab == 'dolphin'">
+          <div class="animated fadeIn" ng-show="currentTab == 'dolphin'">
             <!-- Search form -->
-            <ng-include src="'basement/search/search_form.html'" ng-if="initialled">
-            </ng-include>
+            <ng-include src="'basement/search/search_form.html'" ng-if="initialled"></ng-include>
+
             <!-- Search noresult -->
-            <ng-include src="'basement/search/search_noresult.html'" class="dis-b s-mar-x-soft"></ng-include>
+            <ng-include src="'basement/search/search_noresult.html'"></ng-include>
 
             <!-- Nothing -->
             <ng-include src="'basement/nothing/nothing.html'" ng-init="nothingPadding = false"
@@ -38,11 +38,13 @@
             </ng-include>
 
             <!-- Dolphins -->
-            <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins"
-              ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
-              <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})">
-                <p class="caption">{{ d.meta_data.name }}</p>
-              </a>
+            <div class="row">
+              <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins"
+                ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
+                <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})">
+                  <p class="caption">{{ d.meta_data.name }}</p>
+                </a>
+              </div>
             </div>
           </div>
 
