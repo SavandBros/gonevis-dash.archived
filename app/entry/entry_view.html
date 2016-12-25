@@ -10,7 +10,8 @@
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult && initialled">
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult && initialled"
+      ng-init="nothingText = 'No entries yet.'">
     </ng-include>
     <!-- List -->
     <div class="animated fadeInUp" ng-if="entries.length">
