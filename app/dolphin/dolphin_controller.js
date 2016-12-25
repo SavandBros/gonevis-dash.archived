@@ -30,6 +30,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.dolphinService = DolphinService;
     $scope.dolphinForm = {};
     $scope.search = Search;
+    $scope.nothingText = "It's lonely here... Try adding some dolphins.";
 
     if ($rootScope.selectionMode) {
       $scope.currentTab = "dolphin";

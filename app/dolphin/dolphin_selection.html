@@ -31,9 +31,12 @@
             </ng-include>
             <!-- Search noresult -->
             <ng-include src="'basement/search/search_noresult.html'" class="dis-b s-mar-x-soft"></ng-include>
+
             <!-- Nothing -->
-            <ng-include src="'basement/nothing/nothing.html'"
-              ng-if="!dolphins.length && !searchForm.noResult && initialled"></ng-include>
+            <ng-include src="'basement/nothing/nothing.html'" ng-init="nothingPadding = false"
+              ng-sif="!dolphins.length && !searchForm.noResult && initialled">
+            </ng-include>
+
             <!-- Dolphins -->
             <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins"
               ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
