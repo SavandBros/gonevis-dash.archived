@@ -22,8 +22,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   var site = AuthService.getCurrentSite();
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -111,8 +109,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
 
 
   /**
-   * uploadFile
-   *
    * @method uploadFile
    * @desc Handle for file uploads
    *
@@ -155,8 +151,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   /**
-   * update
-   *
    * @method update
    *
    * @param event {Event}
@@ -175,8 +169,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   }
 
   /**
-   * action
-   *
    * @method updateDolphins
    * @desc Add extra properties for dolphins
    */
