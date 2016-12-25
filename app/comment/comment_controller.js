@@ -27,7 +27,6 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.commentService = CommentService;
     $scope.search = Search;
-    $scope.nothing = { text: "You have no comments" };
     $scope.pageForm = {};
 
     var payload = { site: AuthService.getCurrentSite() };

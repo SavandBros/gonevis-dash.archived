@@ -35,7 +35,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
    */
   function constructor() {
     $scope.view = localStorage.dolphinView || "list";
-    $scope.nothing = { text: "It's lonely here... Try adding some dolphins!" };
     $scope.dolphinService = DolphinService;
     $scope.dolphinForm = {};
     $scope.search = Search;
