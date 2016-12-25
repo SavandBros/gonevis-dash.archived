@@ -36,8 +36,15 @@
             add-from-autocomplete-only="true">
             <auto-complete source="loadTags($query)"
               min-length="0"
-              max-results-to-show="10"></auto-complete>
+              max-results-to-show="10"
+              template="tag"></auto-complete>
           </tags-input>
+          <script type="text/ng-template" id="tag">
+            <div class="right-panel">
+              <span ng-bind-html="$highlight($getDisplayText())"></span>
+              <span class="pull-right o-fade">{{data.count}}</span>
+            </div>
+          </script>
         </div>
         <!-- Cover select -->
         <div class="form-group">

@@ -42,16 +42,18 @@
             <!-- Tag (List) -->
             <li class="row list-panel s-fade" ng-repeat="t in tags" ng-show="!t.isDeleted">
               <!-- Title and slug -->
-              <div class="col-md-3">
+              <div class="col-lg-3 col-xs-10">
                 <img class="tag img-rounded" ng-src="{{ t.media.cover_image.thumbnail_48x48 ?
                     t.media.cover_image.thumbnail_48x48 : 'http://placehold.it/48x48/eee/eee'
                   }}">
                 <a ng-click="tagService.view(t)">{{ t.name }}</a>
                 <small class="dis-b o-fade">#{{ t.slug }}</small>
               </div>
-              <!-- Date -->
-              <div class="col-md-9 text-left o-fade">
-                {{ t.description }}
+              <!-- Description -->
+              <div class="col-lg-8 text-left o-fade hidden-xs hidden-sm hidden-md">{{ t.description }}</div>
+              <!-- Count -->
+              <div class="col-md-1 col-xs-2 text-right">
+                <span class="badge">{{ t.tagged_items_count | number }}</span>
               </div>
             </li>
           </ul>

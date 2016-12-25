@@ -21,15 +21,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
 
   var site = AuthService.getCurrentSite();
 
-  $scope.updateDolphins = function () {
-    for (var i = 0; i < $scope.dolphins.length; i++) {
-      $scope.dolphins[i].extRaw = $scope.dolphins[i].ext.split("/")[1].toUpperCase();
-    }
-  };
-
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -38,6 +30,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.dolphinService = DolphinService;
     $scope.dolphinForm = {};
     $scope.search = Search;
+    $scope.nothingText = "It's lonely here... Try adding some dolphins.";
 
     if ($rootScope.selectionMode) {
       $scope.currentTab = "dolphin";
@@ -117,8 +110,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
 
 
   /**
-   * uploadFile
-   *
    * @method uploadFile
    * @desc Handle for file uploads
    *
@@ -161,8 +152,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   /**
-   * update
-   *
    * @method update
    *
    * @param event {Event}
@@ -181,8 +170,16 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   }
 
   /**
-   * action
-   *
+   * @method updateDolphins
+   * @desc Add extra properties for dolphins
+   */
+  $scope.updateDolphins = function () {
+    angular.forEach($scope.dolphins, function (dolphin) {
+      dolphin.extRaw = dolphin.ext.split("/")[1].toUpperCase();
+    });
+  };
+
+  /**
    * @method action
    * @desc Action is used to determine the action for the current state.
    *
