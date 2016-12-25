@@ -29,7 +29,12 @@ function EntryNewController($scope, $rootScope, $state, $mdToast, Codekit, AuthS
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data) {
         for (var i in data.results) {
-          $scope.tags.push({ slug: data.results[i].slug, id: data.results[i].id, name: data.results[i].name });
+          $scope.tags.push({
+            slug: data.results[i].slug,
+            id: data.results[i].id,
+            name: data.results[i].name,
+            count: data.results[i].tagged_items_count,
+          });
         }
       }
     );

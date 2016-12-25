@@ -39,6 +39,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
             slug: data.results[i].slug,
             id: data.results[i].id,
             name: data.results[i].name,
+            count: data.results[i].tagged_items_count,
           });
         }
       }
