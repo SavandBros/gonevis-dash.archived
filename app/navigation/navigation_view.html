@@ -11,7 +11,9 @@
       <div class="panel-heading">Navigations</div>
       <div class="panel-body">
         <!-- Nothing -->
-        <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length && initialled"></ng-include>
+        <ng-include src="'basement/nothing/nothing.html'" ng-if="!navigations.length && initialled"
+          ng-init="nothingText = 'It\'s lonly here... Try adding some navigations.'">
+        </ng-include>
         <!-- Form -->
         <form name="form" ng-submit="update(form)" sv-root sv-part="navigations">
           <div class="form-group sz-full s-mar-bottom-list" ng-repeat="nav in navigations" sv-element>
