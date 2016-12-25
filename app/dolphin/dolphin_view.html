@@ -1,5 +1,27 @@
 <div class="container container-light pad-top">
   <div class="row">
+    <!-- Upload -->
+    <div class="col-md-3 col-xs-12 pull-right">
+      <div class="panel panel-default s-mar-x-soft">
+        <div class="panel-heading"><i class="fa fa-fw fa-upload text-primary"></i> Upload File</div>
+        <div class="panel-body">
+          <!-- Select -->
+          <button type="file" class="btn btn-primary" ngf-select="uploadFile($files, $invalidFiles)"
+            ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
+            <i class="fa fa-fw fa-plus"></i> Select File
+          </button>
+
+          <!-- Progress -->
+          <div class="progress s-mar-top-soft s-mar-no a-fade" ng-class="{active: file.progress != 100}" 
+               ng-repeat="file in upload.files" ng-hide="file.dismiss">
+            <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
+              <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Left side -->
     <div class="col-md-9">
       <!-- Top bar -->
@@ -96,28 +118,6 @@
       <ng-include src="'basement/pagination/pagination_loadmore.html'"
         ng-init="pageForm = dolphinForm" ng-if="initialled">
       </ng-include>
-    </div>
-
-    <!-- Upload -->
-    <div class="col-md-3">
-      <div class="panel panel-default">
-        <div class="panel-heading"><i class="fa fa-fw fa-upload text-primary"></i> Upload File</div>
-        <div class="panel-body">
-          <!-- Select -->
-          <button type="file" class="btn btn-primary" ngf-select="uploadFile($files, $invalidFiles)"
-            ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
-            <i class="fa fa-fw fa-plus"></i> Select File
-          </button>
-
-          <!-- Progress -->
-          <div class="progress s-mar-top-soft s-mar-no a-fade" ng-class="{active: file.progress != 100}" 
-               ng-repeat="file in upload.files" ng-hide="file.dismiss">
-            <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
-              <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
