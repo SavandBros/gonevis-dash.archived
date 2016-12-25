@@ -14,9 +14,9 @@
       ng-init="nothingText = 'No entries yet.'">
     </ng-include>
     <!-- List -->
-    <div class="animated fadeInUp" ng-if="entries.length">
+    <div ng-if="entries.length">
       <!-- Entry grid -->
-      <div ng-if="view == 'grid'">
+      <div class="animated fadeIn" ng-if="view == 'grid'">
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <div class="row">
@@ -40,7 +40,7 @@
         </div>
       </div>
       <!-- Entry list -->
-      <div class="panel panel-default s-box s-mar-soft s-mar-top-no" ng-if="view == 'list'">
+      <div class="panel panel-default s-box s-mar-x-soft animated fadeIn" ng-if="view == 'list'">
         <div class="panel-heading">
             <!-- Action dropdown -->
           <div class="dropdown options pull-right" title="options">
