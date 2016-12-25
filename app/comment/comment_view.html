@@ -11,7 +11,7 @@
       ng-init="nothingText = 'You have no comments.'">
     </ng-include>
     <!-- List -->
-    <div class="panel panel-default animated fadeInUp" ng-if="comments.length">
+    <div class="panel panel-default animated fadeIn" ng-if="comments.length">
       <ul class="panel-body panel-list">
         <li class="panel-list-item s-fade b-left" ng-class="{'b-color-2': c.is_active, 'b-color-0': c.needs_approval}"
           ng-repeat="c in comments" ng-show="!c.isDeleted">
