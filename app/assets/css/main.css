@@ -99,6 +99,11 @@ hr[soft] {
     margin: 15px;
 }
 
+.s-mar-x-soft {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
 .s-mar-no {
     margin: 0;
 }
@@ -940,11 +945,6 @@ a.editable-click {
     text-decoration: none;
 }
 
-.form-control:focus {
-    border-color: #ab5c00;
-    box-shadow: 0 0 4px rgba(171, 92, 0, 0.5);
-}
-
 .btn-primary.disabled:hover,
 .btn-primary[disabled]:hover,
 fieldset[disabled] .btn-primary:hover,
@@ -955,6 +955,85 @@ fieldset[disabled] .btn-primary:focus,
 .btn-primary[disabled].focus,
 fieldset[disabled] .btn-primary.focus {
     background: #b96400;
+}
+
+.text-primary {
+    color: #b05f00;
+}
+
+a.text-primary:hover,
+a.text-primary:focus {
+    color: #7d4400;
+}
+
+.bg-primary {
+    background-color: #b05f00;
+}
+
+a.bg-primary:hover,
+a.bg-primary:focus {
+    background-color: #7d4400;
+}
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:hover,
+.nav-pills>li.active>a:focus {
+    background-color: #b05f00;
+}
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+    background-color: #b05f00;
+    border-color: #b05f00;
+}
+
+.label-primary {
+    background-color: #b05f00;
+}
+
+.label-primary[href]:hover,
+.label-primary[href]:focus {
+    background-color: #7d4400;
+}
+
+.list-group-item.active>.badge,
+.nav-pills>.active>a>.badge {
+    color: #b05f00;
+}
+
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
+    border-color: #b05f00;
+}
+
+.progress-bar {
+    background-color: #b05f00;
+}
+
+.panel-primary {
+    border-color: #b05f00;
+}
+
+.panel-primary>.panel-heading {
+    background-color: #b05f00;
+    border-color: #b05f00;
+}
+
+.panel-primary>.panel-heading+.panel-collapse>.panel-body {
+    border-top-color: #b05f00;
+}
+
+.panel-primary>.panel-heading .badge {
+    color: #b05f00;
+}
+
+.panel-primary>.panel-footer+.panel-collapse>.panel-body {
+    border-bottom-color: #b05f00;
 }
 
 
@@ -1047,7 +1126,6 @@ img.tag {
 #loading-bar .bar {
     background: #ff8a00;
 }
-
 
 #loading-bar .peg {
     -moz-box-shadow: #ff8a00 1px 0 6px 1px;
