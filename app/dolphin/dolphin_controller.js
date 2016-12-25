@@ -21,12 +21,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
 
   var site = AuthService.getCurrentSite();
 
-  $scope.updateDolphins = function () {
-    for (var i = 0; i < $scope.dolphins.length; i++) {
-      $scope.dolphins[i].extRaw = $scope.dolphins[i].ext.split("/")[1].toUpperCase();
-    }
-  };
-
   /**
    * constructor
    *
@@ -183,6 +177,16 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
   /**
    * action
    *
+   * @method updateDolphins
+   * @desc Add extra properties for dolphins
+   */
+  $scope.updateDolphins = function () {
+    angular.forEach($scope.dolphins, function (dolphin) {
+      dolphin.extRaw = dolphin.ext.split("/")[1].toUpperCase();
+    });
+  };
+
+  /**
    * @method action
    * @desc Action is used to determine the action for the current state.
    *
