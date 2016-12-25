@@ -9,7 +9,8 @@
       <ng-include src="'basement/search/search_noresult.html'"></ng-include>
 
       <!-- Nothing -->
-      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled">
+      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled"
+        ng-init="nothingText = 'It\'s lonely here... Try adding some dolphins!'">
       </ng-include>
 
       <!-- List -->
