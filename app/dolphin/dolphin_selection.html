@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4>
-          <i class="fa fa-image text-primary fa-fw"></i> Select Cover Image
+          <i class="fa fa-image text-primary fa-fw"></i> Select an image
           <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
         </h4>
       </div>
@@ -27,11 +27,10 @@
           <!-- List -->
           <div class="row a-fade" ng-show="currentTab == 'dolphin'">
             <!-- Search form -->
-            <ng-include src="'basement/search/search_form.html'"
-              class="dis-b s-mar-soft s-mar-top-no animated fadeIn" ng-if="initialled">
+            <ng-include src="'basement/search/search_form.html'" ng-if="initialled">
             </ng-include>
             <!-- Search noresult -->
-            <ng-include src="'basement/search/search_noresult.html'" class="dis-b s-mar-soft"></ng-include>
+            <ng-include src="'basement/search/search_noresult.html'" class="dis-b s-mar-x-soft"></ng-include>
             <!-- Nothing -->
             <ng-include src="'basement/nothing/nothing.html'"
               ng-if="!dolphins.length && !searchForm.noResult && initialled"></ng-include>

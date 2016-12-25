@@ -29,7 +29,6 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
     $scope.filters = { name: "" };
     $scope.search = Search;
     $scope.pageForm = {};
-    $scope.nothing = { text: "It's lonely here... Try adding some tags!" };
 
     var payload = { site: site };
     API.Tags.get(payload,

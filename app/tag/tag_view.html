@@ -10,10 +10,11 @@
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!tags.length && !searchForm.noResult && initialled">
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!tags.length && !searchForm.noResult && initialled"
+      ng-init="nothingText = 'It\'s lonely here... Try adding some tags.'">
     </ng-include>
     <!-- List -->
-    <div ng-if="tags.length" class="animated fadeInUp">
+    <div ng-if="tags.length" class="animated fadeIn">
       <!-- Grid view -->
       <div class="panel-body s-pad-y-no" ng-show="view == 'grid'">
         <ul class="list-unstyled s-mar-no">
@@ -35,7 +36,7 @@
         </ul>
       </div>
       <!-- List view -->
-      <div ng-show="view == 'list'" class="panel panel-default s-box s-mar-soft s-mar-top-no">
+      <div ng-show="view == 'list'" class="panel panel-default s-box s-mar-x-soft">
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <!-- Tag (List) -->

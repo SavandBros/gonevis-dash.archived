@@ -9,11 +9,12 @@
       <ng-include src="'basement/search/search_noresult.html'"></ng-include>
 
       <!-- Nothing -->
-      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled">
+      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled"
+        ng-init="nothingText = 'It\'s lonely here... Try adding some dolphins!'">
       </ng-include>
 
       <!-- List -->
-      <div class="animated fadeInUp" ng-if="initialled">
+      <div class="animated fadeIn" ng-if="initialled">
 
         <!-- Grid view -->
         <div class="col-md-3 col-sm-3 col-xs-6 text-center" ng-repeat="d in dolphins"
@@ -44,7 +45,7 @@
         </div>
 
         <!-- List view -->
-        <div ng-if="view == 'list'" class="panel panel-default s-box s-mar-soft s-mar-top-no">
+        <div ng-if="view == 'list'" class="panel panel-default s-box s-mar-x-soft">
           <div class="panel-body s-pad-y-no">
             <ul class="list-unstyled s-mar-no">
               <!-- List -->
@@ -90,6 +91,7 @@
             </ul>
           </div>
         </div>
+
       </div>
 
       <!-- More -->

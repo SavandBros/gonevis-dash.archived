@@ -30,8 +30,6 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
         $scope.navigations = data.navigation;
       }
     );
-
-    $scope.nothing = { text: "It's lonely here... Try adding some navigations!" };
   }
 
   /**

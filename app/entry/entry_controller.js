@@ -21,7 +21,6 @@ function EntryController($scope, $rootScope, $state, $mdToast,
    */
   function constructor() {
     $scope.view = localStorage.entryView || "list";
-    $scope.nothing = { text: "It's lonely here... Try adding some entries!" };
     $scope.filters = { title: "" };
     $scope.entryService = EntryService;
     $scope.statuses = Codekit.entryStatuses;
