@@ -34,7 +34,7 @@
 
             <!-- Nothing -->
             <ng-include src="'basement/nothing/nothing.html'" ng-init="nothingPadding = false"
-              ng-sif="!dolphins.length && !searchForm.noResult && initialled">
+              ng-if="!dolphins.length && !searchForm.noResult && initialled">
             </ng-include>
 
             <!-- Dolphins -->
