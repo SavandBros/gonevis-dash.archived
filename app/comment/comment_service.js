@@ -23,7 +23,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
     toast = toast || true;
 
     API.Comment.delete({ comment_id: comment.id },
-      function (data) {
+      function(data) {
         if (toast) {
           $mdToast.showSimple("Comment deleted.");
         }
@@ -34,7 +34,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
           success: true
         });
       },
-      function (data) {
+      function(data) {
         if (toast) {
           $mdToast.showSimple("Deleting comment failed.");
         }
@@ -46,6 +46,17 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
       }
     );
   }
+
+  function setStatus(comment, key, value) {
+    var payload = {};
+    payload[key] = value;
+
+    API.Comment.patch({ comment_id: comment.id }, payload,
+      function() {
+        comment[key] = value;
+      }
+    );
+  };
 
   /**
    * @method view
@@ -60,6 +71,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   return {
     remove: remove,
     view: view,
+    setStatus: setStatus,
   };
 }
 
