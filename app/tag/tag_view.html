@@ -19,7 +19,9 @@
       <div class="panel-body s-pad-y-no" ng-show="view == 'grid'">
         <ul class="list-unstyled s-mar-no">
           <div class="row">
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4"  ng-repeat="t in tags | orderBy:'-tagged_items_count'" ng-show="!e.isDeleted">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4"
+              ng-repeat="t in tags | orderBy:'-tagged_items_count'"
+              ng-show="!e.isDeleted">
               <!-- Tag (thumbnail) -->
               <a class="thumbnail text-center s-pad-no" ng-click="tagService.view(t)">
                 <!-- Image -->
@@ -40,7 +42,9 @@
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <!-- Tag (List) -->
-            <li class="row list-panel s-fade" ng-repeat="t in tags | orderBy:'-tagged_items_count'" ng-show="!t.isDeleted">
+            <li class="row list-panel s-fade"
+              ng-repeat="t in tags | orderBy:'-tagged_items_count'"
+              ng-show="!t.isDeleted">
               <!-- Title and slug -->
               <div class="col-lg-3 col-xs-10">
                 <img class="tag img-rounded" ng-src="{{ t.media.cover_image.thumbnail_48x48 ?
