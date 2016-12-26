@@ -83,7 +83,7 @@ function Codekit($timeout) {
    * @param key {String} Deleted property
    */
   function timeoutSlice(master, key, delay) {
-    $timeout(function () {
+    $timeout(function() {
       key = key || "isDeleted";
       delay = delay || 1000;
 
@@ -105,13 +105,26 @@ function Codekit($timeout) {
     return (Object.getOwnPropertyNames(object).length === 0);
   }
 
+  /**
+   * @method focus
+   * @desc Focus on an element (input)
+   *
+   * @param selector {String}
+   */
+  function focus(selector) {
+    $timeout(function() {
+      angular.element(selector).focus();
+    }, 200);
+  }
+
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
     teamRoles: teamRoles,
     objectTypes: objectTypes,
     timeoutSlice: timeoutSlice,
-    isEmptyObj: isEmptyObj
+    isEmptyObj: isEmptyObj,
+    focus: focus
   };
 };
 
