@@ -1,4 +1,4 @@
-<div class="modal fade">
+<div class="modal fade" id="tag">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,7 +13,13 @@
       <div class="modal-body">
         <form ng-submit="tagService.update(form.data, true, form)">
           <ng-include src="'tag/includes/tag_form.html'"></ng-include>
-          <button class="btn btn-primary btn-block" ng-disabled="form.loading">Update</button>
+          <div class="btn-group stack">
+            <button class="btn btn-primary" ng-disabled="form.loading">Update</button>
+            <button class="btn btn-default" ng-disabled="form.loading"
+              title="Delete entry" type="button" ng-click="tagService.remove(form.data)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
         </form>
       </div>
     </div>
