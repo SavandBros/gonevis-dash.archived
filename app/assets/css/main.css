@@ -1011,7 +1011,7 @@ a.thumbnail.active {
     border-color: #b05f00;
 }
 
-.progress-bar {
+.progress-bar:not(.progress-bar-success) {
     background-color: #b05f00;
 }
 
