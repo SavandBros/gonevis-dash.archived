@@ -12,7 +12,7 @@
     <!-- List -->
     <div class="panel panel-default animated fadeIn" ng-if="comments.length">
       <ul class="panel-body panel-list">
-        <li class="panel-list-item s-fade b-left" ng-class="{'b-color-2': c.is_active, 'b-color-0': c.needs_approval}"
+        <li class="panel-list-item a-fade b-left" ng-class="{'b-color-2': c.status == 1, 'b-color-0': c.status == 0}"
           ng-repeat="c in comments" ng-show="!c.isDeleted">
           <!-- User -->
           <img class="comment pull-left img-circle"
@@ -24,9 +24,16 @@
           <span class="panel-list-item-button">
             <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
             <ul class="dropdown-menu">
+              <li class="dropdown-header">Change status</li>
+              <li ng-repeat="s in statuses" ng-class="{'active': c.status == s.value}">
+                <a ng-click="setStatus(c, s.property, s.value)">
+                  <i class="fa fa-{{ s.icon }}"></i> {{ s.label }}
+                </a>
+              </li>
+              <li class="divider"></li>
               <li>
                 <a ng-click="commentService.remove(c)">
-                <i class="fa fa-fw fa-trash text-danger"></i> Delete comment
+                  <i class="fa fa-fw fa-trash text-danger"></i> Delete comment
                 </a>
               </li>
             </ul>

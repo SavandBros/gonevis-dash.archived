@@ -3,15 +3,30 @@
     <div class="modal-content">
       <div class="modal-header">
         <img class="modal-image" ng-src="{{ comment.user.media.picture ?
-            comment.user.media.picture.thumbnail_128x128 : 'assets/img/avatar.svg'
+          comment.user.media.picture.thumbnail_128x128 : 'assets/img/avatar.svg'
           }}">
         {{ comment.user.name }} <small class="pull-right">{{ comment.created | date }}</small>
       </div>
       <div class="modal-body ws-pre">{{ comment.comment }}</div>
       <div class="modal-footer">
-        <button class="btn btn-sm btn-danger" ng-click="commentService.remove(comment)" data-dismiss="modal">
-          <i class="fa fa-trash"></i>
+        <button class="btn btn-sm btn-danger pull-left"
+          ng-click="commentService.remove(comment)"
+          data-dismiss="modal">
+        <i class="fa fa-trash"></i>
         </button>
+        <div class="dropdown options col-md-2 pull-right s-pad-no">
+          <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
+            Set status <li class="fa fa-caret-down"></li>
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Change status</li>
+            <li ng-repeat="s in statuses" ng-class="{'active': comment.status == s.value}">
+              <a ng-click="setStatus(comment, s.property, s.value)">
+              <i class="fa fa-{{ s.icon }}"></i> {{ s.label }}
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
