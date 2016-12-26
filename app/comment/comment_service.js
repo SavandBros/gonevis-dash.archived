@@ -56,7 +56,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
         comment[key] = value;
       }
     );
-  };
+  }
 
   /**
    * @method view

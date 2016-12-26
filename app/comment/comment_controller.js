@@ -51,7 +51,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
    */
   $scope.setStatus = function(comment, key, value) {
     $scope.commentService.setStatus(comment, key, value);
-  }
+  };
 
   /**
    * loadMore
