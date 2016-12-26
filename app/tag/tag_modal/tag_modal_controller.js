@@ -10,8 +10,9 @@
  * @param tag
  * @param DolphinService
  * @param Slug
+ * @param ModalsService
  */
-function TagModalController($scope, TagService, tag, DolphinService, Slug) {
+function TagModalController($scope, TagService, tag, DolphinService, Slug, ModalsService) {
 
   /**
    * constructor
@@ -22,11 +23,16 @@ function TagModalController($scope, TagService, tag, DolphinService, Slug) {
   function constructor() {
     $scope.tagService = TagService;
     $scope.dolphinService = DolphinService;
+    $scope.modalsService = ModalsService;
     $scope.form = { data: tag };
   };
 
   $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
     $scope.form.data.cover_image = dolphin ? dolphin.id : null;
+  });
+
+  $scope.$on("gonevisDash.TagService:remove", function () {
+    $scope.modalsService.close("tag");
   });
 
   $scope.updateSlug = function () {
@@ -42,5 +48,6 @@ TagModalController.$inject = [
   "TagService",
   "tag",
   "DolphinService",
-  "Slug"
+  "Slug",
+  "ModalsService"
 ];
