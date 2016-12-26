@@ -47,6 +47,14 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
     );
   }
 
+  /**
+   * @method setStatus
+   * @desc Change comment status
+   *
+   * @param comment {Object}
+   * @param key {String}
+   * @param value {Number}
+   */
   function setStatus(comment, key, value) {
     var payload = {};
     payload[key] = value;
