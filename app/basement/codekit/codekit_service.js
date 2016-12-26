@@ -54,6 +54,29 @@ function Codekit($timeout) {
   }];
 
   /**
+   * @name commentStatuses
+   * @desc All statuses available for comments.
+   *
+   * @type {Array}
+   */
+  var commentStatuses = [{
+    label: "Pending approval",
+    icon: "clock-o",
+    property: "status",
+    value: 0
+  }, {
+    label: "Active",
+    icon: "globe",
+    property: "status",
+    value: 1
+  }, {
+    label: "Hidden",
+    icon: "user-secret",
+    property: "status",
+    value: 2
+  }];
+
+  /**
    * @name teamRoles
    * @desc All roles for team.
    *
@@ -83,7 +106,7 @@ function Codekit($timeout) {
    * @param key {String} Deleted property
    */
   function timeoutSlice(master, key, delay) {
-    $timeout(function () {
+    $timeout(function() {
       key = key || "isDeleted";
       delay = delay || 1000;
 
@@ -108,6 +131,7 @@ function Codekit($timeout) {
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
+    commentStatuses: commentStatuses,
     teamRoles: teamRoles,
     objectTypes: objectTypes,
     timeoutSlice: timeoutSlice,
