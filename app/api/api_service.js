@@ -50,6 +50,9 @@ function API($http, $resource, ENV) {
     }, {
       name: "Entries",
       endpoint: "website/entry/" // GET
+    }, {
+      name: "EntryMetrics",
+      endpoint: "/website/entry/:entry_id/metrics/" // GET
     },
     // Sushial
     {
