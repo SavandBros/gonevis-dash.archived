@@ -207,6 +207,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     if (data.success) {
       $scope.dolphinForm.page = data.page;
       $scope.dolphins = $scope.dolphins.concat(data.data.results);
+      $scope.updateDolphins();
     }
   });
 
