@@ -83,7 +83,7 @@ function Codekit($timeout) {
    * @param key {String} Deleted property
    */
   function timeoutSlice(master, key, delay) {
-    $timeout(function() {
+    $timeout(function () {
       key = key || "isDeleted";
       delay = delay || 1000;
 
@@ -112,7 +112,7 @@ function Codekit($timeout) {
    * @param selector {String}
    */
   function focus(selector) {
-    $timeout(function() {
+    $timeout(function () {
       angular.element(selector).focus();
     }, 200);
   }
@@ -126,7 +126,7 @@ function Codekit($timeout) {
     isEmptyObj: isEmptyObj,
     focus: focus
   };
-};
+}
 
 app.factory("Codekit", Codekit);
 Codekit.$inject = [
