@@ -1,5 +1,5 @@
 <div class="form-group" ng-class="{'has-error': form.errors.name}">
-  <input id="name" class="form-control" type="text" ng-model="form.data.name"
+  <input id="name" class="form-control name" type="text" ng-model="form.data.name"
 		placeholder="Name" ng-change="updateSlug()" required/>
   <span id="name" class="help-block" ng-show="form.errors.name">{{ form.errors.name[0] }}</span>
 </div>
