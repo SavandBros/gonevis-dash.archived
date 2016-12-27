@@ -104,12 +104,13 @@ function Codekit($timeout) {
    *
    * @param master {Object} Master data to search in
    * @param key {String} Deleted property
+   * @param delay {Number}
    */
   function timeoutSlice(master, key, delay) {
-    $timeout(function () {
-      key = key || "isDeleted";
-      delay = delay || 1000;
+    key = key || "isDeleted";
+    delay = delay || 1000;
 
+    $timeout(function () {
       for (var i in master) {
         if (master[i][key] === true) {
           master.splice(i, 1);
