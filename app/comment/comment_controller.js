@@ -15,17 +15,17 @@
  * @param Pagination
  * @param Codekit
  */
-function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService, Pagination, Search, Codekit) {
+function CommentController($scope, $rootScope, $state, $mdToast,
+  API, AuthService, CommentService, Pagination, Search, Codekit) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.commentService = CommentService;
+    $scope.statuses = Codekit.commentStatuses;
     $scope.search = Search;
     $scope.pageForm = {};
 
@@ -41,8 +41,18 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
   }
 
   /**
-   * loadMore
+   * @method setStatus
+   * @desc Change comment status
    *
+   * @param comment {Object}
+   * @param key {String}
+   * @param value {Number}
+   */
+  $scope.setStatus = function (comment, key, value) {
+    $scope.commentService.setStatus(comment, key, value);
+  };
+
+  /**
    * @method loadMore
    * @desc Load more function for controller
    */

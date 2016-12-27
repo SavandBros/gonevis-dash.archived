@@ -48,6 +48,25 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   }
 
   /**
+   * @method setStatus
+   * @desc Change comment status
+   *
+   * @param comment {Object}
+   * @param key {String}
+   * @param value {Number}
+   */
+  function setStatus(comment, key, value) {
+    var payload = {};
+    payload[key] = value;
+
+    API.Comment.patch({ comment_id: comment.id }, payload,
+      function () {
+        comment[key] = value;
+      }
+    );
+  }
+
+  /**
    * @method view
    * @desc View comment as modal (detailed mode).
    * 
@@ -60,6 +79,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   return {
     remove: remove,
     view: view,
+    setStatus: setStatus,
   };
 }
 
