@@ -15,11 +15,10 @@
  * @param Pagination
  * @param Codekit
  */
-function CommentController($scope, $rootScope, $state, $mdToast, API, AuthService, CommentService, Pagination, Search, Codekit) {
+function CommentController($scope, $rootScope, $state, $mdToast,
+  API, AuthService, CommentService, Pagination, Search, Codekit) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -32,7 +31,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
 
     var payload = { site: AuthService.getCurrentSite() };
     API.Comments.get(payload,
-      function(data) {
+      function (data) {
         $scope.initialled = true;
         $scope.comments = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
@@ -43,25 +42,23 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
 
   /**
    * @method setStatus
-   * @desc change comment status
+   * @desc Change comment status
    *
    * @param comment {Object}
    * @param key {String}
    * @param value {Number}
    */
-  $scope.setStatus = function(comment, key, value) {
+  $scope.setStatus = function (comment, key, value) {
     $scope.commentService.setStatus(comment, key, value);
   };
 
   /**
-   * loadMore
-   *
    * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
 
-  $rootScope.$on("gonevisDash.CommentService:remove", function(event, data) {
+  $rootScope.$on("gonevisDash.CommentService:remove", function (event, data) {
     for (var i = 0; i < $scope.comments.length; i++) {
       if ($scope.comments[i].id === data.id) {
         $scope.comments[i].isDeleted = true;
@@ -70,7 +67,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     Codekit.timeoutSlice($scope.comments);
   });
 
-  $scope.$on("gonevisDash.Search:submit", function(event, data) {
+  $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
       $scope.comments = data.data.results;
@@ -78,7 +75,7 @@ function CommentController($scope, $rootScope, $state, $mdToast, API, AuthServic
     }
   });
 
-  $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
       $scope.comments = $scope.comments.concat(data.data.results);
