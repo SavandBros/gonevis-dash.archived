@@ -111,7 +111,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
    * @desc Tag creation modal
    */
   function viewCreate() {
-    ModalsService.open("tagCreate", "TagCreateModalController");
+    ModalsService.open("tagCreate", "TagNewModalController");
   }
 
   /**

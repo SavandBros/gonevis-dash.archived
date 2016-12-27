@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:TagCreateModalController
- * Controller of the gonevisDash
+ * @class TagNewModalController
  *
  * @param $scope
  * @param TagService
@@ -14,7 +12,7 @@
  * @param DolphinService
  * @param Codekit
  */
-function TagCreateModalController($scope, TagService, API, AuthService, ModalsService, Slug, DolphinService, Codekit) {
+function TagNewModalController($scope, TagService, API, AuthService, ModalsService, Slug, DolphinService, Codekit) {
 
   var site = AuthService.getCurrentSite();
 
@@ -27,8 +25,9 @@ function TagCreateModalController($scope, TagService, API, AuthService, ModalsSe
   function constructor() {
     $scope.form = { data: {} };
     $scope.dolphinService = DolphinService;
+
     Codekit.focus("input.name:last");
-  };
+  }
 
   /**
    * create
@@ -49,34 +48,45 @@ function TagCreateModalController($scope, TagService, API, AuthService, ModalsSe
       function (data) {
         TagService.create(form, data);
         form.loading = false;
-        ModalsService.close('tagCreate');
+        ModalsService.close("tagCreate");
       },
       function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
-  }
+  };
 
+  /**
+   * @method updateSlug
+   * @desc Slugify title and update slug
+   */
   $scope.updateSlug = function () {
     $scope.form.data.slug = Slug.slugify($scope.form.data.name);
-  }
+  };
 
-  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+  /**
+   * @event gonevisDash.DolphinService:select
+   * @desc Dolphin selection
+   *
+   * @param event {Event}
+   * @param dolphin {Object}
+   */
+  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
     $scope.form.data.cover_image = dolphin ? dolphin.id : null;
   });
 
   constructor();
 }
 
-app.controller("TagCreateModalController", TagCreateModalController);
-TagCreateModalController.$inject = [
-  '$scope',
-  'TagService',
-  'API',
-  'AuthService',
-  'ModalsService',
-  'Slug',
-  'DolphinService',
-  'Codekit'
+app.controller("TagNewModalController", TagNewModalController);
+TagNewModalController.$inject = [
+  "$scope",
+  "TagService",
+  "API",
+  "AuthService",
+  "ModalsService",
+  "Slug",
+  "DolphinService",
+  "Codekit"
 ];
