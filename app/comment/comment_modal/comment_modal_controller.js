@@ -1,9 +1,7 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:CommentModalController
- * Controller of the gonevisDash
+ * @class CommentModalController
  *
  * @param $scope
  * @param CommentService
@@ -13,8 +11,6 @@
 function CommentModalController($scope, CommentService, comment, Codekit) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -23,19 +19,19 @@ function CommentModalController($scope, CommentService, comment, Codekit) {
     $scope.statuses = Codekit.commentStatuses;
     $scope.statuses = Codekit.commentStatuses;
     $scope.comment = comment;
-  };
+  }
 
   /**
    * @method setStatus
-   * @desc set status comments
+   * @desc Set comment status
    *
    * @param comment {Object}
    * @param key {String}
    * @param value {Number}
    */
-  $scope.setStatus = function(comment, key, value) {
+  $scope.setStatus = function (comment, key, value) {
     $scope.commentService.setStatus(comment, key, value);
-  }
+  };
 
   constructor();
 }
