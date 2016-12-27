@@ -106,7 +106,7 @@ function Codekit($timeout) {
    * @param key {String} Deleted property
    */
   function timeoutSlice(master, key, delay) {
-    $timeout(function() {
+    $timeout(function () {
       key = key || "isDeleted";
       delay = delay || 1000;
 
@@ -137,7 +137,7 @@ function Codekit($timeout) {
     timeoutSlice: timeoutSlice,
     isEmptyObj: isEmptyObj
   };
-};
+}
 
 app.factory("Codekit", Codekit);
 Codekit.$inject = [
