@@ -104,11 +104,9 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   $scope.loadMore = Pagination.loadMore;
 
   $scope.$on("gonevisDash.TagService:remove", function (event, data) {
-    for (var i = 0; i < $scope.tags.length; i++) {
-      if ($scope.tags[i].id === data.id) {
-        $scope.tags[i].isDeleted = true;
-      }
-    }
+    var index = Codekit.getIndex($scope.tags, data.tag);
+    $scope.tags[index].isDeleted = true;
+    Codekit.timeoutSlice($scope.tags);
   });
 
   $scope.$on("gonevisDash.TagService:create", function (event, data) {
