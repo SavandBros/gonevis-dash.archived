@@ -12,8 +12,9 @@
  * @param ModalsService
  * @param Slug
  * @param DolphinService
+ * @param Codekit
  */
-function TagCreateModalController($scope, TagService, API, AuthService, ModalsService, Slug, DolphinService) {
+function TagCreateModalController($scope, TagService, API, AuthService, ModalsService, Slug, DolphinService, Codekit) {
 
   var site = AuthService.getCurrentSite();
 
@@ -26,6 +27,7 @@ function TagCreateModalController($scope, TagService, API, AuthService, ModalsSe
   function constructor() {
     $scope.form = { data: {} };
     $scope.dolphinService = DolphinService;
+    Codekit.focus("input.name:last");
   };
 
   /**
@@ -75,5 +77,6 @@ TagCreateModalController.$inject = [
   'AuthService',
   'ModalsService',
   'Slug',
-  'DolphinService'
+  'DolphinService',
+  'Codekit'
 ];
