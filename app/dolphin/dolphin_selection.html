@@ -25,7 +25,7 @@
           </ul>
 
           <!-- List -->
-          <div class="animated fadeIn" ng-show="currentTab == 'dolphin'">
+          <div ng-show="currentTab == 'dolphin'">
             <!-- Search form -->
             <ng-include src="'basement/search/search_form.html'" ng-if="initialled"></ng-include>
 
@@ -39,7 +39,7 @@
 
             <!-- Dolphins -->
             <div class="row">
-              <div class="col-md-3 col-sm-3 col-xs-6 a-fade" ng-repeat="d in dolphins"
+              <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="d in dolphins"
                 ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
                 <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})">
                   <p class="caption">{{ d.meta_data.name }}</p>
@@ -49,9 +49,9 @@
           </div>
 
           <!-- Upload -->
-          <div class="a-fade text-center" ng-show="currentTab == 'upload'">
+          <div class="text-center" ng-show="currentTab == 'upload'">
             <!-- Select -->
-            <button type="file" class="btn btn-primary btn-lg"
+            <button type="file" class="btn btn-primary btn-lg animated fadeIn"
               ngf-select="uploadFile($files, $invalidFiles)"
               ngf-accept="upload.accept"
               ngf-max-size="25MB"
