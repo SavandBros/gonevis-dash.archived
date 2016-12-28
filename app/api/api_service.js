@@ -103,7 +103,7 @@ function API($http, $resource, ENV) {
     // Tagool
     {
       name: "Tag",
-      endpoint: "tagool/tag/:tag_slug/" // GET, PUT
+      endpoint: "tagool/tag/:slug/" // GET, PUT
     }, {
       name: "Tags",
       endpoint: "tagool/tag/" // GET, POST
