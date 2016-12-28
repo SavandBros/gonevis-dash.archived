@@ -27,13 +27,15 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
   function update(tag, toast, form) {
     toast = toast || true;
     form.loading = true;
+    var slug = form.oldSlug || tag.slug;
 
-    API.Tag.put({ tag_site: tag.site, tag_id: tag.id }, tag,
+    API.Tag.put({ slug: slug }, tag,
       function (data) {
         if (toast) {
           $mdToast.showSimple("Tag updated.");
         }
         form.loading = false;
+        form.oldSlug = data.slug;
         $rootScope.$broadcast("gonevisDash.TagService:update", {
           data: data,
           tag: tag,
