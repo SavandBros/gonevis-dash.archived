@@ -48,6 +48,7 @@ function TagNewModalController($scope, TagService, API, AuthService, ModalsServi
       function (data) {
         TagService.create(form, data);
         form.loading = false;
+        form.data.tagged_items_count = 0;
         ModalsService.close("tagCreate");
       },
       function (data) {
