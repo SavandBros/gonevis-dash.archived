@@ -24,8 +24,8 @@ function TagModalController($scope, TagService, tag, DolphinService, Slug, Modal
     $scope.tagService = TagService;
     $scope.dolphinService = DolphinService;
     $scope.modalsService = ModalsService;
-    $scope.form = { data: tag };
-  };
+    $scope.form = { data: tag, oldSlug: tag.slug };
+  }
 
   $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
     $scope.form.data.cover_image = dolphin ? dolphin.id : null;
