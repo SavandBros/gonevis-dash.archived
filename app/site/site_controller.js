@@ -58,7 +58,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
     API.SiteUpdate.put({ site_id: site }, payload,
       function (data) {
-        $scope.site[key] = data[key];
+        if (key === "cover_image" || key === "logo") {
+          $scope.site.media[key] = data.media[key];
+        } else {
+          $scope.site[key] = data[key];
+        }
         $mdToast.showSimple("Site " + keyString + " updated");
       },
       function () {
