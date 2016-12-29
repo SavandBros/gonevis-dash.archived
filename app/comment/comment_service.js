@@ -24,7 +24,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService, Codekit) {
     toast = toast || true;
 
     API.Comment.delete({ comment_id: comment.id },
-      function(data) {
+      function (data) {
         if (toast) {
           $mdToast.showSimple("Comment deleted.");
         }
@@ -35,7 +35,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService, Codekit) {
           success: true
         });
       },
-      function(data) {
+      function (data) {
         if (toast) {
           $mdToast.showSimple("Deleting comment failed.");
         }
@@ -77,7 +77,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService, Codekit) {
     payload[key] = value;
 
     API.Comment.patch({ comment_id: comment.id }, payload,
-      function() {
+      function () {
         comment[key] = value;
         comment.statusLabel = getStatus(comment);
       }
