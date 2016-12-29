@@ -60,8 +60,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
       function (data) {
         if (key === "cover_image" || key === "logo") {
           $scope.site.media[key] = data.media[key];
+        } else {
+          $scope.site[key] = data[key];
         }
-        $scope.site[key] = data[key];
         $mdToast.showSimple("Site " + keyString + " updated");
       },
       function () {
