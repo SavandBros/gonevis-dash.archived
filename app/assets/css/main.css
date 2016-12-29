@@ -7,6 +7,10 @@
     outline: 0 !important;
 }
 
+.btn-link {
+    text-decoration: none !important;
+}
+
 html,
 body {
     background-color: #fcfcfc;
