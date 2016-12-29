@@ -17,8 +17,8 @@ function CommentModalController($scope, CommentService, comment, Codekit) {
   function constructor() {
     $scope.commentService = CommentService;
     $scope.statuses = Codekit.commentStatuses;
-    $scope.statuses = Codekit.commentStatuses;
     $scope.comment = comment;
+    $scope.comment.statusLabel = CommentService.getStatus($scope.comment);
   }
 
   /**
@@ -30,7 +30,7 @@ function CommentModalController($scope, CommentService, comment, Codekit) {
    * @param value {Number}
    */
   $scope.setStatus = function (comment, key, value) {
-    $scope.commentService.setStatus(comment, key, value);
+    CommentService.setStatus(comment, key, value);
   };
 
   constructor();
