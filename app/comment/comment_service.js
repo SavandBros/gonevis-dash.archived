@@ -7,10 +7,11 @@
  * @param $mdToast
  * @param API
  * @param ModalsService
+ * @param Codekit
  *
  * @return [Factory]
  */
-function CommentService($rootScope, $mdToast, API, ModalsService) {
+function CommentService($rootScope, $mdToast, API, ModalsService, Codekit) {
 
   /**
    * @method remove
@@ -23,7 +24,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
     toast = toast || true;
 
     API.Comment.delete({ comment_id: comment.id },
-      function (data) {
+      function(data) {
         if (toast) {
           $mdToast.showSimple("Comment deleted.");
         }
@@ -34,7 +35,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
           success: true
         });
       },
-      function (data) {
+      function(data) {
         if (toast) {
           $mdToast.showSimple("Deleting comment failed.");
         }
@@ -45,6 +46,22 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
         });
       }
     );
+  }
+
+  /**
+   * @method getStatus
+   * @desc Get comment's current status.
+   *
+   * @param comment {Object}
+   */
+  function getStatus(comment) {
+    for (var i in Codekit.commentStatuses) {
+      var status = Codekit.commentStatuses[i];
+
+      if (status.value === comment.status) {
+        return status.label;
+      }
+    }
   }
 
   /**
@@ -60,8 +77,9 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
     payload[key] = value;
 
     API.Comment.patch({ comment_id: comment.id }, payload,
-      function () {
+      function() {
         comment[key] = value;
+        comment.statusLabel = getStatus(comment);
       }
     );
   }
@@ -69,7 +87,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   /**
    * @method view
    * @desc View comment as modal (detailed mode).
-   * 
+   *
    * @param comment {Object}
    */
   function view(comment) {
@@ -79,6 +97,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService) {
   return {
     remove: remove,
     view: view,
+    getStatus: getStatus,
     setStatus: setStatus,
   };
 }
@@ -88,5 +107,6 @@ CommentService.$inject = [
   "$rootScope",
   "$mdToast",
   "API",
-  "ModalsService"
+  "ModalsService",
+  "Codekit"
 ];
