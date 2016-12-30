@@ -850,6 +850,10 @@ img.comment {
     margin-top: 2px;
 }
 
+textarea.comment {
+    max-width: 100%;
+}
+
 
 /* Editable */
 
