@@ -82,6 +82,12 @@ function CommentController($scope, $rootScope, $state, $mdToast,
     }
   });
 
+  $scope.$on("gonevisDash.reply:submit", function (event, data) {
+    if (data.success) {
+      constructor();
+    }
+  });
+
   constructor();
 }
 
