@@ -38,7 +38,7 @@ function CommentModalController($scope, $rootScope, CommentService, comment, Cod
 
     API.Comments.save(payload,
       function (data) {
-        $rootScope.$broadcast("gonevisDash.reply:submit", {
+        $rootScope.$broadcast("gonevisDash.CommentService:reply", {
           data: data,
           success: true
         });
