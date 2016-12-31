@@ -12,6 +12,10 @@ body {
     background-color: #fcfcfc;
 }
 
+textarea {
+    max-width: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -848,10 +852,6 @@ img.comment {
     margin-left: -9px;
     margin-right: 9px;
     margin-top: 2px;
-}
-
-textarea.comment {
-    max-width: 100%;
 }
 
 
