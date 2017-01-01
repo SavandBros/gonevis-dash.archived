@@ -5,7 +5,7 @@
 
 <!-- Content -->
 <div class="container container-light pad-top">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-12">
     <!-- Main -->
     <div class="panel panel-default s-box form-inline animated fadeIn">
       <div class="panel-heading">Navigations</div>
@@ -26,15 +26,27 @@
               <i class="fa fa-reorder" style="margin-top: 8px"></i>
             </div>
             <!-- Label -->
-            <div class="col-xs-4 s-pad-left-no">
-              <input type="text" placeholder="Label" ng-model="nav.label" class="form-control sz-full" required />
+            <div class="col-xs-2">
+              <input type="text" placeholder="Label" ng-model="nav.label" class="form-control sz-full">
             </div>
             <!-- URL -->
-            <div class="col-xs-5 s-pad-no">
+            <div class="col-xs-3">
               <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control sz-full" required />
             </div>
-            <!-- Delete -->
+            <!-- Tooltip -->
             <div class="col-xs-2">
+              <input type="text" placeholder="Tooltip" ng-model="nav.tooltip" class="form-control sz-full">
+            </div>
+            <!-- Icon -->
+            <div class="col-xs-1">
+              <input type="text" placeholder="Icon" ng-model="nav.icon" class="form-control sz-full">
+            </div>
+            <!-- Color -->
+            <div class="col-xs-1">
+              <input type="text" placeholder="Color" ng-model="nav.color" class="form-control sz-full">
+            </div>
+            <!-- Delete -->
+            <div class="col-xs-1">
               <button class="btn btn-default btn-block" ng-click="remove($index)" type="button">
                 <i class="fa fa-trash"></i>
               </button>
