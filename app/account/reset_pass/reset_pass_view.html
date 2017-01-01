@@ -1,12 +1,11 @@
 <div class="container">
   <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default s-box">
-      <!-- Header -->
-      <div class="panel-heading">
-        <h4>Reset Password <i class="fa fa-lock text-primary pull-right"></i></h4>
-      </div>
+      <div class="panel-body s-pad">
       <!-- Form -->
-      <form class="panel-body" ng-submit="resetPassword(form)" name="form">
+      <form ng-submit="resetPassword(form)" name="form">
+        <h3 class="o-fade-soft">Reset Password <i class="fa fa-lock fa-fw text-danger pull-right"></i></h3>
+        <hr>
         <!-- Password -->
         <div class="form-group" ng-class="{'has-error': form.errors.password}">
           <input class="form-control input-lg" type="password" name="password"
@@ -27,13 +26,13 @@
         <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
           {{ form.errors.non_field_errors[0] }}
         </div>
-        <hr>
         <!-- Submit -->
-        <button class="btn btn-warning btn-block btn-lg"
+        <button class="btn btn-primary btn-block btn-lg"
           ng-disabled="form.loading || form.$invalid || form.password !== form.password2">
           Change Password
         </button>
       </form>
+      </div>
     </div>
   </div>
 </div>
