@@ -7,7 +7,23 @@
           }}">
         {{ comment.user.name }} <small class="pull-right">{{ comment.created | date }}</small>
       </div>
-      <div class="modal-body ws-pre">{{ comment.comment }}</div>
+      <div class="modal-body">
+        {{ comment.comment }}
+        <hr>
+        <form ng-submit="reply(form)">
+          <div class="row">
+            <div class="form-group col-md-10">
+              <textarea ng-model="form.comment"
+                placeholder="@{{comment.user.name}}"
+                class="form-control comment">
+              </textarea>
+            </div>
+            <div class="form-group col-md-2">
+              <button class="btn btn-sm btn-primary">Reply</button>
+            </div>
+          </div>
+        </form>
+      </div>
       <div class="modal-footer">
         <button class="btn btn-sm btn-danger pull-left"
           ng-click="commentService.remove(comment)"
