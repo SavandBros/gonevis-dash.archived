@@ -71,11 +71,12 @@
         </button>
       </h3>
       <div class="panel-body">
-        <!-- Template name -->
-        <div class="form-grop">
+        <!-- Template modal -->
+        <div class="form-group">
           <label for="template">Template</label>
-          <input name="template" type="text" class="form-control"
-            placeholder="Template name" ng-model="siteTemplate.name">
+          <button name="template" class="btn btn-primary btn-block" ng-click="siteTemplates()">
+            {{ siteTemplate.name }}
+          </button>
         </div>
       </div>
       <div class="panel-footer">
