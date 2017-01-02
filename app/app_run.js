@@ -101,12 +101,12 @@ function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsServi
   $rootScope.$on("$viewContentLoaded", function () {
     // Invalid state
     if (!$state.current.name) {
-      console.log("Invalid" + $state.current);
+      console.debug("Invalid", $state.current);
       if (AuthService.isAuthenticated()) {
-        console.log("Going main");
+        console.debug("Going main");
         $state.go("dash.main", { s: 0 });
       } else {
-        console.log("Going signin");
+        console.debug("Going signin");
         $state.go("signin");
       }
     }
