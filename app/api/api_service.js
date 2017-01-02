@@ -42,6 +42,9 @@ function API($http, $resource, ENV) {
     }, {
       name: "EmailConfirmation",
       endpoint: "account/email-confirmation/:token/" // GET
+    }, {
+      name: "EmailConfirmationResend",
+      endpoint: "account/resend-email-confirmation/" // GET
     },
     // Entry
     {
