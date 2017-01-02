@@ -16,9 +16,14 @@ function EmailConfirmationController($scope, $state, API, $mdToast) {
    */
   function constructor() {
     $scope.loading = true;
-    API.EmailConfirmation.save({token: $state.params.token}, {},
+    API.EmailConfirmation.get({token: $state.params.token}, {},
       function () {
         $scope.loading = false;
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent('Thanks for confirming your email, please login with your credentials.')
+            .hideDelay(10000)
+        );
         $state.go("signin");
       }, function () {
         $scope.loading = false;
