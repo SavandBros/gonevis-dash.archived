@@ -6,8 +6,9 @@
  * @param $scope
  * @param $state
  * @param API
+ * @param $mdToast
  */
-function EmailConfirmationController($scope, $state, API) {
+function EmailConfirmationController($scope, $state, API, $mdToast) {
 
   /**
    * @method constructor
@@ -26,6 +27,23 @@ function EmailConfirmationController($scope, $state, API) {
     );
   }
 
+  /**
+   * @method resend
+   * @desc Resend email confirmation
+   *
+   * @param form {Object}
+   */
+  $scope.resend = function (form) {
+    API.EmailConfirmationResend.save({email: form.email},
+      function () {
+        $mdToast.showSimple("Email confirmation has been sent to you.");
+        $state.go('signin');
+      }, function (data) {
+        form.errors = data.data;
+      }
+    )
+  };
+
   constructor();
 }
 
@@ -33,5 +51,6 @@ app.controller("EmailConfirmationController", EmailConfirmationController);
 EmailConfirmationController.$inject = [
   "$scope",
   "$state",
-  "API"
+  "API",
+  "$mdToast"
 ];
