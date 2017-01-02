@@ -39,6 +39,9 @@ function API($http, $resource, ENV) {
     }, {
       name: "ResetPassword",
       endpoint: "account/password-reset/" // POST
+    }, {
+      name: "EmailConfirmation",
+      endpoint: "account/email-confirmation/:token/" // GET
     },
     // Entry
     {
@@ -120,9 +123,9 @@ function API($http, $resource, ENV) {
 
   function createResourceObject(attrName, endpoint) {
     apiData[attrName] = $resource(endpoint, {}, {
-      put: { method: "PUT" },
-      post: { method: "POST" },
-      patch: { method: "PATCH" }
+      put: {method: "PUT"},
+      post: {method: "POST"},
+      patch: {method: "PATCH"}
     });
   }
 
