@@ -134,5 +134,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: -1
     });
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise(function ($injector) {
+    var state = $injector.get("$state");
+    var AuthService = $injector.get("AuthService");
+
+    if (AuthService.isAuthenticated()) {
+      state.go("dash.main", { s: 0 });
+    } else {
+      state.go("signin");
+    }
+  });
 });
