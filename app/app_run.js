@@ -95,24 +95,6 @@ function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsServi
   });
 
   /**
-   * @event $viewContentLoaded
-   * @desc Load view content of state callback
-   */
-  $rootScope.$on("$viewContentLoaded", function () {
-    // Invalid state
-    if (!$state.current.name) {
-      console.debug("Invalid", $state.current);
-      if (AuthService.isAuthenticated()) {
-        console.debug("Going main");
-        $state.go("dash.main", { s: 0 });
-      } else {
-        console.debug("Going signin");
-        $state.go("signin");
-      }
-    }
-  });
-
-  /**
    * @event gonevisDash.DolphinService:select
    * @desc Dolphin selection callback, depends on state @editor
    */
