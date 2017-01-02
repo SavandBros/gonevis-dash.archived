@@ -84,7 +84,6 @@ function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsServi
     // Check authentication
     if (toState.auth === true && !AuthService.isAuthenticated() ||
       toState.auth === false && AuthService.isAuthenticated()) {
-        console.log("Stopping");
       event.preventDefault();
     }
 
