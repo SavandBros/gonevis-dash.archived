@@ -106,7 +106,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/email-verification/:token",
       controller: "EmailConfirmationController",
       templateUrl: "account/email_confirmation/email_confirmation_view.html",
-      auth: 0
+      auth: -1
     })
     .state("dash.team", {
       url: "/team",
