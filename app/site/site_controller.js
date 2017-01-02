@@ -14,7 +14,7 @@
  * @param DolphinService
  */
 function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
-  API, ModalsService, AuthService, DolphinService) {
+                        API, ModalsService, AuthService, DolphinService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -27,13 +27,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
 
-    API.Site.get({ site_id: site },
+    API.Site.get({site_id: site},
       function (data) {
         $scope.site = data;
       }
     );
 
-    API.SiteTemplateConfig.get({ site_id: site },
+    API.SiteTemplateConfig.get({site_id: site},
       function (data) {
         $scope.siteTemplate = data.template_config;
       }
@@ -56,7 +56,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     var payload = {};
     payload[key] = value;
 
-    API.SiteUpdate.put({ site_id: site }, payload,
+    API.SiteUpdate.put({site_id: site}, payload,
       function (data) {
         if (key === "cover_image" || key === "logo") {
           $scope.site.media[key] = data.media[key];
@@ -83,7 +83,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
       return;
     }
 
-    API.Site.delete({ site_id: site },
+    API.Site.delete({site_id: site},
       function () {
         for (var i = 0; i < $scope.user.sites.length; i++) {
           if ($scope.user.sites[i].id === site) {
@@ -127,7 +127,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     var payload = {
       config_fields: $scope.siteTemplate.fields
     };
-    API.SetSiteTemplateConfig.put({ site_id: site }, payload,
+    API.SetSiteTemplateConfig.put({site_id: site}, payload,
       function () {
         $mdToast.showSimple("Site template updated");
       },
@@ -141,6 +141,23 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.site.media[$scope.editing] = dolphin ? dolphin.id : null;
     $scope.updateSite($scope.editing, dolphin ? dolphin.id : null);
   });
+
+  $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function (event, data) {
+    var templateConfig = data.data.config;
+
+    API.SiteSetTemplate.put({siteId: site}, {site_template_id: data.data.id},
+      function () {
+        $scope.siteTemplate = templateConfig;
+        $mdToast.showSimple("Site template updated");
+      }, function () {
+        $mdToast.showSimple("Oh... Couldn't update site template");
+      }
+    )
+  });
+
+  $scope.siteTemplates = function () {
+    ModalsService.open("siteTemplates", "SiteTemplatesModalController");
+  };
 
   constructor();
 }
