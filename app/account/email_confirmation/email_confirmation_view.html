@@ -7,10 +7,16 @@
     </span>
     <span ng-if="!loading && error">
       <i class="fa fa-close fa-5x text-danger"></i>
-      <hr>
-      <h4 class="text-danger">Oh... Invalid confirmation link.</h4>
       <br>
-      <button class="btn btn-default t-bold btn-block">Resend Confirmation Link</button>
+      <h4 class="text-danger">Oh... Invalid confirmation link.</h4>
+      <hr>
+      <form ng-submit="resend(form)">
+        <div class="form-group" ng-class="{'has-error': form.errors.email}">
+          <input type="email" class="form-control" placeholder="Email address" ng-model="form.email" required>
+          <small id="email" class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</small>
+        </div>
+        <button class="btn btn-default t-bold btn-block">Resend Confirmation Link</button>
+      </form>
     </span>
   </div>
 </div>
