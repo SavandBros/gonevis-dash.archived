@@ -47,15 +47,31 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
         username: form.username,
         password: form.password
       },
-      function () {
+      function (data) {
         $rootScope.$broadcast("gonevisDash.AuthService:Registered");
         form.errors = [];
+        $scope.registeredEmail = data.email;
+        $scope.success = true;
       },
       function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
+  };
+
+  /**
+   * @method resend
+   * @desc Resend email confirmation
+   *
+   * @param email {String}
+   */
+  $scope.resend = function (email) {
+    API.EmailConfirmationResend.save({email: email},
+      function () {
+        $mdToast.showSimple("Email confirmation has been sent to you.");
+      }
+    )
   };
 
   $scope.$on("gonevisDash.AuthService:Registered", function () {
