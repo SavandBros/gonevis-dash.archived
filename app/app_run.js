@@ -84,6 +84,7 @@ function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsServi
     // Check authentication
     if (toState.auth === true && !AuthService.isAuthenticated() ||
       toState.auth === false && AuthService.isAuthenticated()) {
+        console.log("Stopping");
       event.preventDefault();
     }
 
@@ -100,9 +101,12 @@ function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsServi
   $rootScope.$on("$viewContentLoaded", function () {
     // Invalid state
     if (!$state.current.name) {
+      console.log("Invalid" + $state.current);
       if (AuthService.isAuthenticated()) {
+        console.log("Going main");
         $state.go("dash.main", { s: 0 });
       } else {
+        console.log("Going signin");
         $state.go("signin");
       }
     }
