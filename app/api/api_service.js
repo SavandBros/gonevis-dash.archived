@@ -79,6 +79,12 @@ function API($http, $resource, ENV) {
       name: "SetSiteTemplateConfig",
       endpoint: "website/site/:site_id/set-template-config/" // PUT
     }, {
+      name: "SiteTemplates",
+      endpoint: "website/site/:site_id/templates/" // GET
+    }, {
+      name: "SiteSetTemplate",
+      endpoint: "website/site/:siteId/set-template/" // PUT
+    }, {
       name: "SiteUpdate",
       endpoint: "website/site/:site_id/update-settings/" // GET, PUT
     }, {
@@ -120,9 +126,9 @@ function API($http, $resource, ENV) {
 
   function createResourceObject(attrName, endpoint) {
     apiData[attrName] = $resource(endpoint, {}, {
-      put: { method: "PUT" },
-      post: { method: "POST" },
-      patch: { method: "PATCH" }
+      put: {method: "PUT"},
+      post: {method: "POST"},
+      patch: {method: "PATCH"}
     });
   }
 
