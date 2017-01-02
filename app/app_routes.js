@@ -134,5 +134,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: -1
     });
 
-  $urlRouterProvider.otherwise("/0/");
+  $urlRouterProvider.otherwise("/");
 });
