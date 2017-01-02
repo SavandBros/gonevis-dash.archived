@@ -1,0 +1,16 @@
+<div class="modal fade" id="siteTemplates">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">Choose a template
+        <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+      </div>
+      <div class="modal-body">
+        <div class="list-group" data-dismiss="modal">
+          <a class="list-group-item" ng-click="setTemplate(template)" ng-repeat="template in siteTemplates">
+            {{ template.name }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
