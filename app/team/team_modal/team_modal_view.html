@@ -1,0 +1,56 @@
+<div class="modal fade sidebar right" id="team">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header modal-header-clickable close" data-dismiss="modal">
+        <i class="fa fa-chevron-left"></i>
+      </div>
+      <div class="modal-body">
+        <div ng-if="team.isPending">
+          <div class="text-center">
+            <img ng-src="assets/img/avatar.svg" width="128" class="img-circle">
+          </div>
+          <br>
+          <small>
+            <span class="o-fade-soft">Email: </span>{{team.email}}
+          </small>
+          <br>
+          <small class="o-fade-soft">Role:</small>
+          <span class="t-small outline {{ teamRoles[team.role].color }}" style="margin-top: 8px">
+            {{ teamRoles[team.role].label | uppercase }}
+          </span>
+        </div>
+        <div ng-if="!team.isPending">
+          <div class="text-center">
+            <img ng-src="{{
+              team.user.media.thumbnail_128x128 ? team.user.media.thumbnail_128x128 : 'assets/img/avatar.svg'
+            }}" width="128" class="img-circle">
+          </div>
+          <br>
+          <small>
+            <span class="o-fade-soft">Name: </span>{{team.user.name}}
+          </small>
+          <br>
+          <small>
+            <span class="o-fade-soft">Username: </span>{{team.user.username}}
+          </small>
+          <br>
+          <small>
+            <span class="o-fade-soft">About: </span>{{team.user.about}}
+          </small>
+          <br>
+          <small>
+            <span class="o-fade-soft">Location: </span>{{team.user.location}}
+          </small>
+          <hr>
+          <!-- Role label -->
+          <small class="o-fade-soft">Role:</small>
+          <span class="t-small outline {{ teamRoles[team.role].color }}" style="margin-top: 8px">
+            {{ teamRoles[team.role].label | uppercase }}
+          </span>
+        </div>
+        <hr>
+        <button class="btn btn-danger" ng-click="remove(team)"><i class="fa fa-trash"></i> Remove from team</button>
+      </div>
+    </div>
+  </div>
+</div>
