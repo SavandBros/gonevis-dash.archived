@@ -18,7 +18,7 @@ function SiteTemplatesModalController($scope, $rootScope, API, AuthService) {
    */
   function constructor() {
 
-    API.SiteTemplates.get({site_id: site},
+    API.SiteTemplates.get({siteId: site},
       function (data) {
         $scope.siteTemplates = data.templates;
       }
