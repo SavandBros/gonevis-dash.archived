@@ -129,7 +129,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     };
     API.SetSiteTemplateConfig.put({site_id: site}, payload,
       function () {
-        $mdToast.showSimple("Site template updated");
+        $mdToast.showSimple("Site template updated.");
       },
       function () {
         $mdToast.showSimple("Oh... Something went wrong, couldn't update site template");
@@ -148,9 +148,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.SiteSetTemplate.put({siteId: site}, {site_template_id: data.data.id},
       function () {
         $scope.siteTemplate = templateConfig;
-        $mdToast.showSimple("Site template updated");
+        $mdToast.showSimple("Site template updated.");
       }, function () {
-        $mdToast.showSimple("Oh... Couldn't update site template");
+        $mdToast.showSimple("Oh... Couldn't update site template.");
       }
     )
   });
