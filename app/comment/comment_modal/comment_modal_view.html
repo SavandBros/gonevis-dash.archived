@@ -7,16 +7,32 @@
           }}">
         {{ comment.user.name }} <small class="pull-right">{{ comment.created | date }}</small>
       </div>
-      <div class="modal-body ws-pre">{{ comment.comment }}</div>
+      <div class="modal-body">
+        {{ comment.comment }}
+        <hr>
+        <form ng-submit="reply(form)">
+          <div class="row">
+            <div class="form-group col-md-10">
+              <textarea ng-model="form.comment"
+                placeholder="@{{comment.user.name}}"
+                class="form-control comment">
+              </textarea>
+            </div>
+            <div class="form-group col-md-2">
+              <button class="btn btn-sm btn-primary">Reply</button>
+            </div>
+          </div>
+        </form>
+      </div>
       <div class="modal-footer">
         <button class="btn btn-sm btn-danger pull-left"
           ng-click="commentService.remove(comment)"
           data-dismiss="modal">
         <i class="fa fa-trash"></i>
         </button>
-        <div class="dropdown options col-md-2 pull-right s-pad-no">
+        <div class="dropdown options col-md-3 pull-right s-pad-no">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
-            Set status <li class="fa fa-caret-down"></li>
+            {{ comment.statusLabel }} <li class="fa fa-caret-down"></li>
           </button>
           <ul class="dropdown-menu">
             <li class="dropdown-header">Change status</li>
