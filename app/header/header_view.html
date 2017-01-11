@@ -34,11 +34,11 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signup')}">
-          <a ui-sref="signup">Register</a>
-        </li>
         <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signin')}">
           <a ui-sref="signin">Login</a>
+        </li>
+        <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signup')}">
+          <a ui-sref="signup">Register</a>
         </li>
         <li class="dropdown" ng-if="auth.isAuthenticated()">
           <a class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <i class="fa fa-caret-down o-fade-hard"></i></a>
