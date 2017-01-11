@@ -14,12 +14,7 @@
  */
 function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API) {
 
-  // Signup form
-  $scope.form = {};
-
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -32,8 +27,6 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
   };
 
   /**
-   * signup
-   *
    * @method signup
    * @desc Submit signup form
    * 
@@ -47,15 +40,31 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
         username: form.username,
         password: form.password
       },
-      function () {
+      function (data) {
         $rootScope.$broadcast("gonevisDash.AuthService:Registered");
         form.errors = [];
+        $scope.registeredEmail = data.email;
+        $scope.success = true;
       },
       function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
+  };
+
+  /**
+   * @method resend
+   * @desc Resend email confirmation
+   *
+   * @param email {String}
+   */
+  $scope.resend = function (email) {
+    API.EmailConfirmationResend.save({email: email},
+      function () {
+        $mdToast.showSimple("We've send a confirmation link to your email.");
+      }
+    )
   };
 
   $scope.$on("gonevisDash.AuthService:Registered", function () {
