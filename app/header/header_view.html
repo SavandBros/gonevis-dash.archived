@@ -34,10 +34,21 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signin')}">
+          <a ui-sref="signin">Login</a>
+        </li>
+        <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signup')}">
+          <a ui-sref="signup">Register</a>
+        </li>
         <li class="dropdown" ng-if="auth.isAuthenticated()">
           <a class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <i class="fa fa-caret-down o-fade-hard"></i></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="dash.user({s: param.s})">View Account</a></li>
+            <li>
+              <a ui-sref="dash.user({s: param.s})">
+                View Account<br>
+                <small class="o-fade">Logged in as {{ user.name }}</small>
+              </a>
+            </li>
             <li role="separator" class="divider" ng-if="user.sites"></li>
             <li ng-repeat="site in user.sites" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>

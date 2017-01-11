@@ -16,7 +16,7 @@
             <h4>
               <!-- Avatar -->
               <img class="img-circle" ng-class="{'o-fade-hard': t.isPending || !t.user.media.picture}" height="64"
-                ng-src="{{ !t.isPending ? t.user.media.picture.thumbnail_128x128 : 'assets/img/avatar.svg' }}">
+                ng-src="{{ !t.isPending ? t.user.media.thumbnail_128x128 : 'assets/img/avatar.svg' }}">
               <!-- Name/email -->
               <span class="s-mar-left">{{ !t.isPending ? t.user.name : t.email }}</span>
               <!-- Right side -->

@@ -39,6 +39,12 @@ function API($http, $resource, ENV) {
     }, {
       name: "ResetPassword",
       endpoint: "account/password-reset/" // POST
+    }, {
+      name: "EmailConfirmation",
+      endpoint: "account/email-confirmation/:token/" // GET
+    }, {
+      name: "EmailConfirmationResend",
+      endpoint: "account/resend-email-confirmation/" // GET
     },
     // Entry
     {
