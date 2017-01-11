@@ -14,12 +14,7 @@
  */
 function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API) {
 
-  // Signup form
-  $scope.form = {};
-
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -32,8 +27,6 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
   };
 
   /**
-   * signup
-   *
    * @method signup
    * @desc Submit signup form
    * 
@@ -69,7 +62,7 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
   $scope.resend = function (email) {
     API.EmailConfirmationResend.save({email: email},
       function () {
-        $mdToast.showSimple("Email confirmation has been sent to you.");
+        $mdToast.showSimple("We've send a confirmation link to your email.");
       }
     )
   };
