@@ -72,10 +72,10 @@
       </h3>
       <div class="panel-body">
         <!-- Template modal -->
-        <div class="form-group">
-          <label for="template">Template</label>
-          <button name="template" class="btn btn-primary btn-block" ng-click="siteTemplates()">
-            {{ siteTemplate.name }}
+        <div class="form-group s-mar-no">
+          <label>Template:</label>
+          <button class="btn btn-primary btn-block stack-element btn-lg t-shadow-small" ng-click="siteTemplates()">
+            <i class="fa btn-icon fa-cube"></i> {{ siteTemplate.name | uppercase }}
           </button>
         </div>
       </div>
