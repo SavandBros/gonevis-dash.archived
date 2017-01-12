@@ -140,11 +140,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
   });
 
   $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function (event, data) {
-    var templateConfig = data.data.config;
-
-    API.SiteSetTemplate.put({ siteId: site }, { site_template_id: data.data.id },
+    API.SiteSetTemplate.put({ siteId: site }, { site_template_id: data.template.id },
       function () {
-        $scope.siteTemplate = templateConfig;
+        $scope.siteTemplate = data.template.config;
         $mdToast.showSimple("Site template changed. ");
       },
       function (data) {
