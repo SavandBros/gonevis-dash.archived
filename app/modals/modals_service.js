@@ -21,7 +21,8 @@ function ModalsService(ModalService) {
     sites: "site/sites_modal/site_modal_view.html",
     invite: "team/invite_modal/invite_modal_view.html",
     forgotPassword: "account/forgot_modal/forgot_modal_view.html",
-    siteTemplates: "site/site_templates_modal/site_templates_modal_view.html"
+    siteTemplates: "site/site_templates_modal/site_templates_modal_view.html",
+    team: "team/team_modal/team_modal_view.html"
   };
 
   var modals = {};

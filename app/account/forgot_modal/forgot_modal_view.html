@@ -8,13 +8,13 @@
       <div class="modal-body">
         <!-- Form -->
         <form ng-submit="forgotPassword(form)" name="form">
-          <div class="form-group row" ng-class="{'has-error': form.errors.email}">
+          <div class="form-group row s-child-mar-bottom-soft" ng-class="{'has-error': form.errors.email}">
             <!-- Email -->
-            <div class="col-xs-8">
+            <div class="col-md-8">
               <input class="form-control" type="email" ng-model="form.data.email" placeholder="Email" required/>
             </div>
             <!-- Button -->
-            <div class="col-xs-4">
+            <div class="col-md-4">
               <button class="btn btn-primary btn-block" ng-disabled="form.$invalid || form.loading">
                 Get Reset Link
               </button>

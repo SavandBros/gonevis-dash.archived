@@ -7,6 +7,7 @@
  * @param $rootScope
  * @param $state
  * @param $mdToast
+ * @param API
  * @param AuthService
  * @param Codekit
  * @param ModalsService
@@ -38,45 +39,23 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
   }
 
   /**
-   * @method remove
-   * @desc Remove a user from team
-   *
-   * @param team {Object}
-   */
-  $scope.remove = function (team) {
-    team.title = team.email ? team.email : team.user.name;
-
-    if (!confirm("Remove from team?\n\nAre you sure you want to remove '" + team.title + "' from team?")) {
-      return;
-    }
-
-    var api = API.RemoveTeamPending;
-    var payload = { email: team.email };
-
-    if (!team.isPending) {
-      api = API.RemoveTeam;
-      payload = { team_member_id: team.user.id };
-    }
-
-    api.put({ site_id: site }, payload,
-      function () {
-        team.isRemoved = true;
-        $mdToast.showSimple(
-          "Removed " + team.title + " (" + $scope.teamRoles[team.role].label.toLowerCase() + ") from team."
-        );
-      },
-      function () {
-        $mdToast.showSimple("Something went wrong... We couldn't remove team.");
-      }
-    );
-  };
-
-  /**
    * @method invite
    * @desc Open up invite modal
    */
   $scope.invite = function () {
     ModalsService.open("invite", "TeamInviteModalController");
+  };
+
+  /**
+   * view
+   *
+   * @method view
+   * @desc Team view via modal
+   *
+   * @param team {Object}
+   */
+  $scope.view = function (team) {
+    ModalsService.open("team", "TeamModalController", { team: team });
   };
 
   $scope.$on("gonevisDash.TeamService.invite", function () {
