@@ -773,6 +773,21 @@ img.modal-image {
     right: 0;
 }
 
+.modal .cover {
+    transition: all 0.3s ease-in-out;
+    height: 150px;
+    margin: -15px;
+    margin-bottom: -60px;
+    background-size: 100%;
+    background-position: center;
+    box-shadow: inset 0 0 10000px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid #bbb;
+}
+
+.modal .cover.open {
+    height: 256px;
+}
+
 
 /* Button Circle @btn */
 
