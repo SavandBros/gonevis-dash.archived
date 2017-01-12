@@ -124,15 +124,12 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
    * @desc Save template config
    */
   $scope.saveConfig = function () {
-    var payload = {
-      config_fields: $scope.siteTemplate.fields
-    };
-    API.SetSiteTemplateConfig.put({ siteId: site }, payload,
+    API.SetSiteTemplateConfig.put({ siteId: site }, { config_fields: $scope.siteTemplate.fields },
       function () {
-        $mdToast.showSimple("Site template updated");
+        $mdToast.showSimple("Site template updated.");
       },
-      function () {
-        $mdToast.showSimple("Oh... Something went wrong, couldn't update site template");
+      function (data) {
+        $mdToast.showSimple(data.detail ? data.detail : "Oh... Something went wrong, couldn't update site template.");
       }
     );
   };
@@ -148,12 +145,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.SiteSetTemplate.put({ siteId: site }, { site_template_id: data.data.id },
       function () {
         $scope.siteTemplate = templateConfig;
-        $mdToast.showSimple("Site template updated");
+        $mdToast.showSimple("Site template changed. ");
       },
-      function () {
-        $mdToast.showSimple("Oh... Couldn't update site template");
+      function (data) {
+        $mdToast.showSimple(
+          data.detail ? data.detail : "Oh... Something went wrong, couldn't change site template."
+        );
       }
-    )
+    );
   });
 
   $scope.siteTemplates = function () {
