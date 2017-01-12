@@ -748,6 +748,10 @@ img.modal-image {
     overflow-y: scroll;
 }
 
+.modal.sidebar .modal-content::-webkit-scrollbar {
+    width: 0 !important;
+}
+
 .modal.right:not(.in) .modal-dialog {
     -webkit-transform: translate3d(25%, 0, 0);
     transform: translate3d(25%, 0, 0);
@@ -1097,6 +1101,25 @@ a.thumbnail.active {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.t-shadow {
+    text-shadow: 0 0 2px #000;
+}
+
+
+/* Key Value */
+
+.kv {
+    text-align: right;
+    width: calc(100% - 25px);
+    margin-left: 25px;
+}
+
+.kv .fa {
+    position: absolute;
+    color: #777;
+    left: 15px;
 }
 
 
