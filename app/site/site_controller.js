@@ -148,7 +148,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
     API.SiteSetTemplate.put({ siteId: site }, { site_template_id: data.template.id },
       function () {
-        $scope.siteTemplate = templateConfig;
+        $scope.loadingTemplate = false;
+        $scope.siteTemplate = data.template.config;
         $mdToast.showSimple("Site template updated.");
       }, function () {
         $mdToast.showSimple("Oh... Couldn't update site template.");
