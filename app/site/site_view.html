@@ -60,26 +60,20 @@
     </div>
   </div>
   <!-- Template -->
-  <div class="col-md-4">
+  <div class="col-md-4 animated fadeIn" ng-if="siteTemplate">
     <form class="panel panel-default s-box s-mar-top">
-      <h3 class="panel-heading">
-        <!-- Title -->
-        Appearance
-        <!-- Update button -->
-        <button class="btn btn-sm btn-success pull-right" ng-click="saveConfig()">
-          <i class="fa fa-fw fa-check"></i> Save Changes
-        </button>
-      </h3>
+      <h3 class="panel-heading">Appearance</h3>
       <div class="panel-body">
         <!-- Template modal -->
         <div class="form-group s-mar-no">
           <label>Template:</label>
-          <button class="btn btn-primary btn-block stack-element btn-lg t-shadow-small" ng-click="siteTemplates()">
+          <button class="btn btn-primary btn-block stack-element btn-lg t-shadow-small"
+            ng-click="siteTemplates()" ng-disabled="loadingTemplate">
             <i class="fa btn-icon fa-cube"></i> {{ siteTemplate.name | uppercase }}
           </button>
         </div>
       </div>
-      <div class="panel-footer animated fadeIn" ng-if="siteTemplate.fields">
+      <div class="panel-footer" ng-if="siteTemplate.fields">
         <!-- Template fields -->
         <div class="form-grop" ng-repeat="(key, field) in siteTemplate.fields"
           ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
@@ -95,6 +89,11 @@
             placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value"></textarea>
           <span class="help-block">{{ field.help_text }}</span>
         </div>
+        <hr>
+        <!-- Update button -->
+        <button class="btn btn-sm btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
+          <i class="fa fa-fw fa-check"></i> Save Changes
+        </button>
       </div>
     </form>
   </div>
