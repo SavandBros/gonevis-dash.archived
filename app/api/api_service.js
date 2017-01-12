@@ -126,7 +126,7 @@ function API($http, $resource, ENV) {
       endpoint: "dolphin/file/" // GET, POST
     }, {
       name: "Dolphin",
-      endpoint: "dolphin/file/:file_id/" // GET, PUT, DELETE
+      endpoint: "dolphin/file/:fileId/" // GET, PUT, DELETE
     }
   ];
 

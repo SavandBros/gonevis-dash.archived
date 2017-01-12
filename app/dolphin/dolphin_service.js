@@ -27,7 +27,7 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
   function remove(dolphin, toast) {
     toast = toast || true;
 
-    API.Dolphin.remove({ siteId: dolphin.site, file_id: dolphin.id },
+    API.Dolphin.remove({ siteId: dolphin.site, fileId: dolphin.id },
       function (data) {
         dolphin.isDeleted = true;
         $rootScope.$broadcast("gonevisDash.DolphinService:remove", {

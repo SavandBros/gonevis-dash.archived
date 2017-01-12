@@ -27,7 +27,7 @@ function DolphinModalController($scope, $rootScope, $mdToast, dolphin, DolphinSe
 
     $scope.dolphinService = DolphinService;
 
-    API.Dolphin.get({ siteId: dolphin.site, file_id: dolphin.id },
+    API.Dolphin.get({ siteId: dolphin.site, fileId: dolphin.id },
       function (data, status, headers, config) {
         $scope.form.data = data;
       }
@@ -45,7 +45,7 @@ function DolphinModalController($scope, $rootScope, $mdToast, dolphin, DolphinSe
   $scope.update = function (form) {
     form.loading = true;
 
-    API.Dolphin.put({ siteId: form.data.site, file_id: form.data.id }, form.data,
+    API.Dolphin.put({ siteId: form.data.site, fileId: form.data.id }, form.data,
       function (data, status, headers, config) {
         form.loading = false;
         $mdToast.showSimple("File " + form.data.meta_data.name + " updated.");
