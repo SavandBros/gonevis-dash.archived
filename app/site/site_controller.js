@@ -124,11 +124,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
    * @desc Save template config
    */
   $scope.saveConfig = function () {
+    $scope.loadingTemplate = true;
+
     API.SetSiteTemplateConfig.put({ siteId: site }, { config_fields: $scope.siteTemplate.fields },
       function () {
+        $scope.loadingTemplate = false;
         $mdToast.showSimple("Site template updated.");
       },
       function (data) {
+        $scope.loadingTemplate = false;
         $mdToast.showSimple(data.detail ? data.detail : "Oh... Something went wrong, couldn't update site template.");
       }
     );
@@ -140,12 +144,16 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
   });
 
   $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function (event, data) {
+    $scope.loadingTemplate = true;
+
     API.SiteSetTemplate.put({ siteId: site }, { site_template_id: data.template.id },
       function () {
         $scope.siteTemplate = data.template.config;
+        $scope.loadingTemplate = false;
         $mdToast.showSimple("Site template changed. ");
       },
       function (data) {
+        $scope.loadingTemplate = false;
         $mdToast.showSimple(
           data.detail ? data.detail : "Oh... Something went wrong, couldn't change site template."
         );
@@ -154,7 +162,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
   });
 
   $scope.siteTemplates = function () {
-    ModalsService.open("siteTemplates", "SiteTemplatesModalController");
+    ModalsService.open("siteTemplates", "SiteTemplatesModalController", { currentTemplate: $scope.siteTemplate });
   };
 
   constructor();
