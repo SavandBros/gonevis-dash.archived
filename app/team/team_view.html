@@ -12,13 +12,15 @@
       <div class="panel-body s-pad-no">
         <!-- Team -->
         <div class="list-group s-mar-no">
-          <a class="list-group-item b-no" ng-repeat="t in team.list" ng-show="!t.isRemoved">
+          <a class="list-group-item b-no" ng-repeat="t in team.list" ng-show="!t.isRemoved" ng-click="view(t)">
             <h4>
               <!-- Avatar -->
-              <img class="img-circle" ng-class="{'o-fade-hard': t.isPending || !t.user.media.picture}" height="64"
-                ng-src="{{ !t.isPending ? t.user.media.thumbnail_128x128 : 'assets/img/avatar.svg' }}">
+              <img class="img-circle" ng-class="{'o-fade-hard': t.isPending || !t.user.media.picture}"
+                height="64" ng-src="{{
+                  !t.isPending && t.user.media.picture ? t.user.media.thumbnail_128x128 : 'assets/img/avatar.jpg'
+                }}">
               <!-- Name/email -->
-              <span class="s-mar-left">{{ !t.isPending ? t.user.name : t.email }}</span>
+              <span class="s-mar-left">{{ !t.isPending ? t.user.name || t.user.username : t.email }}</span>
               <!-- Right side -->
               <span class="pull-right" style="margin-top: 22px">
                 <!-- Pending label -->
@@ -27,18 +29,6 @@
                 <span class="t-small outline {{ teamRoles[t.role].color }}" style="margin-top: 8px">
                   {{ teamRoles[t.role].label | uppercase }}
                 </span>
-                <!-- Options -->
-                <span class="dropdown s-mar-left" ng-hide="t.user.id === user.id && !t.isPending" title="Options">
-                  <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
-                    id="options{{ $index }}" data-toggle="dropdown">
-                    <i class="fa fa-ellipsis-v"></i>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <!-- Remove -->
-                    <li ng-click="remove(t)"><i class="fa fa-trash text-danger"></i> Remove from team</li>
-                  </ul>
-                </span>
-              </span>
             </h4>
           </a>
         </div>
