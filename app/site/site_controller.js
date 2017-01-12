@@ -148,15 +148,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
     API.SiteSetTemplate.put({ siteId: site }, { site_template_id: data.template.id },
       function () {
-        $scope.siteTemplate = data.template.config;
-        $scope.loadingTemplate = false;
-        $mdToast.showSimple("Site template changed. ");
-      },
-      function (data) {
-        $scope.loadingTemplate = false;
-        $mdToast.showSimple(
-          data.detail ? data.detail : "Oh... Something went wrong, couldn't change site template."
-        );
+        $scope.siteTemplate = templateConfig;
+        $mdToast.showSimple("Site template updated.");
+      }, function () {
+        $mdToast.showSimple("Oh... Couldn't update site template.");
       }
     );
   });
