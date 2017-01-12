@@ -44,7 +44,7 @@ function TeamModalController($scope, $mdToast, API, team, Codekit, AuthService, 
       payload = { team_member_id: team.user.id };
     }
 
-    api.put({ site_id: AuthService.getCurrentSite }, payload,
+    api.put({ siteId: AuthService.getCurrentSite }, payload,
       function () {
         team.isRemoved = true;
         ModalsService.close('team');

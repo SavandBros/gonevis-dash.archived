@@ -27,13 +27,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
 
-    API.Site.get({ site_id: site },
+    API.Site.get({ siteId: site },
       function (data) {
         $scope.site = data;
       }
     );
 
-    API.SiteTemplateConfig.get({ site_id: site },
+    API.SiteTemplateConfig.get({ siteId: site },
       function (data) {
         $scope.siteTemplate = data.template_config;
       }
@@ -56,7 +56,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     var payload = {};
     payload[key] = value;
 
-    API.SiteUpdate.put({ site_id: site }, payload,
+    API.SiteUpdate.put({ siteId: site }, payload,
       function (data) {
         if (key === "cover_image" || key === "logo") {
           $scope.site.media[key] = data.media[key];
@@ -83,7 +83,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
       return;
     }
 
-    API.Site.delete({ site_id: site },
+    API.Site.delete({ siteId: site },
       function () {
         for (var i = 0; i < $scope.user.sites.length; i++) {
           if ($scope.user.sites[i].id === site) {
@@ -124,15 +124,16 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
    * @desc Save template config
    */
   $scope.saveConfig = function () {
-    var payload = {
-      config_fields: $scope.siteTemplate.fields
-    };
-    API.SetSiteTemplateConfig.put({ site_id: site }, payload,
+    $scope.loadingTemplate = true;
+
+    API.SetSiteTemplateConfig.put({ siteId: site }, { config_fields: $scope.siteTemplate.fields },
       function () {
-        $mdToast.showSimple("Site template updated");
+        $scope.loadingTemplate = false;
+        $mdToast.showSimple("Site template updated.");
       },
-      function () {
-        $mdToast.showSimple("Oh... Something went wrong, couldn't update site template");
+      function (data) {
+        $scope.loadingTemplate = false;
+        $mdToast.showSimple(data.detail ? data.detail : "Oh... Something went wrong, couldn't update site template.");
       }
     );
   };
@@ -141,6 +142,24 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.site.media[$scope.editing] = dolphin ? dolphin.id : null;
     $scope.updateSite($scope.editing, dolphin ? dolphin.id : null);
   });
+
+  $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function (event, data) {
+    $scope.loadingTemplate = true;
+
+    API.SiteSetTemplate.put({ siteId: site }, { site_template_id: data.template.id },
+      function () {
+        $scope.loadingTemplate = false;
+        $scope.siteTemplate = data.template.config;
+        $mdToast.showSimple("Site template updated.");
+      }, function () {
+        $mdToast.showSimple("Oh... Couldn't update site template.");
+      }
+    );
+  });
+
+  $scope.siteTemplates = function () {
+    ModalsService.open("siteTemplates", "SiteTemplatesModalController", { currentTemplate: $scope.siteTemplate });
+  };
 
   constructor();
 }

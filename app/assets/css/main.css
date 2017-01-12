@@ -1107,6 +1107,10 @@ a.thumbnail.active {
     text-shadow: 0 0 2px #000;
 }
 
+.t-shadow-small {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
 
 /* Key Value */
 
@@ -1199,4 +1203,13 @@ img.tag {
 #loading-bar-spinner .spinner-icon {
     border-top-color: #ff8a00;
     border-left-color: #ff8a00;
+}
+
+
+/* Button icon */
+
+.btn-icon {
+    position: absolute;
+    left: 30px;
+    margin: 2px;
 }
