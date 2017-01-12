@@ -50,7 +50,7 @@ function MainController($scope, $state, $mdToast, $stateParams,
     initialize: function () {
       $scope.Comment.loading = true;
 
-      API.Comments.get({ site_id: $scope.site },
+      API.Comments.get({ siteId: $scope.site },
         function (data) {
           $scope.Comment.loading = true;
           $scope.Comment.list = data.results;
@@ -98,7 +98,7 @@ function MainController($scope, $state, $mdToast, $stateParams,
     initialize: function () {
       $scope.Metrics.loading = true;
 
-      API.SiteMetrics.get({ site_id: $scope.site },
+      API.SiteMetrics.get({ siteId: $scope.site },
         function (data) {
           $scope.Metrics.loading = false;
           $scope.Metrics.list = data.metrics;

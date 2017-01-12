@@ -74,43 +74,43 @@ function API($http, $resource, ENV) {
       endpoint: "website/site/" // POST
     }, {
       name: "Site",
-      endpoint: "website/site/:site_id/" // GET, PUT
+      endpoint: "website/site/:siteId/" // GET, PUT
     }, {
       name: "SiteMetrics",
-      endpoint: "website/site/:site_id/metrics/" // GET
+      endpoint: "website/site/:siteId/metrics/" // GET
     }, {
       name: "SiteTemplateConfig",
-      endpoint: "website/site/:site_id/template-config/" // GET
+      endpoint: "website/site/:siteId/template-config/" // GET
     }, {
       name: "SetSiteTemplateConfig",
-      endpoint: "website/site/:site_id/set-template-config/" // PUT
+      endpoint: "website/site/:siteId/set-template-config/" // PUT
     }, {
       name: "SiteTemplates",
-      endpoint: "website/site/:site_id/templates/" // GET
+      endpoint: "website/site/:siteId/templates/" // GET
     }, {
       name: "SiteSetTemplate",
       endpoint: "website/site/:siteId/set-template/" // PUT
     }, {
       name: "SiteUpdate",
-      endpoint: "website/site/:site_id/update-settings/" // GET, PUT
+      endpoint: "website/site/:siteId/update-settings/" // GET, PUT
     }, {
       name: "Navigation",
-      endpoint: "website/site/:site_id/navigation/" // GET
+      endpoint: "website/site/:siteId/navigation/" // GET
     }, {
       name: "UpdateNavigation",
-      endpoint: "website/site/:site_id/update-navigation/" // GET, PUT
+      endpoint: "website/site/:siteId/update-navigation/" // GET, PUT
     }, {
       name: "Team",
-      endpoint: "website/site/:site_id/team/" // GET
+      endpoint: "website/site/:siteId/team/" // GET
     }, {
       name: "TeamInvite",
-      endpoint: "website/site/:site_id/promote-user/" // PUT
+      endpoint: "website/site/:siteId/promote-user/" // PUT
     }, {
       name: "RemoveTeam",
-      endpoint: "website/site/:site_id/remove-team-member/" // PUT
+      endpoint: "website/site/:siteId/remove-team-member/" // PUT
     }, {
       name: "RemoveTeamPending",
-      endpoint: "website/site/:site_id/remove-pending-member/" // PUT
+      endpoint: "website/site/:siteId/remove-pending-member/" // PUT
     },
     // Tagool
     {

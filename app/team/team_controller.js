@@ -24,7 +24,7 @@ function TeamController($scope, $rootScope, $state, $mdToast, API, AuthService, 
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.teamRoles = Codekit.teamRoles;
 
-    API.Team.get({ site_id: site },
+    API.Team.get({ siteId: site },
       function (data) {
         $scope.initialled = true;
         $scope.team = data;
