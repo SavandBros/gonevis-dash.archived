@@ -5,7 +5,7 @@
         <i class="fa fa-chevron-left"></i>
       </div>
       <div class="modal-body">
-        <button class="btn btn-default btn-block btn-lg" ng-class="{'btn-acitve': currentTemplate.id === template.id}"
+        <button class="btn btn-default btn-block btn-lg" ng-class="{'btn-primary': current.name === template.name}"
           ng-click="setTemplate(template)" ng-repeat="template in siteTemplates" data-dismiss="modal">
           <i class="fa btn-icon fa-cube"></i> {{ template.name | uppercase }}
         </button>
