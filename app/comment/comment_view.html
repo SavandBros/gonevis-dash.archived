@@ -16,7 +16,7 @@
           ng-repeat="c in comments" ng-show="!c.isDeleted">
           <!-- User -->
           <img class="comment pull-left img-circle"
-            ng-src="{{ c.user.media.picture.thumbnail_48x48 ? c.user.media.picture.thumbnail_48x48 : 'assets/img/avatar.svg' }}">
+            ng-src="{{ c.user.media.picture.thumbnail_48x48 ? c.user.media.picture.thumbnail_48x48 : 'assets/img/avatar.jpg' }}">
           <small>{{ c.user.name }}:</small>
           <!-- Comment -->
           <a ng-click="commentService.view(c)">{{ c.comment }}</a>
