@@ -647,6 +647,11 @@ md-toast {
 
 /* Borders */
 
+.br-x-no {
+    border-right: 0;
+    border-left: 0;
+}
+
 .br-r-no {
     border-radius: 0 !important;
 }
