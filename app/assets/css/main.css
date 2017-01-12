@@ -325,6 +325,17 @@ hr[soft] {
 }
 
 
+/* Colors */
+
+.c-white {
+    color: #fff;
+}
+
+.c-grey {
+    color: #777;
+}
+
+
 /* Avatar */
 
 .avatar {
