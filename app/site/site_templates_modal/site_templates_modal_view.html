@@ -1,15 +1,14 @@
-<div class="modal fade" id="siteTemplates">
+<div class="modal sidebar right fade" id="siteTemplates">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">Choose a template
-        <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+      <div class="modal-header modal-header-clickable" data-dismiss="modal">
+        <i class="fa fa-chevron-left"></i>
       </div>
       <div class="modal-body">
-        <div class="list-group" data-dismiss="modal">
-          <a class="list-group-item" ng-click="setTemplate(template)" ng-repeat="template in siteTemplates">
-            {{ template.name }}
-          </a>
-        </div>
+        <button class="btn btn-default btn-block btn-lg" ng-class="{'btn-acitve': currentTemplate.id === template.id}"
+          ng-click="setTemplate(template)" ng-repeat="template in siteTemplates" data-dismiss="modal">
+          <i class="fa btn-icon fa-cube"></i> {{ template.name | uppercase }}
+        </button>
       </div>
     </div>
   </div>
