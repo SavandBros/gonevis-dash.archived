@@ -20,7 +20,7 @@
                   !t.isPending && t.user.media.picture ? t.user.media.thumbnail_128x128 : 'assets/img/avatar.jpg'
                 }}">
               <!-- Name/email -->
-              <span class="s-mar-left">{{ !t.isPending ? t.user.name : t.email }}</span>
+              <span class="s-mar-left">{{ !t.isPending ? t.user.name || t.user.username : t.email }}</span>
               <!-- Right side -->
               <span class="pull-right" style="margin-top: 22px">
                 <!-- Pending label -->
