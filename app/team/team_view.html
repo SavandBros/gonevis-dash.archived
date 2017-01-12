@@ -15,8 +15,10 @@
           <a class="list-group-item b-no" ng-repeat="t in team.list" ng-show="!t.isRemoved" ng-click="view(t)">
             <h4>
               <!-- Avatar -->
-              <img class="img-circle" ng-class="{'o-fade-hard': t.isPending || !t.user.media.picture}" height="64"
-                ng-src="{{ !t.isPending ? t.user.media.thumbnail_128x128 : 'assets/img/avatar.svg' }}">
+              <img class="img-circle" ng-class="{'o-fade-hard': t.isPending || !t.user.media.picture}"
+                height="64" ng-src="{{
+                  !t.isPending && t.user.media.picture ? t.user.media.thumbnail_128x128 : 'assets/img/avatar.jpg'
+                }}">
               <!-- Name/email -->
               <span class="s-mar-left">{{ !t.isPending ? t.user.name : t.email }}</span>
               <!-- Right side -->
