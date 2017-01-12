@@ -132,9 +132,9 @@ function API($http, $resource, ENV) {
 
   function createResourceObject(attrName, endpoint) {
     apiData[attrName] = $resource(endpoint, {}, {
-      put: {method: "PUT"},
-      post: {method: "POST"},
-      patch: {method: "PATCH"}
+      put: { method: "PUT" },
+      post: { method: "POST" },
+      patch: { method: "PATCH" }
     });
   }
 
