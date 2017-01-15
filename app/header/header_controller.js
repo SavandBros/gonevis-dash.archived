@@ -27,15 +27,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
     $scope.param = $stateParams;
   }
 
-  $rootScope.$on("gonevisDash.AuthService:Authenticated", function () {
-    constructor();
-    if (!$scope.user.sites.length) {
-      $state.go("dash.site-new");
-    } else {
-      $state.go("dash.main", { s: 0 });
-    }
-  });
-
   $scope.$on("gonevisDash.SiteNewController:Create", function () {
     constructor();
   });
