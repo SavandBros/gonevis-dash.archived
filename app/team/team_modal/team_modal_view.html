@@ -1,0 +1,47 @@
+<div class="modal fade sidebar right" id="team">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header modal-header-clickable" data-dismiss="modal">
+        <i class="fa fa-chevron-left"></i>
+      </div>
+      <div class="modal-body">
+        <!-- Cover -->
+        <div class="cover" ng-class="{open: open}" ng-click="open = !open" 
+          ng-init="open = false" style="background-image:
+          url({{ team.user.media.picture ? team.user.media.thumbnail_256x256 : 'assets/img/avatar.jpg' }})">
+        </div>
+        <!-- Name -->
+        <h3 class="c-white t-shadow">
+          {{ team.user.name || team.user.username }}
+          <br>
+          <small class="c-white">{{ teamRoles[team.role].label }}</small>
+        </h3>
+        <br>
+        <!-- Info -->
+        <div class="s-mar-top-soft o-fade-soft">
+          <!-- Username -->
+          <h4>
+            <small>Username:</small>
+            <span class="pull-right">
+              <small>@</small>{{ team.user.username }}
+            </span>
+          </h4>
+          <hr>
+          <!-- Email -->
+          <h4 class="t-line kv">
+            <a href="mailto:{{ team.user.email }}" target="_blank">
+               <i class="fa fa-envelope-o"></i>
+               <span>amir@savandbros.com</span>
+            </a>
+          </h4>
+          <hr>
+        </div>
+        <!-- Remove -->
+        <br>
+        <button class="btn btn-danger stack-element" ng-click="remove(team)" ng-if="team.user.id !== user.id">
+          <i class="fa fa-trash"></i> Remove from team
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

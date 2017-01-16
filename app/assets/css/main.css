@@ -16,6 +16,10 @@ body {
     background-color: #fcfcfc;
 }
 
+textarea {
+    max-width: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -318,6 +322,17 @@ hr[soft] {
 
 .animated.ng-leave {
     display: none !important;
+}
+
+
+/* Colors */
+
+.c-white {
+    color: #fff;
+}
+
+.c-grey {
+    color: #777;
 }
 
 
@@ -632,6 +647,11 @@ md-toast {
 
 /* Borders */
 
+.br-x-no {
+    border-right: 0;
+    border-left: 0;
+}
+
 .br-r-no {
     border-radius: 0 !important;
 }
@@ -728,6 +748,10 @@ img.modal-image {
     overflow-y: scroll;
 }
 
+.modal.sidebar .modal-content::-webkit-scrollbar {
+    width: 0 !important;
+}
+
 .modal.right:not(.in) .modal-dialog {
     -webkit-transform: translate3d(25%, 0, 0);
     transform: translate3d(25%, 0, 0);
@@ -751,6 +775,21 @@ img.modal-image {
     position: absolute;
     box-shadow: 0 0 0 100000px rgba(0, 0, 0, 0.1);
     right: 0;
+}
+
+.modal .cover {
+    transition: all 0.3s ease-in-out;
+    height: 150px;
+    margin: -15px;
+    margin-bottom: -60px;
+    background-size: 100%;
+    background-position: center;
+    box-shadow: inset 0 0 10000px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid #bbb;
+}
+
+.modal .cover.open {
+    height: 256px;
 }
 
 
@@ -1064,6 +1103,29 @@ a.thumbnail.active {
     overflow: hidden;
 }
 
+.t-shadow {
+    text-shadow: 0 0 2px #000;
+}
+
+.t-shadow-small {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Key Value */
+
+.kv {
+    text-align: right;
+    width: calc(100% - 25px);
+    margin-left: 25px;
+}
+
+.kv .fa {
+    position: absolute;
+    color: #777;
+    left: 15px;
+}
+
 
 /* Outline */
 
@@ -1141,4 +1203,13 @@ img.tag {
 #loading-bar-spinner .spinner-icon {
     border-top-color: #ff8a00;
     border-left-color: #ff8a00;
+}
+
+
+/* Button icon */
+
+.btn-icon {
+    position: absolute;
+    left: 30px;
+    margin: 2px;
 }

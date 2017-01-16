@@ -24,7 +24,7 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
   function constructor() {
     $scope.navigations = [];
 
-    API.Navigation.get({ site_id: site },
+    API.Navigation.get({ siteId: site },
       function (data) {
         $scope.initialled = true;
         $scope.navigations = data.navigation;
@@ -47,7 +47,7 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
       $scope.navigations[n].sort_number = n;
     }
 
-    API.UpdateNavigation.put({ site_id: site }, { navigation: $scope.navigations },
+    API.UpdateNavigation.put({ siteId: site }, { navigation: $scope.navigations },
       function (data) {
         form.loading = false;
         $scope.navigations = data.navigation;

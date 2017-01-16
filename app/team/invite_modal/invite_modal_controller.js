@@ -38,7 +38,7 @@ function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, Au
   $scope.invite = function (form) {
     form.loading = true;
 
-    API.TeamInvite.put({ site_id: site }, form.data,
+    API.TeamInvite.put({ siteId: site }, form.data,
       function (data) {
         $rootScope.$broadcast("gonevisDash.TeamService.invite", data);
         ModalsService.close("invite");

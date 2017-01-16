@@ -19,7 +19,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: true
     })
     .state("dash.site-new", {
-      url: "/site-create",
+      url: "/new-site",
       controller: "SiteNewController",
       templateUrl: "site/site_new/site_new_view.html",
       auth: true
@@ -102,6 +102,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "account/change_pass/change_pass_view.html",
       auth: true
     })
+    .state("email-confirmation", {
+      url: "/email-verification/:token",
+      controller: "EmailConfirmationController",
+      templateUrl: "account/email_confirmation/email_confirmation_view.html",
+      auth: -1
+    })
     .state("dash.team", {
       url: "/team",
       controller: "TeamController",
@@ -128,5 +134,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: -1
     });
 
-  $urlRouterProvider.otherwise("/0/");
+  $urlRouterProvider.otherwise(function ($injector) {
+    var state = $injector.get("$state");
+    var AuthService = $injector.get("AuthService");
+
+    if (AuthService.isAuthenticated()) {
+      state.go("dash.main", { s: 0 });
+    } else {
+      state.go("signin");
+    }
+  });
 });
