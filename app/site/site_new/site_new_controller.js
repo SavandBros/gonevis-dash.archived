@@ -34,8 +34,8 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
         form.loading = false;
         var index = $scope.user.sites.push(data);
         AuthService.updateAuth($scope.user);
-        $mdToast.showSimple('Site ' + data.title + ' created');
         $rootScope.$broadcast("gonevisDash.SiteNewController:Create");
+        $mdToast.showSimple("Awesome, created " + data.title + ".");
         $state.go("dash.main", { s: index - 1 });
       },
       function (data) {
