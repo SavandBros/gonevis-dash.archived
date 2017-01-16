@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:SiteNewController
- * Controller of the gonevisDash
+ * @class SiteNewController
  *
  * @param $scope
  * @param $rootScope
@@ -14,41 +12,33 @@
  */
 function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthService) {
 
-  // Create Site form
-  $scope.form = {};
-
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
-  };
+  }
 
   /**
-   * createSite
-   *
    * @method createSite
    * @desc create site via api call
    *
-   * @param form {object}
+   * @param form {Object}
    */
   $scope.createSite = function (form) {
     form.loading = true;
 
     API.SiteNew.save(form,
-      function (data, status, headers, config) {
+      function (data) {
         form.loading = false;
-
         var index = $scope.user.sites.push(data);
         AuthService.updateAuth($scope.user);
-        $rootScope.$broadcast('gonevisDash.SiteNewController:Create');
         $mdToast.showSimple('Site ' + data.title + ' created');
         $state.go('dash.entry-new', { s: index - 1 });
+        $rootScope.$broadcast("gonevisDash.SiteNewController:Create");
       },
-      function (data, status, headers, config) {
+      function (data) {
         form.errors = data.data;
         form.loading = false;
       }
@@ -59,10 +49,11 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
 }
 
 app.controller("SiteNewController", SiteNewController);
-SiteNewController.$inject = ['$scope',
-  '$rootScope',
-  '$state',
-  '$mdToast',
-  'API',
-  'AuthService'
+SiteNewController.$inject = [
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$mdToast",
+  "API",
+  "AuthService"
 ];
