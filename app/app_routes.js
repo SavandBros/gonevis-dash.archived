@@ -19,7 +19,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: true
     })
     .state("dash.site-new", {
-      url: "/site-create",
+      url: "/new-site",
       controller: "SiteNewController",
       templateUrl: "site/site_new/site_new_view.html",
       auth: true
