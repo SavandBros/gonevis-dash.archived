@@ -1,24 +1,24 @@
 <div class="container">
   <div class="row">
     <!-- Left -->
-    <div class="col-md-6">
+    <div class="col-md-8">
       <!-- Latest comments -->
       <div class="panel panel-default" ng-if="Comment.list.length">
         <div class="panel-heading">Comments</div>
         <ul class="panel-body panel-list">
           <!-- Comment -->
-          <li class="panel-list-item a-fade" ng-repeat="c in Comment.list" ng-show="!c.isDeleted">
+          <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list" ng-show="!comment.isDeleted">
             <!-- Username -->
-            <small>{{ c.user.name }}:</small>
+            <small>{{ comment.user.name }}:</small>
             <!-- Content -->
-            <a ng-click="Comment.service.view(c)">{{ c.comment }}</a>
+            <a ng-click="Comment.service.view(comment)">{{ comment.comment }}</a>
             <!-- Options -->
             <span class="panel-list-item-button">
               <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
               <ul class="dropdown-menu">
                 <!-- Delete -->
                 <li>
-                  <a ng-click="Comment.service.remove(c)">
+                  <a ng-click="Comment.service.remove(comment)">
                     <i class="fa fa-fw fa-trash text-danger"></i> Delete
                   </a>
                 </li>
@@ -34,14 +34,16 @@
         <!-- Entry list -->
         <ul class="panel-body panel-list">
           <!-- Entry -->
-          <li class="panel-list-item s-fade" ng-repeat="e in Entry.list" ng-show="!e.isDeleted">
-            <a ui-sref="dash.entry-edit({entryId: e.id})" ng-click="Entry.service.cache(e)">{{ e.title }}</a>
+          <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list" ng-show="!entry.isDeleted">
+            <a ui-sref="dash.entry-edit({ entryId: entry.id })" ng-click="Entry.service.cache(entry)">
+              {{ entry.title }}
+            </a>
           </li>
         </ul>
       </div>
     </div>
     <!-- Right -->
-    <div class="col-md-4 col-md-offset-2">
+    <div class="col-md-4">
       <!-- Metrics:Entry -->
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->

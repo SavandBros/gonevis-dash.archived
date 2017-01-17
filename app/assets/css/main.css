@@ -276,6 +276,11 @@ hr[soft] {
     cursor: pointer;
 }
 
+.sv-sorting-in-progress,
+.c-move {
+    cursor: move;
+}
+
 
 /* Hovers */
 
@@ -652,8 +657,34 @@ md-toast {
     border-left: 0;
 }
 
+.br-right-no {
+    border-right: 0;
+}
+
+.br-left-no {
+    border-left: 0;
+}
+
+.br-right-no {
+    border-right: 0;
+}
+
+.br-left-no {
+    border-left: 0;
+}
+
 .br-r-no {
     border-radius: 0 !important;
+}
+
+.br-r-right-no {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.br-r-left-no {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
 }
 
 
@@ -939,14 +970,31 @@ img.comment {
 
 /* Load more */
 
-.load-more .btn {
-    margin-bottom: 15px;
-}
-
 .load-more {
     margin: 15px 0;
     text-align: center;
 }
+
+.load-more .btn {
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 15px;
+    padding: 0;
+    width: 130px;
+    height: 130px;
+    border-radius: 100%;
+    font-size: 1.1em;
+    color: #d17100 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    background: transparent !important;
+    opacity: 1 !important;
+}
+
+.load-more .btn:hover,
+.load-more .btn:active,
+.load-more .btn:focus {
+    border-color: #d17100 !important;
+}
+
 
 
 /* Primary color */
@@ -1212,4 +1260,12 @@ img.tag {
     position: absolute;
     left: 30px;
     margin: 2px;
+}
+
+
+/* SV Reorder */
+
+.sv-visibility-hidden * {
+    transition: all 0.3s ease-in-out;
+    opacity: 0.6;
 }
