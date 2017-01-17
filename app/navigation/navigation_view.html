@@ -16,45 +16,48 @@
         </ng-include>
         <!-- Form -->
         <form name="form" ng-submit="update(form)" sv-root sv-part="navigations">
-          <div class="form-group sz-full s-mar-bottom-list" ng-repeat="nav in navigations" sv-element>
+          <div class="form-group sz-full s-mar-bottom-list" ng-repeat="nav in navigations" sv-element style="visibility: visible !important; opacity: 1 !important">
             <!-- Helper -->
             <div sv-helper class="helper-left" style="height: 34px">
-              <i class="fa fa-arrows-v fa-border fa-2x"></i>
             </div>
             <!-- Handle -->
-            <div class="col-xs-1" sv-handle>
-              <i class="fa fa-reorder" style="margin-top: 8px"></i>
+            <div class="col-xs-1 s-pad-no" sv-handle>
+              <button class="btn btn-default btn-block br-r-right-no br-right-no" type="button">
+                <i class="fa fa-reorder"></i>
+              </button>
             </div>
             <!-- Label -->
-            <div class="col-xs-2">
-              <input type="text" placeholder="Label" ng-model="nav.label" class="form-control sz-full">
+            <div class="col-xs-2 s-pad-no">
+              <input type="text" placeholder="Label" ng-model="nav.label" class="form-control br-r-no br-right-no sz-full">
             </div>
             <!-- URL -->
-            <div class="col-xs-3">
-              <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control sz-full" required />
+            <div class="col-xs-4 s-pad-no">
+              <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control br-r-no br-right-no sz-full" required />
             </div>
             <!-- Tooltip -->
-            <div class="col-xs-2">
-              <input type="text" placeholder="Tooltip" ng-model="nav.tooltip" class="form-control sz-full">
+            <div class="col-xs-2 s-pad-no">
+              <input type="text" placeholder="Tooltip" ng-model="nav.tooltip" class="form-control br-r-no br-right-no sz-full">
             </div>
             <!-- Icon -->
-            <div class="col-xs-1">
-              <input type="text" placeholder="Icon" ng-model="nav.icon" class="form-control sz-full">
+            <div class="col-xs-1 s-pad-no">
+              <input type="text" placeholder="Icon class" ng-model="nav.icon" class="form-control br-r-no br-right-no sz-full">
             </div>
             <!-- Color -->
-            <div class="col-xs-1">
-              <input type="text" placeholder="Color" ng-model="nav.color" class="form-control sz-full">
+            <div class="col-xs-1 s-pad-no">
+              <input type="text" placeholder="Color" ng-model="nav.color" class="form-control br-r-no br-right-no color sz-full">
             </div>
             <!-- Delete -->
-            <div class="col-xs-1">
-              <button class="btn btn-default btn-block" ng-click="remove($index)" type="button">
-                <i class="fa fa-trash"></i>
+            <div class="col-xs-1 s-pad-no">
+              <button class="btn btn-default btn-block br-r-left-no" ng-click="remove($index)" type="button">
+                <i class="fa fa-close"></i>
               </button>
             </div>
           </div>
           <!-- Update -->
-          <div class="form-group s-pad-right-soft s-mar-top-soft pull-right">
-            <button class="btn btn-primary">Update</button>
+          <div class="form-group s-mar-top-soft pull-right">
+            <button class="btn btn-primary">
+              <i class="fa fa-check fa-fw"></i> Save Changes
+            </button>
           </div>
         </form>
       </div>
