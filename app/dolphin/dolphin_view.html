@@ -1,123 +1,114 @@
 <div class="container container-light pad-top">
   <div class="row">
-    <!-- Upload -->
-    <div class="col-md-3 col-xs-12 pull-right">
-      <div class="panel panel-default s-mar-x-soft">
-        <div class="panel-heading"><i class="fa fa-fw fa-upload text-primary"></i> Upload File</div>
-        <div class="panel-body">
-          <!-- Select -->
-          <button type="file" class="btn btn-primary" ngf-select="uploadFile($files, $invalidFiles)"
-            ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
-            <i class="fa fa-fw fa-plus"></i> Select File
+    <!-- Top bar -->
+    <div class="row animated fadeIn s-mar-no" ng-show="initialled">
+      <!-- Search form -->
+      <div class="col-sm-9">
+        <ng-include src="'basement/search/search_form.html'"></ng-include>
+      </div>
+      <!-- View buttons -->
+      <div class="col-sm-3 col-md-2 col-xs-9">
+        <ng-include src="'basement/view/view_buttons.html'"></ng-include>
+      </div>
+      <!-- Upload -->
+      <div class="col-sm-12 col-md-1 col-xs-3 s-mar-bottom-soft">
+        <button type="file" class="btn btn-primary btn-block" ngf-select="uploadFile($files, $invalidFiles)"
+          ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
+          <i class="fa fa-fw fa-upload"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search noresult -->
+    <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+
+    <!-- Nothing -->
+    <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled">
+    </ng-include>
+
+    <!-- List -->
+    <div class="animated fadeIn" ng-if="initialled">
+
+      <!-- Grid view -->
+      <div class="col-md-3 col-sm-3 col-xs-6 text-center" ng-repeat="d in dolphins"
+        ng-show="!d.isDeleted" ng-class="{'animated zoomOut': d.isDeleted}" ng-if="view == 'grid'">
+        <!-- Link -->
+        <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})"
+          ng-class="{'not-image': !d.is_image}">
+          <!-- Icon -->
+          <i class="fa fa-5x" ng-class="{
+            'fa-file-archive-o': d.extRaw == 'ZIP',
+            'fa-file-pdf-o': d.extRaw == 'PDF'
+            }" ng-if="!d.is_image">
+          </i>
+          <!-- Caption -->
+          <p class="caption">{{ d.meta_data.name }}</p>
+        </a>
+        <!-- Options -->
+        <div class="dropdown options" title="options">
+          <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade"
+            id="options{{ $index }}" data-toggle="dropdown">
+            <i class="fa fa-fw fa-ellipsis-v"></i>
           </button>
+          <ul class="dropdown-menu">
+            <li><a ng-click="dolphinService.view(d)"><i class="fa fa-eye"></i> View</a></li>
+            <li><a ng-click="dolphinService.remove(d)"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+          </ul>
+        </div>
+      </div>
 
-          <!-- Progress -->
-          <div class="progress s-mar-top-soft s-mar-no a-fade" ng-class="{active: file.progress != 100}" 
-               ng-repeat="file in upload.files" ng-hide="file.dismiss">
-            <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
-              <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
-            </div>
-          </div>
+      <!-- List view -->
+      <div ng-if="view == 'list'" class="panel panel-default s-box s-mar-x-soft">
+        <div class="panel-body s-pad-y-no">
+          <ul class="list-unstyled s-mar-no">
+            <!-- List -->
+            <li class="row list-panel s-fade" ng-repeat="d in dolphins"
+              ng-show="!d.isDeleted" ng-class="{'animated zoomOut': d.isDeleted}">
+              <!-- Left -->
+              <div class="col-md-11 row s-pad-no">
+                <!-- Image -->
+                <div class="col-xs-1">
+                  <!-- Img -->
+                  <img ng-src="{{ d.thumbnail_48x48 }}" class="s-pad-right-soft" ng-if="d.is_image">
+                  <!-- Icon -->
+                  <i class="fa fa-2x o-fade" style="background: #eee;padding: 10px 12px;" ng-class="{
+                    'fa-file-archive-o': d.extRaw == 'ZIP',
+                    'fa-file-pdf-o': d.extRaw == 'PDF'
+                    }" ng-if="!d.is_image">
+                  </i>
+                </div>
+                <!-- Title and info -->
+                <div class="col-xs-11 t-line">
+                  <!-- Title -->
+                  <a ng-click="action(d)">{{ d.meta_data.name }}</a>
+                  <br>
+                  <!-- Info -->
+                  <small class="o-fade-soft">
+                    <i class="fa fa-fw fa-hdd-o" title="Size"></i> {{ d.size_human }}
+                    <i class="fa fa-fw fa-file-o s-mar-left-soft" title="Extension"></i> {{ d.extRaw | lowercase }}
+                  </small>
+                </div>
+              </div>
+              <!-- Options -->
+              <div class="dropdown options options-mid col-md-1 text-right s-pad-no" title="Options">
+                <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade"
+                  id="options{{ $index }}" data-toggle="dropdown">
+                  <i class="fa fa-fw fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a ng-click="dolphinService.view(d)"><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-click="dolphinService.remove(d)"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <!-- Left side -->
-    <div class="col-md-9">
-      <!-- Top bar -->
-      <ng-include src="'basement/view/top_bar.html'"></ng-include>
-
-      <!-- Search noresult -->
-      <ng-include src="'basement/search/search_noresult.html'"></ng-include>
-
-      <!-- Nothing -->
-      <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled">
-      </ng-include>
-
-      <!-- List -->
-      <div class="animated fadeIn" ng-if="initialled">
-
-        <!-- Grid view -->
-        <div class="col-md-3 col-sm-3 col-xs-6 text-center" ng-repeat="d in dolphins"
-          ng-show="!d.isDeleted" ng-class="{'animated zoomOut': d.isDeleted}" ng-if="view == 'grid'">
-          <!-- Link -->
-          <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})"
-            ng-class="{'not-image': !d.is_image}">
-            <!-- Icon -->
-            <i class="fa fa-5x" ng-class="{
-              'fa-file-archive-o': d.extRaw == 'ZIP',
-              'fa-file-pdf-o': d.extRaw == 'PDF'
-              }" ng-if="!d.is_image">
-            </i>
-            <!-- Caption -->
-            <p class="caption">{{ d.meta_data.name }}</p>
-          </a>
-          <!-- Options -->
-          <div class="dropdown options" title="options">
-            <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade"
-              id="options{{ $index }}" data-toggle="dropdown">
-              <i class="fa fa-fw fa-ellipsis-v"></i>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a ng-click="dolphinService.view(d)"><i class="fa fa-eye"></i> View</a></li>
-              <li><a ng-click="dolphinService.remove(d)"><i class="fa fa-trash text-danger"></i> Delete</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- List view -->
-        <div ng-if="view == 'list'" class="panel panel-default s-box s-mar-x-soft">
-          <div class="panel-body s-pad-y-no">
-            <ul class="list-unstyled s-mar-no">
-              <!-- List -->
-              <li class="row list-panel s-fade" ng-repeat="d in dolphins"
-                ng-show="!d.isDeleted" ng-class="{'animated zoomOut': d.isDeleted}">
-                <!-- Left -->
-                <div class="col-md-11 row s-pad-no">
-                  <!-- Image -->
-                  <div class="col-xs-1">
-                    <!-- Img -->
-                    <img ng-src="{{ d.thumbnail_48x48 }}" class="s-pad-right-soft" ng-if="d.is_image">
-                    <!-- Icon -->
-                    <i class="fa fa-2x o-fade" style="background: #eee;padding: 10px 12px;" ng-class="{
-                      'fa-file-archive-o': d.extRaw == 'ZIP',
-                      'fa-file-pdf-o': d.extRaw == 'PDF'
-                      }" ng-if="!d.is_image">
-                    </i>
-                  </div>
-                  <!-- Title and info -->
-                  <div class="col-xs-11 t-line">
-                    <!-- Title -->
-                    <a ng-click="action(d)">{{ d.meta_data.name }}</a>
-                    <br>
-                    <!-- Info -->
-                    <small class="o-fade-soft">
-                      <i class="fa fa-fw fa-hdd-o" title="Size"></i> {{ d.size_human }}
-                      <i class="fa fa-fw fa-file-o s-mar-left-soft" title="Extension"></i> {{ d.extRaw | lowercase }}
-                    </small>
-                  </div>
-                </div>
-                <!-- Options -->
-                <div class="dropdown options options-mid col-md-1 text-right s-pad-no" title="Options">
-                  <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade"
-                    id="options{{ $index }}" data-toggle="dropdown">
-                    <i class="fa fa-fw fa-ellipsis-v"></i>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a ng-click="dolphinService.view(d)"><i class="fa fa-eye"></i> View</a></li>
-                    <li><a ng-click="dolphinService.remove(d)"><i class="fa fa-trash text-danger"></i> Delete</a></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- More -->
-      <ng-include src="'basement/pagination/pagination_loadmore.html'"
-        ng-init="pageForm = dolphinForm" ng-if="initialled">
-      </ng-include>
-    </div>
+    <!-- More -->
+    <ng-include src="'basement/pagination/pagination_loadmore.html'"
+      ng-init="pageForm = dolphinForm" ng-if="initialled">
+    </ng-include>
   </div>
 </div>
