@@ -276,6 +276,11 @@ hr[soft] {
     cursor: pointer;
 }
 
+.sv-sorting-in-progress,
+.c-move {
+    cursor: move;
+}
+
 
 /* Hovers */
 
