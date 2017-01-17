@@ -970,14 +970,31 @@ img.comment {
 
 /* Load more */
 
-.load-more .btn {
-    margin-bottom: 15px;
-}
-
 .load-more {
     margin: 15px 0;
     text-align: center;
 }
+
+.load-more .btn {
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 15px;
+    padding: 0;
+    width: 130px;
+    height: 130px;
+    border-radius: 100%;
+    font-size: 1.1em;
+    color: #d17100 !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+    background: transparent !important;
+    opacity: 1 !important;
+}
+
+.load-more .btn:hover,
+.load-more .btn:active,
+.load-more .btn:focus {
+    border-color: #d17100 !important;
+}
+
 
 
 /* Primary color */
@@ -1244,6 +1261,7 @@ img.tag {
     left: 30px;
     margin: 2px;
 }
+
 
 /* SV Reorder */
 
