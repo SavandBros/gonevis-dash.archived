@@ -652,8 +652,34 @@ md-toast {
     border-left: 0;
 }
 
+.br-right-no {
+    border-right: 0;
+}
+
+.br-left-no {
+    border-left: 0;
+}
+
+.br-right-no {
+    border-right: 0;
+}
+
+.br-left-no {
+    border-left: 0;
+}
+
 .br-r-no {
     border-radius: 0 !important;
+}
+
+.br-r-right-no {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.br-r-left-no {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
 }
 
 
@@ -1212,4 +1238,11 @@ img.tag {
     position: absolute;
     left: 30px;
     margin: 2px;
+}
+
+/* SV Reorder */
+
+.sv-visibility-hidden * {
+    transition: all 0.3s ease-in-out;
+    opacity: 0.6;
 }
