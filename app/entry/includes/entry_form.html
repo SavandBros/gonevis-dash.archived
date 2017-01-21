@@ -46,11 +46,17 @@
             </div>
           </script>
         </div>
-        <!-- Cover select -->
+        <!-- Cover select and view entry on site -->
         <div class="form-group">
           <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection()" type="button">
             <i class="fa fa-fw fa-image"></i> Select cover image
           </button>
+          <a href="{{ form.get_absolute_url }}"
+             class="btn btn-default btn-sm btn-block"
+             target="_blank"
+             ng-if="editing">
+            <i class="fa fa-eye"></i> View entry on site
+          </a>
         </div>
         <!-- Advanced options -->
         <div class="form-group">
