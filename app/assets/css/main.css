@@ -588,29 +588,28 @@ md-toast {
     border-bottom-color: #d17100 !important;
 }
 
+.editor {
+    font-size: 16px;
+}
+
 .editor p {
-    font-size: 1.7rem;
-    line-height: 18px !important;
+    line-height: 24px;
+    margin-bottom: 16px;
 }
 
-.editor h1 {
-    line-height: 80px !important;
-}
-
-.editor h2 {
-    line-height: 70px !important;
-}
-
+.editor h1,
+.editor h2,
 .editor h3 {
-    line-height: 60px !important;
-}
-
-.editor h4 {
-    line-height: 50px !important;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 .editor img {
     max-width: 100%;
+}
+
+.editor li+li {
+    margin-top: 0.25em;
 }
 
 
