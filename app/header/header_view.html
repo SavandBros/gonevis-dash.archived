@@ -10,7 +10,7 @@
       <a class="navbar-brand" ui-sref="dash.main({s: param.s})">Dash</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
-      <ul class="nav navbar-nav" ng-if="auth.isAuthenticated()">
+      <ul class="nav navbar-nav" ng-if="auth.isAuthenticated() && param.s">
         <li ng-class="{'active': state.includes('dash.entry-new')}">
           <a ui-sref="dash.entry-new">Nevis</a>
         </li>
@@ -49,10 +49,15 @@
                 <small class="o-fade">Logged in as {{ user.email }}</small>
               </a>
             </li>
-            <li role="separator" class="divider" ng-if="user.sites"></li>
+            <li role="separator" class="divider"></li>
             <li ng-repeat="site in user.sites" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
               <a ui-sref="dash.site" class="nav-link-in-link"><i class="fa fa-cog" ng-if="param.s == $index"></i></a>
+            </li>
+            <li>
+              <a ui-sref="site-new">
+                Create a new site<br>
+              </a>
             </li>
             <li role="separator" class="divider"></li>
             <li><a ng-click="auth.logout()">Logout</a></li>
