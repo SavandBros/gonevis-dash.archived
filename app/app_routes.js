@@ -18,12 +18,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "main/main_view.html",
       auth: true
     })
-    .state("dash.site-new", {
-      url: "/new-site",
-      controller: "SiteNewController",
-      templateUrl: "site/site_new/site_new_view.html",
-      auth: true
-    })
     .state("dash.navigation", {
       url: "/navigation",
       controller: "NavigationController",
@@ -115,6 +109,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: true,
     })
     // Other states that are not a child of dash state
+    .state("site-new", {
+      url: "/new-site",
+      controller: "SiteNewController",
+      templateUrl: "site/site_new/site_new_view.html",
+      auth: true
+    })
     .state("signin", {
       url: "/login",
       controller: "SigninController",
