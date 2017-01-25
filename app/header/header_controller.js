@@ -30,7 +30,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
   $rootScope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
     if (!$scope.user.sites.length) {
-      $state.go("dash.site-new");
+      $state.go("site-new");
     } else {
       $state.go("dash.main", { s: 0 });
     }

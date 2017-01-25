@@ -78,7 +78,7 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
 
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
         $mdToast.showSimple("Welcome " + data.user.username);
-        $state.go("dash.site-new");
+        $state.go("site-new");
       }
     );
   });
