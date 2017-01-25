@@ -7,6 +7,11 @@
   <div class="col-md-6 col-md-offset-1">
     <div class="panel panel-default s-box s-mar-top">
       <h3 class="panel-heading">
+        <!-- Logo -->
+        <img class="img-circle"
+             ng-src="{{site.media.logo.thumbnail_48x48}}"
+             title="Logo"
+             ng-if="site.media.logo">
         <!-- Title -->
         {{ site.title }}
         <!-- Image -->
