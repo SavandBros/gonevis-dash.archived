@@ -48,12 +48,12 @@
                   }}">
               </div>
               <!-- Title and slug -->
-              <div class="col-md-4 col-xs-8 t-line">
+              <div class="col-lg-2 col-md-9 col-xs-8 t-line">
                 <a ng-click="tagService.view(tag)">{{ tag.name }}</a>
                 <small class="dis-b o-fade">#{{ tag.slug }}</small>
               </div>
               <!-- Description -->
-              <div class="col-lg-5 text-left o-fade t-line hidden-xs hidden-sm hidden-md">{{ tag.description }}</div>
+              <div class="col-lg-7 text-left o-fade t-line hidden-xs hidden-sm hidden-md">{{ tag.description }}</div>
               <!-- Count -->
               <div class="col-md-1 col-xs-2 text-right" style="padding: 10px 0">
                 <span class="badge">{{ tag.tagged_items_count | number }}</span>
