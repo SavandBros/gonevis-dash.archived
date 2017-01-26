@@ -95,12 +95,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
         $mdToast.showSimple("Site deleted");
-
-        if ($scope.user.sites.length === 0) {
-          $state.go("site-new");
-        } else {
-          ModalsService.open("sites", "SiteModalController");
-        }
+        $state.go($scope.user.sites ? "site-new" : "dash.main");
       },
       function () {
         $mdToast.showSimple("Oh... Something went wrong, couldn't delete site");
@@ -151,7 +146,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
         $scope.loadingTemplate = false;
         $scope.siteTemplate = data.template.config;
         $mdToast.showSimple("Site template updated.");
-      }, function () {
+      },
+      function () {
         $mdToast.showSimple("Oh... Couldn't update site template.");
       }
     );

@@ -15,6 +15,8 @@
 function MainController($scope, $state, $mdToast, $stateParams,
   AuthService, API, Codekit, CommentService, EntryService) {
 
+  var site = AuthService.getCurrentSite();
+
   /**
    * @method constructor
    * @desc Init function for controller
@@ -22,7 +24,6 @@ function MainController($scope, $state, $mdToast, $stateParams,
   function constructor() {
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser();
-    $scope.site = AuthService.getCurrentSite();
 
     $scope.state = $state;
     $scope.param = $stateParams;
@@ -50,7 +51,7 @@ function MainController($scope, $state, $mdToast, $stateParams,
     initialize: function () {
       $scope.Comment.loading = true;
 
-      API.Comments.get({ siteId: $scope.site },
+      API.Comments.get({ site: site },
         function (data) {
           $scope.Comment.loading = true;
           $scope.Comment.list = data.results;
@@ -77,7 +78,7 @@ function MainController($scope, $state, $mdToast, $stateParams,
     initialize: function () {
       $scope.Entry.loading = true;
 
-      API.Entries.get({ site: $scope.site },
+      API.Entries.get({ site: site },
         function (data) {
           $scope.Entry.loading = true;
           $scope.Entry.list = data.results;
@@ -98,7 +99,7 @@ function MainController($scope, $state, $mdToast, $stateParams,
     initialize: function () {
       $scope.Metrics.loading = true;
 
-      API.SiteMetrics.get({ siteId: $scope.site },
+      API.SiteMetrics.get({ siteId: site },
         function (data) {
           $scope.Metrics.loading = false;
           $scope.Metrics.list = data.metrics;

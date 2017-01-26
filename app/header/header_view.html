@@ -12,25 +12,25 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav" ng-if="auth.isAuthenticated() && param.s">
         <li ng-class="{'active': state.includes('dash.entry-new')}">
-          <a ui-sref="dash.entry-new">Nevis</a>
+          <a ui-sref="dash.entry-new({s: param.s})">Nevis</a>
         </li>
         <li ng-class="{'active': state.includes('dash.entry-list')}">
-          <a ui-sref="dash.entry-list">Entries</a>
+          <a ui-sref="dash.entry-list({s: param.s})">Entries</a>
         </li>
         <li ng-class="{'active': state.includes('dash.tag-list')}">
-          <a ui-sref="dash.tag-list">Tags</a>
+          <a ui-sref="dash.tag-list({s: param.s})">Tags</a>
         </li>
         <li ng-class="{'active': state.includes('dash.comment-list')}">
-          <a ui-sref="dash.comment-list">Comments</a>
+          <a ui-sref="dash.comment-list({s: param.s})">Comments</a>
         </li>
         <li ng-class="{'active': state.includes('dash.dolphin')}">
-          <a ui-sref="dash.dolphin">Dolphin</a>
+          <a ui-sref="dash.dolphin({s: param.s})">Dolphin</a>
         </li>
         <li ng-class="{'active': state.includes('dash.navigation')}">
-          <a ui-sref="dash.navigation">Navigations</a>
+          <a ui-sref="dash.navigation({s: param.s})">Navigations</a>
         </li>
         <li ng-class="{'active': state.includes('dash.team')}">
-          <a ui-sref="dash.team">Team</a>
+          <a ui-sref="dash.team({s: param.s})">Team</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -41,26 +41,26 @@
           <a ui-sref="signup">Register</a>
         </li>
         <li class="dropdown" ng-if="auth.isAuthenticated()">
-          <a class="dropdown-toggle" data-toggle="dropdown">{{ user.name || user.username }} <i class="fa fa-caret-down o-fade-hard"></i></a>
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            {{ user.name || user.username }} <i class="fa fa-caret-down o-fade-hard"></i>
+          </a>
           <ul class="dropdown-menu">
             <li>
-              <a ui-sref="dash.user({ s: param.s })">
+              <a ui-sref="dash.user({s: param.s})">
                 View Account<br>
-                <small class="o-fade">Logged in as {{ user.email }}</small>
+                <small class="o-fade">{{ user.email }}</small>
               </a>
             </li>
             <li role="separator" class="divider"></li>
             <li ng-repeat="site in user.sites" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
-              <a ui-sref="dash.site" class="nav-link-in-link"><i class="fa fa-cog" ng-if="param.s == $index"></i></a>
+              <a ui-sref="dash.site({s: param.s})" class="nav-link-in-link"><i class="fa fa-cog" ng-if="param.s == $index"></i></a>
             </li>
             <li>
-              <a ui-sref="site-new">
-                Create a new site<br>
-              </a>
+              <a ui-sref="site-new" class="o-fade small">CREATE NEW SITE</a>
             </li>
             <li role="separator" class="divider"></li>
-            <li><a ng-click="auth.logout()">Logout</a></li>
+            <li><a ng-click="auth.logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
           </ul>
         </li>
       </ul>

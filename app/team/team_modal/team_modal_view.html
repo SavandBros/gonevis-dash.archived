@@ -25,16 +25,16 @@
             <span class="pull-right">
               <small>@</small>{{ team.user.username }}
             </span>
+            <hr>
           </h4>
-          <hr>
           <!-- Email -->
-          <h4 class="t-line kv">
+          <h4 class="t-line kv" ng-if="team.user.email">
             <a href="mailto:{{ team.user.email }}" target="_blank">
                <i class="fa fa-envelope-o"></i>
-               <span>amir@savandbros.com</span>
+               <span>{{ team.user.email }}</span>
             </a>
+            <hr>
           </h4>
-          <hr>
         </div>
         <!-- Remove -->
         <br>

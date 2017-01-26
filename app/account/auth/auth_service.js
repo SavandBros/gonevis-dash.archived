@@ -136,11 +136,9 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
    */
   function getCurrentSite() {
     var sites = getAuthenticatedUser().sites;
+    var siteIndex = $stateParams.s || 0;
 
-    if (sites.length) {
-      var siteIndex = $stateParams.s || 0;
-      return getAuthenticatedUser().sites[siteIndex].id;
-    }
+    return sites[siteIndex] ? sites[siteIndex].id : false;
   }
 
   /**
