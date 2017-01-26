@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @class RunForestRun
+ * @class RunNevisRun
  *
  * @param $rootScope
  * @param $mdToast
@@ -15,7 +15,7 @@
  * @param DolphinService
  * @param textAngularManager
  */
-function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsService, AuthService,
+function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsService, AuthService,
   taOptions, taRegisterTool, taToolFunctions, DolphinService, textAngularManager) {
 
   /**
@@ -144,8 +144,8 @@ function RunForestRun($rootScope, $mdToast, $state, editableOptions, ModalsServi
   });
 }
 
-app.run(RunForestRun);
-RunForestRun.$inject = [
+app.run(RunNevisRun);
+RunNevisRun.$inject = [
   "$rootScope",
   "$mdToast",
   "$state",
