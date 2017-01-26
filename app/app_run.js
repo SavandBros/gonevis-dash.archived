@@ -87,7 +87,7 @@ function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsServic
       event.preventDefault();
     }
     // Check current site, if not set use first one
-    if (toState.name.indexOf("dash.") !== -1 && !parseInt(toParams.s) && parseInt(toParams.s) !== 0) {
+    if (toState.name.indexOf("dash.") !== -1 && !AuthService.getAuthenticatedUser().sites[toParams.s]) {
       event.preventDefault();
       toParams.s = 0;
       $state.go(toState.name, toParams);
