@@ -8,7 +8,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state("dash", {
       url: "/:s",
       abstract: true,
-      controller: "DashController",
       template: "<ui-view/>",
       auth: true
     })
