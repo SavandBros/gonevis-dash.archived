@@ -64,6 +64,12 @@
                   style="padding: 14px 0" data-toggle="dropdown"></i>
                 <ul class="dropdown-menu">
                   <li><a ng-click="tagService.view(tag)"><i class="fa fa-eye"></i> View</a></li>
+                  <li>
+                    <a href="{{ tag.absolute_uri }}" target="_blank">
+                      <i class="fa fa-fw fa-external-link"></i> View on site
+                    </a>
+                  </li>
+                  <li class="divider"></li>
                   <li><a ng-click="tagService.remove(tag)"><i class="fa fa-trash text-danger"></i> Delete</a></li>
                 </ul>
               </div>
