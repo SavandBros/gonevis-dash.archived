@@ -4,11 +4,11 @@
 <!-- Main -->
 <div class="container container-light animated fadeIn">
   <!-- Site settings -->
-  <div class="col-md-6 col-md-offset-1">
+  <div class="col-md-7">
     <div class="panel panel-default s-box s-mar-top">
       <h3 class="panel-heading">
         <!-- Logo -->
-        <img class="img-circle" ng-src="{{ site.media.logo.thumbnail_48x48 }}" title="Logo" ng-if="site.media.logo">
+        <img class="img-circle heading-image" ng-if="site.media.logo" ng-src="{{ site.media.logo.thumbnail_48x48 }}">
         <!-- Title -->
         {{ site.title }}
         <!-- Image -->
@@ -60,7 +60,7 @@
     </div>
   </div>
   <!-- Template -->
-  <div class="col-md-4 animated fadeIn" ng-if="siteTemplate">
+  <div class="col-md-5 animated fadeIn" ng-if="siteTemplate">
     <form class="panel panel-default s-box s-mar-top">
       <h3 class="panel-heading">Appearance</h3>
       <div class="panel-body">
