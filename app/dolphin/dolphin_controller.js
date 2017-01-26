@@ -30,11 +30,12 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.dolphinService = DolphinService;
     $scope.dolphinForm = {};
     $scope.search = Search;
-    $scope.nothingText = "It's lonely here... Try adding some dolphins.";
+    $scope.nothingText = "It's lonely here... Go ahead and upload some dolphins.";
 
     if ($rootScope.selectionMode) {
       $scope.currentTab = "dolphin";
     }
+
     var payload = { site: site };
     API.Dolphins.get(payload,
       function (data) {
