@@ -24,6 +24,7 @@ function TagModalController($scope, TagService, tag, DolphinService, Slug, Modal
     $scope.tagService = TagService;
     $scope.dolphinService = DolphinService;
     $scope.modalsService = ModalsService;
+    $scope.editing = true;
     $scope.form = { data: tag, oldSlug: tag.slug };
   }
 

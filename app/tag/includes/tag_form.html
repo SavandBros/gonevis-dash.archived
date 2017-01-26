@@ -12,8 +12,14 @@
 		placeholder="Descroption"></textarea>
   <span id="description" class="help-block" ng-show="form.errors.description">{{ form.errors.slug[0] }}</span>
 </div>
-<!-- Advanced Options -->
+<!-- Advanced Options and View on site -->
 <div class="form-group">
+  <a href="{{ form.data.absolute_uri }}"
+     class="btn btn-default btn-sm btn-block"
+     target="_blank"
+     ng-if="editing">
+    <i class="fa fa-external-link"></i> View on site
+  </a>
   <button class="btn btn-default btn-sm btn-block"
     type="button" ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
     <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
