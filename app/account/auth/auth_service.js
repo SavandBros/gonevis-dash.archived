@@ -138,9 +138,7 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
     var sites = getAuthenticatedUser().sites;
     var siteIndex = $stateParams.s || 0;
 
-    if (sites.length - 1 > siteIndex) {
-      return getAuthenticatedUser().sites[siteIndex].id;
-    }
+    return sites[siteIndex] ? sites[siteIndex].id : false;
   }
 
   /**
