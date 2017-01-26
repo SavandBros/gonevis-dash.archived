@@ -4,19 +4,19 @@
 <!-- Main -->
 <div class="container container-light animated fadeIn">
   <!-- Site settings -->
-  <div class="col-md-6 col-md-offset-1">
+  <div class="col-md-7">
     <div class="panel panel-default s-box s-mar-top">
       <h3 class="panel-heading">
+        <!-- Logo -->
+        <img class="img-circle heading-image" ng-if="site.media.logo" ng-src="{{ site.media.logo.thumbnail_48x48 }}">
         <!-- Title -->
         {{ site.title }}
         <!-- Image -->
         <div class="btn-group pull-right" role="group">
-          <button class="btn btn-default btn-sm" ng-click="selectImage('logo')"
-            title="Set or Change logo of site.">
+          <button class="btn btn-default btn-sm" ng-click="selectImage('logo')" title="Change site logo.">
             <i class="fa fa-image"></i> Logo
           </button>
-          <button class="btn btn-default btn-sm" ng-click="selectImage('cover_image')"
-            title="Set or Change cover image of site.">
+          <button class="btn btn-default btn-sm" ng-click="selectImage('cover_image')" title="Change site cover image.">
             <i class="fa fa-image"></i> Cover Image
           </button>
         </div>
@@ -60,7 +60,7 @@
     </div>
   </div>
   <!-- Template -->
-  <div class="col-md-4 animated fadeIn" ng-if="siteTemplate">
+  <div class="col-md-5 animated fadeIn" ng-if="siteTemplate">
     <form class="panel panel-default s-box s-mar-top">
       <h3 class="panel-heading">Appearance</h3>
       <div class="panel-body">
@@ -86,7 +86,8 @@
           <label for="{{ key }}">{{ field.verbose_name }}</label>
           <!-- Text field -->
           <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
-            placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value"></textarea>
+            placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
+          </textarea>
           <span class="help-block">{{ field.help_text }}</span>
         </div>
         <hr>

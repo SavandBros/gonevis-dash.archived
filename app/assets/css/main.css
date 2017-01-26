@@ -447,6 +447,14 @@ md-toast {
     padding: 18px 12px !important;
 }
 
+.heading-image {
+    margin: -10px 0;
+    margin-right: 5px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
 
 /* Dolphin */
 
