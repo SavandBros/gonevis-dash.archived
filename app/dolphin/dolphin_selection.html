@@ -8,63 +8,65 @@
         </h4>
       </div>
       <div class="modal-body">
-        <!-- Content -->
-        <div>
-          <!-- Tabs -->
-          <ul class="nav nav-tabs s-mar-bottom-soft">
-            <li ng-class="{active: currentTab == 'dolphin'}">
-              <a ng-click="currentTab = 'dolphin'">Dolphin</a>
-            </li>
-            <li ng-class="{active: currentTab == 'upload'}">
-              <a ng-click="currentTab = 'upload'">
-                <i class="fa fa-upload"></i> Upload More</a>
-            </li>
-            <button class="btn btn-link pull-right" ng-click="action(null)" data-dismiss="modal">
-              <span class="text-danger">Remove Media</span>
-            </button>
-          </ul>
+        <!-- Tabs -->
+        <ul class="nav nav-tabs s-mar-bottom-soft">
+          <li ng-class="{active: currentTab == 'dolphin'}">
+            <a ng-click="currentTab = 'dolphin'">Dolphin</a>
+          </li>
+          <li ng-class="{active: currentTab == 'upload'}">
+            <a ng-click="currentTab = 'upload'">
+              <i class="fa fa-upload"></i> Upload More</a>
+          </li>
+          <button class="btn btn-link pull-right" ng-click="action(null)" data-dismiss="modal">
+            <span class="text-danger">Remove Media</span>
+          </button>
+        </ul>
 
-          <!-- List -->
-          <div ng-show="currentTab == 'dolphin'">
-            <!-- Search form -->
-            <ng-include src="'basement/search/search_form.html'" ng-if="initialled"></ng-include>
+        <!-- List -->
+        <div ng-show="currentTab == 'dolphin'">
+          <!-- Search form -->
+          <ng-include src="'basement/search/search_form.html'" ng-if="initialled"></ng-include>
 
-            <!-- Search noresult -->
-            <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+          <!-- Search noresult -->
+          <ng-include src="'basement/search/search_noresult.html'"></ng-include>
 
-            <!-- Nothing -->
-            <ng-include src="'basement/nothing/nothing.html'" ng-init="nothingPadding = false"
-              ng-if="!dolphins.length && !searchForm.noResult && initialled">
-            </ng-include>
+          <!-- Nothing -->
+          <ng-include src="'basement/nothing/nothing.html'" ng-init="nothingPadding = false"
+            ng-if="!dolphins.length && !searchForm.noResult && initialled">
+          </ng-include>
 
-            <!-- Dolphins -->
-            <div class="row">
-              <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="d in dolphins"
-                ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
-                <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})">
-                  <p class="caption">{{ d.meta_data.name }}</p>
-                </a>
-              </div>
-            </div>
+          <!-- Loading -->
+          <div class="s-pad text-center" ng-if="!initialled">
+            <i class="fa fa-5x fa-arrow-down fa-spin animated infinity bounce text-primary"></i>
           </div>
 
-          <!-- Upload -->
-          <div class="text-center" ng-show="currentTab == 'upload'">
-            <!-- Select -->
-            <button type="file" class="btn btn-primary btn-lg animated fadeIn"
-              ngf-select="uploadFile($files, $invalidFiles)"
-              ngf-accept="upload.accept"
-              ngf-max-size="25MB"
-              ngf-multiple="true">
-              <i class="fa fa-fw fa-plus"></i> Select File
-            </button>
-            <!-- Progress Bars -->
-            <div class="row">
-              <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
-                <div class="progress s-mar-top-soft s-mar-no" ng-class="{active: file.progress != 100}">
-                  <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
-                    <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
-                  </div>
+          <!-- Dolphins -->
+          <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="d in dolphins"
+              ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
+              <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})">
+                <p class="caption">{{ d.meta_data.name }}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upload -->
+        <div class="text-center" ng-show="currentTab == 'upload'">
+          <!-- Select -->
+          <button type="file" class="btn btn-primary btn-lg animated fadeIn"
+            ngf-select="uploadFile($files, $invalidFiles)"
+            ngf-accept="upload.accept"
+            ngf-max-size="25MB"
+            ngf-multiple="true">
+            <i class="fa fa-fw fa-plus"></i> Select File
+          </button>
+          <!-- Progress Bars -->
+          <div class="row">
+            <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
+              <div class="progress s-mar-top-soft s-mar-no" ng-class="{active: file.progress != 100}">
+                <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
+                  <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
                 </div>
               </div>
             </div>
