@@ -11,6 +11,13 @@
         <img class="img-circle heading-image" ng-if="site.media.logo" ng-src="{{ site.media.logo.thumbnail_48x48 }}">
         <!-- Title -->
         {{ site.title }}
+        <!-- Separator -->
+        <hr class="hidden visible-xs">
+        <!-- Visit -->
+        <a class="btn btn-default btn-sm pull-right s-mar-left-soft"
+          href="{{ site.absolute_uri }}" target="_blank" title="Go to site.">
+          <i class="fa fa-external-link"></i> View site
+        </a>
         <!-- Image -->
         <div class="btn-group pull-right" role="group">
           <button class="btn btn-default btn-sm" ng-click="selectImage('logo')" title="Change site logo.">
@@ -20,6 +27,7 @@
             <i class="fa fa-image"></i> Cover Image
           </button>
         </div>
+        <div class="clearfix"></div>
       </h3>
       <div class="panel-body s-pad">
         <!-- Title -->
@@ -28,6 +36,13 @@
             {{ site.title || "Nothing here..." }}
           </span>
           <small class="o-fade pull-right">TITLE</small>
+        </div>
+        <!-- URL -->
+        <div class="panel panel-default panel-body">
+          <span editable-text="site.url" onbeforesave="updateSite('url', $data)">
+            {{ site.url || "Nothing here..." }}
+          </span>
+          <small class="o-fade pull-right">URL</small>
         </div>
         <!-- Description -->
         <div class="panel panel-default panel-body">
