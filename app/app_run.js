@@ -80,14 +80,22 @@ function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsServic
    * @param toState {Object}
    * @param toParams {Object}
    */
-  $rootScope.$on("$stateChangeStart", function (event, toState, toParams) {
+  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
+    var isAuthenticated = AuthService.isAuthenticated();
+    var sites = isAuthenticated ? AuthService.getAuthenticatedUser().sites : [];
+
     // Check authentication
-    if (toState.auth === true && !AuthService.isAuthenticated() ||
-      toState.auth === false && AuthService.isAuthenticated()) {
+    if (toState.auth === true && !isAuthenticated || toState.auth === false && isAuthenticated) {
+      // Redirect if in bad auth state
+      if (fromState.auth === true && toState.auth === false) {
+        $state.go("signin");
+      }
+      // Prevent
       event.preventDefault();
     }
+
     // Check current site, if not set use first one
-    if (toState.name.indexOf("dash.") !== -1 && !AuthService.getAuthenticatedUser().sites[toParams.s]) {
+    if (isAuthenticated && toState.name.indexOf("dash.") !== -1 && sites && !sites[toParams.s]) {
       event.preventDefault();
       toParams.s = 0;
       $state.go(toState.name, toParams);
