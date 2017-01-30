@@ -1,18 +1,17 @@
 "use strict";
+
 /**
- * @ngdoc function
- * @name gonevisDash.controller:HeaderController
- * Controller of the gonevisDash
+ * @class HeaderController
  *
  * @param $scope
  * @param $state
  * @param $stateParams
+ * @param $mdToast
  * @param AuthService
  */
-function HeaderController($scope, $rootScope, $state, $stateParams, AuthService) {
+function HeaderController($scope, $rootScope, $state, $stateParams, $mdToast, AuthService) {
+
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    *
@@ -40,7 +39,11 @@ function HeaderController($scope, $rootScope, $state, $stateParams, AuthService)
     constructor();
   });
 
-  $scope.$on("gonevisDash.AuthService:SignedOut", function () {
+  $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
+    if (sessionExpired) {
+      $mdToast.showSimple("Looks like your session has expired, login again.");
+    }
+    AuthService.unAuthenticate();
     $state.go("signin");
   });
 
@@ -57,5 +60,6 @@ HeaderController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
+  "$mdToast",
   "AuthService"
 ];
