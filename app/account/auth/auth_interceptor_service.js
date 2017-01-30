@@ -28,6 +28,14 @@ function AuthInterceptorService($rootScope, $window, $q, ENV) {
     return config;
   }
 
+  /**
+   * @method responseError
+   * @desc Handler for http response
+   *
+   * @param response {Object}
+   *
+   * @return {Object}
+   */
   function responseError(response) {
     if (response.status === 403) {
       $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
