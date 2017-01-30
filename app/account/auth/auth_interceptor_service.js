@@ -3,10 +3,12 @@
 /**
  * @class AuthInterceptorService
  *
+ * @param $rootScope
  * @param $window
+ * @param $q
  * @param ENV
  */
-function AuthInterceptorService($window, ENV) {
+function AuthInterceptorService($rootScope, $window, $q, ENV) {
 
   /**
    * @method request
@@ -26,13 +28,23 @@ function AuthInterceptorService($window, ENV) {
     return config;
   }
 
+  function responseError(response) {
+    if (response.status === 403) {
+      $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
+    }
+    return $q.reject(response);
+  }
+
   return {
-    request: request
+    request: request,
+    responseError: responseError
   };
 }
 
 app.factory("AuthInterceptorService", AuthInterceptorService);
 AuthInterceptorService.$inject = [
+  "$rootScope",
   "$window",
+  "$q",
   "ENV"
 ];
