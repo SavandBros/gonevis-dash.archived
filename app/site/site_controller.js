@@ -91,7 +91,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
           }
         }
 
-        AuthService.updateAuth($scope.user);
+        AuthService.setAuthenticatedUser($scope.user);
 
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
         $mdToast.showSimple("Site deleted");
