@@ -6,12 +6,13 @@
  * Controller of the gonevisDash
  *
  * @param $scope
+ * @param $rootScope
  * @param $mdToast
  * @param AuthService
  * @param API
  * @param DolphinService
  */
-function UserController($scope, $mdToast, AuthService, API, DolphinService) {
+function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinService) {
 
   /**
    * constructor
@@ -49,6 +50,10 @@ function UserController($scope, $mdToast, AuthService, API, DolphinService) {
       function (data) {
         $scope.user = data;
         $scope.userAvatar = data.user;
+
+        AuthService.setAuthenticatedUser($scope.user);
+        $rootScope.$broadcast("gonevisDash.UserController:update");
+
         $mdToast.showSimple("Profile update.");
       },
       function () {
@@ -67,6 +72,7 @@ function UserController($scope, $mdToast, AuthService, API, DolphinService) {
 app.controller("UserController", UserController);
 UserController.$inject = [
   "$scope",
+  "$rootScope",
   "$mdToast",
   "AuthService",
   "API",
