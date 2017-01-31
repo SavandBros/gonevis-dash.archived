@@ -14,7 +14,7 @@
  * @param DolphinService
  */
 function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
-  API, ModalsService, AuthService, DolphinService) {
+  API, ModalsService, AuthService, DolphinService, Codekit) {
 
   var site = AuthService.getCurrentSite();
 
@@ -63,6 +63,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
         } else {
           $scope.site[key] = data[key];
         }
+        var index = Codekit.getIndex($scope.user.sites, $scope.site);
+        $scope.user.sites[index][key] = data[key];
+
+        AuthService.setAuthenticatedUser($scope.user);
+        $rootScope.$broadcast("gonevisDash.SiteController:update");
         $mdToast.showSimple("Site " + keyString + " updated");
       },
       function () {
@@ -170,5 +175,6 @@ SiteController.$inject = [
   "API",
   "ModalsService",
   "AuthService",
-  "DolphinService"
+  "DolphinService",
+  "Codekit"
 ];
