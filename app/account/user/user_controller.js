@@ -22,8 +22,10 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
-    $scope.dolphinService = DolphinService;
+    $scope.sites = $scope.user.sites;
 
+    console.log($scope.sites);
+    $scope.dolphinService = DolphinService;
     API.User.get({ user_id: $scope.user.id },
       function (data) {
         $scope.user = data;
@@ -41,20 +43,24 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
    * @param key {string} value {string}
    */
   $scope.updateProfile = function (key, value) {
-    $mdToast.showSimple('Updating ' + key + '...');
+
+    var keyString = key.replace("_", " ");
+
+    $mdToast.showSimple('Updating ' + keyString + '...');
 
     var payload = {};
     payload[key] = value;
 
     API.UserUpdate.put(payload,
       function (data) {
-        $scope.user = data;
+        $scope.user[key] = data[key]
+        $scope.user.sites = $scope.sites;
         $scope.userAvatar = data.user;
 
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
-        $mdToast.showSimple("Profile update.");
+        $mdToast.showSimple("Profile " + keyString + " updated");
       },
       function () {
         $mdToast.showSimple("Sorry, error has occured while updating profile, try again later.");
