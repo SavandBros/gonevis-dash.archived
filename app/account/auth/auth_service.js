@@ -124,16 +124,6 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
   }
 
   /**
-   * @method updateAuth
-   * @desc Update authentication data instantly
-   *
-   * @param {Object} updatedUser
-   */
-  function updateAuth(updatedUser) {
-    $window.localStorage.setItem("authenticatedUser", JSON.stringify(updatedUser));
-  }
-
-  /**
    * @method getCurrentSite
    * @desc Check and return the ID of the current site
    *
@@ -159,7 +149,6 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
     unAuthenticate: unAuthenticate,
     isAuthenticated: isAuthenticated,
     logout: logout,
-    updateAuth: updateAuth,
     getCurrentSite: getCurrentSite
   };
 }
