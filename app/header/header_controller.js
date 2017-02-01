@@ -51,6 +51,15 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $mdToast, Au
     constructor();
   });
 
+  $scope.$on("gonevisDash.SiteController:update", function () {
+    constructor();
+  });
+
+  $scope.$on("gonevisDash.UserController:update", function () {
+    constructor();
+  });
+
+
   constructor();
 }
 
