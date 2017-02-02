@@ -14,8 +14,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $mdToast, Au
   /**
    * @method constructor
    * @desc Init function for controller
-   *
-   * @memberOf HeaderController
    */
   function constructor() {
     // Get user
