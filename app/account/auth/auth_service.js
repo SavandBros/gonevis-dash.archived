@@ -72,15 +72,15 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
    * @param {Object} authenticatedUser
    */
   function setAuthenticatedUser(authenticatedUser) {
+    // Reverse sites so older comes first
+    authenticatedUser.sites = authenticatedUser.sites.slice().reverse();
+    // Store
     $window.localStorage.setItem("authenticatedUser", JSON.stringify(authenticatedUser));
   }
 
   /**
-   * Delete the cookie where the account object is stored
-   *
    * @method unAuthenticate
-   * @returns {undefined}
-   * @memberOf gonevisDash.AuthService
+   * @desc Delete the cookie where the account object is stored
    */
   function unAuthenticate() {
     $window.localStorage.removeItem("jwtToken");
