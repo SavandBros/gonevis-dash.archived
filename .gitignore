@@ -5,6 +5,6 @@
 .idea/
 /bower_components
 jsconfig.json
-/app/app_config.js
+/app/app_module.js
 .vscode/
 coverage/

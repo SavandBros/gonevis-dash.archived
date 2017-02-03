@@ -440,7 +440,7 @@ module.exports = function (grunt) {
         space: "  ",
         wrap: "\"use strict\";\n\n var app = {%= __ngModule %}",
         name: "gonevisDash",
-        dest: "<%= gonevisDash.app %>/app_config.js",
+        dest: "<%= gonevisDash.app %>/app_module.js",
         deps: [
           "ngMaterial",
           "ngAnimate",

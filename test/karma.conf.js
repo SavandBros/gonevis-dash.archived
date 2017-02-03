@@ -59,8 +59,8 @@ module.exports = function(config) {
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
+      'app/app_module.js',
       'app/app_config.js',
-      'app/app.js',
       'app/app_run.js',
       'app/app_routes.js',
       'app/**/*.js',
