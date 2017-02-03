@@ -4,11 +4,11 @@
  * @class AuthInterceptorService
  *
  * @param $rootScope
- * @param $window
+ * @param $cookies
  * @param $q
  * @param ENV
  */
-function AuthInterceptorService($rootScope, $window, $q, ENV) {
+function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
 
   /**
    * @method request
@@ -19,7 +19,7 @@ function AuthInterceptorService($rootScope, $window, $q, ENV) {
    * @returns {Object}
    */
   function request(config) {
-    var token = $window.localStorage.getItem("jwtToken");
+    var token = $cookies.get("JWT");
 
     if (config.url.indexOf(ENV.apiEndpoint) === 0 && token) {
       config.headers.Authorization = "JWT " + token;
@@ -37,7 +37,7 @@ function AuthInterceptorService($rootScope, $window, $q, ENV) {
    * @return {Object}
    */
   function responseError(response) {
-    if (response.status === 403) {
+    if (response.status === 403 || response.status === 401) {
       $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
     }
     return $q.reject(response);
@@ -52,7 +52,7 @@ function AuthInterceptorService($rootScope, $window, $q, ENV) {
 app.factory("AuthInterceptorService", AuthInterceptorService);
 AuthInterceptorService.$inject = [
   "$rootScope",
-  "$window",
+  "$cookies",
   "$q",
   "ENV"
 ];
