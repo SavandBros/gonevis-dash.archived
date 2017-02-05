@@ -1,0 +1,17 @@
+dependencies:
+  override:
+    - npm install -g grunt-cli bower
+    - npm install --only=dev
+    - bower install
+test:
+  override:
+    - 'grunt jshint'
+    - 'grunt jscs'
+    - 'grunt test'
+  post:
+    - bash <(curl -s https://codecov.io/bash)
+deployment:
+  production:
+    branch: production
+    commands:
+      - ./scripts/deploy.sh
