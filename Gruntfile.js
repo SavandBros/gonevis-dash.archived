@@ -486,7 +486,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: "production",
-            apiEndpoint: "http://www.gonevis.com/api/v1/"
+            apiEndpoint: "https://www.gonevis.com/api/v1/"
           }
         }
       }
