@@ -1,14 +1,27 @@
-<div class="modal sidebar right fade" id="siteTemplates">
+<div class="modal fade" id="siteTemplates">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header modal-header-clickable" data-dismiss="modal">
-        <i class="fa fa-chevron-left"></i>
+      <div class="modal-header">
+        <h3>Templates <i class="fa fa-close close pull-right" data-dismiss="modal"></i></h3>
       </div>
       <div class="modal-body">
-        <button class="btn btn-default btn-block btn-lg" ng-class="{'btn-primary': current.name === template.name}"
-          ng-click="setTemplate(template)" ng-repeat="template in siteTemplates" data-dismiss="modal">
-          <i class="fa btn-icon fa-cube"></i> {{ template.name | uppercase }}
-        </button>
+        <div class="row">
+          <div class="col-md-6" ng-repeat="template in siteTemplates">
+            <div class="thumbnail" style="background: #eee">
+              <img ng-src="{{ template.media.screen_shot }}" alt="{{ template.name }}">
+              <div class="caption">
+                <h3 style="margin-bottom: 10px">{{ template.name }}</h3>
+                <span class="text-muted" style="margin-top: 12px">
+                  By <a href="{{ template.config.url }}" target="_blank"> {{ template.config.author }}</a>
+                </span>
+                <button ng-click="setTemplate(template)" ng-disabled="current.name === template.name"
+                  class="btn btn-default pull-right" data-dismiss="modal"  style="margin-top: -12px">
+                  {{ current.name === template.name ? "Selected" : "Select" }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
