@@ -463,6 +463,9 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             googleAnalyticsID: "UA-XXXXXXX-X"
+          },
+          Client: {
+            version: 1
           }
         }
       },
