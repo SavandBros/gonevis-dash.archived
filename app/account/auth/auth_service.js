@@ -7,12 +7,13 @@
  * @param $state
  * @param $rootScope
  * @param $http
+ * @param $cookies
  * @param $window
  * @param $stateParams
  *
  * @returns [Factory]
  */
-function AuthService($state, $rootScope, $http, $window, $stateParams) {
+function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams) {
   /**
    * @method getAuthenticatedUser
    * @desc Return the currently authenticated user
@@ -20,8 +21,8 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
    * @returns {object|undefined}
    */
   function getAuthenticatedUser() {
-    if ($window.localStorage.getItem("authenticatedUser")) {
-      return JSON.parse($window.localStorage.getItem("authenticatedUser"));
+    if ($cookies.get("user")) {
+      return JSON.parse($cookies.get("user"));
     }
   }
 
@@ -52,7 +53,7 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
    * @param {String} token
    */
   function setToken(token) {
-    $window.localStorage.setItem("jwtToken", token);
+    $cookies.put("JWT", token);
   }
 
   /**
@@ -62,7 +63,7 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
    * @returns {String}
    */
   function getToken() {
-    return $window.localStorage.getItem("jwtToken");
+    return $cookies.get("JWT");
   }
 
   /**
@@ -72,19 +73,19 @@ function AuthService($state, $rootScope, $http, $window, $stateParams) {
    * @param {Object} authenticatedUser
    */
   function setAuthenticatedUser(authenticatedUser) {
-    $window.localStorage.setItem("authenticatedUser", JSON.stringify(authenticatedUser));
+    // Reverse sites so older comes first
+    authenticatedUser.sites = authenticatedUser.sites.slice().reverse();
+    // Store
+    $cookies.put("user", JSON.stringify(authenticatedUser));
   }
 
   /**
-   * Delete the cookie where the account object is stored
-   *
    * @method unAuthenticate
-   * @returns {undefined}
-   * @memberOf gonevisDash.AuthService
+   * @desc Delete the cookie where the account object is stored
    */
   function unAuthenticate() {
-    $window.localStorage.removeItem("jwtToken");
-    $window.localStorage.removeItem("authenticatedUser");
+    $cookies.remove("JWT");
+    $cookies.remove("user");
   }
 
   /**
@@ -158,6 +159,7 @@ AuthService.$inject = [
   "$state",
   "$rootScope",
   "$http",
+  "$cookies",
   "$window",
   "$stateParams"
 ];

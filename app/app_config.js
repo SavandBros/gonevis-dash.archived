@@ -4,20 +4,17 @@
  * @class app.config
  * @desc Main module of the application.
  *
- * @param $stateProvider
- * @param $urlRouterProvider
  * @param $httpProvider
- * @param $locationProvider
  * @param $resourceProvider
+ * @param cookiesProvider
  * @param cfpLoadingBarProvider
  */
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $resourceProvider,
-  cfpLoadingBarProvider) {
-
-  // Http config
+app.config(function ($httpProvider, $resourceProvider, $cookiesProvider, cfpLoadingBarProvider) {
   $httpProvider.interceptors.push("AuthInterceptorService");
+
   $resourceProvider.defaults.stripTrailingSlashes = false;
 
-  // Loading config
+  $cookiesProvider.defaults.domain = location.hostname.split(location.hostname.split(".")[0]).join("");
+
   cfpLoadingBarProvider.includeSpinner = false;
 });

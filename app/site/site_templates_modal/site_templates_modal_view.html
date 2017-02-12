@@ -1,14 +1,49 @@
-<div class="modal sidebar right fade" id="siteTemplates">
+<div class="modal fade" id="siteTemplates">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header modal-header-clickable" data-dismiss="modal">
-        <i class="fa fa-chevron-left"></i>
+      <div class="modal-header">
+        <h3>Templates <i class="fa fa-close close pull-right" data-dismiss="modal"></i></h3>
       </div>
       <div class="modal-body">
-        <button class="btn btn-default btn-block btn-lg" ng-class="{'btn-primary': current.name === template.name}"
-          ng-click="setTemplate(template)" ng-repeat="template in siteTemplates" data-dismiss="modal">
-          <i class="fa btn-icon fa-cube"></i> {{ template.name | uppercase }}
-        </button>
+        <div class="row">
+          <!-- Templates -->
+          <div class="col-md-6" ng-repeat="template in siteTemplates">
+            <div class="thumbnail b-co" style="background: #eee"
+              ng-class="{'b-color-0': current.name === template.name}">
+              <!-- Image -->
+              <img ng-src="{{ template.media.screen_shot }}" alt="{{ template.name }}">
+              <div class="caption">
+                <!-- Name -->
+                <h3 style="margin-bottom: 10px">{{ template.name }}</h3>
+                <!-- Author -->
+                <span class="text-muted" style="margin-top: 12px">
+                  By <a href="{{ template.config.url }}" target="_blank"> {{ template.config.author }}</a>
+                </span>
+                <div class="btn-group pull-right" style="margin-top: -12px">
+                  <!-- Select(ed) -->
+                  <button ng-click="setTemplate(template)" ng-disabled="current.name === template.name"
+                    class="btn btn-default" data-dismiss="modal">
+                    {{ current.name === template.name ? "Selected" : "Select" }}
+                  </button>
+                  <!-- More -->
+                  <div class="btn-group" ng-if="current.name !== template.name">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <!-- Prevew theme -->
+                      <li>
+                        <a href="{{ site.absolute_uri }}/?preview-template={{ template.name }}" target="_blank">
+                          <i class="fa fa-eye-slash"></i> Prevew
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
