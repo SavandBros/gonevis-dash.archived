@@ -4,20 +4,17 @@
  * @class RunNevisRun
  *
  * @param $rootScope
- * @param $mdToast
  * @param $state
- * @param editableOptions
- * @param ModalsService
  * @param AuthService
+ * @param DolphinService
+ * @param editableOptions
  * @param taOptions
  * @param taRegisterTool
- * @param taToolFunctions
- * @param DolphinService
  * @param textAngularManager
+ * @param taToolFunctions
  */
-function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsService, AuthService,
-  taOptions, taRegisterTool, taToolFunctions, DolphinService, textAngularManager) {
-
+function RunNevisRun($rootScope, $state, AuthService, DolphinService,
+  editableOptions, taOptions, taRegisterTool, textAngularManager, taToolFunctions) {
   /**
    * @name cache
    * @desc Predefined rootscope variable
@@ -39,6 +36,7 @@ function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsServic
   // Editable texts config
   editableOptions.theme = "bs3";
 
+  // Editor toolbar
   taRegisterTool("code", {
     iconclass: "fa fa-code t-bold",
     tooltiptext: "Insert code (Preformatted text)",
@@ -156,14 +154,12 @@ function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsServic
 app.run(RunNevisRun);
 RunNevisRun.$inject = [
   "$rootScope",
-  "$mdToast",
   "$state",
-  "editableOptions",
-  "ModalsService",
   "AuthService",
+  "DolphinService",
+  "editableOptions",
   "taOptions",
   "taRegisterTool",
-  "taToolFunctions",
-  "DolphinService",
-  "textAngularManager"
+  "textAngularManager",
+  "taToolFunctions"
 ];
