@@ -7,14 +7,17 @@
  * @param $rootScope
  * @param API
  * @param AuthService
+ * @param currentTemplate
+ * @param site
  */
-function SiteTemplatesModalController($scope, $rootScope, API, AuthService, currentTemplate) {
+function SiteTemplatesModalController($scope, $rootScope, API, AuthService, currentTemplate, site) {
 
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
+    $scope.site = site;
     $scope.current = currentTemplate;
 
     API.SiteTemplates.get({ siteId: AuthService.getCurrentSite() },
@@ -37,5 +40,6 @@ SiteTemplatesModalController.$inject = [
   "$rootScope",
   "API",
   "AuthService",
-  "currentTemplate"
+  "currentTemplate",
+  "site"
 ];
