@@ -159,7 +159,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
   });
 
   $scope.siteTemplates = function () {
-    ModalsService.open("siteTemplates", "SiteTemplatesModalController", { currentTemplate: $scope.siteTemplate });
+    ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
+      site: $scope.site,
+      currentTemplate: $scope.siteTemplate
+    });
   };
 
   constructor();
