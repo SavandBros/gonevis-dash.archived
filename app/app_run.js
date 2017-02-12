@@ -37,11 +37,8 @@ function RunNevisRun($rootScope, $window, $cookies, $state, $mdToast, AuthServic
     editor: {}
   };
 
-  // Client version control
-  var clientStoredVersion = parseInt($window.localStorage.getItem("version"));
-
-  // If invalid or old client version
-  if (isNaN(clientStoredVersion) || Client.version !== clientStoredVersion) {
+  // Client version control (if not current version)
+  if (Client.version !== parseInt($window.localStorage.getItem("version"))) {
     
     // Store auth to use after data reset
     var isAuthed = AuthService.isAuthenticated();
