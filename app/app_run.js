@@ -4,20 +4,21 @@
  * @class RunNevisRun
  *
  * @param $rootScope
- * @param $mdToast
+ * @param $window
+ * @param $cookies
  * @param $state
- * @param editableOptions
- * @param ModalsService
+ * @param $mdToast
  * @param AuthService
+ * @param DolphinService
+ * @param Client
+ * @param editableOptions
  * @param taOptions
  * @param taRegisterTool
- * @param taToolFunctions
- * @param DolphinService
  * @param textAngularManager
+ * @param taToolFunctions
  */
-function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsService, AuthService,
-  taOptions, taRegisterTool, taToolFunctions, DolphinService, textAngularManager) {
-
+function RunNevisRun($rootScope, $window, $cookies, $state, $mdToast, AuthService, DolphinService, Client,
+  editableOptions, taOptions, taRegisterTool, textAngularManager, taToolFunctions) {
   /**
    * @name cache
    * @desc Predefined rootscope variable
@@ -36,9 +37,34 @@ function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsServic
     editor: {}
   };
 
+  // Client version control
+  var clientStoredVersion = parseInt($window.localStorage.getItem("version"));
+
+  // If invalid or old client version
+  if (isNaN(clientStoredVersion) || Client.version > clientStoredVersion) {
+    
+    // Store auth to use after data reset
+    var isAuthed = AuthService.isAuthenticated();
+
+    // Clear cookies
+    $cookies.remove("JWT");
+    $cookies.remove("user");
+
+    // Reset localStorage
+    $window.localStorage.clear();
+    $window.localStorage.setItem("version", Client.version);
+
+    // Redirect to signin and toast (If logged in)
+    if (isAuthed) {
+      $mdToast.showSimple("Client version updated! Login again, please.");
+      $state.go("signin");
+    }
+  }
+
   // Editable texts config
   editableOptions.theme = "bs3";
 
+  // Editor toolbar (register)
   taRegisterTool("code", {
     iconclass: "fa fa-code t-bold",
     tooltiptext: "Insert code (Preformatted text)",
@@ -64,6 +90,7 @@ function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsServic
     }
   });
 
+  // Editor toolbar
   taOptions.toolbar = [
     ["h1", "h2", "h3", "code", "quote"],
     ["bold", "italics", "underline", "strikeThrough"],
@@ -156,14 +183,16 @@ function RunNevisRun($rootScope, $mdToast, $state, editableOptions, ModalsServic
 app.run(RunNevisRun);
 RunNevisRun.$inject = [
   "$rootScope",
-  "$mdToast",
+  "$window",
+  "$cookies",
   "$state",
-  "editableOptions",
-  "ModalsService",
+  "$mdToast",
   "AuthService",
+  "DolphinService",
+  "Client",
+  "editableOptions",
   "taOptions",
   "taRegisterTool",
-  "taToolFunctions",
-  "DolphinService",
-  "textAngularManager"
+  "textAngularManager",
+  "taToolFunctions"
 ];
