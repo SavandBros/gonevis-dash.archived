@@ -4,16 +4,20 @@
  * @class RunNevisRun
  *
  * @param $rootScope
+ * @param $window
+ * @param $cookies
  * @param $state
+ * @param $mdToast
  * @param AuthService
  * @param DolphinService
+ * @param Client
  * @param editableOptions
  * @param taOptions
  * @param taRegisterTool
  * @param textAngularManager
  * @param taToolFunctions
  */
-function RunNevisRun($rootScope, $state, AuthService, DolphinService,
+function RunNevisRun($rootScope, $window, $cookies, $state, $mdToast, AuthService, DolphinService, Client,
   editableOptions, taOptions, taRegisterTool, textAngularManager, taToolFunctions) {
   /**
    * @name cache
@@ -33,10 +37,34 @@ function RunNevisRun($rootScope, $state, AuthService, DolphinService,
     editor: {}
   };
 
+  // Client version control
+  var clientStoredVersion = parseInt($window.localStorage.getItem("version"));
+
+  // If invalid or old client version
+  if (isNaN(clientStoredVersion) || Client.version > clientStoredVersion) {
+    
+    // Store auth to use after data reset
+    var isAuthed = AuthService.isAuthenticated();
+
+    // Clear cookies
+    $cookies.remove("JWT");
+    $cookies.remove("user");
+
+    // Reset localStorage
+    $window.localStorage.clear();
+    $window.localStorage.setItem("version", Client.version);
+
+    // Redirect to signin and toast (If logged in)
+    if (isAuthed) {
+      $mdToast.showSimple("Client version updated! Login again, please.");
+      $state.go("signin");
+    }
+  }
+
   // Editable texts config
   editableOptions.theme = "bs3";
 
-  // Editor toolbar
+  // Editor toolbar (register)
   taRegisterTool("code", {
     iconclass: "fa fa-code t-bold",
     tooltiptext: "Insert code (Preformatted text)",
@@ -62,6 +90,7 @@ function RunNevisRun($rootScope, $state, AuthService, DolphinService,
     }
   });
 
+  // Editor toolbar
   taOptions.toolbar = [
     ["h1", "h2", "h3", "code", "quote"],
     ["bold", "italics", "underline", "strikeThrough"],
@@ -154,9 +183,13 @@ function RunNevisRun($rootScope, $state, AuthService, DolphinService,
 app.run(RunNevisRun);
 RunNevisRun.$inject = [
   "$rootScope",
+  "$window",
+  "$cookies",
   "$state",
+  "$mdToast",
   "AuthService",
   "DolphinService",
+  "Client",
   "editableOptions",
   "taOptions",
   "taRegisterTool",
