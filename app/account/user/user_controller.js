@@ -32,7 +32,7 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
         $scope.viewLoaded = true;
       }
     );
-  };
+  }
 
   /**
    * updateProfile
@@ -53,9 +53,8 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
 
     API.UserUpdate.put(payload,
       function (data) {
-        $scope.user[key] = data[key]
+        $scope.user[key] = data[key];
         $scope.user.sites = $scope.sites;
-        $scope.userAvatar = data.user;
 
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.UserController:update");
@@ -115,21 +114,20 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
   };
   $scope.upload.accept = $scope.upload.acceptList.join(",");
 
-
-  // upload on file select or drop
+  // upload on file select
   $scope.uploadFile = function (file) {
     Upload.upload({
       url: ENV.apiEndpoint + "account/update-profile/",
       data: { picture: file, key: file.name },
       method: "PUT"
     }).then(function (data) {
-      console.log(data);
+      $mdToast.showSimple("Profile picture updated.");
+      $scope.user.media = data.data.media;
+    }, function (data) {
+      $scope.errors = data.data;
+      $mdToast.showSimple("Sorry, error has occured while uploading profile picture.");
     });
   };
-
-  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    $scope.updateProfile("picture", dolphin ? dolphin.id : null);
-  });
 
   constructor();
 }
