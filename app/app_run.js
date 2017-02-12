@@ -50,8 +50,7 @@ function RunNevisRun($rootScope, $window, $cookies, $state, $mdToast, AuthServic
     $cookies.remove("JWT");
     $cookies.remove("user");
 
-    // Reset localStorage
-    $window.localStorage.clear();
+    // Reset localStorage version
     $window.localStorage.setItem("version", Client.version);
 
     // Redirect to signin and toast (If logged in)
