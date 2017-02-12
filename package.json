@@ -1,6 +1,7 @@
 {
   "name": "gonevisdash",
   "private": true,
+  "version": "1.0.0",
   "devDependencies": {
     "grunt-jscs": "^3.0.1",
     "grunt-karma": "^2.0.0",
