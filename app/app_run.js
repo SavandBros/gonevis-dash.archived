@@ -16,9 +16,10 @@
  * @param taRegisterTool
  * @param textAngularManager
  * @param taToolFunctions
+ * @param Analytics
  */
 function RunNevisRun($rootScope, $window, $cookies, $state, $mdToast, AuthService, DolphinService, Client,
-  editableOptions, taOptions, taRegisterTool, textAngularManager, taToolFunctions) {
+  editableOptions, taOptions, taRegisterTool, textAngularManager, taToolFunctions, Analytics) {
   /**
    * @name cache
    * @desc Predefined rootscope variable
@@ -190,5 +191,6 @@ RunNevisRun.$inject = [
   "taOptions",
   "taRegisterTool",
   "textAngularManager",
-  "taToolFunctions"
+  "taToolFunctions",
+  "Analytics"
 ];
