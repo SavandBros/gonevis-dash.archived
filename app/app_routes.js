@@ -11,7 +11,7 @@ app.config(function ($stateProvider, $urlRouterProvider, AnalyticsProvider) {
 
   // Change the default page event name.
   // Helpful when using ui-router, which fires $stateChangeSuccess instead of $routeChangeSuccess.
-  AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+  AnalyticsProvider.setPageEvent("$stateChangeSuccess");
   $stateProvider
     .state("dash", {
       url: "/:s",
