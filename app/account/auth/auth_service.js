@@ -86,6 +86,7 @@ function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams)
   function unAuthenticate() {
     $cookies.remove("JWT");
     $cookies.remove("user");
+    $cookies.remove("sessionid");
   }
 
   /**
