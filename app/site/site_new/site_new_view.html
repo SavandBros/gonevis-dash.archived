@@ -16,13 +16,16 @@
             <small id="url" class="help-block">{{ form.errors.url[0] }}</small>
           </div>
           <div class="form-group" ng-class="{'has-error': form.errors.title}">
-            <input id="title" class="form-control input-lg" type="text" ng-model="form.title" placeholder="Title" required/>
+            <input id="title" class="form-control input-lg" type="text"
+              ng-model="form.title" placeholder="Title" required/>
             <small id="title" class="help-block">{{ form.errors.title[0] }}</small>
           </div>
           <div class="form-group">
             <input id="description" class="form-control input-lg" type="text" ng-model="form.description" placeholder="Description">
           </div>
-          <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">Create</button>
+          <button class="btn btn-success btn-block btn-lg"
+            ng-disabled="form.loading || form.$invalid">Create
+          </button>
         </form>
       </div>
     </div>
