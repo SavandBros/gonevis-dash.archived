@@ -57,6 +57,7 @@ module.exports = function(config) {
       'bower_components/angular-slugify/angular-slugify.js',
       'bower_components/angular-sortable-view/src/angular-sortable-view.js',
       'bower_components/angular-loading-bar/build/loading-bar.js',
+      'bower_components/angular-google-analytics/dist/angular-google-analytics.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/app_module.js',
