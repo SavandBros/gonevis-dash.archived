@@ -6,7 +6,13 @@
           <h3 class="o-fade-soft">Create a new site</h3>
           <hr>
           <div class="form-group" ng-class="{'has-error': form.errors.url}">
-            <input id="url" class="form-control input-lg" type="text" ng-model="form.url" placeholder="Url" required/>
+            <div class="input-group">
+              <input id="url" class="form-control input-lg" type="text" ng-model="form.url"
+                placeholder="Subdomain" required aria-describedby="subdomain">
+              <span class="input-group-addon" id="subdomain">
+                <span class="text-primary">.gonevis.com</span>
+              </span>
+            </div>
             <small id="url" class="help-block">{{ form.errors.url[0] }}</small>
           </div>
           <div class="form-group" ng-class="{'has-error': form.errors.title}">
