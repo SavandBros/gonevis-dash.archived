@@ -3,7 +3,15 @@
 /**
  * @desc Every child of dash state follows site id that user is into
  */
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, AnalyticsProvider) {
+  AnalyticsProvider.trackPages(true);
+
+  // Track all URL query params (default is false).
+  AnalyticsProvider.trackUrlParams(true);
+
+  // Change the default page event name.
+  // Helpful when using ui-router, which fires $stateChangeSuccess instead of $routeChangeSuccess.
+  AnalyticsProvider.setPageEvent("$stateChangeSuccess");
   $stateProvider
     .state("dash", {
       url: "/:s",

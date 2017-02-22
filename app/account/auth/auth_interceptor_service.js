@@ -37,7 +37,7 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
    * @return {Object}
    */
   function responseError(response) {
-    if (response.status === 403 || response.status === 401) {
+    if (response.status === 403) {
       $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
     }
     return $q.reject(response);
