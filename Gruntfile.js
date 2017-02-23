@@ -232,7 +232,7 @@ module.exports = function (grunt) {
         src: [
           "<%= gonevisDash.dist %>/{,*/}*.js",
           "<%= gonevisDash.dist %>/assets/css/{,*/}*.css",
-          "<%= gonevisDash.dist %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg,json,ico}",
+          "<%= gonevisDash.dist %>/assets/img/fav/*.*",
           "<%= gonevisDash.dist %>/assets/css/fonts/*"
         ]
       }
