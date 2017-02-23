@@ -232,7 +232,7 @@ module.exports = function (grunt) {
         src: [
           "<%= gonevisDash.dist %>/{,*/}*.js",
           "<%= gonevisDash.dist %>/assets/css/{,*/}*.css",
-          "<%= gonevisDash.dist %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}",
+          "<%= gonevisDash.dist %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg,json,ico}",
           "<%= gonevisDash.dist %>/assets/css/fonts/*"
         ]
       }
@@ -259,9 +259,9 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ["<%= gonevisDash.dist %>/{,*/}*.html"],
-      css: ["<%= gonevisDash.dist %>/assets/css/{,*/}*.css"],
-      js: ["<%= gonevisDash.dist %>/{,*/}*.js"],
+      html: ["<%= gonevisDash.dist %>/**/*.html"],
+      css: ["<%= gonevisDash.dist %>/assets/css/**.css"],
+      js: ["<%= gonevisDash.dist %>/**.js"],
       options: {
         assetsDirs: [
           "<%= gonevisDash.dist %>",
@@ -383,9 +383,9 @@ module.exports = function (grunt) {
           cwd: "<%= gonevisDash.app %>",
           dest: "<%= gonevisDash.dist %>",
           src: [
-            "*.{ico,png,txt}",
+            "*.{ico,png,txt,ico}",
             "*.html",
-            "assets/img/{,*/}*.{webp}",
+            "assets/img/{,*/}*.{webp,json,ico}",
             "assets/css/fonts/{,*/}*.*"
           ]
         }, {
