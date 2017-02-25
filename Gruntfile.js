@@ -458,8 +458,7 @@ module.exports = function (grunt) {
           "slugifier",
           "angularModalService",
           "angular-sortable-view",
-          "angular-loading-bar",
-          "angular-google-analytics"
+          "angular-loading-bar"
         ],
         constants: {
           ENV: {
