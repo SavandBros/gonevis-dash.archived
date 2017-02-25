@@ -461,9 +461,6 @@ module.exports = function (grunt) {
           "angular-loading-bar"
         ],
         constants: {
-          ENV: {
-            googleAnalyticsID: "UA-XXXXXXX-X"
-          },
           Client: {
             version: 1
           }
