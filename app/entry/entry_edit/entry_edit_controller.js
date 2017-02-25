@@ -32,7 +32,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     $scope.form.id = $stateParams.entryId;
     $scope.form.site = AuthService.getCurrentSite();
 
-    API.Tags.get({ tag_site: $scope.form.site },
+    API.Tags.get({ site: $scope.form.site },
       function (data) {
         for (var i in data.results) {
           $scope.tags.push({
