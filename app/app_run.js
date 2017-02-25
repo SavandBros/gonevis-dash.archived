@@ -9,6 +9,7 @@
  * @param $cookies
  * @param $state
  * @param $mdToast
+ * @param ENV
  * @param AuthService
  * @param DolphinService
  * @param Client
@@ -19,7 +20,7 @@
  * @param taToolFunctions
  */
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, $mdToast,
-  AuthService, DolphinService, Client, editableOptions, taOptions, taRegisterTool,
+  ENV, AuthService, DolphinService, Client, editableOptions, taOptions, taRegisterTool,
   textAngularManager, taToolFunctions) {
   /**
    * @name cache
@@ -132,7 +133,9 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, $mdToast,
    * @desc Changed state succesfully
    */
   $rootScope.$on("$stateChangeSuccess", function () {
-    $window.ga("send", "pageview", { page: $location.url() });
+    if (ENV.name === "production") {
+      $window.ga("send", "pageview", { page: $location.url() });
+    }
   });
 
   /**
@@ -194,6 +197,7 @@ RunNevisRun.$inject = [
   "$cookies",
   "$state",
   "$mdToast",
+  "ENV",
   "AuthService",
   "DolphinService",
   "Client",
