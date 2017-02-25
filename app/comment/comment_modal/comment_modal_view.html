@@ -28,7 +28,7 @@
         <button class="btn btn-sm btn-danger pull-left"
           ng-click="commentService.remove(comment)"
           data-dismiss="modal">
-        <i class="fa fa-trash"></i>
+          <i class="fa fa-trash"></i>
         </button>
         <div class="dropdown options col-md-3 pull-right s-pad-no">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
@@ -38,7 +38,7 @@
             <li class="dropdown-header">Change status</li>
             <li ng-repeat="s in statuses" ng-class="{'active': comment.status == s.value}">
               <a ng-click="setStatus(comment, s.property, s.value)">
-              <i class="fa fa-{{ s.icon }}"></i> {{ s.label }}
+                <i class="fa fa-{{ s.icon }}"></i> {{ s.label }}
               </a>
             </li>
           </ul>
