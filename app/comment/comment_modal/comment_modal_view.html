@@ -38,7 +38,7 @@
             <li class="dropdown-header">Change status</li>
             <li ng-repeat="s in statuses" ng-class="{'active': comment.status == s.value}">
               <a ng-click="setStatus(comment, s.property, s.value)">
-              <i class="fa fa-{{ s.icon }}"></i> {{ s.label }}
+                <i class="fa fa-{{ s.icon }}"></i> {{ s.label }}
               </a>
             </li>
           </ul>
