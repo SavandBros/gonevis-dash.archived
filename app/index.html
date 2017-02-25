@@ -6,7 +6,7 @@
   <title>Gonevis Dash</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  
+
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/fav/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="assets/img/fav/favicon-32x32.png" sizes="32x32">
@@ -46,6 +46,17 @@
 
   <div ui-view></div>
 
+  <!-- Google analytics -->
+  <script>
+    ! function(A, n, g, u, l, a, r) {
+      A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
+          (A[l].q = A[l].q || []).push(arguments)
+        }, A[l].l = +new Date, a = n.createElement(g),
+        r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-58251754-3');
+  </script>
+
   <!-- build:js(.) scripts/vendor.js -->
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -78,7 +89,6 @@
   <script src="bower_components/angular-slugify/angular-slugify.js"></script>
   <script src="bower_components/angular-sortable-view/src/angular-sortable-view.js"></script>
   <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-  <script src="bower_components/angular-google-analytics/dist/angular-google-analytics.min.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js({.tmp,app}) scripts/scripts.js -->

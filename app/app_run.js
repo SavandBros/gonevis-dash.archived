@@ -5,9 +5,11 @@
  *
  * @param $rootScope
  * @param $window
+ * @param $location
  * @param $cookies
  * @param $state
  * @param $mdToast
+ * @param ENV
  * @param AuthService
  * @param DolphinService
  * @param Client
@@ -17,8 +19,9 @@
  * @param textAngularManager
  * @param taToolFunctions
  */
-function RunNevisRun($rootScope, $window, $cookies, $state, $mdToast, AuthService, DolphinService, Client,
-  editableOptions, taOptions, taRegisterTool, textAngularManager, taToolFunctions) {
+function RunNevisRun($rootScope, $window, $location, $cookies, $state, $mdToast,
+  ENV, AuthService, DolphinService, Client, editableOptions, taOptions, taRegisterTool,
+  textAngularManager, taToolFunctions) {
   /**
    * @name cache
    * @desc Predefined rootscope variable
@@ -39,7 +42,7 @@ function RunNevisRun($rootScope, $window, $cookies, $state, $mdToast, AuthServic
 
   // Client version control (if not current version)
   if (Client.version !== parseInt($window.localStorage.getItem("version"))) {
-    
+
     // Store auth to use after data reset
     var isAuthed = AuthService.isAuthenticated();
 
@@ -126,6 +129,16 @@ function RunNevisRun($rootScope, $window, $cookies, $state, $mdToast, AuthServic
   });
 
   /**
+   * @event $stateChangeSuccess
+   * @desc Changed state succesfully
+   */
+  $rootScope.$on("$stateChangeSuccess", function () {
+    if (ENV.name === "production") {
+      $window.ga("send", "pageview", { page: $location.url() });
+    }
+  });
+
+  /**
    * @event gonevisDash.DolphinService:select
    * @desc Dolphin selection callback, depends on state @editor
    */
@@ -180,9 +193,11 @@ app.run(RunNevisRun);
 RunNevisRun.$inject = [
   "$rootScope",
   "$window",
+  "$location",
   "$cookies",
   "$state",
   "$mdToast",
+  "ENV",
   "AuthService",
   "DolphinService",
   "Client",
