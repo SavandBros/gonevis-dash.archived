@@ -69,7 +69,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
   function remove(tag, toast) {
     toast = toast || true;
 
-    API.Tag.remove({ slug: tag.slug },
+    API.Tag.remove({ slug: tag.slug, site: tag.site },
       function (data) {
         if (toast) {
           $mdToast.showSimple("Tag " + tag.name + " removed.");
