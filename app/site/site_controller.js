@@ -100,7 +100,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
         $mdToast.showSimple("Site deleted");
-        $state.go($scope.user.sites ? "site-new" : "dash.main");
+        // An error while no sites are available, FIX THIS LINE.
+        $state.go($scope.user.sites ? "dash.main" : "site-new");
       },
       function () {
         $mdToast.showSimple("Oh... Something went wrong, couldn't delete site");
