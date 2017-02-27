@@ -29,7 +29,7 @@ function TagService($rootScope, $mdToast, API, ModalsService) {
     form.loading = true;
     var slug = form.oldSlug || tag.slug;
 
-    API.Tag.put({ slug: slug }, tag,
+    API.Tag.put({ slug: slug, site: tag.site }, tag,
       function (data) {
         if (toast) {
           $mdToast.showSimple("Tag updated.");
