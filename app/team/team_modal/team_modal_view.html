@@ -8,11 +8,11 @@
         <!-- Cover -->
         <div class="cover" ng-class="{open: open}" ng-click="open = !open" 
           ng-init="open = false" style="background-image:
-          url({{ team.user.media.picture ? team.user.media.thumbnail_256x256 : 'assets/img/avatar.png' }})">
+          url({{ team.user.media.picture && !team.isPending ? team.user.media.thumbnail_256x256 : 'assets/img/avatar.png' }})">
         </div>
         <!-- Name -->
         <h3 class="c-white t-shadow">
-          {{ team.user.name || team.user.username }}
+          <span ng-if="!team.isPending">{{ team.user.name || team.user.username }}</span>
           <br>
           <small class="c-white">{{ teamRoles[team.role].label }}</small>
         </h3>
@@ -20,7 +20,7 @@
         <!-- Info -->
         <div class="s-mar-top-soft o-fade-soft">
           <!-- Username -->
-          <h4>
+          <h4 ng-if="!team.isPending">
             <small>Username:</small>
             <span class="pull-right">
               <small>@</small>{{ team.user.username }}
@@ -31,7 +31,7 @@
           <h4 class="t-line kv" ng-if="team.user.email">
             <a href="mailto:{{ team.user.email }}" target="_blank">
                <i class="fa fa-envelope-o"></i>
-               <span>{{ team.user.email }}</span>
+               <span>{{ team.isPending ? team.email : team.user.email }}</span>
             </a>
             <hr>
           </h4>
