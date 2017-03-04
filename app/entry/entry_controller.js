@@ -27,16 +27,6 @@ function EntryController($scope, $rootScope, $state, $mdToast,
     $scope.search = Search;
     $scope.pageForm = {};
     $scope.actions = [{
-      label: "Draft",
-      icon: "edit",
-      property: "status",
-      value: 0
-    }, {
-      label: "Published",
-      icon: "globe",
-      property: "status",
-      value: 1,
-    }, {
       label: "Set to featured",
       icon: "star",
       property: "featured",
