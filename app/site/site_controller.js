@@ -90,12 +90,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
     API.Site.delete({ siteId: site },
       function () {
-        for (var i = 0; i < $scope.user.sites.length; i++) {
-          if ($scope.user.sites[i].id === site) {
-            $scope.user.sites.splice(i, 1);
-          }
-        }
-
+        // Remove site from user object
+        $scope.user.sites.splice(Codekit.getIndex($scope.user.sites, site));
+        // Update local user object
         AuthService.setAuthenticatedUser($scope.user);
 
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
