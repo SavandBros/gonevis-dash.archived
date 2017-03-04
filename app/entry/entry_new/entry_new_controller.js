@@ -34,6 +34,7 @@ function EntryNewController($scope, $rootScope, $state, $mdToast, Codekit, AuthS
             id: data.results[i].id,
             name: data.results[i].name,
             count: data.results[i].tagged_items_count,
+            cover_image: data.results[i].media.cover_image
           });
         }
       }
