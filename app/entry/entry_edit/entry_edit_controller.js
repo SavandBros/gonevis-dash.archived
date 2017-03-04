@@ -53,6 +53,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
         if (data.end_publication) {
           data.end_publication = new Date(data.end_publication);
         }
+        $scope.originStatus = data.status;
         $scope.form = data;
         for (var i = 0; i < $scope.form.tags.length; i++) {
           $scope.tagsToSubmit.push($scope.form.tags[i]);
@@ -111,6 +112,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
         $mdToast.showSimple("Entry updated!");
         form.loading = false;
         form.errors = null;
+        $scope.originStatus = form.status;
       },
       function (data) {
         $mdToast.showSimple("Sorry, entry couldn't be updated. Try again.");
