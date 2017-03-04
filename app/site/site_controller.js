@@ -94,10 +94,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
         $scope.user.sites.splice(Codekit.getIndex($scope.user.sites, site));
         // Update local user object
         AuthService.setAuthenticatedUser($scope.user);
-
+        // Announce site removal
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
-        $mdToast.showSimple("Site deleted");
-        // An error while no sites are available, FIX THIS LINE.
+        $mdToast.showSimple("Site deleted!");
+        // Go to main or new site page if has no other sites
         $state.go($scope.user.sites ? "dash.main" : "site-new");
       },
       function () {
