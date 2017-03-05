@@ -90,17 +90,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
     API.Site.delete({ siteId: site },
       function () {
-        for (var i = 0; i < $scope.user.sites.length; i++) {
-          if ($scope.user.sites[i].id === site) {
-            $scope.user.sites.splice(i, 1);
-          }
-        }
-
+        // Remove site from user object
+        $scope.user.sites.splice(Codekit.getIndex($scope.user.sites, site));
+        // Update local user object
         AuthService.setAuthenticatedUser($scope.user);
-
+        // Announce site removal
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
-        $mdToast.showSimple("Site deleted");
-        $state.go($scope.user.sites ? "site-new" : "dash.main");
+        $mdToast.showSimple("Site deleted!");
+        // Go to main or new site page if has no other sites
+        $state.go($scope.user.sites ? "dash.main" : "site-new");
       },
       function () {
         $mdToast.showSimple("Oh... Something went wrong, couldn't delete site");
