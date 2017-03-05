@@ -30,6 +30,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "account/reset_pass/reset_pass_view.html",
       auth: -1
     })
+    .state("email-confirmation", {
+      url: "/email-verification/:token",
+      controller: "EmailConfirmationController",
+      templateUrl: "account/email_confirmation/email_confirmation_view.html",
+      auth: -1
+    })
     // Dash states that require authentication and site index
     .state("dash", {
       url: "/:s",
@@ -120,12 +126,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "ChangePassController",
       templateUrl: "account/change_pass/change_pass_view.html",
       auth: true
-    })
-    .state("email-confirmation", {
-      url: "/email-verification/:token",
-      controller: "EmailConfirmationController",
-      templateUrl: "account/email_confirmation/email_confirmation_view.html",
-      auth: -1
     })
     .state("dash.team", {
       url: "/team",
