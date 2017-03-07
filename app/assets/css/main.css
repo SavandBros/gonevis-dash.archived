@@ -721,6 +721,43 @@ tags-input .tags.focused {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
 }
 
+tags-input .autocomplete .suggestion-item.selected span:last-child {
+    color: lavender;
+}
+
+.autocomplete-template .left-panel {
+    float: left;
+}
+
+.autocomplete-template .left-panel img {
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+}
+
+.autocomplete-template .right-panel {
+    margin-left: 5px;
+    margin-top: 7px;
+    padding-top: 10px;
+}
+
+.autocomplete-template .right-panel span:first-child {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.autocomplete-template .right-panel span:nth-child(2) {
+    font-size: 14px;
+    color: gray;
+}
+
+.autocomplete-template .right-panel span:last-child {
+    display: block;
+    font-size: 14px;
+    font-style: italic;
+    color: gray;
+}
+
 
 /* Button Corner @btn */
 

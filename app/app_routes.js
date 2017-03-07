@@ -5,6 +5,38 @@
  */
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
+    // Other states that are not a child of dash state
+    .state("site-new", {
+      url: "/new-site",
+      controller: "SiteNewController",
+      templateUrl: "site/site_new/site_new_view.html",
+      auth: true
+    })
+    .state("signin", {
+      url: "/login",
+      controller: "SigninController",
+      templateUrl: "account/signin/signin_view.html",
+      auth: false
+    })
+    .state("signup", {
+      url: "/register",
+      controller: "SignupController",
+      templateUrl: "account/signup/signup_view.html",
+      auth: false
+    })
+    .state("reset-pass", {
+      url: "/reset-password/:token",
+      controller: "ResetPassController",
+      templateUrl: "account/reset_pass/reset_pass_view.html",
+      auth: -1
+    })
+    .state("email-confirmation", {
+      url: "/email-verification/:token",
+      controller: "EmailConfirmationController",
+      templateUrl: "account/email_confirmation/email_confirmation_view.html",
+      auth: -1
+    })
+    // Dash states that require authentication and site index
     .state("dash", {
       url: "/:s",
       abstract: true,
@@ -95,42 +127,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "account/change_pass/change_pass_view.html",
       auth: true
     })
-    .state("email-confirmation", {
-      url: "/email-verification/:token",
-      controller: "EmailConfirmationController",
-      templateUrl: "account/email_confirmation/email_confirmation_view.html",
-      auth: -1
-    })
     .state("dash.team", {
       url: "/team",
       controller: "TeamController",
       templateUrl: "team/team_view.html",
       auth: true,
-    })
-    // Other states that are not a child of dash state
-    .state("site-new", {
-      url: "/new-site",
-      controller: "SiteNewController",
-      templateUrl: "site/site_new/site_new_view.html",
-      auth: true
-    })
-    .state("signin", {
-      url: "/login",
-      controller: "SigninController",
-      templateUrl: "account/signin/signin_view.html",
-      auth: false
-    })
-    .state("signup", {
-      url: "/register",
-      controller: "SignupController",
-      templateUrl: "account/signup/signup_view.html",
-      auth: false
-    })
-    .state("reset-pass", {
-      url: "/reset-password/:token",
-      controller: "ResetPassController",
-      templateUrl: "account/reset_pass/reset_pass_view.html",
-      auth: -1
     });
 
   $urlRouterProvider.otherwise(function ($injector) {

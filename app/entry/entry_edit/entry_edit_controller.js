@@ -40,6 +40,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
             id: data.results[i].id,
             name: data.results[i].name,
             count: data.results[i].tagged_items_count,
+            cover_image: data.results[i].media.cover_image
           });
         }
       }
@@ -70,10 +71,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     deferred.resolve($scope.tags);
     return deferred.promise;
   }
-
-  $scope.loadTags = function () {
-    return load();
-  };
 
   /**
    * @method loadTags

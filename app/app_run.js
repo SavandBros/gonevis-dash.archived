@@ -108,21 +108,29 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, $mdToast,
    */
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
     var isAuthenticated = AuthService.isAuthenticated();
+    var toDash = toState.name.indexOf("dash.") !== -1;
     var sites = isAuthenticated ? AuthService.getAuthenticatedUser().sites : [];
 
-    // Check authentication
-    if (toState.auth === true && !isAuthenticated || toState.auth === false && isAuthenticated) {
-      // Redirect if in bad auth state
-      if (fromState.auth === true && toState.auth === false) {
-        $state.go("signin");
-      }
-      // Prevent
+    // If requires unauthenticated access only and user is authenticated or
+    // If state requires authenticated access only and user is not authenticated
+    if ((toState.auth === false && isAuthenticated) || (toState.auth === true && !isAuthenticated)) {
+      // Stop changing state
       event.preventDefault();
+      // If current state is invalid (first page)
+      if (!fromState.name) {
+        if (isAuthenticated) {
+          $state.go("dash.main", { s: 0 });
+        } else {
+          $state.go("signin");
+        }
+      }
     }
 
-    // Check current site, if not set use first one
-    if (isAuthenticated && toState.name.indexOf("dash.") !== -1 && sites && !sites[toParams.s]) {
+    // If is authenticated and going to a dash state with an invalid site index
+    if (isAuthenticated && toDash && sites && !sites[toParams.s]) {
+      // Stop changing state
       event.preventDefault();
+      // Redirect with the same state but first site
       toParams.s = 0;
       $state.go(toState.name, toParams);
     }
