@@ -135,6 +135,16 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   };
 
+  $scope.getEntryUrl = function () {
+    var params = "";
+
+    if ($scope.form.status === 0) {
+      params = "?view=preview";
+    }
+
+    return $scope.form.absolute_uri + params;
+  }
+
   /**
    * @event gonevisDash.DolphinService:select
    * @desc Image selection callback
