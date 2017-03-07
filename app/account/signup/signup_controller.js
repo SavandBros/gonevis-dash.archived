@@ -6,13 +6,12 @@
  * Controller of the gonevisDash
  *
  * @param $scope
- * @param $rootScope
  * @param $state
  * @param $mdToast
  * @param AuthService
  * @param API
  */
-function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API) {
+function SignupController($scope, $state, $mdToast, AuthService, API) {
 
   /**
    * @method constructor
@@ -41,7 +40,6 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
         password: form.password
       },
       function (data) {
-        $rootScope.$broadcast("gonevisDash.AuthService:Registered");
         form.errors = [];
         $scope.registeredEmail = data.email;
         $scope.success = true;
@@ -67,29 +65,12 @@ function SignupController($scope, $rootScope, $state, $mdToast, AuthService, API
     )
   };
 
-  $scope.$on("gonevisDash.AuthService:Registered", function () {
-    API.Signin.post({
-        username: $scope.form.username,
-        password: $scope.form.password
-      },
-      function (data) {
-        AuthService.setAuthenticatedUser(data.user);
-        AuthService.setToken(data.token);
-
-        $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
-        $mdToast.showSimple("Welcome " + data.user.username);
-        $state.go("site-new");
-      }
-    );
-  });
-
   constructor();
 }
 
 app.controller("SignupController", SignupController);
 SignupController.$inject = [
   "$scope",
-  "$rootScope",
   "$state",
   "$mdToast",
   "AuthService",
