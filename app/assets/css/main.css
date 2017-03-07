@@ -55,9 +55,8 @@ hr[soft] {
 
 .container-image {
     height: 300px;
-    margin-bottom: -180px;
     margin-top: -20px;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
 }
 
