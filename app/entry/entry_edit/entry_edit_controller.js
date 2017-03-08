@@ -135,10 +135,14 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     );
   };
 
+  /**
+   * @method getEntryUrl
+   * @desc add draft parameters if entry is draft
+   */
   $scope.getEntryUrl = function () {
     var params = "";
 
-    if ($scope.form.status === 0) {
+    if ($scope.form.status === Codekit.entryStatuses[0].id) {
       params = "?view=preview";
     }
 
