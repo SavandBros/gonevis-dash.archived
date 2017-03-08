@@ -104,7 +104,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     }
 
     API.Entry.put({ entry_id: payload.id }, payload,
-      function () {
+      function (data) {
+        $scope.form = data;
         $mdToast.showSimple("Entry updated!");
         form.loading = false;
         form.errors = null;
