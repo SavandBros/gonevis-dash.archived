@@ -2,8 +2,8 @@
 <browserconfig>
   <msapplication>
     <tile>
-      <square150x150logo src="assets/img/fav/mstile-150x150.png"/>
-      <TileColor>#d17200</TileColor>
+      <square150x150logo src="https://gonevis.s3.amazonaws.com/img/fav/apple-touch-icon.png"/>
+      <TileColor>#d17100</TileColor>
     </tile>
   </msapplication>
 </browserconfig>
