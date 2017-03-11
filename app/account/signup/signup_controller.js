@@ -1,17 +1,16 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:SigninController
- * Controller of the gonevisDash
+ * @class SignupController
  *
  * @param $scope
  * @param $state
+ * @param $stateParams
  * @param $mdToast
  * @param AuthService
  * @param API
  */
-function SignupController($scope, $state, $mdToast, AuthService, API) {
+function SignupController($scope, $state, $stateParams, $mdToast, AuthService, API) {
 
   /**
    * @method constructor
@@ -23,13 +22,13 @@ function SignupController($scope, $state, $mdToast, AuthService, API) {
     if (AuthService.isAuthenticated()) {
       $state.go("main");
     }
-  };
+  }
 
   /**
    * @method signup
    * @desc Submit signup form
    * 
-   * @param form {object}
+   * @param form {Object}
    */
   $scope.signup = function register(form) {
     form.loading = true;
@@ -58,11 +57,11 @@ function SignupController($scope, $state, $mdToast, AuthService, API) {
    * @param email {String}
    */
   $scope.resend = function (email) {
-    API.EmailConfirmationResend.save({email: email},
+    API.EmailConfirmationResend.save({ email: email },
       function () {
         $mdToast.showSimple("We've send a confirmation link to your email.");
       }
-    )
+    );
   };
 
   constructor();
@@ -72,6 +71,7 @@ app.controller("SignupController", SignupController);
 SignupController.$inject = [
   "$scope",
   "$state",
+  "$stateParams",
   "$mdToast",
   "AuthService",
   "API"
