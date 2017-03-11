@@ -17,11 +17,8 @@ function SignupController($scope, $state, $stateParams, $mdToast, AuthService, A
    * @desc Init function for controller
    */
   function constructor() {
-
-    // Check auth
-    if (AuthService.isAuthenticated()) {
-      $state.go("main");
-    }
+    // Get collaborating token
+    $scope.inviteId = $stateParams.token;
   }
 
   /**
@@ -33,11 +30,12 @@ function SignupController($scope, $state, $stateParams, $mdToast, AuthService, A
   $scope.signup = function register(form) {
     form.loading = true;
 
-    API.Signup.post({
-        email: form.email,
-        username: form.username,
-        password: form.password
-      },
+    var payload = form.data;
+    if ($scope.inviteId) {
+      payload.invite_id = $scope.inviteId;
+    }
+
+    API.Signup.post(payload,
       function (data) {
         form.errors = [];
         $scope.registeredEmail = data.email;
