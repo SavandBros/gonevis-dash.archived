@@ -137,6 +137,20 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   /**
+   * @method getEntryUrl
+   * @desc Add draft parameters if entry is draft
+   */
+  $scope.getEntryUrl = function () {
+    var params = "";
+
+    if ($scope.form.status === Codekit.entryStatuses[0].id) {
+      params = "?view=preview";
+    }
+
+    return $scope.form.absolute_uri + params;
+  }
+
+  /**
    * @event gonevisDash.DolphinService:select
    * @desc Image selection callback
    *
