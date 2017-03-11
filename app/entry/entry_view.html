@@ -94,7 +94,7 @@
                   </li>
                   <li class="divider" ng-show="e.password || e.featured || e.comment_enabled"></li>
                   <li>
-                    <a href="{{ e.absolute_uri }}" target="_blank">
+                    <a ng-href="{{ entryService.getEntryUrl(e) }}" target="_blank">
                       <i class="fa fa-fw fa-external-link"></i> View on site
                     </a>
                   </li>
