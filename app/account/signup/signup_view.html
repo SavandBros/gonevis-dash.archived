@@ -15,7 +15,7 @@
         </div>
         <!-- Signup form -->
         <form ng-submit="signup(form)" name="form" ng-hide="success">
-          <h3 class="o-fade-soft">Register</h3>
+          <h3 class="o-fade-soft">{{ inviteToken ? "Start Collaborating" : "Register" }}</h3>
           <hr>
           <div class="form-group" ng-class="{'has-error': form.errors.email}">
             <input id="email" class="form-control input-lg" type="email" ng-model="form.email" placeholder="Email" required/>
