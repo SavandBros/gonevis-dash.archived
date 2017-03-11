@@ -5,10 +5,11 @@
  *
  * @param $rootScope
  * @param API
- * 
+ * @param Codekit
+ *
  * @return [Factory]
  */
-function EntryService($rootScope, API) {
+function EntryService($rootScope, API, Codekit) {
 
   /**
    * @method cache
@@ -30,14 +31,34 @@ function EntryService($rootScope, API) {
     );
   }
 
+  /**
+   * @method getEntryUrl
+   * @desc Add draft parameters if entry is draft
+   *
+   * @param entry {Object}
+   *
+   * @returns {String}
+   */
+  function getEntryUrl(entry) {
+    var params = "";
+
+    if (entry.status === Codekit.entryStatuses[0].id) {
+      params = "?view=preview";
+    }
+
+    return entry.absolute_uri + params;
+  }
+
   return {
     cache: cache,
-    setProperty: setProperty
+    setProperty: setProperty,
+    getEntryUrl: getEntryUrl
   };
 }
 
 app.factory("EntryService", EntryService);
 EntryService.$inject = [
   "$rootScope",
-  "API"
+  "API",
+  "Codekit"
 ];

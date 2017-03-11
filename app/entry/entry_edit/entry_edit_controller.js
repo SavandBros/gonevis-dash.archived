@@ -13,9 +13,10 @@
  * @param API
  * @param AuthService
  * @param DolphinService
+ * @param EntryService
  */
 function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, $q,
-  Codekit, API, AuthService, DolphinService) {
+  Codekit, API, AuthService, DolphinService, EntryService) {
 
   /**
    * @method constructor
@@ -23,6 +24,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
    */
   function constructor() {
     $scope.dolphinService = DolphinService;
+    $scope.entryService = EntryService;
     $scope.editing = true;
     $scope.tags = [];
     $scope.tagsToSubmit = [];
@@ -137,20 +139,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
   };
 
   /**
-   * @method getEntryUrl
-   * @desc Add draft parameters if entry is draft
-   */
-  $scope.getEntryUrl = function () {
-    var params = "";
-
-    if ($scope.form.status === Codekit.entryStatuses[0].id) {
-      params = "?view=preview";
-    }
-
-    return $scope.form.absolute_uri + params;
-  }
-
-  /**
    * @event gonevisDash.DolphinService:select
    * @desc Image selection callback
    *
@@ -181,5 +169,6 @@ EntryEditController.$inject = [
   "Codekit",
   "API",
   "AuthService",
-  "DolphinService"
+  "DolphinService",
+  "EntryService"
 ];

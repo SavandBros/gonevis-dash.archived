@@ -57,7 +57,7 @@
           <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection()" type="button">
             <i class="fa fa-fw fa-image"></i> Select cover image
           </button>
-          <a ng-href="{{ getEntryUrl() }}"
+          <a ng-href="{{ entryService.getEntryUrl(form) }}"
              class="btn btn-default btn-sm btn-block"
              target="_blank"
              ng-if="editing">
