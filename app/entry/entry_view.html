@@ -76,7 +76,8 @@
               <!--Date-->
               <div class="col-md-3 text-right o-fade">
                 {{ e.status == 2 ? e.publication_date : e.created | date }}
-                <small class="dis-b o-fade">{{ e.status == 2 ? "Publication" : "Creation" }}</small>
+                <small class="dis-b o-fade" ng-if="e.status === 1">Publication</small>
+                <small class="dis-b o-fade" ng-if="e.status === 0">Creation</small>
               </div>
               <!--Tools-->
               <div class="col-md-1 text-right">
