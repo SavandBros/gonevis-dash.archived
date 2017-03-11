@@ -24,6 +24,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "account/signup/signup_view.html",
       auth: false
     })
+    .state("collaborate", {
+      // Same as Signup but different url
+      url: "/start-collaborating/:token",
+      controller: "SignupController",
+      templateUrl: "account/signup/signup_view.html",
+      auth: false
+    })
     .state("reset-pass", {
       url: "/reset-password/:token",
       controller: "ResetPassController",
