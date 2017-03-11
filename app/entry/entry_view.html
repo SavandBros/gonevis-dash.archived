@@ -75,7 +75,7 @@
               </div>
               <!-- Date -->
               <div class="col-md-3 text-right o-fade">
-                {{ e.status == 1 ? e.publication_date : e.created | date }}
+                {{ e.status == 1 ? e.published : e.created | date }}
                 <small class="dis-b o-fade" ng-if="e.status === 1">Publication</small>
                 <small class="dis-b o-fade" ng-if="e.status === 0">Creation</small>
               </div>
