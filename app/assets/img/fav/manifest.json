@@ -1,17 +1,22 @@
 {
-	"name": "Gonevis",
-	"icons": [
-		{
-			"src": "assets\/img\/fav\/android-chrome-192x192.png",
-			"sizes": "192x192",
-			"type": "image\/png"
-		},
-		{
-			"src": "assets\/img\/fav\/android-chrome-512x512.png",
-			"sizes": "512x512",
-			"type": "image\/png"
-		}
-	],
-	"theme_color": "#d17200",
-	"display": "standalone"
+  "name": "GoNevis Dash",
+  "short_name": "GoNevis",
+  "theme_color": "#d17100",
+  "background_color": "#d17100",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [{
+    "src": "gonevis-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }, {
+    "src": "gonevis-512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }, {
+    "src": "gonevis-1024.png",
+    "sizes": "1024x1024",
+    "type": "image/png"
+  }]
 }
