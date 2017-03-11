@@ -232,7 +232,7 @@ module.exports = function (grunt) {
         src: [
           "<%= gonevisDash.dist %>/{,*/}*.js",
           "<%= gonevisDash.dist %>/assets/css/{,*/}*.css",
-          "<%= gonevisDash.dist %>/assets/img/fav/*.*",
+          // "<%= gonevisDash.dist %>/assets/img/fav/*.*",
           "<%= gonevisDash.dist %>/assets/css/fonts/*"
         ]
       }
@@ -265,12 +265,12 @@ module.exports = function (grunt) {
       options: {
         assetsDirs: [
           "<%= gonevisDash.dist %>",
-          "<%= gonevisDash.dist %>/assets/img",
+          // "<%= gonevisDash.dist %>/assets/img",
           "<%= gonevisDash.dist %>/assets/css"
         ],
         patterns: {
           js: [
-            [/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, "Replacing references to images"]
+            // [/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, "Replacing references to images"]
           ]
         }
       }
