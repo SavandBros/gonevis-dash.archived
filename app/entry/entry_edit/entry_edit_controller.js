@@ -13,9 +13,10 @@
  * @param API
  * @param AuthService
  * @param DolphinService
+ * @param EntryService
  */
 function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, $q,
-  Codekit, API, AuthService, DolphinService) {
+  Codekit, API, AuthService, DolphinService, EntryService) {
 
   /**
    * @method constructor
@@ -23,6 +24,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
    */
   function constructor() {
     $scope.dolphinService = DolphinService;
+    $scope.entryService = EntryService;
     $scope.editing = true;
     $scope.tags = [];
     $scope.tagsToSubmit = [];
@@ -104,7 +106,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     }
 
     API.Entry.put({ entry_id: payload.id }, payload,
-      function () {
+      function (data) {
+        $scope.form = data;
         $mdToast.showSimple("Entry updated!");
         form.loading = false;
         form.errors = null;
@@ -166,5 +169,6 @@ EntryEditController.$inject = [
   "Codekit",
   "API",
   "AuthService",
-  "DolphinService"
+  "DolphinService",
+  "EntryService"
 ];
