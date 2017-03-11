@@ -34,6 +34,10 @@ function EntryService($rootScope, API, Codekit) {
   /**
    * @method getEntryUrl
    * @desc Add draft parameters if entry is draft
+   *
+   * @param entry {Object}
+   *
+   * @returns {String}
    */
   function getEntryUrl(entry) {
     var params = "";
