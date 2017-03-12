@@ -1,9 +1,9 @@
-[![Stories in Ready](https://badge.waffle.io/SavandBros/gonevis-dash.png?label=ready&title=Ready)](https://waffle.io/SavandBros/gonevis-dash)
 # Gonevis Dash
 
 [![Build Status](https://travis-ci.org/SavandBros/gonevis-dash.svg?branch=master)](https://travis-ci.org/SavandBros/gonevis-dash)
 [![codecov](https://codecov.io/gh/SavandBros/gonevis-dash/branch/master/graph/badge.svg)](https://codecov.io/gh/SavandBros/gonevis-dash)
 [![Dependency Status](https://gemnasium.com/badges/github.com/SavandBros/gonevis-dash.svg)](https://gemnasium.com/github.com/SavandBros/gonevis-dash)
+[![Stories in Ready](https://badge.waffle.io/SavandBros/gonevis-dash.png?label=ready&title=Ready)](https://waffle.io/SavandBros/gonevis-dash)
 
 
 This project is the source code of the [GoNevis Dash](http://dash.gonevis.com), the admin area of of GoNevis blogging platform.
