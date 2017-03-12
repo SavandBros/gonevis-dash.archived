@@ -640,6 +640,25 @@ md-toast {
     margin-top: 0.25em;
 }
 
+.editor-draft-mode {
+    position: fixed;
+    bottom: 20px;
+    border: 2px solid #d17100;
+    left: 20px;
+    z-index: 11;
+    padding: 5px 12px;
+    font-size: smaller;
+    border-radius: 100px;
+    color: #444;
+    opacity: 0.8;
+    cursor: default;
+    font-weight: bold;
+}
+
+.editor-draft-mode:hover {
+    opacity: 1;
+}
+
 
 /* Navigation */
 
@@ -795,6 +814,15 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 .btn-corner:focus,
 .btn-corner:active {
     outline: 0 !important;
+}
+
+
+/* Button icon */
+
+.btn .fa.left {
+    padding: 4px 0;
+    position: absolute;
+    left: 10px;
 }
 
 
@@ -1214,6 +1242,10 @@ a.thumbnail.active {
     overflow: hidden;
 }
 
+.t-letter-spacing {
+    letter-spacing: 1px;
+}
+
 .t-shadow {
     text-shadow: 0 0 2px #000;
 }
@@ -1275,6 +1307,10 @@ img.tag {
 
 .tooltip.top .tooltip-arrow {
     border-top-color: #d17100;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #d17100;
 }
 
 
