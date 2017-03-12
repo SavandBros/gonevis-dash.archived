@@ -230,10 +230,10 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
-          "<%= gonevisDash.dist %>/{,*/}*.js",
-          "<%= gonevisDash.dist %>/assets/css/{,*/}*.css",
+          "<%= gonevisDash.dist %>/**/*.js",
+          "<%= gonevisDash.dist %>/**/*.css",
           // "<%= gonevisDash.dist %>/assets/img/fav/*.*",
-          "<%= gonevisDash.dist %>/assets/css/fonts/*"
+          "<%= gonevisDash.dist %>/assets/css/fonts/*",
         ]
       }
     },
@@ -260,8 +260,8 @@ module.exports = function (grunt) {
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
       html: ["<%= gonevisDash.dist %>/**/*.html"],
-      css: ["<%= gonevisDash.dist %>/assets/css/**.css"],
-      js: ["<%= gonevisDash.dist %>/**.js"],
+      js: ["<%= gonevisDash.dist %>/**/*.js"],
+      css: ["<%= gonevisDash.dist %>/**/*.css"],
       options: {
         assetsDirs: [
           "<%= gonevisDash.dist %>",
