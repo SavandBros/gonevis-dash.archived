@@ -630,6 +630,25 @@ md-toast {
     margin-top: 0.25em;
 }
 
+.editor-draft-mode {
+    position: fixed;
+    bottom: 20px;
+    border: 2px solid #d17100;
+    left: 20px;
+    z-index: 11;
+    padding: 5px 12px;
+    font-size: smaller;
+    border-radius: 100px;
+    color: #444;
+    opacity: 0.8;
+    cursor: default;
+    font-weight: bold;
+}
+
+.editor-draft-mode:hover {
+    opacity: 1;
+}
+
 
 /* Navigation */
 
