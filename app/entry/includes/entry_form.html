@@ -125,6 +125,12 @@
           {{ form.errors.non_field_errors[0] }}
         </div>
         <!-- Status -->
+        <div class="btn-group-vertical btn-block s-mar-bottom-soft">
+          <label class="btn btn-{{ status.color }}" ng-repeat="status in statuses"
+            ng-model="form.status" uib-btn-radio="status.id"
+            ng-class="{'t-bold': form.status === status.id, 'o-fade-soft': form.status !== status.id}">
+            <i class="fa fa-fw fa-{{ status.icon }} left"></i> {{ status.label }}
+          </label>
         </div>
         <!-- New button -->
         <button class="btn btn-primary btn-block" ng-if="!editing">SUBMIT</button>
