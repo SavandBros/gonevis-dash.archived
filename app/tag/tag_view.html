@@ -1,5 +1,5 @@
 <!-- Add button -->
-<button type="button" class="btn btn-primary btn-corner" ng-click="tagService.viewCreate()">
+<button type="button" class="btn btn-primary btn-corner" ng-click="Tag.viewCreate()">
   <i class="fa fa-plus"></i>
 </button>
 <!-- Main -->
@@ -19,16 +19,16 @@
       <div class="panel-body s-pad-y-no" ng-show="view == 'grid'">
         <ul class="list-unstyled s-mar-no">
           <div class="row">
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4"  ng-repeat="tag in tags" ng-show="!tag.isDeleted">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4"  ng-repeat="tag in tags track by $index" ng-show="!tag.isDeleted">
               <!-- Tag (thumbnail) -->
-              <a class="thumbnail text-center s-pad-no" ng-click="tagService.view(tag)">
+              <a class="thumbnail text-center s-pad-no" ng-click="tag.view()">
                 <!-- Image -->
-                <img ng-src="{{ tag.media.cover_image.thumbnail_128x128 ?
-                    tag.media.cover_image.thumbnail_128x128 : 'http://placehold.it/128x128/eee/eee'
+                <img ng-src="{{ tag.get.media.cover_image.thumbnail_128x128 ?
+                    tag.get.media.cover_image.thumbnail_128x128 : 'http://placehold.it/128x128/eee/eee'
                   }}">
                 <!-- Name -->
                 <div class="caption t-line">
-                  <small class="text-primary">{{ tag.name }}</small>
+                  <small class="text-primary">{{ tag.get.name }}</small>
                 </div>
               </a>
             </div>
@@ -40,37 +40,37 @@
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <!-- Tag (List) -->
-            <li class="row list-panel" ng-repeat="tag in tags" ng-show="!tag.isDeleted">
+            <li class="row list-panel" ng-repeat="tag in tags track by $index" ng-show="!tag.isDeleted">
               <!-- Image -->
               <div class="col-lg-1 col-xs-1">
-                <img class="tag img-rounded" ng-src="{{ tag.media.cover_image.thumbnail_48x48 ?
-                    tag.media.cover_image.thumbnail_48x48 : 'http://placehold.it/48x48/eee/eee'
+                <img class="tag img-rounded" ng-src="{{ tag.get.media.cover_image.thumbnail_48x48 ?
+                    tag.get.media.cover_image.thumbnail_48x48 : 'http://placehold.it/48x48/eee/eee'
                   }}">
               </div>
               <!-- Title and slug -->
               <div class="col-lg-2 col-md-9 col-xs-8 t-line">
-                <a ng-click="tagService.view(tag)">{{ tag.name }}</a>
-                <small class="dis-b o-fade">#{{ tag.slug }}</small>
+                <a ng-click="tag.view()">{{ tag.get.name }}</a>
+                <small class="dis-b o-fade">#{{ tag.get.slug }}</small>
               </div>
               <!-- Description -->
-              <div class="col-lg-7 text-left o-fade t-line hidden-xs hidden-sm hidden-md">{{ tag.description }}</div>
+              <div class="col-lg-7 text-left o-fade t-line hidden-xs hidden-sm hidden-md">{{ tag.get.description }}</div>
               <!-- Count -->
               <div class="col-md-1 col-xs-2 text-right" style="padding: 10px 0">
-                <span class="badge">{{ tag.tagged_items_count | number }}</span>
+                <span class="badge">{{ tag.get.tagged_items_count | number }}</span>
               </div>
               <!-- Options -->
               <div class="col-md-1 col-xs-1 text-right">
                 <i class="fa fa-fw fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle"
                   style="padding: 14px 0" data-toggle="dropdown"></i>
                 <ul class="dropdown-menu">
-                  <li><a ng-click="tagService.view(tag)"><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-click="tag.view()"><i class="fa fa-eye"></i> View</a></li>
                   <li>
-                    <a href="{{ tag.absolute_uri }}" target="_blank">
+                    <a href="{{ tag.get.absolute_uri }}" target="_blank">
                       <i class="fa fa-fw fa-external-link"></i> View on site
                     </a>
                   </li>
                   <li class="divider"></li>
-                  <li><a ng-click="tagService.remove(tag)"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                  <li><a ng-click="tag.remove()"><i class="fa fa-trash text-danger"></i> Delete</a></li>
                 </ul>
               </div>
             </li>
