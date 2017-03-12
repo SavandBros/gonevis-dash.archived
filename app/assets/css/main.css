@@ -1280,6 +1280,10 @@ img.tag {
     border-top-color: #d17100;
 }
 
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #d17100;
+}
+
 
 /* Stack element */
 
