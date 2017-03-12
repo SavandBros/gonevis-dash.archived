@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/SavandBros/gonevis-dash.png?label=ready&title=Ready)](https://waffle.io/SavandBros/gonevis-dash)
 # Gonevis Dash
 
 [![Build Status](https://travis-ci.org/SavandBros/gonevis-dash.svg?branch=master)](https://travis-ci.org/SavandBros/gonevis-dash)
