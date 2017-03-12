@@ -1213,6 +1213,10 @@ a.thumbnail.active {
     overflow: hidden;
 }
 
+.t-letter-spacing {
+    letter-spacing: 1px;
+}
+
 .t-shadow {
     text-shadow: 0 0 2px #000;
 }
