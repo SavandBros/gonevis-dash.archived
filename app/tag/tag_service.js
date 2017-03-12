@@ -1,151 +1,147 @@
 "use strict";
 
 /**
- * Tag Service
- *
- * @class TagService
- * @namespace gonevisDash.TagService
+ * @class Tag
  *
  * @param $rootScope
  * @param $mdToast
  * @param API
  * @param ModalsService
- *
- * @returns [Factory]
  */
-function TagService($rootScope, $mdToast, API, ModalsService) {
+function Tag($rootScope, $mdToast, API, ModalsService) {
+  return function (data) {
+    /**
+     * @name self
+     * @desc Super variable for getting this in functions
+     *
+     * @type {Tag}
+     */
+    var self = this;
 
-  /**
-   * update
-   *
-   * @method update
-   * @desc Update tag, notify and broadcast for controllers to use.
-   *
-   * @param tag {Object}
-   * @param toast {Boolean}
-   */
-  function update(tag, toast, form) {
-    toast = toast || true;
-    form.loading = true;
-    var slug = form.oldSlug || tag.slug;
+    /**
+     * @name data
+     * @desc Backend data
+     *
+     * @type {Object}
+     */
+    this.get = data;
 
-    API.Tag.put({ slug: slug, site: tag.site }, tag,
-      function (data) {
-        if (toast) {
+    /**
+     * @name isDeleted
+     * @type {Boolean}
+     */
+    this.isDeleted = false;
+
+    /**
+     * @method update
+     * @desc Update tag, notify and broadcast for controllers to use.
+     *
+     * @param form {Object}
+     * @param toast {Boolean}
+     */
+    this.update = function (form) {
+      form.loading = true;
+      var slug = form.oldSlug || form.data.slug;
+
+      API.Tag.put({ slug: slug, site: this.get.site }, form.data,
+        function (data) {
+          self.get = data;
+          form.loading = false;
+          form.oldSlug = data.slug;
           $mdToast.showSimple("Tag updated.");
-        }
-        form.loading = false;
-        form.oldSlug = data.slug;
-        $rootScope.$broadcast("gonevisDash.TagService:update", {
-          data: data,
-          tag: tag,
-          success: true,
-        });
-      },
-      function (data) {
-        if (toast) {
+          $rootScope.$broadcast("gonevisDash.Tag:update", {
+            data: data,
+            tag: self,
+            success: true,
+          });
+        },
+        function (data) {
+          form.loading = false;
           $mdToast.showSimple("Tag update failed.");
+          $rootScope.$broadcast("gonevisDash.Tag:update", {
+            data: data,
+            tag: self,
+            success: false,
+          });
         }
-        form.loading = false;
-        $rootScope.$broadcast("gonevisDash.TagService:update", {
-          data: data,
-          tag: tag,
-          success: false,
-        });
-      }
-    );
-  }
+      );
+    };
 
-
-  /**
-   * remove
-   *
-   * @method remove
-   * @desc Remove tag, notify and broadcast for controllers to use.
-   *
-   * @param tag {Object}
-   * @param toast {Boolean}
-   */
-  function remove(tag, toast) {
-    toast = toast || true;
-
-    API.Tag.remove({ slug: tag.slug, site: tag.site },
-      function (data) {
-        if (toast) {
-          $mdToast.showSimple("Tag " + tag.name + " removed.");
+    /**
+     * @method remove
+     * @desc Remove tag, notify and broadcast for controllers to use.
+     */
+    this.remove = function () {
+      API.Tag.remove({ slug: this.get.slug, site: this.get.site },
+        function (data) {
+          this.isDeleted = true;
+          $mdToast.showSimple("Tag " + this.get.name + " removed.");
+          $rootScope.$broadcast("gonevisDash.Tag:remove", {
+            data: data,
+            tag: this,
+            success: false,
+          });
         }
-        tag.isDeleted = true;
-        $rootScope.$broadcast("gonevisDash.TagService:remove", {
-          data: data,
-          tag: tag,
-          success: true,
-        });
-      },
-      function (data) {
-        if (toast) {
-          $mdToast.showSimple("Deleting tag failed.");
+      );
+    };
+
+    /**
+     * @method view
+     * @desc View tag as modal (detailed mode).
+     */
+    this.view = function () {
+      ModalsService.open("tag", "TagModalController", {
+        tag: angular.copy(this)
+      });
+    };
+
+    /**
+     * @method viewCreate
+     * @desc Tag creation modal
+     */
+    this.viewCreate = function () {
+      ModalsService.open("tagCreate", "TagNewModalController");
+    };
+
+    /**
+     * @method create
+     * @desc Tag creation via backend
+     *
+     * @param form {Object}
+     */
+    this.create = function (form) {
+      form.loading = true;
+      form.errors = null;
+
+      form.data.slug = form.data.slug ? form.data.slug : "";
+
+      API.Tags.save({ site: form.data.site }, form.data,
+        function (data) {
+          form.loading = false;
+          form.data.tagged_items_count = 0;
+          ModalsService.close("tagCreate");
+          $mdToast.showSimple("Tag " + data.name + " created.");
+          $rootScope.$broadcast("gonevisDash.Tag:create", {
+            success: true,
+            data: data
+          });
+        },
+        function (data) {
+          form.loading = false;
+          form.errors = data.data;
+          $mdToast.showSimple("Failed to create tag.");
+          $rootScope.$broadcast("gonevisDash.Tag:create", {
+            success: false,
+            data: data
+          });
         }
-        $rootScope.$broadcast("gonevisDash.TagService:remove", {
-          data: data,
-          tag: tag,
-          success: false,
-        });
-      }
-    );
-  }
-
-  /**
-   * view
-   *
-   * @method view
-   * @desc View tag as modal (detailed mode).
-   *
-   * @param tag {Object}
-   */
-  function view(tag) {
-    ModalsService.open("tag", "TagModalController", { tag: tag });
-  }
-
-  /**
-   * viewCreate
-   *
-   * @method viewCreate
-   * @desc Tag creation modal
-   */
-  function viewCreate() {
-    ModalsService.open("tagCreate", "TagNewModalController");
-  }
-
-  /**
-   * create
-   *
-   * @method create
-   * @desc Tag creation for broadcast and toast
-   *
-   * @param form {Object}
-   * @param data {Object}
-   */
-  function create(form, data) {
-    $rootScope.$broadcast("gonevisDash.TagService:create", {
-      success: true,
-      data: data,
-      tag: form.data
-    });
-
-    $mdToast.showSimple("Tag " + data.name + " created.");
-  }
-
-  return {
-    update: update,
-    remove: remove,
-    view: view,
-    viewCreate: viewCreate,
-    create: create
+      );
+    };
   };
 }
 
-app.factory("TagService", TagService);
-TagService.$inject = [
+app.service("Tag", Tag);
+Tag.$inject = [
   "$rootScope",
   "$mdToast",
   "API",
