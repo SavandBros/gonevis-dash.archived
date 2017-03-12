@@ -58,6 +58,16 @@ hr[soft] {
     margin-top: -20px;
     background-size: cover;
     background-position: center;
+    margin-bottom: -100px;
+    color: transparent;
+    text-align: center;
+    padding-top: 70px;
+    transition: all 0.1s ease-in-out;
+}
+
+.container-image:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 
