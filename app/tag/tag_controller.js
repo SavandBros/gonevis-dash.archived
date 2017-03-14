@@ -14,7 +14,7 @@
  * @param Pagination
  * @param Search
  */
-function TagController($scope, $rootScope, $state, $mdToast, TagService, API, AuthService, Pagination, Search, Codekit) {
+function TagController($scope, $rootScope, $state, $mdToast, Tag, API, AuthService, Pagination, Search, Codekit) {
 
   var site = AuthService.getCurrentSite();
 
@@ -23,18 +23,24 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.view = localStorage.tagView || "list";
     $scope.user = AuthService.getAuthenticatedUser();
-    $scope.tagService = TagService;
+    $scope.view = localStorage.tagView || "list";
     $scope.filters = { name: "" };
     $scope.search = Search;
     $scope.pageForm = {};
+    $scope.tags = [];
+    $scope.Tag = new Tag();
 
-    var payload = { site: site };
+    var payload = {
+      site: site
+    };
+
     API.Tags.get(payload,
       function (data) {
+        angular.forEach(data.results, function (data) {
+          $scope.tags.push(new Tag(data));
+        });
         $scope.initialled = true;
-        $scope.tags = data.results;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Tags.get, data, payload);
       }
@@ -70,71 +76,46 @@ function TagController($scope, $rootScope, $state, $mdToast, TagService, API, Au
   };
 
   /**
-   * @method create
-   * @desc Create a new tag
-   *
-   * @param form {Object}
-   */
-  $scope.create = function (form) {
-    form.loading = true;
-    form.errors = null;
-
-    form.data.slug = form.data.slug || "";
-
-    API.Tags.save({ site: site }, form.data,
-      function (data) {
-        form.loading = false;
-        form.data = null;
-        $scope.tags.unshift(data);
-        $mdToast.showSimple("Tag " + data.name + " created.");
-      },
-      function (data) {
-        form.loading = false;
-        form.data = null;
-        form.errors = data.data;
-        $mdToast.showSimple("Tag creaton failed.");
-      }
-    );
-  };
-
-  /**
    * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
 
-  $scope.$on("gonevisDash.TagService:remove", function (event, data) {
+  $scope.$on("gonevisDash.Tag:remove", function (event, data) {
     var index = Codekit.getIndex($scope.tags, data.tag);
     $scope.tags[index].isDeleted = true;
     Codekit.timeoutSlice($scope.tags);
   });
 
-  $scope.$on("gonevisDash.TagService:create", function (event, data) {
-    var tag = data.tag;
-    tag.slug = data.data.slug;
-    tag.site = data.data.site;
-    $scope.tags.unshift(tag);
+  $scope.$on("gonevisDash.Tag:create", function (event, data) {
+    if (data.success) {
+      $scope.tags.push(new Tag(data.data));
+    }
   });
 
-  $scope.$on("gonevisDash.TagService:update", function (event, data) {
+  $scope.$on("gonevisDash.Tag:update", function (event, data) {
     if (data.success) {
       var index = Codekit.getIndex($scope.tags, data.tag);
-      $scope.tags[index] = data.data;
+      $scope.tags[index] = data.tag;
     }
   });
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
-      $scope.tags = $scope.tags.concat(data.data.results);
+      angular.forEach(data.data.results, function (data) {
+        $scope.tags.push(new Tag(data));
+      });
     }
   });
 
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
-      $scope.tags = data.data.results;
       $scope.searchForm = data.form;
+      angular.forEach(data.data.results, function (data) {
+        $scope.tags.push(new Tag(data));
+      });
     }
   });
 
@@ -147,7 +128,7 @@ TagController.$inject = [
   "$rootScope",
   "$state",
   "$mdToast",
-  "TagService",
+  "Tag",
   "API",
   "AuthService",
   "Pagination",
