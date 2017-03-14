@@ -4,11 +4,12 @@
  * @class Tag
  *
  * @param $rootScope
+ * @param $state
  * @param $mdToast
  * @param API
  * @param ModalsService
  */
-function Tag($rootScope, $mdToast, API, ModalsService) {
+function Tag($rootScope, $state, $mdToast, API, ModalsService) {
   return function (data) {
     /**
      * @name self
@@ -96,6 +97,19 @@ function Tag($rootScope, $mdToast, API, ModalsService) {
     };
 
     /**
+     * @method addToNavigation
+     * @desc Add tag to navigation
+     */
+    this.addToNavigation = function () {
+      $state.go("dash.navigation", {
+        add: {
+          label: this.get.name,
+          url: "/tag/" + this.get.slug
+        }
+      })
+    };
+
+    /**
      * @method viewCreate
      * @desc Tag creation modal
      */
@@ -143,7 +157,8 @@ function Tag($rootScope, $mdToast, API, ModalsService) {
 app.service("Tag", Tag);
 Tag.$inject = [
   "$rootScope",
+  "$state",
   "$mdToast",
   "API",
-  "ModalsService",
+  "ModalsService"
 ];
