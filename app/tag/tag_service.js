@@ -106,7 +106,7 @@ function Tag($rootScope, $state, $mdToast, API, ModalsService) {
           label: this.get.name,
           url: "/tag/" + this.get.slug
         }
-      })
+      });
     };
 
     /**

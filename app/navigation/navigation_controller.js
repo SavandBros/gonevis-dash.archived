@@ -37,7 +37,7 @@ function NavigationController($scope, $rootScope, $state, $stateParams, $mdToast
           $scope.navigations.push({
             label: navigation.label,
             url: navigation.url
-          })
+          });
         }
       }
     );
