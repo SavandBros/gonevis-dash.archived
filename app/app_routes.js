@@ -60,6 +60,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/navigation",
       controller: "NavigationController",
       templateUrl: "navigation/navigation_view.html",
+      params: {
+        add: null
+      },
       auth: true
     })
     .state("dash.dolphin", {
