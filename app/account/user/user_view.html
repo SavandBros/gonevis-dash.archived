@@ -10,25 +10,34 @@
             </div>
           </div>
           <div class="col-md-8">
-            <h3 class="text-right o-fade-soft" editable-text="user.name" onbeforesave="updateProfile('name', $data)">{{ user.name || "You have no name :-[" }}</h3>
+            <h3 class="text-right o-fade-soft" editable-text="user.name"
+              onbeforesave="updateProfile('name', $data)">
+              {{ user.name || "You have no name :-[" }}
+            </h3>
           </div>
         </div>
         <div class="s-mar-top">
+          <!-- Avout -->
           <div class="panel panel-default panel-body">
-            <span editable-textarea="user.about" onbeforesave="updateProfile('about', $data)">{{ user.about || "Nothing here..." }}</span>
+            <span editable-textarea="user.about" onbeforesave="updateProfile('about', $data)">
+              {{ user.about || "Nothing here..." }}
+            </span>
             <small class="o-fade pull-right">ABOUT</small>
           </div>
+          <!-- Location -->
           <div class="panel panel-default panel-body">
-            <span editable-text="user.location" onbeforesave="updateProfile('location', $data)">{{ user.location || "Nothing here..." }}</span>
+            <span editable-text="user.location" onbeforesave="updateProfile('location', $data)">
+              {{ user.location || "Nothing here..." }}
+            </span>
             <small class="o-fade pull-right">LOCATION</small>
           </div>
           <!-- Receive email notification -->
-          <div class="checkbox checkbox-primary panel panel-default panel-body">
-            <input id="notification"
-                   type="checkbox"
-                   ng-model="notification"
-                   ng-change="updateProfile('receive_email_notification', notification)">
-              <label for="notification">Receive email notification</label>
+          <div class="panel panel-default panel-body s-pad-y-no">
+            <div class="checkbox checkbox-primary">
+              <input id="receive_email_notification" type="checkbox" ng-model="receive_email_notification"
+                    ng-change="updateProfile('receive_email_notification', notification)">
+                <label for="receive_email_notification">Receive email notification</label>
+            </div>
           </div>
         </div>
       </div>
