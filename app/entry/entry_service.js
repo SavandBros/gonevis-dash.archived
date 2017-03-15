@@ -91,7 +91,7 @@ function Entry($rootScope, $mdToast, API, Codekit) {
       }
 
       return this.get.absolute_uri + params;
-    }
+    };
   };
 }
 
