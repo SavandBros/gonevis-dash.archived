@@ -7,13 +7,12 @@
  * @namespace gonevisDash.DolphinService
  *
  * @param $rootScope
- * @param $mdToast
  * @param API
  * @param ModalsService
  *
  * @returns [Factory]
  */
-function DolphinService($rootScope, $mdToast, API, ModalsService) {
+function DolphinService($rootScope, API, ModalsService) {
 
   /**
    * remove
@@ -36,7 +35,7 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
           success: true
         });
         if (toast) {
-          $mdToast.showSimple("Deleted " + dolphin.meta_data.name);
+          // $mdToast.showSimple("Deleted " + dolphin.meta_data.name);
         }
       },
       function (data) {
@@ -46,7 +45,7 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
           success: false
         });
         if (toast) {
-          $mdToast.showSimple("Sorry, file couldn't be deleted. Try again later.");
+          // $mdToast.showSimple("Sorry, file couldn't be deleted. Try again later.");
         }
       }
     );
@@ -85,7 +84,6 @@ function DolphinService($rootScope, $mdToast, API, ModalsService) {
 app.factory("DolphinService", DolphinService);
 DolphinService.$inject = [
   "$rootScope",
-  "$mdToast",
   "API",
   "ModalsService",
 ];

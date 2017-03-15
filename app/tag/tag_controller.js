@@ -8,13 +8,12 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
  * @param API
  * @param AuthService
  * @param Pagination
  * @param Search
  */
-function TagController($scope, $rootScope, $state, $mdToast, Tag, API, AuthService, Pagination, Search, Codekit) {
+function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagination, Search, Codekit) {
 
   var site = AuthService.getCurrentSite();
 
@@ -127,7 +126,6 @@ TagController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
   "Tag",
   "API",
   "AuthService",

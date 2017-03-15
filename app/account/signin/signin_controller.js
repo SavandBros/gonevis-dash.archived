@@ -8,12 +8,11 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
  * @param AuthService
  * @param API
  * @param ModalsService
  */
-function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API, ModalsService) {
+function SigninController($scope, $rootScope, $state, AuthService, API, ModalsService) {
 
   /**
    * constructor
@@ -48,7 +47,7 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API
         AuthService.setToken(data.token);
 
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
-        $mdToast.showSimple("Welcome " + data.user.username);
+        // $mdToast.showSimple("Welcome " + data.user.username);
       },
       function (data) {
         form.loading = false;
@@ -69,7 +68,6 @@ SigninController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
   "AuthService",
   "API",
   "ModalsService",

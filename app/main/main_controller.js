@@ -5,14 +5,13 @@
  *
  * @param $scope
  * @param $state
- * @param $mdToast
  * @param AuthService
  * @param API
  * @param Codekit
  * @param CommentService
  * @param EntryService
  */
-function MainController($scope, $state, $mdToast, $stateParams,
+function MainController($scope, $state, $stateParams,
   AuthService, API, Codekit, CommentService, EntryService) {
 
   var site = AuthService.getCurrentSite();
@@ -115,7 +114,6 @@ app.controller("MainController", MainController);
 MainController.$inject = [
   "$scope",
   "$state",
-  "$mdToast",
   "$stateParams",
   "AuthService",
   "API",

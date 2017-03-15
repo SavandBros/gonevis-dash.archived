@@ -7,14 +7,13 @@
  *
  * @param $scope
  * @param $rootScope
- * @param $mdToast
  * @param AuthService
  * @param API
  * @param DolphinService
  * @param Upload
  * @param ENV
  */
-function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinService, Upload, ENV) {
+function UserController($scope, $rootScope, AuthService, API, DolphinService, Upload, ENV) {
 
   /**
    * constructor
@@ -47,7 +46,7 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
 
     var keyString = key.replace(/_/g, " ");
 
-    $mdToast.showSimple('Updating ' + keyString + '...');
+    // $mdToast.showSimple('Updating ' + keyString + '...');
 
     var payload = {};
     payload[key] = value;
@@ -60,10 +59,10 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
-        $mdToast.showSimple("Profile " + keyString + " updated");
+        // $mdToast.showSimple("Profile " + keyString + " updated");
       },
       function () {
-        $mdToast.showSimple("Sorry, error has occurred while updating profile, try again later.");
+        // $mdToast.showSimple("Sorry, error has occurred while updating profile, try again later.");
       }
     );
   };
@@ -122,11 +121,11 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
       data: { picture: file, key: file.name },
       method: "PUT"
     }).then(function (data) {
-      $mdToast.showSimple("Profile picture updated.");
+      // $mdToast.showSimple("Profile picture updated.");
       $scope.user.media = data.data.media;
     }, function (data) {
       $scope.errors = data.data;
-      $mdToast.showSimple("Sorry, error has occured while uploading profile picture.");
+      // $mdToast.showSimple("Sorry, error has occured while uploading profile picture.");
     });
   };
 
@@ -138,7 +137,6 @@ app.controller("UserController", UserController);
 UserController.$inject = [
   "$scope",
   "$rootScope",
-  "$mdToast",
   "AuthService",
   "API",
   "DolphinService",

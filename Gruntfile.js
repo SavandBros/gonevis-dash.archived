@@ -442,7 +442,6 @@ module.exports = function (grunt) {
         name: "gonevisDash",
         dest: "<%= gonevisDash.app %>/app_module.js",
         deps: [
-          "ngMaterial",
           "ngAnimate",
           "ngMessages",
           "ngResource",

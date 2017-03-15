@@ -6,10 +6,9 @@
  * @param $scope
  * @param $state
  * @param $stateParams
- * @param $mdToast
  * @param AuthService
  */
-function HeaderController($scope, $rootScope, $state, $stateParams, $mdToast, AuthService) {
+function HeaderController($scope, $rootScope, $state, $stateParams, AuthService) {
 
   /**
    * @method constructor
@@ -39,7 +38,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $mdToast, Au
 
   $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
     if (sessionExpired) {
-      $mdToast.showSimple("Looks like your session has expired, login again.");
+      // $mdToast.showSimple("Looks like your session has expired, login again.");
     }
     AuthService.unAuthenticate();
     $state.go("signin");
@@ -67,6 +66,5 @@ HeaderController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "$mdToast",
   "AuthService"
 ];

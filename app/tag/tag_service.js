@@ -5,11 +5,10 @@
  *
  * @param $rootScope
  * @param $state
- * @param $mdToast
  * @param API
  * @param ModalsService
  */
-function Tag($rootScope, $state, $mdToast, API, ModalsService) {
+function Tag($rootScope, $state, API, ModalsService) {
   return function (data) {
     /**
      * @name self
@@ -49,7 +48,7 @@ function Tag($rootScope, $state, $mdToast, API, ModalsService) {
           self.get = data;
           form.loading = false;
           form.oldSlug = data.slug;
-          $mdToast.showSimple("Tag updated.");
+          // $mdToast.showSimple("Tag updated.");
           $rootScope.$broadcast("gonevisDash.Tag:update", {
             data: data,
             tag: self,
@@ -58,7 +57,7 @@ function Tag($rootScope, $state, $mdToast, API, ModalsService) {
         },
         function (data) {
           form.loading = false;
-          $mdToast.showSimple("Tag update failed.");
+          // $mdToast.showSimple("Tag update failed.");
           $rootScope.$broadcast("gonevisDash.Tag:update", {
             data: data,
             tag: self,
@@ -76,7 +75,7 @@ function Tag($rootScope, $state, $mdToast, API, ModalsService) {
       API.Tag.remove({ slug: this.get.slug, site: this.get.site },
         function (data) {
           this.isDeleted = true;
-          $mdToast.showSimple("Tag " + this.get.name + " removed.");
+          // $mdToast.showSimple("Tag " + this.get.name + " removed.");
           $rootScope.$broadcast("gonevisDash.Tag:remove", {
             data: data,
             tag: this,
@@ -134,7 +133,7 @@ function Tag($rootScope, $state, $mdToast, API, ModalsService) {
           form.loading = false;
           form.data.tagged_items_count = 0;
           ModalsService.close("tagCreate");
-          $mdToast.showSimple("Tag " + data.name + " created.");
+          // $mdToast.showSimple("Tag " + data.name + " created.");
           $rootScope.$broadcast("gonevisDash.Tag:create", {
             success: true,
             data: data
@@ -143,7 +142,7 @@ function Tag($rootScope, $state, $mdToast, API, ModalsService) {
         function (data) {
           form.loading = false;
           form.errors = data.data;
-          $mdToast.showSimple("Failed to create tag.");
+          // $mdToast.showSimple("Failed to create tag.");
           $rootScope.$broadcast("gonevisDash.Tag:create", {
             success: false,
             data: data
@@ -158,7 +157,6 @@ app.service("Tag", Tag);
 Tag.$inject = [
   "$rootScope",
   "$state",
-  "$mdToast",
   "API",
   "ModalsService"
 ];

@@ -6,12 +6,11 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
  * @param AuthService
  * @param Codekit
  * @param ModalsService
  */
-function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, AuthService, Codekit, ModalsService) {
+function TeamInviteModalController($scope, $rootScope, $state, API, AuthService, Codekit, ModalsService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -42,9 +41,9 @@ function TeamInviteModalController($scope, $rootScope, $state, $mdToast, API, Au
       function (data) {
         $rootScope.$broadcast("gonevisDash.TeamService.invite", data);
         ModalsService.close("invite");
-        $mdToast.showSimple(
-          "Invited "+form.data.email+" as "+$scope.teamRoles[form.data.role-1].label.toLowerCase()+" into the team."
-        );
+        // $mdToast.showSimple(
+        //   "Invited "+form.data.email+" as "+$scope.teamRoles[form.data.role-1].label.toLowerCase()+" into the team."
+        // );
       },
       function (data) {
         form.errors = data.data;
@@ -61,7 +60,6 @@ TeamInviteModalController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
   "API",
   "AuthService",
   "Codekit",

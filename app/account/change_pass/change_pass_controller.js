@@ -6,13 +6,12 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
  * @param $stateParams
  * @param API
  * @param ModalsService
  * @param AuthService
  */
-function ChangePassController($scope, $rootScope, $state, $mdToast, $stateParams, API, ModalsService, AuthService) {
+function ChangePassController($scope, $rootScope, $state, $stateParams, API, ModalsService, AuthService) {
 
   /**
    * @method constructor
@@ -51,7 +50,7 @@ function ChangePassController($scope, $rootScope, $state, $mdToast, $stateParams
     API.ChangePassword.save(form,
       function () {
         form.loading = false;
-        $mdToast.showSimple("Password changed.");
+        // $mdToast.showSimple("Password changed.");
         form.errors = null;
         $state.go("dash.user");
       },
@@ -74,7 +73,6 @@ ChangePassController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
   "$stateParams",
   "API",
   "ModalsService",

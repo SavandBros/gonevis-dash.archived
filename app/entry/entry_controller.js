@@ -12,7 +12,7 @@
  * @param Pagination
  * @param Search
  */
-function EntryController($scope, $rootScope, $state, $mdToast,
+function EntryController($scope, $rootScope, $state,
   EntryService, Codekit, API, AuthService, Pagination, Search) {
 
   /**
@@ -123,7 +123,7 @@ function EntryController($scope, $rootScope, $state, $mdToast,
     API.Entry.delete({ entry_id: entry.id },
       function() {
         entry.isDeleted = true;
-        $mdToast.showSimple("Entry deleted!");
+        // $mdToast.showSimple("Entry deleted!");
         Codekit.timeoutSlice($scope.entries);
       }
     );
@@ -187,7 +187,6 @@ EntryController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
   "EntryService",
   "Codekit",
   "API",

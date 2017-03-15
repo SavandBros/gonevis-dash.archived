@@ -6,11 +6,10 @@
  * @param $scope
  * @param $state
  * @param $stateParams
- * @param $mdToast
  * @param AuthService
  * @param API
  */
-function SignupController($scope, $state, $stateParams, $mdToast, AuthService, API) {
+function SignupController($scope, $state, $stateParams, AuthService, API) {
 
   /**
    * @method constructor
@@ -57,7 +56,7 @@ function SignupController($scope, $state, $stateParams, $mdToast, AuthService, A
   $scope.resend = function (email) {
     API.EmailConfirmationResend.save({ email: email },
       function () {
-        $mdToast.showSimple("We've send a confirmation link to your email.");
+        // $mdToast.showSimple("We've send a confirmation link to your email.");
       }
     );
   };
@@ -70,7 +69,6 @@ SignupController.$inject = [
   "$scope",
   "$state",
   "$stateParams",
-  "$mdToast",
   "AuthService",
   "API"
 ];

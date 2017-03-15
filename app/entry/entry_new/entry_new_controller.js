@@ -6,12 +6,11 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
  * @param Codekit
  * @param AuthService
  * @param API
  */
-function EntryNewController($scope, $rootScope, $state, $mdToast, Codekit, AuthService, API, DolphinService, $q) {
+function EntryNewController($scope, $rootScope, $state, Codekit, AuthService, API, DolphinService, $q) {
 
   /**
    * @method constructor
@@ -87,11 +86,11 @@ function EntryNewController($scope, $rootScope, $state, $mdToast, Codekit, AuthS
 
     API.EntryAdd.save(payload,
       function (data) {
-        $mdToast.showSimple("Entry added.");
+        // $mdToast.showSimple("Entry added.");
         $state.go("dash.entry-edit", { entryId: data.id });
       },
       function (data) {
-        $mdToast.showSimple("Failed to add entry.");
+        // $mdToast.showSimple("Failed to add entry.");
         form.loading = false;
         form.errors = data;
       }
@@ -123,7 +122,6 @@ EntryNewController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
   "Codekit",
   "AuthService",
   "API",
