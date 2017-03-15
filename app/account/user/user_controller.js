@@ -40,11 +40,12 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
    * @method updateProfile
    * @desc update user profile via api call
    * 
-   * @param key {string} value {string}
+   * @param key {string}
+   * @param value {string}
    */
   $scope.updateProfile = function (key, value) {
 
-    var keyString = key.replace("_", " ");
+    var keyString = key.replace(/_/g, " ");
 
     $mdToast.showSimple('Updating ' + keyString + '...');
 
@@ -62,7 +63,7 @@ function UserController($scope, $rootScope, $mdToast, AuthService, API, DolphinS
         $mdToast.showSimple("Profile " + keyString + " updated");
       },
       function () {
-        $mdToast.showSimple("Sorry, error has occured while updating profile, try again later.");
+        $mdToast.showSimple("Sorry, error has occurred while updating profile, try again later.");
       }
     );
   };
