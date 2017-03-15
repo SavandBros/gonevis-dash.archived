@@ -31,7 +31,8 @@ function NavigationController($scope, $rootScope, $state, $stateParams, $mdToast
         $scope.initialled = true;
         $scope.navigations = data.navigation;
 
-        if ($stateParams.add !== null) {
+        // If adding a navigation
+        if ($stateParams.add) {
           var navigation = $stateParams.add;
 
           $scope.navigations.push({
