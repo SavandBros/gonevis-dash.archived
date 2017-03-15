@@ -1,38 +1,36 @@
-'use strict';
+"use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:TagModalController
- * Controller of the gonevisDash
+ * @class TagModalController
  *
  * @param $scope
- * @param TagService
  * @param tag
- * @param DolphinService
  * @param Slug
+ * @param DolphinService
  * @param ModalsService
  */
-function TagModalController($scope, TagService, tag, DolphinService, Slug, ModalsService) {
+function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.tagService = TagService;
     $scope.dolphinService = DolphinService;
     $scope.modalsService = ModalsService;
     $scope.editing = true;
-    $scope.form = { data: tag, oldSlug: tag.slug };
+    $scope.tag = tag;
+    $scope.form = {
+      data: tag.get,
+      oldSlug: tag.get.slug
+    };
   }
 
   $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
     $scope.form.data.cover_image = dolphin ? dolphin.id : null;
   });
 
-  $scope.$on("gonevisDash.TagService:remove", function () {
+  $scope.$on("gonevisDash.Tag:remove", function () {
     $scope.modalsService.close("tag");
   });
 
@@ -46,9 +44,8 @@ function TagModalController($scope, TagService, tag, DolphinService, Slug, Modal
 app.controller("TagModalController", TagModalController);
 TagModalController.$inject = [
   "$scope",
-  "TagService",
   "tag",
-  "DolphinService",
   "Slug",
+  "DolphinService",
   "ModalsService"
 ];

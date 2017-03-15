@@ -11,12 +11,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <form ng-submit="tagService.update(form.data, true, form)">
+        <form ng-submit="tag.update(form)">
           <ng-include src="'tag/includes/tag_form.html'"></ng-include>
           <div class="btn-group stack">
             <button class="btn btn-primary" ng-disabled="form.loading">Update</button>
-            <button class="btn btn-default" ng-disabled="form.loading"
-              title="Delete entry" type="button" ng-click="tagService.remove(form.data)">
+            <button class="btn btn-default" ng-disabled="form.loading" type="button"
+              title="Delete entry" type="button" ng-click="tag.remove()">
               <i class="fa fa-trash"></i>
             </button>
           </div>

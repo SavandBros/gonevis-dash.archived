@@ -8,10 +8,12 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param $stateParams
  * @param $mdToast
+ * @param API
  * @param AuthService
  */
-function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthService) {
+function NavigationController($scope, $rootScope, $state, $stateParams, $mdToast, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -28,6 +30,16 @@ function NavigationController($scope, $rootScope, $state, $mdToast, API, AuthSer
       function (data) {
         $scope.initialled = true;
         $scope.navigations = data.navigation;
+
+        // If adding a navigation
+        if ($stateParams.add) {
+          var navigation = $stateParams.add;
+
+          $scope.navigations.push({
+            label: navigation.label,
+            url: navigation.url
+          });
+        }
       }
     );
   }
@@ -94,6 +106,7 @@ NavigationController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
+  "$stateParams",
   "$mdToast",
   "API",
   "AuthService"

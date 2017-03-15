@@ -4,7 +4,7 @@
  * @class TagNewModalController
  *
  * @param $scope
- * @param TagService
+ * @param Tag
  * @param API
  * @param AuthService
  * @param ModalsService
@@ -12,51 +12,21 @@
  * @param DolphinService
  * @param Codekit
  */
-function TagNewModalController($scope, TagService, API, AuthService, ModalsService, Slug, DolphinService, Codekit) {
-
-  var site = AuthService.getCurrentSite();
+function TagNewModalController($scope, Tag, API, AuthService, ModalsService, Slug, DolphinService, Codekit) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.form = { data: {} };
+    $scope.Tag = new Tag({ site: AuthService.getCurrentSite() });
     $scope.dolphinService = DolphinService;
+    $scope.form = {
+      data: { site: $scope.Tag.get.site }
+    };
 
     Codekit.focus("input.name:last");
   }
-
-  /**
-   * create
-   *
-   * @method create
-   * @desc Create a new tag
-   *
-   * @param form {Object}
-   */
-  $scope.create = function (form) {
-    form.loading = true;
-    form.errors = null;
-
-    form.data.slug = form.data.slug ? form.data.slug : "";
-    form.data.site = site;
-
-    API.Tags.save({ site: site }, form.data,
-      function (data) {
-        TagService.create(form, data);
-        form.loading = false;
-        form.data.tagged_items_count = 0;
-        ModalsService.close("tagCreate");
-      },
-      function (data) {
-        form.loading = false;
-        form.errors = data.data;
-      }
-    );
-  };
 
   /**
    * @method updateSlug
@@ -83,7 +53,7 @@ function TagNewModalController($scope, TagService, API, AuthService, ModalsServi
 app.controller("TagNewModalController", TagNewModalController);
 TagNewModalController.$inject = [
   "$scope",
-  "TagService",
+  "Tag",
   "API",
   "AuthService",
   "ModalsService",
