@@ -4,14 +4,11 @@
  * @class ForgotModalController
  *
  * @param $scope
+ * @param toaster
  * @param API
  * @param ModalsService
  */
-function ForgotModalController($scope, API, ModalsService) {
-
-  // var toast = $mdToast.simple().content(
-  //   "Please check your email, instruction to reset your password has been sent to the email address you provided."
-  // ).hideDelay(10000);
+function ForgotModalController($scope, toaster, API, ModalsService) {
 
   /**
    * @method forgotPassword
@@ -25,20 +22,23 @@ function ForgotModalController($scope, API, ModalsService) {
     API.ForgotPassword.save(form.data,
       function () {
         ModalsService.close("forgotPassword");
-        // $mdToast.show(toast);
+        toaster.success("Sent",
+          "Please check your email, instruction to reset your password has been sent to the email address you provided.",
+          10000);
       },
       function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
-  }
+  };
 
 }
 
 app.controller("ForgotModalController", ForgotModalController);
 ForgotModalController.$inject = [
   "$scope",
+  "toaster",
   "API",
   "ModalsService"
 ];

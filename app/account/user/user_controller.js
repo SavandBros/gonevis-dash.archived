@@ -7,13 +7,16 @@
  *
  * @param $scope
  * @param $rootScope
+ * @param toaster
  * @param AuthService
  * @param API
  * @param DolphinService
  * @param Upload
  * @param ENV
  */
-function UserController($scope, $rootScope, AuthService, API, DolphinService, Upload, ENV) {
+function UserController($scope, $rootScope, toaster, AuthService, API, DolphinService, Upload, ENV) {
+
+  var toasters = {};
 
   /**
    * constructor
@@ -46,7 +49,7 @@ function UserController($scope, $rootScope, AuthService, API, DolphinService, Up
 
     var keyString = key.replace(/_/g, " ");
 
-    // $mdToast.showSimple('Updating ' + keyString + '...');
+    toasters[key] = toaster.info("", "Updating " + keyString + "...");
 
     var payload = {};
     payload[key] = value;
@@ -59,10 +62,11 @@ function UserController($scope, $rootScope, AuthService, API, DolphinService, Up
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
-        // $mdToast.showSimple("Profile " + keyString + " updated");
+        toaster.clear(toasters[key]);
+        toaster.info("Done", "Profile " + keyString + " updated", 3000);
       },
       function () {
-        // $mdToast.showSimple("Sorry, error has occurred while updating profile, try again later.");
+        toaster.error("Sorry", "An error has occurred while updating profile, try again later.");
       }
     );
   };
@@ -121,11 +125,11 @@ function UserController($scope, $rootScope, AuthService, API, DolphinService, Up
       data: { picture: file, key: file.name },
       method: "PUT"
     }).then(function (data) {
-      // $mdToast.showSimple("Profile picture updated.");
+      toaster.info("Done", "Profile picture updated");
       $scope.user.media = data.data.media;
     }, function (data) {
       $scope.errors = data.data;
-      // $mdToast.showSimple("Sorry, error has occured while uploading profile picture.");
+      toaster.error("Sorry", "An error has occured while uploading profile picture.");
     });
   };
 
@@ -137,6 +141,7 @@ app.controller("UserController", UserController);
 UserController.$inject = [
   "$scope",
   "$rootScope",
+  "toaster",
   "AuthService",
   "API",
   "DolphinService",

@@ -7,6 +7,7 @@
  * @param $rootScope
  * @param $state
  * @param $stateParams
+ * @param toaster
  * @param $q
  * @param Codekit
  * @param API
@@ -14,7 +15,7 @@
  * @param DolphinService
  * @param EntryService
  */
-function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
+function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, $q,
   Codekit, API, AuthService, DolphinService, EntryService) {
 
   /**
@@ -107,12 +108,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
     API.Entry.put({ entry_id: payload.id }, payload,
       function (data) {
         $scope.form = data;
-        // $mdToast.showSimple("Entry updated!");
+        toaster.info("Done", "Entry updated");
         form.loading = false;
         form.errors = null;
       },
       function (data) {
-        // $mdToast.showSimple("Sorry, entry couldn't be updated. Try again.");
+        toaster.error("Sorry", "Entry couldn't be updated. Try again.");
         form.loading = false;
         form.errors = data.data;
       }
@@ -128,11 +129,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
   $scope.remove = function (id) {
     API.Entry.delete({ entry_id: id },
       function () {
-        // $mdToast.showSimple("Entry has been deleted !");
+        toaster.success("Done", "Entry has been deleted");
         $state.go("dash.entry-list");
       },
       function () {
-        // $mdToast.showSimple("Something went wrong... We couldn't delete entry!");
+        toaster.error("Oops", "Something went wrong... We couldn't delete entry!");        
       }
     );
   };
@@ -163,6 +164,7 @@ EntryEditController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
+  "toaster",
   "$q",
   "Codekit",
   "API",

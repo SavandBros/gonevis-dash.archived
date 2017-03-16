@@ -457,7 +457,8 @@ module.exports = function (grunt) {
           "slugifier",
           "angularModalService",
           "angular-sortable-view",
-          "angular-loading-bar"
+          "angular-loading-bar",
+          "toaster"
         ],
         constants: {
           Client: {

@@ -7,6 +7,7 @@
  * @param $scope
  * @param $state
  * @param $stateParams
+ * @param toaster
  * @param DolphinService
  * @param Codekit
  * @param API
@@ -15,7 +16,7 @@
  * @param Upload
  * @param Pagination
  */
-function DolphinController($scope, $rootScope, $state, $stateParams,
+function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
   DolphinService, Codekit, API, ENV, AuthService, Upload, Pagination, Search) {
 
   var site = AuthService.getCurrentSite();
@@ -129,12 +130,12 @@ function DolphinController($scope, $rootScope, $state, $stateParams,
 
         file.upload.then(
           function (data) {
-            // $mdToast.showSimple("Upload completed.");
+            toaster.success("Done", "Upload completed");
             $scope.dolphins.unshift(data.data);
             $scope.updateDolphins();
           },
           function () {
-            // $mdToast.showSimple("Upload failed.");
+            toaster.error("", "Upload failed");
           },
           function (event) {
             file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
@@ -229,6 +230,7 @@ DolphinController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
+  "toaster",
   "DolphinService",
   "Codekit",
   "API",

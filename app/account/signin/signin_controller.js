@@ -8,11 +8,12 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param toaster
  * @param AuthService
  * @param API
  * @param ModalsService
  */
-function SigninController($scope, $rootScope, $state, AuthService, API, ModalsService) {
+function SigninController($scope, $rootScope, $state, toaster, AuthService, API, ModalsService) {
 
   /**
    * constructor
@@ -22,7 +23,7 @@ function SigninController($scope, $rootScope, $state, AuthService, API, ModalsSe
    */
   function constructor() {
     $scope.form = {};
-  };
+  }
 
   /**
    * signin
@@ -47,18 +48,22 @@ function SigninController($scope, $rootScope, $state, AuthService, API, ModalsSe
         AuthService.setToken(data.token);
 
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
-        // $mdToast.showSimple("Welcome " + data.user.username);
+        toaster.pop({
+                type: 'success',
+                title: 'Logged in',
+                body: "Welcome back " + data.user.username
+            });
       },
       function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
-  }
+  };
 
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
-  }
+  };
 
   constructor();
 }
@@ -68,6 +73,7 @@ SigninController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
+  "toaster",
   "AuthService",
   "API",
   "ModalsService",
