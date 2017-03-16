@@ -8,12 +8,13 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param Tag
  * @param API
  * @param AuthService
  * @param Pagination
  * @param Search
  */
-function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagination, Search, Codekit) {
+function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagination, Search) {
 
   var site = AuthService.getCurrentSite();
 
@@ -80,22 +81,9 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
    */
   $scope.loadMore = Pagination.loadMore;
 
-  $scope.$on("gonevisDash.Tag:remove", function (event, data) {
-    var index = Codekit.getIndex($scope.tags, data.tag);
-    $scope.tags[index].isDeleted = true;
-    Codekit.timeoutSlice($scope.tags);
-  });
-
   $scope.$on("gonevisDash.Tag:create", function (event, data) {
     if (data.success) {
       $scope.tags.push(new Tag(data.data));
-    }
-  });
-
-  $scope.$on("gonevisDash.Tag:update", function (event, data) {
-    if (data.success) {
-      var index = Codekit.getIndex($scope.tags, data.tag);
-      $scope.tags[index] = data.tag;
     }
   });
 
@@ -130,6 +118,5 @@ TagController.$inject = [
   "API",
   "AuthService",
   "Pagination",
-  "Search",
-  "Codekit"
+  "Search"
 ];
