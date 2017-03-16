@@ -8,6 +8,7 @@
  * @param $location
  * @param $cookies
  * @param $state
+ * @param toaster
  * @param ENV
  * @param AuthService
  * @param DolphinService
@@ -18,7 +19,7 @@
  * @param textAngularManager
  * @param taToolFunctions
  */
-function RunNevisRun($rootScope, $window, $location, $cookies, $state,
+function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   ENV, AuthService, DolphinService, Client, editableOptions, taOptions, taRegisterTool,
   textAngularManager, taToolFunctions) {
   /**
@@ -54,7 +55,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state,
 
     // Redirect to signin and toast (If logged in)
     if (isAuthed) {
-      // $mdToast.showSimple("Client version updated! Login again, please.");
+      toaster.info("Logged out", "Client version updated! Login again, please.");
       $state.go("signin");
     }
   }
@@ -203,6 +204,7 @@ RunNevisRun.$inject = [
   "$location",
   "$cookies",
   "$state",
+  "toaster",
   "ENV",
   "AuthService",
   "DolphinService",
