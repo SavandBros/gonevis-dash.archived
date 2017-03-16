@@ -4,8 +4,6 @@
       <div class="modal-body">
         <!-- Form -->
         <form ng-submit="update(form)" name="form">
-          <h3 class="o-fade-soft">{{ form.data.meta_data.name }}</h3>
-          <hr>
           <div class="thumbnail" ng-if="form.data.is_image">
             <img ng-src="{{ form.data.file }}" alt="form.data.meta_data.name">
           </div>
