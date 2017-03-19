@@ -28,7 +28,7 @@ function EntryController($scope, $rootScope, $state, $mdToast,
     $scope.pageForm = {};
     $scope.actions = [{
       label: "Draft",
-      icon: "edit",
+      icon: "pencil",
       property: "status",
       value: 0
     }, {
@@ -37,13 +37,13 @@ function EntryController($scope, $rootScope, $state, $mdToast,
       property: "status",
       value: 1,
     }, {
-      label: "Set to featured",
+      label: "Pin (Featured)",
       icon: "star",
       property: "featured",
       value: true
     }, {
-      label: "Remove from Featured",
-      icon: "close",
+      label: "Unpin",
+      icon: "star-o",
       property: "featured",
       value: false
     }, {
@@ -53,7 +53,7 @@ function EntryController($scope, $rootScope, $state, $mdToast,
       value: true
     }, {
       label: "Disable comments",
-      icon: "close",
+      icon: "ban",
       property: "comment_enabled",
       value: false
     }];
