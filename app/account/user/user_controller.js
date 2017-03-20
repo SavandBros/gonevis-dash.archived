@@ -66,7 +66,7 @@ function UserController($scope, $rootScope, toaster, AuthService, API, DolphinSe
         toaster.info("Done", "Profile " + keyString + " updated", 3000);
       },
       function () {
-        toaster.error("Sorry", "An error has occurred while updating profile, try again later.");
+        toaster.error("Error", "An error has occurred while updating profile, try again.");
       }
     );
   };
