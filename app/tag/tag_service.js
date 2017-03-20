@@ -58,7 +58,7 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
         },
         function (data) {
           form.loading = false;
-          toaster.error("Oops", "Tag update failed.");
+          toaster.error("Error", "Something went wrong, we couldn't update tag.");
           $rootScope.$broadcast("gonevisDash.Tag:update", {
             data: data,
             tag: self,
