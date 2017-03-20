@@ -6,6 +6,7 @@
  * Controller of the gonevisDash
  * 
  * @param $scope
+ * @param $stateParams
  * @param $rootScope
  * @param $state
  * @param $mdToast
@@ -13,7 +14,7 @@
  * @param API
  * @param ModalsService
  */
-function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API, ModalsService) {
+function SigninController($scope, $stateParams, $rootScope, $state, $mdToast, AuthService, API, ModalsService) {
 
   /**
    * constructor
@@ -23,7 +24,10 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API
    */
   function constructor() {
     $scope.form = {};
-  };
+    if ($stateParams.action === "forgot") {
+      $scope.forgotPassword();
+    }
+  }
 
   /**
    * signin
@@ -59,7 +63,7 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API
 
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
-  }
+  };
 
   constructor();
 }
@@ -67,6 +71,7 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API
 app.controller("SigninController", SigninController);
 SigninController.$inject = [
   "$scope",
+  "$stateParams",
   "$rootScope",
   "$state",
   "$mdToast",
