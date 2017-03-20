@@ -113,7 +113,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, 
         form.errors = null;
       },
       function (data) {
-        toaster.error("Sorry", "Entry couldn't be updated. Try again.");
+        toaster.error("Error", "Entry couldn't be updated, try again.");
         form.loading = false;
         form.errors = data.data;
       }
@@ -129,7 +129,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, 
   $scope.remove = function (id) {
     API.Entry.delete({ entry_id: id },
       function () {
-        toaster.success("Done", "Entry has been deleted");
+        toaster.success("Done", "Entry deleted");
         $state.go("dash.entry-list");
       },
       function () {
