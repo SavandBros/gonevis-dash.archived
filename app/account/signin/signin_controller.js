@@ -1,9 +1,7 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:SigninController
- * Controller of the gonevisDash
+ * @class SigninController
  * 
  * @param $scope
  * @param $stateParams
@@ -17,8 +15,6 @@
 function SigninController($scope, $stateParams, $rootScope, $state, $mdToast, AuthService, API, ModalsService) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
@@ -30,8 +26,6 @@ function SigninController($scope, $stateParams, $rootScope, $state, $mdToast, Au
   }
 
   /**
-   * signin
-   *
    * @method signin
    * @desc Submit signin form to authenticate
    *
@@ -60,7 +54,10 @@ function SigninController($scope, $stateParams, $rootScope, $state, $mdToast, Au
       }
     );
   }
-
+  /**
+   * @method forgotPassword
+   * @desc Open up forgot password modal
+   */
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
   };
