@@ -47,6 +47,13 @@ function Entry($rootScope, $mdToast, API, Codekit) {
       $rootScope.cache.entry = this;
     };
 
+    /**
+     * @method setProperty
+     * @desc Change a property of entry
+     *
+     * @param key {String} Property name
+     * @param value {String|Number} Property value
+     */
     this.setProperty = function (key, value) {
       var payload = {};
       payload[key] = value;
