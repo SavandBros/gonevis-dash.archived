@@ -38,7 +38,7 @@ function EmailConfirmationController($scope, $state, toaster, API) {
   $scope.resend = function (form) {
     API.EmailConfirmationResend.save({email: form.email},
       function () {
-        toaster.info("Sent", "Email confirmation has been sent to you");
+        toaster.success("Sent", "Email confirmation sent to " + form.email);
         $state.go('signin');
       }, function (data) {
         form.errors = data.data;
