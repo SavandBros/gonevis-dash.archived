@@ -39,7 +39,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, toaster, Aut
 
   $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
     if (sessionExpired) {
-      toaster.info("Logged out", "looks like your session has expired, login again.");
+      toaster.info("Logged out", "Looks like your session has expired, login again.");
     }
     AuthService.unAuthenticate();
     $state.go("signin");
