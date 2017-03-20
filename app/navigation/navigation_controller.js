@@ -67,7 +67,7 @@ function NavigationController($scope, $rootScope, toaster, $state, $stateParams,
       },
       function () {
         form.loading = false;
-        toaster.error("Sorry", "Couldn't update navigation, please try again later.");
+        toaster.error("Error", "Something went wrong, we couldn't update navigations.");
       }
     );
   };
