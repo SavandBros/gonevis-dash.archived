@@ -91,7 +91,7 @@ function EntryNewController($scope, $rootScope, $state, toaster, Codekit, AuthSe
         $state.go("dash.entry-edit", { entryId: data.id });
       },
       function (data) {
-        toaster.error("Sorry", "Failed to add entry");
+        toaster.error("Error", "Failed to add entry");
         form.loading = false;
         form.errors = data;
       }
