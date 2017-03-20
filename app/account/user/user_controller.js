@@ -129,7 +129,7 @@ function UserController($scope, $rootScope, toaster, AuthService, API, DolphinSe
       $scope.user.media = data.data.media;
     }, function (data) {
       $scope.errors = data.data;
-      toaster.error("Sorry", "An error has occured while uploading profile picture.");
+      toaster.error("Error", "An error has occured while uploading profile picture, try again.");
     });
   };
 
