@@ -1,64 +1,111 @@
 "use strict";
 
 /**
- * @class EntryService
+ * @class Entry
  *
  * @param $rootScope
+ * @param toaster
  * @param API
  * @param Codekit
- *
- * @return [Factory]
  */
-function EntryService($rootScope, API, Codekit) {
+function Entry($rootScope, toaster, API, Codekit) {
+  return function (data) {
 
-  /**
-   * @method cache
-   * @desc Cache entry
-   */
-  function cache(entry) {
-    $rootScope.cache.entry = entry;
-  }
+    /**
+     * @name self
+     * @desc Super variable for getting this in functions
+     *
+     * @type {Tag}
+     */
+    var self = this;
 
-  function setProperty(entry, key, value) {
-    var payload = {};
-    payload[key] = value;
+    /**
+     * @name data
+     * @desc Backend data
+     *
+     * @type {Object}
+     */
+    this.get = data;
 
-    API.Entry.patch({ entry_id: entry.id }, payload,
-      function() {
-        entry[key] = value;
-        entry.isSelected = true;
+    /**
+     * @name isDeleted
+     * @type {Boolean}
+     */
+    this.isDeleted = false;
+
+    /**
+     * @name isSelected
+     * @type {Boolean}
+     */
+    this.isSelected = false;
+
+    /**
+     * @method cache
+     * @desc Cache entry
+     */
+    this.cache = function () {
+      $rootScope.cache.entry = this;
+    };
+
+    /**
+     * @method setProperty
+     * @desc Change a property of entry
+     *
+     * @param key {String} Property name
+     * @param value {String|Number} Property value
+     */
+    this.setProperty = function (key, value) {
+      var payload = {};
+      payload[key] = value;
+
+      API.Entry.patch({ entry_id: this.get.id }, payload,
+        function () {
+          self.get[key] = value;
+          self.isSelected = true;
+        }
+      );
+    };
+
+    /**
+     * @method remove
+     * @desc Delete entries via API call
+     */
+    this.remove = function () {
+      API.Entry.delete({ entry_id: this.get.id },
+        function () {
+          self.isDeleted = true;
+          self.isSelected = false;
+          toaster.success("Done", "Entry deleted!");
+          $rootScope.$broadcast("gonevisDash.Entry:remove", {
+            entry: self,
+            success: true,
+          });
+        }
+      );
+    };
+
+    /**
+     * @method getUrl
+     * @desc Add draft parameters if entry is draft
+     *
+     * @returns {String}
+     */
+    this.getUrl = function () {
+      var params = "";
+
+      if (this.get.status === Codekit.entryStatuses[0].id) {
+        params = "?view=preview";
       }
-    );
-  }
 
-  /**
-   * @method getEntryUrl
-   * @desc Add draft parameters if entry is draft
-   *
-   * @param entry {Object}
-   *
-   * @returns {String}
-   */
-  function getEntryUrl(entry) {
-    var params = "";
-
-    if (entry.status === Codekit.entryStatuses[0].id) {
-      params = "?view=preview";
-    }
-
-    return entry.absolute_uri + params;
-  }
-
-  return {
-    cache: cache,
-    setProperty: setProperty,
-    getEntryUrl: getEntryUrl
+      return this.get.absolute_uri + params;
+    };
   };
 }
 
-app.factory("EntryService", EntryService);
-EntryService.$inject = [
+app.service("Entry", Entry);
+Entry.$inject = [
   "$rootScope",
+  "toaster",
   "API",
-  "Codekit"
+  "Codekit",
 ];

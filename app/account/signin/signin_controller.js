@@ -4,15 +4,15 @@
  * @class SigninController
  * 
  * @param $scope
- * @param $stateParams
  * @param $rootScope
  * @param $state
- * @param $mdToast
+ * @param $stateParams
  * @param AuthService
  * @param API
  * @param ModalsService
+ * @param toaster
  */
-function SigninController($scope, $stateParams, $rootScope, $state, $mdToast, AuthService, API, ModalsService) {
+function SigninController($scope, $rootScope, $state, $stateParams, AuthService, API, ModalsService, toaster) {
 
   /**
    * @method constructor
@@ -20,6 +20,7 @@ function SigninController($scope, $stateParams, $rootScope, $state, $mdToast, Au
    */
   function constructor() {
     $scope.form = {};
+
     if ($stateParams.action === "forgot") {
       $scope.forgotPassword();
     }
@@ -46,14 +47,15 @@ function SigninController($scope, $stateParams, $rootScope, $state, $mdToast, Au
         AuthService.setToken(data.token);
 
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
-        $mdToast.showSimple("Welcome " + data.user.username);
+        toaster.info("Logged in", "Welcome back " + data.user.username);
       },
       function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
-  }
+  };
+
   /**
    * @method forgotPassword
    * @desc Open up forgot password modal
@@ -71,7 +73,7 @@ SigninController.$inject = [
   "$stateParams",
   "$rootScope",
   "$state",
-  "$mdToast",
+  "toaster",
   "AuthService",
   "API",
   "ModalsService",
