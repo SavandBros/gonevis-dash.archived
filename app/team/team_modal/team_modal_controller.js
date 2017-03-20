@@ -4,14 +4,14 @@
  * @class TeamModalController
  *
  * @param $scope
- * @param $mdToast
+ * @param toaster
  * @param API
  * @param team
  * @param Codekit
  * @param AuthService
  * @param ModalsService
  */
-function TeamModalController($scope, $mdToast, API, team, Codekit, AuthService, ModalsService) {
+function TeamModalController($scope, toaster, API, team, Codekit, AuthService, ModalsService) {
 
   /**
    * @method constructor
@@ -48,12 +48,13 @@ function TeamModalController($scope, $mdToast, API, team, Codekit, AuthService, 
       function () {
         team.isRemoved = true;
         ModalsService.close('team');
-        $mdToast.showSimple(
+        toaster.success(
+          "Removed",
           "Removed " + team.title + " (" + $scope.teamRoles[team.role].label.toLowerCase() + ") from team."
         );
       },
       function () {
-        $mdToast.showSimple("Something went wrong... We couldn't remove team.");
+        toaster.error("Error", "Something went wrong... We couldn't remove team.");
       }
     );
   };
@@ -64,7 +65,7 @@ function TeamModalController($scope, $mdToast, API, team, Codekit, AuthService, 
 app.controller("TeamModalController", TeamModalController);
 TeamModalController.$inject = [
   "$scope",
-  "$mdToast",
+  "toaster",
   "API",
   "team",
   "Codekit",

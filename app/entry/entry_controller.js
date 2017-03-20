@@ -12,8 +12,7 @@
  * @param Pagination
  * @param Search
  */
-function EntryController($scope, $rootScope, $state, $mdToast,
-  Entry, Codekit, API, AuthService, Pagination, Search) {
+function EntryController($scope, $rootScope, $state, Entry, Codekit, API, AuthService, Pagination, Search) {
 
   /**
    * @method constructor
@@ -116,8 +115,6 @@ function EntryController($scope, $rootScope, $state, $mdToast,
   };
 
   /**
-   * countSelected
-   *
    * @method countSelected
    * @desc Count selected entries
    */
@@ -173,7 +170,6 @@ EntryController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
   "Entry",
   "Codekit",
   "API",

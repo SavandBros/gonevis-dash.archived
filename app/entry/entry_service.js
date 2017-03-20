@@ -4,11 +4,11 @@
  * @class Entry
  *
  * @param $rootScope
- * @param $mdToast
+ * @param toaster
  * @param API
  * @param Codekit
  */
-function Entry($rootScope, $mdToast, API, Codekit) {
+function Entry($rootScope, toaster, API, Codekit) {
   return function (data) {
 
     /**
@@ -75,7 +75,7 @@ function Entry($rootScope, $mdToast, API, Codekit) {
         function () {
           self.isDeleted = true;
           self.isSelected = false;
-          $mdToast.showSimple("Entry deleted!");
+          toaster.success("Done", "Entry deleted!");
           $rootScope.$broadcast("gonevisDash.Entry:remove", {
             entry: self,
             success: true,
@@ -105,7 +105,7 @@ function Entry($rootScope, $mdToast, API, Codekit) {
 app.service("Entry", Entry);
 Entry.$inject = [
   "$rootScope",
-  "$mdToast",
+  "toaster",
   "API",
   "Codekit",
 ];

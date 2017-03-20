@@ -6,11 +6,11 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
+ * @param toaster
  * @param API
  * @param AuthService
  */
-function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthService) {
+function SiteNewController($scope, $rootScope, $state, toaster, API, AuthService) {
 
   /**
    * @method constructor
@@ -35,7 +35,8 @@ function SiteNewController($scope, $rootScope, $state, $mdToast, API, AuthServic
         var index = $scope.user.sites.push(data);
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.SiteNewController:Create");
-        $mdToast.showSimple("Awesome, created " + data.title + ".");
+
+        toaster.success("Awesome", "Created " + data.title + ".");
         $state.go("dash.main", { s: index - 1 });
       },
       function (data) {
@@ -53,7 +54,7 @@ SiteNewController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
+  "toaster",
   "API",
   "AuthService"
 ];

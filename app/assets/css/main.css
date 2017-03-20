@@ -1369,3 +1369,11 @@ img.tag {
     transition: all 0.3s ease-in-out;
     opacity: 0.6;
 }
+
+
+/* Toaster */
+
+#toast-container>div {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2) !important;
+    transition: opacity 0.2s ease-in-out !important;
+}

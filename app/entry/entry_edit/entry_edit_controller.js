@@ -7,7 +7,6 @@
  * @param $rootScope
  * @param $state
  * @param $stateParams
- * @param $mdToast
  * @param $q
  * @param Entry
  * @param Tag
@@ -15,9 +14,10 @@
  * @param API
  * @param AuthService
  * @param DolphinService
+ * @param toaster
  */
-function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, $q,
-  Entry, Tag, Codekit, API, AuthService, DolphinService) {
+function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
 
   /**
    * @method constructor
@@ -123,12 +123,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.Entry.put({ entry_id: payload.id }, payload,
       function (data) {
         $scope.form.get = data;
-        $mdToast.showSimple("Entry updated!");
+        toaster.info("Done", "Entry updated");
         form.loading = false;
         form.errors = null;
       },
       function (data) {
-        $mdToast.showSimple("Sorry, entry couldn't be updated. Try again.");
+        toaster.error("Error", "Entry couldn't be updated, try again.");
         form.loading = false;
         form.errors = data.data;
       }
@@ -178,12 +178,12 @@ EntryEditController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "$mdToast",
   "$q",
   "Entry",
   "Tag",
   "Codekit",
   "API",
   "AuthService",
-  "DolphinService"
+  "DolphinService",
+  "toaster"
 ];
