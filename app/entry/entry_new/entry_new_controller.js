@@ -6,7 +6,6 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
  * @param $q
  * @param Entry
  * @param Tag
@@ -15,7 +14,7 @@
  * @param API
  * @param toaster
  */
-function EntryNewController($scope, $rootScope, $state, $mdToast, $q,
+function EntryNewController($scope, $rootScope, $state, $q,
   Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
   /**
