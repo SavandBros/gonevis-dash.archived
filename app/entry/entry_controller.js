@@ -12,8 +12,7 @@
  * @param Pagination
  * @param Search
  */
-function EntryController($scope, $rootScope, $state,
-  Entry, Codekit, API, AuthService, Pagination, Search) {
+function EntryController($scope, $rootScope, $state, Entry, Codekit, API, AuthService, Pagination, Search) {
 
   /**
    * @method constructor
