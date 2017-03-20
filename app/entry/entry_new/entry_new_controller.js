@@ -6,12 +6,17 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param toaster
+ * @param $mdToast
+ * @param $q
+ * @param Entry
+ * @param Tag
  * @param Codekit
  * @param AuthService
  * @param API
+ * @param toaster
  */
-function EntryNewController($scope, $rootScope, $state, toaster, Codekit, AuthService, API, DolphinService, $q) {
+function EntryNewController($scope, $rootScope, $state, $mdToast, $q,
+  Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
   /**
    * @method constructor
@@ -22,21 +27,21 @@ function EntryNewController($scope, $rootScope, $state, toaster, Codekit, AuthSe
     $scope.dolphinService = DolphinService;
     $scope.tagsToSubmit = [];
     $scope.statuses = Codekit.entryStatuses;
-    $scope.form = {
+    $scope.form = new Entry({
       status: $scope.statuses[0].id
-    };
+    });
 
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data) {
-        for (var i in data.results) {
-          $scope.tags.push({
-            slug: data.results[i].slug,
-            id: data.results[i].id,
-            name: data.results[i].name,
-            count: data.results[i].tagged_items_count,
-            cover_image: data.results[i].media.cover_image
+        angular.forEach(data.results, function (data) {
+          var tag = new Tag({
+            slug: data.slug,
+            id: data.id,
+            name: data.name,
+            count: data.tagged_items_count
           });
-        }
+          $scope.tags.push(tag.get);
+        });
       }
     );
   }
@@ -75,15 +80,15 @@ function EntryNewController($scope, $rootScope, $state, toaster, Codekit, AuthSe
    */
   $scope.newPost = function (form) {
     form.loading = true;
-    form.site = AuthService.getCurrentSite();
-    form.user = AuthService.getAuthenticatedUser();
+    form.get.site = AuthService.getCurrentSite();
+    form.get.user = AuthService.getAuthenticatedUser();
 
-    var payload = form;
+    var payload = form.get;
     payload.tag_ids = [];
 
-    for (var i = 0; i < $scope.tagsToSubmit.length; i++) {
-      payload.tag_ids.push($scope.tagsToSubmit[i].id);
-    }
+    angular.forEach($scope.tagsToSubmit, function (tag) {
+      payload.tag_ids.push(tag.id);
+    });
 
     API.EntryAdd.save(payload,
       function (data) {
@@ -123,10 +128,12 @@ EntryNewController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "toaster",
+  "$q",
+  "Entry",
+  "Tag",
   "Codekit",
   "AuthService",
   "API",
   "DolphinService",
-  "$q"
+  "toaster"
 ];

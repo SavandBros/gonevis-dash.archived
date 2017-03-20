@@ -5,14 +5,14 @@
  *
  * @param $scope
  * @param $state
+ * @param $stateParams
  * @param AuthService
  * @param API
  * @param Codekit
  * @param CommentService
- * @param EntryService
+ * @param Entry
  */
-function MainController($scope, $state, $stateParams,
-  AuthService, API, Codekit, CommentService, EntryService) {
+function MainController($scope, $state, $stateParams, AuthService, API, Codekit, CommentService, Entry) {
 
   var site = AuthService.getCurrentSite();
 
@@ -65,11 +65,10 @@ function MainController($scope, $state, $stateParams,
    */
   $scope.Entry = {
     /**
-     * @name service
-     * @desc Object service
-     * @type {Service}
+     * @name list
+     * @type Array
      */
-    service: EntryService,
+    list: [],
     /**
      * @method initialize
      * @desc Initialize entries
@@ -80,7 +79,9 @@ function MainController($scope, $state, $stateParams,
       API.Entries.get({ site: site },
         function (data) {
           $scope.Entry.loading = true;
-          $scope.Entry.list = data.results;
+          angular.forEach(data.results, function (data) {
+            $scope.Entry.list.push(new Entry(data));
+          });
         }
       );
     }
@@ -119,5 +120,5 @@ MainController.$inject = [
   "API",
   "Codekit",
   "CommentService",
-  "EntryService"
+  "Entry"
 ];

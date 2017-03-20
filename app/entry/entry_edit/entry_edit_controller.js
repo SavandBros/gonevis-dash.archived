@@ -7,16 +7,17 @@
  * @param $rootScope
  * @param $state
  * @param $stateParams
- * @param toaster
  * @param $q
+ * @param Entry
+ * @param Tag
  * @param Codekit
  * @param API
  * @param AuthService
  * @param DolphinService
- * @param EntryService
+ * @param toaster
  */
-function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, $q,
-  Codekit, API, AuthService, DolphinService, EntryService) {
+function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, $q,
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
 
   /**
    * @method constructor
@@ -24,31 +25,36 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, 
    */
   function constructor() {
     $scope.dolphinService = DolphinService;
-    $scope.entryService = EntryService;
     $scope.editing = true;
     $scope.tags = [];
     $scope.tagsToSubmit = [];
     $scope.statuses = Codekit.entryStatuses;
 
-    $scope.form = $rootScope.cache.entry ? $rootScope.cache.entry : {};
-    $scope.form.id = $stateParams.entryId;
-    $scope.form.site = AuthService.getCurrentSite();
+    // Load from cache if available
+    if ($rootScope.cache.entry) {
+      $scope.form = $rootScope.cache.entry;
+    } else {
+      $scope.form = new Entry({
+        site: AuthService.getCurrentSite(),
+        id: $stateParams.entryId
+      });
+    }
 
-    API.Tags.get({ site: $scope.form.site },
+    API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data) {
-        for (var i in data.results) {
-          $scope.tags.push({
-            slug: data.results[i].slug,
-            id: data.results[i].id,
-            name: data.results[i].name,
-            count: data.results[i].tagged_items_count,
-            cover_image: data.results[i].media.cover_image
+        angular.forEach(data.results, function (data) {
+          var tag = new Tag({
+            slug: data.slug,
+            id: data.id,
+            name: data.name,
+            count: data.tagged_items_count
           });
-        }
+          $scope.tags.push(tag.get);
+        });
       }
     );
 
-    API.Entry.get({ entry_id: $scope.form.id },
+    API.Entry.get({ entry_id: $scope.form.get.id },
       function (data) {
         if (data.start_publication) {
           data.start_publication = new Date(data.start_publication);
@@ -56,10 +62,19 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, 
         if (data.end_publication) {
           data.end_publication = new Date(data.end_publication);
         }
-        $scope.form = data;
-        for (var i = 0; i < $scope.form.tags.length; i++) {
-          $scope.tagsToSubmit.push($scope.form.tags[i]);
-        }
+        // Get entry data
+        $scope.form.get = data;
+        $scope.form.url = $scope.form.getUrl();
+        // Get entry tags
+        angular.forEach($scope.form.get.tags, function (data) {
+          var tag = new Tag({
+            slug: data.slug,
+            id: data.id,
+            name: data.name,
+            count: data.tagged_items_count
+          });
+          $scope.tagsToSubmit.push(tag.get);
+        });
       }
     );
   }
@@ -98,16 +113,16 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, 
   $scope.update = function (form) {
     form.loading = true;
 
-    var payload = form;
+    var payload = form.get;
     payload.tag_ids = [];
 
-    for (var i = 0; i < $scope.tagsToSubmit.length; i++) {
-      payload.tag_ids.push($scope.tagsToSubmit[i].id);
-    }
+    angular.forEach($scope.tagsToSubmit, function (tag) {
+      payload.tag_ids.push(tag.id);
+    });
 
     API.Entry.put({ entry_id: payload.id }, payload,
       function (data) {
-        $scope.form = data;
+        $scope.form.get = data;
         toaster.info("Done", "Entry updated");
         form.loading = false;
         form.errors = null;
@@ -121,22 +136,21 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, 
   };
 
   /**
-   * @method remove
-   * @desc remove entry via api call
+   * @event gonevisDash.DolphinService:select
+   * @desc Image selection callback
    *
-   * @param id {String} UUID of entry
+   * @param event {Event}
+   * @param dolphin {Object}
    */
-  $scope.remove = function (id) {
-    API.Entry.delete({ entry_id: id },
-      function () {
-        toaster.success("Done", "Entry deleted");
-        $state.go("dash.entry-list");
-      },
-      function () {
-        toaster.error("Oops", "Something went wrong... We couldn't delete entry!");        
-      }
-    );
-  };
+  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
+    if (Codekit.isEmptyObj($rootScope.set.editor)) {
+      $scope.form.cover_image = dolphin ? dolphin.id : null;
+    } else if ($scope.form.content.length < 20) {
+      $rootScope.set.editor.scope.displayElements.text.focus();
+      $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.file, false);
+      $rootScope.set.editor = {};
+    }
+  });
 
   /**
    * @event gonevisDash.DolphinService:select
@@ -145,7 +159,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, toaster, 
    * @param event {Event}
    * @param dolphin {Object}
    */
-  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
+  $scope.$on("gonevisDash.Entry:remove", function (event, dolphin) {
     if (Codekit.isEmptyObj($rootScope.set.editor)) {
       $scope.form.cover_image = dolphin ? dolphin.id : null;
     } else if ($scope.form.content.length < 20) {
@@ -164,11 +178,12 @@ EntryEditController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "toaster",
   "$q",
+  "Entry",
+  "Tag",
   "Codekit",
   "API",
   "AuthService",
   "DolphinService",
-  "EntryService"
+  "toaster"
 ];
