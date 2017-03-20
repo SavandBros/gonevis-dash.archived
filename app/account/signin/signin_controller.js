@@ -70,11 +70,11 @@ function SigninController($scope, $rootScope, $state, $stateParams, AuthService,
 app.controller("SigninController", SigninController);
 SigninController.$inject = [
   "$scope",
-  "$stateParams",
   "$rootScope",
   "$state",
-  "toaster",
+  "$stateParams",
   "AuthService",
   "API",
   "ModalsService",
+  "toaster"
 ];
