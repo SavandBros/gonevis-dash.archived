@@ -5,7 +5,7 @@
 </button>
 
 <!-- Draft mode -->
-<div ng-if="form.status === 0" class="editor-draft-mode animated fadeInUp"
+<div ng-if="form.get.status === 0" class="editor-draft-mode animated fadeInUp"
   uib-tooltip="Entry is not published" tooltip-placement="top">
   <i class="fa fa-pencil fa-fw"></i> DRAFT MODE
 </div>
@@ -19,9 +19,9 @@
 <div class="col-md-12">
   <!-- Nevis -->
   <div class="form-group editor" ng-class="{'editingContent': editingContent}">
-    <input id="title" class="form-control" type="text" ng-model="form.title" placeholder="TITLE">
+    <input id="title" class="form-control" type="text" ng-model="form.get.title" placeholder="TITLE">
     <br>
-    <div text-angular ng-model="form.content" placeholder="CONTENT" name="editor"
+    <div text-angular ng-model="form.get.content" placeholder="CONTENT" name="editor"
       ng-focus="editingContent = true" ng-blur="editingContent = false">
     </div>
   </div>
@@ -37,24 +37,17 @@
       <div class="modal-body">
         <!-- Tag -->
         <div class="form-group" ng-class="{'has-error': form.errors.tag_ids}">
-          <tags-input ng-model="tagsToSubmit" display-property="name"
-            replace-spaces-with-dashes="false"
+          <tags-input ng-model="tagsToSubmit" display-property="name" replace-spaces-with-dashes="false"
             add-from-autocomplete-only="true">
-            <auto-complete source="loadTags($query)"
-              min-length="0"
-              max-results-to-show="10"
-              template="tag"></auto-complete>
+            <auto-complete source="loadTags($query)" min-length="0" max-results-to-show="10" template="tag">
+            </auto-complete>
           </tags-input>
           <script type="text/ng-template" id="tag">
             <div class="autocomplete-template">
-              <div class="left-panel">
-                <img class="img-circle" ng-src="{{ data.cover_image.thumbnail_48x48 }}">
-              </div>
-              <div class="right-panel">
+              <small>
                 <span ng-bind-html="$highlight($getDisplayText())"></span>
-                <span></span>
-                <span>{{data.count}}</span>
-              </div>
+                <span>{{ data.count }}</span>
+              </small>
             </div>
           </script>
         </div>
@@ -63,10 +56,7 @@
           <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection()" type="button">
             <i class="fa fa-fw fa-image"></i> Select cover image
           </button>
-          <a ng-href="{{ entryService.getEntryUrl(form) }}"
-             class="btn btn-default btn-sm btn-block"
-             target="_blank"
-             ng-if="editing">
+          <a ng-href="{{ form.url }}" class="btn btn-default btn-sm btn-block" target="_blank" ng-if="editing">
             <i class="fa fa-external-link"></i> View on site
           </a>
         </div>
@@ -82,40 +72,42 @@
         <div uib-collapse="advanced">
           <!-- Lead -->
           <div class="form-group" ng-class="{'has-error': form.errors.lead}">
-            <textarea id="lead" class="form-control" type="text" ng-model="form.lead" placeholder="Lead paragraph" rows="5">
+            <textarea id="lead" class="form-control" type="text"
+              ng-model="form.get.lead" placeholder="Lead paragraph" rows="5">
             </textarea>
             <small id="lead" class="help-block" ng-show="form.errors.lead">{{ form.errors.lead[0] }}</small>
           </div>
           <!-- Slug -->
           <div class="form-group" ng-class="{'has-error': form.errors.slug}">
-            <input id="slug" class="form-control" type="text" ng-model="form.slug" placeholder="Slug (URL)" />
+            <input id="slug" class="form-control" type="text" ng-model="form.get.slug" placeholder="Slug (URL)" />
             <small id="slug" class="help-block">{{ form.errors.slug[0] }}</small>
           </div>
           <!-- Expert -->
           <div class="form-group" ng-class="{'has-error': form.errors.excerpt}">
-            <textarea id="excerpt" class="form-control" type="text" ng-model="form.excerpt" placeholder="Excerpt (For SEO)">
+            <textarea id="excerpt" class="form-control" type="text"
+              ng-model="form.get.excerpt" placeholder="Excerpt (For SEO)">
             </textarea>
             <small id="excerpt" class="help-block">{{ form.errors.excerpt[0] }}</small>
           </div>
           <div class="form-group">
-            <input ng-model="form.meta_title" placeholder="Meta title" class="form-control">
+            <input ng-model="form.get.meta_title" placeholder="Meta title" class="form-control">
           </div>
           <div class="form-group">
-            <input ng-model="form.meta_description" placeholder="Meta description" class="form-control">
+            <input ng-model="form.get.meta_description" placeholder="Meta description" class="form-control">
           </div>
           <!-- Start publication -->
           <div class="form-group">
             <label for="startDate">Start publication</label>
-            <input id="startDate" ng-model="form.start_publication" type="datetime-local" class="form-control">
+            <input id="startDate" ng-model="form.get.start_publication" type="datetime-local" class="form-control">
           </div>
           <!-- Comments enabled -->
           <div class="checkbox checkbox-primary">
-            <input id="comments_enabled" type="checkbox" ng-model="form.comment_enabled">
+            <input id="comments_enabled" type="checkbox" ng-model="form.get.comment_enabled">
             <label for="comments_enabled">Comment enabled</label>
           </div>
           <!-- Featured -->
           <div class="checkbox checkbox-primary ">
-            <input id="featued" type="checkbox" ng-model="form.featured">
+            <input id="featued" type="checkbox" ng-model="form.get.featured">
             <label for="featued">Featured</label>
           </div>
           <hr>
@@ -127,8 +119,8 @@
         <!-- Status -->
         <div class="btn-group-vertical btn-block s-mar-bottom-soft">
           <label class="btn btn-{{ status.color }}" ng-repeat="status in statuses"
-            ng-model="form.status" uib-btn-radio="status.id"
-            ng-class="{'t-bold': form.status === status.id, 'o-fade-soft': form.status !== status.id}">
+            ng-model="form.get.status" uib-btn-radio="status.id"
+            ng-class="{'t-bold': form.get.status === status.id, 'o-fade-soft': form.get.status !== status.id}">
             <i class="fa fa-fw fa-{{ status.icon }} left"></i> {{ status.label }}
           </label>
         </div>
