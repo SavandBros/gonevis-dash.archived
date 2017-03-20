@@ -22,9 +22,9 @@ function ForgotModalController($scope, toaster, API, ModalsService) {
     API.ForgotPassword.save(form.data,
       function () {
         ModalsService.close("forgotPassword");
-        toaster.success("Sent",
-          "Please check your email, instruction to reset your password has been sent to the email address you provided.",
-          10000);
+        toaster.success(
+          "Sent", "Please check your email, instruction to reset your password sent to " + form.data.email, 10000
+        );
       },
       function (data) {
         form.loading = false;
