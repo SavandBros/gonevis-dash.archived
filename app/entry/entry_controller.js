@@ -11,10 +11,9 @@
  * @param AuthService
  * @param Pagination
  * @param Search
- * @param toaster
  */
 function EntryController($scope, $rootScope, $state,
-  Entry, Codekit, API, AuthService, Pagination, Search, toaster) {
+  Entry, Codekit, API, AuthService, Pagination, Search) {
 
   /**
    * @method constructor
@@ -177,6 +176,5 @@ EntryController.$inject = [
   "API",
   "AuthService",
   "Pagination",
-  "Search",
-  "toaster"
+  "Search"
 ];
