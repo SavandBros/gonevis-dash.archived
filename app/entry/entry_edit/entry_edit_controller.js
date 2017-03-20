@@ -16,7 +16,7 @@
  * @param DolphinService
  * @param toaster
  */
-function EntryEditController($scope, $rootScope, $state, $stateParams, $mdToast, $q,
+function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
 
   /**
