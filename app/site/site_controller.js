@@ -134,7 +134,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
       },
       function (data) {
         $scope.loadingTemplate = false;
-        toaster.error("Oops", data.detail ? data.detail : "Something went wrong, couldn't update site template.");        
+        toaster.error("Error", data.detail ? data.detail : "Something went wrong, we couldn't update site template.");        
       }
     );
   };
@@ -154,7 +154,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         toaster.info("Done", "Site template updated");
       },
       function () {
-        toaster.error("", "Oh... Couldn't update site template.");
+        toaster.error("Error", "Something went wrong, we couldn't update site template.");
       }
     );
   });
