@@ -48,11 +48,7 @@ function SigninController($scope, $rootScope, $state, toaster, AuthService, API,
         AuthService.setToken(data.token);
 
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
-        toaster.pop({
-                type: 'success',
-                title: 'Logged in',
-                body: "Welcome back " + data.user.username
-            });
+        toaster.info("Logged in", "Welcome back " + data.user.username);
       },
       function (data) {
         form.loading = false;
