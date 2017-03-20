@@ -51,10 +51,10 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
         toaster.success(
           "Removed",
           "Removed " + team.title + " (" + $scope.teamRoles[team.role].label.toLowerCase() + ") from team."
-          );
+        );
       },
       function () {
-        toaster.error("Oops", "Something went wrong... We couldn't remove team.");
+        toaster.error("Error", "Something went wrong... We couldn't remove team.");
       }
     );
   };
