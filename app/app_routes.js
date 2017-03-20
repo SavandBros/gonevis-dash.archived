@@ -13,7 +13,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: true
     })
     .state("signin", {
-      url: "/login",
+      url: "/login/:action",
       controller: "SigninController",
       templateUrl: "account/signin/signin_view.html",
       auth: false
