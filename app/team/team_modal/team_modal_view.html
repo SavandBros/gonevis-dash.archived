@@ -38,7 +38,9 @@
         </div>
         <!-- Remove -->
         <br>
-        <button class="btn btn-danger stack-element" ng-click="remove(team)" ng-if="team.user.id !== user.id">
+        <button class="btn btn-danger stack-element"
+          ng-click="remove(team)"
+          ng-if="team.user.id !== user.id || team.isPending">
           <i class="fa fa-trash"></i> Remove from team
         </button>
       </div>
