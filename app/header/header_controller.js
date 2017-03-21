@@ -6,10 +6,10 @@
  * @param $scope
  * @param $state
  * @param $stateParams
- * @param $mdToast
+ * @param toaster
  * @param AuthService
  */
-function HeaderController($scope, $rootScope, $state, $stateParams, $mdToast, AuthService) {
+function HeaderController($scope, $rootScope, $state, $stateParams, toaster, AuthService) {
 
   /**
    * @method constructor
@@ -31,7 +31,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $mdToast, Au
     } else {
       $state.go("dash.main", { s: 0 });
     }
-  });
+  }); 
 
   $scope.$on("gonevisDash.SiteNewController:Create", function () {
     constructor();
@@ -39,7 +39,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $mdToast, Au
 
   $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
     if (sessionExpired) {
-      $mdToast.showSimple("Looks like your session has expired, login again.");
+      toaster.info("Logged out", "Looks like your session has expired, login again.");
     }
     AuthService.unAuthenticate();
     $state.go("signin");
@@ -67,6 +67,6 @@ HeaderController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "$mdToast",
+  "toaster",
   "AuthService"
 ];

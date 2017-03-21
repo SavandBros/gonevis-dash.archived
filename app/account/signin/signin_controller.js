@@ -1,33 +1,32 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:SigninController
- * Controller of the gonevisDash
+ * @class SigninController
  * 
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param $mdToast
+ * @param $stateParams
  * @param AuthService
  * @param API
  * @param ModalsService
+ * @param toaster
  */
-function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API, ModalsService) {
+function SigninController($scope, $rootScope, $state, $stateParams, AuthService, API, ModalsService, toaster) {
 
   /**
-   * constructor
-   *
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
     $scope.form = {};
-  };
+
+    if ($stateParams.action === "forgot") {
+      $scope.forgotPassword();
+    }
+  }
 
   /**
-   * signin
-   *
    * @method signin
    * @desc Submit signin form to authenticate
    *
@@ -48,18 +47,26 @@ function SigninController($scope, $rootScope, $state, $mdToast, AuthService, API
         AuthService.setToken(data.token);
 
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
-        $mdToast.showSimple("Welcome " + data.user.username);
+        toaster.info("Logged in", "Welcome back " + data.user.username);
       },
       function (data) {
         form.loading = false;
         form.errors = data.data;
       }
     );
-  }
+  };
 
+  $scope.goForgetState = function () {
+    $state.go("signin", { action: "forgot" }, { reload: "signin" });
+  };
+
+  /**
+   * @method forgotPassword
+   * @desc Open up forgot password modal
+   */
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
-  }
+  };
 
   constructor();
 }
@@ -69,8 +76,9 @@ SigninController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "$mdToast",
+  "$stateParams",
   "AuthService",
   "API",
   "ModalsService",
+  "toaster"
 ];

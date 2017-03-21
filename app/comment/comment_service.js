@@ -4,14 +4,14 @@
  * @class CommentService
  *
  * @param $rootScope
- * @param $mdToast
+ * @param toaster
  * @param API
  * @param ModalsService
  * @param Codekit
  *
  * @return [Factory]
  */
-function CommentService($rootScope, $mdToast, API, ModalsService, Codekit) {
+function CommentService($rootScope, toaster, API, ModalsService, Codekit) {
 
   /**
    * @method remove
@@ -26,7 +26,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService, Codekit) {
     API.Comment.delete({ comment_id: comment.id },
       function (data) {
         if (toast) {
-          $mdToast.showSimple("Comment deleted.");
+          toaster.success("Done", "Comment deleted");
         }
         comment.isDeleted = true;
         $rootScope.$broadcast("gonevisDash.CommentService:remove", {
@@ -37,7 +37,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService, Codekit) {
       },
       function (data) {
         if (toast) {
-          $mdToast.showSimple("Deleting comment failed.");
+          toaster.error("", "Deleting comment failed");
         }
         $rootScope.$broadcast("gonevisDash.CommentService:remove", {
           data: data,
@@ -105,7 +105,7 @@ function CommentService($rootScope, $mdToast, API, ModalsService, Codekit) {
 app.factory("CommentService", CommentService);
 CommentService.$inject = [
   "$rootScope",
-  "$mdToast",
+  "toaster",
   "API",
   "ModalsService",
   "Codekit"

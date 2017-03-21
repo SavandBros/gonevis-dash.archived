@@ -7,13 +7,13 @@
  *
  * @param $scope
  * @param $rootScope
+ * @param toaster
  * @param $state
  * @param $stateParams
- * @param $mdToast
  * @param API
  * @param AuthService
  */
-function NavigationController($scope, $rootScope, $state, $stateParams, $mdToast, API, AuthService) {
+function NavigationController($scope, $rootScope, toaster, $state, $stateParams, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -61,13 +61,13 @@ function NavigationController($scope, $rootScope, $state, $stateParams, $mdToast
 
     API.UpdateNavigation.put({ siteId: site }, { navigation: $scope.navigations },
       function (data) {
+        toaster.info("Done", "Navigation updated");
         form.loading = false;
         $scope.navigations = data.navigation;
-        $mdToast.showSimple("Navigation updated.");
       },
       function () {
         form.loading = false;
-        $mdToast.showSimple("Couldn't update navigation, please try again later.");
+        toaster.error("Error", "Something went wrong, we couldn't update navigations.");
       }
     );
   };
@@ -105,9 +105,9 @@ app.controller("NavigationController", NavigationController);
 NavigationController.$inject = [
   "$scope",
   "$rootScope",
+  "toaster",
   "$state",
   "$stateParams",
-  "$mdToast",
   "API",
   "AuthService"
 ];

@@ -20,18 +20,18 @@
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <div class="row">
-              <div class="col-md-4 col-sm-6" ng-repeat="e in entries" ng-show="!e.isDeleted">
-                <a class="thumbnail s-pad-no" ui-sref="dash.entry-edit({ entryId: e.id })"
-                  ng-click="entryService.cache(e)">
-                  <img ng-src="{{ e.media.cover_image.thumbnail_256x256 ?
-                      e.media.cover_image.thumbnail_256x256 : 'http://placehold.it/256x256/eee/eee'
+              <div class="col-md-4 col-sm-6" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
+                <a class="thumbnail s-pad-no" ui-sref="dash.entry-edit({ entryId: entry.get.id })"
+                  ng-click="entry.cache()">
+                  <img ng-src="{{ entry.get.media.cover_image.thumbnail_256x256 ?
+                      entry.get.media.cover_image.thumbnail_256x256 : 'http://placehold.it/256x256/eee/eee'
                     }}">
                   <div class="caption t-line">
-                    <small class="text-primary">{{ e.title }}</small>
+                    <small class="text-primary">{{ entry.get.title }}</small>
                     <hr soft>
-                    <i class="fa fa-fw fa-comments text-muted" ng-if="e.comment_enabled"></i>
-                    <i class="fa fa-fw fa-star text-primary" ng-if="e.featured"></i>
-                    <i class="fa fa-fw fa-lock text-danger" ng-if="e.password"></i>
+                    <i class="fa fa-fw fa-comments text-muted" ng-if="entry.get.comment_enabled"></i>
+                    <i class="fa fa-fw fa-star text-primary" ng-if="entry.get.featured"></i>
+                    <i class="fa fa-fw fa-lock text-danger" ng-if="entry.get.password"></i>
                   </div>
                 </a>
               </div>
@@ -65,41 +65,45 @@
         </div>
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
-            <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': e.status == 1}"
-              ng-repeat="e in entries" ng-show="!e.isDeleted">
+            <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': entry.get.status == 1}"
+              ng-repeat="entry in entries" ng-show="!entry.isDeleted">
               <!--Title and slug-->
               <div class="col-md-8">
-                <input type="checkbox" ng-model="e.isSelected" ng-change="countSelected(e)">
-                <a ui-sref="dash.entry-edit({entryId: e.id})"ng-click="entryService.cache(e)">{{ e.title }}</a>
-                <small class="dis-b o-fade">/{{ e.slug }}</small>
+                <input type="checkbox" ng-model="entry.isSelected" ng-change="countSelected(entry)">
+                <a ui-sref="dash.entry-edit({entryId: entry.get.id})" ng-click="entry.cache()">{{ entry.get.title }}</a>
+                <small class="dis-b o-fade">/{{ entry.get.slug }}</small>
               </div>
               <!-- Date -->
               <div class="col-md-3 text-right o-fade">
-                {{ e.status == 1 ? e.published : e.created | date }}
-                <small class="dis-b o-fade" ng-if="e.status === 1">Publication</small>
-                <small class="dis-b o-fade" ng-if="e.status === 0">Creation</small>
+                {{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}
+                <small class="dis-b o-fade" ng-if="entry.get.status === 1">Publication</small>
+                <small class="dis-b o-fade" ng-if="entry.get.status === 0">Creation</small>
               </div>
               <!-- Tools -->
               <div class="col-md-1 text-right">
                 <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle"
                   style="padding: 4px" data-toggle="dropdown"></i>
                 <ul class="dropdown-menu">
-                  <li class="dropdown-header" ng-if="e.comment_enabled">
+                  <li class="dropdown-header" ng-if="entry.get.comment_enabled">
                     <i init class="fa fa-fw fa-comments text-muted"></i> Comments enabled
                   </li>
-                  <li class="dropdown-header" ng-if="e.featured ">
+                  <li class="dropdown-header" ng-if="entry.get.featured ">
                     <i init class="fa fa-fw fa-star text-primary"></i> Featured
                   </li>
-                  <li class="dropdown-header" ng-if="e.password ">
+                  <li class="dropdown-header" ng-if="entry.get.password ">
                     <i init class="fa fa-fw fa-lock text-danger"></i> Passworded
                   </li>
-                  <li class="divider" ng-show="e.password || e.featured || e.comment_enabled"></li>
+                  <li class="divider" ng-show="entry.get.password || entry.get.featured || entry.get.comment_enabled"></li>
                   <li>
-                    <a ng-href="{{ entryService.getEntryUrl(e) }}" target="_blank">
+                    <a ng-href="{{ entry.getUrl() }}" target="_blank">
                       <i class="fa fa-fw fa-external-link"></i> View on site
                     </a>
                   </li>
-                  <li><a ng-click="remove(e)"><i class="fa fa-fw fa-trash text-danger"></i> Delete entry</a></li>
+                  <li>
+                    <a ng-click="entry.remove()">
+                      <i class="fa fa-fw fa-trash text-danger"></i> Delete entry
+                    </a>
+                  </li>
                 </ul>
               </div>
             </li>
