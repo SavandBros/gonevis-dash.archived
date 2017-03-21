@@ -80,7 +80,7 @@ To release a new version or have the latest changes on the production:
 * Make a new Pull Request from branch **master** to **production**.
 * The pull request should pass (not limited to):
     * Test Coverage
-    * Unit Tess Status
+    * Unit Test Status
     * Build Status
     * Reviewers Approval
 
