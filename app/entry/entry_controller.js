@@ -27,7 +27,7 @@ function EntryController($scope, $rootScope, $state, Entry, Codekit, API, AuthSe
     $scope.entries = [];
     $scope.actions = [{
       label: "Draft",
-      icon: "edit",
+      icon: "pencil",
       property: "status",
       value: 0
     }, {
@@ -36,23 +36,23 @@ function EntryController($scope, $rootScope, $state, Entry, Codekit, API, AuthSe
       property: "status",
       value: 1,
     }, {
-      label: "Set to featured",
+      label: "Pin (Featured)",
       icon: "star",
       property: "featured",
       value: true
     }, {
-      label: "Remove from Featured",
-      icon: "close",
+      label: "Unpin",
+      icon: "star-o",
       property: "featured",
       value: false
     }, {
-      label: "Enable comments",
+      label: "Enable Comments",
       icon: "comments",
       property: "comment_enabled",
       value: true
     }, {
-      label: "Disable comments",
-      icon: "close",
+      label: "Disable Comments",
+      icon: "ban",
       property: "comment_enabled",
       value: false
     }];
