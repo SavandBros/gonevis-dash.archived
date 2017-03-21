@@ -47,12 +47,12 @@ function EntryController($scope, $rootScope, $state, $mdToast,
       property: "featured",
       value: false
     }, {
-      label: "Enable comments",
+      label: "Enable Comments",
       icon: "comments",
       property: "comment_enabled",
       value: true
     }, {
-      label: "Disable comments",
+      label: "Disable Comments",
       icon: "ban",
       property: "comment_enabled",
       value: false
@@ -130,8 +130,6 @@ function EntryController($scope, $rootScope, $state, $mdToast,
   };
 
   /**
-   * countSelected
-   *
    * @method countSelected
    * @desc Count selected entries
    */
