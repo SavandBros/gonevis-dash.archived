@@ -128,6 +128,8 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
           data: { file: file, site: site }
         });
 
+        $scope.file = file;
+
         file.upload.then(
           function (data) {
             toaster.success("Done", "Upload completed");
