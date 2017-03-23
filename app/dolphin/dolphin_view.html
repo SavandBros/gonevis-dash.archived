@@ -13,12 +13,19 @@
       <!-- Upload -->
       <div class="col-sm-12 col-md-1 col-xs-3 s-mar-bottom-soft">
         <button type="file" class="btn btn-primary btn-block" ngf-select="uploadFile($files, $invalidFiles)"
-          ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
+          ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true" ngf-max-files="5">
           <i class="fa fa-fw fa-upload"></i>
         </button>
       </div>
     </div>
 
+    <div ngf-thumbnail="file"
+      style="width: 256px; height: 256px;"
+      ngf-resize="{width: 256, height: 256, quality: 0.9}"
+      ngf-as-background="true"></div>
+    <span class="progress" ng-show="file.progress >= 0">
+      <div style="width:100%">{{file.progress}}</div>
+		</span>
     <!-- Search noresult -->
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
 
