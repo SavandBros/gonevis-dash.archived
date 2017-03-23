@@ -7,16 +7,17 @@
  * @param $rootScope
  * @param $state
  * @param $stateParams
- * @param $mdToast
+ * @param toaster
  * @param API
  * @param ModalsService
  * @param AuthService
  * @param DolphinService
  */
-function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
+function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   API, ModalsService, AuthService, DolphinService, Codekit) {
 
   var site = AuthService.getCurrentSite();
+  var toasters = {};
 
   /**
    * @method constructor
@@ -51,7 +52,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
     var keyString = key.replace("_", " ");
 
-    $mdToast.showSimple("Updating " + keyString + "...");
+    toasters[key] = toaster.info("Updating " + keyString + "...");
 
     var payload = {};
     payload[key] = value;
@@ -68,10 +69,12 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
 
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.SiteController:update");
-        $mdToast.showSimple("Site " + keyString + " updated");
+
+        toaster.clear(toasters[key]);
+        toaster.info("Done", "Site " + keyString + " updated", 3000);
       },
       function () {
-        $mdToast.showSimple("Oh... Couldn't update " + keyString);
+        toaster.error("", "Oh... Couldn't update " + keyString);
       }
     );
   };
@@ -96,12 +99,12 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
         AuthService.setAuthenticatedUser($scope.user);
         // Announce site removal
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
-        $mdToast.showSimple("Site deleted!");
+        toaster.success("Done", "Site deleted");
         // Go to main or new site page if has no other sites
         $state.go($scope.user.sites ? "dash.main" : "site-new");
       },
       function () {
-        $mdToast.showSimple("Oh... Something went wrong, couldn't delete site");
+        toaster.error("Oops", "Something went wrong, couldn't delete site");
       }
     );
   };
@@ -127,11 +130,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
     API.SetSiteTemplateConfig.put({ siteId: site }, { config_fields: $scope.siteTemplate.fields },
       function () {
         $scope.loadingTemplate = false;
-        $mdToast.showSimple("Site template updated.");
+        toaster.info("Done", "Site template updated");
       },
       function (data) {
         $scope.loadingTemplate = false;
-        $mdToast.showSimple(data.detail ? data.detail : "Oh... Something went wrong, couldn't update site template.");
+        toaster.error("Error", data.detail ? data.detail : "Something went wrong, we couldn't update site template.");        
       }
     );
   };
@@ -148,10 +151,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, $mdToast,
       function () {
         $scope.loadingTemplate = false;
         $scope.siteTemplate = data.template.config;
-        $mdToast.showSimple("Site template updated.");
+        toaster.info("Done", "Site template updated");
       },
       function () {
-        $mdToast.showSimple("Oh... Couldn't update site template.");
+        toaster.error("Error", "Something went wrong, we couldn't update site template.");
       }
     );
   });
@@ -172,7 +175,7 @@ SiteController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "$mdToast",
+  "toaster",
   "API",
   "ModalsService",
   "AuthService",

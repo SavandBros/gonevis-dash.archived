@@ -7,12 +7,12 @@
  *
  * @param $scope
  * @param $rootScope
- * @param $mdToast
+ * @param toaster
  * @param dolphin
  * @param DolphinService
  * @param API
  */
-function DolphinModalController($scope, $rootScope, $mdToast, dolphin, DolphinService, API) {
+function DolphinModalController($scope, $rootScope, toaster, dolphin, DolphinService, API) {
 
   /**
    * constructor
@@ -28,11 +28,11 @@ function DolphinModalController($scope, $rootScope, $mdToast, dolphin, DolphinSe
     $scope.dolphinService = DolphinService;
 
     API.Dolphin.get({ siteId: dolphin.site, fileId: dolphin.id },
-      function (data, status, headers, config) {
+      function (data) {
         $scope.form.data = data;
       }
     );
-  };
+  }
 
   /**
    * update
@@ -46,16 +46,16 @@ function DolphinModalController($scope, $rootScope, $mdToast, dolphin, DolphinSe
     form.loading = true;
 
     API.Dolphin.put({ siteId: form.data.site, fileId: form.data.id }, form.data,
-      function (data, status, headers, config) {
+      function (data) {
         form.loading = false;
-        $mdToast.showSimple("File " + form.data.meta_data.name + " updated.");
+        toaster.info("Done", "File " + form.data.meta_data.name + " updated.");
         $rootScope.$broadcast('gonevisDash.DolphinService:update', {
           dolphin: data,
           data: data,
           success: true
         });
       },
-      function (data, status, headers, config) {
+      function (data) {
         form.loading = false;
         form.errors = data.data;
       }
@@ -63,13 +63,13 @@ function DolphinModalController($scope, $rootScope, $mdToast, dolphin, DolphinSe
   };
 
   constructor();
-};
+}
 
 app.controller("DolphinModalController", DolphinModalController);
 DolphinModalController.$inject = [
   '$scope',
   '$rootScope',
-  '$mdToast',
+  'toaster',
   'dolphin',
   'DolphinService',
   'API'

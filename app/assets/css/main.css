@@ -807,7 +807,7 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     color: rgba(0, 0, 0, 0.5);
     box-shadow: none;
     bottom: initial;
-    top: 20px;
+    top: 30px;
     right: 30px;
 }
 
@@ -836,6 +836,7 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 .modal-header-clickable {
     background: rgba(0, 0, 0, 0.05);
     color: rgba(0, 0, 0, 0.3);
+    padding: 20px 15px;
 }
 
 .modal-header-clickable:hover {
@@ -1367,4 +1368,12 @@ img.tag {
 .sv-visibility-hidden * {
     transition: all 0.3s ease-in-out;
     opacity: 0.6;
+}
+
+
+/* Toaster */
+
+#toast-container>div {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2) !important;
+    transition: opacity 0.2s ease-in-out !important;
 }

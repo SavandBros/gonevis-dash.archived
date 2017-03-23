@@ -36,10 +36,8 @@ module.exports = function(config) {
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-aria/angular-aria.js',
-      'bower_components/angular-material/angular-material.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-gettext/dist/angular-gettext.js',
-      'bower_components/angular-ui-router-title/angular-ui-router-title.js',
       'bower_components/angular-xeditable/dist/js/xeditable.js',
       'bower_components/rangy/rangy-core.js',
       'bower_components/rangy/rangy-classapplier.js',
@@ -57,6 +55,7 @@ module.exports = function(config) {
       'bower_components/angular-slugify/angular-slugify.js',
       'bower_components/angular-sortable-view/src/angular-sortable-view.js',
       'bower_components/angular-loading-bar/build/loading-bar.js',
+      'bower_components/AngularJS-Toaster/toaster.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/app_module.js',
