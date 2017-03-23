@@ -37,6 +37,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     API.SiteTemplateConfig.get({ siteId: site },
       function (data) {
         $scope.siteTemplate = data.template_config;
+        // Check if site template config fields are empty
+        $scope.check = Codekit.isEmptyObj(data.template_config.fields);
+        console.log($scope.check);
       }
     );
   }
@@ -151,6 +154,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
       function () {
         $scope.loadingTemplate = false;
         $scope.siteTemplate = data.template.config;
+        // Check if site template config fields are empty
+        $scope.check = Codekit.isEmptyObj($scope.siteTemplate.fields);
         toaster.info("Done", "Site template updated");
       },
       function () {
