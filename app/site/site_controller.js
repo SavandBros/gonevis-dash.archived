@@ -39,7 +39,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         $scope.siteTemplate = data.template_config;
         // Check if site template config fields are empty
         $scope.check = Codekit.isEmptyObj(data.template_config.fields);
-        console.log($scope.check);
       }
     );
   }
