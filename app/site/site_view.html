@@ -90,7 +90,7 @@
           </button>
         </div>
       </div>
-      <div class="panel-footer" ng-if="!check">
+      <div class="panel-footer" ng-if="siteTemplate.hasFields">
         <!-- Template fields -->
         <div class="form-grop" ng-repeat="(key, field) in siteTemplate.fields"
           ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
