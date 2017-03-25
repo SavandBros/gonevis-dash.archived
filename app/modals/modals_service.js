@@ -27,6 +27,12 @@ function ModalsService(ModalService) {
     team: "team/team_modal/team_modal_view.html"
   };
 
+  /**
+   * @name modals
+   * @desc Modal instances
+   *
+   * @type {Object}
+   */
   var modals = {};
 
   /**
