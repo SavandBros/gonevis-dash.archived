@@ -65,6 +65,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
         // Get entry data
         $scope.form.get = data;
         $scope.form.url = $scope.form.getUrl();
+        Codekit.setTitle($scope.form.get.title);
+
         // Get entry tags
         angular.forEach($scope.form.get.tags, function (data) {
           var tag = new Tag({
