@@ -142,6 +142,12 @@ function Codekit($timeout, $window) {
     }, 200);
   }
 
+  /**
+   * @method setTitle
+   * @desc Set tab title
+   *
+   * @param {String} title 
+   */
   function setTitle(title) {
     var finalTitle = "GoNevis Dash";
 
