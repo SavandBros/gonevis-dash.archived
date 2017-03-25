@@ -31,6 +31,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     API.Site.get({ siteId: site },
       function (data) {
         $scope.site = data;
+        Codekit.setTitle($scope.site.title);
       }
     );
 
