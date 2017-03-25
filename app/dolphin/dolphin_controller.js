@@ -128,26 +128,20 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
           data: { file: file, site: site }
         });
 
-        $scope.file = file;
+        file.isImage = file.type.indexOf("image") === 0;
 
         file.upload.then(
           function (data) {
-            toaster.success("Done", "Upload completed");
+            file.done = true;
+            toaster.success("Upload Complete", file.name);
             $scope.dolphins.unshift(data.data);
             $scope.updateDolphins();
           },
           function () {
-            toaster.error("", "Upload failed");
+            toaster.error("Error", "Something went wrong, couldn't upload file.");
           },
           function (event) {
             file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
-
-            if (file.progress === 100) {
-              setTimeout(function () {
-                file.dismiss = true;
-                $scope.$apply();
-              }, 3000);
-            }
           }
         );
       }
