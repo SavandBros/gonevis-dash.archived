@@ -6,9 +6,11 @@
  * @param $httpProvider
  * @param $resourceProvider
  * @param $cookiesProvider
+ * @param $qProvider
  * @param cfpLoadingBarProvider
  */
-function Config($httpProvider, $resourceProvider, $cookiesProvider, cfpLoadingBarProvider) {
+function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, cfpLoadingBarProvider) {
+
   // Http
   $httpProvider.interceptors.push("AuthInterceptorService");
 
@@ -17,6 +19,9 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, cfpLoadingBa
 
   // Cookies
   $cookiesProvider.defaults.domain = location.hostname.split(location.hostname.split(".")[0]).join("");
+
+  // Q
+  $qProvider.errorOnUnhandledRejections(false)
 
   // CFP loading bar
   cfpLoadingBarProvider.includeSpinner = false;
@@ -27,5 +32,6 @@ Config.$inject = [
   "$httpProvider",
   "$resourceProvider",
   "$cookiesProvider",
+  "$qProvider",
   "cfpLoadingBarProvider"
 ];
