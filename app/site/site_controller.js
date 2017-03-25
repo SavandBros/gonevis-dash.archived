@@ -75,7 +75,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         toaster.info("Done", "Site " + keyString + " updated", 3000);
       },
       function () {
-        toaster.error("", "Oh... Couldn't update " + keyString);
+        toaster.error("Error", "Something went wrong, couldn't update " + keyString);
       }
     );
   };
@@ -105,7 +105,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         $state.go($scope.user.sites ? "dash.main" : "site-new");
       },
       function () {
-        toaster.error("Oops", "Something went wrong, couldn't delete site");
+        toaster.error("Error", "Something went wrong, couldn't delete site");
       }
     );
   };
