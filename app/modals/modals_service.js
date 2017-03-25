@@ -77,4 +77,6 @@ function ModalsService(ModalService) {
 }
 
 app.factory("ModalsService", ModalsService);
-ModalsService.$inject = ["ModalService"];
+ModalsService.$inject = [
+  "ModalService"
+];
