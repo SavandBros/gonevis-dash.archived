@@ -36,10 +36,8 @@ function ModalsService(ModalService) {
   var modals = {};
 
   /**
-   * open
-   *
    * @method open
-   * @desc Open up modal with a template and a controller
+   * @desc Open up a modal with a template and a controller
    *
    * @param template {String} Name of the modal template
    * @param controller {String} Controller of modal
