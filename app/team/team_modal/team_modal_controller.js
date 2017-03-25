@@ -49,14 +49,14 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
     api.put({ siteId: site }, payload,
       function () {
         team.isRemoved = true;
-        ModalsService.close('team');
+        ModalsService.close("team");
         toaster.success(
           "Removed",
           "Removed " + team.title + " (" + $scope.teamRoles[team.role].label.toLowerCase() + ") from team."
         );
       },
       function () {
-        toaster.error("Error", "Something went wrong... We couldn't remove team.");
+        toaster.error("Error", "Something went wrong, couldn't remove team.");
       }
     );
   };

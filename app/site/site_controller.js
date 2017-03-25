@@ -31,12 +31,16 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     API.Site.get({ siteId: site },
       function (data) {
         $scope.site = data;
+        Codekit.setTitle($scope.site.title);
       }
     );
 
     API.SiteTemplateConfig.get({ siteId: site },
       function (data) {
         $scope.siteTemplate = data.template_config;
+        $scope.siteTemplate.hasFields = !Codekit.isEmptyObj(
+          $scope.siteTemplate.fields
+        );
       }
     );
   }
@@ -64,17 +68,18 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         } else {
           $scope.site[key] = data[key];
         }
+
         var index = Codekit.getIndex($scope.user.sites, $scope.site);
         $scope.user.sites[index][key] = data[key];
-
         AuthService.setAuthenticatedUser($scope.user);
+
         $rootScope.$broadcast("gonevisDash.SiteController:update");
 
         toaster.clear(toasters[key]);
         toaster.info("Done", "Site " + keyString + " updated", 3000);
       },
       function () {
-        toaster.error("", "Oh... Couldn't update " + keyString);
+        toaster.error("Error", "Something went wrong, couldn't update " + keyString);
       }
     );
   };
@@ -104,7 +109,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         $state.go($scope.user.sites ? "dash.main" : "site-new");
       },
       function () {
-        toaster.error("Oops", "Something went wrong, couldn't delete site");
+        toaster.error("Error", "Something went wrong, couldn't delete site");
       }
     );
   };
@@ -134,7 +139,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
       },
       function (data) {
         $scope.loadingTemplate = false;
-        toaster.error("Error", data.detail ? data.detail : "Something went wrong, we couldn't update site template.");        
+        toaster.error("Error", data.detail ? data.detail : "Something went wrong, we couldn't update site template.");
       }
     );
   };
@@ -151,6 +156,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
       function () {
         $scope.loadingTemplate = false;
         $scope.siteTemplate = data.template.config;
+        $scope.siteTemplate.hasFields = !Codekit.isEmptyObj(
+          $scope.siteTemplate.fields
+        );
+
         toaster.info("Done", "Site template updated");
       },
       function () {

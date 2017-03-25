@@ -20,7 +20,7 @@
  * @param taToolFunctions
  */
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
-  ENV, AuthService, DolphinService, Client, editableOptions, taOptions, taRegisterTool,
+  ENV, AuthService, DolphinService, Codekit, Client, editableOptions, taOptions, taRegisterTool,
   textAngularManager, taToolFunctions) {
   /**
    * @name cache
@@ -140,10 +140,11 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @event $stateChangeSuccess
    * @desc Changed state succesfully
    */
-  $rootScope.$on("$stateChangeSuccess", function () {
+  $rootScope.$on("$stateChangeSuccess", function (event, toState) {
     if (ENV.name === "production") {
       $window.ga("send", "pageview", { page: $location.url() });
     }
+    Codekit.setTitle(toState.title);
   });
 
   /**
@@ -208,6 +209,7 @@ RunNevisRun.$inject = [
   "ENV",
   "AuthService",
   "DolphinService",
+  "Codekit",
   "Client",
   "editableOptions",
   "taOptions",
