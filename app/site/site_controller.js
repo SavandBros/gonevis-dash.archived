@@ -31,6 +31,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     API.Site.get({ siteId: site },
       function (data) {
         $scope.site = data;
+        Codekit.setTitle($scope.site.title);
       }
     );
 
@@ -78,7 +79,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         toaster.info("Done", "Site " + keyString + " updated", 3000);
       },
       function () {
-        toaster.error("Error", "Oh... Couldn't update " + keyString);
+        toaster.error("Error", "Something went wrong, couldn't update " + keyString);
       }
     );
   };
