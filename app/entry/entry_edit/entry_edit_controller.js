@@ -33,6 +33,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
     // Load from cache if available
     if ($rootScope.cache.entry) {
       $scope.form = $rootScope.cache.entry;
+      Codekit.setTitle($scope.form.get.title);
     } else {
       $scope.form = new Entry({
         site: AuthService.getCurrentSite(),
@@ -124,7 +125,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
 
     API.Entry.put({ entry_id: payload.id }, payload,
       function (data) {
-        $scope.form.get = data;
+        form.get = data;
+        Codekit.setTitle(form.get.title);
         toaster.info("Done", "Entry updated");
         form.loading = false;
         form.errors = null;
