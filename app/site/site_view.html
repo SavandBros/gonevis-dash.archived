@@ -41,9 +41,9 @@
         </div>
         <!-- URL -->
         <div class="panel panel-default panel-body">
-          <span title="Can not be changed.">
-            {{ site.url || "Nothing here..." }}
-          </span>
+          <a ng-href="{{ site.absolute_uri }}" target="_blank" title="Can not be changed.">
+            {{ site.absolute_uri || "Nothing here..." }}
+          </a>
           <small class="o-fade pull-right">URL</small>
         </div>
         <!-- Description -->
@@ -90,7 +90,7 @@
           </button>
         </div>
       </div>
-      <div class="panel-footer" ng-if="siteTemplate.fields.length">
+      <div class="panel-footer" ng-if="siteTemplate.hasFields">
         <!-- Template fields -->
         <div class="form-grop" ng-repeat="(key, field) in siteTemplate.fields"
           ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">

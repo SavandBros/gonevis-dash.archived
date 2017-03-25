@@ -38,6 +38,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     API.SiteTemplateConfig.get({ siteId: site },
       function (data) {
         $scope.siteTemplate = data.template_config;
+        $scope.siteTemplate.hasFields = !Codekit.isEmptyObj(
+          $scope.siteTemplate.fields
+        );
       }
     );
   }
@@ -65,10 +68,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         } else {
           $scope.site[key] = data[key];
         }
+
         var index = Codekit.getIndex($scope.user.sites, $scope.site);
         $scope.user.sites[index][key] = data[key];
-
         AuthService.setAuthenticatedUser($scope.user);
+
         $rootScope.$broadcast("gonevisDash.SiteController:update");
 
         toaster.clear(toasters[key]);
@@ -135,7 +139,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
       },
       function (data) {
         $scope.loadingTemplate = false;
-        toaster.error("Error", data.detail ? data.detail : "Something went wrong, we couldn't update site template.");        
+        toaster.error("Error", data.detail ? data.detail : "Something went wrong, we couldn't update site template.");
       }
     );
   };
@@ -152,6 +156,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
       function () {
         $scope.loadingTemplate = false;
         $scope.siteTemplate = data.template.config;
+        $scope.siteTemplate.hasFields = !Codekit.isEmptyObj(
+          $scope.siteTemplate.fields
+        );
+
         toaster.info("Done", "Site template updated");
       },
       function () {
