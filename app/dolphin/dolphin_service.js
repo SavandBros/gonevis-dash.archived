@@ -1,23 +1,16 @@
 "use strict";
 
 /**
- * Dolphin Service
- *
  * @class DolphinService
- * @namespace gonevisDash.DolphinService
  *
  * @param $rootScope
- * @param toaster
  * @param API
  * @param ModalsService
- *
- * @returns [Factory]
+ * @param toaster
  */
-function DolphinService($rootScope, toaster, API, ModalsService) {
+function DolphinService($rootScope, API, ModalsService, toaster) {
 
   /**
-   * remove
-   *
    * @method remove
    * @desc Delete a dolphin and broadcast it
    *
@@ -53,8 +46,6 @@ function DolphinService($rootScope, toaster, API, ModalsService) {
   }
 
   /**
-   * view
-   *
    * @method view
    * @desc Dolphin view via modal
    *
@@ -65,8 +56,6 @@ function DolphinService($rootScope, toaster, API, ModalsService) {
   }
 
   /**
-   * viewSelection
-   *
    * @method viewSelection
    * @desc Open the main dolphin component via modal for selection
    */
@@ -85,7 +74,7 @@ function DolphinService($rootScope, toaster, API, ModalsService) {
 app.factory("DolphinService", DolphinService);
 DolphinService.$inject = [
   "$rootScope",
-  "toaster",
   "API",
   "ModalsService",
+  "toaster"
 ];
