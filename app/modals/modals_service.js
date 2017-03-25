@@ -54,12 +54,10 @@ function ModalsService(ModalService) {
   }
 
   /**
-   * close
-   *
    * @method close
    * @desc Close a modal by it's instance
    *
-   * @param template {String} Name of the modal template
+   * @param template {String} Name of the modal template (instance)
    */
   function close(template) {
     // Trigger the close button
