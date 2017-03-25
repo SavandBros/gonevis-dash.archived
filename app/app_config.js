@@ -21,7 +21,7 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, 
   $cookiesProvider.defaults.domain = location.hostname.split(location.hostname.split(".")[0]).join("");
 
   // Q
-  $qProvider.errorOnUnhandledRejections(false)
+  $qProvider.errorOnUnhandledRejections(false);
 
   // CFP loading bar
   cfpLoadingBarProvider.includeSpinner = false;
