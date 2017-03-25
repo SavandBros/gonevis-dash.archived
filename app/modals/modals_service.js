@@ -1,14 +1,11 @@
 "use strict";
 
 /**
- * Modals Service
- *
  * @class ModalsService
- * @namespace gonevisDash.ModalsService
+ * @desc Modal service to work with bootstrap's modal
+ *       Each modal should have an id same as its template name
  *
  * @param ModalService
- *
- * @returns [Factory]
  */
 function ModalsService(ModalService) {
 
