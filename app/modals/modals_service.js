@@ -56,7 +56,7 @@ function ModalsService(ModalService) {
    */
   function close(template) {
     // Trigger the close button
-    angular.element("#" + template + " .close").trigger("click");
+    angular.element("#" + template + " [data-dismiss=modal]").trigger("click");
     // Make sure backdrop is gone
     setTimeout(function () {
       if (!angular.element(".modal.fade.in").length) {
