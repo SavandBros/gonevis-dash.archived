@@ -1,35 +1,42 @@
 <div class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
+      <!-- Comment header -->
       <div class="modal-header">
         <img class="modal-image" ng-src="{{ comment.user.media.picture ?
           comment.user.media.thumbnail_128x128 : 'assets/img/avatar.png'
-          }}">
+        }}">
         {{ comment.user.name }} <small class="pull-right">{{ comment.created | date }}</small>
       </div>
       <div class="modal-body">
+        <!-- Comment content -->
         {{ comment.comment }}
         <hr>
+        <!-- Reply -->
         <form ng-submit="reply(form)">
           <div class="row">
+            <!-- Reply comment -->
             <div class="form-group col-md-10">
               <textarea ng-model="form.comment"
                 placeholder="@{{comment.user.name}}"
                 class="form-control comment">
               </textarea>
             </div>
+            <!-- Reply buttom -->
             <div class="form-group col-md-2">
-              <button class="btn btn-sm btn-primary">Reply</button>
+              <button class="btn btn-sm btn-primary btn-block">Reply</button>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
+        <!-- Delete comment -->
         <button class="btn btn-sm btn-danger pull-left"
           ng-click="commentService.remove(comment)"
           data-dismiss="modal">
           <i class="fa fa-trash"></i>
         </button>
+        <!-- Comment status -->
         <div class="dropdown options col-md-3 pull-right s-pad-no">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
             {{ comment.statusLabel }} <li class="fa fa-caret-down"></li>
