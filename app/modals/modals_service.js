@@ -9,6 +9,12 @@
  */
 function ModalsService(ModalService) {
 
+  /**
+   * @name templates
+   * @desc All modal templates are defined here
+   *
+   * @type {Object}
+   */
   var templates = {
     dolphin: "dolphin/dolphin_modal/dolphin_modal_view.html",
     dolphinSelection: "dolphin/dolphin_selection.html",
