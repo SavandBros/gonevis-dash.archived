@@ -10,38 +10,44 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/new-site",
       controller: "SiteNewController",
       templateUrl: "site/site_new/site_new_view.html",
-      auth: true
+      auth: true,
+      title: "New Site"
     })
     .state("signin", {
       url: "/login/:action",
       controller: "SigninController",
       templateUrl: "account/signin/signin_view.html",
-      auth: false
+      auth: false,
+      title: "Login"
     })
     .state("signup", {
       url: "/register",
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
-      auth: false
+      auth: false,
+      title: "Register"
     })
     .state("collaborate", {
       // Same as Signup but different url
       url: "/start-collaborating/:token",
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
-      auth: false
+      auth: false,
+      title: "Start collaborating"
     })
     .state("reset-pass", {
       url: "/reset-password/:token",
       controller: "ResetPassController",
       templateUrl: "account/reset_pass/reset_pass_view.html",
-      auth: -1
+      auth: -1,
+      title: "Reset password"
     })
     .state("email-confirmation", {
       url: "/email-verification/:token",
       controller: "EmailConfirmationController",
       templateUrl: "account/email_confirmation/email_confirmation_view.html",
-      auth: -1
+      auth: -1,
+      title: "Email verification"
     })
     // Dash states that require authentication and site index
     .state("dash", {
@@ -63,19 +69,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       params: {
         add: null
       },
-      auth: true
+      auth: true,
+      title: "Navigations"
     })
     .state("dash.dolphin", {
       url: "/dolphin",
       controller: "DolphinController",
       templateUrl: "dolphin/dolphin_view.html",
-      auth: true
+      auth: true,
+      title: "Dolphin"
     })
     .state("dash.comment-list", {
       url: "/comments",
       controller: "CommentController",
       templateUrl: "comment/comment_view.html",
-      auth: true
+      auth: true,
+      title: "Comments"
     })
     .state("dash.entry-new", {
       url: "/new",
@@ -84,13 +93,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: true,
       editor: true,
       mousemoveEvent: true,
-      clickEvent: true
+      clickEvent: true,
+      title: "Nevis"
     })
     .state("dash.entry-list", {
       url: "/entries",
       controller: "EntryController",
       templateUrl: "entry/entry_view.html",
-      auth: true
+      auth: true,
+      title: "Entries"
     })
     .state("dash.entry-edit", {
       url: "/entry/:entryId",
@@ -117,31 +128,29 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/tags",
       controller: "TagController",
       templateUrl: "tag/tag_view.html",
-      auth: true
-    })
-    .state("dash.tag-new", {
-      url: "/tag-new",
-      controller: "TagNewController",
-      templateUrl: "tag/tag_new/tag_new_view.html",
-      auth: true
+      auth: true,
+      title: "Tags"
     })
     .state("dash.user", {
       url: "/user",
       controller: "UserController",
       templateUrl: "account/user/user_view.html",
-      auth: true
+      auth: true,
+      title: "Account"
     })
     .state("dash.change-password", {
       url: "/change-password",
       controller: "ChangePassController",
       templateUrl: "account/change_pass/change_pass_view.html",
-      auth: true
+      auth: true,
+      title: "Change password"
     })
     .state("dash.team", {
       url: "/team",
       controller: "TeamController",
       templateUrl: "team/team_view.html",
       auth: true,
+      title: "Team"
     });
 
   $urlRouterProvider.otherwise(function ($injector) {
