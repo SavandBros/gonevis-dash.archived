@@ -33,7 +33,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
       auth: false,
-      title: "Start collaborating"
+      title: "Start Collaborating"
     })
     .state("reset-pass", {
       url: "/reset-password/:token",
@@ -47,7 +47,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "EmailConfirmationController",
       templateUrl: "account/email_confirmation/email_confirmation_view.html",
       auth: -1,
-      title: "Email verification"
+      title: "Email Verification"
     })
     // Dash states that require authentication and site index
     .state("dash", {
@@ -66,11 +66,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/navigation",
       controller: "NavigationController",
       templateUrl: "navigation/navigation_view.html",
+      auth: true,
+      title: "Navigations",
       params: {
         add: null
-      },
-      auth: true,
-      title: "Navigations"
+      }
     })
     .state("dash.dolphin", {
       url: "/dolphin",
@@ -143,7 +143,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "ChangePassController",
       templateUrl: "account/change_pass/change_pass_view.html",
       auth: true,
-      title: "Change password"
+      title: "Change Password"
     })
     .state("dash.team", {
       url: "/team",
