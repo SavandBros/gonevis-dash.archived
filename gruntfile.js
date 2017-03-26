@@ -57,7 +57,7 @@ module.exports = function (grunt) {
         tasks: ["newer:copy:styles", "postcss"]
       },
       gruntfile: {
-        files: ["Gruntfile.js"]
+        files: ["gruntfile.js"]
       },
       livereload: {
         options: {
@@ -130,7 +130,7 @@ module.exports = function (grunt) {
       },
       all: {
         src: [
-          "Gruntfile.js",
+          "gruntfile.js",
           "<%= gonevisDash.app %>/{,*/,*/}*.js"
         ]
       },
@@ -150,7 +150,7 @@ module.exports = function (grunt) {
       },
       all: {
         src: [
-          "Gruntfile.js",
+          "gruntfile.js",
           "<%= gonevisDash.app %>/{,*/}*.js",
         ]
       },

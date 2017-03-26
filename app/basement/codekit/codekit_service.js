@@ -7,10 +7,11 @@
  *       Using this provider is highly recommended, even got a short name to be used quickly :P
  *
  * @param $timeout
+ * @param $window
  *
  * @returns [Factory]
  */
-function Codekit($timeout) {
+function Codekit($timeout, $window) {
 
   /**
    * @method getIndex
@@ -141,6 +142,22 @@ function Codekit($timeout) {
     }, 200);
   }
 
+  /**
+   * @method setTitle
+   * @desc Set tab title
+   *
+   * @param {String} title 
+   */
+  function setTitle(title) {
+    var finalTitle = "GoNevis Dash";
+
+    if (title) {
+      finalTitle = title + " - GoNevis Dash";
+    }
+
+    $window.document.title = finalTitle;
+  }
+
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
@@ -149,11 +166,13 @@ function Codekit($timeout) {
     objectTypes: objectTypes,
     timeoutSlice: timeoutSlice,
     isEmptyObj: isEmptyObj,
-    focus: focus
+    focus: focus,
+    setTitle: setTitle
   };
 }
 
 app.factory("Codekit", Codekit);
 Codekit.$inject = [
-  "$timeout"
+  "$timeout",
+  "$window"
 ];

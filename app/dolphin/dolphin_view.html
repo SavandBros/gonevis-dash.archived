@@ -13,7 +13,7 @@
       <!-- Upload -->
       <div class="col-sm-12 col-md-1 col-xs-3 s-mar-bottom-soft">
         <button type="file" class="btn btn-primary btn-block" ngf-select="uploadFile($files, $invalidFiles)"
-          ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
+          ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true" ngf-max-files="5">
           <i class="fa fa-fw fa-upload"></i>
         </button>
       </div>
@@ -25,6 +25,19 @@
     <!-- Nothing -->
     <ng-include src="'basement/nothing/nothing.html'" ng-if="!dolphins.length && !searchForm.noResult && initialled">
     </ng-include>
+
+    <!-- Uploading preview -->
+    <div class="dolphin-uploads text-center">
+      <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="file in upload.files" ng-if="!file.done">
+        <div class="dolphin" ngf-thumbnail="file" ngf-as-background="true" style="display: block !important"
+          ngf-resize="{quality: 1}" ng-class="{'not-image': !file.isImage}">
+          <i class="fa fa-5x fa-file-o c-white" ng-if="!d.is_image"></i>
+          <p class="caption progress progress-striped">
+            <span class="progress-bar active" style="width: {{ file.progress }}%"></span>
+          </p>
+        </div>
+      </div>
+    </div>
 
     <!-- List -->
     <div class="animated fadeIn" ng-if="initialled">
@@ -46,9 +59,9 @@
         </a>
         <!-- Options -->
         <div class="dropdown options" title="options">
-          <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade"
+          <button class="btn btn-default dropdown-toggle o-fade-hard o-fade-hover-full bg-no c-white b-no"
             id="options{{ $index }}" data-toggle="dropdown">
-            <i class="fa fa-fw fa-ellipsis-v"></i>
+            <i class="fa fa-ellipsis-v"></i>
           </button>
           <ul class="dropdown-menu">
             <li><a ng-click="dolphinService.view(d)"><i class="fa fa-eye"></i> View</a></li>
