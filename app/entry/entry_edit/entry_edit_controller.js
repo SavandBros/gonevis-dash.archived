@@ -148,7 +148,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
    */
   $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
     if (Codekit.isEmptyObj($rootScope.set.editor)) {
-      $scope.form.cover_image = dolphin ? dolphin.id : null;
+      $scope.form.get.cover_image = dolphin ? dolphin.id : null;
     } else if ($scope.form.content.length < 20) {
       $rootScope.set.editor.scope.displayElements.text.focus();
       $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.file, false);
