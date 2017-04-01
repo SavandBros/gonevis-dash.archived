@@ -55,6 +55,11 @@ function Codekit($timeout, $window) {
   }];
 
   /**
+   * @name entryFormats
+   * @desc All formats available for entries.
+   *
+   * @type {Object}
+   */
   var entryFormats = {
     text: {
       id: 0,
@@ -83,6 +88,7 @@ function Codekit($timeout, $window) {
     }
   };
 
+  /**
    * @name commentStatuses
    * @desc All statuses available for comments.
    *
