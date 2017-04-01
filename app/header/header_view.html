@@ -71,7 +71,10 @@
             <li role="separator" class="divider"></li>
             <li ng-repeat="site in user.sites" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
-              <a ui-sref="dash.site({s: param.s})" class="nav-link-in-link"><i class="fa fa-cog" ng-if="param.s == $index"></i></a>
+              <a ui-sref="dash.site({s: param.s})"
+                class="nav-link-in-link" ng-if="param.s == $index">
+                <i class="fa fa-cog fa-fw" init></i>
+              </a>
             </li>
             <li>
               <a ui-sref="site-new" class="o-fade small">CREATE NEW SITE</a>
