@@ -67,6 +67,9 @@ function Entry($rootScope, toaster, API, Codekit) {
     };
 
     /**
+    this.create = function (success, fail) {
+      return API.Entry.save(this.get, success, fail);
+    };
      * @method remove
      * @desc Delete entries via API call
      */
