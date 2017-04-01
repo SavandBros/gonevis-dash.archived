@@ -31,6 +31,12 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   }
 
   /**
+  $scope.nevis = function (format) {
+    $scope.nevisFormat = format;
+    if (format === "image") {
+      DolphinService.viewSelection("headerNevis");
+    }
+  };
    * @event gonevisDash.AuthService:Authenticated
    * @desc Authentication loads
    */
