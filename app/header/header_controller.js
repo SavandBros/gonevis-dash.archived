@@ -32,6 +32,14 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
     // Entry formats
     $scope.entryFormats = Codekit.entryFormats;
   }
+
+  /**
+   * @method handleNevis
+   * @desc Handle user selection of quick nevis
+   *
+   * @param {String} format 
+   * @param {Object|String} data 
+   */
   function handleNevis(format, data) {
     // New entry
     var entry = new Entry({
