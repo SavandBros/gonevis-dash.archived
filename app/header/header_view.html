@@ -23,7 +23,8 @@
             <li class="dropdown-header hidden-xs">MORE TO NEVIS</li>
             <li role="separator" class="divider"></li>
             <li ng-repeat="(key, format) in entryFormats" ng-if="key !== 'text'">
-              <a ng-click="nevis(key)">
+              <a ng-click="nevis(key)" ng-disabled="format.disabled"
+                ng-class="{'o-fade-soft': format.disabled}" title="{{ format.disabled ? 'Coming soon' : null }}">
                 <i class="fa fa-{{ format.icon }}"></i> {{ format.label }}
               </a>
             </li>
