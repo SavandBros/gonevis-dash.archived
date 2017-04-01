@@ -25,16 +25,13 @@ function HeaderController($scope, $rootScope, $state, $stateParams, toaster, Aut
   }
 
   $rootScope.$on("gonevisDash.AuthService:Authenticated", function () {
+  $scope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
     if (!$scope.user.sites.length) {
       $state.go("site-new");
     } else {
       $state.go("dash.main", { s: 0 });
     }
-  }); 
-
-  $scope.$on("gonevisDash.SiteNewController:Create", function () {
-    constructor();
   });
 
   $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
@@ -45,18 +42,12 @@ function HeaderController($scope, $rootScope, $state, $stateParams, toaster, Aut
     $state.go("signin");
   });
 
-  $scope.$on("gonevisDash.SiteController:remove", function () {
-    constructor();
-  });
 
-  $scope.$on("gonevisDash.SiteController:update", function () {
-    constructor();
-  });
+  $scope.$on("gonevisDash.SiteController:remove", constructor);
 
-  $scope.$on("gonevisDash.UserController:update", function () {
-    constructor();
-  });
+  $scope.$on("gonevisDash.SiteController:update", constructor);
 
+  $scope.$on("gonevisDash.UserController:update", constructor);
 
   constructor();
 }
