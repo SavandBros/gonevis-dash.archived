@@ -26,6 +26,8 @@
     <div text-angular ng-model="form.get.content" placeholder="CONTENT" name="editor"
       ng-focus="editingContent = true" ng-blur="editingContent = false"  ng-show="form.get.format === formats.text.id">
     </div>
+    <!-- Entry formats -->
+    <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
     </div>
   </div>
 </div>
