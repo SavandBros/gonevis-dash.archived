@@ -28,6 +28,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
     // State
     $scope.state = $state;
     $scope.param = $stateParams;
+
+    // Entry formats
+    $scope.entryFormats = Codekit.entryFormats;
+  }
   }
 
   /**
