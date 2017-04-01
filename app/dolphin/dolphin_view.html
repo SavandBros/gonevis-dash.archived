@@ -27,11 +27,11 @@
     </ng-include>
 
     <!-- Uploading preview -->
-    <div class="dolphin-uploads text-center">
+    <div class="dolphin-uploads text-center dis-ib sz-full">
       <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="file in upload.files" ng-if="!file.done">
         <div class="dolphin" ngf-thumbnail="file" ngf-as-background="true" style="display: block !important"
           ngf-resize="{quality: 1}" ng-class="{'not-image': !file.isImage}">
-          <i class="fa fa-5x fa-file-o c-white" ng-if="!d.is_image"></i>
+          <i class="fa fa-5x fa-file-o c-white" ng-if="!file.isImage"></i>
           <p class="caption progress progress-striped">
             <span class="progress-bar active" style="width: {{ file.progress }}%"></span>
           </p>
