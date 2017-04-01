@@ -26,7 +26,8 @@ describe("DolphinController", function () {
 
       var controller = $controller("DolphinController", { // jshint ignore:line
         $scope: $scope,
-        AuthService: authService
+        AuthService: authService,
+        source: null
       });
 
       $scope.updateDolphins();

@@ -55,6 +55,43 @@ function Codekit($timeout, $window) {
   }];
 
   /**
+   * @name entryFormats
+   * @desc All formats available for entries.
+   *
+   * @type {Object}
+   */
+  var entryFormats = {
+    text: {
+      id: 0,
+      label: "Text",
+      icon: "file-text-o"
+    },
+    image: {
+      id: 1,
+      label: "Image",
+      icon: "picture-o"
+    },
+    video: {
+      id: 2,
+      label: "Video",
+      icon: "film",
+      disabled: true
+    },
+    audio: {
+      id: 3,
+      label: "Audio",
+      icon: "headphones",
+      disabled: true
+    },
+    status: {
+      id: 4,
+      label: "Status",
+      icon: "smile-o",
+      disabled: true
+    }
+  };
+
+  /**
    * @name commentStatuses
    * @desc All statuses available for comments.
    *
@@ -161,6 +198,7 @@ function Codekit($timeout, $window) {
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
+    entryFormats: entryFormats,
     commentStatuses: commentStatuses,
     teamRoles: teamRoles,
     objectTypes: objectTypes,

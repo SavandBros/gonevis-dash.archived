@@ -58,10 +58,12 @@ function DolphinService($rootScope, API, ModalsService, toaster) {
   /**
    * @method viewSelection
    * @desc Open the main dolphin component via modal for selection
+   *
+   * @param source {String} Source of use (to check later)
    */
-  function viewSelection() {
+  function viewSelection(source) {
     $rootScope.selectionMode = true;
-    ModalsService.open("dolphinSelection", "DolphinController");
+    ModalsService.open("dolphinSelection", "DolphinController", { source: source });
   }
 
   return {

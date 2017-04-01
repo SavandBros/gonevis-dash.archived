@@ -25,10 +25,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
    */
   function constructor() {
     $scope.dolphinService = DolphinService;
+    $scope.statuses = Codekit.entryStatuses;
+    $scope.formats = Codekit.entryFormats;
     $scope.editing = true;
     $scope.tags = [];
     $scope.tagsToSubmit = [];
-    $scope.statuses = Codekit.entryStatuses;
 
     // Load from cache if available
     if ($rootScope.cache.entry) {
@@ -145,11 +146,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
    *
    * @param event {Event}
    * @param dolphin {Object}
+   * @param source {String}
    */
-  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
-    if (Codekit.isEmptyObj($rootScope.set.editor)) {
+  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin, source) {
+    if (source === "entryCover") {
       $scope.form.get.cover_image = dolphin ? dolphin.id : null;
-    } else if ($scope.form.content.length < 20) {
+    } else if (source === "editorAddImage") {
       $rootScope.set.editor.scope.displayElements.text.focus();
       $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.file, false);
       $rootScope.set.editor = {};
@@ -157,19 +159,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
   });
 
   /**
-   * @event gonevisDash.DolphinService:select
-   * @desc Image selection callback
+   * @event gonevisDash.Entry:remove
+   * @desc Go to entries on entry removal
    *
    * @param event {Event}
-   * @param dolphin {Object}
+   * @param data {Object}
    */
-  $scope.$on("gonevisDash.Entry:remove", function (event, dolphin) {
-    if (Codekit.isEmptyObj($rootScope.set.editor)) {
-      $scope.form.cover_image = dolphin ? dolphin.id : null;
-    } else if ($scope.form.content.length < 20) {
-      $rootScope.set.editor.scope.displayElements.text.focus();
-      $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.file, false);
-      $rootScope.set.editor = {};
+  $scope.$on("gonevisDash.Entry:remove", function (event, data) {
+    if (data.success) {
+      $state.go("dash.entry-list");
     }
   });
 
