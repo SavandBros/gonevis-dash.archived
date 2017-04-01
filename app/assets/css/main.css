@@ -504,6 +504,7 @@ md-toast {
     font-size: 13px;
     margin-top: 228px;
     text-overflow: ellipsis;
+    text-align: center;
     width: 100%;
     overflow: hidden;
     font-weight: bold;
