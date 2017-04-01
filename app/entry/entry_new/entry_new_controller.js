@@ -122,19 +122,6 @@ function EntryNewController($scope, $rootScope, $state, $q,
     }
   });
 
-  /**
-   * @event gonevisDash.Entry:remove
-   * @desc Go to entries on entry removal
-   *
-   * @param event {Event}
-   * @param data {Object}
-   */
-  $scope.$on("gonevisDash.Entry:remove", function (event, data) {
-    if (data.success) {
-      $state.go("dash.entry-list");
-    }
-  });
-
   constructor();
 }
 
