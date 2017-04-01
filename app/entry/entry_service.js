@@ -4,11 +4,11 @@
  * @class Entry
  *
  * @param $rootScope
- * @param toaster
  * @param API
  * @param Codekit
+ * @param toaster
  */
-function Entry($rootScope, toaster, API, Codekit) {
+function Entry($rootScope, API, Codekit, toaster) {
   return function (data) {
 
     /**
@@ -67,9 +67,19 @@ function Entry($rootScope, toaster, API, Codekit) {
     };
 
     /**
+     * @method create
+     * @desc Entry creation
+     *
+     * @param success {Function}
+     * @param fail {Function}
+     *
+     * @returns {Promise}
+     */
     this.create = function (success, fail) {
       return API.Entry.save(this.get, success, fail);
     };
+
+    /**
      * @method remove
      * @desc Delete entries via API call
      */
@@ -108,7 +118,7 @@ function Entry($rootScope, toaster, API, Codekit) {
 app.service("Entry", Entry);
 Entry.$inject = [
   "$rootScope",
-  "toaster",
   "API",
   "Codekit",
+  "toaster"
 ];
