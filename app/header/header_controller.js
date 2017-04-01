@@ -6,25 +6,30 @@
  * @param $scope
  * @param $state
  * @param $stateParams
- * @param toaster
  * @param AuthService
+ * @param DolphinService
+ * @param Codekit
+ * @param Entry
+ * @param API
+ * @param toaster
  */
-function HeaderController($scope, $rootScope, $state, $stateParams, toaster, AuthService) {
+function HeaderController($scope, $rootScope, $state, $stateParams,
+  AuthService, DolphinService, Codekit, Entry, API, toaster) {
 
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    // Get user
+    // User
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser();
 
+    // State
     $scope.state = $state;
     $scope.param = $stateParams;
   }
 
-  $rootScope.$on("gonevisDash.AuthService:Authenticated", function () {
   /**
    * @event gonevisDash.AuthService:Authenticated
    * @desc Authentication loads
@@ -46,9 +51,12 @@ function HeaderController($scope, $rootScope, $state, $stateParams, toaster, Aut
    * @param sessionExpired {Boolean}
    */
   $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
+    // Session expired message
     if (sessionExpired) {
-      toaster.info("Logged out", "Looks like your session has expired, login again.");
+      toaster.clear($scope.signOutToast);
+      $scope.signOutToast = toaster.info("Logged out", "Looks like your session has expired, login again.");
     }
+    // Sign out completely
     AuthService.unAuthenticate();
     $state.go("signin");
   });
@@ -86,6 +94,10 @@ HeaderController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "toaster",
-  "AuthService"
+  "AuthService",
+  "DolphinService",
+  "Codekit",
+  "Entry",
+  "API",
+  "toaster"
 ];
