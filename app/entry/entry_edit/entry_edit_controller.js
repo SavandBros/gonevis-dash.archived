@@ -25,10 +25,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
    */
   function constructor() {
     $scope.dolphinService = DolphinService;
+    $scope.statuses = Codekit.entryStatuses;
+    $scope.formats = Codekit.entryFormats;
     $scope.editing = true;
     $scope.tags = [];
     $scope.tagsToSubmit = [];
-    $scope.statuses = Codekit.entryStatuses;
 
     // Load from cache if available
     if ($rootScope.cache.entry) {
