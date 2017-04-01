@@ -42,9 +42,12 @@ function TagNewModalController($scope, Tag, API, AuthService, ModalsService, Slu
    *
    * @param event {Event}
    * @param dolphin {Object}
+   * @param source {String}
    */
-  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
-    $scope.form.data.cover_image = dolphin ? dolphin.id : null;
+  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin, source) {
+    if (source === "tagCover") {
+      $scope.form.data.cover_image = dolphin ? dolphin.id : null;
+    }
   });
 
   constructor();
