@@ -20,6 +20,13 @@
             <i class="fa fa-caret-down o-fade-hard hidden-xs"></i>
           </a>
           <ul class="dropdown-menu">
+            <li class="dropdown-header hidden-xs">MORE TO NEVIS</li>
+            <li role="separator" class="divider"></li>
+            <li ng-repeat="(key, format) in entryFormats" ng-if="key !== 'text'">
+              <a ng-click="nevis(key)">
+                <i class="fa fa-{{ format.icon }}"></i> {{ format.label }}
+              </a>
+            </li>
             <li role="separator" class="divider hidden visible-xs"></li>
           </ul>
         </li>
