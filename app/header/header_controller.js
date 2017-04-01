@@ -31,6 +31,11 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   }
 
   /**
+   * @method nevis
+   * @desc Entry with different format
+   *
+   * @param format {String}
+   */
   $scope.nevis = function (format) {
     $scope.nevisFormat = format;
     if (format === "image") {
