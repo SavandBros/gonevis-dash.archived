@@ -63,7 +63,7 @@
         </div>
         <!-- Cover select and view entry on site -->
         <div class="form-group">
-          <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection()" type="button">
+          <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection('entryCover')" type="button">
             <i class="fa fa-fw fa-image"></i> Select cover image
           </button>
           <a ng-href="{{ form.url }}" class="btn btn-default btn-sm btn-block" target="_blank" ng-if="editing">
@@ -140,7 +140,7 @@
         <div class="btn-group stack" ng-if="editing">
           <button class="btn btn-primary" ng-disabled="form.loading || form.$invalid">UPDATE</button>
           <button class="btn btn-default" ng-disabled="form.loading || form.$invalid"
-            title="Delete entry" type="button" ng-click="remove(form.id)">
+            title="Delete entry" type="button" ng-click="form.remove()">
             <i class="fa fa-trash"></i>
           </button>
         </div>
