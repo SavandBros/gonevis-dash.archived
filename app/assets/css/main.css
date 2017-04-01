@@ -428,8 +428,14 @@ md-toast {
 
 .nav-link-in-link {
     position: absolute;
+    background: rgba(209, 113, 0, 0.8) !important;
     right: 0;
     margin-top: -36px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-link-in-link:hover {
+    background: rgba(209, 113, 0, 1) !important;
 }
 
 
