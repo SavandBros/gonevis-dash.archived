@@ -27,7 +27,7 @@
     </ng-include>
 
     <!-- Uploading preview -->
-    <div class="dolphin-uploads text-center">
+    <div class="dolphin-uploads text-center dis-ib sz-full">
       <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="file in upload.files" ng-if="!file.done">
         <div class="dolphin" ngf-thumbnail="file" ngf-as-background="true" style="display: block !important"
           ngf-resize="{quality: 1}" ng-class="{'not-image': !file.isImage}">
