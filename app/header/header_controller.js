@@ -32,6 +32,34 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
     // Entry formats
     $scope.entryFormats = Codekit.entryFormats;
   }
+  function handleNevis(format, data) {
+    // New entry
+    var entry = new Entry({
+      site: AuthService.getCurrentSite(),
+      format: Codekit.entryFormats[format].id
+    });
+    // Set image properties
+    if (format === "image") {
+      entry.get.cover_image = data.id;
+      entry.get.title = data.meta_data.name;
+      entry.get.content = "<img src='" + data.file + "' alt='" + data.meta_data.name + "'/>";
+    }
+    // Entry submission
+    entry.create(
+      function (data) {
+        toaster.success("Done", "Entry created!");
+        // Go for edit
+        $state.go("dash.entry-edit", {
+          s: $stateParams.s,
+          entryId: data.id
+        });
+      },
+      function () {
+        toaster.error("Error", "Something went wrong, failed to create entry.");
+      }
+    );
+    // Clear
+    $scope.nevisFormat = null;
   }
 
   /**
