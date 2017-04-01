@@ -28,6 +28,11 @@
     </div>
     <!-- Entry formats -->
     <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
+      <!-- Image -->
+      <a class="thumbnail" ng-if="form.get.format === formats.image.id"
+        ng-href="{{ form.get.media.cover_image.file }}" target="_blank">
+        <img ng-src="{{ form.get.media.cover_image.file }}" alt="{{ form.get.title }}">
+      </a>
     </div>
   </div>
 </div>
