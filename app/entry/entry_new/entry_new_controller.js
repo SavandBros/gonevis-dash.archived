@@ -26,6 +26,7 @@ function EntryNewController($scope, $rootScope, $state, $q,
     $scope.dolphinService = DolphinService;
     $scope.tagsToSubmit = [];
     $scope.statuses = Codekit.entryStatuses;
+    $scope.formats = Codekit.entryFormats;
     $scope.form = new Entry({
       status: $scope.statuses[0].id
     });
