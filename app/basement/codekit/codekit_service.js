@@ -74,17 +74,20 @@ function Codekit($timeout, $window) {
     video: {
       id: 2,
       label: "Video",
-      icon: "film"
+      icon: "film",
+      disabled: true
     },
     audio: {
       id: 3,
       label: "Audio",
-      icon: "headphones"
+      icon: "headphones",
+      disabled: true
     },
     status: {
       id: 4,
       label: "Status",
-      icon: "smile-o"
+      icon: "smile-o",
+      disabled: true
     }
   };
 
