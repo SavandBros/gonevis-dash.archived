@@ -6,57 +6,152 @@
  * @param $scope
  * @param $state
  * @param $stateParams
- * @param toaster
  * @param AuthService
+ * @param DolphinService
+ * @param Codekit
+ * @param Entry
+ * @param API
+ * @param toaster
  */
-function HeaderController($scope, $rootScope, $state, $stateParams, toaster, AuthService) {
+function HeaderController($scope, $rootScope, $state, $stateParams,
+  AuthService, DolphinService, Codekit, Entry, API, toaster) {
 
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    // Get user
+    // User
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser();
 
+    // State
     $scope.state = $state;
     $scope.param = $stateParams;
+
+    // Entry formats
+    $scope.entryFormats = Codekit.entryFormats;
   }
 
-  $rootScope.$on("gonevisDash.AuthService:Authenticated", function () {
+  /**
+   * @method handleNevis
+   * @desc Handle user selection of quick nevis
+   *
+   * @param {String} format 
+   * @param {Object|String} data 
+   */
+  function handleNevis(format, data) {
+    // New entry
+    var entry = new Entry({
+      site: AuthService.getCurrentSite(),
+      format: Codekit.entryFormats[format].id
+    });
+    // Set image properties
+    if (format === "image") {
+      entry.get.cover_image = data.id;
+      entry.get.title = data.meta_data.name;
+      entry.get.content = "<img src='" + data.file + "' alt='" + data.meta_data.name + "'/>";
+    }
+    // Entry submission
+    entry.create(
+      function (data) {
+        toaster.success("Done", "Entry created!");
+        // Go for edit
+        $state.go("dash.entry-edit", {
+          s: $stateParams.s,
+          entryId: data.id
+        });
+      },
+      function () {
+        toaster.error("Error", "Something went wrong, failed to create entry.");
+      }
+    );
+    // Clear
+    $scope.nevisFormat = null;
+  }
+
+  /**
+   * @method nevis
+   * @desc Entry with different format
+   *
+   * @param format {String}
+   */
+  $scope.nevis = function (format) {
+    $scope.nevisFormat = format;
+    if (format === "image") {
+      DolphinService.viewSelection("headerNevis");
+    }
+  };
+
+  /**
+   * @event gonevisDash.DolphinService:select
+   * @desc Dolphin selection used for quick nevis
+   *
+   * @param event {Event}
+   * @param dolphin {Object}
+   * @param source {String}
+   */
+  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin, source) {
+    // If we're dealing with quick nevis
+    if (source === "headerNevis") {
+      handleNevis($scope.nevisFormat, dolphin);
+    }
+  });
+
+  /**
+   * @event gonevisDash.AuthService:Authenticated
+   * @desc Authentication loads
+   */
+  $scope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
     if (!$scope.user.sites.length) {
       $state.go("site-new");
     } else {
       $state.go("dash.main", { s: 0 });
     }
-  }); 
-
-  $scope.$on("gonevisDash.SiteNewController:Create", function () {
-    constructor();
   });
 
+  /**
+   * @event gonevisDash.AuthService:SignedOut
+   * @desc Un-authentication redirect
+   *
+   * @param event {Event}
+   * @param sessionExpired {Boolean}
+   */
   $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
+    // Session expired message
     if (sessionExpired) {
-      toaster.info("Logged out", "Looks like your session has expired, login again.");
+      toaster.clear($scope.signOutToast);
+      $scope.signOutToast = toaster.info("Logged out", "Looks like your session has expired, login again.");
     }
+    // Sign out completely
     AuthService.unAuthenticate();
     $state.go("signin");
   });
 
-  $scope.$on("gonevisDash.SiteController:remove", function () {
-    constructor();
-  });
+  /**
+   * @event gonevisDash.SiteNewController:Create
+   * @desc Site creation load
+   */
+  $scope.$on("gonevisDash.SiteNewController:Create", constructor);
 
-  $scope.$on("gonevisDash.SiteController:update", function () {
-    constructor();
-  });
+  /**
+   * @event gonevisDash.SiteController:remove
+   * @desc Site removal
+   */
+  $scope.$on("gonevisDash.SiteController:remove", constructor);
 
-  $scope.$on("gonevisDash.UserController:update", function () {
-    constructor();
-  });
+  /**
+   * @event gonevisDash.SiteController:update
+   * @desc Site update
+   */
+  $scope.$on("gonevisDash.SiteController:update", constructor);
 
+  /**
+   * @event gonevisDash.UserController:update
+   * @desc User update
+   */
+  $scope.$on("gonevisDash.UserController:update", constructor);
 
   constructor();
 }
@@ -67,6 +162,10 @@ HeaderController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "toaster",
-  "AuthService"
+  "AuthService",
+  "DolphinService",
+  "Codekit",
+  "Entry",
+  "API",
+  "toaster"
 ];

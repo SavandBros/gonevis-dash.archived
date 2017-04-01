@@ -15,9 +15,10 @@
  * @param AuthService
  * @param Upload
  * @param Pagination
+ * @param source
  */
 function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
-  DolphinService, Codekit, API, ENV, AuthService, Upload, Pagination, Search) {
+  DolphinService, Codekit, API, ENV, AuthService, Upload, Pagination, Search, source) {
 
   var site = AuthService.getCurrentSite();
 
@@ -184,7 +185,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
    */
   $scope.action = function (dolphin) {
     if ($rootScope.selectionMode) {
-      $rootScope.$broadcast("gonevisDash.DolphinService:select", dolphin);
+      $rootScope.$broadcast("gonevisDash.DolphinService:select", dolphin, source);
       $rootScope.selectionMode = false;
       return;
     }
@@ -234,5 +235,6 @@ DolphinController.$inject = [
   "AuthService",
   "Upload",
   "Pagination",
-  "Search"
+  "Search",
+  "source"
 ];

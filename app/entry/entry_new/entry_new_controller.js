@@ -26,8 +26,10 @@ function EntryNewController($scope, $rootScope, $state, $q,
     $scope.dolphinService = DolphinService;
     $scope.tagsToSubmit = [];
     $scope.statuses = Codekit.entryStatuses;
+    $scope.formats = Codekit.entryFormats;
     $scope.form = new Entry({
-      status: $scope.statuses[0].id
+      status: $scope.statuses[0].id,
+      format: Codekit.entryFormats.text.id
     });
 
     API.Tags.get({ site: AuthService.getCurrentSite() },
@@ -108,14 +110,28 @@ function EntryNewController($scope, $rootScope, $state, $q,
    *
    * @param event {Event}
    * @param dolphin {Object}
+   * @param source {String}
    */
-  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin) {
-    if (Codekit.isEmptyObj($rootScope.set.editor)) {
+  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin, source) {
+    if (source === "entryCover") {
       $scope.form.get.cover_image = dolphin ? dolphin.id : null;
-    } else if ($scope.form.content.length < 20) {
+    } else if (source === "editorAddImage") {
       $rootScope.set.editor.scope.displayElements.text.focus();
       $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.file, false);
       $rootScope.set.editor = {};
+    }
+  });
+
+  /**
+   * @event gonevisDash.Entry:remove
+   * @desc Go to entries on entry removal
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
+  $scope.$on("gonevisDash.Entry:remove", function (event, data) {
+    if (data.success) {
+      $state.go("dash.entry-list");
     }
   });
 

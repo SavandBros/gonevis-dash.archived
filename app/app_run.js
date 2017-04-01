@@ -81,7 +81,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
         this: this,
         selecting: true
       };
-      DolphinService.viewSelection();
+      DolphinService.viewSelection("editorAddImage");
     },
     onElementSelect: {
       element: "img",
@@ -150,9 +150,13 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   /**
    * @event gonevisDash.DolphinService:select
    * @desc Dolphin selection callback, depends on state @editor
+   *
+   * @param event {Event}
+   * @param dolphin {Object}
+   * @param source {String}
    */
-  $rootScope.$on("gonevisDash.DolphinService:select", function (event, dolphin) {
-    if ($state.current.editor) {
+  $rootScope.$on("gonevisDash.DolphinService:select", function (event, dolphin, source) {
+    if ($state.current.editor && source === "editorAddImage") {
       if ($rootScope.set.editor.selecting === true) {
         $rootScope.set.editor.dolphin = dolphin;
         $rootScope.set.editor.selecting = false;

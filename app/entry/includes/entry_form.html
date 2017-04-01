@@ -19,10 +19,20 @@
 <div class="col-md-12">
   <!-- Nevis -->
   <div class="form-group editor" ng-class="{'editingContent': editingContent}">
+    <!-- Title -->
     <input id="title" class="form-control" type="text" ng-model="form.get.title" placeholder="TITLE">
     <br>
+    <!-- Editor (description) -->
     <div text-angular ng-model="form.get.content" placeholder="CONTENT" name="editor"
-      ng-focus="editingContent = true" ng-blur="editingContent = false">
+      ng-focus="editingContent = true" ng-blur="editingContent = false"  ng-show="form.get.format === formats.text.id">
+    </div>
+    <!-- Entry formats -->
+    <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
+      <!-- Image -->
+      <a class="thumbnail" ng-if="form.get.format === formats.image.id"
+        ng-href="{{ form.get.media.cover_image.file }}" target="_blank">
+        <img ng-src="{{ form.get.media.cover_image.file }}" alt="{{ form.get.title }}">
+      </a>
     </div>
   </div>
 </div>
@@ -53,7 +63,7 @@
         </div>
         <!-- Cover select and view entry on site -->
         <div class="form-group">
-          <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection()" type="button">
+          <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection('entryCover')" type="button">
             <i class="fa fa-fw fa-image"></i> Select cover image
           </button>
           <a ng-href="{{ form.url }}" class="btn btn-default btn-sm btn-block" target="_blank" ng-if="editing">
@@ -130,7 +140,7 @@
         <div class="btn-group stack" ng-if="editing">
           <button class="btn btn-primary" ng-disabled="form.loading || form.$invalid">UPDATE</button>
           <button class="btn btn-default" ng-disabled="form.loading || form.$invalid"
-            title="Delete entry" type="button" ng-click="remove(form.id)">
+            title="Delete entry" type="button" ng-click="form.remove()">
             <i class="fa fa-trash"></i>
           </button>
         </div>
