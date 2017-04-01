@@ -28,7 +28,8 @@ function EntryNewController($scope, $rootScope, $state, $q,
     $scope.statuses = Codekit.entryStatuses;
     $scope.formats = Codekit.entryFormats;
     $scope.form = new Entry({
-      status: $scope.statuses[0].id
+      status: $scope.statuses[0].id,
+      format: Codekit.entryFormats.text.id
     });
 
     API.Tags.get({ site: AuthService.getCurrentSite() },
