@@ -82,6 +82,23 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
       DolphinService.viewSelection("headerNevis");
     }
   };
+
+  /**
+   * @event gonevisDash.DolphinService:select
+   * @desc Dolphin selection used for quick nevis
+   *
+   * @param event {Event}
+   * @param dolphin {Object}
+   * @param source {String}
+   */
+  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin, source) {
+    // If we're dealing with quick nevis
+    if (source === "headerNevis") {
+      handleNevis($scope.nevisFormat, dolphin);
+    }
+  });
+
+  /**
    * @event gonevisDash.AuthService:Authenticated
    * @desc Authentication loads
    */
