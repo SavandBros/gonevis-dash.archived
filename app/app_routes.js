@@ -77,7 +77,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "DolphinController",
       templateUrl: "dolphin/dolphin_view.html",
       auth: true,
-      title: "Dolphin"
+      title: "Dolphin",
+      resolve: {
+        // Used to determine source of selection
+        source: function () {
+          return null;
+        }
+      }
     })
     .state("dash.comment-list", {
       url: "/comments",
