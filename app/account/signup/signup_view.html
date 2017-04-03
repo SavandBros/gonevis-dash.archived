@@ -31,8 +31,18 @@
           </div>
           <!-- Password -->
           <div class="form-group" ng-class="{'has-error': form.errors.password}">
-            <input id="password" class="form-control input-lg" type="password" ng-model="form.data.password" placeholder="Password" required/>
-            <span id="password" class="help-block" ng-show="form.errors.password">{{ form.errors.password[0] }}</span>
+            <div class="input-group">
+              <!-- Input -->
+              <input id="password" class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
+                ng-model="form.data.password" placeholder="Password" required>
+              <!-- Show/hide button -->
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-lg" type="button" ng-model="showPassword" uib-btn-checkbox>
+                  <i class="fa fa-fw" ng-class="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+                </button>
+              </span>
+            </div>
+            <span class="help-block" ng-show="form.errors.password">{{ form.errors.password[0] }}</span>
           </div>
           <!-- Error -->
           <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
