@@ -24,6 +24,8 @@ function SigninController($scope, $rootScope, $state, $stateParams, AuthService,
     if ($stateParams.action === "forgot") {
       $scope.forgotPassword();
     }
+
+    $scope.showPassword = false;
   }
 
   /**
