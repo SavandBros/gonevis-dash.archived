@@ -41,7 +41,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
     API.Dolphins.get(payload,
       function (data) {
         $scope.initialled = true;
-        console.log(data.results)
+        console.log(data.results);
         angular.forEach(data.results, function (data) {
           $scope.dolphins.push(new Dolphin(data));
         });
