@@ -57,6 +57,11 @@
         <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signup') || state.includes('collaborate')}">
           <a ui-sref="signup">Register</a>
         </li>
+        <li class="animated" ng-class="{fadeIn: param.lights, fadeOut: !param.lights}">
+          <a ng-click="set.lights = !set.lights">
+            <i class="fa fa-lightbulb-o nav-icon"></i>
+          </a>
+        </li>
         <li class="dropdown" ng-if="auth.isAuthenticated()">
           <a class="dropdown-toggle" data-toggle="dropdown">
             {{ user.name || user.username }} <i class="fa fa-caret-down o-fade-hard"></i>
