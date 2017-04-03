@@ -19,6 +19,8 @@ function ResetPassController($scope, $state, AuthService, API) {
       password: null,
       password2: null
     };
+
+    $scope.showPassword = false;
   }
 
   /**
