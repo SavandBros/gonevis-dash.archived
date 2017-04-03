@@ -47,7 +47,7 @@
 
   <ng-include src="'header/header_view.html'" ng-controller="HeaderController"></ng-include>
 
-  <div ui-view></div>
+  <div ui-view class="lights" ng-class="{'off': !set.lights}"></div>
 
   <!-- Google analytics -->
   <script>
