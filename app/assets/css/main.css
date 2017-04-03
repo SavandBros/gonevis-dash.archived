@@ -77,6 +77,11 @@ hr[soft] {
     z-index: 10;
 }
 
+.navbar,
+.navbar li {
+    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
 .navbar-brand {
     margin-right: 30px;
 }
@@ -89,6 +94,12 @@ hr[soft] {
     .navbar-brand {
         padding-top: 20px !important;
         padding-bottom: 20px !important;
+    }
+    .navbar a .fa.nav-icon {
+        font-size: 24px;
+        margin-top: -6px;
+        position: relative;
+        top: 4px;
     }
 }
 
@@ -682,6 +693,34 @@ md-toast {
     opacity: 1;
 }
 
+.lights.off .editor {
+    box-shadow: 0 0 0 10000px #333;
+}
+
+.lights.off .editor,
+.lights.off .form-control,
+.lights.off .ta-toolbar {
+    background: #333;
+    color: #fff;
+}
+
+.lights.off .editor-draft-mode,
+.lights.off .ta-toolbar .btn {
+    color: #ddd;
+    border-color: #222;
+}
+
+.lights.off code {
+    color: #faa;
+    background: #222;
+}
+
+.lights.off pre {
+    background: #222;
+    color: #ddd;
+    border-color: #333;
+}
+
 
 /* Navigation */
 
@@ -839,6 +878,18 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     outline: 0 !important;
 }
 
+.lights.off .btn-corner {
+    background: #222;
+    color: #ddd !important;
+    border-color: #080808;
+}
+
+.lights.off .btn-corner:hover {
+    color: #fff !important;
+    background: #333;
+    border-color: #222;
+}
+
 
 /* Button icon */
 
@@ -860,11 +911,23 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     background: rgba(0, 0, 0, 0.05);
     color: rgba(0, 0, 0, 0.3);
     padding: 20px 15px;
+    height: 61px;
+}
+
+.lights.off .modal-header-clickable {
+    background: #1f1f1f;
+    border-bottom: 1px solid #070707;
+    color: #ddd;
 }
 
 .modal-header-clickable:hover {
     background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
+}
+
+.lights.off .modal-header-clickable:hover {
+    background: #111;
+    color: #fff;
 }
 
 img.modal-image {
