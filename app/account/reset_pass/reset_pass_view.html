@@ -5,8 +5,8 @@
       <!-- Form -->
       <form ng-submit="resetPassword(form)">
         <!-- Title -->
-        <h3 class="o-fade-soft">Reset Password
-          <i class="fa fa-lock fa-fw text-danger pull-right"></i>
+        <h3 class="o-fade-soft">
+          Reset Password <i class="fa fa-lock fa-fw text-danger pull-right"></i>
         </h3>
         <hr>
         <!-- Password -->
@@ -21,9 +21,8 @@
         <div class="form-group">
           <input class="form-control input-lg" type="password" name="passsword2"
             placeholder="Confirm new password" ng-model="form.password2" required/>
-          <span id="password2" class="help-block text-danger"
-            ng-show="form.password !== form.password2 && form.$valid">
-            Passwords don't match!
+          <span id="password2" class="help-block" ng-show="form.password !== form.password2 && form.password.length > 5">
+            <span class="text-danger">Passwords don't match!</span>
           </span>
         </div>
         <!-- Errors -->

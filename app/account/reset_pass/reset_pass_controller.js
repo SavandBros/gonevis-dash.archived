@@ -34,7 +34,7 @@ function ResetPassController($scope, $state, AuthService, API) {
     AuthService.setToken($state.params.token);
     form.loading = true;
 
-    API.ResetPassword.save({password: form.password},
+    API.ResetPassword.save({ password: form.password },
       function () {
         AuthService.logout();
       },
@@ -44,6 +44,8 @@ function ResetPassController($scope, $state, AuthService, API) {
       }
     );
   };
+
+  constructor();
 }
 
 app.controller("ResetPassController", ResetPassController);
