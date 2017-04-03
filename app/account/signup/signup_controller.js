@@ -33,6 +33,8 @@ function SignupController($scope, $state, $stateParams, toaster, AuthService, AP
     form.loading = true;
 
     var payload = form.data;
+    payload.email = payload.email.toLowerCase();
+
     if ($scope.inviteId) {
       payload.invite_id = $scope.inviteId;
     }
