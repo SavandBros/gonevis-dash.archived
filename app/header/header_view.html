@@ -54,7 +54,8 @@
         <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signin')}">
           <a ui-sref="signin">Login</a>
         </li>
-        <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signup') || state.includes('collaborate')}">
+        <li ng-if="!auth.isAuthenticated()"
+          ng-class="{'active': state.includes('signup') || state.includes('collaborate')}">
           <a ui-sref="signup">Register</a>
         </li>
         <li class="animated" ng-class="{fadeIn: param.lights, fadeOut: !param.lights}">
