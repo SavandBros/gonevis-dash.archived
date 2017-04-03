@@ -721,6 +721,21 @@ md-toast {
     border-color: #333;
 }
 
+.editor-draft-mode:hover {
+    opacity: 1;
+}
+
+.editor,
+.form-control,
+.editor-draft-mode,
+.navbar .active a,
+code,
+pre {
+    transition-duration: 0.3s;
+    transition-property: background, box-shadow, color;
+    transition-timing-function: ease-in-out;
+}
+
 
 /* Navigation */
 
