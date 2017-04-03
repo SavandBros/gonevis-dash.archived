@@ -11,6 +11,10 @@
 function ResetPassController($scope, $state, AuthService, API) {
 
   /**
+    $scope.form = {
+      password: null,
+      password2: null
+    };
    * @method resetPassword
    * @desc Reset password handler
    *
