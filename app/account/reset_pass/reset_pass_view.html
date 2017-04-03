@@ -11,7 +11,7 @@
         <hr>
         <!-- Password -->
         <div class="form-group" ng-class="{'has-error': form.errors.password}">
-          <input class="form-control input-lg" type="password" name="password"
+          <input class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}" name="password"
             placeholder="New password" ng-model="form.password" required minlength="5"/>
           <span class="help-block text-danger animated fadeInDown" ng-if="form.errors.password[0]">
             {{ form.errors.password[0] }}
@@ -19,7 +19,7 @@
         </div>
         <!-- Confirm password -->
         <div class="form-group">
-          <input class="form-control input-lg" type="password" name="passsword2"
+          <input class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}" name="passsword2"
             placeholder="Confirm new password" ng-model="form.password2" required/>
           <span id="password2" class="help-block" ng-show="form.password !== form.password2 && form.password.length > 5">
             <span class="text-danger">Passwords don't match!</span>
@@ -28,6 +28,11 @@
         <!-- Errors -->
         <div class="form-group alert alert-danger" ng-show="form.errors.detail">
           {{ form.errors.detail }}
+        </div>
+        <!-- Show/hide password -->
+        <div class="form-group checkbox checkbox-primary ">
+          <input id="showPassword" type="checkbox" ng-model="showPassword">
+          <label for="showPassword">Show password</label>
         </div>
         <!-- Submit -->
         <button class="btn btn-primary btn-block btn-lg"
