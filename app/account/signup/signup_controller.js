@@ -19,6 +19,8 @@ function SignupController($scope, $state, $stateParams, toaster, AuthService, AP
   function constructor() {
     // Get collaborating token
     $scope.inviteId = $stateParams.token;
+
+    $scope.showPassword = false;
   }
 
   /**
