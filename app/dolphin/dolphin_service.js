@@ -1,60 +1,100 @@
 "use strict";
 
 /**
- * @class DolphinService
+ * @class Dolphin
  *
  * @param $rootScope
  * @param API
+ * @param AuthService
  * @param ModalsService
  * @param toaster
  */
-function DolphinService($rootScope, API, ModalsService, toaster) {
+function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
+  return function (data) {
 
-  /**
-   * @method remove
-   * @desc Delete a dolphin and broadcast it
-   *
-   * @param dolphin {Object}
-   * @param toast {Boolean} Toggle show notification (toast) after API call
-   */
-  function remove(dolphin, toast) {
-    toast = toast || true;
+    /**
+     * @name self
+     * @desc Super variable for getting this in functions
+     *
+     * @type {Dolphin}
+     */
+    var self = this;
 
-    API.Dolphin.remove({ siteId: dolphin.site, fileId: dolphin.id },
-      function (data) {
-        dolphin.isDeleted = true;
-        $rootScope.$broadcast("gonevisDash.DolphinService:remove", {
-          dolphin: dolphin,
-          data: data,
-          success: true
-        });
-        if (toast) {
-          toaster.success("Done", "Deleted " + dolphin.meta_data.name);
+    /**
+     * @name data
+     * @desc Backend data
+     *
+     * @type {Object}
+     */
+    this.get = data;
+
+    /**
+     * @name isDeleted
+     * @type {Boolean}
+     */
+    this.isDeleted = false;
+
+    /**
+     * @method remove
+     * @desc Delete a dolphin and broadcast it
+     */
+    this.remove = function () {
+      API.Dolphin.remove({ siteId: this.get.site, fileId: this.get.id },
+        function (data) {
+          self.isDeleted = true;
+          toaster.success("Done", "Deleted " + self.get.meta_data.name);
+
+          $rootScope.$broadcast("gonevisDash.Dolphin:remove", {
+            dolphin: self,
+            data: data,
+            success: true
+          });
+        },
+        function (data) {
+          toaster.error("Error", "Something went wrong, couldn't remove file.");
+
+          $rootScope.$broadcast("gonevisDash.Dolphin:remove", {
+            dolphin: self,
+            data: data,
+            success: false
+          });
         }
-      },
-      function (data) {
-        $rootScope.$broadcast("gonevisDash.DolphinService:remove", {
-          dolphin: data,
-          data: data,
-          success: false
-        });
-        if (toast) {
-          toaster.error("Sorry", "file couldn't be deleted. Try again later.");
-        }
-      }
-    );
-  }
+      );
+    };
 
-  /**
-   * @method view
-   * @desc Dolphin view via modal
-   *
-   * @param dolphin {Object}
-   */
-  function view(dolphin) {
-    ModalsService.open("dolphin", "DolphinModalController", { dolphin: dolphin });
-  }
+    /**
+     * @method view
+     * @desc Dolphin view via modal
+     */
+    this.view = function () {
+      ModalsService.open("dolphin", "DolphinModalController", { dolphin: self });
+    };
 
+    function constructor() {
+      self.extention = self.get.ext.split("/")[1].toUpperCase();
+      self.get.site = AuthService.getCurrentSite();
+    }
+    constructor();
+  };
+
+}
+
+app.service("Dolphin", Dolphin);
+Dolphin.$inject = [
+  "$rootScope",
+  "API",
+  "AuthService",
+  "ModalsService",
+  "toaster"
+];
+
+/**
+ * @class DolphinServicerootSc
+ *
+ * @param $rootScope
+ * @param ModalsService
+ */
+function DolphinService($rootScope, ModalsService) {
   /**
    * @method viewSelection
    * @desc Open the main dolphin component via modal for selection
@@ -67,16 +107,12 @@ function DolphinService($rootScope, API, ModalsService, toaster) {
   }
 
   return {
-    remove: remove,
-    view: view,
-    viewSelection: viewSelection,
+    viewSelection: viewSelection
   };
 }
 
-app.factory("DolphinService", DolphinService);
+app.service("DolphinService", DolphinService);
 DolphinService.$inject = [
   "$rootScope",
-  "API",
-  "ModalsService",
-  "toaster"
+  "ModalsService"
 ];
