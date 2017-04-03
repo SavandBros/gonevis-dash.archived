@@ -105,19 +105,19 @@ function EntryNewController($scope, $rootScope, $state, $q,
   };
 
   /**
-   * @event gonevisDash.DolphinService:select
+   * @event gonevisDash.Dolphin:select
    * @desc Image selection callback
    *
    * @param event {Event}
-   * @param dolphin {Object}
+   * @param dolphin {Dolphin}
    * @param source {String}
    */
-  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function (data, dolphin, source) {
     if (source === "entryCover") {
-      $scope.form.get.cover_image = dolphin ? dolphin.id : null;
+      $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
     } else if (source === "editorAddImage") {
       $rootScope.set.editor.scope.displayElements.text.focus();
-      $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.file, false);
+      $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.get.file, false);
       $rootScope.set.editor = {};
     }
   });
