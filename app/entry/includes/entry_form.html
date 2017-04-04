@@ -21,6 +21,9 @@
   <div class="form-group editor" ng-class="{'editingContent': editingContent}">
     <!-- Title -->
     <input id="title" class="form-control" type="text" ng-model="form.get.title" placeholder="TITLE">
+    <small class="help-block" ng-show="form.errors.title">
+      {{ form.errors.title[0] }}
+    </small>
     <br>
     <!-- Editor (description) -->
     <div text-angular ng-model="form.get.content" placeholder="CONTENT" name="editor"
