@@ -139,12 +139,22 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   /**
    * @event $stateChangeSuccess
    * @desc Changed state succesfully
+   *
+   * @param event {Event}
+   * @param toState {Object}
+   * @param toParams {Object}
    */
-  $rootScope.$on("$stateChangeSuccess", function (event, toState) {
+  $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams) {
     if (ENV.name === "production") {
       $window.ga("send", "pageview", { page: $location.url() });
     }
+    // Update title
     Codekit.setTitle(toState.title);
+
+    // Switch lights
+    if (toParams.lights !== true) {
+      $rootScope.set.lights = true;
+    }
   });
 
   /**

@@ -17,24 +17,44 @@
         <form ng-submit="signup(form)" name="form" ng-hide="success">
           <h3 class="o-fade-soft">{{ inviteToken ? "Start Collaborating" : "Register" }}</h3>
           <hr>
+          <!-- Email -->
           <div class="form-group" ng-class="{'has-error': form.errors.email}">
-            <input id="email" class="form-control input-lg" type="email" ng-model="form.data.email" placeholder="Email" required/>
-            <span id="email" class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</span>
+            <input id="email" class="form-control input-lg" type="email"
+              ng-model="form.data.email" placeholder="Email" required/>
+            <span class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</span>
           </div>
+          <!-- Username -->
           <div class="form-group" ng-class="{'has-error': form.errors.username}">
-            <input id="username" class="form-control input-lg" type="username" ng-model="form.data.username" placeholder="Username" required/>
-            <span id="username" class="help-block" ng-show="form.errors.username">{{ form.errors.username[0] }}</span>
+            <input id="username" class="form-control input-lg" type="username"
+              ng-model="form.data.username" placeholder="Username" required/>
+            <span class="help-block" ng-show="form.errors.username">{{ form.errors.username[0] }}</span>
           </div>
+          <!-- Password -->
           <div class="form-group" ng-class="{'has-error': form.errors.password}">
-            <input id="password" class="form-control input-lg" type="password" ng-model="form.data.password" placeholder="Password" required/>
-            <span id="password" class="help-block" ng-show="form.errors.password">{{ form.errors.password[0] }}</span>
+            <div class="input-group">
+              <!-- Input -->
+              <input id="password" class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
+                ng-model="form.data.password" placeholder="Password" required>
+              <!-- Show/hide button -->
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-lg" type="button" ng-model="showPassword" uib-btn-checkbox>
+                  <i class="fa fa-fw" ng-class="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+                </button>
+              </span>
+            </div>
+            <span class="help-block" ng-show="form.errors.password">{{ form.errors.password[0] }}</span>
           </div>
+          <!-- Error -->
           <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
             {{ form.errors.non_field_errors[0] }}
           </div>
-          <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">Register</button>
+          <!-- Button -->
+          <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">
+            Register
+          </button>
         </form>
       </div>
+      <!-- Footer -->
       <div class="panel-footer s-pad">
         <span class="s-mar-no o-fade">Already have an account?</span> <a ui-sref="signin">Login</a>
       </div>

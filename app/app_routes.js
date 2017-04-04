@@ -5,7 +5,7 @@
  */
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
-    // Other states that are not a child of dash state
+  // Other states that are not a child of dash state
     .state("site-new", {
       url: "/new-site",
       controller: "SiteNewController",
@@ -100,14 +100,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       editor: true,
       mousemoveEvent: true,
       clickEvent: true,
+      params: {
+        lights: true,
+      },
       title: "Nevis"
-    })
-    .state("dash.entry-list", {
-      url: "/entries",
-      controller: "EntryController",
-      templateUrl: "entry/entry_view.html",
-      auth: true,
-      title: "Entries"
     })
     .state("dash.entry-edit", {
       url: "/entry/:entryId",
@@ -116,7 +112,18 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: true,
       editor: true,
       mousemoveEvent: true,
-      clickEvent: true
+      clickEvent: true,
+      params: {
+        lights: true,
+      },
+      title: "Nevis"
+    })
+    .state("dash.entry-list", {
+      url: "/entries",
+      controller: "EntryController",
+      templateUrl: "entry/entry_view.html",
+      auth: true,
+      title: "Entries"
     })
     .state("dash.site", {
       url: "/site",
