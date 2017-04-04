@@ -9,16 +9,16 @@
           <!-- Comment -->
           <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list" ng-show="!comment.isDeleted">
             <!-- Username -->
-            <small>{{ comment.user.name }}:</small>
+            <small>{{ comment.get.user.name }}:</small>
             <!-- Content -->
-            <a ng-click="Comment.service.view(comment)">{{ comment.comment }}</a>
+            <a ng-click="comment.view()">{{ comment.get.comment }}</a>
             <!-- Options -->
             <span class="panel-list-item-button">
               <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
               <ul class="dropdown-menu">
                 <!-- Delete -->
                 <li>
-                  <a ng-click="Comment.service.remove(comment)">
+                  <a ng-click="comment.remove()">
                     <i class="fa fa-fw fa-trash text-danger"></i> Delete
                   </a>
                 </li>
