@@ -99,10 +99,11 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
-      $scope.searchForm = data.form;
+      $scope.tags = [];
       angular.forEach(data.data.results, function (data) {
         $scope.tags.push(new Tag(data));
       });
+      $scope.searchForm = data.form;
     }
   });
 

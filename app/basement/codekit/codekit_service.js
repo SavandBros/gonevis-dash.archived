@@ -101,17 +101,20 @@ function Codekit($timeout, $window) {
     label: "Pending approval",
     icon: "clock-o",
     property: "status",
-    value: 0
+    value: 0,
+    class: "b-color-0"
   }, {
     label: "Active",
     icon: "globe",
     property: "status",
-    value: 1
+    value: 1,
+    class: "b-color-2"
   }, {
     label: "Hidden",
     icon: "user-secret",
     property: "status",
-    value: 2
+    value: 2,
+    class: "b-color-1"
   }];
 
   /**
@@ -125,16 +128,6 @@ function Codekit($timeout, $window) {
     { id: 1, color: "text-info", label: "Administrator" },
     { id: 2, color: "text-warning", label: "Editor" }
   ];
-
-  /**
-   * @name objectTypes
-   * @desc API object types
-   *
-   * @type {Object}
-   */
-  var objectTypes = {
-    comment: 1
-  };
 
   /**
    * @method timeoutSlice
@@ -201,7 +194,6 @@ function Codekit($timeout, $window) {
     entryFormats: entryFormats,
     commentStatuses: commentStatuses,
     teamRoles: teamRoles,
-    objectTypes: objectTypes,
     timeoutSlice: timeoutSlice,
     isEmptyObj: isEmptyObj,
     focus: focus,

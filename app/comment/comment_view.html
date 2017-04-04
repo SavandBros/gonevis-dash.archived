@@ -12,34 +12,36 @@
     <!-- List -->
     <div class="panel panel-default animated fadeIn" ng-if="comments.length">
       <ul class="panel-body panel-list">
-        <li class="panel-list-item a-fade b-left" ng-class="{'b-color-2': c.status == 1, 'b-color-0': c.status == 0}"
-          ng-repeat="c in comments" ng-show="!c.isDeleted">
+        <li class="panel-list-item b-left {{ comment.getStatus().class }}" ng-class="{'animated fadeOut': comment.isDeleted}"
+          ng-repeat="comment in comments" ng-show="!comment.isDeleted">
           <!-- User -->
           <img class="comment pull-left img-circle"
-            ng-src="{{ c.user.media.picture ? c.user.media.thumbnail_48x48 : 'assets/img/avatar.png' }}">
-          <small>{{ c.user.name }}:</small>
+            ng-src="{{
+              comment.get.user.media.picture ? comment.get.user.media.thumbnail_48x48 : 'assets/img/avatar.png'
+            }}">
+          <small>{{ comment.get.user.name }}:</small>
           <!-- Comment -->
-          <a ng-click="commentService.view(c)">{{ c.comment }}</a>
+          <a ng-click="comment.view()">{{ comment.get.comment }}</a>
           <!-- Options -->
           <span class="panel-list-item-button">
             <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
             <ul class="dropdown-menu">
               <li class="dropdown-header">Change status</li>
-              <li ng-repeat="s in statuses" ng-class="{'active': c.status == s.value}">
-                <a ng-click="setStatus(c, s.property, s.value)">
-                  <i class="fa fa-{{ s.icon }}"></i> {{ s.label }}
+              <li ng-repeat="status in statuses" ng-class="{'active': comment.getStatus().label == status.label}">
+                <a ng-click="comment.setStatus(status.property, status.value)">
+                  <i class="fa fa-{{ status.icon }}"></i> {{ status.label }}
                 </a>
               </li>
               <li class="divider"></li>
               <li>
-                <a ng-click="commentService.remove(c)">
+                <a ng-click="comment.remove()">
                   <i class="fa fa-fw fa-trash text-danger"></i> Delete comment
                 </a>
               </li>
             </ul>
           </span>
           <!-- Extra info -->
-          <small class="dis-b">{{ c.created | date }}</small>
+          <small class="dis-b">{{ comment.get.created | date }}</small>
         </li>
       </ul>
     </div>
