@@ -11,7 +11,7 @@
 </div>
 
 <!-- Selected dolphin preview -->
-<img class="o-fade-soft" ng-if="set.editor.dolphin" width="100" ng-src="{{ set.editor.dolphin.thumbnail_128x128 }}"
+<img class="o-fade-soft" ng-if="set.editor.dolphin" width="100" ng-src="{{ set.editor.dolphin.get.thumbnail_128x128 }}"
   style="position: fixed;top: {{ set.pageY+10 }}px;left: {{ set.pageX+10 }}px;z-index: 10000">
 </img>
 
@@ -21,6 +21,9 @@
   <div class="form-group editor" ng-class="{'editingContent': editingContent}">
     <!-- Title -->
     <input id="title" class="form-control" type="text" ng-model="form.get.title" placeholder="TITLE">
+    <small class="help-block" ng-show="form.errors.title">
+      {{ form.errors.title[0] }}
+    </small>
     <br>
     <!-- Editor (description) -->
     <div text-angular ng-model="form.get.content" placeholder="CONTENT" name="editor"

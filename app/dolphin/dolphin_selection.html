@@ -42,10 +42,12 @@
 
           <!-- Dolphins -->
           <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="d in dolphins"
-              ng-show="!d.isDeleted" ng-if="d.is_image" data-dismiss="modal">
-              <a ng-click="action(d)" class="dolphin" style="background-image: url({{ d.thumbnail_256x256 }})">
-                <p class="caption">{{ d.meta_data.name }}</p>
+            <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="dolphin in dolphins"
+              ng-show="!dolphin.isDeleted" ng-if="dolphin.get.is_image" data-dismiss="modal">
+              <a ng-click="action(dolphin)"
+                class="dolphin"
+                style="background-image: url({{ dolphin.get.thumbnail_256x256 }})">
+                <p class="caption">{{ dolphin.get.meta_data.name }}</p>
               </a>
             </div>
             <!-- Load more -->

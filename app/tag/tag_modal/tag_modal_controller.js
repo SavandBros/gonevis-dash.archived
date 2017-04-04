@@ -26,9 +26,17 @@ function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
     };
   }
 
-  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin, source) {
+  /**
+   * @event gonevisDash.Dolphin:select
+   * @desc Dolphin selection
+   *
+   * @param event {Event}
+   * @param dolphin {Dolphin}
+   * @param source {String}
+   */
+  $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     if (source === "tagCover") {
-      $scope.form.data.cover_image = dolphin ? dolphin.id : null;
+      $scope.form.data.cover_image = dolphin ? dolphin.get.id : null;
     }
   });
 
