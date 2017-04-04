@@ -143,7 +143,9 @@ function EntryController($scope, $rootScope, $state, Entry, Codekit, API, AuthSe
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
-      $scope.entries = $scope.entries.concat(data.data.results);
+      angular.forEach(data.data.results, function (data) {
+        $scope.entries.push(new Entry(data));
+      });
     }
   });
 
@@ -157,7 +159,10 @@ function EntryController($scope, $rootScope, $state, Entry, Codekit, API, AuthSe
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
-      $scope.entries = data.data.results;
+      $scope.entries = [];
+      angular.forEach(data.data.results, function (data) {
+        $scope.entries.push(new Entry(data));
+      });
       $scope.searchForm = data.form;
     }
   });
