@@ -37,7 +37,8 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @type {Object}
    */
   $rootScope.set = {
-    editor: {}
+    editor: {},
+    lights: true
   };
 
   // Client version control (if not current version)
