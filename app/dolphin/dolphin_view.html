@@ -50,8 +50,8 @@
           ng-class="{'not-image': !dolphin.get.is_image}">
           <!-- Icon -->
           <i class="fa fa-5x" ng-class="{
-            'fa-file-archive-o': dolphin.extention == 'ZIP',
-            'fa-file-pdf-o': dolphin.extention == 'PDF'
+            'fa-file-archive-o': dolphin.extension == 'ZIP',
+            'fa-file-pdf-o': dolphin.extension == 'PDF'
             }" ng-if="!dolphin.get.is_image">
           </i>
           <!-- Caption -->
@@ -85,8 +85,8 @@
                   <img ng-src="{{ dolphin.get.thumbnail_48x48 }}" class="s-pad-right-soft" ng-if="dolphin.get.is_image">
                   <!-- Icon -->
                   <i class="fa fa-2x o-fade" style="background: #eee;padding: 10px 12px;" ng-class="{
-                    'fa-file-archive-o': dolphin.extention == 'ZIP',
-                    'fa-file-pdf-o': dolphin.extention == 'PDF'
+                    'fa-file-archive-o': dolphin.extension == 'ZIP',
+                    'fa-file-pdf-o': dolphin.extension == 'PDF'
                     }" ng-if="!dolphin.get.is_image">
                   </i>
                 </div>
@@ -100,7 +100,7 @@
                     <i class="fa fa-fw fa-hdd-o"
                       title="Size"></i> {{ dolphin.get.size_human }}
                     <i class="fa fa-fw fa-file-o s-mar-left-soft"
-                      title="Extension"></i> {{ dolphin.extention | lowercase }}
+                      title="Extension"></i> {{ dolphin.extension | lowercase }}
                   </small>
                 </div>
               </div>

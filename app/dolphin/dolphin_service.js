@@ -71,7 +71,7 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
     };
 
     function constructor() {
-      self.extention = self.get.ext.split("/")[1].toUpperCase();
+      self.extension = self.get.ext.split("/")[1].toUpperCase();
       self.get.site = AuthService.getCurrentSite();
     }
     constructor();
