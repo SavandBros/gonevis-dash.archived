@@ -99,7 +99,7 @@ function EntryNewController($scope, $rootScope, $state, $q,
       function (data) {
         toaster.error("Error", "Failed to add entry");
         form.loading = false;
-        form.errors = data;
+        form.errors = data.data;
       }
     );
   };
