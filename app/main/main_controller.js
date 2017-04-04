@@ -9,10 +9,10 @@
  * @param AuthService
  * @param API
  * @param Codekit
- * @param CommentService
+ * @param Comment
  * @param Entry
  */
-function MainController($scope, $state, $stateParams, AuthService, API, Codekit, CommentService, Entry) {
+function MainController($scope, $state, $stateParams, AuthService, API, Codekit, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
 
@@ -38,11 +38,10 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
    */
   $scope.Comment = {
     /**
-     * @name service
-     * @desc Object service
-     * @type {Service}
+     * @name list
+     * @type Array
      */
-    service: CommentService,
+    list: [],
     /**
      * @method initialize
      * @desc initialize comments
@@ -53,7 +52,9 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
       API.Comments.get({ site: site },
         function (data) {
           $scope.Comment.loading = true;
-          $scope.Comment.list = data.results;
+          angular.forEach(data.results, function (data) {
+            $scope.Comment.list.push(new Comment(data));
+          });
         }
       );
     }
@@ -108,6 +109,17 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
     }
   };
 
+  /**
+   * @event gonevisDash.Comment:reply
+   * @desc Reply comment
+   *
+   * @param event {Event}
+   * @param comment {Object}
+   */
+  $scope.$on("gonevisDash.Comment:reply", function (event, comment) {
+    $scope.Comment.list.unshift(new Comment(comment));
+  });
+
   constructor();
 }
 
@@ -119,6 +131,6 @@ MainController.$inject = [
   "AuthService",
   "API",
   "Codekit",
-  "CommentService",
+  "Comment",
   "Entry"
 ];
