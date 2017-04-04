@@ -8,7 +8,7 @@
  * @param $state
  * @param $stateParams
  * @param toaster
- * @param DolphinService
+ * @param Dolphin
  * @param Codekit
  * @param API
  * @param ENV
@@ -18,7 +18,7 @@
  * @param source
  */
 function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
-  DolphinService, Codekit, API, ENV, AuthService, Upload, Pagination, Search, source) {
+  Dolphin, Codekit, API, ENV, AuthService, Upload, Pagination, Search, source) {
 
   var site = AuthService.getCurrentSite();
 
@@ -28,7 +28,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
    */
   function constructor() {
     $scope.view = localStorage.dolphinView || "list";
-    $scope.dolphinService = DolphinService;
+    $scope.dolphins = [];
     $scope.dolphinForm = {};
     $scope.search = Search;
     $scope.nothingText = "It's lonely here... Go ahead and upload some dolphins.";
@@ -41,8 +41,9 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
     API.Dolphins.get(payload,
       function (data) {
         $scope.initialled = true;
-        $scope.dolphins = data.results;
-        $scope.updateDolphins();
+        angular.forEach(data.results, function (data) {
+          $scope.dolphins.push(new Dolphin(data));
+        });
         $scope.dolphinForm = Pagination.paginate(
           $scope.dolphinForm, data, {}
         );
@@ -135,8 +136,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
           function (data) {
             file.done = true;
             toaster.success("Upload Complete", file.name);
-            $scope.dolphins.unshift(data.data);
-            $scope.updateDolphins();
+            $scope.dolphins.unshift(new Dolphin(data.data));
           },
           function () {
             toaster.error("Error", "Something went wrong, couldn't upload file.");
@@ -151,45 +151,25 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
 
   /**
    * @method update
-   *
-   * @param event {Event}
-   * @param data {Object}
+   * @desc Handler for dolphin changes
    */
-  function update(event, data) {
-    if (data.success) {
-      var index = Codekit.getIndex($scope.dolphins, data.dolphin);
-
-      $scope.dolphins[index].meta_data.name = data.dolphin.meta_data.name;
-      $scope.dolphins[index].meta_data.description = data.dolphin.meta_data.description;
-      $scope.dolphins[index].isDeleted = data.dolphin.isDeleted;
-
-      Codekit.timeoutSlice($scope.dolphins);
-    }
+  function update() {
+    Codekit.timeoutSlice($scope.dolphins);
   }
-
-  /**
-   * @method updateDolphins
-   * @desc Add extra properties for dolphins
-   */
-  $scope.updateDolphins = function () {
-    angular.forEach($scope.dolphins, function (dolphin) {
-      dolphin.extRaw = dolphin.ext.split("/")[1].toUpperCase();
-    });
-  };
 
   /**
    * @method action
    * @desc Action is used to determine the action for the current state.
    *
-   * @param dolphin {Object}
+   * @param dolphin {Dolphin}
    */
   $scope.action = function (dolphin) {
     if ($rootScope.selectionMode) {
-      $rootScope.$broadcast("gonevisDash.DolphinService:select", dolphin, source);
+      $rootScope.$broadcast("gonevisDash.Dolphin:select", dolphin, source);
       $rootScope.selectionMode = false;
       return;
     }
-    DolphinService.view(dolphin);
+    dolphin.view();
   };
 
   /**
@@ -198,22 +178,25 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
    */
   $scope.loadMore = Pagination.loadMore;
 
-  $scope.$on("gonevisDash.DolphinService:update", update);
-  $scope.$on("gonevisDash.DolphinService:remove", update);
+  $scope.$on("gonevisDash.Dolphin:update", update);
+  $scope.$on("gonevisDash.Dolphin:remove", update);
 
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.dolphinForm.page = data.page;
-      $scope.dolphins = $scope.dolphins.concat(data.data.results);
-      $scope.updateDolphins();
+      angular.forEach(data.data.results, function (data) {
+        $scope.dolphins.push(new Dolphin(data));
+      });
     }
   });
 
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.dolphinForm = data.dolphinForm;
-      $scope.dolphins = data.data.results;
-      $scope.updateDolphins();
+      $scope.dolphins = [];
+      angular.forEach(data.data.results, function (data) {
+        $scope.dolphins.push(new Dolphin(data));
+      });
       $scope.searchForm = data.form;
     }
   });
@@ -228,7 +211,7 @@ DolphinController.$inject = [
   "$state",
   "$stateParams",
   "toaster",
-  "DolphinService",
+  "Dolphin",
   "Codekit",
   "API",
   "ENV",

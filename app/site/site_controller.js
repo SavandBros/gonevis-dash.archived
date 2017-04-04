@@ -144,10 +144,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     );
   };
 
-  $scope.$on("gonevisDash.DolphinService:select", function (data, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function (data, dolphin, source) {
     if (source === "siteImage") {
-      $scope.site.media[$scope.editing] = dolphin ? dolphin.id : null;
-      $scope.updateSite($scope.editing, dolphin ? dolphin.id : null);
+      $scope.site.media[$scope.editing] = dolphin ? dolphin.get.id : null;
+      $scope.updateSite($scope.editing, dolphin ? dolphin.get.id : null);
     }
   });
 

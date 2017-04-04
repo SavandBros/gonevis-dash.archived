@@ -38,7 +38,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
    * @desc Handle user selection of quick nevis
    *
    * @param {String} format 
-   * @param {Object|String} data 
+   * @param {Dolphin|Object|String} data
    */
   function handleNevis(format, data) {
     // New entry
@@ -48,9 +48,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
     });
     // Set image properties
     if (format === "image") {
-      entry.get.cover_image = data.id;
-      entry.get.title = data.meta_data.name;
-      entry.get.content = "<img src='" + data.file + "' alt='" + data.meta_data.name + "'/>";
+      entry.get.cover_image = data.get.id;
+      entry.get.title = data.get.meta_data.name;
+      entry.get.content = "<img src='" + data.get.file + "' alt='" + data.get.meta_data.name + "'/>";
     }
     // Entry submission
     entry.create(
@@ -84,14 +84,14 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   };
 
   /**
-   * @event gonevisDash.DolphinService:select
+   * @event gonevisDash.Dolphin:select
    * @desc Dolphin selection used for quick nevis
    *
    * @param event {Event}
-   * @param dolphin {Object}
+   * @param dolphin {Dolphin}
    * @param source {String}
    */
-  $scope.$on("gonevisDash.DolphinService:select", function (event, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     // If we're dealing with quick nevis
     if (source === "headerNevis") {
       handleNevis($scope.nevisFormat, dolphin);
