@@ -138,7 +138,9 @@
           </label>
         </div>
         <!-- New button -->
-        <button class="btn btn-primary btn-block" ng-if="!editing">SUBMIT</button>
+        <button class="btn btn-primary btn-block"
+          ng-if="!editing"
+          ng-disabled="form.loading || form.$invalid">SUBMIT</button>
         <!-- Editing buttons -->
         <div class="btn-group stack" ng-if="editing">
           <button class="btn btn-primary" ng-disabled="form.loading || form.$invalid">UPDATE</button>
