@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @class CommentService
+ * @class Comment
  *
  * @param $rootScope
  * @param toaster
@@ -11,99 +11,132 @@
  *
  * @return [Factory]
  */
-function CommentService($rootScope, toaster, API, ModalsService, Codekit) {
+function Comment($rootScope, toaster, API, ModalsService, Codekit) {
+  return function (data) {
 
-  /**
-   * @method remove
-   * @desc Delete comment, notify and broadcast for controllers to use.
-   * 
-   * @param comment {Object}
-   * @param toast {Boolean}
-   */
-  function remove(comment, toast) {
-    toast = toast || true;
+    /**
+     * @name self
+     * @desc Super variable for getting this in functions
+     *
+     * @type {Dolphin}
+     */
+    var self = this;
 
-    API.Comment.delete({ comment_id: comment.id },
-      function (data) {
-        if (toast) {
+    /**
+     * @name data
+     * @desc Backend data
+     *
+     * @type {Object}
+     */
+    this.get = data;
+
+    /**
+     * @name isDeleted
+     * @type {Boolean}
+     */
+    this.isDeleted = false;
+
+    /**
+     * @name isReplying
+     * @type {Boolean}
+     */
+    this.isReplying = false;
+
+    /**
+     * @name objectType
+     * @type {Number}
+     */
+    this.objectType = 1;
+
+    /**
+     * @method remove
+     * @desc Delete comment, notify and broadcast for controllers to use.
+     */
+    this.remove = function () {
+      API.Comment.delete({ comment_id: this.get.id },
+        function (data) {
           toaster.success("Done", "Comment deleted");
+          self.isDeleted = true;
+
+          $rootScope.$broadcast("gonevisDash.Comment:remove", {
+            data: data,
+            comment: self,
+            success: true
+          });
+        },
+        function (data) {
+          toaster.error("Error", "Deleting comment failed");
+
+          $rootScope.$broadcast("gonevisDash.Comment:remove", {
+            data: data,
+            comment: self,
+            success: false
+          });
         }
-        comment.isDeleted = true;
-        $rootScope.$broadcast("gonevisDash.CommentService:remove", {
-          data: data,
-          comment: comment,
-          success: true
-        });
-      },
-      function (data) {
-        if (toast) {
-          toaster.error("", "Deleting comment failed");
+      );
+    };
+
+    /**
+     * @method reply
+     * @desc Reply to comment.
+     */
+    this.reply = function (comment) {
+
+      this.isReplying = true;
+
+      var payload = {
+        object_type: this.objectType,
+        comment: comment,
+        object_pk: this.get.object_pk
+      };
+      API.Comments.save(payload,
+        function (data) {
+          self.isReplying = false;
+          $rootScope.$broadcast("gonevisDash.Comment:reply", data);
         }
-        $rootScope.$broadcast("gonevisDash.CommentService:remove", {
-          data: data,
-          comment: comment,
-          success: false
-        });
-      }
-    );
-  }
+      );
+    };
 
-  /**
-   * @method getStatus
-   * @desc Get comment's current status.
-   *
-   * @param comment {Object}
-   */
-  function getStatus(comment) {
-    for (var i in Codekit.commentStatuses) {
-      var status = Codekit.commentStatuses[i];
+    /**
+     * @method getStatus
+     * @desc Get comment's current status.
+     */
+    this.getStatus = function () {
+      return Codekit.commentStatuses[this.get.status];
+    };
 
-      if (status.value === comment.status) {
-        return status.label;
-      }
-    }
-  }
+    /**
+     * @method setStatus
+     * @desc Change comment status
+     * 
+     * @param key {String}
+     * @param value {Number}
+     */
+    this.setStatus = function (key, value) {
+      var payload = {};
+      payload[key] = value;
 
-  /**
-   * @method setStatus
-   * @desc Change comment status
-   *
-   * @param comment {Object}
-   * @param key {String}
-   * @param value {Number}
-   */
-  function setStatus(comment, key, value) {
-    var payload = {};
-    payload[key] = value;
+      API.Comment.patch({ comment_id: this.get.id }, payload,
+        function () {
+          self.get[key] = value;
+          self.get.statusLabel = this.getStatus();
+        }
+      );
+    };
 
-    API.Comment.patch({ comment_id: comment.id }, payload,
-      function () {
-        comment[key] = value;
-        comment.statusLabel = getStatus(comment);
-      }
-    );
-  }
+    /**
+     * @method view
+     * @desc View comment as modal (detailed mode).
+     */
+    this.view = function () {
+      ModalsService.open("comment", "CommentModalController", { comment: this });
+    };
 
-  /**
-   * @method view
-   * @desc View comment as modal (detailed mode).
-   *
-   * @param comment {Object}
-   */
-  function view(comment) {
-    ModalsService.open("comment", "CommentModalController", { comment: comment });
-  }
-
-  return {
-    remove: remove,
-    view: view,
-    getStatus: getStatus,
-    setStatus: setStatus,
   };
 }
 
-app.factory("CommentService", CommentService);
-CommentService.$inject = [
+app.factory("Comment", Comment);
+Comment.$inject = [
   "$rootScope",
   "toaster",
   "API",
