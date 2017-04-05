@@ -136,7 +136,11 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       $state.go(toState.name, toParams);
     }
 
-    angular.element("div").removeClass("modal-backdrop in");
+    angular.element(".modal, .modal-backdrop").fadeOut(
+      function () {
+        angular.element(this).remove();
+      }
+    );
   });
 
   /**
