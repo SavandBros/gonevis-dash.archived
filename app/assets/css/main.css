@@ -1295,7 +1295,7 @@ a.thumbnail.active {
     border-color: #b05f00;
 }
 
-.progress-bar:not(.progress-bar-success) {
+.progress-bar-primary {
     background-color: #b05f00;
 }
 
@@ -1318,6 +1318,21 @@ a.thumbnail.active {
 
 .panel-primary>.panel-footer+.panel-collapse>.panel-body {
     border-bottom-color: #b05f00;
+}
+
+
+/* Progress Input */
+
+.progress-input {
+    height: 30px;
+    margin-top: -8px;
+    width: calc(100% - 1px);
+    margin-bottom: 0;
+}
+
+.progress-input .progress-bar {
+    padding-top: 8px;
+    transition: all 0.3s ease-in-out !important;
 }
 
 
@@ -1403,18 +1418,17 @@ img.tag {
 
 /* Tooltip @tooltip */
 
-.tooltip .tooltip-inner {
+.tooltip:not(.init) .tooltip-inner {
     background: #d17100;
 }
 
-.tooltip.top .tooltip-arrow {
+.tooltip.top:not(.init) .tooltip-arrow {
     border-top-color: #d17100;
 }
 
-.tooltip.bottom .tooltip-arrow {
+.tooltip.bottom:not(.init) .tooltip-arrow {
     border-bottom-color: #d17100;
 }
-
 
 /* Stack element */
 

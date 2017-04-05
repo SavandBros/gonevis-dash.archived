@@ -3,7 +3,7 @@
     <div class="panel panel-default s-box">
       <div class="panel-body s-pad">
       <!-- Form -->
-      <form ng-submit="resetPassword(form)">
+      <form ng-submit="resetPassword(form)" name="form">
         <!-- Title -->
         <h3 class="o-fade-soft">
           Reset Password <i class="fa fa-lock fa-fw text-danger pull-right"></i>
@@ -11,8 +11,10 @@
         <hr>
         <!-- Password -->
         <div class="form-group" ng-class="{'has-error': form.errors.password}">
-          <input class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}" name="password"
-            placeholder="New password" ng-model="form.password" required minlength="5"/>
+          <input class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
+            name="password" ng-trim="false" placeholder="New password"
+            ng-model="password.password" required style="position: relative"/>
+          <ng-include src="'basement/password/password_strength.html'"></ng-include>
           <span class="help-block text-danger animated fadeInDown" ng-if="form.errors.password[0]">
             {{ form.errors.password[0] }}
           </span>
@@ -20,8 +22,8 @@
         <!-- Confirm password -->
         <div class="form-group">
           <input class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}" name="passsword2"
-            placeholder="Confirm new password" ng-model="form.password2" required/>
-          <span id="password2" class="help-block" ng-show="form.password !== form.password2 && form.password.length > 5">
+            placeholder="Confirm new password" ng-model="form.confirm" required/>
+          <span id="password2" class="help-block" ng-show="password.password !== form.confirm && password.password.length > 8">
             <span class="text-danger">Passwords don't match!</span>
           </span>
         </div>
@@ -36,7 +38,7 @@
         </div>
         <!-- Submit -->
         <button class="btn btn-primary btn-block btn-lg"
-          ng-disabled="form.loading || form.$invalid || form.password !== form.password2">
+          ng-disabled="form.loading || form.$invalid || password.password !== form.confirm || !password.isValid()">
           Change Password
         </button>
       </form>

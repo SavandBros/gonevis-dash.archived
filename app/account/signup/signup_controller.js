@@ -6,21 +6,27 @@
  * @param $scope
  * @param $state
  * @param $stateParams
- * @param toaster
  * @param AuthService
  * @param API
+ * @param Password
+ * @param toaster
  */
-function SignupController($scope, $state, $stateParams, toaster, AuthService, API) {
+function SignupController($scope, $state, $stateParams, AuthService, API, Password, toaster) {
 
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
+
     // Get collaborating token
     $scope.inviteId = $stateParams.token;
 
+    // Toggle password visibility
     $scope.showPassword = false;
+
+    // Password class to check strength
+    $scope.password = new Password();
   }
 
   /**
@@ -32,8 +38,11 @@ function SignupController($scope, $state, $stateParams, toaster, AuthService, AP
   $scope.signup = function register(form) {
     form.loading = true;
 
-    var payload = form.data;
-    payload.email = payload.email.toLowerCase();
+    var payload = {
+      password: $scope.password.password,
+      email: form.data.email,
+      username: form.data.username
+    };
 
     if ($scope.inviteId) {
       payload.invite_id = $scope.inviteId;
@@ -74,7 +83,8 @@ SignupController.$inject = [
   "$scope",
   "$state",
   "$stateParams",
-  "toaster",
   "AuthService",
-  "API"
+  "API",
+  "Password",
+  "toaster"
 ];
