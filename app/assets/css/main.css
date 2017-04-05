@@ -1295,7 +1295,7 @@ a.thumbnail.active {
     border-color: #b05f00;
 }
 
-.progress-bar:not(.progress-bar-success) {
+.progress-bar-primary {
     background-color: #b05f00;
 }
 
@@ -1403,18 +1403,17 @@ img.tag {
 
 /* Tooltip @tooltip */
 
-.tooltip .tooltip-inner {
+.tooltip:not(.init) .tooltip-inner {
     background: #d17100;
 }
 
-.tooltip.top .tooltip-arrow {
+.tooltip.top:not(.init) .tooltip-arrow {
     border-top-color: #d17100;
 }
 
-.tooltip.bottom .tooltip-arrow {
+.tooltip.bottom:not(.init) .tooltip-arrow {
     border-bottom-color: #d17100;
 }
-
 
 /* Stack element */
 
