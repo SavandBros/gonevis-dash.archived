@@ -58,10 +58,6 @@ function SigninController($scope, $rootScope, $state, $stateParams, AuthService,
     );
   };
 
-  $scope.goForgetState = function () {
-    $state.go("signin", { action: "forgot" }, { reload: "signin" });
-  };
-
   /**
    * @method forgotPassword
    * @desc Open up forgot password modal
