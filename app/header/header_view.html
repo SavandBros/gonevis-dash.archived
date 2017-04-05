@@ -58,7 +58,7 @@
           ng-class="{'active': state.includes('signup') || state.includes('collaborate')}">
           <a ui-sref="signup">Register</a>
         </li>
-        <li class="animated" ng-class="{fadeIn: param.lights, fadeOut: !param.lights}">
+        <li class="animated fadeIn" ng-if="param.lights">
           <a ng-click="set.lights = !set.lights">
             <i class="fa fa-lightbulb-o nav-icon"></i>
           </a>
