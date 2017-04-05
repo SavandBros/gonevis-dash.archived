@@ -135,6 +135,8 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       toParams.s = 0;
       $state.go(toState.name, toParams);
     }
+
+    angular.element("div").removeClass("in");
   });
 
   /**
