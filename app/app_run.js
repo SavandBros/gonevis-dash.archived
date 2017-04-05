@@ -135,6 +135,13 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       toParams.s = 0;
       $state.go(toState.name, toParams);
     }
+
+    // Close open modals
+    angular.element(".modal, .modal-backdrop").fadeOut(
+      function () {
+        angular.element(this).remove();
+      }
+    );
   });
 
   /**
