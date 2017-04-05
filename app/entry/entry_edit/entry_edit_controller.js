@@ -83,11 +83,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       }
     );
 
-    $timeout(function () {
-      angular.element(".editor").css(
-        'margin-top', angular.element(".ta-toolbar").height()
-      );
-    }, 1000);
+    if (Codekit.isMobile()) {
+      $timeout(function () {
+        angular.element(".editor").css(
+          'margin-top', angular.element(".ta-toolbar").height()
+        );
+      }, 1000);
+    }
   }
 
   /**
