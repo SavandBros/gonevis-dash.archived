@@ -34,9 +34,9 @@
           <!-- Receive email notification -->
           <div class="panel panel-default panel-body s-pad-y-no">
             <div class="checkbox checkbox-primary">
-              <input id="receive_email_notification" type="checkbox" ng-model="receive_email_notification"
-                    ng-change="updateProfile('receive_email_notification', notification)">
-                <label for="receive_email_notification">Receive email notification</label>
+              <input id="receive_email_notification" type="checkbox" ng-model="user.receive_email_notification"
+                ng-change="updateProfile('receive_email_notification', user.receive_email_notification)">
+              <label for="receive_email_notification">Receive email notification</label>
             </div>
           </div>
         </div>
