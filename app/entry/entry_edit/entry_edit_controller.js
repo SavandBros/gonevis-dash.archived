@@ -7,6 +7,7 @@
  * @param $rootScope
  * @param $state
  * @param $stateParams
+ * @param $timeout
  * @param $q
  * @param Entry
  * @param Tag
@@ -16,7 +17,7 @@
  * @param DolphinService
  * @param toaster
  */
-function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
+function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
 
   /**
@@ -81,6 +82,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $q,
         });
       }
     );
+
+    $timeout(function () {
+      angular.element(".editor").css(
+        'margin-top', angular.element(".ta-toolbar").height()
+      );
+    }, 1000);
   }
 
   /**
@@ -180,6 +187,7 @@ EntryEditController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
+  "$timeout",
   "$q",
   "Entry",
   "Tag",
