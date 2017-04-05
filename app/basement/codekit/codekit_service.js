@@ -188,6 +188,16 @@ function Codekit($timeout, $window) {
     $window.document.title = finalTitle;
   }
 
+  /**
+   * @method isMobile
+   * @desc Check screen size to see if mobile or not
+   *
+   * @returns {Boolean}
+   */
+  function isMobile() {
+    return $window.matchMedia("only screen and (max-width: 760px)").matches;
+  }
+
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
@@ -197,7 +207,8 @@ function Codekit($timeout, $window) {
     timeoutSlice: timeoutSlice,
     isEmptyObj: isEmptyObj,
     focus: focus,
-    setTitle: setTitle
+    setTitle: setTitle,
+    isMobile: isMobile
   };
 }
 
