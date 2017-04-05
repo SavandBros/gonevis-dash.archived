@@ -20,7 +20,7 @@
   <!-- Nevis -->
   <div class="form-group editor" ng-class="{'editingContent': editingContent}">
     <!-- Title -->
-    <input id="title" class="form-control" type="text" ng-model="form.get.title" placeholder="TITLE">
+    <input id="title" class="form-control" type="text" ng-model="form.get.title" placeholder="TITLE" autocomplete="off">
     <small class="help-block" ng-show="form.errors.title">
       {{ form.errors.title[0] }}
     </small>
