@@ -5,8 +5,13 @@
 </button>
 
 <!-- Draft mode -->
-<div ng-if="form.get.status === 0" class="editor-draft-mode animated fadeInUp"
-  uib-tooltip="Entry is not published" tooltip-placement="top">
+<div ng-show="form.get.status === 0"
+  class="editor-draft-mode animated"
+  uib-tooltip="Entry is not published"
+  tooltip-placement="top"
+  ng-click="sidebar = true"
+  ng-init="sidebar = false"
+  ng-class="{'fadeInUp': form.get.status === 0, 'fadeOutDown': form.get.status === 1}">
   <i class="fa fa-pencil fa-fw"></i> DRAFT MODE
 </div>
 
@@ -119,7 +124,7 @@
             <label for="comments_enabled">Comment enabled</label>
           </div>
           <!-- Featured -->
-          <div class="checkbox checkbox-primary ">
+          <div class="checkbox checkbox-primarys">
             <input id="featued" type="checkbox" ng-model="form.get.featured">
             <label for="featued">Featured</label>
           </div>
