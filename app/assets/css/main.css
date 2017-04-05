@@ -598,7 +598,7 @@ md-toast {
     padding: 10px 0;
     padding-top: 20px;
     width: 100%;
-    margin-top: -10px;
+    margin-top: -160px;
     opacity: 0;
     z-index: 1;
 }
