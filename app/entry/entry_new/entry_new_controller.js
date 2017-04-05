@@ -6,6 +6,7 @@
  * @param $scope
  * @param $rootScope
  * @param $state
+ * @param $timeout
  * @param $q
  * @param Entry
  * @param Tag
@@ -14,7 +15,7 @@
  * @param API
  * @param toaster
  */
-function EntryNewController($scope, $rootScope, $state, $q,
+function EntryNewController($scope, $rootScope, $state, $timeout, $q,
   Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
   /**
@@ -31,6 +32,15 @@ function EntryNewController($scope, $rootScope, $state, $q,
       status: $scope.statuses[0].id,
       format: Codekit.entryFormats.text.id
     });
+
+    // Add space from top for toolbar
+    if (Codekit.isMobile()) {
+      $timeout(function () {
+        angular.element(".editor").css(
+          'margin-top', angular.element(".ta-toolbar").height()
+        );
+      }, 1000);
+    }
 
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function (data) {
@@ -130,6 +140,7 @@ EntryNewController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
+  "$timeout",
   "$q",
   "Entry",
   "Tag",

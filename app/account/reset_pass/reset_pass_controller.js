@@ -7,19 +7,19 @@
  * @param $state
  * @param AuthService
  * @param API
+ * @param Password
  */
-function ResetPassController($scope, $state, AuthService, API) {
+function ResetPassController($scope, $state, AuthService, API, Password) {
 
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.form = {
-      password: null,
-      password2: null
-    };
+    // Password strength
+    $scope.password = new Password();
 
+    // Password toggle
     $scope.showPassword = false;
   }
 
@@ -34,7 +34,7 @@ function ResetPassController($scope, $state, AuthService, API) {
     AuthService.setToken($state.params.token);
     form.loading = true;
 
-    API.ResetPassword.save({ password: form.password },
+    API.ResetPassword.save({ password: $scope.password.password },
       function () {
         AuthService.logout();
       },
@@ -53,5 +53,6 @@ ResetPassController.$inject = [
   "$scope",
   "$state",
   "AuthService",
-  "API"
+  "API",
+  "Password"
 ];
