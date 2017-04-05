@@ -83,6 +83,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       }
     );
 
+    // Add space from top for toolbar
     if (Codekit.isMobile()) {
       $timeout(function () {
         angular.element(".editor").css(
