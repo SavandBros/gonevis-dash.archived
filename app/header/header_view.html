@@ -69,7 +69,7 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a ui-sref="dash.user({s: param.s})">
+              <a ui-sref="user({s: param.s})">
                 View Account<br>
                 <small class="o-fade">{{ user.email }}</small>
               </a>
@@ -83,7 +83,7 @@
               </a>
             </li>
             <li>
-              <a ui-sref="site-new" class="o-fade small">CREATE NEW SITE</a>
+              <a ui-sref="site-new({s: param.s})" class="o-fade small">CREATE NEW SITE</a>
             </li>
             <li role="separator" class="divider"></li>
             <li><a href="mailto:hello@gonevis.com"><i class="fa fa-envelope-o"></i> Feedback</a></li>

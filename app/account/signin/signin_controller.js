@@ -44,7 +44,6 @@ function SigninController($scope, $rootScope, $state, $stateParams, AuthService,
       function (data) {
         form.loading = false;
         form.errors = null;
-        data.user.sites = [];
         AuthService.setAuthenticatedUser(data.user);
         AuthService.setToken(data.token);
 

@@ -108,6 +108,14 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @param toParams {Object}
    */
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
+
+    // Close open modals
+    angular.element(".modal, .modal-backdrop").fadeOut(
+      function () {
+        angular.element(this).remove();
+      }
+    );
+
     var isAuthenticated = AuthService.isAuthenticated();
     var toDash = toState.name.indexOf("dash.") !== -1;
     var sites = isAuthenticated ? AuthService.getAuthenticatedUser().sites : [];
@@ -132,7 +140,8 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
 
       // If no site
       if (sites.length < 1) {
-        $state.go("site-new");
+        event.preventDefault();
+        return $state.go("site-new");
       }
 
       // If has an invalid site index
@@ -144,13 +153,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
         $state.go(toState.name, toParams);
       }
     }
-
-    // Close open modals
-    angular.element(".modal, .modal-backdrop").fadeOut(
-      function () {
-        angular.element(this).remove();
-      }
-    );
   });
 
   /**
