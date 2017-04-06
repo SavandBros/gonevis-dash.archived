@@ -104,11 +104,8 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
    */
   $scope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
-    if (!$scope.user.sites.length) {
-      $state.go("site-new");
-    } else {
-      $state.go("dash.main", { s: 0 });
-    }
+    // Go to main or new site page if has no other sites
+    $state.go($scope.user.sites.length > 0 ? "dash.main" : "site-new");
   });
 
   /**

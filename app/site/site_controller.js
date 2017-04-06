@@ -106,7 +106,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
         toaster.success("Done", "Site deleted");
         // Go to main or new site page if has no other sites
-        $state.go($scope.user.sites ? "dash.main" : "site-new");
+        $state.go($scope.user.sites.length > 0 ? "dash.main" : "site-new");
       },
       function () {
         toaster.error("Error", "Something went wrong, couldn't delete site");

@@ -127,13 +127,22 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       }
     }
 
-    // If is authenticated and going to a dash state with an invalid site index
-    if (isAuthenticated && toDash && sites && !sites[toParams.s]) {
-      // Stop changing state
-      event.preventDefault();
-      // Redirect with the same state but first site
-      toParams.s = 0;
-      $state.go(toState.name, toParams);
+    // If is authenticated and going to a dash state
+    if (isAuthenticated && toDash) {
+
+      // If no site
+      if (sites.length < 1) {
+        $state.go("site-new");
+      }
+
+      // If has an invalid site index
+      if (sites.length && !sites[toParams.s]) {
+        // Stop changing state
+        event.preventDefault();
+        // Redirect with the same state but first site
+        toParams.s = 0;
+        $state.go(toState.name, toParams);
+      }
     }
 
     // Close open modals
