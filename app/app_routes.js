@@ -111,7 +111,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "EntryNewController",
       templateUrl: "entry/entry_new/entry_new_view.html",
       auth: true,
-      mousemoveEvent: true,
       clickEvent: true,
       params: {
         lights: true,
@@ -123,7 +122,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "EntryEditController",
       templateUrl: "entry/entry_edit/entry_edit_view.html",
       auth: true,
-      mousemoveEvent: true,
       clickEvent: true,
       params: {
         lights: true,
