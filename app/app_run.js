@@ -183,28 +183,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       if (el.hasClass("preIn")) {
         angular.element("[ng-click='sidebar = false']").trigger("click");
       }
-
-      // Dolphin insert handler
-      if (el.attr("contenteditable") === "true" || el.parent().attr("contenteditable") === "true") {
-        if ($rootScope.set.editor.dolphin) {
-          $rootScope.set.editor.this.$editor().wrapSelection(
-            "insertImage", $rootScope.set.editor.dolphin.get.file, false
-          );
-          $rootScope.set.editor = {};
-        }
-      }
-    }
-  });
-
-  /**
-   * @event document.mousemove
-   * @desc Mouse movement callback, depends on state @mousemoveEvent
-   */
-  angular.element(document).on("mousemove", function (event) {
-    if ($state.current.mousemoveEvent) {
-      $rootScope.set.pageX = event.pageX;
-      $rootScope.set.pageY = event.pageY - angular.element("body").scrollTop();
-      $rootScope.$apply();
     }
   });
 }
