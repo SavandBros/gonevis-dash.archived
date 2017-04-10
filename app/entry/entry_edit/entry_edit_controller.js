@@ -133,7 +133,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     angular.forEach($scope.tagsToSubmit, function (tag) {
       payload.tag_ids.push(tag.id);
     });
-​​​
+
     // Remove image placeholder
     payload.content = payload.content
       .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
