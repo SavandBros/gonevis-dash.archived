@@ -668,6 +668,8 @@ md-toast {
 
 .editor img {
     max-width: 100%;
+    background: #eee;
+}
 }
 
 .editor li+li {
