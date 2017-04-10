@@ -703,7 +703,7 @@ md-toast {
 }
 
 .lights.off .editor,
-.lights.off .form-control,
+.lights.off .editor .form-control,
 .lights.off .ta-toolbar {
     background: #333;
     color: #fff;
