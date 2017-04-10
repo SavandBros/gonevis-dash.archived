@@ -668,6 +668,11 @@ md-toast {
 
 .editor img {
     max-width: 100%;
+    background: #eee;
+}
+
+.editor img[src="assets/img/avatar.png"] {
+    display: none;
 }
 
 .editor li+li {
@@ -698,7 +703,7 @@ md-toast {
 }
 
 .lights.off .editor,
-.lights.off .form-control,
+.lights.off .editor .form-control,
 .lights.off .ta-toolbar {
     background: #333;
     color: #fff;
@@ -903,6 +908,13 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     color: #fff !important;
     background: #333;
     border-color: #222;
+}
+
+@media(max-width:1160px) {
+    .btn-corner.btn-corner-navbar {
+        top: 60px;
+        right: 10px;
+    }
 }
 
 
@@ -1429,6 +1441,7 @@ img.tag {
 .tooltip.bottom:not(.init) .tooltip-arrow {
     border-bottom-color: #d17100;
 }
+
 
 /* Stack element */
 

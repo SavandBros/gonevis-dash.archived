@@ -37,7 +37,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @type {Object}
    */
   $rootScope.set = {
-    editor: {},
     lights: true
   };
 
@@ -71,17 +70,15 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     action: function () {
       return this.$editor().wrapSelection("formatBlock", "<pre>");
     },
-    activeState: function () { return this.$editor().queryFormatBlockState("pre"); }
+    activeState: function () {
+      return this.$editor().queryFormatBlockState("pre");
+    }
   });
   taRegisterTool("addImage", {
     iconclass: "fa fa-picture-o",
     tooltiptext: "Insert Image",
     action: function () {
-      $rootScope.set.editor = {
-        scope: textAngularManager.retrieveEditor("editor").scope,
-        this: this,
-        selecting: true
-      };
+      this.$editor().wrapSelection("insertImage", "assets/img/avatar.png", false);
       DolphinService.viewSelection("editorAddImage");
     },
     onElementSelect: {
@@ -177,23 +174,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   });
 
   /**
-   * @event gonevisDash.Dolphin:select
-   * @desc Dolphin selection callback, depends on state @editor
-   *
-   * @param event {Event}
-   * @param dolphin {Dolphin}
-   * @param source {String}
-   */
-  $rootScope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
-    if ($state.current.editor && source === "editorAddImage") {
-      if ($rootScope.set.editor.selecting === true) {
-        $rootScope.set.editor.dolphin = dolphin;
-        $rootScope.set.editor.selecting = false;
-      }
-    }
-  });
-
-  /**
    * @event document.click
    * @desc Click callback, depends on state @clickEvent
    */
@@ -205,28 +185,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       if (el.hasClass("preIn")) {
         angular.element("[ng-click='sidebar = false']").trigger("click");
       }
-
-      // Dolphin insert handler
-      if (el.attr("contenteditable") === "true" || el.parent().attr("contenteditable") === "true") {
-        if ($rootScope.set.editor.dolphin) {
-          $rootScope.set.editor.this.$editor().wrapSelection(
-            "insertImage", $rootScope.set.editor.dolphin.get.file, false
-          );
-          $rootScope.set.editor = {};
-        }
-      }
-    }
-  });
-
-  /**
-   * @event document.mousemove
-   * @desc Mouse movement callback, depends on state @mousemoveEvent
-   */
-  angular.element(document).on("mousemove", function (event) {
-    if ($state.current.mousemoveEvent) {
-      $rootScope.set.pageX = event.pageX;
-      $rootScope.set.pageY = event.pageY - angular.element("body").scrollTop();
-      $rootScope.$apply();
     }
   });
 }
