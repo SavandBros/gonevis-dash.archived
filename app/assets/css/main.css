@@ -670,6 +670,9 @@ md-toast {
     max-width: 100%;
     background: #eee;
 }
+
+.editor img[src="assets/img/avatar.png"] {
+    display: none;
 }
 
 .editor li+li {
