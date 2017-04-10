@@ -70,7 +70,9 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     action: function () {
       return this.$editor().wrapSelection("formatBlock", "<pre>");
     },
-    activeState: function () { return this.$editor().queryFormatBlockState("pre"); }
+    activeState: function () {
+      return this.$editor().queryFormatBlockState("pre");
+    }
   });
   taRegisterTool("addImage", {
     iconclass: "fa fa-picture-o",
