@@ -87,7 +87,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state("dash.dolphin", {
-      url: "/dolphin",
+      url: "/files",
       controller: "DolphinController",
       templateUrl: "dolphin/dolphin_view.html",
       auth: true,
