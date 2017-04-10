@@ -101,6 +101,11 @@ function EntryNewController($scope, $rootScope, $state, $timeout, $q,
       payload.tag_ids.push(tag.id);
     });
 
+    // Remove image placeholder
+    payload.content = payload.content
+      .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
+      .replace(/<p><\/p>/g, "");
+
     API.EntryAdd.save(payload,
       function (data) {
         toaster.success("Done", "Entry added");

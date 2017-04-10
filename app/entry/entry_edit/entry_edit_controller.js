@@ -133,12 +133,18 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     angular.forEach($scope.tagsToSubmit, function (tag) {
       payload.tag_ids.push(tag.id);
     });
+​​​
+    // Remove image placeholder
+    payload.content = payload.content
+      .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
+      .replace(/<p><\/p>/g, "");
 
     API.Entry.put({ entry_id: payload.id }, payload,
       function (data) {
         form.get = data;
         Codekit.setTitle(form.get.title);
         toaster.info("Done", "Entry updated");
+        toaster.info("Done", "Updated " + payload.title);
         form.loading = false;
         form.errors = null;
       },
