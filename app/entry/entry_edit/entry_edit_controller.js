@@ -161,6 +161,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     if (source === "entryCover") {
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
+    } else if (source === "editorAddImage") {
+      $scope.form.get.content = $scope.form.get.content.replace("assets/img/avatar.png", dolphin.get.file);
     }
   });
 
