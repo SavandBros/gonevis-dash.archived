@@ -37,7 +37,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @type {Object}
    */
   $rootScope.set = {
-    editor: {},
     lights: true
   };
 
@@ -77,11 +76,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     iconclass: "fa fa-picture-o",
     tooltiptext: "Insert Image",
     action: function () {
-      $rootScope.set.editor = {
-        scope: textAngularManager.retrieveEditor("editor").scope,
-        this: this,
-        selecting: true
-      };
+      this.$editor().wrapSelection("insertImage", "assets/img/avatar.png", false);
       DolphinService.viewSelection("editorAddImage");
     },
     onElementSelect: {
