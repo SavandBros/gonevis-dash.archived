@@ -139,6 +139,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
             $scope.dolphins.unshift(new Dolphin(data.data));
           },
           function () {
+            file.done = true;
             toaster.error("Error", "Something went wrong, couldn't upload file.");
           },
           function (event) {
