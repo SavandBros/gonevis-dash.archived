@@ -8,8 +8,10 @@
  * @param $cookiesProvider
  * @param $qProvider
  * @param cfpLoadingBarProvider
+ * @param ChartJsProvider
  */
-function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, cfpLoadingBarProvider) {
+function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
+  cfpLoadingBarProvider, ChartJsProvider) {
 
   // Http
   $httpProvider.interceptors.push("AuthInterceptorService");
@@ -25,6 +27,25 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, 
 
   // CFP loading bar
   cfpLoadingBarProvider.includeSpinner = false;
+
+  // Configure all charts
+  ChartJsProvider.setOptions({
+    chartColors: [
+      "#99FF99",
+      "#FFAA00",
+      "#DDDDDD"
+    ],
+    elements: {
+      arc: {
+        borderWidth: 0
+      }
+    }
+  });
+
+  // Configure all line charts
+  // ChartJsProvider.setOptions("line", {
+  //   showLines: false
+  // });
 }
 
 app.config(Config);
@@ -33,5 +54,6 @@ Config.$inject = [
   "$resourceProvider",
   "$cookiesProvider",
   "$qProvider",
-  "cfpLoadingBarProvider"
+  "cfpLoadingBarProvider",
+  "ChartJsProvider"
 ];
