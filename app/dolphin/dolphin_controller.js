@@ -132,13 +132,16 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
           file_size: file.size,
           mime_type: file.type
         }, function (data) {
+          data.post_data["file"] = file;
+
           file.upload = Upload.upload({
-            url: data.signed_request,
-            data: { file: file }
+            url: data.post_data.url,
+            data: data.post_data,
           });
 
           file.isImage = file.type.indexOf("image") === 0;
 
+          // Trully weird way of handling it, why "upload" has been assigned to "file"?
           file.upload.then(
             function (data) {
               file.done = true;
