@@ -132,11 +132,11 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
           file_size: file.size,
           mime_type: file.type
         }, function (data) {
-          data.post_data["file"] = file;
+          data.post_data.fields["file"] = file;
 
           file.upload = Upload.upload({
             url: data.post_data.url,
-            data: data.post_data,
+            data: data.post_data.fields,
           });
 
           file.isImage = file.type.indexOf("image") === 0;
