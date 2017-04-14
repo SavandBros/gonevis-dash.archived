@@ -4,7 +4,9 @@
     <div class="col-md-8">
       <!-- Latest comments -->
       <div class="panel panel-default" ng-if="Comment.list.length">
-        <div class="panel-heading">Comments</div>
+        <div class="panel-heading">
+          Comments <span class="label label-default">{{ Metrics.list.comment_count }}</span>
+        </div>
         <ul class="panel-body panel-list">
           <!-- Comment -->
           <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list" ng-show="!comment.isDeleted">
@@ -30,7 +32,9 @@
       <!-- Latest entries -->
       <div class="panel panel-default" ng-if="Entry.list.length">
         <!-- Title -->
-        <div class="panel-heading">Entries</div>
+        <div class="panel-heading">
+          Entries <span class="label label-default">{{ Metrics.list.entry_count }}</span>
+        </div>
         <!-- Entry list -->
         <ul class="panel-body panel-list">
           <!-- Entry -->
@@ -67,29 +71,25 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
-          <i class="fa fa-comment text-primary"></i> Comment overview
+          Comment overview <i class="fa fa-comment text-primary"></i>
         </div>
-        <!-- Overview -->
-        <ul class="panel-body list-group s-pad-no">
-          <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.comment_count}">
-            Comments <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
-          </li>
-          <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.active_comment_count}">
-            Active comments <b class="pull-right text-primary">{{ Metrics.list.active_comment_count }}</b>
-          </li>
-          <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.pending_comment_count}">
-            Pending comments <b class="pull-right text-primary">{{ Metrics.list.pending_comment_count }}</b>
-          </li>
-          <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.hidden_comment_count}">
-            Hidden comments <b class="pull-right text-primary">{{ Metrics.list.hidden_comment_count }}</b>
-          </li>
+        <!-- Overview (Chart -->
+        <ul class="panel-body s-pad">
+          <canvas class="chart chart-doughnut"
+            chart-labels="['Active Comments', 'Pending Comments', 'Hidden Comments']"
+            chart-data="[
+              Metrics.list.active_comment_count,
+              Metrics.list.pending_comment_count,
+              Metrics.list.hidden_comment_count
+            ]">
+          </canvas>
         </ul>
       </div>
       <!-- Metrics:Subscribers -->
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
-          <i class="fa fa-user-plus text-primary"></i> Subscribers overview
+          Subscribers <i class="fa fa-user-plus text-primary"></i>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
