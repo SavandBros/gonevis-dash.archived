@@ -496,6 +496,26 @@ md-toast {
     border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+.panel-heading .label:not(.init) {
+    float: right;
+    padding: 10px;
+    margin-top: -7px;
+    font-size: 1em;
+    background: #888;
+}
+
+.panel-heading .fa:not(.init) {
+    float: right;
+    color: #fff;
+    background: #888;
+    width: 34px;
+    height: 34px;
+    margin: -8px 0;
+    border-radius: 100%;
+    padding: 10px 0;
+    text-align: center;
+}
+
 
 /* Dolphin */
 
