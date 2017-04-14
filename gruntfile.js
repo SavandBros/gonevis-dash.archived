@@ -451,6 +451,7 @@ module.exports = function (grunt) {
           "ngFileUpload",
           "ui.router",
           "ui.bootstrap",
+          "chart.js",
           "gettext",
           "xeditable",
           "textAngular",
