@@ -131,7 +131,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
           file_size: file.size,
           mime_type: file.type
         };
-
         // Get data from UploadUrl
         API.UploadUrl.post({ siteId: site }, payload,
           function (data) {
