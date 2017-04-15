@@ -1,13 +1,12 @@
 "use strict";
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:DolphinController
+ * @class DolphinController
  *
  * @param $scope
  * @param $state
  * @param $stateParams
- * @param toaster
+ * @param $resource
  * @param Dolphin
  * @param Codekit
  * @param API
@@ -15,10 +14,11 @@
  * @param AuthService
  * @param Upload
  * @param Pagination
+ * @param toaster
  * @param source
  */
-function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
-  Dolphin, Codekit, API, ENV, AuthService, Upload, Pagination, Search, source) {
+function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
+  Dolphin, Codekit, API, ENV, AuthService, Upload, Pagination, Search, toaster, source) {
 
   var site = AuthService.getCurrentSite();
 
@@ -125,25 +125,49 @@ function DolphinController($scope, $rootScope, $state, $stateParams, toaster,
 
     angular.forEach($scope.upload.files,
       function (file) {
-        file.upload = Upload.upload({
-          url: ENV.apiEndpoint + "dolphin/file/",
-          data: { file: file, site: site }
-        });
-
-        file.isImage = file.type.indexOf("image") === 0;
-
-        file.upload.then(
+        // UploadUrl payload
+        var payload = {
+          file_name: file.name,
+          file_size: file.size,
+          mime_type: file.type
+        };
+        // Get data from UploadUrl
+        API.UploadUrl.post({ siteId: site }, payload,
           function (data) {
-            file.done = true;
-            toaster.success("Upload Complete", file.name);
-            $scope.dolphins.unshift(new Dolphin(data.data));
-          },
-          function () {
-            file.done = true;
-            toaster.error("Error", "Something went wrong, couldn't upload file.");
-          },
-          function (event) {
-            file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
+            data.post_data.fields.file = file;
+
+            // Upload the file
+            file.upload = Upload.upload({
+              url: data.post_data.url,
+              data: data.post_data.fields,
+            });
+
+            // Store data
+            file.isImage = file.type.indexOf("image") === 0;
+            file.key = data.post_data.fields.key;
+
+            payload = {
+              file_key: file.key,
+              site: site
+            };
+
+            file.upload.then(
+              function () {
+                API.Dolphins.post(payload,
+                  function (data) {
+                    file.done = true;
+                    toaster.success("Upload Complete", file.name);
+                    $scope.dolphins.unshift(new Dolphin(data));
+                  }
+                );
+              },
+              function () {
+                toaster.error("Error", "Something went wrong, couldn't upload file.");
+              },
+              function (event) {
+                file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
+              }
+            );
           }
         );
       }
@@ -211,7 +235,7 @@ DolphinController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "toaster",
+  "$resource",
   "Dolphin",
   "Codekit",
   "API",
@@ -220,5 +244,6 @@ DolphinController.$inject = [
   "Upload",
   "Pagination",
   "Search",
+  "toaster",
   "source"
 ];
