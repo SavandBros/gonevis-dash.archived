@@ -125,37 +125,52 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
 
     angular.forEach($scope.upload.files,
       function (file) {
-        API.UploadUrl.post({
-          siteId: site
-        }, {
+        // UploadUrl payload
+        var payload = {
           file_name: file.name,
           file_size: file.size,
           mime_type: file.type
-        }, function (data) {
-          data.post_data.fields["file"] = file;
+        };
 
-          file.upload = Upload.upload({
-            url: data.post_data.url,
-            data: data.post_data.fields,
-          });
+        // Get data from UploadUrl
+        API.UploadUrl.post({ siteId: site }, payload,
+          function (data) {
+            data.post_data.fields.file = file;
 
-          file.isImage = file.type.indexOf("image") === 0;
+            // Upload the file
+            file.upload = Upload.upload({
+              url: data.post_data.url,
+              data: data.post_data.fields,
+            });
 
-          // Trully weird way of handling it, why "upload" has been assigned to "file"?
-          file.upload.then(
-            function (data) {
-              file.done = true;
-              toaster.success("Upload Complete", file.name);
-              $scope.dolphins.unshift(new Dolphin(data.data));
-            },
-            function () {
-              toaster.error("Error", "Something went wrong, couldn't upload file.");
-            },
-            function (event) {
-              file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
-            }
-          );
-        });
+            // Store data
+            file.isImage = file.type.indexOf("image") === 0;
+            file.key = data.post_data.fields.key;
+
+            payload = {
+              file_key: file.key,
+              site: site
+            };
+
+            file.upload.then(
+              function () {
+                API.Dolphins.post(payload,
+                  function (data) {
+                    file.done = true;
+                    toaster.success("Upload Complete", file.name);
+                    $scope.dolphins.unshift(new Dolphin(data));
+                  }
+                );
+              },
+              function () {
+                toaster.error("Error", "Something went wrong, couldn't upload file.");
+              },
+              function (event) {
+                file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
+              }
+            );
+          }
+        );
       }
     );
   };
