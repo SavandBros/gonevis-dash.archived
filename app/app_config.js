@@ -41,11 +41,6 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
       }
     }
   });
-
-  // Configure all line charts
-  // ChartJsProvider.setOptions("line", {
-  //   showLines: false
-  // });
 }
 
 app.config(Config);
