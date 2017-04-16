@@ -34,7 +34,8 @@
       <div class="panel panel-default" ng-if="Entry.list.length">
         <!-- Title -->
         <div class="panel-heading">
-          Entries <span class="label label-default">{{ Metrics.list.entry_count }}</span>
+          <a ui-sref="dash.entry-list" class="header-link">Entries</a>
+          <span class="label label-default">{{ Metrics.list.entry_count }}</span>
         </div>
         <!-- Entry list -->
         <ul class="panel-body panel-list">
