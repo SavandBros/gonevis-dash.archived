@@ -74,7 +74,13 @@
           Comment overview <i class="fa fa-comment text-primary"></i>
         </div>
         <!-- Overview (Chart -->
-        <ul class="panel-body s-pad">
+        <ul class="panel-body panel-body-chart s-pad">
+          <!-- Chart text -->
+          <h1 class="chart-text chart-text-doughnut">
+            {{ Metrics.list.comment_count }}
+            <small>Comments</small>
+          </h1>
+          <!-- Chart -->
           <canvas class="chart chart-doughnut"
             chart-labels="['Active Comments', 'Pending Comments', 'Hidden Comments']"
             chart-data="[
