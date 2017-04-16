@@ -134,11 +134,16 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       payload.tag_ids.push(tag.id);
     });
 
+    // Remove image placeholder
+    payload.content = payload.content
+      .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
+      .replace(/<p><\/p>/g, "");
+
     API.Entry.put({ entry_id: payload.id }, payload,
       function (data) {
         form.get = data;
         Codekit.setTitle(form.get.title);
-        toaster.info("Done", "Entry updated");
+        toaster.info("Done", "Updated " + payload.title);
         form.loading = false;
         form.errors = null;
       },
@@ -162,9 +167,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     if (source === "entryCover") {
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
     } else if (source === "editorAddImage") {
-      $rootScope.set.editor.scope.displayElements.text.focus();
-      $rootScope.set.editor.this.$editor().wrapSelection("insertImage", $rootScope.set.editor.dolphin.get.file, false);
-      $rootScope.set.editor = {};
+      $scope.form.get.content = $scope.form.get.content.replace("assets/img/avatar.png", dolphin.get.file);
     }
   });
 

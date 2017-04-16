@@ -56,6 +56,8 @@ module.exports = function(config) {
       'bower_components/angular-sortable-view/src/angular-sortable-view.js',
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/AngularJS-Toaster/toaster.js',
+      'bower_components/chart.js/dist/Chart.js',
+      'bower_components/angular-chart.js/dist/angular-chart.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/app_module.js',

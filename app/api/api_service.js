@@ -58,7 +58,10 @@ function API($http, $resource, ENV) {
       endpoint: "website/entry/" // GET
     }, {
       name: "EntryMetrics",
-      endpoint: "/website/entry/:entry_id/metrics/" // GET
+      endpoint: "website/entry/:entry_id/metrics/" // GET
+    }, {
+      name: "UploadUrl",
+      endpoint: "website/site/:siteId/upload-url/" // POST
     },
     // Sushial
     {
@@ -124,9 +127,6 @@ function API($http, $resource, ENV) {
     {
       name: "Dolphins",
       endpoint: "dolphin/file/" // GET, POST
-    }, {
-      name: "Dolphin",
-      endpoint: "dolphin/file/:fileId/" // GET, PUT, DELETE
     }
   ];
 

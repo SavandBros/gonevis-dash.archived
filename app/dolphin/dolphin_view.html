@@ -13,7 +13,7 @@
       <!-- Upload -->
       <div class="col-sm-12 col-md-1 col-xs-3 s-mar-bottom-soft">
         <button type="file" class="btn btn-primary btn-block" ngf-select="uploadFile($files, $invalidFiles)"
-          ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true" ngf-max-files="5">
+          ngf-accept="upload.accept" ngf-max-size="100MB" ngf-multiple="true">
           <i class="fa fa-fw fa-upload"></i>
         </button>
       </div>
@@ -33,7 +33,7 @@
           ngf-resize="{quality: 1}" ng-class="{'not-image': !file.isImage}">
           <i class="fa fa-5x fa-file-o c-white" ng-if="!file.isImage"></i>
           <p class="caption progress progress-striped">
-            <span class="progress-bar active" style="width: {{ file.progress }}%"></span>
+            <span class="progress-bar progress-bar-primary active" style="width: {{ file.progress }}%"></span>
           </p>
         </div>
       </div>
@@ -65,6 +65,8 @@
           </button>
           <ul class="dropdown-menu">
             <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> View</a></li>
+            <li><a ng-href="{{ dolphin.get.file }}" download><i class="fa fa-download"></i> Download</a></li>
+            <li class="divider"></li>
             <li><a ng-click="dolphin.remove()"><i class="fa fa-trash text-danger"></i> Delete</a></li>
           </ul>
         </div>
@@ -112,6 +114,8 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-href="{{ dolphin.get.file }}" download><i class="fa fa-download"></i> Download</a></li>
+                  <li class="divider"></li>
                   <li><a ng-click="dolphin.remove()"><i class="fa fa-trash text-danger"></i> Delete</a></li>
                 </ul>
               </div>

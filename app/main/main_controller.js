@@ -30,6 +30,11 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
     $scope.Comment.initialize();
     $scope.Entry.initialize();
     $scope.Metrics.initialize();
+
+    // Get site template
+    API.SiteTemplateConfig.get({ siteId: site }, function (data) {
+      $scope.siteTemplate = data.template_config;
+    });
   }
 
   /**

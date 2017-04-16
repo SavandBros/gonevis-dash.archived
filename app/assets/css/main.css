@@ -484,6 +484,14 @@ md-toast {
     cursor: pointer;
 }
 
+.panel-list-item .label {
+    padding: 4px;
+    background: none;
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-left: 4px;
+}
+
 .panel-heading {
     padding: 18px 12px !important;
 }
@@ -494,6 +502,61 @@ md-toast {
     width: 42px;
     height: 42px;
     border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.panel-heading .label:not(.init) {
+    float: right;
+    padding: 10px;
+    margin-top: -7px;
+    font-size: 1em;
+    color: #d17100;
+    background: rgba(0, 0, 0, 0.1);
+    min-width: 34px;
+}
+
+.panel-heading>.fa:not(.init) {
+    float: right;
+    color: #d17100;
+    background: rgba(0, 0, 0, 0.1);
+    width: 34px;
+    height: 34px;
+    margin: -8px 0;
+    border-radius: 100%;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.panel-heading .header-link {
+    color: #333;
+}
+
+.panel-heading .header-link:hover,
+.panel-heading .header-link:focus {
+    color: #d17100;
+}
+
+
+/* Panel Chart */
+
+.panel-body-chart {
+    position: relative;
+}
+
+.panel-body-chart .chart-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #d17100;
+    font-weight: bold;
+}
+
+.panel-body-chart .chart-text small {
+    text-transform: uppercase;
+    font-size: 0.3em;
+    display: block;
+    margin-top: 5px;
 }
 
 
@@ -668,6 +731,11 @@ md-toast {
 
 .editor img {
     max-width: 100%;
+    background: #eee;
+}
+
+.editor img[src="assets/img/avatar.png"] {
+    display: none;
 }
 
 .editor li+li {
@@ -698,7 +766,7 @@ md-toast {
 }
 
 .lights.off .editor,
-.lights.off .form-control,
+.lights.off .editor .form-control,
 .lights.off .ta-toolbar {
     background: #333;
     color: #fff;
@@ -903,6 +971,13 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     color: #fff !important;
     background: #333;
     border-color: #222;
+}
+
+@media(max-width:1160px) {
+    .btn-corner.btn-corner-navbar {
+        top: 60px;
+        right: 10px;
+    }
 }
 
 
@@ -1336,6 +1411,13 @@ a.thumbnail.active {
 }
 
 
+/* List group item */
+
+.list-group-item .pull-right.btn-sm {
+    margin-top: -5px;
+}
+
+
 /* Over flow */
 
 .of {
@@ -1429,6 +1511,7 @@ img.tag {
 .tooltip.bottom:not(.init) .tooltip-arrow {
     border-bottom-color: #d17100;
 }
+
 
 /* Stack element */
 

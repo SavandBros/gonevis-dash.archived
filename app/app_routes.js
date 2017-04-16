@@ -1,7 +1,8 @@
 "use strict";
 
 /**
- * @desc Every child of dash state follows site id that user is into
+ * @desc Every child of dash state follows site id that user is into.
+ *       States with s param don't require site index, so it is given to it for later navigation.
  */
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -11,7 +12,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "SiteNewController",
       templateUrl: "site/site_new/site_new_view.html",
       auth: true,
-      title: "New Site"
+      title: "New Site",
+      params: {
+        s: 0
+      }
+    })
+    .state("user", {
+      url: "/user",
+      controller: "UserController",
+      templateUrl: "account/user/user_view.html",
+      auth: true,
+      title: "Account",
+      params: {
+        s: 0
+      }
     })
     .state("signin", {
       url: "/login/:action",
@@ -73,7 +87,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state("dash.dolphin", {
-      url: "/dolphin",
+      url: "/files",
       controller: "DolphinController",
       templateUrl: "dolphin/dolphin_view.html",
       auth: true,
@@ -97,8 +111,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "EntryNewController",
       templateUrl: "entry/entry_new/entry_new_view.html",
       auth: true,
-      editor: true,
-      mousemoveEvent: true,
       clickEvent: true,
       params: {
         lights: true,
@@ -110,8 +122,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "EntryEditController",
       templateUrl: "entry/entry_edit/entry_edit_view.html",
       auth: true,
-      editor: true,
-      mousemoveEvent: true,
       clickEvent: true,
       params: {
         lights: true,
@@ -143,13 +153,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "tag/tag_view.html",
       auth: true,
       title: "Tags"
-    })
-    .state("dash.user", {
-      url: "/user",
-      controller: "UserController",
-      templateUrl: "account/user/user_view.html",
-      auth: true,
-      title: "Account"
     })
     .state("dash.change-password", {
       url: "/change-password",
