@@ -4,7 +4,10 @@
     <div class="col-md-8">
       <!-- Latest comments -->
       <div class="panel panel-default" ng-if="Comment.list.length">
-        <div class="panel-heading">Comments</div>
+        <div class="panel-heading">
+          <a ui-sref="dash.comment-list" class="header-link">Comments</a>
+          <span class="label label-default">{{ Metrics.list.comment_count }}</span>
+        </div>
         <ul class="panel-body panel-list">
           <!-- Comment -->
           <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list" ng-show="!comment.isDeleted">
@@ -30,14 +33,26 @@
       <!-- Latest entries -->
       <div class="panel panel-default" ng-if="Entry.list.length">
         <!-- Title -->
-        <div class="panel-heading">Entries</div>
+        <div class="panel-heading">
+          <a ui-sref="dash.entry-list" class="header-link">Entries</a>
+          <span class="label label-default">{{ Metrics.list.entry_count }}</span>
+        </div>
         <!-- Entry list -->
         <ul class="panel-body panel-list">
           <!-- Entry -->
           <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list" ng-show="!entry.isDeleted">
+            <!-- Title -->
             <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
               {{ entry.get.title }}
             </a>
+            <!-- Views -->
+            <span class="pull-right label label-default" ng-if="entry.get.view_count">
+              {{ entry.get.view_count }} <i class="fa fa-eye o-fade"></i>
+            </span>
+            <!-- Votes -->
+            <span class="pull-right label label-default" ng-if="entry.get.vote_count">
+              {{ entry.get.vote_count }} <i class="fa fa-heart o-fade"></i>
+            </span>
           </li>
         </ul>
       </div>
@@ -48,7 +63,7 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
-          <i class="fa fa-list-alt text-primary"></i> Entry overview
+          <i class="fa fa-list-alt text-primary"></i> Publication
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
@@ -67,34 +82,46 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
-          <i class="fa fa-comment text-primary"></i> Comment overview
+          Comment overview <i class="fa fa-comment text-primary"></i>
         </div>
-        <!-- Overview -->
-        <ul class="panel-body list-group s-pad-no">
-          <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.comment_count}">
-            Comments <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
-          </li>
-          <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.active_comment_count}">
-            Active comments <b class="pull-right text-primary">{{ Metrics.list.active_comment_count }}</b>
-          </li>
-          <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.pending_comment_count}">
-            Pending comments <b class="pull-right text-primary">{{ Metrics.list.pending_comment_count }}</b>
-          </li>
-          <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.hidden_comment_count}">
-            Hidden comments <b class="pull-right text-primary">{{ Metrics.list.hidden_comment_count }}</b>
-          </li>
+        <!-- Overview (Chart -->
+        <ul class="panel-body panel-body-chart s-pad">
+          <!-- Chart text -->
+          <h1 class="chart-text chart-text-doughnut">
+            {{ Metrics.list.comment_count }}
+            <small>Comments</small>
+          </h1>
+          <!-- Chart -->
+          <canvas class="chart chart-doughnut"
+            chart-labels="['Active Comments', 'Pending Comments', 'Hidden Comments']"
+            chart-data="[
+              Metrics.list.active_comment_count,
+              Metrics.list.pending_comment_count,
+              Metrics.list.hidden_comment_count
+            ]">
+          </canvas>
         </ul>
       </div>
-      <!-- Metrics:Subscribers -->
+      <!-- Site Overview -->
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
-          <i class="fa fa-user-plus text-primary"></i> Subscribers overview
+          <a ui-sref="dash.site" class="header-link">Site overview</a>
+          <i class="fa fa-globe text-primary"></i>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
+          <!-- Followers -->
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.subscriber_count}">
-            Subscribers <b class="pull-right text-primary">{{ Metrics.list.subscriber_count }}</b>
+            <i class="fa fa-border fa-user-plus"></i> Followers
+            <b class="pull-right text-primary">{{ Metrics.list.subscriber_count }}</b>
+          </li>
+          <!-- Template -->
+          <li class="list-group-item">
+            <i class="fa fa-border fa-paint-brush"></i> Theme and Layout
+            <a class="pull-right btn btn-primary btn-sm" ui-sref="dash.site">
+              {{ siteTemplate.name | uppercase }}
+            </a>
           </li>
         </ul>
       </div>
@@ -102,7 +129,8 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
-          <i class="fa fa-cubes text-primary"></i> Files overview
+          <a ui-sref="dash.dolphin" class="header-link">Storage</a>
+          <i class="fa fa-cubes text-primary"></i>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
@@ -140,7 +168,7 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
-          <i class="fa fa-users text-primary"></i> Team overview
+          <i class="fa fa-users text-primary"></i> Team
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
