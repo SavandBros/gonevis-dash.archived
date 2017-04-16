@@ -506,7 +506,7 @@ md-toast {
     min-width: 34px;
 }
 
-.panel-heading .fa:not(.init) {
+.panel-heading>.fa:not(.init) {
     float: right;
     color: #d17100;
     background: rgba(0, 0, 0, 0.1);
