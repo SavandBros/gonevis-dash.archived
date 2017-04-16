@@ -41,9 +41,14 @@
         <ul class="panel-body panel-list">
           <!-- Entry -->
           <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list" ng-show="!entry.isDeleted">
+            <!-- Title -->
             <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
               {{ entry.get.title }}
             </a>
+            <!-- Views -->
+            <span class="pull-right label label-default" ng-if="entry.get.view_count">
+              {{ entry.get.view_count }} <i class="fa fa-eye o-fade"></i>
+            </span>
           </li>
         </ul>
       </div>
