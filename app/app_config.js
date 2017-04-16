@@ -37,7 +37,7 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
     ],
     elements: {
       arc: {
-        borderWidth: 0
+        borderWidth: 4
       }
     }
   });
