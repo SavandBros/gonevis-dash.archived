@@ -484,6 +484,14 @@ md-toast {
     cursor: pointer;
 }
 
+.panel-list-item .label {
+    padding: 4px;
+    background: none;
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-left: 4px;
+}
+
 .panel-heading {
     padding: 18px 12px !important;
 }
