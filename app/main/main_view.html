@@ -96,6 +96,15 @@
         <ul class="panel-body list-group s-pad-no">
           <!-- Followers -->
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.subscriber_count}">
+            <i class="fa fa-border fa-user-plus"></i> Followers
+            <b class="pull-right text-primary">{{ Metrics.list.subscriber_count }}</b>
+          </li>
+          <!-- Template -->
+          <li class="list-group-item">
+            <i class="fa fa-border fa-paint-brush"></i> Theme and Layout
+            <a class="pull-right btn btn-primary btn-sm" ui-sref="dash.site">
+              {{ siteTemplate.name | uppercase }}
+            </a>
           </li>
         </ul>
       </div>
