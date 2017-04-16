@@ -5,7 +5,8 @@
       <!-- Latest comments -->
       <div class="panel panel-default" ng-if="Comment.list.length">
         <div class="panel-heading">
-          Comments <span class="label label-default">{{ Metrics.list.comment_count }}</span>
+          <a ui-sref="dash.comment-list" class="header-link">Comments</a>
+          <span class="label label-default">{{ Metrics.list.comment_count }}</span>
         </div>
         <ul class="panel-body panel-list">
           <!-- Comment -->
