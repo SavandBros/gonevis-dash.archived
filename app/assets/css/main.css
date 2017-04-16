@@ -1401,6 +1401,13 @@ a.thumbnail.active {
 }
 
 
+/* List group item */
+
+.list-group-item .pull-right.btn-sm {
+    margin-top: -5px;
+}
+
+
 /* Over flow */
 
 .of {
