@@ -22,6 +22,9 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
     // Get collaborating token
     $scope.inviteId = $stateParams.token;
 
+    // Get username
+    $scope.username = $stateParams.username;
+
     // Toggle password visibility
     $scope.showPassword = false;
 
