@@ -14,7 +14,7 @@
           </small>
         </div>
         <!-- Signup form -->
-        <form ng-submit="signup(form)" name="form" ng-hide="success">
+        <form ng-submit="signup(form)" ng-hide="success">
           <h3 class="o-fade-soft">{{ inviteToken ? "Start Collaborating" : "Register" }}</h3>
           <hr>
           <!-- Email -->
@@ -25,7 +25,7 @@
           </div>
           <!-- Username -->
           <div class="form-group" ng-class="{'has-error': form.errors.username}">
-            <input id="username" class="form-control input-lg" type="username" ng-init="form.data.username = username"
+            <input id="username" class="form-control input-lg" type="username"
               ng-focus="form.focused.username = true" ng-blur="form.focused.username = false"
               uib-tooltip="Used in your public profile." tooltip-trigger="'focus'" tooltip-class="init"
               ng-model="form.data.username" placeholder="Username" required/>
