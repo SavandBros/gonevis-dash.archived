@@ -6,11 +6,12 @@
  * @param $scope
  * @param $rootScope
  * @param $state
- * @param toaster
+ * @param $stateParams
  * @param API
+ * @param toaster
  * @param AuthService
  */
-function SiteNewController($scope, $rootScope, $state, toaster, API, AuthService) {
+function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthService, toaster) {
 
   /**
    * @method constructor
@@ -18,6 +19,14 @@ function SiteNewController($scope, $rootScope, $state, toaster, API, AuthService
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
+
+    // Get site from param
+    if ($stateParams.site) {
+      var name = $stateParams.site.split(".")[0];
+      if (name.length >= 3) {
+        $scope.form = { url: name };
+      }
+    }
   }
 
   /**
@@ -54,7 +63,8 @@ SiteNewController.$inject = [
   "$scope",
   "$rootScope",
   "$state",
-  "toaster",
+  "$stateParams",
   "API",
-  "AuthService"
+  "AuthService",
+  "toaster"
 ];
