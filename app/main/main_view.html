@@ -85,21 +85,35 @@
           Comment overview <i class="fa fa-comment text-primary"></i>
         </div>
         <!-- Overview (Chart -->
-        <ul class="panel-body panel-body-chart s-pad">
-          <!-- Chart text -->
-          <h1 class="chart-text chart-text-doughnut">
-            {{ Metrics.list.comment_count }}
-            <small>Comments</small>
-          </h1>
-          <!-- Chart -->
-          <canvas class="chart chart-doughnut"
-            chart-labels="['Active Comments', 'Pending Comments', 'Hidden Comments']"
-            chart-data="[
-              Metrics.list.active_comment_count,
-              Metrics.list.pending_comment_count,
-              Metrics.list.hidden_comment_count
-            ]">
-          </canvas>
+        <ul class="panel-body panel-body-chart s-pad-no list-group">
+          <div ng-if="Metrics.list.active_comment_count !== Metrics.list.comment_count">
+            <!-- Chart text -->
+            <h1 class="chart-text chart-text-doughnut">
+              {{ Metrics.list.comment_count }}
+              <small>Comments</small>
+            </h1>
+            <!-- Chart -->
+            <div class="s-pad">
+<canvas class="chart chart-doughnut"
+              chart-labels="[' Active Comments', ' Pending Comments', ' Hidden Comments']"
+              chart-data="[
+                Metrics.list.active_comment_count,
+                Metrics.list.pending_comment_count,
+                Metrics.list.hidden_comment_count
+              ]">
+            </canvas>
+            </div>
+          </div>
+          <li class="list-group-item"
+            ng-show="Metrics.list.comment_count && Metrics.list.active_comment_count == Metrics.list.comment_count">
+            <i class="fa fa-border fa-check"></i> All comments are approved
+            <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
+          </li>
+          <li class="list-group-item"
+            ng-show="!Metrics.list.comment_count" ng-class="{'o-fade': !Metrics.list.comment_count}">
+            Comments
+            <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
+          </li>
         </ul>
       </div>
       <!-- Site Overview -->
