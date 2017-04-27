@@ -8,7 +8,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
   // Other states that are not a child of dash state
     .state("site-new", {
-      url: "/new-site",
+      url: "/new-site?site",
       controller: "SiteNewController",
       templateUrl: "site/site_new/site_new_view.html",
       auth: true,
