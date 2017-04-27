@@ -18,6 +18,12 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
    * @desc Init function for controller
    */
   function constructor() {
+    // Forn with username (param)
+    $scope.form = {
+      data: {
+        username: $stateParams.username
+      }
+    };
 
     // Get collaborating token
     $scope.inviteId = $stateParams.token;

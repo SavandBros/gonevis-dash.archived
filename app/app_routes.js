@@ -35,7 +35,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       title: "Login"
     })
     .state("signup", {
-      url: "/register",
+      url: "/register?username",
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
       auth: false,
