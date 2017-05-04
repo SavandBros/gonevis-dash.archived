@@ -49,6 +49,10 @@
             <span class="pull-right label label-default" ng-if="entry.get.view_count">
               {{ entry.get.view_count }} <i class="fa fa-eye o-fade"></i>
             </span>
+            <!-- Comments -->
+            <span class="pull-right label label-default" ng-if="entry.get.comment_count">
+              {{ entry.get.comment_count }} <i class="fa fa-comments o-fade"></i>
+            </span>
             <!-- Votes -->
             <span class="pull-right label label-default" ng-if="entry.get.vote_count">
               {{ entry.get.vote_count }} <i class="fa fa-heart o-fade"></i>
