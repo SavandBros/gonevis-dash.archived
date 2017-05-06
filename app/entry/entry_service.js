@@ -4,11 +4,12 @@
  * @class Entry
  *
  * @param $rootScope
+ * @param $state
  * @param API
  * @param Codekit
  * @param toaster
  */
-function Entry($rootScope, API, Codekit, toaster) {
+function Entry($rootScope, $state, API, Codekit, toaster) {
   return function (data) {
 
     /**
@@ -112,12 +113,26 @@ function Entry($rootScope, API, Codekit, toaster) {
 
       return this.get.absolute_uri + params;
     };
+
+    /**
+     * @method addToNavigation
+     * @desc Add entry to navigation
+     */
+    this.addToNavigation = function () {
+      $state.go("dash.navigation", {
+        add: {
+          label: this.get.title,
+          url: "/" + this.get.slug
+        }
+      });
+    };
   };
 }
 
 app.service("Entry", Entry);
 Entry.$inject = [
   "$rootScope",
+  "$state",
   "API",
   "Codekit",
   "toaster"
