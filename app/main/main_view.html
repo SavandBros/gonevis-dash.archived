@@ -12,7 +12,11 @@
           <!-- Comment -->
           <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list" ng-show="!comment.isDeleted">
             <!-- Username -->
-            <small>{{ comment.get.user.name }}:</small>
+            <small>
+              {{ comment.get.user.name }} responded to <a href="#">{{ comment.get.entry_title }}</a>
+              <span class="o-fade-soft">{{ comment.get.created | date }}</span>
+            </small>
+            <br>
             <!-- Content -->
             <a ng-click="comment.view()">{{ comment.get.comment }}</a>
             <!-- Options -->
