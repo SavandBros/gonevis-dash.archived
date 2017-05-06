@@ -19,11 +19,7 @@
             ng-src="{{
               comment.get.user.media.picture ? comment.get.user.media.thumbnail_48x48 : 'assets/img/avatar.png'
             }}">
-          <small>
-            {{ comment.get.user.name }} responded to <a href="#">{{ comment.get.entry_title }}</a>
-            <span class="o-fade-soft">{{ comment.get.created | date }}</span>
-          </small>
-          <br>
+          <small>{{ comment.get.user.name }}:</small>
           <!-- Comment -->
           <a ng-click="comment.view()">{{ comment.get.comment }}</a>
           <!-- Options -->
@@ -44,6 +40,8 @@
               </li>
             </ul>
           </span>
+          <!-- Extra info -->
+          <small class="dis-b">{{ comment.get.created | date }}</small>
         </li>
       </ul>
     </div>
