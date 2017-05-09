@@ -13,7 +13,10 @@
           <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list" ng-show="!comment.isDeleted">
             <!-- Username -->
             <small>
-              {{ comment.get.user.name }} responded to
+              <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
+                {{ comment.get.user.name }}
+              </a>
+              responded to
               <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
                 {{ comment.get.commented_object_minimal_data.title }}
               </a>
