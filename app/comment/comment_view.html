@@ -20,7 +20,10 @@
               comment.get.user.media.picture ? comment.get.user.media.thumbnail_48x48 : 'assets/img/avatar.png'
             }}">
           <small>
-            {{ comment.get.user.name }} responded to <a href="#">{{ comment.get.entry_title }}</a>
+            {{ comment.get.user.name }} responded to
+            <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
+              {{ comment.get.commented_object_minimal_data.title }}
+            </a>
             <span class="o-fade-soft">{{ comment.get.created | date }}</span>
           </small>
           <br>
