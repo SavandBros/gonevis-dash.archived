@@ -6,11 +6,20 @@
         <img class="modal-image" ng-src="{{ comment.get.user.media.picture ?
           comment.get.user.media.thumbnail_128x128 : 'assets/img/avatar.png'
         }}">
-        {{ comment.get.user.name }} <small class="pull-right">{{ comment.get.created | date }}</small>
+        <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
+          {{ comment.get.user.name }}
+        </a>
+        <small class="pull-right">{{ comment.get.created | date }}</small>
       </div>
       <div class="modal-body">
         <!-- Comment content -->
-        {{ comment.get.comment }}
+        <h3>{{ comment.get.comment }}</h3>
+        <br>
+        <blockquote>
+          <a class="c-grey" ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
+            {{ comment.get.commented_object_minimal_data.title }}
+          </a>
+        </blockquote>
         <hr>
         <!-- Reply -->
         <form ng-submit="comment.reply(form.comment)" name="form">
