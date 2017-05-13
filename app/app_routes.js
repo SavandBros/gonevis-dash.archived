@@ -183,7 +183,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     if (AuthService.isAuthenticated()) {
       state.go("dash.main", { s: 0 });
     } else {
-      state.go("signin");
+      state.go("start");
     }
   });
 });
