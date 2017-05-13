@@ -7,6 +7,13 @@
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
   // Other states that are not a child of dash state
+    .state("start", {
+      url: "/",
+      controller: "StartController",
+      templateUrl: "start/start_view.html",
+      auth: false,
+      title: "Get Started"
+    })
     .state("site-new", {
       url: "/new-site?site",
       controller: "SiteNewController",
