@@ -1,0 +1,28 @@
+<div class="container s-pad-y-hard">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <!-- Site address -->
+      <h2 class="text-center">Let's create your site.</h2>
+      <!-- Site url input -->
+      <div class="form-group s-mar-y col-md-12">
+        <div class="input-group">
+          <input type="text" name="siteName" ng-model="name"
+            class="form-control input-xlg primary" placeholder="Enter site address">
+          <span class="input-group-addon" id="subdomain">
+            <span class="text-primary">.gonevis.com</span>
+          </span>
+        </div>
+      </div>
+      <!-- Site templates -->
+      <div class="dis-ib animated slideInUp">
+        <div class="col-md-4 col-sm-6" ng-repeat="template in templates">
+          <div class="thumbnail thumbnail-selection">
+            <span><i class="fa fa-3x fa-check"></i></span>
+            <img src="https://i1.wp.com/s0.wp.com/wp-content/themes/pub/harmonic/screenshot.png?w=660?w=340">
+            <div>Template {{ $index }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
