@@ -7,7 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ui-sref="dash.main({s: param.s})">Dash</a>
+      <a class="navbar-brand" ng-if="auth.isAuthenticated()"  ui-sref="dash.main({s: param.s})">Dash</a>
+      <a class="navbar-brand" ng-if="!auth.isAuthenticated()" ui-sref="start">GoNevis</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav" ng-if="auth.isAuthenticated() && param.s">
@@ -52,12 +53,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signin')}">
-          <a ui-sref="signin">Login</a>
+          <a ui-sref="signin">Log In</a>
         </li>
-        <li ng-if="!auth.isAuthenticated()"
+        <!--<li ng-if="!auth.isAuthenticated()"
           ng-class="{'active': state.includes('signup') || state.includes('collaborate')}">
           <a ui-sref="signup">Register</a>
-        </li>
+        </li>-->
         <li class="animated fadeIn" ng-if="param.lights">
           <a ng-click="set.lights = !set.lights">
             <i class="fa fa-lightbulb-o nav-icon"></i>
