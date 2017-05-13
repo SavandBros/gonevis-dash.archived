@@ -1582,3 +1582,37 @@ img.tag {
 .bg-no {
     background: none;
 }
+
+
+/* Thumbnail selection */
+
+.thumbnail-selection {
+    padding: 2px;
+    cursor: pointer;
+}
+
+.thumbnail-selection:hover {
+    border-color: #d17100;
+}
+
+.thumbnail-selection span {
+    color: #fff;
+    position: absolute;
+    top: calc(50% - 40px);
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.15s ease-in-out;
+}
+
+.thumbnail-selection:hover span {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.thumbnail-selection div {
+    font-weight: bold;
+    padding: 10px;
+}
