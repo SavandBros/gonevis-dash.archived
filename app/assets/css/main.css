@@ -246,6 +246,11 @@ hr[soft] {
     padding-bottom: 30px;
 }
 
+.s-pad-y-hard {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 .s-pad-y-soft {
     padding-top: 15px;
     padding-bottom: 15px;
