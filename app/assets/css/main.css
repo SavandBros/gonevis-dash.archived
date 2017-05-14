@@ -573,6 +573,18 @@ md-toast {
 }
 
 
+/* Panel */
+
+.panel {
+    border-radius: 2px;
+}
+
+.panel,
+.panel-heading {
+    border-color: #dcdcdc !important;
+}
+
+
 /* Dolphin */
 
 .dolphin {
