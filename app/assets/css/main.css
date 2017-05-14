@@ -1607,3 +1607,44 @@ img.tag {
 .bg-no {
     background: none;
 }
+
+
+/* Popover */
+
+.popover {
+    border-radius: 2px;
+    border-color: #dcdcdc;
+    box-shadow: none;
+    padding: 0;
+    max-width: 350px;
+    box-shadow: 0 0 0 100000px rgba(0, 0, 0, 0.6);
+}
+
+.popover-target {
+    position: relative;
+    z-index: 10000;
+}
+
+.popover button {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 12px;
+}
+
+.popover-title {
+    padding: 20px;
+    border-radius: 2px 2px 0 0;
+    font-size: large;
+    background: #eee;
+}
+
+.popover-content {
+    padding: 20px;
+}
+
+.popover.top .arrow {
+    border-top-color: #ccc;
+}
