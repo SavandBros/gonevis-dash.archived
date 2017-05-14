@@ -1,3 +1,4 @@
+<!-- Navbar -->
 <nav class="navbar navbar-default navbar-static-top" ng-class="{'navbar-default': set.lights, 'navbar-inverse': !set.lights}">
   <div class="container">
     <div class="navbar-header">
@@ -95,6 +96,17 @@
   </div>
 </nav>
 
+<!-- Toaster -->
 <toaster-container
   toaster-options="{'position-class': 'toast-bottom-left'}">
 </toaster-container>
+
+<!-- Popover -->
+<div class="popover tour animated">
+  <div class="arrow"></div>
+  <button class="btn btn-success" ng-click="tour.nextStep()">
+    <i class="fa fa-check"></i>
+  </button>
+  <div class="popover-title"></div>
+  <div class="popover-content"></div>
+</div>
