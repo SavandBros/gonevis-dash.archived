@@ -11,10 +11,12 @@
  * @param Codekit
  * @param Entry
  * @param API
+ * @param Tour
+ * @param TourStep
  * @param toaster
  */
 function HeaderController($scope, $rootScope, $state, $stateParams,
-  AuthService, DolphinService, Codekit, Entry, API, toaster) {
+  AuthService, DolphinService, Codekit, Entry, API, Tour, TourStep, toaster) {
 
   /**
    * @method constructor
@@ -31,6 +33,14 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
 
     // Entry formats
     $scope.entryFormats = Codekit.entryFormats;
+
+    // Tour
+    setTimeout(function () {
+      $scope.tour = new Tour([
+        new TourStep("#entries", "Entries Overview", "Check out your latest entries and some info."),
+        new TourStep("#site", "Entries Overview 2", "Check out your latest entries and some info."),
+      ]);
+    }, 2000);
   }
 
   /**
@@ -164,5 +174,7 @@ HeaderController.$inject = [
   "Codekit",
   "Entry",
   "API",
+  "Tour",
+  "TourStep",
   "toaster"
 ];
