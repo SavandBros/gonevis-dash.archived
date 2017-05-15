@@ -44,8 +44,8 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
      * @method cache
      * @desc Cache entry
      */
-    this.cache = function () {
-      $rootScope.cache.entry = this;
+    this.cache = function (clear) {
+      $rootScope.cache.entry = clear ? null : this;
     };
 
     /**
