@@ -55,6 +55,8 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
     // Entry submission
     entry.create(
       function (data) {
+        // Prevent older cache
+        entry.cache(true);
         toaster.success("Done", "Entry created!");
         // Go for edit
         $state.go("dash.entry-edit", {
