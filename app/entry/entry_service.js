@@ -43,6 +43,7 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     /**
      * @method cache
      * @desc Cache entry
+     * @param clear {Boolean}
      */
     this.cache = function (clear) {
       $rootScope.cache.entry = clear ? null : this;
@@ -68,7 +69,7 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     };
 
     /**
-     * @method create
+     * @method createdocumentation
      * @desc Entry creation
      *
      * @param success {Function}
