@@ -8,7 +8,7 @@
         <div class="row">
           <!-- Templates -->
           <div class="col-md-6" ng-repeat="template in siteTemplates">
-            <div class="thumbnail b-co" style="background: #eee"
+            <div class="thumbnail b-co" style="background: #eee; max-width: 512px;"
               ng-class="{'b-color-0': current.name === template.name}">
               <!-- Image -->
               <img ng-src="{{ template.media.screen_shot }}" alt="{{ template.name }}">
@@ -17,7 +17,7 @@
                 <h3 style="margin-bottom: 10px">{{ template.name }}</h3>
                 <!-- Author -->
                 <span class="text-muted" style="margin-top: 12px">
-                  By <a href="{{ template.config.thumbnail_256x256 }}" target="_blank"> {{ template.config.author }}</a>
+                  By <a href="{{ template.config.thumbnail_512x512 }}" target="_blank"> {{ template.config.author }}</a>
                 </span>
                 <div class="btn-group pull-right" style="margin-top: -12px">
                   <!-- Select(ed) -->
@@ -35,6 +35,12 @@
                       <li>
                         <a href="{{ site.absolute_uri }}/?preview-template={{ template.name }}" target="_blank">
                           <i class="fa fa-eye-slash"></i> Prevew
+                        </a>
+                      </li>
+                      <!-- View image -->
+                      <li>
+                        <a href="{{ template.media.thumbnail_512x512 }}" target="_blank">
+                          <i class="fa fa-search-plus"></i> View image
                         </a>
                       </li>
                     </ul>
