@@ -14,7 +14,8 @@ function StartController($scope, API) {
     API.WebsiteTemplates.get({},
       function (data) {
         $scope.templates = data.results;
-      });
+      }
+    );
   }
 
 
