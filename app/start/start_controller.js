@@ -11,7 +11,7 @@ function StartController($scope, API) {
    */
   function constructor() {
 
-    API.WebsiteTemplates.get({},
+    API.SiteTemplatesPublic.get({},
       function (data) {
         $scope.templates = data.results;
       }
