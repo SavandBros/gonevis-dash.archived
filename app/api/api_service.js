@@ -82,7 +82,7 @@ function API($http, $resource, ENV) {
       name: "SiteMetrics",
       endpoint: "website/site/:siteId/metrics/" // GET
     }, {
-      name: "WebsiteTemplates",
+      name: "SiteTemplatesPublic",
       endpoint: "website/templates/" // GET
     }, {
       name: "SiteTemplateConfig",
