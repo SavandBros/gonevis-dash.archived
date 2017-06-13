@@ -18,8 +18,8 @@
         <div class="col-md-4 col-sm-6" ng-repeat="template in templates">
           <div class="thumbnail thumbnail-selection">
             <span><i class="fa fa-3x fa-check"></i></span>
-            <img src="https://i1.wp.com/s0.wp.com/wp-content/themes/pub/harmonic/screenshot.png?w=660?w=340">
-            <div>Template {{ $index }}</div>
+            <img ng-src="{{ template.media.thumbnail_256x256 }}">
+            <div>{{ template.name }}</div>
           </div>
         </div>
       </div>
