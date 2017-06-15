@@ -3,7 +3,7 @@
 /**
  * @class StartController
  */
-function StartController($scope) {
+function StartController($scope, API) {
 
   /**
    * @method constructor
@@ -11,9 +11,11 @@ function StartController($scope) {
    */
   function constructor() {
 
-    $scope.templates = [
-      1, 2, 3, 4 ,5, 6, 7, 8, 9
-    ];
+    API.SiteTemplatesPublic.get({},
+      function (data) {
+        $scope.templates = data.results;
+      }
+    );
   }
 
 
@@ -22,5 +24,6 @@ function StartController($scope) {
 
 app.controller("StartController", StartController);
 StartController.$inject = [
-  "$scope"
+  "$scope",
+  "API"
 ];
