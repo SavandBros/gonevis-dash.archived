@@ -12,7 +12,6 @@ function StartController($scope, $timeout, Password, API) {
 
   /**
    * @method constructor
-   * @desc Init function for controller
    */
   function constructor() {
 
