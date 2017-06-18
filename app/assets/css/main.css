@@ -1628,7 +1628,8 @@ img.tag {
     cursor: pointer;
 }
 
-.thumbnail-selection:hover {
+.thumbnail-selection:hover,
+.thumbnail-selection.active {
     border-color: #d17100;
 }
 
@@ -1641,10 +1642,15 @@ img.tag {
     text-align: center;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.15s ease-in-out;
+    z-index: 1;
 }
 
-.thumbnail-selection:hover span {
+.thumbnail-selection.active span {
+    color: #d17100;
+}
+
+.thumbnail-selection:hover span,
+.thumbnail-selection.active span {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
 }
@@ -1653,6 +1659,13 @@ img.tag {
     font-weight: bold;
     padding: 10px;
 }
+
+.thumbnail-selection img,
+.thumbnail-selection span {
+    transition: all 0.15s ease-in-out;
+}
+
+
 /* Popover input */
 
 .popover-input {
