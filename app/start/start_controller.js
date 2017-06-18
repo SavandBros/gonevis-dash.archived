@@ -66,6 +66,23 @@ function StartController($scope, $timeout, Password, API) {
       $scope.isNexting = false;
     }, 500);
   };
+  $scope.checkDomain = function (form) {
+    form.loading = true;
+
+    API.DomainCheck.post({ domain: form.name },
+      function () {
+        form.checkedName = form.name;
+        form.loading = false;
+        form.available = true;
+      },
+      function (data) {
+        form.checkedName = form.name;
+        form.loading = false;
+        form.available = false;
+        form.error = data.data;
+      }
+    );
+  };
    * @method signup
    * @desc Submit signup form
    * 
