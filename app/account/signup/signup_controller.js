@@ -54,7 +54,7 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
       payload.invite_id = $scope.inviteId;
     }
 
-    API.Signup.post(payload,
+    API.SignupAccount.post(payload,
       function (data) {
         form.errors = [];
         $scope.registeredEmail = data.email;
