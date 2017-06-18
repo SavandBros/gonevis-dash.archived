@@ -66,6 +66,13 @@ function StartController($scope, $timeout, Password, API) {
       $scope.isNexting = false;
     }, 500);
   };
+
+  /**
+   * @method checkDomain
+   * @desc Check availability of domain as user enters it
+   *
+   * @param {Object} form Domain form
+   */
   $scope.checkDomain = function (form) {
     form.loading = true;
 
