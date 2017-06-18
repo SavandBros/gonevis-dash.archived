@@ -56,6 +56,9 @@ function StartController($scope, $timeout, Password, API) {
   }
 
   /**
+   * @method next
+   * @desc Take user to next step of getting started
+   */
   $scope.next = function () {
     $scope.isNexting = true;
     $timeout(function () {
