@@ -120,6 +120,9 @@ function API($http, $resource, ENV) {
     }, {
       name: "RemoveTeamPending",
       endpoint: "website/site/:siteId/remove-pending-member/" // PUT
+    }, {
+      name: "DomainCheck",
+      endpoint: "website/domain-check/" // POST
     },
     // Tagool
     {
