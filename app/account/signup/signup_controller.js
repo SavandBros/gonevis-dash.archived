@@ -41,7 +41,7 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
    * 
    * @param form {Object}
    */
-  $scope.signup = function register(form) {
+  $scope.signup = function (form) {
     form.loading = true;
 
     var payload = {
