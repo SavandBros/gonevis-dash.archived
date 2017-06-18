@@ -13,13 +13,33 @@
           </span>
         </div>
       </div>
-      <!-- Site templates -->
-      <div class="dis-ib animated slideInUp">
-        <div class="col-md-4 col-sm-6" ng-repeat="template in templates">
-          <div class="thumbnail thumbnail-selection">
-            <span><i class="fa fa-3x fa-check"></i></span>
-            <img ng-src="{{ template.media.thumbnail_256x256 }}">
-            <div>{{ template.name }}</div>
+
+      <!-- Step: Template -->
+      <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting}" ng-if="steps[step] === 'template'">
+
+        <!-- Sub header -->
+        <h4 class="page-header">
+          Pick a theme
+          <button class="btn btn-primary btn-sm pull-right"
+            ng-click="selectTemplate(templates[0])">
+            Skip <i class="fa fa-fw fa-arrow-right"></i>
+          </button>
+        </h4>
+
+        <!-- Templatews -->
+        <div class="row">
+          <div class="col-md-4 col-sm-6 text-center" ng-repeat="template in templates">
+            <div class="thumbnail thumbnail-selection dis-ib" ng-click="selectTemplate(template)"
+              ng-class="{active: selectedTemplate.id === template.id}">
+              <span>
+                <i class="fa fa-3x" ng-class="{
+                  'fa-check': selectedTemplate.id !== template.id,
+                  'fa-check-circle': selectedTemplate.id === template.id
+                }"></i>
+              </span>
+              <img ng-src="{{ template.media.thumbnail_512x512 }}">
+              <div class="t-cap">{{ template.name }}</div>
+            </div>
           </div>
         </div>
       </div>
