@@ -56,6 +56,13 @@ function StartController($scope, $timeout, Password, API) {
   }
 
   /**
+  $scope.next = function () {
+    $scope.isNexting = true;
+    $timeout(function () {
+      $scope.step++;
+      $scope.isNexting = false;
+    }, 500);
+  };
    * @method signup
    * @desc Submit signup form
    * 
