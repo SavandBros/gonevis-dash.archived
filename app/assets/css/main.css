@@ -1683,3 +1683,11 @@ img.tag {
 .popover-input.bottom>.arrow {
     left: 50px;
 }
+
+
+/* Page header button */
+
+.page-header .btn.pull-right {
+    margin: -10px;
+    margin-right: 0;
+}
