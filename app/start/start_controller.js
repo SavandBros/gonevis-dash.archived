@@ -29,6 +29,28 @@ function StartController($scope, $timeout, Password, API) {
     );
   }
 
+  $scope.signup = function (form) {
+    form.loading = true;
+
+    var payload = {
+      password: $scope.password.password,
+      email: form.data.email,
+      template_id: $scope.selectedTemplate.id,
+      site_name: $scope.domainForm.name,
+      site_url: $scope.domainForm.name
+    };
+
+    API.Signup.post(payload,
+      function () {
+        form.errors = [];
+        $scope.success = true;
+      },
+      function (data) {
+        form.loading = false;
+        form.errors = data.data;
+      }
+    );
+  };
 
   constructor();
 }
