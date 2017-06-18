@@ -119,10 +119,10 @@ function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams)
   }
 
   /**
-   * @method logout
+   * @method signOut
    * @desc Clear credentials (log user out)
    */
-  function logout() {
+  function signOut() {
     unAuthenticate();
     $rootScope.$broadcast("gonevisDash.AuthService:SignedOut");
   }
@@ -152,7 +152,7 @@ function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams)
     setAuthenticatedUser: setAuthenticatedUser,
     unAuthenticate: unAuthenticate,
     isAuthenticated: isAuthenticated,
-    logout: logout,
+    signOut: signOut,
     getCurrentSite: getCurrentSite
   };
 }
