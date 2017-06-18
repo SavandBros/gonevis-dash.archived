@@ -93,7 +93,7 @@ function StartController($scope, $timeout, Password, API) {
    * @method signup
    * @desc Submit signup form
    * 
-   * @param form {Object}
+   * @param {Object} form Signup form
    */
   $scope.signup = function (form) {
     form.loading = true;
