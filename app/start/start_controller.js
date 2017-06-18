@@ -29,6 +29,12 @@ function StartController($scope, $timeout, Password, API) {
     );
   }
 
+  /**
+   * @method signup
+   * @desc Submit signup form
+   * 
+   * @param form {Object}
+   */
   $scope.signup = function (form) {
     form.loading = true;
 
