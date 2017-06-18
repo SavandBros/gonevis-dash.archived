@@ -1,16 +1,48 @@
 <div class="container s-pad-y-hard">
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-      <!-- Site address -->
-      <h2 class="text-center">Let's create your site.</h2>
-      <!-- Site url input -->
-      <div class="form-group s-mar-y col-md-12">
-        <div class="input-group">
-          <input type="text" name="siteName" ng-model="name"
-            class="form-control input-xlg primary" placeholder="Enter site address">
-          <span class="input-group-addon" id="subdomain">
-            <span class="text-primary">.gonevis.com</span>
-          </span>
+
+      <!-- Step: Domain -->
+      <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting}" ng-if="steps[step] === 'domain'">
+
+        <!-- Title -->
+        <h2 class="text-center">Let's create your site</h2>
+        
+        <!-- Domain form -->
+        <div class="form-group s-mar-y">
+          <div class="input-group">
+            <input type="text" name="siteName" ng-model="domainForm.name" ng-change="checkDomain(domainForm)"
+              class="form-control input-xlg primary" placeholder="Enter site address"
+              ng-model-options='{ debounce: 500 }' ng-minlength="3">
+            <span class="input-group-addon" id="subdomain">
+              <span class="text-primary">.gonevis.com</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Domain status -->
+        <div class="popover popover-input bottom" ng-if="domainForm.checkedName">
+          <div class="arrow"></div> 
+          <div class="popover-content">
+            <div ng-class="{'o-fade': domainForm.loading}">
+              <span ng-if="domainForm.available">
+                <b><i class="fa fa-fw fa-check text-success"></i> Awesome!</b> {{ domainForm.checkedName }} is available.
+              </span>
+              <span ng-if="!domainForm.available">
+                <b><i class="fa fa-fw fa-times text-danger"></i> Oh...</b> {{ domainForm.error.domain[0] }}.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continue -->
+        <div class="col-xs-12 s-mar-top-soft" ng-if="domainForm.available">
+          <div class="animated fadeIn">
+            <button class="btn btn-primary btn-lg col-md-3 col-md-offset-4 col-xs-12"
+              ng-disabled="domainForm.loading" ng-click="next()">
+              Continue <i class="fa fa-fw fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </div>
 
