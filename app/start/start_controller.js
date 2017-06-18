@@ -2,6 +2,11 @@
 
 /**
  * @class StartController
+ *
+ * @param $scope
+ * @param $timeout
+ * @param Password
+ * @param API
  */
 function StartController($scope, $timeout, Password, API) {
 
@@ -31,6 +36,7 @@ function StartController($scope, $timeout, Password, API) {
 app.controller("StartController", StartController);
 StartController.$inject = [
   "$scope",
+  "$timeout",
   "Password",
   "API"
 ];
