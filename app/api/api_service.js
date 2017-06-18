@@ -22,6 +22,9 @@ function API($http, $resource, ENV) {
       name: "Signup",
       endpoint: "account/register/"
     }, {
+      name: "SignupAccount",
+      endpoint: "account/register-account-only/"
+    }, {
       name: "Profile",
       endpoint: "profile/"
     }, {
