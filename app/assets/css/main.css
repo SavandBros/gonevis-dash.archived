@@ -1472,6 +1472,10 @@ a.thumbnail.active {
     font-weight: bold;
 }
 
+.t-cap {
+    text-transform: capitalize;
+}
+
 .t-line {
     white-space: nowrap;
     text-overflow: ellipsis;
