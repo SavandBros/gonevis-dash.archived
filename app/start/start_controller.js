@@ -90,11 +90,19 @@ function StartController($scope, $timeout, Password, API) {
       }
     );
   };
+
+  /**
+   * @method selectTemplate
+   * @desc Store template and go to next step
+   *
+   * @param {Object} template Selected template object
+   */
   $scope.selectTemplate = function (template) {
     $scope.selectedTemplate = template;
     $scope.next();
   };
 
+  /**
    * @method signup
    * @desc Submit signup form
    * 
