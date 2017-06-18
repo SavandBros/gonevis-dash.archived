@@ -1653,3 +1653,20 @@ img.tag {
     font-weight: bold;
     padding: 10px;
 }
+/* Popover input */
+
+.popover-input {
+    position: relative;
+    display: block;
+    float: left;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    margin-top: -15px !important;
+    border-radius: 2px;
+    box-shadow: none;
+}
+
+.popover-input.bottom>.arrow {
+    left: 50px;
+}
