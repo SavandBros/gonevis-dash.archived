@@ -90,6 +90,11 @@ function StartController($scope, $timeout, Password, API) {
       }
     );
   };
+  $scope.selectTemplate = function (template) {
+    $scope.selectedTemplate = template;
+    $scope.next();
+  };
+
    * @method signup
    * @desc Submit signup form
    * 
