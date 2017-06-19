@@ -10,10 +10,11 @@
  * @param $cookies
  * @param $window
  * @param $stateParams
+ * @param API
  *
  * @returns [Factory]
  */
-function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams) {
+function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams, API) {
   /**
    * @method getAuthenticatedUser
    * @desc Return the currently authenticated user
@@ -119,6 +120,24 @@ function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams)
   }
 
   /**
+  function signIn(username, password, success, fail) {
+    API.Signin.post({
+        username: username,
+        password: password
+      },
+      function (data) {
+        setAuthenticatedUser(data.user);
+        setToken(data.token);
+        $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
+        success(data);
+      },
+      function (data) {
+        fail(data);
+      }
+    );
+  }
+
+  /**
    * @method signOut
    * @desc Clear credentials (log user out)
    */
@@ -152,6 +171,7 @@ function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams)
     setAuthenticatedUser: setAuthenticatedUser,
     unAuthenticate: unAuthenticate,
     isAuthenticated: isAuthenticated,
+    signIn: signIn,
     signOut: signOut,
     getCurrentSite: getCurrentSite
   };
@@ -164,5 +184,6 @@ AuthService.$inject = [
   "$http",
   "$cookies",
   "$window",
-  "$stateParams"
+  "$stateParams",
+  "API"
 ];
