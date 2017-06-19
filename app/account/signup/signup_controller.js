@@ -41,7 +41,7 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
    * 
    * @param form {Object}
    */
-  $scope.signup = function register(form) {
+  $scope.signup = function (form) {
     form.loading = true;
 
     var payload = {
@@ -54,11 +54,20 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
       payload.invite_id = $scope.inviteId;
     }
 
-    API.Signup.post(payload,
-      function (data) {
+    API.SignupAccount.post(payload,
+      function () {
         form.errors = [];
-        $scope.registeredEmail = data.email;
-        $scope.success = true;
+        // Sign user in
+        AuthService.signIn(
+          form.data.username,
+          $scope.password.password,
+          function () {
+            toaster.success(
+              "Welcome " + form.data.username,
+              "Thanks for registering at GoNevis, a link has been sent to your email for account verification."
+            );
+          }
+        );
       },
       function (data) {
         form.loading = false;

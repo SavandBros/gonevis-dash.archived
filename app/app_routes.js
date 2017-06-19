@@ -7,6 +7,13 @@
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
   // Other states that are not a child of dash state
+    .state("start", {
+      url: "/",
+      controller: "StartController",
+      templateUrl: "start/start_view.html",
+      auth: false,
+      title: "Get Started"
+    })
     .state("site-new", {
       url: "/new-site?site",
       controller: "SiteNewController",
@@ -23,6 +30,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "account/user/user_view.html",
       auth: true,
       title: "Account",
+      params: {
+        s: 0
+      }
+    })
+    .state("change-password", {
+      url: "/change-password",
+      controller: "ChangePassController",
+      templateUrl: "account/change_pass/change_pass_view.html",
+      auth: true,
+      title: "Change Password",
       params: {
         s: 0
       }
@@ -154,13 +171,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: true,
       title: "Tags"
     })
-    .state("dash.change-password", {
-      url: "/change-password",
-      controller: "ChangePassController",
-      templateUrl: "account/change_pass/change_pass_view.html",
-      auth: true,
-      title: "Change Password"
-    })
     .state("dash.team", {
       url: "/team",
       controller: "TeamController",
@@ -176,7 +186,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     if (AuthService.isAuthenticated()) {
       state.go("dash.main", { s: 0 });
     } else {
-      state.go("signin");
+      state.go("start");
     }
   });
 });

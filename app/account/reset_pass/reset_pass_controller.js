@@ -36,7 +36,7 @@ function ResetPassController($scope, $state, AuthService, API, Password) {
 
     API.ResetPassword.save({ password: $scope.password.password },
       function () {
-        AuthService.logout();
+        AuthService.signOut();
       },
       function (data) {
         form.loading = false;

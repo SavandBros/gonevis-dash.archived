@@ -7,7 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ui-sref="dash.main({s: param.s})">Dash</a>
+      <a class="navbar-brand" ng-if="auth.isAuthenticated()"  ui-sref="dash.main({s: param.s})">Dash</a>
+      <a class="navbar-brand" ng-if="!auth.isAuthenticated()" ui-sref="start">GoNevis</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav" ng-if="auth.isAuthenticated() && param.s">
@@ -51,6 +52,12 @@
         </li>
       </ul>
       <!-- If user is not Authenticated -->
+      <ul class="nav navbar-nav" ng-if="!auth.isAuthenticated()">
+        <li ng-class="{'active': state.includes('start')}">
+          <a ui-sref="start">Get Started</a>
+        </li>
+      </ul>
+      <!-- If user is not Authenticated -->
       <ul class="nav navbar-nav navbar-right" ng-if="!auth.isAuthenticated()">
         <li ng-class="{'active': state.includes('signin')}">
           <a ui-sref="signin">Login</a>
@@ -90,7 +97,7 @@
             </li>
             <li role="separator" class="divider"></li>
             <li><a href="mailto:hello@gonevis.com"><i class="fa fa-envelope-o"></i> Feedback</a></li>
-            <li><a ng-click="auth.logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
+            <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> Sign out</a></li>
           </ul>
         </li>
       </ul>

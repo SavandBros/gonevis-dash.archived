@@ -50,6 +50,16 @@ hr[soft] {
     opacity: 1;
 }
 
+.form-control,
+.input-group-btn,
+.btn,
+.panel,
+.label,
+.modal-content,
+.thumbnail {
+    border-radius: 2px;
+}
+
 
 /* Image container */
 
@@ -86,6 +96,10 @@ hr[soft] {
     margin-right: 30px;
 }
 
+.navbar-brand:hover {
+    color: #d17100 !important;
+}
+
 @media(min-width:768px) {
     .navbar {
         min-height: 60px;
@@ -108,6 +122,19 @@ hr[soft] {
 
 .help-block {
     margin-left: 10px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.form-control.primary:focus {
+    border-color: #d17100;
+}
+
+.input-xlg {
+    padding: 25px;
+    font-size: 1.1em;
 }
 
 
@@ -157,6 +184,11 @@ hr[soft] {
 
 .s-mar-top {
     margin-top: 30px;
+}
+
+.s-mar-y {
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .s-mar-top-hard {
@@ -212,6 +244,11 @@ hr[soft] {
 .s-pad-y {
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+.s-pad-y-hard {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .s-pad-y-soft {
@@ -1435,6 +1472,10 @@ a.thumbnail.active {
     font-weight: bold;
 }
 
+.t-cap {
+    text-transform: capitalize;
+}
+
 .t-line {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -1581,4 +1622,76 @@ img.tag {
 
 .bg-no {
     background: none;
+}
+
+
+/* Thumbnail selection */
+
+.thumbnail-selection {
+    padding: 2px;
+    cursor: pointer;
+}
+
+.thumbnail-selection:hover,
+.thumbnail-selection.active {
+    border-color: #d17100;
+}
+
+.thumbnail-selection span {
+    color: #fff;
+    position: absolute;
+    top: calc(50% - 40px);
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.thumbnail-selection.active span {
+    color: #d17100;
+}
+
+.thumbnail-selection:hover span,
+.thumbnail-selection.active span {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.thumbnail-selection div {
+    font-weight: bold;
+    padding: 10px;
+}
+
+.thumbnail-selection img,
+.thumbnail-selection span {
+    transition: all 0.15s ease-in-out;
+}
+
+
+/* Popover input */
+
+.popover-input {
+    position: relative;
+    display: block;
+    float: left;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    margin-top: -15px !important;
+    border-radius: 2px;
+    box-shadow: none;
+}
+
+.popover-input.bottom>.arrow {
+    left: 50px;
+}
+
+
+/* Page header button */
+
+.page-header .btn.pull-right {
+    margin: -10px;
+    margin-right: 0;
 }
