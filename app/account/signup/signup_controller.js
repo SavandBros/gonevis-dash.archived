@@ -55,10 +55,19 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
     }
 
     API.SignupAccount.post(payload,
-      function (data) {
+      function () {
         form.errors = [];
-        $scope.registeredEmail = data.email;
-        $scope.success = true;
+        // Sign user in
+        AuthService.signIn(
+          form.data.username,
+          $scope.password.password,
+          function () {
+            toaster.success(
+              "Welcome " + form.data.username,
+              "Thanks for registering at GoNevis, a link has been sent to your email for account verification."
+            );
+          }
+        );
       },
       function (data) {
         form.loading = false;
