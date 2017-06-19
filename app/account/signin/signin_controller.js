@@ -37,17 +37,10 @@ function SigninController($scope, $rootScope, $state, $stateParams, AuthService,
   $scope.signin = function (form) {
     form.loading = true;
 
-    API.Signin.post({
-        username: form.username,
-        password: form.password
-      },
+    AuthService.signIn(form.username, form.password,
       function (data) {
         form.loading = false;
         form.errors = null;
-        AuthService.setAuthenticatedUser(data.user);
-        AuthService.setToken(data.token);
-
-        $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
         toaster.info("Logged in", "Welcome back " + data.user.username);
       },
       function (data) {
