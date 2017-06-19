@@ -6,9 +6,11 @@
  * @param $scope
  * @param $timeout
  * @param Password
+ * @param AuthService
  * @param API
+ * @param toaster
  */
-function StartController($scope, $timeout, Password, API) {
+function StartController($scope, $timeout, Password, AuthService, API, toaster) {
 
   /**
    * @method constructor
@@ -71,7 +73,7 @@ function StartController($scope, $timeout, Password, API) {
    * @method checkDomain
    * @desc Check availability of domain as user enters it
    *
-   * @param {Object} form Domain form
+   * @param {object} form Domain form
    */
   $scope.checkDomain = function (form) {
     form.loading = true;
@@ -95,7 +97,7 @@ function StartController($scope, $timeout, Password, API) {
    * @method selectTemplate
    * @desc Store template and go to next step
    *
-   * @param {Object} template Selected template object
+   * @param {object} template Selected template object
    */
   $scope.selectTemplate = function (template) {
     $scope.selectedTemplate = template;
@@ -106,7 +108,7 @@ function StartController($scope, $timeout, Password, API) {
    * @method signup
    * @desc Submit signup form
    * 
-   * @param {Object} form Signup form
+   * @param {object} form Signup form
    */
   $scope.signup = function (form) {
     form.loading = true;
@@ -149,5 +151,7 @@ StartController.$inject = [
   "$scope",
   "$timeout",
   "Password",
-  "API"
+  "AuthService",
+  "API",
+  "toaster"
 ];
