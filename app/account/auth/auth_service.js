@@ -120,6 +120,14 @@ function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams,
   }
 
   /**
+   * @method signIn
+   * @desc Main sign in function
+   *
+   * @param {string} username
+   * @param {object} password
+   * @param {function} success callback
+   * @param {function} fail callback
+   */
   function signIn(username, password, success, fail) {
     API.Signin.post({
         username: username,
