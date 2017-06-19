@@ -1,28 +1,24 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:UserController
- * Controller of the gonevisDash
+ * @name UserController
  *
- * @param $scope
- * @param $rootScope
- * @param toaster
- * @param AuthService
- * @param API
- * @param DolphinService
- * @param Upload
- * @param ENV
+ * @param {*} $scope
+ * @param {*} $rootScope
+ * @param {*} $stateParams
+ * @param {*} AuthService 
+ * @param {*} API 
+ * @param {*} DolphinService 
+ * @param {*} Upload 
+ * @param {*} ENV 
+ * @param {*} toaster 
  */
 function UserController($scope, $rootScope, $stateParams, AuthService, API, DolphinService, Upload, ENV, toaster) {
 
   var toasters = {};
 
   /**
-   * constructor
-   *
    * @method constructor
-   * @desc Init function for controller
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
@@ -39,8 +35,6 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   }
 
   /**
-   * updateProfile
-   *
    * @method updateProfile
    * @desc update user profile via api call
    * 
@@ -143,11 +137,11 @@ app.controller("UserController", UserController);
 UserController.$inject = [
   "$scope",
   "$rootScope",
-  "toaster",
   "$stateParams",
   "AuthService",
   "API",
   "DolphinService",
   "Upload",
-  "ENV"
+  "ENV",
+  "toaster"
 ];
