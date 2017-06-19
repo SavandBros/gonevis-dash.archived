@@ -34,6 +34,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         s: 0
       }
     })
+    .state("change-password", {
+      url: "/change-password",
+      controller: "ChangePassController",
+      templateUrl: "account/change_pass/change_pass_view.html",
+      auth: true,
+      title: "Change Password",
+      params: {
+        s: 0
+      }
+    })
     .state("signin", {
       url: "/login/:action",
       controller: "SigninController",
@@ -160,13 +170,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "tag/tag_view.html",
       auth: true,
       title: "Tags"
-    })
-    .state("dash.change-password", {
-      url: "/change-password",
-      controller: "ChangePassController",
-      templateUrl: "account/change_pass/change_pass_view.html",
-      auth: true,
-      title: "Change Password"
     })
     .state("dash.team", {
       url: "/team",
