@@ -52,6 +52,12 @@
         </li>
       </ul>
       <!-- If user is not Authenticated -->
+      <ul class="nav navbar-nav" ng-if="!auth.isAuthenticated()">
+        <li ng-class="{'active': state.includes('start')}">
+          <a ui-sref="start">Get Started</a>
+        </li>
+      </ul>
+      <!-- If user is not Authenticated -->
       <ul class="nav navbar-nav navbar-right" ng-if="!auth.isAuthenticated()">
         <li ng-class="{'active': state.includes('signin')}">
           <a ui-sref="signin">Login</a>
