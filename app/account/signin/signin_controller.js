@@ -32,7 +32,7 @@ function SigninController($scope, $rootScope, $state, $stateParams, AuthService,
    * @method signin
    * @desc Submit signin form to authenticate
    *
-   * @param form {object}
+   * @param {object} form
    */
   $scope.signin = function (form) {
     form.loading = true;
