@@ -122,7 +122,17 @@ function StartController($scope, $timeout, Password, API) {
     API.Signup.post(payload,
       function () {
         form.errors = [];
-        $scope.success = true;
+        // Sign user in
+        AuthService.signIn(
+          form.data.email,
+          $scope.password.password,
+          function () {
+            toaster.success(
+              "Awesome!",
+              "Thanks for registering at GoNevis, a link has been sent to your email for account verification."
+            );
+          }
+        );
       },
       function (data) {
         form.loading = false;
