@@ -124,6 +124,9 @@ function Password() {
      * @returns {Boolean}
      */
     this.isValid = function () {
+      if (!this.password) {
+        return false;
+      }
       return this.password.length >= minLength;
     };
   };
