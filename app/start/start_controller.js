@@ -49,10 +49,10 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
       function (data) {
         $scope.templates = data.results;
         angular.forEach($scope.templates, function (template) {
-          if (template.name === "zero") (
-            $scope.selectedTemplate = template
-          )
-        })
+          if (template.name === "zero") {
+            $scope.selectedTemplate = template;
+          }
+        });
       },
       function () {
         // Failed to get templates, this step is skipped
