@@ -14,7 +14,7 @@
       <div class="modal-body">
         <!-- Comment content -->
         <p>{{ comment.get.comment }}</p>
-        <small class="o-fade">{{ comment.get.created | date }}</small>
+        <small class="o-fade">Commented {{ comment.get.created | timesince }} ago</small>
         <br>
         <blockquote>
           <a class="c-grey" ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
