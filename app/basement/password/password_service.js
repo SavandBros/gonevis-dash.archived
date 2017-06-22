@@ -7,7 +7,7 @@ function Password() {
   return function () {
     /**
      * @name minLength
-     * @type {Number}
+     * @type {number}
      *
      * @private
      */
@@ -15,7 +15,7 @@ function Password() {
 
     /**
      * @name strengthWords
-     * @type {Array}
+     * @type {object}
      *
      * @private
      */
@@ -25,7 +25,7 @@ function Password() {
 
     /**
      * @name strengthColors
-     * @type {Array}
+     * @type {object}
      *
      * @private
      */
@@ -35,13 +35,13 @@ function Password() {
 
     /**
      * @name password
-     * @type {String}
+     * @type {string}
      */
     this.password = "";
 
     /**
      * @name strength
-     * @type {Number} 
+     * @type {number} 
      */
     this.strength = 0;
 
@@ -90,7 +90,7 @@ function Password() {
      * @method getStrength
      * @desc Get strength word based on strength
      *
-     * @returns {String}
+     * @returns {string}
      */
     this.getStrength = function () {
       this.updateStrength();
@@ -101,7 +101,7 @@ function Password() {
      * @method getPercentage
      * @desc Get strength percentage
      *
-     * @returns {Float}
+     * @returns {number}
      */
     this.getPercentage = function () {
       return (this.strength / (strengthWords.length - 1)) * 100;
@@ -111,7 +111,7 @@ function Password() {
      * @method getColor
      * @desc Get strength color
      *
-     * @returns {String}
+     * @returns {string}
      */
     this.getColor = function () {
       return strengthColors[this.strength];
