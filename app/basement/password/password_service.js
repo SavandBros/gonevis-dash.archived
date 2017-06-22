@@ -11,7 +11,7 @@ function Password() {
      *
      * @private
      */
-    var minLength = 8;
+    var minLength = 6;
 
     /**
      * @name strengthWords
