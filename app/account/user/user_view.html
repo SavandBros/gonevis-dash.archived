@@ -7,6 +7,15 @@
             <div class="avatar avatar-outside">
               <span ng-if="!user.media.picture">{{ user.name[0] }}</span>
               <img ng-if="user.media.picture" ng-src="{{ user.media.thumbnail_128x128 }}" />
+              <div class="dropdown">
+                <a  class="dropdown-toggle" data-toggle="dropdown">Change your profile photo</a>
+                <ul class="dropdown-menu">
+                  <li><a><i class="fa fa-upload"></i> Upload new photo</a></li>
+                  <li><a><i class="fa fa-trash"></i> Remove</a></li>
+                  <li class="divider"></li>
+                  <li><a><i class="fa fa-trash text-danger"></i> Cancel</a></li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="col-md-8">
