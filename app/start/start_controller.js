@@ -74,6 +74,14 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
   };
 
   /**
+  $scope.prev = function () {
+    $scope.isPreving = true;
+    $timeout(function () {
+      $scope.step--;
+      $scope.isPreving = false;
+    }, 500);
+  };
+
    * @method checkDomain
    * @desc Check availability of domain as user enters it
    *
