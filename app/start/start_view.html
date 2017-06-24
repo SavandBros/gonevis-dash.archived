@@ -47,7 +47,12 @@
       </div>
 
       <!-- Step: Template -->
-      <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting}" ng-if="steps[step] === 'template'">
+      <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting, 'fadeOutDown': isPreving}" ng-if="steps[step] === 'template'">
+
+        <!-- Go back -->
+        <button class="btn btn-sm btn-default" ng-click="prev()">
+          <i class="fa fa-fw fa-reply"></i> Go Back
+        </button>
 
         <!-- Sub header -->
         <h4 class="page-header">
@@ -79,51 +84,63 @@
       <!-- Step: Sign up -->
       <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting, 'fadeOutDown': isPreving}" ng-if="steps[step] === 'sign up'">
 
-        <!-- Signup form -->
-        <form class="row" ng-submit="signup(signupForm)" ng-hide="success">
-        
+        <div class="row">
           <div class="col-md-6 col-md-offset-3">
 
-            <!-- Sub header -->
-            <h4 class="page-header">Register</h4>
+            <!-- Title -->
+            <h2 class="text-center">
+              <!-- Go back -->
+              <button class="btn btn-sm btn-default pull-left" ng-click="prev()" style="margin-top: 4px">
+                <i class="fa fa-fw fa-reply"></i>
+              </button>
+              <span>You're almost done!</span>
+            </h2>
 
-            <!-- Email -->
-            <div class="form-group" ng-class="{'has-error': signupForm.errors.email}">
-              <input id="email" class="form-control input-lg" type="email"
-                ng-model="signupForm.data.email" placeholder="Email" required/>
-              <span class="help-block" ng-show="signupForm.errors.email">{{ signupForm.errors.email[0] }}</span>
-            </div>
+            <!-- Signup form -->
+            <form ng-submit="signup(signupForm)" ng-hide="success">
+            
+              <!-- Sub header -->
+              <h4 class="page-header">Register</h4>
 
-            <!-- Password -->
-            <div class="form-group" ng-class="{'has-error': signupForm.errors.password}">
-              <div class="input-group">
-                <!-- Input -->
-                <input id="password" class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
-                  uib-tooltip="Must be at least 8 characters." tooltip-trigger="'focus'" tooltip-class="init"
-                  ng-model="password.password" ng-trim="false" placeholder="Password" required>
-                <!-- Show/hide button -->
-                <span class="input-group-btn">
-                  <button class="btn btn-default btn-lg" type="button" ng-model="showPassword" uib-btn-checkbox>
-                    <i class="fa fa-fw" ng-class="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
-                  </button>
-                </span>
+              <!-- Email -->
+              <div class="form-group" ng-class="{'has-error': signupForm.errors.email}">
+                <input id="email" class="form-control input-lg" type="email"
+                  ng-model="signupForm.data.email" placeholder="Email" required/>
+                <span class="help-block" ng-show="signupForm.errors.email">{{ signupForm.errors.email[0] }}</span>
               </div>
-              <ng-include src="'basement/password/password_strength.html'"></ng-include>
-              <span class="help-block" ng-show="signupForm.errors.password">{{ signupForm.errors.password[0] }}</span>
-            </div>
 
-            <!-- Error -->
-            <div class="form-group alert alert-danger" ng-show="signupForm.errors.non_field_errors">
-              {{ signupForm.errors.non_field_errors[0] }}
-            </div>
+              <!-- Password -->
+              <div class="form-group" ng-class="{'has-error': signupForm.errors.password}">
+                <div class="input-group">
+                  <!-- Input -->
+                  <input id="password" class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
+                    uib-tooltip="Must be at least 8 characters." tooltip-trigger="'focus'" tooltip-class="init"
+                    ng-model="password.password" ng-trim="false" placeholder="Password" required>
+                  <!-- Show/hide button -->
+                  <span class="input-group-btn">
+                    <button class="btn btn-default btn-lg" type="button" ng-model="showPassword" uib-btn-checkbox>
+                      <i class="fa fa-fw" ng-class="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+                    </button>
+                  </span>
+                </div>
+                <ng-include src="'basement/password/password_strength.html'"></ng-include>
+                <span class="help-block" ng-show="signupForm.errors.password">{{ signupForm.errors.password[0] }}</span>
+              </div>
 
-            <!-- Button -->
-            <button class="btn btn-success btn-block btn-lg"
-              ng-disabled="signupForm.loading || signupForm.$invalid || !password.isValid()">
-              Register
-            </button>
+              <!-- Error -->
+              <div class="form-group alert alert-danger" ng-show="signupForm.errors.non_field_errors">
+                {{ signupForm.errors.non_field_errors[0] }}
+              </div>
+
+              <!-- Button -->
+              <button class="btn btn-success btn-block btn-lg"
+                ng-disabled="signupForm.loading || signupForm.$invalid || !password.isValid()">
+                Register
+              </button>
+
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
