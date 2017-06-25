@@ -49,7 +49,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "SigninController",
       templateUrl: "account/signin/signin_view.html",
       auth: false,
-      title: "Login"
+      title: "Login",
+      params: {
+        action: null
+      }
     })
     .state("signup", {
       url: "/register?username",
@@ -64,28 +67,40 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
       auth: false,
-      title: "Start Collaborating"
+      title: "Start Collaborating",
+      params: {
+        token: null
+      }
     })
     .state("reset-pass", {
       url: "/reset-password/:token",
       controller: "ResetPassController",
       templateUrl: "account/reset_pass/reset_pass_view.html",
       auth: -1,
-      title: "Reset password"
+      title: "Reset password",
+      params: {
+        token: null
+      }
     })
     .state("email-confirmation", {
       url: "/email-verification/:token",
       controller: "EmailConfirmationController",
       templateUrl: "account/email_confirmation/email_confirmation_view.html",
       auth: -1,
-      title: "Email Verification"
+      title: "Email Verification",
+      params: {
+        token: null
+      }
     })
     // Dash states that require authentication and site index
     .state("dash", {
       url: "/:s",
       abstract: true,
       template: "<ui-view/>",
-      auth: true
+      auth: true,
+      params: {
+        s: null
+      }
     })
     .state("dash.main", {
       url: "/",
@@ -141,7 +156,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: true,
       clickEvent: true,
       params: {
-        lights: true,
+        entryId: null,
+        lights: true
       },
       title: "Nevis"
     })
@@ -162,7 +178,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/tag-list/:tagId",
       controller: "TagEditController",
       templateUrl: "tag/tag_edit/tag_edit_view.html",
-      auth: true
+      auth: true,
+      params: {
+        tagId: null
+      }
     })
     .state("dash.tag-list", {
       url: "/tags",
