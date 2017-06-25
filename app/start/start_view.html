@@ -74,7 +74,7 @@
                   'fa-check-circle': selectedTemplate.id === template.id
                 }"></i>
               </span>
-              <img ng-src="{{ template.media.thumbnail_512x512 }}">
+              <img preload-image ng-src="{{ template.media.thumbnail_512x512 }}" default-image="assets/img/default/512x512.png">
               <div class="t-cap">{{ template.name }}</div>
             </div>
           </div>
