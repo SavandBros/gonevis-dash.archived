@@ -1696,3 +1696,14 @@ img.tag {
     margin: -10px;
     margin-right: 0;
 }
+
+
+/* Cache image */
+
+img.cache {
+    width: 1px;
+    height: 1px;
+    top: -100000px;
+    left: -100000px;
+    position: fixed;
+}
