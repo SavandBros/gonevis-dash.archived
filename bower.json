@@ -26,7 +26,8 @@
     "animate.css": "3.5.2",
     "angular-loading-bar": "0.9.0",
     "AngularJS-Toaster": "2.1.0",
-    "angular-chart.js": "^1.1.1"
+    "angular-chart.js": "^1.1.1",
+    "angular-preload-image": "*"
   },
   "devDependencies": {
     "angular-mocks": "1.6.3"
