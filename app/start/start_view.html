@@ -2,6 +2,10 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
 
+      <!-- Cache -->
+      <img class="cache" preload-image ng-repeat="template in templates"
+        ng-src="{{ template.media.screen_shot }}" default-image="assets/img/default/512x512.png">
+
       <!-- Step: Domain -->
       <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting, 'fadeOutDown': isPreving}" ng-if="steps[step] === 'domain'">
 
@@ -74,7 +78,7 @@
                   'fa-check-circle': selectedTemplate.id === template.id
                 }"></i>
               </span>
-              <img ng-src="{{ template.media.thumbnail_512x512 }}">
+              <img preload-image ng-src="{{ template.media.thumbnail_512x512 }}" default-image="assets/img/default/512x512.png">
               <div class="t-cap">{{ template.name }}</div>
             </div>
           </div>
