@@ -109,7 +109,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
     // Go to main or new site page if has no other sites
     if ($scope.user.sites.length) {
       $state.go("dash.main", { s: 0 });
-      alert(1);
     } else {
       $state.go("site-new");
     }
