@@ -22,6 +22,9 @@ function API($http, $resource, ENV) {
       name: "Signup",
       endpoint: "account/register/"
     }, {
+      name: "SignupAccount",
+      endpoint: "account/register-account-only/"
+    }, {
       name: "Profile",
       endpoint: "profile/"
     }, {
@@ -82,6 +85,9 @@ function API($http, $resource, ENV) {
       name: "SiteMetrics",
       endpoint: "website/site/:siteId/metrics/" // GET
     }, {
+      name: "SiteTemplatesPublic",
+      endpoint: "website/templates/" // GET
+    }, {
       name: "SiteTemplateConfig",
       endpoint: "website/site/:siteId/template-config/" // GET
     }, {
@@ -114,6 +120,9 @@ function API($http, $resource, ENV) {
     }, {
       name: "RemoveTeamPending",
       endpoint: "website/site/:siteId/remove-pending-member/" // PUT
+    }, {
+      name: "DomainCheck",
+      endpoint: "website/domain-check/" // POST
     },
     // Tagool
     {

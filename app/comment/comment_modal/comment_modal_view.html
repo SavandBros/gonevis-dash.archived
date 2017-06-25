@@ -6,38 +6,42 @@
         <img class="modal-image" ng-src="{{ comment.get.user.media.picture ?
           comment.get.user.media.thumbnail_128x128 : 'assets/img/avatar.png'
         }}">
-        {{ comment.get.user.name }} <small class="pull-right">{{ comment.get.created | date }}</small>
+        <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
+          {{ comment.get.user.name }}
+        </a>
+        <i class="fa fa-close fa-2x close pull-right" data-dismiss="modal"></i>
       </div>
       <div class="modal-body">
         <!-- Comment content -->
-        {{ comment.get.comment }}
+        <p>{{ comment.get.comment }}</p>
+        <small class="o-fade">Commented {{ comment.get.created | timesince }} ago</small>
+        <br>
+        <blockquote>
+          <a class="c-grey" ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
+            {{ comment.get.commented_object_minimal_data.title }}
+          </a>
+        </blockquote>
         <hr>
         <!-- Reply -->
-        <form ng-submit="comment.reply(form.comment)" name="form">
+        <form name="form">
           <div class="row">
             <!-- Reply comment -->
-            <div class="form-group col-md-10">
+            <div class="form-group col-md-12">
               <textarea ng-model="form.comment"
                 placeholder="@{{comment.get.user.name}}"
-                class="form-control comment">
+                class="form-control comment"
+              required />
               </textarea>
-            </div>
-            <!-- Reply buttom -->
-            <div class="form-group col-md-2">
-              <button class="btn btn-sm btn-primary btn-block" ng-disabled="comment.isReplying">Reply</button>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <!-- Delete comment -->
-        <button class="btn btn-sm btn-danger pull-left"
-          ng-click="comment.remove()"
-          data-dismiss="modal">
-          <i class="fa fa-trash"></i>
-        </button>
         <!-- Comment status -->
-        <div class="dropdown options col-md-3 pull-right s-pad-no">
+        <button class="btn btn-sm btn-primary pull-left s-mar-right-soft"
+                ng-click="comment.reply(form.comment)"
+                ng-disabled="comment.isReplying || form.$invalid">Reply</button>
+        <div class="dropdown options s-pad-no pull-left">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
             {{ comment.getStatus().label }} <li class="fa fa-caret-down"></li>
           </button>
@@ -50,6 +54,12 @@
             </li>
           </ul>
         </div>
+        <!-- Delete comment -->
+        <button class="btn btn-sm btn-danger pull-right"
+                ng-click="comment.remove()"
+                data-dismiss="modal">
+          <i class="fa fa-trash"></i>
+        </button>
       </div>
     </div>
   </div>

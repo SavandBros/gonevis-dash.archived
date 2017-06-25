@@ -1,33 +1,31 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name gonevisDash.controller:UserController
- * Controller of the gonevisDash
+ * @name UserController
  *
- * @param $scope
- * @param $rootScope
- * @param toaster
- * @param AuthService
- * @param API
- * @param DolphinService
- * @param Upload
- * @param ENV
+ * @param {*} $scope
+ * @param {*} $rootScope
+ * @param {*} $stateParams
+ * @param {*} AuthService 
+ * @param {*} API 
+ * @param {*} DolphinService 
+ * @param {*} Upload 
+ * @param {*} ENV 
+ * @param {*} toaster 
  */
-function UserController($scope, $rootScope, toaster, AuthService, API, DolphinService, Upload, ENV) {
+function UserController($scope, $rootScope, $stateParams, AuthService, API, DolphinService, Upload, ENV, toaster) {
 
   var toasters = {};
 
   /**
-   * constructor
-   *
    * @method constructor
-   * @desc Init function for controller
    */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.sites = $scope.user.sites;
     $scope.dolphinService = DolphinService;
+    $scope.param = $stateParams;
+
     API.User.get({ user_id: $scope.user.id },
       function (data) {
         $scope.user = data;
@@ -37,8 +35,6 @@ function UserController($scope, $rootScope, toaster, AuthService, API, DolphinSe
   }
 
   /**
-   * updateProfile
-   *
    * @method updateProfile
    * @desc update user profile via api call
    * 
@@ -141,10 +137,11 @@ app.controller("UserController", UserController);
 UserController.$inject = [
   "$scope",
   "$rootScope",
-  "toaster",
+  "$stateParams",
   "AuthService",
   "API",
   "DolphinService",
   "Upload",
-  "ENV"
+  "ENV",
+  "toaster"
 ];

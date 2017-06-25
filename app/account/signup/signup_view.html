@@ -2,17 +2,6 @@
   <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default s-box">
       <div class="panel-body s-pad">
-        <!-- Success message -->
-        <div class="animated fadeIn" ng-show="success">
-          <small><i class="fa fa-check-circle-o text-primary"></i>
-            Thanks for registering, a link has been sent to your email for account verification.
-          </small>
-          <hr>
-          <small>
-            <span class="o-fade-soft">Haven't received the verification link yet?</span>
-            <a ng-click="resend(registeredEmail)">Resend email</a>
-          </small>
-        </div>
         <!-- Signup form -->
         <form ng-submit="signup(form)" ng-hide="success">
           <h3 class="o-fade-soft">{{ inviteToken ? "Start Collaborating" : "Register" }}</h3>

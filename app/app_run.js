@@ -93,7 +93,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     ["bold", "italics", "underline", "strikeThrough"],
     ["ul", "ol", "clear"],
     ["justifyLeft", "justifyCenter", "justifyRight", "indent", "outdent"],
-    ["html", "addImage", "insertLink", "insertVideo"]
+    ["html", "addImage", "insertLink", /**"insertVideo"**/]
   ];
 
   /**

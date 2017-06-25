@@ -10,14 +10,14 @@
             </div>
           </div>
           <div class="col-md-8">
-            <h3 class="text-right o-fade-soft" editable-text="user.name"
+            <h3 class="text-left o-fade-soft" editable-text="user.name"
               onbeforesave="updateProfile('name', $data)">
               {{ user.name || "You have no name :-[" }}
             </h3>
           </div>
         </div>
         <div class="s-mar-top">
-          <!-- Avout -->
+          <!-- About -->
           <div class="panel panel-default panel-body">
             <span editable-textarea="user.about" onbeforesave="updateProfile('about', $data)">
               {{ user.about || "Nothing here..." }}
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="panel-footer">
-        <a ui-sref="dash.change-password" class="btn btn-danger btn-sm">
+        <a ui-sref="change-password({s: param.s})" class="btn btn-danger btn-sm">
           <i class="fa fa-lock fa-fw"></i> Change Password
         </a>
         <button class="btn btn-default btn-sm pull-right" ngf-select="uploadFile($file)" title="Set or Change cover image of site.">

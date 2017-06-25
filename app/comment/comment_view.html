@@ -19,7 +19,18 @@
             ng-src="{{
               comment.get.user.media.picture ? comment.get.user.media.thumbnail_48x48 : 'assets/img/avatar.png'
             }}">
-          <small>{{ comment.get.user.name }}:</small>
+          <small>
+            <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
+              {{ comment.get.user.name }}
+            </a>
+            responded to
+            <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
+              {{ comment.get.commented_object_minimal_data.title }}
+            </a>
+            at
+            <span class="o-fade-soft">{{ comment.get.created | date }}</span>
+          </small>
+          <br>
           <!-- Comment -->
           <a ng-click="comment.view()">{{ comment.get.comment }}</a>
           <!-- Options -->
@@ -40,8 +51,6 @@
               </li>
             </ul>
           </span>
-          <!-- Extra info -->
-          <small class="dis-b">{{ comment.get.created | date }}</small>
         </li>
       </ul>
     </div>
