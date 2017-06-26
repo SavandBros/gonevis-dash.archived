@@ -10,7 +10,7 @@
         </div>
         <ul class="panel-body panel-list">
           <!-- Comment -->
-          <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list | limitTo: 10" ng-show="!comment.isDeleted">
+          <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list" ng-show="!comment.isDeleted">
             <!-- Username -->
             <small>
               <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
@@ -50,7 +50,7 @@
         <!-- Entry list -->
         <ul class="panel-body panel-list">
           <!-- Entry -->
-          <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list | limitTo: 10" ng-show="!entry.isDeleted">
+          <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list" ng-show="!entry.isDeleted">
             <!-- Title -->
             <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
               {{ entry.get.title }}
