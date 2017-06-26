@@ -8,37 +8,23 @@
           <a ui-sref="dash.comment-list" class="header-link">Comments</a>
           <span class="label label-default">{{ Metrics.list.comment_count }}</span>
         </div>
-        <ul class="panel-body panel-list">
+        <div class="list-group">
           <!-- Comment -->
-          <li class="panel-list-item a-fade" ng-repeat="comment in Comment.list" ng-show="!comment.isDeleted">
-            <!-- Username -->
-            <small>
-              <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
-                {{ comment.get.user.name }}
-              </a>
-              responded to
-              <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
-                {{ comment.get.commented_object_minimal_data.title }}
-              </a>
+          <a class="list-group-item a-fade"
+             ng-click="comment.view()"
+             ng-repeat="comment in Comment.list | limitTo: 10"
+             ng-show="!comment.isDeleted">
+            <p class="list-group-item-header">
+              {{ comment.get.user.name }}
+              <span class="o-fade-soft">responded to</span> {{ comment.get.commented_object_minimal_data.title }}
+            </p>
+            <!-- Content -->
+            <p class="list-group-item-text">{{ comment.get.comment }}</p>
+            <small class="">
               <span class="o-fade-soft">{{ comment.get.created | date }}</span>
             </small>
-            <br>
-            <!-- Content -->
-            <a ng-click="comment.view()">{{ comment.get.comment }}</a>
-            <!-- Options -->
-            <span class="panel-list-item-button">
-              <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
-              <ul class="dropdown-menu">
-                <!-- Delete -->
-                <li>
-                  <a ng-click="comment.remove()">
-                    <i class="fa fa-fw fa-trash text-danger"></i> Delete
-                  </a>
-                </li>
-              </ul>
-            </span>
-          </li>
-        </ul>
+          </a>
+        </div>
       </div>
       <!-- Latest entries -->
       <div class="panel panel-default" ng-if="Entry.list.length">
@@ -50,7 +36,7 @@
         <!-- Entry list -->
         <ul class="panel-body panel-list">
           <!-- Entry -->
-          <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list" ng-show="!entry.isDeleted">
+          <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list | limitTo: 10" ng-show="!entry.isDeleted">
             <!-- Title -->
             <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
               {{ entry.get.title }}
@@ -108,23 +94,23 @@
             </h1>
             <!-- Chart -->
             <div class="s-pad">
-<canvas class="chart chart-doughnut"
-              chart-labels="[' Active Comments', ' Pending Comments', ' Hidden Comments']"
-              chart-data="[
+              <canvas class="chart chart-doughnut"
+                      chart-labels="[' Active Comments', ' Pending Comments', ' Hidden Comments']"
+                      chart-data="[
                 Metrics.list.active_comment_count,
                 Metrics.list.pending_comment_count,
                 Metrics.list.hidden_comment_count
               ]">
-            </canvas>
+              </canvas>
             </div>
           </div>
           <li class="list-group-item"
-            ng-show="Metrics.list.comment_count && Metrics.list.active_comment_count == Metrics.list.comment_count">
+              ng-show="Metrics.list.comment_count && Metrics.list.active_comment_count == Metrics.list.comment_count">
             <i class="fa fa-border fa-check"></i> All comments are approved
             <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
           </li>
           <li class="list-group-item"
-            ng-show="!Metrics.list.comment_count" ng-class="{'o-fade': !Metrics.list.comment_count}">
+              ng-show="!Metrics.list.comment_count" ng-class="{'o-fade': !Metrics.list.comment_count}">
             Comments
             <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
           </li>
@@ -178,11 +164,11 @@
         <!-- Footer (progress) -->
         <div class="panel-footer s-pad-no of-hidden">
           <div class="progress s-mar-no br-r-no"
-            ng-init="dolphinProgress = Metrics.list.dolphin.used_storage_percentage">
+               ng-init="dolphinProgress = Metrics.list.dolphin.used_storage_percentage">
             <div class="progress-bar progress-bar-striped"
-              role="progressbar" aria-valuemax="100" aria-valuemin="0"
-              aria-valuenow="{{ dolphinProgress }}" style="width: {{ dolphinProgress }}%"
-              ng-class="{
+                 role="progressbar" aria-valuemax="100" aria-valuemin="0"
+                 aria-valuenow="{{ dolphinProgress }}" style="width: {{ dolphinProgress }}%"
+                 ng-class="{
                 'progress-bar-success': dolphinProgress < 80,
                 'progress-bar-warning': dolphinProgress >= 80 && dolphinProgress < 90,
                 'progress-bar-danger':  dolphinProgress >= 90
