@@ -14,15 +14,17 @@
              ng-click="comment.view()"
              ng-repeat="comment in Comment.list | limitTo: 10"
              ng-show="!comment.isDeleted">
-            <p class="list-group-item-header">
-              {{ comment.get.user.name }}
-              <span class="o-fade-soft">responded to</span> {{ comment.get.commented_object_minimal_data.title }}
-            </p>
+            <div class="row">
+              <div class="col-md-10 col-xs-8 col-lg-10 col-sm-10">
+                <p class="list-group-item-text">
+                  <span class="o-fade-soft small">{{ comment.get.user.name }}:</span> {{ comment.get.comment }}
+                </p>
+              </div>
+              <div class="col-md-2 col-xs-4 col-lg-2 col-sm-2">
+                <span class="o-fade-soft pull-right small">{{ comment.get.created | date }}</span>
+              </div>
+            </div>
             <!-- Content -->
-            <p class="list-group-item-text">{{ comment.get.comment }}</p>
-            <small class="">
-              <span class="o-fade-soft">{{ comment.get.created | date }}</span>
-            </small>
           </a>
         </div>
       </div>
