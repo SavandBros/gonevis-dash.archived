@@ -11,7 +11,7 @@
 
         <!-- Title -->
         <h2 class="text-center">Let's create your site</h2>
-        
+
         <!-- Domain form -->
         <div class="form-group s-mar-y">
           <div class="input-group">
@@ -26,7 +26,7 @@
 
         <!-- Domain status -->
         <div class="popover popover-input bottom" ng-if="domainForm.checkedName">
-          <div class="arrow"></div> 
+          <div class="arrow"></div>
           <div class="popover-content">
             <div ng-class="{'o-fade': domainForm.loading}">
               <span ng-if="domainForm.available">
@@ -76,7 +76,7 @@
                 <i class="fa fa-3x" ng-class="{
                   'fa-check': selectedTemplate.id !== template.id,
                   'fa-check-circle': selectedTemplate.id === template.id
-                }"></i>
+                }" style="text-shadow: 2px 2px 2px rgba(0,0,0,0.5)"></i>
               </span>
               <img preload-image ng-src="{{ template.media.thumbnail_512x512 }}" default-image="assets/img/default/512x512.png">
               <div class="t-cap">{{ template.name }}</div>
