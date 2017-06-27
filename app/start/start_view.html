@@ -11,7 +11,7 @@
 
         <!-- Title -->
         <h2 class="text-center">Let's create your site</h2>
-        
+
         <!-- Domain form -->
         <div class="form-group s-mar-y">
           <div class="input-group">
@@ -26,9 +26,12 @@
 
         <!-- Domain status -->
         <div class="popover popover-input bottom" ng-if="domainForm.checkedName">
-          <div class="arrow"></div> 
+          <div class="arrow"></div>
           <div class="popover-content">
-            <div ng-class="{'o-fade': domainForm.loading}">
+            <div ng-if="domainForm.loading">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Checking...
+            </div>
+            <div ng-if="!domainForm.loading" ng-class="{'o-fade': domainForm.loading}">
               <span ng-if="domainForm.available">
                 <b><i class="fa fa-fw fa-check text-success"></i> Awesome!</b> {{ domainForm.checkedName }} is available.
               </span>
