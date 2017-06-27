@@ -1,26 +1,35 @@
-<div class="modal fade">
+<div class="modal fade" id="comment">
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Comment header -->
       <div class="modal-header">
-        <img class="modal-image" ng-src="{{ comment.get.user.media.picture ?
-          comment.get.user.media.thumbnail_128x128 : 'assets/img/avatar.png'
-        }}">
-        <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
-          {{ comment.get.user.name }}
-        </a>
-        <i class="fa fa-close fa-2x close pull-right" data-dismiss="modal"></i>
+        <div class="row">
+          <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1">
+            <img class="img-circle" ng-src="{{ comment.get.user.media.picture ?
+              comment.get.user.media.thumbnail_48x48 : 'assets/img/avatar.png'
+            }}" height="48">
+          </div>
+          <div class="col-md-11 col-xs-10 col-sm-11 col-lg-11">
+            <div class="s-pad-left-soft">
+              <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
+                {{ comment.get.user.name }}
+              </a>
+              <br>
+              <small class="o-fade">Commented {{ comment.get.created | timesince }} ago</small>
+              <i class="fa fa-close o-fade pull-right c-p" data-dismiss="modal"></i>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-body">
         <!-- Comment content -->
-        <p>{{ comment.get.comment }}</p>
-        <small class="o-fade">Commented {{ comment.get.created | timesince }} ago</small>
-        <br>
-        <blockquote>
-          <a class="c-grey" ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
+        <h3>{{ comment.get.comment }}</h3>
+        <div class="c-grey small s-mar-top-soft">
+          Source:
+          <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })" ng-click="close()">
             {{ comment.get.commented_object_minimal_data.title }}
           </a>
-        </blockquote>
+        </div>
         <hr>
         <!-- Reply -->
         <form name="form">
@@ -28,7 +37,7 @@
             <!-- Reply comment -->
             <div class="form-group col-md-12">
               <textarea ng-model="form.comment"
-                placeholder="@{{comment.get.user.name}}"
+                placeholder="Reply to @{{comment.get.user.name}}"
                 class="form-control comment"
               required />
               </textarea>
