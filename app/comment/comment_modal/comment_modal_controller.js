@@ -7,8 +7,9 @@
  * @param $rootScope
  * @param comment
  * @param Codekit
+ * @param ModalsService
  */
-function CommentModalController($scope, $rootScope, comment, Codekit) {
+function CommentModalController($scope, $rootScope, comment, Codekit, ModalsService) {
 
   /**
    * @method constructor
@@ -19,6 +20,10 @@ function CommentModalController($scope, $rootScope, comment, Codekit) {
     $scope.comment = comment;
   }
 
+  $scope.close = function () {
+    ModalsService.close('comment');
+  };
+
   constructor();
 }
 
@@ -27,5 +32,6 @@ CommentModalController.$inject = [
   '$scope',
   '$rootScope',
   'comment',
-  'Codekit'
+  'Codekit',
+  'ModalsService'
 ];
