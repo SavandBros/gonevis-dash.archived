@@ -19,6 +19,10 @@ function CommentModalController($scope, comment, Codekit, ModalsService) {
     $scope.comment = comment;
   }
 
+  /**
+   * @method close
+   * @desc Close modal
+   */
   $scope.close = function () {
     ModalsService.close('comment');
   };
