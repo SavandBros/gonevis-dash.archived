@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @class CommentModalController
@@ -6,9 +6,8 @@
  * @param $scope
  * @param comment
  * @param Codekit
- * @param ModalsService
  */
-function CommentModalController($scope, comment, Codekit, ModalsService) {
+function CommentModalController($scope, comment, Codekit) {
 
   /**
    * @method constructor
@@ -32,8 +31,7 @@ function CommentModalController($scope, comment, Codekit, ModalsService) {
 
 app.controller("CommentModalController", CommentModalController);
 CommentModalController.$inject = [
-  '$scope',
-  'comment',
-  'Codekit',
-  'ModalsService'
+  "$scope",
+  "comment",
+  "Codekit"
 ];
