@@ -460,6 +460,7 @@ module.exports = function (grunt) {
           "angularModalService",
           "angular-sortable-view",
           "angular-loading-bar",
+          "angular-preload-image",
           "toaster"
         ],
         constants: {

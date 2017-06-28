@@ -54,7 +54,7 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
     initialize: function () {
       $scope.Comment.loading = true;
 
-      API.Comments.get({ site: site },
+      API.Comments.get({ site: site, limit: 10 },
         function (data) {
           $scope.Comment.loading = true;
           angular.forEach(data.results, function (data) {
@@ -82,7 +82,7 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
     initialize: function () {
       $scope.Entry.loading = true;
 
-      API.Entries.get({ site: site },
+      API.Entries.get({ site: site, limit: 10 },
         function (data) {
           $scope.Entry.loading = true;
           angular.forEach(data.results, function (data) {

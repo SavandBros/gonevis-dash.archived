@@ -14,6 +14,7 @@
 html,
 body {
     background-color: #fcfcfc;
+    font-family: "Lato", Helvetica, sans-serif;
 }
 
 textarea {
@@ -1700,6 +1701,10 @@ img.tag {
     transition: all 0.15s ease-in-out;
 }
 
+.thumbnail-selection:hover:not(.active) span i {
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
 
 /* Popover input */
 
@@ -1725,4 +1730,15 @@ img.tag {
 .page-header .btn.pull-right {
     margin: -10px;
     margin-right: 0;
+}
+
+
+/* Cache image */
+
+img.cache {
+    width: 1px;
+    height: 1px;
+    top: -100000px;
+    left: -100000px;
+    position: fixed;
 }

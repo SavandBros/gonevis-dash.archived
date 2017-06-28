@@ -48,7 +48,11 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
     API.SiteTemplatesPublic.get({},
       function (data) {
         $scope.templates = data.results;
-        $scope.selectedTemplate = $scope.templates[0];
+        angular.forEach($scope.templates, function (template) {
+          if (template.name === "zero") {
+            $scope.selectedTemplate = template;
+          }
+        });
       },
       function () {
         // Failed to get templates, this step is skipped
@@ -66,6 +70,18 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
     $timeout(function () {
       $scope.step++;
       $scope.isNexting = false;
+    }, 500);
+  };
+
+  /**
+   * @method prev
+   * @desc Take user to the prev step of getting started
+   */
+  $scope.prev = function () {
+    $scope.isPreving = true;
+    $timeout(function () {
+      $scope.step--;
+      $scope.isPreving = false;
     }, 500);
   };
 
