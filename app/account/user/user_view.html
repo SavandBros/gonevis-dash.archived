@@ -6,14 +6,14 @@
           <div class="col-md-4">
             <div class="avatar avatar-outside">
               <span ng-if="!user.media.picture">{{ user.name[0] }}</span>
-              <img ng-if="user.media.picture" ng-src="{{ user.media.thumbnail_128x128 }}" />
+              <img ng-if="user.media.picture" class="img-circle" ng-src="{{ user.media.thumbnail_128x128 }}" />
               <div class="dropdown">
-                <a  class="dropdown-toggle" data-toggle="dropdown">Change your profile photo</a>
+                <h3 class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil"></i> Edit</h3>
                 <ul class="dropdown-menu">
-                  <li><a><i class="fa fa-upload"></i> Upload new photo</a></li>
-                  <li><a><i class="fa fa-trash"></i> Remove</a></li>
+                  <li><a ngf-select="uploadFile($file)"><i class="fa fa-upload"></i> Upload new photo</a></li>
+                  <li><a ng-click="updateProfile('picture', null)"><i class="fa fa-trash"></i> Remove</a></li>
                   <li class="divider"></li>
-                  <li><a><i class="fa fa-trash text-danger"></i> Cancel</a></li>
+                  <li><a><i class="fa fa-minus text-danger"></i> Cancel</a></li>
                 </ul>
               </div>
             </div>
@@ -54,9 +54,6 @@
         <a ui-sref="change-password({s: param.s})" class="btn btn-danger btn-sm">
           <i class="fa fa-lock fa-fw"></i> Change Password
         </a>
-        <button class="btn btn-default btn-sm pull-right" ngf-select="uploadFile($file)" title="Set or Change cover image of site.">
-          <i class="fa fa-image"></i> Avatar
-        </button>
         <div ng-show="errors">
           <small class="help-block">{{ errors.picture[0] }}</small>
         </div>
