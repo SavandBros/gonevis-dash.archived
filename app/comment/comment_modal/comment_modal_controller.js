@@ -4,11 +4,11 @@
  * @class CommentModalController
  *
  * @param $scope
- * @param $rootScope
  * @param comment
  * @param Codekit
+ * @param ModalsService
  */
-function CommentModalController($scope, $rootScope, comment, Codekit) {
+function CommentModalController($scope, comment, Codekit, ModalsService) {
 
   /**
    * @method constructor
@@ -19,13 +19,21 @@ function CommentModalController($scope, $rootScope, comment, Codekit) {
     $scope.comment = comment;
   }
 
+  /**
+   * @method close
+   * @desc Close modal
+   */
+  $scope.close = function () {
+    ModalsService.close('comment');
+  };
+
   constructor();
 }
 
 app.controller("CommentModalController", CommentModalController);
 CommentModalController.$inject = [
   '$scope',
-  '$rootScope',
   'comment',
-  'Codekit'
+  'Codekit',
+  'ModalsService'
 ];
