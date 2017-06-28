@@ -10,10 +10,10 @@
         </div>
         <div class="list-group">
           <!-- Comment -->
-          <a class="list-group-item a-fade"
+          <a class="list-group-item"
              ng-click="comment.view()"
-             ng-repeat="comment in Comment.list | limitTo: 10"
-             ng-show="!comment.isDeleted">
+             ng-repeat="comment in Comment.list"
+             ng-if="!comment.isDeleted">
             <div class="row">
               <div class="col-md-10 col-xs-8 col-lg-10 col-sm-10">
                 <p class="list-group-item-text">
@@ -38,7 +38,7 @@
         <!-- Entry list -->
         <ul class="panel-body panel-list">
           <!-- Entry -->
-          <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list | limitTo: 10" ng-show="!entry.isDeleted">
+          <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list" ng-if="!entry.isDeleted">
             <!-- Title -->
             <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
               {{ entry.get.title }}
@@ -107,12 +107,12 @@
             </div>
           </div>
           <li class="list-group-item"
-              ng-show="Metrics.list.comment_count && Metrics.list.active_comment_count == Metrics.list.comment_count">
+              ng-if="Metrics.list.comment_count && Metrics.list.active_comment_count == Metrics.list.comment_count">
             <i class="fa fa-border fa-check"></i> All comments are approved
             <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
           </li>
           <li class="list-group-item"
-              ng-show="!Metrics.list.comment_count" ng-class="{'o-fade': !Metrics.list.comment_count}">
+              ng-if="!Metrics.list.comment_count" ng-class="{'o-fade': !Metrics.list.comment_count}">
             Comments
             <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
           </li>
