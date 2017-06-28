@@ -6,12 +6,12 @@
  * @param {*} $scope
  * @param {*} $rootScope
  * @param {*} $stateParams
- * @param {*} AuthService 
- * @param {*} API 
- * @param {*} DolphinService 
- * @param {*} Upload 
- * @param {*} ENV 
- * @param {*} toaster 
+ * @param {*} AuthService
+ * @param {*} API
+ * @param {*} DolphinService
+ * @param {*} Upload
+ * @param {*} ENV
+ * @param {*} toaster
  */
 function UserController($scope, $rootScope, $stateParams, AuthService, API, DolphinService, Upload, ENV, toaster) {
 
@@ -26,7 +26,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
     $scope.dolphinService = DolphinService;
     $scope.param = $stateParams;
 
-    API.User.get({ user_id: $scope.user.id },
+    API.User.get({user_id: $scope.user.id},
       function (data) {
         $scope.user = data;
         $scope.viewLoaded = true;
@@ -37,7 +37,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   /**
    * @method updateProfile
    * @desc update user profile via api call
-   * 
+   *
    * @param key {string}
    * @param value {string}
    */
@@ -52,9 +52,13 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
 
     API.UserUpdate.put(payload,
       function (data) {
-        $scope.user[key] = data[key];
+        if (key == "picture") {
+          $scope.user.media[key] = data.media[null];
+        }
+        else {
+          $scope.user[key] = data[key];
+        }
         $scope.user.sites = $scope.sites;
-
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
@@ -118,7 +122,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   $scope.uploadFile = function (file) {
     Upload.upload({
       url: ENV.apiEndpoint + "account/update-profile/",
-      data: { picture: file, key: file.name },
+      data: {picture: file, key: file.name},
       method: "PUT"
     }).then(function (data) {
       toaster.info("Done", "Profile picture updated");
