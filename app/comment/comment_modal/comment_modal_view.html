@@ -23,7 +23,7 @@
         <h3>{{ comment.get.comment }}</h3>
         <div class="c-grey small s-mar-top-soft">
           <span>To:</span>
-          <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })" ng-click="close()">
+          <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })" data-dismiss="modal">
             {{ comment.get.commented_object_minimal_data.title }}
           </a>
         </div>
