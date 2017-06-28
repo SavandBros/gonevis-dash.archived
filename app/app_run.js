@@ -161,9 +161,11 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @param toParams {Object}
    */
   $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams) {
+    // Analytics
     if (ENV.name === "production") {
       $window.ga("send", "pageview", { page: $location.url() });
     }
+
     // Update title
     Codekit.setTitle(toState.title);
 

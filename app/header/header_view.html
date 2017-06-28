@@ -50,6 +50,9 @@
         <li ng-class="{'active': state.includes('dash.team')}">
           <a ui-sref="dash.team({s: param.s})">Team</a>
         </li>
+        <li ng-class="{'active': state.includes('dash.site')}">
+          <a ui-sref="dash.site({s: param.s})">Settings</a>
+        </li>
       </ul>
       <!-- If user is not Authenticated -->
       <ul class="nav navbar-nav" ng-if="!auth.isAuthenticated()">
@@ -87,10 +90,6 @@
             <li role="separator" class="divider"></li>
             <li ng-repeat="site in user.sites" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
-              <a ui-sref="dash.site({s: param.s})"
-                class="nav-link-in-link" ng-if="param.s == $index">
-                <i class="fa fa-cog fa-fw" init></i>
-              </a>
             </li>
             <li>
               <a ui-sref="site-new({s: param.s})" class="o-fade small">CREATE NEW SITE</a>

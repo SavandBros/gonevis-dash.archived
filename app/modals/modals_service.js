@@ -39,8 +39,8 @@ function ModalsService(ModalService) {
    * @method open
    * @desc Open up a modal with a template and a controller
    *
-   * @param template {String} Name of the modal template
-   * @param controller {String} Controller of modal
+   * @param {string} template Name of the modal template
+   * @param {string} controller Controller of modal
    */
   function open(template, controller, data) {
     ModalService.showModal({
@@ -57,7 +57,7 @@ function ModalsService(ModalService) {
    * @method close
    * @desc Close a modal by it's instance
    *
-   * @param template {String} Name of the modal template (instance)
+   * @param {string} template Name of the modal template (instance)
    */
   function close(template) {
     // Trigger the close button

@@ -417,6 +417,7 @@ hr[soft] {
 /* Avatar */
 
 .avatar {
+    position: relative;
     width: 132px;
     height: 132px;
     border: 2px solid rgba(0, 0, 0, 0.2);
@@ -445,6 +446,36 @@ hr[soft] {
 
 .avatar-outside-wrapper {
     margin-top: 64px;
+}
+
+.avatar div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .2s, visibility .2s;
+}
+
+.avatar:hover div {
+    visibility: visible;
+    opacity: 1;
+}
+
+.avatar div a {
+    transition: .2s;
+    transform: translateY(1em);
+}
+
+.avatar:hover div a {
+    transform: translateY(0);
 }
 
 
@@ -1455,6 +1486,10 @@ a.thumbnail.active {
     margin-top: -5px;
 }
 
+.list-group-item {
+    border-color: whitesmoke;
+}
+
 
 /* Over flow */
 
@@ -1668,6 +1703,10 @@ img.tag {
 .thumbnail-selection img,
 .thumbnail-selection span {
     transition: all 0.15s ease-in-out;
+}
+
+.thumbnail-selection:hover:not(.active) span i {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 
