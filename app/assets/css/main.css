@@ -422,10 +422,8 @@ hr[soft] {
     height: 132px;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 100%;
-    overflow: hidden;
     background: #d17100;
     color: #fff;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     cursor: default;
 }
 
@@ -433,6 +431,7 @@ hr[soft] {
     line-height: 128px;
     text-align: center;
     font-size: 80px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .avatar img {
@@ -455,13 +454,13 @@ hr[soft] {
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.5);
-    color: #fff;
     visibility: hidden;
     opacity: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: opacity .2s, visibility .2s;
+    border-radius: 50%;
 }
 
 .avatar:hover div {
