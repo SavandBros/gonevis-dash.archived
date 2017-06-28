@@ -454,7 +454,7 @@ hr[soft] {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     color: #fff;
     visibility: hidden;
     opacity: 0;
@@ -1486,6 +1486,10 @@ a.thumbnail.active {
     margin-top: -5px;
 }
 
+.list-group-item {
+    border-color: whitesmoke;
+}
+
 
 /* Over flow */
 
@@ -1702,7 +1706,7 @@ img.tag {
 }
 
 .thumbnail-selection:hover:not(.active) span i {
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 
