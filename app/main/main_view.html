@@ -36,27 +36,33 @@
           <span class="label label-default">{{ Metrics.list.entry_count }}</span>
         </div>
         <!-- Entry list -->
-        <ul class="panel-body panel-list">
-          <!-- Entry -->
-          <li class="panel-list-item s-fade" ng-repeat="entry in Entry.list" ng-if="!entry.isDeleted">
-            <!-- Title -->
-            <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
-              {{ entry.get.title }}
-            </a>
-            <!-- Views -->
-            <span class="pull-right label label-default" ng-if="entry.get.view_count">
-              {{ entry.get.view_count }} <i class="fa fa-eye o-fade"></i>
-            </span>
-            <!-- Comments -->
-            <span class="pull-right label label-default" ng-if="entry.get.comment_count">
-              {{ entry.get.comment_count }} <i class="fa fa-comments o-fade"></i>
-            </span>
-            <!-- Votes -->
-            <span class="pull-right label label-default" ng-if="entry.get.vote_count">
-              {{ entry.get.vote_count }} <i class="fa fa-heart o-fade"></i>
-            </span>
-          </li>
-        </ul>
+        <div class="list-group">
+          <a class="list-group-item t-line"
+             ng-repeat="entry in Entry.list"
+             ng-if="!entry.isDeleted"
+             ui-sref="dash.entry-edit({ entryId: entry.get.id })"
+             ng-click="entry.cache()">
+            <div class="row">
+              <div class="col-md-8 col-xs-8 col-lg-9 col-sm-8">
+                <p class="list-group-item-text t-line">{{ entry.get.title }}</p>
+              </div>
+              <!-- Views -->
+              <div class="col-md-4 col-xs-4 col-lg-3 col-sm-4">
+                <span class="pull-right label label-default" ng-if="entry.get.view_count">
+                  {{ entry.get.view_count }} <i class="fa fa-eye o-fade"></i>
+                </span>
+                <!-- Comments -->
+                <span class="pull-right label label-default" ng-if="entry.get.comment_count">
+                  {{ entry.get.comment_count }} <i class="fa fa-comments o-fade"></i>
+                </span>
+                <!-- Votes -->
+                <span class="pull-right label label-default" ng-if="entry.get.vote_count">
+                  {{ entry.get.vote_count }} <i class="fa fa-heart o-fade"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
     <!-- Right -->
