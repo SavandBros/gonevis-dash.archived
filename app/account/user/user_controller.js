@@ -26,7 +26,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
     $scope.dolphinService = DolphinService;
     $scope.param = $stateParams;
 
-    API.User.get({user_id: $scope.user.id},
+    API.User.get({ user_id: $scope.user.id },
       function (data) {
         $scope.user = data;
         $scope.viewLoaded = true;
@@ -54,8 +54,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
       function (data) {
         if (key == "picture") {
           $scope.user.media[key] = data.media[null];
-        }
-        else {
+        } else {
           $scope.user[key] = data[key];
         }
         $scope.user.sites = $scope.sites;
@@ -122,7 +121,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   $scope.uploadFile = function (file) {
     Upload.upload({
       url: ENV.apiEndpoint + "account/update-profile/",
-      data: {picture: file, key: file.name},
+      data: { picture: file, key: file.name },
       method: "PUT"
     }).then(function (data) {
       toaster.info("Done", "Profile picture updated");
