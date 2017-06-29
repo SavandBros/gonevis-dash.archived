@@ -6,12 +6,12 @@
  * @param {*} $scope
  * @param {*} $rootScope
  * @param {*} $stateParams
- * @param {*} AuthService 
- * @param {*} API 
- * @param {*} DolphinService 
- * @param {*} Upload 
- * @param {*} ENV 
- * @param {*} toaster 
+ * @param {*} AuthService
+ * @param {*} API
+ * @param {*} DolphinService
+ * @param {*} Upload
+ * @param {*} ENV
+ * @param {*} toaster
  */
 function UserController($scope, $rootScope, $stateParams, AuthService, API, DolphinService, Upload, ENV, toaster) {
 
@@ -37,7 +37,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   /**
    * @method updateProfile
    * @desc update user profile via api call
-   * 
+   *
    * @param key {string}
    * @param value {string}
    */
@@ -52,9 +52,12 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
 
     API.UserUpdate.put(payload,
       function (data) {
-        $scope.user[key] = data[key];
+        if (key == "picture") {
+          $scope.user.media[key] = data.media[null];
+        } else {
+          $scope.user[key] = data[key];
+        }
         $scope.user.sites = $scope.sites;
-
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
