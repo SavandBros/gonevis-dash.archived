@@ -539,7 +539,8 @@ md-toast {
     cursor: pointer;
 }
 
-.panel-list-item .label {
+.panel-list-item .label,
+.list-group-item .label {
     padding: 4px;
     background: none;
     color: #333;
