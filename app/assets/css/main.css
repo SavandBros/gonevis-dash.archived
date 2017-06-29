@@ -447,34 +447,21 @@ hr[soft] {
     margin-top: 64px;
 }
 
-.avatar div {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    visibility: hidden;
+.avatar .dropdown-toggle {
+    margin-top: -86px;
+    padding: 10px;
+    text-shadow: 2px 2px 2px #000;
+    transition: all 0.1s ease-in-out;
+}
+
+.avatar .dropdown-toggle,
+.avatar .dropdown-menu {
     opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity .2s, visibility .2s;
-    border-radius: 50%;
 }
 
-.avatar:hover div {
-    visibility: visible;
+.avatar:hover .dropdown-toggle,
+.avatar:hover .dropdown-menu {
     opacity: 1;
-}
-
-.avatar div a {
-    transition: .2s;
-    transform: translateY(1em);
-}
-
-.avatar:hover div a {
-    transform: translateY(0);
 }
 
 
