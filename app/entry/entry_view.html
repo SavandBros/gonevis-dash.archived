@@ -68,22 +68,25 @@
             <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': entry.get.status == 1}"
               ng-repeat="entry in entries" ng-show="!entry.isDeleted">
               <!--Title and slug-->
-              <div class="col-md-8">
+              <div class="col-xs-7 col-sm-8 col-md-8 col-lg-8 t-line">
                 <input type="checkbox" ng-model="entry.isSelected" ng-change="countSelected(entry)">
                 <a ui-sref="dash.entry-edit({entryId: entry.get.id})" ng-click="entry.cache()">{{ entry.get.title }}</a>
                 <small class="dis-b o-fade">/{{ entry.get.slug }}</small>
               </div>
               <!-- Date -->
-              <div class="col-md-3 text-right o-fade">
-                {{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right o-fade s-pad-no">
+                <span class="hidden-xs">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
+                <span class="visible-xs small">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
                 <small class="dis-b o-fade" ng-if="entry.get.status === 1">Publication</small>
                 <small class="dis-b o-fade" ng-if="entry.get.status === 0">Creation</small>
               </div>
               <!-- Tools -->
-              <div class="col-md-1 text-right">
-                <i class="fa fa-fw fa-2x fa-ellipsis-v o-fade-hard c-p h-opacity dropdown-toggle"
-                  style="padding: 4px" data-toggle="dropdown"></i>
-                <ul class="dropdown-menu">
+              <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 text-right s-pad-no">
+                <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
+                        style="margin-top: 5px;">
+                  <i class="fa fa-fw fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header" ng-if="entry.get.comment_enabled">
                     <i init class="fa fa-fw fa-comments text-muted"></i> Comments enabled
                   </li>
