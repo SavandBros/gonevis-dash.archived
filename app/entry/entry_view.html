@@ -24,7 +24,7 @@
                 <a class="thumbnail s-pad-no" ui-sref="dash.entry-edit({ entryId: entry.get.id })"
                   ng-click="entry.cache()">
                   <img ng-src="{{ entry.get.media.cover_image.thumbnail_256x256 ?
-                      entry.get.media.cover_image.thumbnail_256x256 : 'http://placehold.it/256x256/eee/eee'
+                      entry.get.media.cover_image.thumbnail_256x256 : '../assets/img/default/256x256.png'
                     }}">
                   <div class="caption t-line">
                     <small class="text-primary">{{ entry.get.title }}</small>
