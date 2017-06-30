@@ -9,9 +9,11 @@
  * @param $qProvider
  * @param cfpLoadingBarProvider
  * @param ChartJsProvider
+ * @param RollbarProvider
+ * @param ENV
  */
 function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
-  cfpLoadingBarProvider, ChartJsProvider) {
+  cfpLoadingBarProvider, ChartJsProvider, RollbarProvider, ENV) {
 
   // Http
   $httpProvider.interceptors.push("AuthInterceptorService");
@@ -41,6 +43,22 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
       }
     }
   });
+
+  // Check localhost
+  var localhost = (
+    window.location.href.indexOf("localhost") > 0 || window.location.href.indexOf("127.0.0.1") > 0
+  );
+  
+  // Rollbar integration
+  if (!localhost) {
+    RollbarProvider.init({
+      accessToken: "d0a14094307a424cbd7d59d9c897b940",
+      captureUncaught: true,
+      payload: {
+        environment: ENV.name
+      }
+    });
+  }
 }
 
 app.config(Config);
@@ -50,5 +68,7 @@ Config.$inject = [
   "$cookiesProvider",
   "$qProvider",
   "cfpLoadingBarProvider",
-  "ChartJsProvider"
+  "ChartJsProvider",
+  "RollbarProvider",
+  "ENV"
 ];
