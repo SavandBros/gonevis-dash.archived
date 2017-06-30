@@ -59,6 +59,7 @@ module.exports = function(config) {
       'bower_components/chart.js/dist/Chart.js',
       'bower_components/angular-chart.js/dist/angular-chart.js',
       'bower_components/angular-preload-image/angular-preload-image.js',
+      'bower_components/ng-rollbar/ng-rollbar.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/app_module.js',
