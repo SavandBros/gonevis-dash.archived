@@ -11,6 +11,7 @@
  * @param AuthService
  * @param Comment
  * @param Pagination
+ * @param Search
  * @param Codekit
  */
 function CommentController($scope, $rootScope, API,
