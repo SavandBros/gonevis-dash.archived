@@ -4,15 +4,13 @@
  * @class ChangePassController
  *
  * @param $scope
- * @param $rootScope
  * @param $state
- * @param $stateParams
  * @param toaster
  * @param API
  * @param ModalsService
  * @param AuthService
  */
-function ChangePassController($scope, $rootScope, $state, $stateParams, toaster, API, ModalsService, AuthService) {
+function ChangePassController($scope, $state, toaster, API, ModalsService, AuthService) {
 
   /**
    * @method constructor
@@ -72,9 +70,7 @@ function ChangePassController($scope, $rootScope, $state, $stateParams, toaster,
 app.controller("ChangePassController", ChangePassController);
 ChangePassController.$inject = [
   "$scope",
-  "$rootScope",
   "$state",
-  "$stateParams",
   "toaster",
   "API",
   "ModalsService",
