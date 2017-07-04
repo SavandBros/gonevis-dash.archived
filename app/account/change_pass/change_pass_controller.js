@@ -60,6 +60,10 @@ function ChangePassController($scope, $state, toaster, API, ModalsService, AuthS
     );
   };
 
+  /**
+   * @method forgotPassword
+   * @desc Opens modal
+   */
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
   };
