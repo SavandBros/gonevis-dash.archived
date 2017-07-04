@@ -8,8 +8,8 @@
  * @param $state
  * @param $stateParams
  * @param API
- * @param toaster
  * @param AuthService
+ * @param toaster
  */
 function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthService, toaster) {
 
