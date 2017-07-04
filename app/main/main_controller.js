@@ -8,11 +8,10 @@
  * @param $stateParams
  * @param AuthService
  * @param API
- * @param Codekit
  * @param Comment
  * @param Entry
  */
-function MainController($scope, $state, $stateParams, AuthService, API, Codekit, Comment, Entry) {
+function MainController($scope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
 
@@ -135,7 +134,6 @@ MainController.$inject = [
   "$stateParams",
   "AuthService",
   "API",
-  "Codekit",
   "Comment",
   "Entry"
 ];
