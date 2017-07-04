@@ -12,6 +12,7 @@
  * @param Codekit
  * @param AuthService
  * @param API
+ * @param DolphinService
  * @param toaster
  */
 function EntryNewController($scope, $state, $timeout, $q,
