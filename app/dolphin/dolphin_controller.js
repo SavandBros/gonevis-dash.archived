@@ -4,21 +4,17 @@
  * @class DolphinController
  *
  * @param $scope
- * @param $state
- * @param $stateParams
- * @param $resource
  * @param Dolphin
  * @param Codekit
  * @param API
- * @param ENV
  * @param AuthService
  * @param Upload
  * @param Pagination
  * @param toaster
  * @param source
  */
-function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
-  Dolphin, Codekit, API, ENV, AuthService, Upload, Pagination, Search, toaster, source) {
+function DolphinController($scope, $rootScope, Dolphin,
+  Codekit, API, AuthService, Upload, Pagination, Search, toaster, source) {
 
   var site = AuthService.getCurrentSite();
 
@@ -233,13 +229,9 @@ app.controller("DolphinController", DolphinController);
 DolphinController.$inject = [
   "$scope",
   "$rootScope",
-  "$state",
-  "$stateParams",
-  "$resource",
   "Dolphin",
   "Codekit",
   "API",
-  "ENV",
   "AuthService",
   "Upload",
   "Pagination",
