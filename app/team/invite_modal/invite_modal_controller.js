@@ -6,6 +6,7 @@
  * @param $scope
  * @param $rootScope
  * @param toaster
+ * @param API
  * @param AuthService
  * @param Codekit
  * @param ModalsService
