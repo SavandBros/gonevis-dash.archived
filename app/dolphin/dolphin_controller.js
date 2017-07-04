@@ -4,12 +4,14 @@
  * @class DolphinController
  *
  * @param $scope
+ * @param $rootScope
  * @param Dolphin
  * @param Codekit
  * @param API
  * @param AuthService
  * @param Upload
  * @param Pagination
+ * @param Search
  * @param toaster
  * @param source
  */
