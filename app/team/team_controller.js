@@ -4,14 +4,12 @@
  * @class TeamController
  *
  * @param $scope
- * @param $rootScope
- * @param $state
  * @param API
  * @param AuthService
  * @param Codekit
  * @param ModalsService
  */
-function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, ModalsService) {
+function TeamController($scope, API, AuthService, Codekit, ModalsService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -67,8 +65,6 @@ function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, M
 app.controller("TeamController", TeamController);
 TeamController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "API",
   "AuthService",
   "Codekit",
