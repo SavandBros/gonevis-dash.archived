@@ -5,14 +5,12 @@
  *
  * @param $scope
  * @param Tag
- * @param API
  * @param AuthService
- * @param ModalsService
  * @param Slug
  * @param DolphinService
  * @param Codekit
  */
-function TagNewModalController($scope, Tag, API, AuthService, ModalsService, Slug, DolphinService, Codekit) {
+function TagNewModalController($scope, Tag, AuthService, Slug, DolphinService, Codekit) {
 
   /**
    * @method constructor
@@ -57,9 +55,7 @@ app.controller("TagNewModalController", TagNewModalController);
 TagNewModalController.$inject = [
   "$scope",
   "Tag",
-  "API",
   "AuthService",
-  "ModalsService",
   "Slug",
   "DolphinService",
   "Codekit"
