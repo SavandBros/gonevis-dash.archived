@@ -5,6 +5,7 @@
  *
  * @param $scope
  * @param Entry
+ * @param Codekit
  * @param API
  * @param AuthService
  * @param Pagination
