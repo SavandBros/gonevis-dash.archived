@@ -5,13 +5,12 @@
  *
  * @param $scope
  * @param $rootScope
- * @param $state
  * @param toaster
  * @param AuthService
  * @param Codekit
  * @param ModalsService
  */
-function TeamInviteModalController($scope, $rootScope, $state, toaster, API, AuthService, Codekit, ModalsService) {
+function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService, Codekit, ModalsService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -61,7 +60,6 @@ app.controller("TeamInviteModalController", TeamInviteModalController);
 TeamInviteModalController.$inject = [
   "$scope",
   "$rootScope",
-  "$state",
   "toaster",
   "API",
   "AuthService",
