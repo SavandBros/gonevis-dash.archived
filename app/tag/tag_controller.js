@@ -6,15 +6,13 @@
  * Controller of the gonevisDash
  *
  * @param $scope
- * @param $rootScope
- * @param $state
  * @param Tag
  * @param API
  * @param AuthService
  * @param Pagination
  * @param Search
  */
-function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagination, Search) {
+function TagController($scope, Tag, API, AuthService, Pagination, Search) {
 
   var site = AuthService.getCurrentSite();
 
@@ -113,8 +111,6 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
 app.controller("TagController", TagController);
 TagController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "Tag",
   "API",
   "AuthService",
