@@ -7,15 +7,14 @@
  *
  * @param $scope
  * @param $rootScope
- * @param $state
  * @param API
  * @param AuthService
  * @param Comment
  * @param Pagination
  * @param Codekit
  */
-function CommentController($scope, $rootScope, $state,
-  API, AuthService, Comment, Pagination, Search, Codekit) {
+function CommentController($scope, $rootScope, API,
+  AuthService, Comment, Pagination, Search, Codekit) {
 
   /**
    * @method constructor
@@ -89,7 +88,6 @@ app.controller("CommentController", CommentController);
 CommentController.$inject = [
   "$scope",
   "$rootScope",
-  "$state",
   "API",
   "AuthService",
   "Comment",
