@@ -204,6 +204,13 @@ function DolphinController($scope, $rootScope, Dolphin,
   $scope.$on("gonevisDash.Dolphin:update", update);
   $scope.$on("gonevisDash.Dolphin:remove", update);
 
+  /**
+   * @event gonevisDash.Pagination:loadedMore
+   * @desc Load more callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.dolphinForm.page = data.page;
@@ -213,6 +220,13 @@ function DolphinController($scope, $rootScope, Dolphin,
     }
   });
 
+  /**
+   * @event gonevisDash.Search:submit
+   * @desc Search callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.dolphinForm = data.dolphinForm;
