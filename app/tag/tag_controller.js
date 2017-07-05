@@ -85,6 +85,13 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
     }
   });
 
+  /**
+   * @event gonevisDash.Pagination:loadedMore
+   * @desc Load more callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
@@ -94,6 +101,13 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
     }
   });
 
+  /**
+   * @event gonevisDash.Search:submit
+   * @desc Search callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
