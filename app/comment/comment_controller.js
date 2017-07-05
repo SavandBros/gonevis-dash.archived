@@ -48,7 +48,7 @@ function CommentController($scope, $rootScope, API,
   $scope.loadMore = Pagination.loadMore;
 
   /**
-   * @method gonevisDash.Comment:remove
+   * @event gonevisDash.Comment:remove
    * @desc Remove comment
    */
   $rootScope.$on("gonevisDash.Comment:remove", function () {
