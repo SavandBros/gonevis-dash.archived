@@ -50,7 +50,7 @@ function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
 
   /**
    * @method updateSlug
-   * @desc Update tag slug
+   * @desc Slugify title and update slug
    */
   $scope.updateSlug = function () {
     $scope.form.data.slug = Slug.slugify($scope.form.data.name);
