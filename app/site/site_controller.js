@@ -186,7 +186,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   });
 
   /**
-   * @event siteTemplates
+   * @method siteTemplates
    * @desc Open modal
    */
   $scope.siteTemplates = function () {
