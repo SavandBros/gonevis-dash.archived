@@ -117,7 +117,12 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   };
   $scope.upload.accept = $scope.upload.acceptList.join(",");
 
-  // upload on file select
+  /**
+   * @method uploadFile
+   * @desc Upload on file select
+   *
+   * @param file {Object}
+   */
   $scope.uploadFile = function (file) {
     Upload.upload({
       url: ENV.apiEndpoint + "account/update-profile/",
