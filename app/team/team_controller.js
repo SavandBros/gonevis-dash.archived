@@ -55,6 +55,10 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService) {
     ModalsService.open("team", "TeamModalController", { team: team });
   };
 
+  /**
+   * @event gonevisDash.TeamService.invite
+   * @desc Team invite callback
+   */
   $scope.$on("gonevisDash.TeamService.invite", function () {
     constructor();
   });
