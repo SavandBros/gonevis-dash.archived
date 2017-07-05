@@ -40,10 +40,18 @@ function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
     }
   });
 
+  /**
+   * @event gonevisDash.Tag:remove
+   * @desc Remove tag callback
+   */
   $scope.$on("gonevisDash.Tag:remove", function () {
     $scope.modalsService.close("tag");
   });
 
+  /**
+   * @method updateSlug
+   * @desc Update tag slug
+   */
   $scope.updateSlug = function () {
     $scope.form.data.slug = Slug.slugify($scope.form.data.name);
   };
