@@ -144,6 +144,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     );
   };
 
+  /**
+   * @event gonevisDash.Dolphin:select
+   * @desc Image selection callback
+   *
+   * @param event {Event}
+   * @param dolphin {Dolphin}
+   * @param source {String}
+   */
   $scope.$on("gonevisDash.Dolphin:select", function (data, dolphin, source) {
     if (source === "siteImage") {
       $scope.site.media[$scope.editing] = dolphin ? dolphin.get.id : null;
@@ -151,6 +159,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     }
   });
 
+  /**
+   * @event gonevisDash.SiteTemplatesModalController:setTemplate
+   * @desc Set template callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function (event, data) {
     $scope.loadingTemplate = true;
 
@@ -170,6 +185,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     );
   });
 
+  /**
+   * @event siteTemplates
+   * @desc Open modal
+   */
   $scope.siteTemplates = function () {
     ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
       site: $scope.site,
