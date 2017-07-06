@@ -4,15 +4,14 @@
  * @class EntryController
  *
  * @param $scope
- * @param $rootScope
- * @param $state
  * @param Entry
+ * @param Codekit
  * @param API
  * @param AuthService
  * @param Pagination
  * @param Search
  */
-function EntryController($scope, $rootScope, $state, Entry, Codekit, API, AuthService, Pagination, Search) {
+function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, Search) {
 
   /**
    * @method constructor
@@ -173,8 +172,6 @@ function EntryController($scope, $rootScope, $state, Entry, Codekit, API, AuthSe
 app.controller("EntryController", EntryController);
 EntryController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "Entry",
   "Codekit",
   "API",

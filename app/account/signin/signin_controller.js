@@ -4,15 +4,12 @@
  * @class SigninController
  * 
  * @param $scope
- * @param $rootScope
- * @param $state
  * @param $stateParams
  * @param AuthService
- * @param API
  * @param ModalsService
  * @param toaster
  */
-function SigninController($scope, $rootScope, $state, $stateParams, AuthService, API, ModalsService, toaster) {
+function SigninController($scope, $stateParams, AuthService, ModalsService, toaster) {
 
   /**
    * @method constructor
@@ -64,11 +61,8 @@ function SigninController($scope, $rootScope, $state, $stateParams, AuthService,
 app.controller("SigninController", SigninController);
 SigninController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "$stateParams",
   "AuthService",
-  "API",
   "ModalsService",
   "toaster"
 ];
