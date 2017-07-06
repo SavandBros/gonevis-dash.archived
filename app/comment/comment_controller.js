@@ -7,15 +7,15 @@
  *
  * @param $scope
  * @param $rootScope
- * @param $state
  * @param API
  * @param AuthService
  * @param Comment
  * @param Pagination
+ * @param Search
  * @param Codekit
  */
-function CommentController($scope, $rootScope, $state,
-  API, AuthService, Comment, Pagination, Search, Codekit) {
+function CommentController($scope, $rootScope, API,
+  AuthService, Comment, Pagination, Search, Codekit) {
 
   /**
    * @method constructor
@@ -47,10 +47,21 @@ function CommentController($scope, $rootScope, $state,
    */
   $scope.loadMore = Pagination.loadMore;
 
+  /**
+   * @event gonevisDash.Comment:remove
+   * @desc Remove comment
+   */
   $rootScope.$on("gonevisDash.Comment:remove", function () {
     Codekit.timeoutSlice($scope.comments);
   });
 
+  /**
+   * @event gonevisDash.Search:submit
+   * @desc Search callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
@@ -62,6 +73,13 @@ function CommentController($scope, $rootScope, $state,
     }
   });
 
+  /**
+   * @event gonevisDash.Pagination:loadedMore
+   * @desc Load more callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
@@ -89,7 +107,6 @@ app.controller("CommentController", CommentController);
 CommentController.$inject = [
   "$scope",
   "$rootScope",
-  "$state",
   "API",
   "AuthService",
   "Comment",

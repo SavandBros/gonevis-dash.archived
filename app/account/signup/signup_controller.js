@@ -4,14 +4,13 @@
  * @class SignupController
  *
  * @param $scope
- * @param $state
  * @param $stateParams
  * @param AuthService
  * @param API
  * @param Password
  * @param toaster
  */
-function SignupController($scope, $state, $stateParams, AuthService, API, Password, toaster) {
+function SignupController($scope, $stateParams, AuthService, API, Password, toaster) {
 
   /**
    * @method constructor
@@ -96,7 +95,6 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
 app.controller("SignupController", SignupController);
 SignupController.$inject = [
   "$scope",
-  "$state",
   "$stateParams",
   "AuthService",
   "API",

@@ -4,7 +4,6 @@
  * @class EntryNewController
  *
  * @param $scope
- * @param $rootScope
  * @param $state
  * @param $timeout
  * @param $q
@@ -13,9 +12,10 @@
  * @param Codekit
  * @param AuthService
  * @param API
+ * @param DolphinService
  * @param toaster
  */
-function EntryNewController($scope, $rootScope, $state, $timeout, $q,
+function EntryNewController($scope, $state, $timeout, $q,
   Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
   /**
@@ -141,7 +141,6 @@ function EntryNewController($scope, $rootScope, $state, $timeout, $q,
 app.controller("EntryNewController", EntryNewController);
 EntryNewController.$inject = [
   "$scope",
-  "$rootScope",
   "$state",
   "$timeout",
   "$q",

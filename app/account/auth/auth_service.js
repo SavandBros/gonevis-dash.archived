@@ -6,7 +6,6 @@
  *
  * @param $state
  * @param $rootScope
- * @param $http
  * @param $cookies
  * @param $window
  * @param $stateParams
@@ -14,7 +13,7 @@
  *
  * @returns [Factory]
  */
-function AuthService($state, $rootScope, $http, $cookies, $window, $stateParams, API) {
+function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   /**
    * @method getAuthenticatedUser
    * @desc Return the currently authenticated user
@@ -189,7 +188,6 @@ app.factory("AuthService", AuthService);
 AuthService.$inject = [
   "$state",
   "$rootScope",
-  "$http",
   "$cookies",
   "$window",
   "$stateParams",

@@ -4,21 +4,19 @@
  * @class DolphinController
  *
  * @param $scope
- * @param $state
- * @param $stateParams
- * @param $resource
+ * @param $rootScope
  * @param Dolphin
  * @param Codekit
  * @param API
- * @param ENV
  * @param AuthService
  * @param Upload
  * @param Pagination
+ * @param Search
  * @param toaster
  * @param source
  */
-function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
-  Dolphin, Codekit, API, ENV, AuthService, Upload, Pagination, Search, toaster, source) {
+function DolphinController($scope, $rootScope, Dolphin,
+  Codekit, API, AuthService, Upload, Pagination, Search, toaster, source) {
 
   var site = AuthService.getCurrentSite();
 
@@ -206,6 +204,13 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
   $scope.$on("gonevisDash.Dolphin:update", update);
   $scope.$on("gonevisDash.Dolphin:remove", update);
 
+  /**
+   * @event gonevisDash.Pagination:loadedMore
+   * @desc Load more callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.dolphinForm.page = data.page;
@@ -215,6 +220,13 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
     }
   });
 
+  /**
+   * @event gonevisDash.Search:submit
+   * @desc Search callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.dolphinForm = data.dolphinForm;
@@ -233,13 +245,9 @@ app.controller("DolphinController", DolphinController);
 DolphinController.$inject = [
   "$scope",
   "$rootScope",
-  "$state",
-  "$stateParams",
-  "$resource",
   "Dolphin",
   "Codekit",
   "API",
-  "ENV",
   "AuthService",
   "Upload",
   "Pagination",

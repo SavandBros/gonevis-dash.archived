@@ -6,15 +6,13 @@
  * Controller of the gonevisDash
  *
  * @param $scope
- * @param $rootScope
- * @param $state
  * @param Tag
  * @param API
  * @param AuthService
  * @param Pagination
  * @param Search
  */
-function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagination, Search) {
+function TagController($scope, Tag, API, AuthService, Pagination, Search) {
 
   var site = AuthService.getCurrentSite();
 
@@ -87,6 +85,13 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
     }
   });
 
+  /**
+   * @event gonevisDash.Pagination:loadedMore
+   * @desc Load more callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
@@ -96,6 +101,13 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
     }
   });
 
+  /**
+   * @event gonevisDash.Search:submit
+   * @desc Search callback
+   *
+   * @param event {Event}
+   * @param data {Object}
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
@@ -113,8 +125,6 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
 app.controller("TagController", TagController);
 TagController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "Tag",
   "API",
   "AuthService",

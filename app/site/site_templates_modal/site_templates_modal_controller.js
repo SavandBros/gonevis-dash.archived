@@ -27,6 +27,12 @@ function SiteTemplatesModalController($scope, $rootScope, API, AuthService, curr
     );
   }
 
+  /**
+   * @method setTemplate
+   * @desc Sets site template
+   *
+   * @param template {Object}
+   */
   $scope.setTemplate = function (template) {
     $rootScope.$broadcast("gonevisDash.SiteTemplatesModalController:setTemplate", { template: template });
   };
