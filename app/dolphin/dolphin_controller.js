@@ -1,29 +1,10 @@
 "use strict";
 
-/**
- * @class DolphinController
- *
- * @param $scope
- * @param $rootScope
- * @param Dolphin
- * @param Codekit
- * @param API
- * @param AuthService
- * @param Upload
- * @param Pagination
- * @param Search
- * @param toaster
- * @param source
- */
 function DolphinController($scope, $rootScope, Dolphin,
   Codekit, API, AuthService, Upload, Pagination, Search, toaster, source) {
 
   var site = AuthService.getCurrentSite();
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.view = localStorage.dolphinView || "list";
     $scope.dolphins = [];
@@ -50,10 +31,9 @@ function DolphinController($scope, $rootScope, Dolphin,
     );
 
     /**
-     * @method setView
      * @desc Set item view style
      *
-     * @param view {String}
+     * @param {string} view
      */
     $scope.setView = function (view) {
       $scope.view = view;
@@ -111,11 +91,10 @@ function DolphinController($scope, $rootScope, Dolphin,
 
 
   /**
-   * @method uploadFile
    * @desc Handle for file uploads
    *
-   * @param files {File}
-   * @param errFiles {File}
+   * @param {File} files
+   * @param {File} errFiles
    */
   $scope.uploadFile = function (files, errFiles) {
     $scope.upload.files = files;
@@ -173,7 +152,6 @@ function DolphinController($scope, $rootScope, Dolphin,
   };
 
   /**
-   * @method update
    * @desc Handler for dolphin changes
    */
   function update() {
@@ -181,10 +159,9 @@ function DolphinController($scope, $rootScope, Dolphin,
   }
 
   /**
-   * @method action
    * @desc Action is used to determine the action for the current state.
    *
-   * @param dolphin {Dolphin}
+   * @param {Dolphin} dolphin
    */
   $scope.action = function (dolphin) {
     if ($rootScope.selectionMode) {
@@ -196,7 +173,6 @@ function DolphinController($scope, $rootScope, Dolphin,
   };
 
   /**
-   * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
@@ -205,11 +181,10 @@ function DolphinController($scope, $rootScope, Dolphin,
   $scope.$on("gonevisDash.Dolphin:remove", update);
 
   /**
-   * @event gonevisDash.Pagination:loadedMore
    * @desc Load more callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
@@ -221,11 +196,10 @@ function DolphinController($scope, $rootScope, Dolphin,
   });
 
   /**
-   * @event gonevisDash.Search:submit
    * @desc Search callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
