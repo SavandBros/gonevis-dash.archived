@@ -1,25 +1,9 @@
 'use strict';
 
-/**
- * @name UserController
- *
- * @param {*} $scope
- * @param {*} $rootScope
- * @param {*} $stateParams
- * @param {*} AuthService
- * @param {*} API
- * @param {*} DolphinService
- * @param {*} Upload
- * @param {*} ENV
- * @param {*} toaster
- */
 function UserController($scope, $rootScope, $stateParams, AuthService, API, DolphinService, Upload, ENV, toaster) {
 
   var toasters = {};
 
-  /**
-   * @method constructor
-   */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.sites = $scope.user.sites;
@@ -35,11 +19,10 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   }
 
   /**
-   * @method updateProfile
    * @desc update user profile via api call
    *
-   * @param key {string}
-   * @param value {string}
+   * @param {string} key
+   * @param {string} value
    */
   $scope.updateProfile = function (key, value) {
 
@@ -118,10 +101,9 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   $scope.upload.accept = $scope.upload.acceptList.join(",");
 
   /**
-   * @method uploadFile
    * @desc Upload on file select
    *
-   * @param file {Object}
+   * @param {object} file
    */
   $scope.uploadFile = function (file) {
     Upload.upload({
