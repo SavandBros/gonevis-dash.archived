@@ -1,27 +1,13 @@
 "use strict";
 
-/**
- * Pagination
- *
- * @class Pagination
- * @namespace gonevisDash.Pagination
- *
- * @param $resource
- * @param $rootScope
- *
- * @returns [Factory]
- */
 function Pagination($resource, $rootScope) {
 
   /**
-   * paginate
-   *
-   * @method paginate
    * @desc Add pagination vars for given form
    *
-   * @param form {Object} Form data for API
-   * @param data {Object} Data response of API
-   * @param payload {Object}
+   * @param {object} form Form data for API
+   * @param {object} data Data response of API
+   * @param {object} payload
    */
   function paginate(form, data, payload) {
     form.page = {
@@ -36,12 +22,9 @@ function Pagination($resource, $rootScope) {
   }
 
   /**
-   * loadMore
-   *
-   * @method loadMore
    * @desc Loadmore function based on pagination vars in form data
    *
-   * @param form {Object} Form data for API
+   * @param {object} form Form data for API
    */
   function loadMore(form) {
     $resource(form.page.next).get(form.page.payload,
