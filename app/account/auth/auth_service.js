@@ -1,21 +1,7 @@
 "use strict";
 
-/**
- * @class AuthService
- * @namespace gonevisDash.AuthService
- *
- * @param $state
- * @param $rootScope
- * @param $cookies
- * @param $window
- * @param $stateParams
- * @param API
- *
- * @returns [Factory]
- */
 function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   /**
-   * @method getAuthenticatedUser
    * @desc Return the currently authenticated user
    *
    * @returns {object|undefined}
@@ -27,12 +13,11 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   }
 
   /**
-   * @method parseJwt
    * @desc Parse JWT from token
    *
-   * @param {String} token
+   * @param {string} token
    *
-   * @returns {Object}
+   * @returns {object}
    */
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
@@ -47,30 +32,27 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   }
 
   /**
-   * @method setToken
    * @desc Set token to localStorage
    *
-   * @param {String} token
+   * @param {string} token
    */
   function setToken(token) {
     $cookies.put("JWT", token);
   }
 
   /**
-   * @method getToken
    * @desc Return token from localStorage
    *
-   * @returns {String}
+   * @returns {string}
    */
   function getToken() {
     return $cookies.get("JWT");
   }
 
   /**
-   * @method setAuthenticatedUser
    * @desc Stringify the account object and store it in a cookie
    *
-   * @param {Object} authenticatedUser
+   * @param {object} authenticatedUser
    */
   function setAuthenticatedUser(authenticatedUser) {
     // Reverse sites so older comes first
@@ -82,7 +64,6 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   }
 
   /**
-   * @method unAuthenticate
    * @desc Delete the cookie where the account object is stored
    */
   function unAuthenticate() {
@@ -92,7 +73,6 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   }
 
   /**
-   * @method isAuthenticated
    * @desc Check if the current user is authenticated
    *
    * @returns {boolean}
@@ -119,7 +99,6 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   }
 
   /**
-   * @method signIn
    * @desc Main sign in function
    *
    * @param {string} username
@@ -145,7 +124,6 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   }
 
   /**
-   * @method signOut
    * @desc Clear credentials (log user out)
    */
   function signOut() {
@@ -154,10 +132,9 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   }
 
   /**
-   * @method getCurrentSite
    * @desc Check and return the ID of the current site
    *
-   * @returns {String} Site id (uuid)
+   * @returns {string} Site id (uuid)
    */
   function getCurrentSite() {
     var sites = getAuthenticatedUser().sites;
@@ -167,7 +144,6 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   }
 
   /**
-   * @name AuthService
    * @desc The Factory to be returned
    */
   return {
