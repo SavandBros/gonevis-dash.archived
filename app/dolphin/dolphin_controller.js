@@ -94,11 +94,11 @@ function DolphinController($scope, $rootScope, Dolphin,
    * @desc Handle for file uploads
    *
    * @param {array} files
-   * @param {array} errFiles
+   * @param {array} errorFiles
    */
-  $scope.uploadFile = function (files, errFiles) {
+  $scope.uploadFile = function (files, errorFiles) {
     $scope.upload.files = files;
-    $scope.errFiles = errFiles;
+    $scope.errorFiles = errorFiles;
 
     angular.forEach($scope.upload.files,
       function (file) {
