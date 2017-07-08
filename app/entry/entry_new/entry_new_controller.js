@@ -100,7 +100,7 @@ function EntryNewController($scope, $state, $timeout, $q,
   /**
    * @desc Image selection callback
    *
-   * @param event {Event} event
+   * @param {Event} event
    * @param {dolphin} dolphin
    * @param {string} source
    */
