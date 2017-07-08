@@ -1,9 +1,7 @@
 "use strict";
 
 /**
- * @class BytesFilter
- *
- * @returns {Function}
+ * @returns {function}
  */
 function BytesFilter() {
   return function (bytes, precision) {
