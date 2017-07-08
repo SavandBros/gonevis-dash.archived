@@ -93,8 +93,8 @@ function DolphinController($scope, $rootScope, Dolphin,
   /**
    * @desc Handle for file uploads
    *
-   * @param {File} files
-   * @param {File} errFiles
+   * @param {array} files
+   * @param {array} errFiles
    */
   $scope.uploadFile = function (files, errFiles) {
     $scope.upload.files = files;
