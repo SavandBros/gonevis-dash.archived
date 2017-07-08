@@ -1,19 +1,9 @@
 "use strict";
 
-/**
- * @class Entry
- *
- * @param $rootScope
- * @param $state
- * @param API
- * @param Codekit
- * @param toaster
- */
 function Entry($rootScope, $state, API, Codekit, toaster) {
   return function (data) {
 
     /**
-     * @name self
      * @desc Super variable for getting this in functions
      *
      * @type {Tag}
@@ -21,40 +11,37 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     var self = this;
 
     /**
-     * @name data
+     * @readonly
      * @desc Backend data
      *
-     * @type {Object}
+     * @type {object}
      */
     this.get = data;
 
     /**
-     * @name isDeleted
-     * @type {Boolean}
+     * @type {boolean}
      */
     this.isDeleted = false;
 
     /**
-     * @name isSelected
-     * @type {Boolean}
+     * @type {boolean}
      */
     this.isSelected = false;
 
     /**
-     * @method cache
      * @desc Cache entry
-     * @param clear {Boolean}
+     *
+     * @param {boolean} clear
      */
     this.cache = function (clear) {
       $rootScope.cache.entry = clear ? null : this;
     };
 
     /**
-     * @method setProperty
      * @desc Change a property of entry
      *
-     * @param key {String} Property name
-     * @param value {String|Number} Property value
+     * @param {string} key Property name
+     * @param {string|number} value Property value
      */
     this.setProperty = function (key, value) {
       var payload = {};
@@ -69,11 +56,10 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     };
 
     /**
-     * @method createdocumentation
      * @desc Entry creation
      *
-     * @param success {Function}
-     * @param fail {Function}
+     * @param {function} success
+     * @param {function} fail
      *
      * @returns {Promise}
      */
@@ -82,7 +68,6 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     };
 
     /**
-     * @method remove
      * @desc Delete entries via API call
      */
     this.remove = function () {
@@ -100,10 +85,9 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     };
 
     /**
-     * @method getUrl
      * @desc Add draft parameters if entry is draft
      *
-     * @returns {String}
+     * @returns {string}
      */
     this.getUrl = function () {
       var params = "";
@@ -116,7 +100,6 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     };
 
     /**
-     * @method addToNavigation
      * @desc Add entry to navigation
      */
     this.addToNavigation = function () {
