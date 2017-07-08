@@ -1,27 +1,8 @@
 "use strict";
 
-/**
- * @class EntryNewController
- *
- * @param $scope
- * @param $state
- * @param $timeout
- * @param $q
- * @param Entry
- * @param Tag
- * @param Codekit
- * @param AuthService
- * @param API
- * @param DolphinService
- * @param toaster
- */
 function EntryNewController($scope, $state, $timeout, $q,
   Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.tags = [];
     $scope.dolphinService = DolphinService;
@@ -58,7 +39,6 @@ function EntryNewController($scope, $state, $timeout, $q,
   }
 
   /**
-   * @method load
    * @desc query tags
    */
   function load() {
@@ -68,10 +48,9 @@ function EntryNewController($scope, $state, $timeout, $q,
   }
 
   /**
-   * @method loadTags
    * @desc Load tags and filter them
    *
-   * @param query {String}
+   * @param {string} query
    */
   $scope.loadTags = function (query) {
     return load().then(function (response) {
@@ -84,10 +63,9 @@ function EntryNewController($scope, $state, $timeout, $q,
 
 
   /**
-   * @method newPost
    * @desc Submit newPost form
    *
-   * @param form {object} Form data to submit
+   * @param {object} form Form data to submit
    */
   $scope.newPost = function (form) {
     form.loading = true;
@@ -120,12 +98,11 @@ function EntryNewController($scope, $state, $timeout, $q,
   };
 
   /**
-   * @event gonevisDash.Dolphin:select
    * @desc Image selection callback
    *
-   * @param event {Event}
-   * @param dolphin {Dolphin}
-   * @param source {String}
+   * @param event {Event} event
+   * @param {dolphin} dolphin
+   * @param {string} source
    */
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     if (source === "entryCover") {
