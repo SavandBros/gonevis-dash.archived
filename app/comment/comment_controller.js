@@ -1,26 +1,8 @@
 "use strict";
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:CommentController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param $rootScope
- * @param API
- * @param AuthService
- * @param Comment
- * @param Pagination
- * @param Search
- * @param Codekit
- */
 function CommentController($scope, $rootScope, API,
   AuthService, Comment, Pagination, Search, Codekit) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser();
     $scope.statuses = Codekit.commentStatuses;
@@ -42,13 +24,11 @@ function CommentController($scope, $rootScope, API,
   }
 
   /**
-   * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
 
   /**
-   * @event gonevisDash.Comment:remove
    * @desc Remove comment
    */
   $rootScope.$on("gonevisDash.Comment:remove", function () {
@@ -56,11 +36,10 @@ function CommentController($scope, $rootScope, API,
   });
 
   /**
-   * @event gonevisDash.Search:submit
    * @desc Search callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
@@ -74,11 +53,10 @@ function CommentController($scope, $rootScope, API,
   });
 
   /**
-   * @event gonevisDash.Pagination:loadedMore
    * @desc Load more callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
@@ -90,11 +68,10 @@ function CommentController($scope, $rootScope, API,
   });
 
   /**
-   * @event gonevisDash.Comment:reply
    * @desc Reply comment
    *
-   * @param event {Event}
-   * @param comment {Object}
+   * @param {Event} event
+   * @param {object} comment
    */
   $scope.$on("gonevisDash.Comment:reply", function (event, comment) {
     $scope.comments.unshift(new Comment(comment));
