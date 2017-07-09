@@ -20,9 +20,6 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.auth = AuthService;
-    $scope.user = AuthService.getAuthenticatedUser();
-
     $scope.state = $state;
     $scope.param = $stateParams;
 
