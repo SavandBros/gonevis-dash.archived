@@ -34,6 +34,14 @@ function Account() {
       // Name is not set
       return false;
     };
+    this.getFullName = function () {
+      // Full name
+      if (self.get.name) {
+        return self.get.name;
+      }
+      // Username
+      return self.get.username;
+    };
   };
 }
 
