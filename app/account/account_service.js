@@ -34,6 +34,12 @@ function Account() {
       // Name is not set
       return false;
     };
+
+    /**
+     * @desc Get users full name or username if not available
+     * @type {function}
+     * @returns {string}
+     */
     this.getFullName = function () {
       // Full name
       if (self.get.name) {
