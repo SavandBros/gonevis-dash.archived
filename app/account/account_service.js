@@ -16,6 +16,18 @@ function Account() {
      * @type {object}
      */
     this.get = data;
+    this.getFirstName = function () {
+      // Check name
+      if (self.get.name) {
+        // Get first part of name
+        var firstName = self.get.name.split(" ")[0];
+        if (firstName) {
+          return firstName;
+        }
+      }
+      // Name is not set
+      return false;
+    };
   };
 }
 
