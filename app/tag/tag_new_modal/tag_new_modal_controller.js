@@ -1,21 +1,7 @@
 "use strict";
 
-/**
- * @class TagNewModalController
- *
- * @param $scope
- * @param Tag
- * @param AuthService
- * @param Slug
- * @param DolphinService
- * @param Codekit
- */
 function TagNewModalController($scope, Tag, AuthService, Slug, DolphinService, Codekit) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.Tag = new Tag({ site: AuthService.getCurrentSite() });
     $scope.dolphinService = DolphinService;
@@ -27,7 +13,6 @@ function TagNewModalController($scope, Tag, AuthService, Slug, DolphinService, C
   }
 
   /**
-   * @method updateSlug
    * @desc Slugify title and update slug
    */
   $scope.updateSlug = function () {
@@ -35,12 +20,11 @@ function TagNewModalController($scope, Tag, AuthService, Slug, DolphinService, C
   };
 
   /**
-   * @event gonevisDash.Dolphin:select
    * @desc Dolphin selection
    *
-   * @param event {Event}
-   * @param dolphin {Dolphin}
-   * @param source {String}
+   * @param {Event} event
+   * @param {Dolphin} dolphin
+   * @param {string} source
    */
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     if (source === "tagCover") {
