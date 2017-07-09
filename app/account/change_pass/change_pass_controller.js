@@ -8,17 +8,8 @@
  * @param toaster
  * @param API
  * @param ModalsService
- * @param AuthService
  */
 function ChangePassController($scope, $state, toaster, API, ModalsService) {
-
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
-  function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
-  }
 
   /**
    * @method changePassword
@@ -64,8 +55,6 @@ function ChangePassController($scope, $state, toaster, API, ModalsService) {
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
   };
-
-  constructor();
 }
 
 app.controller("ChangePassController", ChangePassController);
