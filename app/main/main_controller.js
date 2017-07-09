@@ -1,24 +1,9 @@
 "use strict";
 
-/**
- * @class MainController
- *
- * @param $scope
- * @param $state
- * @param $stateParams
- * @param AuthService
- * @param API
- * @param Comment
- * @param Entry
- */
 function MainController($scope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser();
@@ -37,17 +22,14 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
   }
 
   /**
-   * @name Comment
-   * @type {Object}
+   * @type {object}
    */
   $scope.Comment = {
     /**
-     * @name list
-     * @type Array
+     * @type {array}
      */
     list: [],
     /**
-     * @method initialize
      * @desc initialize comments
      */
     initialize: function () {
@@ -65,17 +47,14 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
   };
 
   /**
-   * @name Entry
-   * @type {Object}
+   * @type {object}
    */
   $scope.Entry = {
     /**
-     * @name list
-     * @type Array
+     * @type {array}
      */
     list: [],
     /**
-     * @method initialize
      * @desc Initialize entries
      */
     initialize: function () {
@@ -93,12 +72,10 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
   };
 
   /**
-   * @name Metrics
-   * @type {Object}
+   * @type {object}
    */
   $scope.Metrics = {
     /**
-     * @method initialize
      * @desc Initialize metrics
      */
     initialize: function () {
@@ -114,11 +91,10 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
   };
 
   /**
-   * @event gonevisDash.Comment:reply
    * @desc Reply comment
    *
-   * @param event {Event}
-   * @param comment {Object}
+   * @param {Event} event
+   * @param {object} comment
    */
   $scope.$on("gonevisDash.Comment:reply", function (event, comment) {
     $scope.Comment.list.unshift(new Comment(comment));
