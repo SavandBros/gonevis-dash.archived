@@ -1,19 +1,15 @@
 "use strict";
 
 /**
- * @class ModalsService
  * @desc Modal service to work with bootstrap's modal
  *       Each modal should have an id same as its template name
- *
- * @param ModalService
  */
 function ModalsService(ModalService) {
 
   /**
-   * @name templates
    * @desc All modal templates are defined here
    *
-   * @type {Object}
+   * @type {object}
    */
   var templates = {
     dolphin: "dolphin/dolphin_modal/dolphin_modal_view.html",
@@ -28,19 +24,18 @@ function ModalsService(ModalService) {
   };
 
   /**
-   * @name modals
    * @desc Modal instances
    *
-   * @type {Object}
+   * @type {object}
    */
   var modals = {};
 
   /**
-   * @method open
    * @desc Open up a modal with a template and a controller
    *
    * @param {string} template Name of the modal template
    * @param {string} controller Controller of modal
+   * @param {object} data
    */
   function open(template, controller, data) {
     ModalService.showModal({
@@ -54,7 +49,6 @@ function ModalsService(ModalService) {
   }
 
   /**
-   * @method close
    * @desc Close a modal by it's instance
    *
    * @param {string} template Name of the modal template (instance)
@@ -72,7 +66,7 @@ function ModalsService(ModalService) {
 
   return {
     open: open,
-    close: close,
+    close: close
   };
 }
 
