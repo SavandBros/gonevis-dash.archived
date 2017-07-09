@@ -16,6 +16,12 @@ function Account() {
      * @type {object}
      */
     this.get = data;
+
+    /**
+     * @desc Get first part of full name if name is available
+     * @type {function}
+     * @returns {string|boolean}
+     */
     this.getFirstName = function () {
       // Check name
       if (self.get.name) {
