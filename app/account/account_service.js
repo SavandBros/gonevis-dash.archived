@@ -48,6 +48,12 @@ function Account() {
       // Username
       return self.get.username;
     };
+
+    /**
+     * @desc Show a proper name for user
+     * @type {function}
+     * @returns {string}
+     */
     this.getDisplayName = function () {
       // First name
       if (self.getFirstName()) {
