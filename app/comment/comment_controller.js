@@ -1,28 +1,13 @@
 "use strict";
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:CommentController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param $rootScope
- * @param API
- * @param AuthService
- * @param Comment
- * @param Pagination
- * @param Search
- * @param Codekit
- */
-function CommentController($scope, $rootScope, API,
-  AuthService, Comment, Pagination, Search, Codekit) {
+function CommentController($scope, $rootScope, API, AuthService, Comment, Pagination, Search, Codekit) {
 
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.statuses = Codekit.commentStatuses;
     $scope.search = Search;
     $scope.comments = [];
