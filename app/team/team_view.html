@@ -12,22 +12,22 @@
       <div class="panel-body s-pad-no">
         <!-- Team -->
         <div class="list-group s-mar-no">
-          <a class="list-group-item b-no" ng-repeat="t in team.list" ng-show="!t.isRemoved" ng-click="view(t)">
+          <a class="list-group-item b-no" ng-repeat="team in team.list" ng-show="!team.isRemoved" ng-click="view(team)">
             <h4>
               <!-- Avatar -->
-              <img class="img-circle" ng-class="{'o-fade-hard': t.isPending || !t.user.media.picture}"
+              <img class="img-circle" ng-class="{'o-fade-hard': team.isPending || !team.user.get.media.picture}"
                 height="64" ng-src="{{
-                  !t.isPending && t.user.media.picture ? t.user.media.thumbnail_128x128 : 'assets/img/avatar.png'
+                  !team.isPending && team.user.get.media.picture ? team.user.get.media.thumbnail_128x128 : 'assets/img/avatar.png'
                 }}">
               <!-- Name/email -->
-              <span class="s-mar-left">{{ !t.isPending ? t.user.name || t.user.username : t.email }}</span>
+              <span class="s-mar-left">{{ !team.isPending ? team.user.getFullName() : team.get.email }}</span>
               <!-- Right side -->
               <span class="pull-right" style="margin-top: 22px">
                 <!-- Pending label -->
-                <span class="t-small outline text-muted" ng-if="t.isPending">PENDING</span>
+                <span class="t-small outline text-muted" ng-if="team.isPending">PENDING</span>
                 <!-- Role label -->
-                <span class="t-small outline {{ teamRoles[t.role].color }}" style="margin-top: 8px">
-                  {{ teamRoles[t.role].label | uppercase }}
+                <span class="t-small outline {{ teamRoles[team.role].color }}" style="margin-top: 8px">
+                  {{ teamRoles[team.role].label | uppercase }}
                 </span>
             </h4>
           </a>
