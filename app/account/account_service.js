@@ -48,6 +48,14 @@ function Account() {
       // Username
       return self.get.username;
     };
+    this.getDisplayName = function () {
+      // First name
+      if (self.getFirstName()) {
+        return self.getFirstName();
+      }
+      // Full name
+      return self.getFullName();
+    };
   };
 }
 
