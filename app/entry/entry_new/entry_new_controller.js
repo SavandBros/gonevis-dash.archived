@@ -92,7 +92,7 @@ function EntryNewController($scope, $state, $timeout, $q,
   $scope.newPost = function (form) {
     form.loading = true;
     form.get.site = AuthService.getCurrentSite();
-    form.get.user = AuthService.getAuthenticatedUser();
+    form.get.user = AuthService.getAuthenticatedUser(false);
 
     var payload = form.get;
     payload.tag_ids = [];
