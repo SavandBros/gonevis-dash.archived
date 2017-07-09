@@ -184,7 +184,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   };
 }
 
-app.factory("AuthService", AuthService);
+app.service("AuthService", AuthService);
 AuthService.$inject = [
   "$state",
   "$rootScope",
