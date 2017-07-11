@@ -11,7 +11,7 @@
  *
  * @return [Factory]
  */
-function Comment($rootScope, toaster, API, ModalsService, Codekit) {
+function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
   return function (data) {
 
     /**
@@ -29,6 +29,11 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit) {
      * @type {Object}
      */
     this.get = data;
+
+    /**
+     * @type {Account}
+     */
+    this.user = new Account(self.get.user);
 
     /**
      * @name isDeleted
@@ -141,5 +146,6 @@ Comment.$inject = [
   "toaster",
   "API",
   "ModalsService",
-  "Codekit"
+  "Codekit",
+  "Account"
 ];

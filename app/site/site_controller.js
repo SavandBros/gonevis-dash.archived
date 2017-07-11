@@ -24,7 +24,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(false);
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
 

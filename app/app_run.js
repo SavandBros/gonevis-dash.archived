@@ -44,7 +44,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   if (Client.version !== parseInt($window.localStorage.getItem("version"))) {
 
     // Store auth to use after data reset
-    var isAuthed = AuthService.isAuthenticated();
+    var isAuthed = AuthService.isAuthenticated(true);
 
     // Clear cookies
     $cookies.remove("JWT");
@@ -115,7 +115,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
 
     var isAuthenticated = AuthService.isAuthenticated();
     var toDash = toState.name.indexOf("dash.") !== -1;
-    var sites = isAuthenticated ? AuthService.getAuthenticatedUser().sites : [];
+    var sites = isAuthenticated ? AuthService.getAuthenticatedUser(true).get.sites : [];
 
     // If requires unauthenticated access only and user is authenticated or
     // If state requires authenticated access only and user is not authenticated

@@ -18,7 +18,7 @@ function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthSe
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(false);
 
     // Get site from param
     if ($stateParams.site) {

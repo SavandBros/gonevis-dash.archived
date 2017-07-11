@@ -13,8 +13,6 @@
  */
 function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService, Codekit, ModalsService) {
 
-  var site = AuthService.getCurrentSite();
-
   /**
    * @method constructor
    * @desc Init function for controller
@@ -38,7 +36,7 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
   $scope.invite = function (form) {
     form.loading = true;
 
-    API.TeamInvite.put({ siteId: site }, form.data,
+    API.TeamInvite.put({ siteId: AuthService.getCurrentSite() }, form.data,
       function (data) {
         $rootScope.$broadcast("gonevisDash.TeamService.invite", data);
         ModalsService.close("invite");

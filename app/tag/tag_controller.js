@@ -14,14 +14,11 @@
  */
 function TagController($scope, Tag, API, AuthService, Pagination, Search) {
 
-  var site = AuthService.getCurrentSite();
-
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
     $scope.view = localStorage.tagView || "list";
     $scope.filters = { name: "" };
     $scope.search = Search;
@@ -30,7 +27,7 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
     $scope.Tag = new Tag();
 
     var payload = {
-      site: site
+      site: AuthService.getCurrentSite()
     };
 
     API.Tags.get(payload,
