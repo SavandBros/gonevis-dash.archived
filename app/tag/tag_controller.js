@@ -2,15 +2,6 @@
 
 function TagController($scope, Tag, API, AuthService, Pagination, Search) {
 
-<<<<<<< HEAD
-  var site = AuthService.getCurrentSite();
-
-=======
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
->>>>>>> d850cb100a90949f39ce90db90d478335bb5177b
   function constructor() {
     $scope.view = localStorage.tagView || "list";
     $scope.filters = { name: "" };

@@ -1,21 +1,6 @@
 "use strict";
 
-<<<<<<< HEAD
-function Comment($rootScope, toaster, API, ModalsService, Codekit) {
-=======
-/**
- * @class Comment
- *
- * @param $rootScope
- * @param toaster
- * @param API
- * @param ModalsService
- * @param Codekit
- *
- * @return [Factory]
- */
 function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
->>>>>>> d850cb100a90949f39ce90db90d478335bb5177b
   return function (data) {
 
     /**
@@ -34,9 +19,6 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
     this.get = data;
 
     /**
-<<<<<<< HEAD
-     * @type {boolean}
-=======
      * @type {Account}
      */
     this.user = new Account(self.get.user);
@@ -44,7 +26,6 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
     /**
      * @name isDeleted
      * @type {Boolean}
->>>>>>> d850cb100a90949f39ce90db90d478335bb5177b
      */
     this.isDeleted = false;
 

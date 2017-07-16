@@ -2,15 +2,6 @@
 
 function TeamModalController($scope, toaster, API, team, Codekit, AuthService, ModalsService) {
 
-<<<<<<< HEAD
-  var site = AuthService.getCurrentSite();
-
-=======
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
->>>>>>> d850cb100a90949f39ce90db90d478335bb5177b
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.team = team;

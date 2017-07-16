@@ -2,15 +2,6 @@
 
 function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService, Codekit, ModalsService) {
 
-<<<<<<< HEAD
-  var site = AuthService.getCurrentSite();
-
-=======
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
->>>>>>> d850cb100a90949f39ce90db90d478335bb5177b
   function constructor() {
     $scope.form = {
       data: {}

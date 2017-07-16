@@ -1,21 +1,6 @@
 "use strict";
 
-<<<<<<< HEAD
-function TeamController($scope, API, AuthService, Codekit, ModalsService) {
-
-  var site = AuthService.getCurrentSite();
-=======
-/**
- * @class TeamController
- *
- * @param $scope
- * @param API
- * @param AuthService
- * @param Codekit
- * @param ModalsService
- */
 function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
->>>>>>> d850cb100a90949f39ce90db90d478335bb5177b
 
   function constructor() {
     $scope.teamRoles = Codekit.teamRoles;
