@@ -481,6 +481,7 @@ module.exports = function (grunt) {
       staging: {
         constants: {
           ENV: {
+            ROLLERBAR_TOKEN: "d0a14094307a424cbd7d59d9c897b940",
             name: "staging",
             apiEndpoint: "http://draft.gonevis.com/api/v1/"
           }
