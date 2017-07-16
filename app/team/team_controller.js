@@ -4,26 +4,21 @@
  * @class TeamController
  *
  * @param $scope
- * @param $rootScope
- * @param $state
  * @param API
  * @param AuthService
  * @param Codekit
  * @param ModalsService
  */
-function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, ModalsService) {
-
-  var site = AuthService.getCurrentSite();
+function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
 
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
     $scope.teamRoles = Codekit.teamRoles;
 
-    API.Team.get({ siteId: site },
+    API.Team.get({ siteId: AuthService.getCurrentSite() },
       function (data) {
         $scope.initialled = true;
         $scope.team = data;
@@ -33,6 +28,10 @@ function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, M
           data.team_pending[i].isPending = true;
           $scope.team.list.push(data.team_pending[i]);
         }
+
+        angular.forEach($scope.team.list, function (team) {
+          team.user = new Account(team.user);
+        });
       }
     );
   }
@@ -57,6 +56,10 @@ function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, M
     ModalsService.open("team", "TeamModalController", { team: team });
   };
 
+  /**
+   * @event gonevisDash.TeamService.invite
+   * @desc Team invite callback
+   */
   $scope.$on("gonevisDash.TeamService.invite", function () {
     constructor();
   });
@@ -67,10 +70,9 @@ function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, M
 app.controller("TeamController", TeamController);
 TeamController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "API",
   "AuthService",
   "Codekit",
-  "ModalsService"
+  "ModalsService",
+  "Account"
 ];

@@ -8,11 +8,10 @@
  * @param $stateParams
  * @param AuthService
  * @param API
- * @param Codekit
  * @param Comment
  * @param Entry
  */
-function MainController($scope, $state, $stateParams, AuthService, API, Codekit, Comment, Entry) {
+function MainController($scope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
 
@@ -21,9 +20,6 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.auth = AuthService;
-    $scope.user = AuthService.getAuthenticatedUser();
-
     $scope.state = $state;
     $scope.param = $stateParams;
 
@@ -135,7 +131,6 @@ MainController.$inject = [
   "$stateParams",
   "AuthService",
   "API",
-  "Codekit",
   "Comment",
   "Entry"
 ];

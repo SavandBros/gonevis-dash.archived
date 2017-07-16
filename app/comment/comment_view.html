@@ -12,31 +12,37 @@
     <!-- List -->
     <div class="panel panel-default animated fadeIn" ng-if="comments.length">
       <ul class="panel-body panel-list">
-        <li class="panel-list-item b-left {{ comment.getStatus().class }}" ng-class="{'animated fadeOut': comment.isDeleted}"
+        <li class="panel-list-item b-left row s-mar-no {{ comment.getStatus().class }}" ng-class="{'animated fadeOut': comment.isDeleted}"
           ng-repeat="comment in comments" ng-show="!comment.isDeleted">
-          <!-- User -->
-          <img class="comment pull-left img-circle"
-            ng-src="{{
-              comment.get.user.media.picture ? comment.get.user.media.thumbnail_48x48 : 'assets/img/avatar.png'
+          <!-- Image -->
+          <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+            <img class="comment pull-left img-circle"
+                 ng-src="{{
+              comment.user.get.media.picture ? comment.user.get.media.thumbnail_48x48 : 'assets/img/avatar.png'
             }}">
-          <small>
-            <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
-              {{ comment.get.user.name }}
-            </a>
-            responded to
-            <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
-              {{ comment.get.commented_object_minimal_data.title }}
-            </a>
-            at
-            <span class="o-fade-soft">{{ comment.get.created | date }}</span>
-          </small>
-          <br>
+          </div>
+          <!-- Info -->
+          <div class="col-md-11 col-lg-11 col-sm-11 col-xs-11 t-line">
+            <small>
+              <a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">
+                {{ comment.user.getDisplayName() }}
+              </a>
+              responded to
+              <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
+                {{ comment.get.commented_object_minimal_data.title }}
+              </a>
+              at
+              <span class="o-fade-soft">{{ comment.get.created | date }}</span>
+            </small>
+          </div>
           <!-- Comment -->
-          <a ng-click="comment.view()">{{ comment.get.comment }}</a>
+          <div class="col-md-11 col-lg-11 col-sm-11 col-xs-11 t-line">
+            <a ng-click="comment.view()">{{ comment.get.comment }}</a>
+          </div>
           <!-- Options -->
-          <span class="panel-list-item-button">
+          <span class="panel-list-item-button s-mar-top-soft">
             <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li class="dropdown-header">Change status</li>
               <li ng-repeat="status in statuses" ng-class="{'active': comment.getStatus().label == status.label}">
                 <a ng-click="comment.setStatus(status.property, status.value)">

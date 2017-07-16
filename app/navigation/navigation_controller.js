@@ -6,14 +6,12 @@
  * Controller of the gonevisDash
  *
  * @param $scope
- * @param $rootScope
  * @param toaster
- * @param $state
  * @param $stateParams
  * @param API
  * @param AuthService
  */
-function NavigationController($scope, $rootScope, toaster, $state, $stateParams, API, AuthService) {
+function NavigationController($scope, toaster, $stateParams, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -104,9 +102,7 @@ function NavigationController($scope, $rootScope, toaster, $state, $stateParams,
 app.controller("NavigationController", NavigationController);
 NavigationController.$inject = [
   "$scope",
-  "$rootScope",
   "toaster",
-  "$state",
   "$stateParams",
   "API",
   "AuthService"

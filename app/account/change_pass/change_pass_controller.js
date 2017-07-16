@@ -4,23 +4,12 @@
  * @class ChangePassController
  *
  * @param $scope
- * @param $rootScope
  * @param $state
- * @param $stateParams
  * @param toaster
  * @param API
  * @param ModalsService
- * @param AuthService
  */
-function ChangePassController($scope, $rootScope, $state, $stateParams, toaster, API, ModalsService, AuthService) {
-
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
-  function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
-  }
+function ChangePassController($scope, $state, toaster, API, ModalsService) {
 
   /**
    * @method changePassword
@@ -29,7 +18,6 @@ function ChangePassController($scope, $rootScope, $state, $stateParams, toaster,
    * @param form {Object}
    */
   $scope.changePassword = function (form) {
-
     // Is a new password
     if (form.old_password === form.password) {
       form.errors = {
@@ -50,9 +38,7 @@ function ChangePassController($scope, $rootScope, $state, $stateParams, toaster,
 
     API.ChangePassword.save(form,
       function () {
-        form.loading = false;
         toaster.info("Done", "Password changed");
-        form.errors = null;
         $state.go("dash.user");
       },
       function (data) {
@@ -62,21 +48,20 @@ function ChangePassController($scope, $rootScope, $state, $stateParams, toaster,
     );
   };
 
+  /**
+   * @method forgotPassword
+   * @desc Opens modal
+   */
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
   };
-
-  constructor();
 }
 
 app.controller("ChangePassController", ChangePassController);
 ChangePassController.$inject = [
   "$scope",
-  "$rootScope",
   "$state",
-  "$stateParams",
   "toaster",
   "API",
-  "ModalsService",
-  "AuthService"
+  "ModalsService"
 ];

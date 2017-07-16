@@ -13,14 +13,12 @@
  */
 function TeamModalController($scope, toaster, API, team, Codekit, AuthService, ModalsService) {
 
-  var site = AuthService.getCurrentSite();
-
   /**
    * @method constructor
    * @desc Init function for controller
    */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.team = team;
     $scope.teamRoles = Codekit.teamRoles;
   }
@@ -46,7 +44,7 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
       payload = { team_member_id: team.user.id };
     }
 
-    api.put({ siteId: site }, payload,
+    api.put({ siteId: AuthService.getCurrentSite() }, payload,
       function () {
         team.isRemoved = true;
         ModalsService.close("team");

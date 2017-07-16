@@ -3,13 +3,12 @@
 /**
  * API Service
  *
- * @param $http
  * @param $resource
  * @param ENV
  *
  * @returns {{Service: API.service}}
  */
-function API($http, $resource, ENV) {
+function API($resource, ENV) {
   var BASE_API = ENV.apiEndpoint;
   var apiData = {};
 
@@ -162,7 +161,6 @@ function API($http, $resource, ENV) {
 
 app.service("API", API);
 API.$inject = [
-  "$http",
   "$resource",
   "ENV"
 ];
