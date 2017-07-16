@@ -1,23 +1,7 @@
 "use strict";
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:TagController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param Tag
- * @param API
- * @param AuthService
- * @param Pagination
- * @param Search
- */
 function TagController($scope, Tag, API, AuthService, Pagination, Search) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.view = localStorage.tagView || "list";
     $scope.filters = { name: "" };
@@ -43,10 +27,9 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
   }
 
   /**
-   * @method setView
    * @desc Set item view style
    *
-   * @param view {String}
+   * @param {string} view
    */
   $scope.setView = function (view) {
     $scope.view = view;
@@ -54,7 +37,6 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
   };
 
   /**
-   * @method search
    * @desc Search through tags
    */
   $scope.search = function () {
@@ -71,11 +53,16 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
   };
 
   /**
-   * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
 
+  /**
+   * @desc Tag create callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
   $scope.$on("gonevisDash.Tag:create", function (event, data) {
     if (data.success) {
       $scope.tags.push(new Tag(data.data));
@@ -83,11 +70,10 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
   });
 
   /**
-   * @event gonevisDash.Pagination:loadedMore
    * @desc Load more callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
@@ -99,11 +85,10 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
   });
 
   /**
-   * @event gonevisDash.Search:submit
    * @desc Search callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {

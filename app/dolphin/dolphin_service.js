@@ -1,19 +1,9 @@
 "use strict";
 
-/**
- * @class Dolphin
- *
- * @param $rootScope
- * @param API
- * @param AuthService
- * @param ModalsService
- * @param toaster
- */
 function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
   return function (data) {
 
     /**
-     * @name self
      * @desc Super variable for getting this in functions
      *
      * @type {Dolphin}
@@ -21,21 +11,19 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
     var self = this;
 
     /**
-     * @name data
+     * @readonly
      * @desc Backend data
      *
-     * @type {Object}
+     * @type {object}
      */
     this.get = data;
 
     /**
-     * @name isDeleted
-     * @type {Boolean}
+     * @type {boolean}
      */
     this.isDeleted = false;
 
     /**
-     * @method remove
      * @desc Delete a dolphin and broadcast it
      */
     this.remove = function () {
@@ -63,7 +51,6 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
     };
 
     /**
-     * @method view
      * @desc Dolphin view via modal
      */
     this.view = function () {
@@ -88,18 +75,11 @@ Dolphin.$inject = [
   "toaster"
 ];
 
-/**
- * @class DolphinServicerootSc
- *
- * @param $rootScope
- * @param ModalsService
- */
 function DolphinService($rootScope, ModalsService) {
   /**
-   * @method viewSelection
    * @desc Open the main dolphin component via modal for selection
    *
-   * @param source {String} Source of use (to check later)
+   * @param {string} source Source of use (to check later)
    */
   function viewSelection(source) {
     $rootScope.selectionMode = true;

@@ -1,28 +1,11 @@
 "use strict";
 
-/**
- * @class SiteController
- *
- * @param $scope
- * @param $rootScope
- * @param $state
- * @param $stateParams
- * @param toaster
- * @param API
- * @param ModalsService
- * @param AuthService
- * @param DolphinService
- */
 function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   API, ModalsService, AuthService, DolphinService, Codekit) {
 
   var site = AuthService.getCurrentSite();
   var toasters = {};
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(false);
     $scope.site = $scope.user.sites[$stateParams.s];
@@ -46,11 +29,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   }
 
   /**
-   * @method updateSite
    * @desc update site via api call
    *
-   * @param key {String}
-   * @param value {String}
+   * @param {string} key
+   * @param {string} value
    */
   $scope.updateSite = function (key, value) {
 
@@ -85,7 +67,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
-   * @method remove
    * @desc Delete site via API call
    */
   $scope.remove = function () {
@@ -115,10 +96,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
-   * @method selectImage
    * @desc Select image for logo/cover
    *
-   * @param image {String} Image property of site (logo, cover, etc)
+   * @param {string} image Image property of site (logo, cover, etc)
    */
   $scope.selectImage = function (image) {
     $scope.editing = image;
@@ -126,7 +106,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
-   * @method saveConfig
    * @desc Save template config
    */
   $scope.saveConfig = function () {
@@ -145,12 +124,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
-   * @event gonevisDash.Dolphin:select
    * @desc Image selection callback
    *
-   * @param event {Event}
-   * @param dolphin {Dolphin}
-   * @param source {String}
+   * @param {Event} event
+   * @param {Dolphin} dolphin
+   * @param {string} source
    */
   $scope.$on("gonevisDash.Dolphin:select", function (data, dolphin, source) {
     if (source === "siteImage") {
@@ -160,11 +138,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   });
 
   /**
-   * @event gonevisDash.SiteTemplatesModalController:setTemplate
    * @desc Set template callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function (event, data) {
     $scope.loadingTemplate = true;
@@ -186,7 +163,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   });
 
   /**
-   * @method siteTemplates
    * @desc Open modal
    */
   $scope.siteTemplates = function () {

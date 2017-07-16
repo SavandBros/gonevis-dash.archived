@@ -1,22 +1,7 @@
 "use strict";
 
-/**
- * @class TeamModalController
- *
- * @param $scope
- * @param toaster
- * @param API
- * @param team
- * @param Codekit
- * @param AuthService
- * @param ModalsService
- */
 function TeamModalController($scope, toaster, API, team, Codekit, AuthService, ModalsService) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.team = team;
@@ -24,10 +9,9 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
   }
 
   /**
-   * @method remove
    * @desc Remove a user from team
    *
-   * @param team {Object}
+   * @param {object} team
    */
   $scope.remove = function (team) {
     team.title = team.email ? team.email : team.user.name;

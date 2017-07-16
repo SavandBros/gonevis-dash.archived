@@ -1,11 +1,8 @@
 "use strict";
 
 /**
- * @class TimeSinceFilter
  * @desc Calculate time since from given date object.
  *       3 days, 1 month, one year...
- *
- * @returns {Function}
  */
 function TimeSinceFilter() {
   return function(date, reversed) {

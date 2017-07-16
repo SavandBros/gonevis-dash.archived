@@ -18,11 +18,10 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   }
 
   /**
-   * @method updateProfile
    * @desc update user profile via api call
    *
-   * @param key {string}
-   * @param value {string}
+   * @param {string} key
+   * @param {string} value
    */
   $scope.updateProfile = function (key, value) {
 
@@ -100,10 +99,9 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   $scope.upload.accept = $scope.upload.acceptList.join(",");
 
   /**
-   * @method uploadFile
    * @desc Upload on file select
    *
-   * @param file {Object}
+   * @param {object} file
    */
   $scope.uploadFile = function (file) {
     Upload.upload({

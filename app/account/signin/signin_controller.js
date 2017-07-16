@@ -1,20 +1,7 @@
 "use strict";
 
-/**
- * @class SigninController
- * 
- * @param $scope
- * @param $stateParams
- * @param AuthService
- * @param ModalsService
- * @param toaster
- */
 function SigninController($scope, $stateParams, AuthService, ModalsService, toaster) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.form = {};
 
@@ -26,7 +13,6 @@ function SigninController($scope, $stateParams, AuthService, ModalsService, toas
   }
 
   /**
-   * @method signin
    * @desc Submit signin form to authenticate
    *
    * @param {object} form
@@ -48,7 +34,6 @@ function SigninController($scope, $stateParams, AuthService, ModalsService, toas
   };
 
   /**
-   * @method forgotPassword
    * @desc Open up forgot password modal
    */
   $scope.forgotPassword = function () {

@@ -1,12 +1,8 @@
 "use strict";
 
-/**
- * @class Password
- */
 function Password() {
   return function () {
     /**
-     * @name minLength
      * @type {number}
      *
      * @private
@@ -14,7 +10,6 @@ function Password() {
     var minLength = 6;
 
     /**
-     * @name strengthWords
      * @type {object}
      *
      * @private
@@ -24,7 +19,6 @@ function Password() {
     ];
 
     /**
-     * @name strengthColors
      * @type {object}
      *
      * @private
@@ -34,19 +28,16 @@ function Password() {
     ];
 
     /**
-     * @name password
      * @type {string}
      */
     this.password = "";
 
     /**
-     * @name strength
      * @type {number} 
      */
     this.strength = 0;
 
     /**
-     * @method updateStrength
      * @desc Update strength based on password
      */
     this.updateStrength = function () {
@@ -87,7 +78,6 @@ function Password() {
     };
 
     /**
-     * @method getStrength
      * @desc Get strength word based on strength
      *
      * @returns {string}
@@ -98,7 +88,6 @@ function Password() {
     };
 
     /**
-     * @method getPercentage
      * @desc Get strength percentage
      *
      * @returns {number}
@@ -108,7 +97,6 @@ function Password() {
     };
 
     /**
-     * @method getColor
      * @desc Get strength color
      *
      * @returns {string}
@@ -118,10 +106,9 @@ function Password() {
     };
 
     /**
-     * @method isValid
      * @desc Validity of password
      *
-     * @returns {Boolean}
+     * @returns {boolean}
      */
     this.isValid = function () {
       if (!this.password) {

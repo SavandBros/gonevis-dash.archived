@@ -1,22 +1,7 @@
 "use strict";
 
-/**
- * @class EntryController
- *
- * @param $scope
- * @param Entry
- * @param Codekit
- * @param API
- * @param AuthService
- * @param Pagination
- * @param Search
- */
 function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, Search) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.view = localStorage.entryView || "list";
     $scope.filters = { title: "" };
@@ -71,11 +56,10 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
   }
 
   /**
-   * @method setProperty
    * @desc set property of selected entries
    *
-   * @param key {String}
-   * @param value {Boolian|Number}
+   * @param {string} key
+   * @param {boolean|number} value
    */
   $scope.setProperty = function (key, value) {
     angular.forEach($scope.entries, function (entry) {
@@ -86,10 +70,9 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
   };
 
   /**
-   * @method setView
    * @desc Set item view style
    *
-   * @param view {String}
+   * @param {string} view
    */
   $scope.setView = function (view) {
     $scope.view = view;
@@ -97,7 +80,6 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
   };
 
   /**
-   * @method removeSelected
    * @desc Remove selected entries
    */
   $scope.removeSelected = function () {
@@ -114,7 +96,6 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
   };
 
   /**
-   * @method countSelected
    * @desc Count selected entries
    */
   $scope.countSelected = function () {
@@ -127,17 +108,15 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
   };
 
   /**
-   * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
 
   /**
-   * @event gonevisDash.Pagination:loadedMore
    * @desc Load more callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
@@ -149,11 +128,10 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
   });
 
   /**
-   * @event gonevisDash.Search:submit
    * @desc Search callback
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {

@@ -1,21 +1,11 @@
 "use strict";
 
-/**
- * @class ChangePassController
- *
- * @param $scope
- * @param $state
- * @param toaster
- * @param API
- * @param ModalsService
- */
 function ChangePassController($scope, $state, toaster, API, ModalsService) {
 
   /**
-   * @method changePassword
    * @desc for changing password
    * 
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.changePassword = function (form) {
     // Is a new password
@@ -49,7 +39,6 @@ function ChangePassController($scope, $state, toaster, API, ModalsService) {
   };
 
   /**
-   * @method forgotPassword
    * @desc Opens modal
    */
   $scope.forgotPassword = function () {

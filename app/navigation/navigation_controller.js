@@ -1,26 +1,9 @@
 "use strict";
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:NavigationController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param toaster
- * @param $stateParams
- * @param API
- * @param AuthService
- */
 function NavigationController($scope, toaster, $stateParams, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
 
-  /**
-   * constructor
-   *
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.navigations = [];
 
@@ -43,12 +26,9 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
   }
 
   /**
-   * update
-   *
-   * @method update
    * @desc function for updating navigations
    *
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.update = function (form) {
     form.loading = true;
@@ -71,9 +51,6 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
   };
 
   /**
-   * create
-   *
-   * @method create
    * @desc Nav creation function
    */
   $scope.create = function () {
@@ -85,12 +62,9 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
   };
 
   /**
-   * remove
-   *
-   * @method remove
    * @desc Nav deletion function
    *
-   * @param index {Number}
+   * @param {number} index
    */
   $scope.remove = function (index) {
     $scope.navigations.splice(index, 1);

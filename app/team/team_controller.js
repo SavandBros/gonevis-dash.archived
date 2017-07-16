@@ -1,20 +1,7 @@
 "use strict";
 
-/**
- * @class TeamController
- *
- * @param $scope
- * @param API
- * @param AuthService
- * @param Codekit
- * @param ModalsService
- */
 function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.teamRoles = Codekit.teamRoles;
 
@@ -37,7 +24,6 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService, Accoun
   }
 
   /**
-   * @method invite
    * @desc Open up invite modal
    */
   $scope.invite = function () {
@@ -45,19 +31,15 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService, Accoun
   };
 
   /**
-   * view
-   *
-   * @method view
    * @desc Team view via modal
    *
-   * @param team {Object}
+   * @param {object} team
    */
   $scope.view = function (team) {
     ModalsService.open("team", "TeamModalController", { team: team });
   };
 
   /**
-   * @event gonevisDash.TeamService.invite
    * @desc Team invite callback
    */
   $scope.$on("gonevisDash.TeamService.invite", function () {

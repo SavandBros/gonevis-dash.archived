@@ -1,20 +1,7 @@
 "use strict";
 
-/**
- * @class StartController
- *
- * @param $scope
- * @param $timeout
- * @param Password
- * @param AuthService
- * @param API
- * @param toaster
- */
 function StartController($scope, $timeout, Password, AuthService, API, toaster) {
 
-  /**
-   * @method constructor
-   */
   function constructor() {
 
     // List of steps
@@ -62,7 +49,6 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
   }
 
   /**
-   * @method next
    * @desc Take user to next step of getting started
    */
   $scope.next = function () {
@@ -74,7 +60,6 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
   };
 
   /**
-   * @method prev
    * @desc Take user to the prev step of getting started
    */
   $scope.prev = function () {
@@ -86,7 +71,6 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
   };
 
   /**
-   * @method checkDomain
    * @desc Check availability of domain as user enters it
    *
    * @param {object} form Domain form
@@ -110,7 +94,6 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
   };
 
   /**
-   * @method selectTemplate
    * @desc Store template and go to next step
    *
    * @param {object} template Selected template object
@@ -121,7 +104,6 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
   };
 
   /**
-   * @method signup
    * @desc Submit signup form
    * 
    * @param {object} form Signup form

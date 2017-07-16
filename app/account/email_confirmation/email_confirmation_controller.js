@@ -1,21 +1,7 @@
 "use strict";
 
-/**
- * @class EmailConfirmationController
- *
- * @param $scope
- * @param $rootScope
- * @param $state
- * @param toaster
- * @param API
- * @param AuthService
- */
 function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.loading = true;
     API.EmailConfirmation.save({}, { token: $state.params.token },
@@ -36,10 +22,9 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
   }
 
   /**
-   * @method resend
    * @desc Resend email confirmation
    *
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.resend = function (form) {
     API.EmailConfirmationResend.save({ email: form.email },

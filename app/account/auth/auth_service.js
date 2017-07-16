@@ -1,8 +1,5 @@
 "use strict";
 
-/**
- * @name AuthService
- */
 function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, Account) {
 
   /**
@@ -37,7 +34,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    *
    * @param {string} token
    *
-   * @returns {object|boolean}
+   * @returns {object}
    */
   this.parseJwt = function (token) {
     var base64Url = token.split(".")[1];
@@ -63,6 +60,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
 
   /**
    * @desc Return token from localStorage
+   *
    * @returns {string}
    */
   this.getToken = function () {
@@ -163,6 +161,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
 
   /**
    * @desc Check and return the ID of the current site
+   *
    * @returns {string} Site UUID
    */
   this.getCurrentSite = function () {
