@@ -489,6 +489,7 @@ module.exports = function (grunt) {
       production: {
         constants: {
           ENV: {
+            ROLLERBAR_TOKEN: "d0a14094307a424cbd7d59d9c897b940",
             name: "production",
             apiEndpoint: "https://www.gonevis.com/api/v1/"
           }
