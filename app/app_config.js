@@ -52,7 +52,7 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
   // Rollbar integration
   if (!localhost) {
     RollbarProvider.init({
-      accessToken: "d0a14094307a424cbd7d59d9c897b940",
+      accessToken: ENV.ROLLERBAR_TOKEN,
       captureUncaught: true,
       payload: {
         environment: ENV.name
