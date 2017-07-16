@@ -17,7 +17,7 @@
             <div class="row">
               <div class="col-md-10 col-xs-8 col-lg-10 col-sm-10">
                 <p class="list-group-item-text">
-                  <span class="o-fade-soft small">{{ comment.get.user.name }}:</span> {{ comment.get.comment }}
+                  <span class="o-fade-soft small">{{ comment.user.getFullName() }}:</span> {{ comment.get.comment }}
                 </p>
               </div>
               <div class="col-md-2 col-xs-4 col-lg-2 col-sm-2">
@@ -190,7 +190,8 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
-          <i class="fa fa-users text-primary"></i> Team
+          <a ui-sref="dash.team" class="header-link">Team</a>
+          <i class="fa fa-users text-primary"></i>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">

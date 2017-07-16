@@ -3,7 +3,7 @@
 function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthService, toaster) {
 
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(false);
 
     // Get site from param
     if ($stateParams.site) {

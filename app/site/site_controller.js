@@ -7,7 +7,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   var toasters = {};
 
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(false);
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
 

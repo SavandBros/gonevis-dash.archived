@@ -1,10 +1,6 @@
 "use strict";
 
-function ChangePassController($scope, $state, toaster, API, ModalsService, AuthService) {
-
-  function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
-  }
+function ChangePassController($scope, $state, toaster, API, ModalsService) {
 
   /**
    * @desc for changing password
@@ -12,7 +8,6 @@ function ChangePassController($scope, $state, toaster, API, ModalsService, AuthS
    * @param {object} form
    */
   $scope.changePassword = function (form) {
-
     // Is a new password
     if (form.old_password === form.password) {
       form.errors = {
@@ -33,9 +28,7 @@ function ChangePassController($scope, $state, toaster, API, ModalsService, AuthS
 
     API.ChangePassword.save(form,
       function () {
-        form.loading = false;
         toaster.info("Done", "Password changed");
-        form.errors = null;
         $state.go("dash.user");
       },
       function (data) {
@@ -51,8 +44,6 @@ function ChangePassController($scope, $state, toaster, API, ModalsService, AuthS
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
   };
-
-  constructor();
 }
 
 app.controller("ChangePassController", ChangePassController);
@@ -61,6 +52,5 @@ ChangePassController.$inject = [
   "$state",
   "toaster",
   "API",
-  "ModalsService",
-  "AuthService"
+  "ModalsService"
 ];

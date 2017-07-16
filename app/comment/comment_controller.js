@@ -1,10 +1,14 @@
 "use strict";
 
+<<<<<<< HEAD
 function CommentController($scope, $rootScope, API,
   AuthService, Comment, Pagination, Search, Codekit) {
+=======
+function CommentController($scope, $rootScope, API, AuthService, Comment, Pagination, Search, Codekit) {
+>>>>>>> d850cb100a90949f39ce90db90d478335bb5177b
 
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.statuses = Codekit.commentStatuses;
     $scope.search = Search;
     $scope.comments = [];

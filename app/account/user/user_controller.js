@@ -5,14 +5,13 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
   var toasters = {};
 
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
-    $scope.sites = $scope.user.sites;
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.dolphinService = DolphinService;
     $scope.param = $stateParams;
 
-    API.User.get({ user_id: $scope.user.id },
+    API.User.get({ user_id: $scope.user.get.id },
       function (data) {
-        $scope.user = data;
+        $scope.user = AuthService.setAuthenticatedUser(data, true);
         $scope.viewLoaded = true;
       }
     );
@@ -35,13 +34,12 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
 
     API.UserUpdate.put(payload,
       function (data) {
-        if (key == "picture") {
-          $scope.user.media[key] = data.media[null];
+        if (key === "picture") {
+          $scope.user.get.media[key] = data.media[null];
         } else {
           $scope.user[key] = data[key];
         }
-        $scope.user.sites = $scope.sites;
-        AuthService.setAuthenticatedUser($scope.user);
+        $scope.user = AuthService.setAuthenticatedUser($scope.user.get, true);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
         toaster.clear(toasters[key]);
@@ -112,7 +110,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
       method: "PUT"
     }).then(function (data) {
       toaster.info("Done", "Profile picture updated");
-      $scope.user.media = data.data.media;
+      $scope.user.get.media = data.data.media;
     }, function (data) {
       $scope.errors = data.data;
       toaster.error("Error", "An error has occured while uploading profile picture, try again.");
@@ -121,7 +119,6 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
 
   constructor();
 }
-
 
 app.controller("UserController", UserController);
 UserController.$inject = [

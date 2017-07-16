@@ -1,14 +1,26 @@
 "use strict";
 
+<<<<<<< HEAD
 function TeamController($scope, API, AuthService, Codekit, ModalsService) {
 
   var site = AuthService.getCurrentSite();
+=======
+/**
+ * @class TeamController
+ *
+ * @param $scope
+ * @param API
+ * @param AuthService
+ * @param Codekit
+ * @param ModalsService
+ */
+function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
+>>>>>>> d850cb100a90949f39ce90db90d478335bb5177b
 
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
     $scope.teamRoles = Codekit.teamRoles;
 
-    API.Team.get({ siteId: site },
+    API.Team.get({ siteId: AuthService.getCurrentSite() },
       function (data) {
         $scope.initialled = true;
         $scope.team = data;
@@ -18,6 +30,10 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService) {
           data.team_pending[i].isPending = true;
           $scope.team.list.push(data.team_pending[i]);
         }
+
+        angular.forEach($scope.team.list, function (team) {
+          team.user = new Account(team.user);
+        });
       }
     );
   }
@@ -54,5 +70,6 @@ TeamController.$inject = [
   "API",
   "AuthService",
   "Codekit",
-  "ModalsService"
+  "ModalsService",
+  "Account"
 ];

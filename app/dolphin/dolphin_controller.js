@@ -135,6 +135,7 @@ function DolphinController($scope, $rootScope, Dolphin,
                     file.done = true;
                     toaster.success("Upload Complete", file.name);
                     $scope.dolphins.unshift(new Dolphin(data));
+                    $scope.currentTab = "dolphin";
                   }
                 );
               },

@@ -1,16 +1,33 @@
 "use strict";
 
-function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
+function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, Account) {
+
+  /**
+   * @private
+   */
+  var self = this;
+
   /**
    * @desc Return the currently authenticated user
    *
-   * @returns {object|undefined}
+   * @param {boolean} useInstance Return account instance or raw user data
+   *
+   * @returns {Account|boolean}
    */
-  function getAuthenticatedUser() {
-    if ($cookies.get("user")) {
-      return JSON.parse($cookies.get("user"));
+  this.getAuthenticatedUser = function (useInstance) {
+    if (!this.isAuthenticated()) {
+      return false;
     }
-  }
+
+    useInstance = useInstance || false;
+    var userData = JSON.parse($cookies.get("user"));
+
+    if (useInstance) {
+      return new Account(userData);
+    }
+
+    return userData;
+  };
 
   /**
    * @desc Parse JWT from token
@@ -19,7 +36,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
    *
    * @returns {object}
    */
-  function parseJwt(token) {
+  this.parseJwt = function (token) {
     var base64Url = token.split(".")[1];
 
     if (typeof base64Url === "undefined") {
@@ -29,91 +46,102 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
 
     var base64 = base64Url.replace("-", "+").replace("_", "/");
     return JSON.parse($window.atob(base64));
-  }
+  };
 
   /**
    * @desc Set token to localStorage
+   *       Note: should be called before this.setAuthenticatedUser()
    *
    * @param {string} token
    */
-  function setToken(token) {
+  this.setToken = function (token) {
     $cookies.put("JWT", token);
-  }
+  };
 
   /**
    * @desc Return token from localStorage
    *
    * @returns {string}
    */
-  function getToken() {
+  this.getToken = function () {
     return $cookies.get("JWT");
-  }
+  };
 
   /**
-   * @desc Stringify the account object and store it in a cookie
+   * @desc Set/update authenticated user data
+   *       Note: should be called after this.setAuthenticatedUser
    *
-   * @param {object} authenticatedUser
+   * @param {object} userData
+   * @param {boolean} separateSites Set user data without effecting sites
    */
-  function setAuthenticatedUser(authenticatedUser) {
+  this.setAuthenticatedUser = function (userData, separateSites) {
+    // Separated sites
+    if (separateSites) {
+      userData.sites = self.getAuthenticatedUser(true).sites;
+    }
     // Reverse sites so older comes first
     if (!$cookies.get("user")) {
-      authenticatedUser.sites = authenticatedUser.sites.slice().reverse();
+      userData.sites = userData.sites.slice().reverse();
     }
-    // Store
-    $cookies.put("user", JSON.stringify(authenticatedUser));
-  }
+    // Store authentication
+    $cookies.put("user", JSON.stringify(userData));
+    // Return account instance
+    return self.getAuthenticatedUser(true);
+  };
 
   /**
    * @desc Delete the cookie where the account object is stored
    */
-  function unAuthenticate() {
+  this.unAuthenticate = function () {
     $cookies.remove("JWT");
     $cookies.remove("user");
     $cookies.remove("sessionid");
-  }
+  };
 
   /**
    * @desc Check if the current user is authenticated
-   *
    * @returns {boolean}
    */
-  function isAuthenticated() {
+  this.isAuthenticated = function () {
     if ($state.current.auth === -1) {
+      if (!$cookies.get("user")) {
+        self.unAuthenticate();
+      }
       return false;
     }
 
-    var token = getToken();
+    var token = self.getToken();
     var isValid;
 
     if (token) {
-      isValid = Math.round(new Date().getTime() / 1000) <= parseJwt(token).exp;
+      isValid = Math.round(new Date().getTime() / 1000) <= self.parseJwt(token).exp;
     } else {
       isValid = false;
     }
 
     if (!isValid) {
-      unAuthenticate();
+      self.unAuthenticate();
     }
 
     return isValid;
-  }
+  };
 
   /**
    * @desc Main sign in function
    *
    * @param {string} username
-   * @param {object} password
-   * @param {function} success callback
-   * @param {function} fail callback
+   * @param {object|boolean} password
+   * @param {function} success
+   * @param {function} fail
    */
-  function signIn(username, password, success, fail) {
+  this.signIn = function (username, password, success, fail) {
     API.Signin.post({
         username: username,
         password: password
       },
       function (data) {
-        setAuthenticatedUser(data.user);
-        setToken(data.token);
+        self.setToken(data.token);
+        self.setAuthenticatedUser(data.user);
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
         success(data);
       },
@@ -121,27 +149,27 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
         fail(data);
       }
     );
-  }
+  };
 
   /**
    * @desc Clear credentials (log user out)
    */
-  function signOut() {
-    unAuthenticate();
+  this.signOut = function () {
+    self.unAuthenticate();
     $rootScope.$broadcast("gonevisDash.AuthService:SignedOut");
-  }
+  };
 
   /**
    * @desc Check and return the ID of the current site
    *
-   * @returns {string} Site id (uuid)
+   * @returns {string} Site UUID
    */
-  function getCurrentSite() {
-    var sites = getAuthenticatedUser().sites;
+  this.getCurrentSite = function () {
+    var sites = self.getAuthenticatedUser().sites;
     var siteIndex = $stateParams.s || 0;
 
     return sites[siteIndex] ? sites[siteIndex].id : false;
-  }
+  };
 
   /**
    * @desc The Factory to be returned
@@ -160,12 +188,13 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API) {
   };
 }
 
-app.factory("AuthService", AuthService);
+app.service("AuthService", AuthService);
 AuthService.$inject = [
   "$state",
   "$rootScope",
   "$cookies",
   "$window",
   "$stateParams",
-  "API"
+  "API",
+  "Account"
 ];
