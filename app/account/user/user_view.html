@@ -25,17 +25,29 @@
         <div class="s-mar-top">
           <!-- About -->
           <div class="panel panel-default panel-body">
-            <span editable-textarea="user.get.about" onbeforesave="updateProfile('about', $data)">
-              {{ user.get.about || "Nothing here..." }}
-            </span>
-            <small class="o-fade pull-right">ABOUT</small>
+            <div class="row">
+              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+                <small class="o-fade">ABOUT</small>
+              </div>
+              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+                <span editable-textarea="user.get.about" onbeforesave="updateProfile('about', $data)">
+                  {{ user.get.about || "Nothing here..." }}
+                </span>
+              </div>
+            </div>
           </div>
           <!-- Location -->
           <div class="panel panel-default panel-body">
-            <span editable-text="user.get.location" onbeforesave="updateProfile('location', $data)">
-              {{ user.get.location || "Nothing here..." }}
-            </span>
-            <small class="o-fade pull-right">LOCATION</small>
+            <div class="row">
+              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+                <small class="o-fade">LOCATION</small>
+              </div>
+              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+                <span editable-text="user.get.location" onbeforesave="updateProfile('location', $data)">
+                  {{ user.get.location || "Nothing here..." }}
+                </span>
+              </div>
+            </div>
           </div>
           <!-- Receive email notification -->
           <div class="panel panel-default panel-body s-pad-y-no">
