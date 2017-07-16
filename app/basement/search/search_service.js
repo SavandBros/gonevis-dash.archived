@@ -1,10 +1,6 @@
 "use strict";
 
 /**
- * Search
- *
- * @class Search
- * @namespace gonevisDash.Search
  * @desc Search service for controllers:
  *       Inject the Search to controller
  *       Define a scope var to use its search property
@@ -13,27 +9,19 @@
  *       Include the search noresult template in the view
  *       Watch the gonevisDash.Search:submit to update the current data
  *       Also update controller's pageForm variable to data.form.pageForm
- *
- * @param $rootScope
- * @param $resource
- * @param Pagination
- *
- * @returns [Factory]
  */
-function Search($rootScope, $resource, Pagination) {
+function Search($rootScope, Pagination) {
 
   /**
-   * searchify
-   *
-   * @method searchify
    * @desc Turn a variable to a search var and return it
    *
-   * @param form {Object} Variable to searchify
-   * @param api {API} Api label to query
-   * @param pageForm {Pagination} Pagination form
-   * @param data {Object} API response data
+   * @param {object} form Variable to searchify
+   * @param {api} api Api label to query
+   * @param {pagination} pageForm Pagination form
+   * @param {object} data API response data
+   * @param {object} payload
    *
-   * @returns {Object}
+   * @returns {object}
    */
   function searchify(form, pageForm, api, data, payload) {
     data = data || { results: [] };
@@ -44,23 +32,20 @@ function Search($rootScope, $resource, Pagination) {
       data: data,
       pageForm: pageForm,
       noResult: false,
-      payload: payload,
+      payload: payload
     };
 
     if (!data.results) {
       form.noResult = true;
-    };
+    }
 
     return form;
-  };
+  }
 
   /**
-   * submit
-   *
-   * @method submit
    * @desc Search data and broadcast
    *
-   * @param form {Object} Main searchified variable
+   * @param {object} form Main searchified variable
    */
   function submit(form) {
     var payload = angular.extend({ search: form.query }, form.payload);
@@ -84,7 +69,7 @@ function Search($rootScope, $resource, Pagination) {
         });
       }
     );
-  };
+  }
 
   return {
     searchify: searchify,
@@ -95,6 +80,5 @@ function Search($rootScope, $resource, Pagination) {
 app.factory("Search", Search);
 Search.$inject = [
   "$rootScope",
-  "$resource",
   "Pagination"
 ];

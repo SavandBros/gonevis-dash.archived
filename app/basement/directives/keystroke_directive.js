@@ -1,10 +1,9 @@
 "use strict";
 
 /**
- * @class ngKeystroke
  * @desc Update scope even with spaces
  *
- * @returns {Function}
+ * @returns {function}
  */
 function ngKeyStroke() {
   return {

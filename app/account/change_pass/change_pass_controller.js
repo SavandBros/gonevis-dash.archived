@@ -1,33 +1,13 @@
 "use strict";
 
-/**
- * @class ChangePassController
- *
- * @param $scope
- * @param $state
- * @param toaster
- * @param API
- * @param ModalsService
- * @param AuthService
- */
-function ChangePassController($scope, $state, toaster, API, ModalsService, AuthService) {
+function ChangePassController($scope, $state, toaster, API, ModalsService) {
 
   /**
-   * @method constructor
-   * @desc Init function for controller
-   */
-  function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
-  }
-
-  /**
-   * @method changePassword
    * @desc for changing password
    * 
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.changePassword = function (form) {
-
     // Is a new password
     if (form.old_password === form.password) {
       form.errors = {
@@ -48,9 +28,7 @@ function ChangePassController($scope, $state, toaster, API, ModalsService, AuthS
 
     API.ChangePassword.save(form,
       function () {
-        form.loading = false;
         toaster.info("Done", "Password changed");
-        form.errors = null;
         $state.go("dash.user");
       },
       function (data) {
@@ -61,14 +39,11 @@ function ChangePassController($scope, $state, toaster, API, ModalsService, AuthS
   };
 
   /**
-   * @method forgotPassword
    * @desc Opens modal
    */
   $scope.forgotPassword = function () {
     ModalsService.open("forgotPassword", "ForgotModalController");
   };
-
-  constructor();
 }
 
 app.controller("ChangePassController", ChangePassController);
@@ -77,6 +52,5 @@ ChangePassController.$inject = [
   "$state",
   "toaster",
   "API",
-  "ModalsService",
-  "AuthService"
+  "ModalsService"
 ];

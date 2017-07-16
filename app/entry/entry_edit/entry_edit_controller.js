@@ -1,29 +1,8 @@
 "use strict";
 
-/**
- * @name EntryEditController
- *
- * @param $scope
- * @param $rootScope
- * @param $state
- * @param $stateParams
- * @param $timeout
- * @param $q
- * @param Entry
- * @param Tag
- * @param Codekit
- * @param API
- * @param AuthService
- * @param DolphinService
- * @param toaster
- */
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.dolphinService = DolphinService;
     $scope.statuses = Codekit.entryStatuses;
@@ -94,7 +73,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   /**
-   * @method load
    * @desc query tags
    */
   function load() {
@@ -104,10 +82,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   /**
-   * @method loadTags
    * @desc Load tags and filter them
    *
-   * @param query {String}
+   * @param {string} query
    */
   $scope.loadTags = function (query) {
     return load().then(function (response) {
@@ -119,10 +96,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
-   * @method update
    * @desc Update entry API callback
    *
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.update = function (form) {
     form.loading = true;
@@ -156,12 +132,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
-   * @event gonevisDash.Dolphin:select
    * @desc Image selection callback
    *
-   * @param event {Event}
-   * @param dolphin {Dolphin}
-   * @param source {String}
+   * @param {Event} event
+   * @param {dolphin} dolphin
+   * @param {string} source
    */
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     if (source === "entryCover") {
@@ -172,11 +147,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   });
 
   /**
-   * @event gonevisDash.Entry:remove
    * @desc Go to entries on entry removal
    *
-   * @param event {Event}
-   * @param data {Object}
+   * @param {Event} event
+   * @param {object} data
    */
   $scope.$on("gonevisDash.Entry:remove", function (event, data) {
     if (data.success) {

@@ -1,24 +1,7 @@
 "use strict";
 
-/**
- * @name TeamInviteModalController
- *
- * @param $scope
- * @param $rootScope
- * @param toaster
- * @param API
- * @param AuthService
- * @param Codekit
- * @param ModalsService
- */
 function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService, Codekit, ModalsService) {
 
-  var site = AuthService.getCurrentSite();
-
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.form = {
       data: {}
@@ -30,15 +13,14 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
   }
 
   /**
-   * @method invite
    * @desc Invite people into the team
    * 
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.invite = function (form) {
     form.loading = true;
 
-    API.TeamInvite.put({ siteId: site }, form.data,
+    API.TeamInvite.put({ siteId: AuthService.getCurrentSite() }, form.data,
       function (data) {
         $rootScope.$broadcast("gonevisDash.TeamService.invite", data);
         ModalsService.close("invite");

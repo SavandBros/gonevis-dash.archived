@@ -1,22 +1,13 @@
 "use strict";
 
-/**
- * @class AuthInterceptorService
- *
- * @param $rootScope
- * @param $cookies
- * @param $q
- * @param ENV
- */
 function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
 
   /**
-   * @method request
    * @desc Automatically attach Authorization header
    *
-   * @param config {Object}
+   * @param {object} config
    *
-   * @returns {Object}
+   * @returns {object}
    */
   function request(config) {
     var token = $cookies.get("JWT");
@@ -29,12 +20,11 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
   }
 
   /**
-   * @method responseError
    * @desc Handler for http response
    *
-   * @param response {Object}
+   * @param {object} response
    *
-   * @return {Object}
+   * @return {object}
    */
   function responseError(response) {
     if (response.status === 403) {

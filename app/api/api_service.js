@@ -1,13 +1,5 @@
 "use strict";
 
-/**
- * API Service
- *
- * @param $resource
- * @param ENV
- *
- * @returns {{Service: API.service}}
- */
 function API($resource, ENV) {
   var BASE_API = ENV.apiEndpoint;
   var apiData = {};

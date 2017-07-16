@@ -18,14 +18,14 @@
           <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
             <img class="comment pull-left img-circle"
                  ng-src="{{
-              comment.get.user.media.picture ? comment.get.user.media.thumbnail_48x48 : 'assets/img/avatar.png'
+              comment.user.get.media.picture ? comment.user.get.media.thumbnail_48x48 : 'assets/img/avatar.png'
             }}">
           </div>
           <!-- Info -->
           <div class="col-md-11 col-lg-11 col-sm-11 col-xs-11 t-line">
             <small>
-              <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">
-                {{ comment.get.user.name }}
+              <a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">
+                {{ comment.user.getDisplayName() }}
               </a>
               responded to
               <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">

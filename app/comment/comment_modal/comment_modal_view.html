@@ -6,11 +6,11 @@
         <div class="row">
           <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1">
             <img class="img-circle" height="48"
-              ng-src="{{ comment.get.user.media.picture ? comment.get.user.media.thumbnail_48x48 : 'assets/img/avatar.png'}}">
+              ng-src="{{ comment.user.get.media.picture ? comment.user.get.media.thumbnail_48x48 : 'assets/img/avatar.png'}}">
           </div>
           <div class="col-md-11 col-xs-10 col-sm-11 col-lg-11">
             <div class="s-pad-left-soft">
-              <a ng-href="{{ comment.get.user.get_absolute_uri }}" target="_blank">{{ comment.get.user.name }}</a>
+              <a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">{{ comment.user.getFullName() }}</a>
               <br>
               <small class="o-fade">Commented {{ comment.get.created | timesince }} ago</small>
               <i class="fa fa-close o-fade pull-right c-p" data-dismiss="modal"></i>
@@ -33,7 +33,7 @@
           <div class="row">
             <!-- Reply comment -->
             <div class="form-group col-md-12">
-              <textarea ng-model="form.comment" placeholder="@{{comment.get.user.name}} (Reply)"
+              <textarea ng-model="form.comment" placeholder="@{{ comment.user.getFullName() }} (Reply)"
                 class="form-control comment" required>
               </textarea>
             </div>

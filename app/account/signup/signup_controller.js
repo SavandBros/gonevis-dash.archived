@@ -1,21 +1,7 @@
 "use strict";
 
-/**
- * @class SignupController
- *
- * @param $scope
- * @param $stateParams
- * @param AuthService
- * @param API
- * @param Password
- * @param toaster
- */
 function SignupController($scope, $stateParams, AuthService, API, Password, toaster) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     // Forn with username (param)
     $scope.form = {
@@ -35,10 +21,9 @@ function SignupController($scope, $stateParams, AuthService, API, Password, toas
   }
 
   /**
-   * @method signup
    * @desc Submit signup form
    * 
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.signup = function (form) {
     form.loading = true;
@@ -76,10 +61,9 @@ function SignupController($scope, $stateParams, AuthService, API, Password, toas
   };
 
   /**
-   * @method resend
    * @desc Resend email confirmation
    *
-   * @param email {String}
+   * @param {string} email
    */
   $scope.resend = function (email) {
     API.EmailConfirmationResend.save({ email: email },

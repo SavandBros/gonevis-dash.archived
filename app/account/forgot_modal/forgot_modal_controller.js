@@ -1,20 +1,11 @@
 "use strict";
 
-/**
- * @class ForgotModalController
- *
- * @param $scope
- * @param toaster
- * @param API
- * @param ModalsService
- */
 function ForgotModalController($scope, toaster, API, ModalsService) {
 
   /**
-   * @method forgotPassword
    * @desc Sends password link to provided email.
    *
-   * @param form {object}
+   * @param {object} form
    */
   $scope.forgotPassword = function (form) {
     form.loading = true;
