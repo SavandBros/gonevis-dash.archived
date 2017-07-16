@@ -170,22 +170,6 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
 
     return sites[siteIndex] ? sites[siteIndex].id : false;
   };
-
-  /**
-   * @desc The Factory to be returned
-   */
-  return {
-    parseJwt: parseJwt,
-    setToken: setToken,
-    getToken: getToken,
-    getAuthenticatedUser: getAuthenticatedUser,
-    setAuthenticatedUser: setAuthenticatedUser,
-    unAuthenticate: unAuthenticate,
-    isAuthenticated: isAuthenticated,
-    signIn: signIn,
-    signOut: signOut,
-    getCurrentSite: getCurrentSite
-  };
 }
 
 app.service("AuthService", AuthService);
