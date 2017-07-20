@@ -3,7 +3,7 @@
     <div class="panel panel-default s-box avatar-outside-wrapper">
       <div class="panel-body s-pad">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <div class="avatar avatar-outside">
               <span ng-if="!user.get.media.picture">{{ user.getDisplayName()[0] }}</span>
               <img ng-if="user.get.media.picture" class="img-circle" ng-src="{{ user.get.media.thumbnail_128x128 }}" />
@@ -16,7 +16,8 @@
               </div>
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-sm-8">
+            <br class="hidden visible-xs">
             <h3 class="text-left o-fade-soft" editable-text="user.get.name" onbeforesave="updateProfile('name', $data)">
               {{ user.get.name || "You have no name :-[" }}
             </h3>
