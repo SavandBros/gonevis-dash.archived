@@ -86,6 +86,7 @@ function EntryNewController($scope, $state, $timeout, $q,
 
     API.EntryAdd.save(payload,
       function (data) {
+        $scope.form.cache(true);
         toaster.success("Done", "Created " + payload.title);
         $state.go("dash.entry-edit", { entryId: data.id });
       },
