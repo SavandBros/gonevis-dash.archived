@@ -118,6 +118,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     API.Entry.put({ entry_id: payload.id }, payload,
       function (data) {
         form.get = data;
+        form.url = $scope.form.getUrl();
         Codekit.setTitle(form.get.title);
         toaster.info("Done", "Updated " + payload.title);
         form.loading = false;
