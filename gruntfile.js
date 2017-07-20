@@ -466,7 +466,7 @@ module.exports = function (grunt) {
         ],
         constants: {
           Client: {
-            version: 1
+            version: 2
           }
         }
       },
