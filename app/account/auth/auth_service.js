@@ -156,7 +156,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   };
 
   /**
-   * @desc Clear credentials (log user out)
+   * @desc Clear credentials (sign user out)
    */
   this.signOut = function () {
     self.unAuthenticate();
