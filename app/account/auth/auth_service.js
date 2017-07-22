@@ -85,6 +85,8 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
     }
     // Store authentication
     $cookies.put("user", JSON.stringify(userData));
+    // Update tracking info
+    self.setTrackingInfo();
     // Return account instance
     return self.getAuthenticatedUser(true);
   };
