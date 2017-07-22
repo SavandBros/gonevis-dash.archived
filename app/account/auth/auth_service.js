@@ -99,7 +99,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
     $cookies.remove("user");
     $cookies.remove("sessionid");
     // Remove tracking info
-    self.setTrackingInfo();
+    self.setTrackingInfo(true);
   };
 
   /**
@@ -177,21 +177,24 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
 
   /**
    * @desc Update person tracking info for Rollbar based on authentication
+   *
+   * @param {boolean} remove Skip and remove
    */
-  this.setTrackingInfo = function () {
+  this.setTrackingInfo = function (remove) {
     if (typeof Rollbar === "undefined") {
       return;
     }
 
     var person = {};
 
-    if (self.isAuthenticated()) {
+    if (!remove && self.isAuthenticated()) {
       var user = self.getAuthenticatedUser(true);
       person = {
         name: user.getFullName(),
-        email: user.get.email,
         username: user.get.username,
-        id: user.get.id
+        id: user.get.id,
+        email: user.get.email,
+        link: user.get.get_absolute_uri
       };
     }
 
