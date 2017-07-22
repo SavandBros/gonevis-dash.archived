@@ -179,7 +179,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @desc Update person tracking info for Rollbar based on authentication
    */
   this.setTrackingInfo = function () {
-    if (!Rollbar) {
+    if (typeof Rollbar === "undefined") {
       return;
     }
 
