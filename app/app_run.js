@@ -1,27 +1,9 @@
 "use strict";
 
-/**
- * @class RunNevisRun
- *
- * @param $rootScope
- * @param $window
- * @param $location
- * @param $cookies
- * @param $state
- * @param toaster
- * @param ENV
- * @param AuthService
- * @param DolphinService
- * @param Client
- * @param editableOptions
- * @param taOptions
- * @param taRegisterTool
- * @param textAngularManager
- * @param taToolFunctions
- */
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   ENV, AuthService, DolphinService, Codekit, Client, editableOptions, taOptions, taRegisterTool,
   textAngularManager, taToolFunctions) {
+
   /**
    * @name cache
    * @desc Predefined rootscope variable
@@ -32,7 +14,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
 
   /**
    * @name set
-   * @desc Predefined rootscope variable
+   * @desc Predefined rootScope variable
    *
    * @type {Object}
    */
@@ -40,25 +22,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     lights: true
   };
 
-  // Client version control (if not current version)
-  if (Client.version !== parseInt($window.localStorage.getItem("version"))) {
-
-    // Store auth to use after data reset
-    var isAuthed = AuthService.isAuthenticated(true);
-
-    // Clear cookies
-    $cookies.remove("JWT");
-    $cookies.remove("user");
-
-    // Reset localStorage version
-    $window.localStorage.setItem("version", Client.version);
-
-    // Redirect to signin and toast (If logged in)
-    if (isAuthed) {
-      toaster.info("Logged out", "Client version updated! Login again, please.");
-      $state.go("signin");
-    }
-  }
 
   // Editable texts config
   editableOptions.theme = "bs3";
@@ -93,7 +56,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     ["bold", "italics", "underline", "strikeThrough"],
     ["ul", "ol", "clear"],
     ["justifyLeft", "justifyCenter", "justifyRight", "indent", "outdent"],
-    ["html", "addImage", "insertLink", /**"insertVideo"**/]
+    ["html", "addImage", "insertLink", /**"insertVideo"**/ ]
   ];
 
   /**
@@ -112,6 +75,26 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
         angular.element(this).remove();
       }
     );
+
+    // Client version control (if not current version)
+    if (Client.version !== parseInt($window.localStorage.getItem("version"))) {
+
+      // Store auth to use after data reset
+      var isAuthed = AuthService.isAuthenticated(true);
+
+      // Reset localStorage version
+      $window.localStorage.setItem("version", Client.version);
+      AuthService.signOut();
+
+      // Redirect to signin and toast (If logged in)
+      if (isAuthed) {
+        toaster.info("Logged out", "Client version updated! Login again, please.");
+        $state.go("signin");
+      }
+
+      // Stop the route
+      event.preventDefault();
+    }
 
     var isAuthenticated = AuthService.isAuthenticated();
     var toDash = toState.name.indexOf("dash.") !== -1;
