@@ -22,6 +22,8 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     lights: true
   };
 
+  // Set user tracking info
+  AuthService.setTrackingInfo();
 
   // Editable texts config
   editableOptions.theme = "bs3";
