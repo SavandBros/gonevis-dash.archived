@@ -96,6 +96,8 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
     $cookies.remove("JWT");
     $cookies.remove("user");
     $cookies.remove("sessionid");
+    // Remove tracking info
+    self.setTrackingInfo();
   };
 
   /**
