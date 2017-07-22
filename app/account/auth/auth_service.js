@@ -174,6 +174,29 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
 
     return sites[siteIndex] ? sites[siteIndex].id : false;
   };
+  this.setTrackingInfo = function () {
+    if (!Rollbar) {
+      return;
+    }
+
+    var person = {};
+
+    if (self.isAuthenticated()) {
+      var user = self.getAuthenticatedUser(true);
+      person = {
+        name: user.getFullName(),
+        email: user.get.email,
+        username: user.get.username,
+        id: user.get.id
+      };
+    }
+
+    Rollbar.configure({
+      payload: {
+        person: person
+      }
+    });
+  };
 }
 
 app.service("AuthService", AuthService);
