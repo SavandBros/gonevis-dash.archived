@@ -1,17 +1,5 @@
 "use strict";
 
-/**
- * @class Config
- *
- * @param $httpProvider
- * @param $resourceProvider
- * @param $cookiesProvider
- * @param $qProvider
- * @param cfpLoadingBarProvider
- * @param ChartJsProvider
- * @param RollbarProvider
- * @param ENV
- */
 function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
   cfpLoadingBarProvider, ChartJsProvider, RollbarProvider, ENV) {
 
