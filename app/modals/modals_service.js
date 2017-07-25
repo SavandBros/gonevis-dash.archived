@@ -33,6 +33,7 @@ function ModalsService(ModalService) {
 
   /**
    * @desc Open up a modal with a template and a controller
+   * @example ModalsService.open("dolphin", DolphinModalController)
    *
    * @param {string} template Name of the modal template
    * @param {string} controller Controller of modal
