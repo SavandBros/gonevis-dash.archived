@@ -41,6 +41,7 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
   $scope.resend = function (form) {
     API.EmailConfirmationResend.save({ email: form.email },
       function () {
+        ModalsService.close("forgotPassword");
         toaster.success("Sent", "Email verification sent to " + form.email);
         $state.go("signin");
       },
