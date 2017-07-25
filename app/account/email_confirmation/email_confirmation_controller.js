@@ -1,6 +1,6 @@
 "use strict";
 
-function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService) {
+function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService, ModalsService) {
 
   function constructor() {
     // If not logged in, attempt to confirm with given token
@@ -61,5 +61,6 @@ EmailConfirmationController.$inject = [
   "$state",
   "toaster",
   "API",
-  "AuthService"
+  "AuthService",
+  "ModalsService"
 ];
