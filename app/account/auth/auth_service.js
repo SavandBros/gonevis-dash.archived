@@ -85,6 +85,8 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
     }
     // Store authentication
     $cookies.put("user", JSON.stringify(userData));
+    // Update tracking info
+    self.setTrackingInfo();
     // Return account instance
     return self.getAuthenticatedUser(true);
   };
@@ -96,6 +98,8 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
     $cookies.remove("JWT");
     $cookies.remove("user");
     $cookies.remove("sessionid"); // Set by django admin
+    // Remove tracking info
+    self.setTrackingInfo(true);
   };
 
   /**
@@ -150,7 +154,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   };
 
   /**
-   * @desc Clear credentials (log user out)
+   * @desc Clear credentials (sign user out)
    */
   this.signOut = function () {
     self.unAuthenticate();
@@ -167,6 +171,36 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
     var siteIndex = $stateParams.s || 0;
 
     return sites[siteIndex] ? sites[siteIndex].id : false;
+  };
+
+  /**
+   * @desc Update person tracking info for Rollbar based on authentication
+   *
+   * @param {boolean} remove Skip and remove
+   */
+  this.setTrackingInfo = function (remove) {
+    if (typeof Rollbar === "undefined") {
+      return;
+    }
+
+    var person = {};
+
+    if (!remove && self.isAuthenticated()) {
+      var user = self.getAuthenticatedUser(true);
+      person = {
+        name: user.getFullName(),
+        username: user.get.username,
+        id: user.get.id,
+        email: user.get.email,
+        link: user.get.get_absolute_uri
+      };
+    }
+
+    Rollbar.configure({
+      payload: {
+        person: person
+      }
+    });
   };
 }
 
