@@ -27,9 +27,18 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
    * @return {object}
    */
   function responseError(response) {
+    // Authentication check
     if (response.status === 403) {
       $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
     }
+
+    // Email confiramtion check
+    if (response.status === 400) {
+      if (JSON.stringify(response.data).indexOf("Your email is not verified.") !== -1) {
+        $rootScope.$broadcast("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess");
+      }
+    }
+
     return $q.reject(response);
   }
 

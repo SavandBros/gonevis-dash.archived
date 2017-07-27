@@ -79,6 +79,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: -1,
       title: "Reset password",
       params: {
+        s: 0,
         token: null
       }
     })
@@ -89,6 +90,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: -1,
       title: "Email Verification",
       params: {
+        s: 0,
         token: null
       }
     })
