@@ -1,7 +1,7 @@
 "use strict";
 
 function HeaderController($scope, $rootScope, $state, $stateParams,
-  AuthService, DolphinService, Codekit, Entry, API, toaster) {
+  AuthService, DolphinService, Codekit, Entry, API, ModalsService, toaster) {
 
   function constructor() {
     // User
@@ -111,6 +111,13 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   });
 
   /**
+   * @desc Email is not confirmed for an action
+   */
+  $scope.$on("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess", function () {
+    ModalsService.open("emailConfirmation", "EmailConfirmationController");
+  });
+
+  /**
    * @desc Site creation load
    */
   $scope.$on("gonevisDash.SiteNewController:Create", constructor);
@@ -144,5 +151,6 @@ HeaderController.$inject = [
   "Codekit",
   "Entry",
   "API",
+  "ModalsService",
   "toaster"
 ];

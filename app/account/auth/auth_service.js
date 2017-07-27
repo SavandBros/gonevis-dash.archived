@@ -49,7 +49,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   };
 
   /**
-   * @desc Set token to localStorage
+   * @desc Store authentiaction token
    *       Note: should be called before this.setAuthenticatedUser()
    *
    * @param {string} token
@@ -59,7 +59,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   };
 
   /**
-   * @desc Return token from localStorage
+   * @desc Return authentiaction token
    *
    * @returns {string}
    */
@@ -69,7 +69,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
 
   /**
    * @desc Set/update authenticated user data
-   *       Note: should be called after this.setAuthenticatedUser
+   *       Note: should be called after this.setToken()
    *
    * @param {object} userData
    * @param {boolean} separateSites Set user data without effecting sites
@@ -92,12 +92,12 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   };
 
   /**
-   * @desc Delete the cookie where the account object is stored
+   * @desc Delete all stored authentiaction data
    */
   this.unAuthenticate = function () {
     $cookies.remove("JWT");
     $cookies.remove("user");
-    $cookies.remove("sessionid");
+    $cookies.remove("sessionid"); // Set by django admin
     // Remove tracking info
     self.setTrackingInfo(true);
   };
@@ -107,10 +107,8 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @returns {boolean}
    */
   this.isAuthenticated = function () {
-    if ($state.current.auth === -1) {
-      if (!$cookies.get("user")) {
-        self.unAuthenticate();
-      }
+    if (!$cookies.get("user")) {
+      self.unAuthenticate();
       return false;
     }
 
