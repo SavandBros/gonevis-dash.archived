@@ -20,7 +20,8 @@ function ModalsService(ModalService) {
     invite: "team/invite_modal/invite_modal_view.html",
     forgotPassword: "account/forgot_modal/forgot_modal_view.html",
     siteTemplates: "site/site_templates_modal/site_templates_modal_view.html",
-    team: "team/team_modal/team_modal_view.html"
+    team: "team/team_modal/team_modal_view.html",
+    emailConfirmation: "account/email_confirmation/email_confirmation_modal.html"
   };
 
   /**
@@ -32,6 +33,7 @@ function ModalsService(ModalService) {
 
   /**
    * @desc Open up a modal with a template and a controller
+   * @example ModalsService.open("dolphin", DolphinModalController)
    *
    * @param {string} template Name of the modal template
    * @param {string} controller Controller of modal
