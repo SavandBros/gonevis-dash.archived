@@ -1,17 +1,5 @@
 "use strict";
 
-/**
- * @class Config
- *
- * @param $httpProvider
- * @param $resourceProvider
- * @param $cookiesProvider
- * @param $qProvider
- * @param cfpLoadingBarProvider
- * @param ChartJsProvider
- * @param RollbarProvider
- * @param ENV
- */
 function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
   cfpLoadingBarProvider, ChartJsProvider, RollbarProvider, ENV) {
 
@@ -48,7 +36,7 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
   var localhost = (
     window.location.href.indexOf("localhost") > 0 || window.location.href.indexOf("127.0.0.1") > 0
   );
-  
+
   // Rollbar integration
   if (!localhost) {
     RollbarProvider.init({
