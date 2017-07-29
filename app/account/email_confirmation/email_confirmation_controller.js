@@ -3,7 +3,7 @@
 function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService, ModalsService) {
 
   function constructor() {
-    // If there is a token then verify
+    // Verify email with given token
     if ($state.params.token) {
       $scope.loading = true;
 
@@ -23,8 +23,7 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
         }
       );
     }
-
-    // Logged in, wants to resend email confirmation link
+    // No token, it's the resend modal
     else {
       $scope.user = AuthService.getAuthenticatedUser(true);
       $scope.form = {
