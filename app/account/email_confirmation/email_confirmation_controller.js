@@ -3,8 +3,8 @@
 function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService, ModalsService) {
 
   function constructor() {
-    // If not logged in, attempt to confirm with given token
-    if (!AuthService.isAuthenticated()) {
+    // If there is a token then verify
+    if ($state.params.token) {
       $scope.loading = true;
 
       API.EmailConfirmation.save({}, { token: $state.params.token },
