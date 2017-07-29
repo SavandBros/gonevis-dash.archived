@@ -1733,3 +1733,13 @@ img.cache {
     left: -100000px;
     position: fixed;
 }
+
+
+/* @media full width button */
+
+@media(max-width: 768px) {
+    .panel-heading .btn {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
