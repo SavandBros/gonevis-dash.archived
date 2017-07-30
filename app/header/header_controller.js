@@ -67,6 +67,19 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   };
 
   /**
+   * @desc Update user data
+   */
+  $scope.refreshData = function () {
+    if (AuthService.isAuthenticated()) {
+      API.User.get({ user_id: $scope.user.get.id },
+        function (data) {
+          $scope.user = AuthService.setAuthenticatedUser(data, true);
+        }
+      );
+    }
+  };
+
+  /**
    * @desc Dolphin selection used for quick nevis
    *
    * @param {Event} event
@@ -138,6 +151,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   $scope.$on("gonevisDash.UserController:update", constructor);
 
   constructor();
+  $scope.refreshData();
 }
 
 app.controller("HeaderController", HeaderController);
