@@ -28,7 +28,7 @@
     "AngularJS-Toaster": "^2.1.0",
     "angular-chart.js": "^1.1.1",
     "angular-preload-image": "*",
-    "ng-rollbar": "^1.9.2"
+    "ng-rollbar": "https://github.com/Alir3z4/ng-rollbar.git#2.1.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.6.4"
