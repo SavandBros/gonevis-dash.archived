@@ -17,6 +17,20 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   }
 
   /**
+   * @desc Retrieve user data
+   */
+  function retrieveUser () {
+    // Get fresh user data if is authenticated
+    if (AuthService.isAuthenticated()) {
+      API.User.get({ user_id: $scope.user.get.id },
+        function (data) {
+          $scope.user = AuthService.setAuthenticatedUser(data, true);
+        }
+      );
+    }
+  }
+
+  /**
    * @desc Handle user selection of quick nevis
    *
    * @param {string} format
@@ -63,19 +77,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
     $scope.nevisFormat = format;
     if (format === "image") {
       DolphinService.viewSelection("headerNevis");
-    }
-  };
-
-  /**
-   * @desc Update user data
-   */
-  $scope.refreshData = function () {
-    if (AuthService.isAuthenticated()) {
-      API.User.get({ user_id: $scope.user.get.id },
-        function (data) {
-          $scope.user = AuthService.setAuthenticatedUser(data, true);
-        }
-      );
     }
   };
 
@@ -151,7 +152,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   $scope.$on("gonevisDash.UserController:update", constructor);
 
   constructor();
-  $scope.refreshData();
+  retrieveUser();
 }
 
 app.controller("HeaderController", HeaderController);
