@@ -40,6 +40,13 @@ function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
     $scope.form.data.slug = Slug.slugify($scope.form.data.name);
   };
 
+  /**
+   * @desc Update modal
+   */
+  $scope.$on("gonevisDash.Tag:update", function (event, data) {
+    $scope.form.data = data.data;
+  });
+
   constructor();
 }
 
