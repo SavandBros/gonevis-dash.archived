@@ -2,6 +2,8 @@
 
 function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
   cfpLoadingBarProvider, ChartJsProvider, RollbarProvider, ENV) {
+  
+  console.log("GoNevis Dash version: " + ENV.GONEVIS_CODE_VERSION);
 
   // Http
   $httpProvider.interceptors.push("AuthInterceptorService");
