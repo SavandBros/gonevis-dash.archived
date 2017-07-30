@@ -49,7 +49,7 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "npm install -g bower grunt-cli && bower install && grunt rock"
+    "postinstall": "npm install -g bower grunt-cli && bower install && GONEVIS_APP_GIT_SHA=`git rev-parse HEAD` grunt rock"
   },
   "repository": {
     "type": "git",
