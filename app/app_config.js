@@ -43,7 +43,13 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
       accessToken: ENV.ROLLERBAR_TOKEN,
       captureUncaught: true,
       payload: {
-        environment: ENV.name
+        environment: ENV.name,
+        client: {
+          javascript: {
+            source_map_enabled: true,
+            code_version: ENV.GONEVIS_CODE_VERSION
+          }
+        }
       }
     });
   }
