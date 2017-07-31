@@ -22,9 +22,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   function retrieveUser () {
     // Get fresh user data if is authenticated
     if (AuthService.isAuthenticated()) {
-      API.User.get({ user_id: $scope.user.get.id },
+      API.AccountRefresh.save({ token: AuthService.getToken() },
         function (data) {
-          $scope.user = AuthService.setAuthenticatedUser(data, true);
+          $scope.user = AuthService.setAuthenticatedUser(data.user);
         }
       );
     }
