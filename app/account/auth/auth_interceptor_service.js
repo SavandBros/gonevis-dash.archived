@@ -1,6 +1,6 @@
 "use strict";
 
-function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
+function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
 
   /**
    * @desc Automatically attach Authorization header
@@ -18,7 +18,7 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
 
     return config;
   }
-
+  
   /**
    * @desc Handler for http response
    *
@@ -29,12 +29,14 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
   function responseError(response) {
     // Authentication check
     if (response.status === 403) {
-      $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
+      if (JSON.stringify(response.data).indexOf(Utils.texts.no_permission) !== -1) {
+        $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
+      }
     }
 
     // Email confiramtion check
     if (response.status === 400) {
-      if (JSON.stringify(response.data).indexOf("Your email is not verified.") !== -1) {
+      if (JSON.stringify(response.data).indexOf(Utils.texts.unverified_email) !== -1) {
         $rootScope.$broadcast("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess");
       }
     }
@@ -53,5 +55,6 @@ AuthInterceptorService.$inject = [
   "$rootScope",
   "$cookies",
   "$q",
-  "ENV"
+  "ENV",
+  "Utils"
 ];
