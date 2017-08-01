@@ -39,6 +39,9 @@ function API($resource, ENV) {
     }, {
       name: "EmailConfirmationResend",
       endpoint: "account/resend-email-confirmation/" // GET
+    }, {
+      name: "AccountRefresh",
+      endpoint: "account/refresh/" // POST
     },
     // Entry
     {

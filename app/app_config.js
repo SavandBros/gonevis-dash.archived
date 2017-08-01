@@ -2,6 +2,8 @@
 
 function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
   cfpLoadingBarProvider, ChartJsProvider, RollbarProvider, ENV) {
+  
+  console.log("GoNevis Dash version: " + ENV.GONEVIS_CODE_VERSION);
 
   // Http
   $httpProvider.interceptors.push("AuthInterceptorService");
@@ -43,7 +45,13 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
       accessToken: ENV.ROLLERBAR_TOKEN,
       captureUncaught: true,
       payload: {
-        environment: ENV.name
+        environment: ENV.name,
+        client: {
+          javascript: {
+            source_map_enabled: true,
+            code_version: ENV.GONEVIS_CODE_VERSION
+          }
+        }
       }
     });
   }

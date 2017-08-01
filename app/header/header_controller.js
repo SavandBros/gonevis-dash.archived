@@ -17,6 +17,20 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   }
 
   /**
+   * @desc Retrieve user data
+   */
+  function retrieveUser () {
+    // Get fresh user data if is authenticated
+    if (AuthService.isAuthenticated()) {
+      API.AccountRefresh.save({ token: AuthService.getToken() },
+        function (data) {
+          $scope.user = AuthService.setAuthenticatedUser(data.user);
+        }
+      );
+    }
+  }
+
+  /**
    * @desc Handle user selection of quick nevis
    *
    * @param {string} format
@@ -138,6 +152,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   $scope.$on("gonevisDash.UserController:update", constructor);
 
   constructor();
+  retrieveUser();
 }
 
 app.controller("HeaderController", HeaderController);
