@@ -174,12 +174,10 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   };
 
   /**
-   * @desc Update person tracking info for Rollbar based on authentication
    *
    * @param {boolean} remove Skip and remove
    */
   this.setTrackingInfo = function (remove) {
-    if (typeof Rollbar === "undefined") {
       return;
     }
 
@@ -196,11 +194,6 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
       };
     }
 
-    Rollbar.configure({
-      payload: {
-        person: person
-      }
-    });
   };
 }
 

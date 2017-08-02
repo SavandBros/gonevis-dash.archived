@@ -468,8 +468,7 @@ module.exports = function (grunt) {
           "angular-sortable-view",
           "angular-loading-bar",
           "angular-preload-image",
-          "toaster",
-          "tandibar/ng-rollbar"
+          "toaster"
         ],
         constants: {
           Client: {
@@ -481,7 +480,6 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: "development",
-            GONEVIS_CODE_VERSION: process.env.GONEVIS_CODE_VERSION || "dev",
             apiEndpoint: "http://gonevis.dev:8000/api/v1/"
           }
         }
@@ -489,7 +487,6 @@ module.exports = function (grunt) {
       staging: {
         constants: {
           ENV: {
-            ROLLERBAR_TOKEN: "d0a14094307a424cbd7d59d9c897b940",
             GONEVIS_CODE_VERSION: process.env.GONEVIS_CODE_VERSION || "draft",
             name: "staging",
             apiEndpoint: "http://draft.gonevis.com/api/v1/"
@@ -499,7 +496,6 @@ module.exports = function (grunt) {
       production: {
         constants: {
           ENV: {
-            ROLLERBAR_TOKEN: "d0a14094307a424cbd7d59d9c897b940",
             GONEVIS_CODE_VERSION: process.env.GONEVIS_CODE_VERSION || "production",
             name: "production",
             apiEndpoint: "https://www.gonevis.com/api/v1/"
