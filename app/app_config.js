@@ -33,12 +33,19 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
   });
 
   // Check localhost
-  var localhost = (
-    window.location.href.indexOf("localhost") > 0 || window.location.href.indexOf("127.0.0.1") > 0
-  );
+  var localhost = false;
 
-  // Rollbar integration
+  // var localhost = (
+  //   window.location.href.indexOf("localhost") > 0 ||
+  //   window.location.href.indexOf("127.0.0.1") > 0
+  // );
+
+  // Sentry integration
   if (!localhost) {
+    console.log(ENV.SENTRY_DSN);
+    // Raven.config(ENV.SENTRY_DSN);
+    // Raven.addPlugin(Raven.Plugins.Angular);
+    // Raven.install();
   }
 }
 

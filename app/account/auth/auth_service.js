@@ -174,10 +174,12 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   };
 
   /**
+   * @desc Update person tracking info
    *
    * @param {boolean} remove Skip and remove
    */
   this.setTrackingInfo = function (remove) {
+    if (!Raven.isSetup()) {
       return;
     }
 
@@ -194,6 +196,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
       };
     }
 
+    Raven.setUserContext(person);
   };
 }
 
