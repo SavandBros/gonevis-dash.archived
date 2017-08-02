@@ -473,6 +473,12 @@ module.exports = function (grunt) {
         constants: {
           Client: {
             version: 2
+          },
+          Utils: {
+            texts: {
+              no_permission: "You do not have permission to perform this action.",
+              unverified_email: "Your email is not verified.",
+            }
           }
         }
       },
