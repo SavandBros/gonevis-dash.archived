@@ -42,10 +42,7 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
 
   // Sentry integration
   if (!localhost) {
-    console.log(ENV.SENTRY_DSN);
-    // Raven.config(ENV.SENTRY_DSN);
-    // Raven.addPlugin(Raven.Plugins.Angular);
-    // Raven.install();
+    Raven.config(ENV.SENTRY_DSN).install();
   }
 }
 
