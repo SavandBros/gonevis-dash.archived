@@ -487,7 +487,7 @@ module.exports = function (grunt) {
           ENV: {
             name: "development",
             apiEndpoint: "http://gonevis.dev:8000/api/v1/",
-            SENTRY_DSN: "https://34664609d2d7416493b4360ea445b452@sentry.io/198251"
+            SENTRY_DSN: "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
           }
         }
       },
@@ -496,7 +496,7 @@ module.exports = function (grunt) {
           ENV: {
             name: "staging",
             apiEndpoint: "http://draft.gonevis.com/api/v1/",
-            SENTRY_DSN: "https://34664609d2d7416493b4360ea445b452@sentry.io/198251"
+            SENTRY_DSN: "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
           }
         }
       },
