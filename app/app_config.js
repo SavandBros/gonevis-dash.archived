@@ -1,9 +1,7 @@
 "use strict";
 
-function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
-  cfpLoadingBarProvider, ChartJsProvider, RollbarProvider, ENV) {
-  
-  console.log("GoNevis Dash version: " + ENV.GONEVIS_CODE_VERSION);
+function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
+  cfpLoadingBarProvider, ChartJsProvider, ENV) {
 
   // Http
   $httpProvider.interceptors.push("AuthInterceptorService");
@@ -34,27 +32,29 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
     }
   });
 
-  // Check localhost
-  var localhost = (
-    window.location.href.indexOf("localhost") > 0 || window.location.href.indexOf("127.0.0.1") > 0
-  );
+  // Custom exception handler
+  $provide.decorator("$exceptionHandler", ["$delegate", "$window", function ($delegate) {
+    // Check if in localhost/127.0.0.1 or not
+    var localhost = (
+      window.location.href.indexOf("localhost") > 0 ||
+      window.location.href.indexOf("127.0.0.1") > 0
+    );
 
-  // Rollbar integration
-  if (!localhost) {
-    RollbarProvider.init({
-      accessToken: ENV.ROLLERBAR_TOKEN,
-      captureUncaught: true,
-      payload: {
-        environment: ENV.name,
-        client: {
-          javascript: {
-            source_map_enabled: true,
-            code_version: ENV.GONEVIS_CODE_VERSION
-          }
-        }
-      }
-    });
-  }
+    if (!localhost) {
+      // Using RavenJS for exception logging.
+      Raven.config(ENV.SENTRY_DSN).install();
+      return function (exception, cause) {
+        console.log("FUCK");
+        Raven.captureException(exception);
+        $delegate(exception, cause);
+      };
+    } else {
+      // Using AngularJS standard exception logging.
+      return function (exception, cause) {
+        $delegate(exception, cause);
+      };
+    }
+  }]);
 }
 
 app.config(Config);
@@ -63,8 +63,8 @@ Config.$inject = [
   "$resourceProvider",
   "$cookiesProvider",
   "$qProvider",
+  "$provide",
   "cfpLoadingBarProvider",
   "ChartJsProvider",
-  "RollbarProvider",
   "ENV"
 ];

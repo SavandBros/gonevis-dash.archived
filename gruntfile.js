@@ -468,17 +468,16 @@ module.exports = function (grunt) {
           "angular-sortable-view",
           "angular-loading-bar",
           "angular-preload-image",
-          "toaster",
-          "tandibar/ng-rollbar"
+          "toaster"
         ],
         constants: {
           Client: {
-            version: 2
+            version: 3
           },
           Utils: {
             texts: {
-              no_permission: "You do not have permission to perform this action.",
-              unverified_email: "Your email is not verified.",
+              noPermission: "You don't have permission to perform this action.",
+              unverifiedEmail: "Your email is not verified.",
             }
           }
         }
@@ -487,28 +486,26 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: "development",
-            GONEVIS_CODE_VERSION: process.env.GONEVIS_CODE_VERSION || "dev",
-            apiEndpoint: "http://gonevis.dev:8000/api/v1/"
+            apiEndpoint: "http://gonevis.dev:8000/api/v1/",
+            SENTRY_DSN: "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
           }
         }
       },
       staging: {
         constants: {
           ENV: {
-            ROLLERBAR_TOKEN: "d0a14094307a424cbd7d59d9c897b940",
-            GONEVIS_CODE_VERSION: process.env.GONEVIS_CODE_VERSION || "draft",
             name: "staging",
-            apiEndpoint: "http://draft.gonevis.com/api/v1/"
+            apiEndpoint: "http://draft.gonevis.com/api/v1/",
+            SENTRY_DSN: "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
           }
         }
       },
       production: {
         constants: {
           ENV: {
-            ROLLERBAR_TOKEN: "d0a14094307a424cbd7d59d9c897b940",
-            GONEVIS_CODE_VERSION: process.env.GONEVIS_CODE_VERSION || "production",
             name: "production",
-            apiEndpoint: "https://www.gonevis.com/api/v1/"
+            apiEndpoint: "https://www.gonevis.com/api/v1/",
+            SENTRY_DSN: "https://34664609d2d7416493b4360ea445b452@sentry.io/198251"
           }
         }
       }

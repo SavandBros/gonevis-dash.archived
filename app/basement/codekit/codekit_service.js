@@ -5,7 +5,7 @@
  *       It stops repeating code such as functions, static variables, etc...
  *       Using this provider is highly recommended, even got a short name to be used quickly :P
  */
-function Codekit($timeout, $window) {
+function Codekit($timeout, $window, $log) {
 
   /**
    * @desc Get index of an item in a data
@@ -182,6 +182,23 @@ function Codekit($timeout, $window) {
     return $window.matchMedia("only screen and (max-width: 760px)").matches;
   }
 
+  /**
+   * @desc Report error to sentry or console
+   *
+   * @param {string} message
+   * @param {object} data
+   */
+  function reportSentry(message, data) {
+    if (Raven.isSetup()) {
+      throw new Error(JSON.stringify({
+        message: message,
+        data: data
+      }));
+    } else {
+      $log.error(message, data);
+    }
+  }
+
   return {
     getIndex: getIndex,
     entryStatuses: entryStatuses,
@@ -192,7 +209,8 @@ function Codekit($timeout, $window) {
     isEmptyObj: isEmptyObj,
     focus: focus,
     setTitle: setTitle,
-    isMobile: isMobile
+    isMobile: isMobile,
+    reportSentry: reportSentry
   };
 }
 
