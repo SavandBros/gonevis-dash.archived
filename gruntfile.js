@@ -472,7 +472,7 @@ module.exports = function (grunt) {
         ],
         constants: {
           Client: {
-            version: 2
+            version: 3
           },
           Utils: {
             texts: {
