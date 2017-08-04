@@ -174,12 +174,12 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   };
 
   /**
-   * @desc Update person tracking info for Rollbar based on authentication
+   * @desc Update person tracking info
    *
    * @param {boolean} remove Skip and remove
    */
   this.setTrackingInfo = function (remove) {
-    if (typeof Rollbar === "undefined") {
+    if (!Raven.isSetup()) {
       return;
     }
 
@@ -196,11 +196,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
       };
     }
 
-    Rollbar.configure({
-      payload: {
-        person: person
-      }
-    });
+    Raven.setUserContext(person);
   };
 }
 
