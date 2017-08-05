@@ -106,7 +106,7 @@ function API($resource, ENV) {
       name: "Team",
       endpoint: "website/site/:siteId/team/" // GET
     }, {
-      name: "TeamInvite",
+      name: "TeamPromote",
       endpoint: "website/site/:siteId/promote-user/" // PUT
     }, {
       name: "RemoveTeam",
