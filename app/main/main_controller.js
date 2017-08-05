@@ -1,6 +1,6 @@
 "use strict";
 
-function MainController($scope, $state, $stateParams, AuthService, API, Comment, Entry) {
+function MainController($scope, $state, $stateParams, AuthService, API, Comment, Entry, Tour) {
 
   var site = AuthService.getCurrentSite();
 
@@ -16,6 +16,14 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
     API.SiteTemplateConfig.get({ siteId: site }, function (data) {
       $scope.siteTemplate = data.template_config;
     });
+
+    // Tour
+    setTimeout(function () {
+      $scope.tour = new Tour([
+        ["#entries", "Entries Overview", "Check out your latest entries and some info."],
+        ["#site", "Entries Overview 2", "Check out your latest entries and some info."],
+      ]);
+    }, 2000);
   }
 
   /**
@@ -108,5 +116,6 @@ MainController.$inject = [
   "AuthService",
   "API",
   "Comment",
-  "Entry"
+  "Entry",
+  "Tour"
 ];
