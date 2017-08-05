@@ -1,19 +1,15 @@
 "use strict";
 
 /**
- * @class ModalsService
  * @desc Modal service to work with bootstrap's modal
  *       Each modal should have an id same as its template name
- *
- * @param ModalService
  */
 function ModalsService(ModalService) {
 
   /**
-   * @name templates
    * @desc All modal templates are defined here
    *
-   * @type {Object}
+   * @type {object}
    */
   var templates = {
     dolphin: "dolphin/dolphin_modal/dolphin_modal_view.html",
@@ -24,23 +20,24 @@ function ModalsService(ModalService) {
     invite: "team/invite_modal/invite_modal_view.html",
     forgotPassword: "account/forgot_modal/forgot_modal_view.html",
     siteTemplates: "site/site_templates_modal/site_templates_modal_view.html",
-    team: "team/team_modal/team_modal_view.html"
+    team: "team/team_modal/team_modal_view.html",
+    emailConfirmation: "account/email_confirmation/email_confirmation_modal.html"
   };
 
   /**
-   * @name modals
    * @desc Modal instances
    *
-   * @type {Object}
+   * @type {object}
    */
   var modals = {};
 
   /**
-   * @method open
    * @desc Open up a modal with a template and a controller
+   * @example ModalsService.open("dolphin", DolphinModalController)
    *
-   * @param template {String} Name of the modal template
-   * @param controller {String} Controller of modal
+   * @param {string} template Name of the modal template
+   * @param {string} controller Controller of modal
+   * @param {object} data
    */
   function open(template, controller, data) {
     ModalService.showModal({
@@ -54,10 +51,9 @@ function ModalsService(ModalService) {
   }
 
   /**
-   * @method close
    * @desc Close a modal by it's instance
    *
-   * @param template {String} Name of the modal template (instance)
+   * @param {string} template Name of the modal template (instance)
    */
   function close(template) {
     // Trigger the close button
@@ -72,7 +68,7 @@ function ModalsService(ModalService) {
 
   return {
     open: open,
-    close: close,
+    close: close
   };
 }
 

@@ -1,51 +1,48 @@
 "use strict";
 
-/**
- * @class EmailConfirmationController
- *
- * @param $scope
- * @param $rootScope
- * @param $state
- * @param toaster
- * @param API
- * @param AuthService
- */
-function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService) {
+function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService, ModalsService) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
-    $scope.loading = true;
-    API.EmailConfirmation.save({}, { token: $state.params.token },
-      function (data) {
-        $scope.loading = false;
-        toaster.success("Done", "Thanks for confirming your email");
+    // Verify email with given token
+    if ($state.params.token) {
+      $scope.loading = true;
 
-        AuthService.setAuthenticatedUser(data.user);
-        AuthService.setToken(data.token);
+      API.EmailConfirmation.save({}, { token: $state.params.token },
+        function (data) {
+          $scope.loading = false;
+          toaster.success("Done", "Thanks for verifying your email.");
 
-        $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
-      },
-      function () {
-        $scope.loading = false;
-        $scope.error = true;
-      }
-    );
+          AuthService.setAuthenticatedUser(data.user);
+          AuthService.setToken(data.token);
+
+          $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
+        },
+        function () {
+          $scope.loading = false;
+          $scope.error = true;
+        }
+      );
+    }
+    // No token, it's the resend modal
+    else {
+      $scope.user = AuthService.getAuthenticatedUser(true);
+      $scope.form = {
+        email: $scope.user.get.email
+      };
+    }
   }
 
   /**
-   * @method resend
-   * @desc Resend email confirmation
+   * @desc Resend email confirmation link
    *
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.resend = function (form) {
     API.EmailConfirmationResend.save({ email: form.email },
       function () {
-        toaster.success("Sent", "Email confirmation sent to " + form.email);
-        $state.go('signin');
+        ModalsService.close("forgotPassword");
+        toaster.success("Sent", "Email verification sent to " + form.email);
+        $state.go("signin");
       },
       function (data) {
         form.errors = data.data;
@@ -63,5 +60,6 @@ EmailConfirmationController.$inject = [
   "$state",
   "toaster",
   "API",
-  "AuthService"
+  "AuthService",
+  "ModalsService"
 ];

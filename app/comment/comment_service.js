@@ -1,21 +1,9 @@
 "use strict";
 
-/**
- * @class Comment
- *
- * @param $rootScope
- * @param toaster
- * @param API
- * @param ModalsService
- * @param Codekit
- *
- * @return [Factory]
- */
-function Comment($rootScope, toaster, API, ModalsService, Codekit) {
+function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
   return function (data) {
 
     /**
-     * @name self
      * @desc Super variable for getting this in functions
      *
      * @type {Dolphin}
@@ -23,12 +11,17 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit) {
     var self = this;
 
     /**
-     * @name data
+     * @readonly
      * @desc Backend data
      *
-     * @type {Object}
+     * @type {object}
      */
     this.get = data;
+
+    /**
+     * @type {Account}
+     */
+    this.user = new Account(self.get.user);
 
     /**
      * @name isDeleted
@@ -37,19 +30,16 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit) {
     this.isDeleted = false;
 
     /**
-     * @name isReplying
-     * @type {Boolean}
+     * @type {boolean}
      */
     this.isReplying = false;
 
     /**
-     * @name objectType
-     * @type {Number}
+     * @type {number}
      */
     this.objectType = 1;
 
     /**
-     * @method remove
      * @desc Delete comment, notify and broadcast for controllers to use.
      */
     this.remove = function () {
@@ -77,7 +67,6 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit) {
     };
 
     /**
-     * @method reply
      * @desc Reply to comment.
      */
     this.reply = function (comment) {
@@ -98,7 +87,6 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit) {
     };
 
     /**
-     * @method getStatus
      * @desc Get comment's current status.
      */
     this.getStatus = function () {
@@ -106,11 +94,10 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit) {
     };
 
     /**
-     * @method setStatus
      * @desc Change comment status
      * 
-     * @param key {String}
-     * @param value {Number}
+     * @param {string} key
+     * @param {number} value
      */
     this.setStatus = function (key, value) {
       var payload = {};
@@ -125,7 +112,6 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit) {
     };
 
     /**
-     * @method view
      * @desc View comment as modal (detailed mode).
      */
     this.view = function () {
@@ -141,5 +127,6 @@ Comment.$inject = [
   "toaster",
   "API",
   "ModalsService",
-  "Codekit"
+  "Codekit",
+  "Account"
 ];

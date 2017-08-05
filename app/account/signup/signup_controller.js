@@ -1,22 +1,7 @@
 "use strict";
 
-/**
- * @class SignupController
- *
- * @param $scope
- * @param $state
- * @param $stateParams
- * @param AuthService
- * @param API
- * @param Password
- * @param toaster
- */
-function SignupController($scope, $state, $stateParams, AuthService, API, Password, toaster) {
+function SignupController($scope, $stateParams, AuthService, API, Password, toaster) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     // Forn with username (param)
     $scope.form = {
@@ -36,12 +21,11 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
   }
 
   /**
-   * @method signup
    * @desc Submit signup form
    * 
-   * @param form {Object}
+   * @param {object} form
    */
-  $scope.signup = function register(form) {
+  $scope.signup = function (form) {
     form.loading = true;
 
     var payload = {
@@ -54,11 +38,20 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
       payload.invite_id = $scope.inviteId;
     }
 
-    API.Signup.post(payload,
-      function (data) {
+    API.SignupAccount.post(payload,
+      function () {
         form.errors = [];
-        $scope.registeredEmail = data.email;
-        $scope.success = true;
+        // Sign user in
+        AuthService.signIn(
+          form.data.username,
+          $scope.password.password,
+          function () {
+            toaster.success(
+              "Welcome " + form.data.username,
+              "Thanks for registering at GoNevis, a link has been sent to your email for account verification."
+            );
+          }
+        );
       },
       function (data) {
         form.loading = false;
@@ -68,10 +61,9 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
   };
 
   /**
-   * @method resend
    * @desc Resend email confirmation
    *
-   * @param email {String}
+   * @param {string} email
    */
   $scope.resend = function (email) {
     API.EmailConfirmationResend.save({ email: email },
@@ -87,7 +79,6 @@ function SignupController($scope, $state, $stateParams, AuthService, API, Passwo
 app.controller("SignupController", SignupController);
 SignupController.$inject = [
   "$scope",
-  "$state",
   "$stateParams",
   "AuthService",
   "API",

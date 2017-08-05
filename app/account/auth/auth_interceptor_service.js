@@ -1,22 +1,13 @@
 "use strict";
 
-/**
- * @class AuthInterceptorService
- *
- * @param $rootScope
- * @param $cookies
- * @param $q
- * @param ENV
- */
-function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
+function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
 
   /**
-   * @method request
    * @desc Automatically attach Authorization header
    *
-   * @param config {Object}
+   * @param {object} config
    *
-   * @returns {Object}
+   * @returns {object}
    */
   function request(config) {
     var token = $cookies.get("JWT");
@@ -27,19 +18,29 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV) {
 
     return config;
   }
-
+  
   /**
-   * @method responseError
    * @desc Handler for http response
    *
-   * @param response {Object}
+   * @param {object} response
    *
-   * @return {Object}
+   * @return {object}
    */
   function responseError(response) {
+    // Authentication check
     if (response.status === 403) {
-      $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
+      if (JSON.stringify(response.data).indexOf(Utils.texts.noPermission) === -1) {
+        $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
+      }
     }
+
+    // Email confiramtion check
+    if (response.status === 400) {
+      if (JSON.stringify(response.data).indexOf(Utils.texts.unverifiedEmail) !== -1) {
+        $rootScope.$broadcast("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess");
+      }
+    }
+
     return $q.reject(response);
   }
 
@@ -54,5 +55,6 @@ AuthInterceptorService.$inject = [
   "$rootScope",
   "$cookies",
   "$q",
-  "ENV"
+  "ENV",
+  "Utils"
 ];

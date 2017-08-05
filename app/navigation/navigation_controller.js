@@ -1,28 +1,9 @@
 "use strict";
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:NavigationController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param $rootScope
- * @param toaster
- * @param $state
- * @param $stateParams
- * @param API
- * @param AuthService
- */
-function NavigationController($scope, $rootScope, toaster, $state, $stateParams, API, AuthService) {
+function NavigationController($scope, toaster, $stateParams, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
 
-  /**
-   * constructor
-   *
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.navigations = [];
 
@@ -45,12 +26,9 @@ function NavigationController($scope, $rootScope, toaster, $state, $stateParams,
   }
 
   /**
-   * update
-   *
-   * @method update
    * @desc function for updating navigations
    *
-   * @param form {Object}
+   * @param {object} form
    */
   $scope.update = function (form) {
     form.loading = true;
@@ -73,9 +51,6 @@ function NavigationController($scope, $rootScope, toaster, $state, $stateParams,
   };
 
   /**
-   * create
-   *
-   * @method create
    * @desc Nav creation function
    */
   $scope.create = function () {
@@ -87,12 +62,9 @@ function NavigationController($scope, $rootScope, toaster, $state, $stateParams,
   };
 
   /**
-   * remove
-   *
-   * @method remove
    * @desc Nav deletion function
    *
-   * @param index {Number}
+   * @param {number} index
    */
   $scope.remove = function (index) {
     $scope.navigations.splice(index, 1);
@@ -104,9 +76,7 @@ function NavigationController($scope, $rootScope, toaster, $state, $stateParams,
 app.controller("NavigationController", NavigationController);
 NavigationController.$inject = [
   "$scope",
-  "$rootScope",
   "toaster",
-  "$state",
   "$stateParams",
   "API",
   "AuthService"

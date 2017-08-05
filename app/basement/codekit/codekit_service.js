@@ -1,27 +1,20 @@
 "use strict";
 
 /**
- * @class Codekit
  * @desc Codekit service is a basement filled with useful function and constant data,
  *       It stops repeating code such as functions, static variables, etc...
  *       Using this provider is highly recommended, even got a short name to be used quickly :P
- *
- * @param $timeout
- * @param $window
- *
- * @returns [Factory]
  */
-function Codekit($timeout, $window) {
+function Codekit($timeout, $window, $log) {
 
   /**
-   * @method getIndex
    * @desc Get index of an item in a data
    *
-   * @param master {Object} Master data to search in
-   * @param search {Object} Item to find it's index in master object
-   * @param key {String} Property to compare, default is "id"
+   * @param {object} master Master data to search in
+   * @param {object} search Item to find it's index in master object
+   * @param {string} key Property to compare, default is "id"
    *
-   * @returns {Number} Index of the item found in data via the given key
+   * @returns {number} Index of the item found in data via the given key
    */
   function getIndex(master, search, key) {
     key = key || "id";
@@ -35,10 +28,9 @@ function Codekit($timeout, $window) {
   }
 
   /**
-   * @name entryStatuses
    * @desc All statuses available for entries.
    *
-   * @type {Array}
+   * @type {array}
    */
   var entryStatuses = [{
     label: "Draft",
@@ -55,10 +47,9 @@ function Codekit($timeout, $window) {
   }];
 
   /**
-   * @name entryFormats
    * @desc All formats available for entries.
    *
-   * @type {Object}
+   * @type {object}
    */
   var entryFormats = {
     text: {
@@ -92,10 +83,9 @@ function Codekit($timeout, $window) {
   };
 
   /**
-   * @name commentStatuses
    * @desc All statuses available for comments.
    *
-   * @type {Array}
+   * @type {array}
    */
   var commentStatuses = [{
     label: "Pending approval",
@@ -118,10 +108,9 @@ function Codekit($timeout, $window) {
   }];
 
   /**
-   * @name teamRoles
    * @desc All roles for team.
    *
-   * @type {Array}
+   * @type {array}
    */
   var teamRoles = [
     { id: 0, color: "text-primary", label: "Owner" },
@@ -130,12 +119,11 @@ function Codekit($timeout, $window) {
   ];
 
   /**
-   * @method timeoutSlice
    * @desc Delete an item if has property isDeleted
    *
-   * @param master {Object} Master data to search in
-   * @param key {String} Deleted property
-   * @param delay {Number}
+   * @param {object} master Master data to search in
+   * @param {string} key Deleted property
+   * @param {number} delay
    */
   function timeoutSlice(master, key, delay) {
     key = key || "isDeleted";
@@ -151,20 +139,18 @@ function Codekit($timeout, $window) {
   }
 
   /**
-   * @method isEmptyObj
    * @desc is object empty
    *
-   * @param object {Object}
+   * @param {object} object
    */
   function isEmptyObj(object) {
     return (Object.getOwnPropertyNames(object).length === 0);
   }
 
   /**
-   * @method focus
    * @desc Focus on an element (input)
    *
-   * @param selector {String}
+   * @param {string} selector
    */
   function focus(selector) {
     $timeout(function () {
@@ -173,10 +159,9 @@ function Codekit($timeout, $window) {
   }
 
   /**
-   * @method setTitle
    * @desc Set tab title
    *
-   * @param {String} title 
+   * @param {string} title
    */
   function setTitle(title) {
     var finalTitle = "GoNevis Dash";
@@ -189,13 +174,29 @@ function Codekit($timeout, $window) {
   }
 
   /**
-   * @method isMobile
    * @desc Check screen size to see if mobile or not
    *
-   * @returns {Boolean}
+   * @returns {boolean}
    */
   function isMobile() {
     return $window.matchMedia("only screen and (max-width: 760px)").matches;
+  }
+
+  /**
+   * @desc Report error to sentry or console
+   *
+   * @param {string} message
+   * @param {object} data
+   */
+  function reportSentry(message, data) {
+    if (Raven.isSetup()) {
+      throw new Error(JSON.stringify({
+        message: message,
+        data: data
+      }));
+    } else {
+      $log.error(message, data);
+    }
   }
 
   return {
@@ -208,7 +209,8 @@ function Codekit($timeout, $window) {
     isEmptyObj: isEmptyObj,
     focus: focus,
     setTitle: setTitle,
-    isMobile: isMobile
+    isMobile: isMobile,
+    reportSentry: reportSentry
   };
 }
 

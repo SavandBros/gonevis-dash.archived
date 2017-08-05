@@ -1,28 +1,10 @@
 "use strict";
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:CommentController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param $rootScope
- * @param $state
- * @param API
- * @param AuthService
- * @param Comment
- * @param Pagination
- * @param Codekit
- */
-function CommentController($scope, $rootScope, $state,
-  API, AuthService, Comment, Pagination, Search, Codekit) {
+function CommentController($scope, $rootScope, API,
+  AuthService, Comment, Pagination, Search, Codekit) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.statuses = Codekit.commentStatuses;
     $scope.search = Search;
     $scope.comments = [];
@@ -42,15 +24,23 @@ function CommentController($scope, $rootScope, $state,
   }
 
   /**
-   * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
 
+  /**
+   * @desc Remove comment
+   */
   $rootScope.$on("gonevisDash.Comment:remove", function () {
     Codekit.timeoutSlice($scope.comments);
   });
 
+  /**
+   * @desc Search callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
@@ -62,6 +52,12 @@ function CommentController($scope, $rootScope, $state,
     }
   });
 
+  /**
+   * @desc Load more callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
@@ -72,11 +68,10 @@ function CommentController($scope, $rootScope, $state,
   });
 
   /**
-   * @event gonevisDash.Comment:reply
    * @desc Reply comment
    *
-   * @param event {Event}
-   * @param comment {Object}
+   * @param {Event} event
+   * @param {object} comment
    */
   $scope.$on("gonevisDash.Comment:reply", function (event, comment) {
     $scope.comments.unshift(new Comment(comment));
@@ -89,7 +84,6 @@ app.controller("CommentController", CommentController);
 CommentController.$inject = [
   "$scope",
   "$rootScope",
-  "$state",
   "API",
   "AuthService",
   "Comment",

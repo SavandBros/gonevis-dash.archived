@@ -1,18 +1,8 @@
 "use strict";
 
-/**
- * @class Tag
- *
- * @param $rootScope
- * @param $state
- * @param toaster
- * @param API
- * @param ModalsService
- */
 function Tag($rootScope, $state, toaster, API, ModalsService) {
   return function (data) {
     /**
-     * @name self
      * @desc Super variable for getting this in functions
      *
      * @type {Tag}
@@ -20,25 +10,22 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
     var self = this;
 
     /**
-     * @name data
+     * @readonly
      * @desc Backend data
      *
-     * @type {Object}
+     * @type {object}
      */
     this.get = data;
 
     /**
-     * @name isDeleted
-     * @type {Boolean}
+     * @type {boolean}
      */
     this.isDeleted = false;
 
     /**
-     * @method update
      * @desc Update tag, notify and broadcast for controllers to use.
      *
-     * @param form {Object}
-     * @param toast {Boolean}
+     * @param {object} form
      */
     this.update = function (form) {
       form.loading = true;
@@ -53,7 +40,7 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
           $rootScope.$broadcast("gonevisDash.Tag:update", {
             data: data,
             tag: self,
-            success: true,
+            success: true
           });
         },
         function (data) {
@@ -62,14 +49,13 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
           $rootScope.$broadcast("gonevisDash.Tag:update", {
             data: data,
             tag: self,
-            success: false,
+            success: false
           });
         }
       );
     };
 
     /**
-     * @method remove
      * @desc Remove tag, notify and broadcast for controllers to use.
      */
     this.remove = function () {
@@ -80,14 +66,13 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
           $rootScope.$broadcast("gonevisDash.Tag:remove", {
             data: data,
             tag: self,
-            success: false,
+            success: false
           });
         }
       );
     };
 
     /**
-     * @method view
      * @desc View tag as modal (detailed mode).
      */
     this.view = function () {
@@ -97,7 +82,6 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
     };
 
     /**
-     * @method addToNavigation
      * @desc Add tag to navigation
      */
     this.addToNavigation = function () {
@@ -110,7 +94,6 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
     };
 
     /**
-     * @method viewCreate
      * @desc Tag creation modal
      */
     this.viewCreate = function () {
@@ -118,10 +101,9 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
     };
 
     /**
-     * @method create
      * @desc Tag creation via backend
      *
-     * @param form {Object}
+     * @param {object} form
      */
     this.create = function (form) {
       form.loading = true;

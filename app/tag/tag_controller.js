@@ -1,29 +1,8 @@
 "use strict";
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:TagController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param $rootScope
- * @param $state
- * @param Tag
- * @param API
- * @param AuthService
- * @param Pagination
- * @param Search
- */
-function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagination, Search) {
+function TagController($scope, Tag, API, AuthService, Pagination, Search) {
 
-  var site = AuthService.getCurrentSite();
-
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
     $scope.view = localStorage.tagView || "list";
     $scope.filters = { name: "" };
     $scope.search = Search;
@@ -32,7 +11,7 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
     $scope.Tag = new Tag();
 
     var payload = {
-      site: site
+      site: AuthService.getCurrentSite()
     };
 
     API.Tags.get(payload,
@@ -48,10 +27,9 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
   }
 
   /**
-   * @method setView
    * @desc Set item view style
    *
-   * @param view {String}
+   * @param {string} view
    */
   $scope.setView = function (view) {
     $scope.view = view;
@@ -59,7 +37,6 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
   };
 
   /**
-   * @method search
    * @desc Search through tags
    */
   $scope.search = function () {
@@ -76,17 +53,28 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
   };
 
   /**
-   * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
 
+  /**
+   * @desc Tag create callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
   $scope.$on("gonevisDash.Tag:create", function (event, data) {
     if (data.success) {
       $scope.tags.push(new Tag(data.data));
     }
   });
 
+  /**
+   * @desc Load more callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
@@ -96,6 +84,12 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
     }
   });
 
+  /**
+   * @desc Search callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
@@ -113,8 +107,6 @@ function TagController($scope, $rootScope, $state, Tag, API, AuthService, Pagina
 app.controller("TagController", TagController);
 TagController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "Tag",
   "API",
   "AuthService",

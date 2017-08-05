@@ -1,24 +1,7 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:DolphinModalController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param $rootScope
- * @param toaster
- * @param dolphin
- * @param API
- */
 function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
 
-  /**
-   * constructor
-   *
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.dolphin = dolphin;
 
@@ -28,12 +11,9 @@ function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
   }
 
   /**
-   * update
-   *
-   * @method update
    * @desc Update dolphin and broadcast
    *
-   * @param form {Object} Form and dolphin data object
+   * @param {object} form Form and dolphin data object
    */
   $scope.update = function (form) {
     form.loading = true;

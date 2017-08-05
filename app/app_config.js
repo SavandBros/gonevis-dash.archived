@@ -1,17 +1,7 @@
 "use strict";
 
-/**
- * @class Config
- *
- * @param $httpProvider
- * @param $resourceProvider
- * @param $cookiesProvider
- * @param $qProvider
- * @param cfpLoadingBarProvider
- * @param ChartJsProvider
- */
-function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
-  cfpLoadingBarProvider, ChartJsProvider) {
+function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
+  cfpLoadingBarProvider, ChartJsProvider, ENV) {
 
   // Http
   $httpProvider.interceptors.push("AuthInterceptorService");
@@ -41,6 +31,30 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider,
       }
     }
   });
+
+  // Custom exception handler
+  $provide.decorator("$exceptionHandler", ["$delegate", "$window", function ($delegate) {
+    // Check if in localhost/127.0.0.1 or not
+    var localhost = (
+      window.location.href.indexOf("localhost") > 0 ||
+      window.location.href.indexOf("127.0.0.1") > 0
+    );
+
+    if (!localhost) {
+      // Using RavenJS for exception logging.
+      Raven.config(ENV.SENTRY_DSN).install();
+      return function (exception, cause) {
+        console.log("FUCK");
+        Raven.captureException(exception);
+        $delegate(exception, cause);
+      };
+    } else {
+      // Using AngularJS standard exception logging.
+      return function (exception, cause) {
+        $delegate(exception, cause);
+      };
+    }
+  }]);
 }
 
 app.config(Config);
@@ -49,6 +63,8 @@ Config.$inject = [
   "$resourceProvider",
   "$cookiesProvider",
   "$qProvider",
+  "$provide",
   "cfpLoadingBarProvider",
-  "ChartJsProvider"
+  "ChartJsProvider",
+  "ENV"
 ];

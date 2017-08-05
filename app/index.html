@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#d17100">
 
   <!-- Font -->
-  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
@@ -96,6 +96,8 @@
   <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
   <script src="bower_components/chart.js/dist/Chart.js"></script>
   <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+  <script src="bower_components/angular-preload-image/angular-preload-image.js"></script>
+  <script src="bower_components/raven-js/dist/raven.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -118,6 +120,7 @@
   <script src="basement/filters/timeuntil_filter.js"></script>
   <script src="basement/filters/bytes_filter.js"></script>
 
+  <script src="account/account_service.js"></script>
   <script src="account/auth/auth_interceptor_service.js"></script>
   <script src="account/auth/auth_service.js"></script>
   <script src="account/signin/signin_controller.js"></script>
@@ -155,6 +158,8 @@
   <script src="dolphin/dolphin_service.js"></script>
   <script src="dolphin/dolphin_controller.js"></script>
   <script src="dolphin/dolphin_modal/dolphin_modal_controller.js"></script>
+
+  <script src="start/start_controller.js"></script>
 
   <script src="header/header_controller.js"></script>
 

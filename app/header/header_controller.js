@@ -1,31 +1,12 @@
 "use strict";
 
-/**
- * @class HeaderController
- *
- * @param $scope
- * @param $state
- * @param $stateParams
- * @param AuthService
- * @param DolphinService
- * @param Codekit
- * @param Entry
- * @param API
- * @param Tour
- * @param TourStep
- * @param toaster
- */
 function HeaderController($scope, $rootScope, $state, $stateParams,
   AuthService, DolphinService, Codekit, Entry, API, Tour, TourStep, toaster) {
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     // User
     $scope.auth = AuthService;
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(true);
 
     // State
     $scope.state = $state;
@@ -44,11 +25,24 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   }
 
   /**
-   * @method handleNevis
+   * @desc Retrieve user data
+   */
+  function retrieveUser () {
+    // Get fresh user data if is authenticated
+    if (AuthService.isAuthenticated()) {
+      API.AccountRefresh.save({ token: AuthService.getToken() },
+        function (data) {
+          $scope.user = AuthService.setAuthenticatedUser(data.user);
+        }
+      );
+    }
+  }
+
+  /**
    * @desc Handle user selection of quick nevis
    *
-   * @param {String} format 
-   * @param {Dolphin|Object|String} data
+   * @param {string} format
+   * @param {Dolphin|object|string} data
    */
   function handleNevis(format, data) {
     // New entry
@@ -65,6 +59,8 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
     // Entry submission
     entry.create(
       function (data) {
+        // Prevent older cache
+        entry.cache(true);
         toaster.success("Done", "Entry created!");
         // Go for edit
         $state.go("dash.entry-edit", {
@@ -81,10 +77,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   }
 
   /**
-   * @method nevis
    * @desc Entry with different format
    *
-   * @param format {String}
+   * @param {string} format
    */
   $scope.nevis = function (format) {
     $scope.nevisFormat = format;
@@ -94,12 +89,11 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   };
 
   /**
-   * @event gonevisDash.Dolphin:select
    * @desc Dolphin selection used for quick nevis
    *
-   * @param event {Event}
-   * @param dolphin {Dolphin}
-   * @param source {String}
+   * @param {Event} event
+   * @param {Dolphin} dolphin
+   * @param {string} source
    */
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     // If we're dealing with quick nevis
@@ -109,21 +103,23 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   });
 
   /**
-   * @event gonevisDash.AuthService:Authenticated
    * @desc Authentication loads
    */
   $scope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
     // Go to main or new site page if has no other sites
-    $state.go($scope.user.sites.length > 0 ? "dash.main" : "site-new");
+    if ($scope.user.get.sites.length) {
+      $state.go("dash.main", { s: 0 });
+    } else {
+      $state.go("site-new");
+    }
   });
 
   /**
-   * @event gonevisDash.AuthService:SignedOut
    * @desc Un-authentication redirect
    *
-   * @param event {Event}
-   * @param sessionExpired {Boolean}
+   * @param {Event} event
+   * @param {boolean} sessionExpired
    */
   $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
     // Session expired message
@@ -137,30 +133,34 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   });
 
   /**
-   * @event gonevisDash.SiteNewController:Create
+   * @desc Email is not confirmed for an action
+   */
+  $scope.$on("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess", function () {
+    ModalsService.open("emailConfirmation", "EmailConfirmationController");
+  });
+
+  /**
    * @desc Site creation load
    */
   $scope.$on("gonevisDash.SiteNewController:Create", constructor);
 
   /**
-   * @event gonevisDash.SiteController:remove
    * @desc Site removal
    */
   $scope.$on("gonevisDash.SiteController:remove", constructor);
 
   /**
-   * @event gonevisDash.SiteController:update
    * @desc Site update
    */
   $scope.$on("gonevisDash.SiteController:update", constructor);
 
   /**
-   * @event gonevisDash.UserController:update
    * @desc User update
    */
   $scope.$on("gonevisDash.UserController:update", constructor);
 
   constructor();
+  retrieveUser();
 }
 
 app.controller("HeaderController", HeaderController);

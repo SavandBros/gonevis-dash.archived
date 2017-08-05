@@ -1,29 +1,11 @@
 "use strict";
 
-/**
- * @class TeamController
- *
- * @param $scope
- * @param $rootScope
- * @param $state
- * @param API
- * @param AuthService
- * @param Codekit
- * @param ModalsService
- */
-function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, ModalsService) {
+function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
 
-  var site = AuthService.getCurrentSite();
-
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
     $scope.teamRoles = Codekit.teamRoles;
 
-    API.Team.get({ siteId: site },
+    API.Team.get({ siteId: AuthService.getCurrentSite() },
       function (data) {
         $scope.initialled = true;
         $scope.team = data;
@@ -33,12 +15,15 @@ function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, M
           data.team_pending[i].isPending = true;
           $scope.team.list.push(data.team_pending[i]);
         }
+
+        angular.forEach($scope.team.list, function (team) {
+          team.user = new Account(team.user);
+        });
       }
     );
   }
 
   /**
-   * @method invite
    * @desc Open up invite modal
    */
   $scope.invite = function () {
@@ -46,17 +31,17 @@ function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, M
   };
 
   /**
-   * view
-   *
-   * @method view
    * @desc Team view via modal
    *
-   * @param team {Object}
+   * @param {object} team
    */
   $scope.view = function (team) {
     ModalsService.open("team", "TeamModalController", { team: team });
   };
 
+  /**
+   * @desc Team invite callback
+   */
   $scope.$on("gonevisDash.TeamService.invite", function () {
     constructor();
   });
@@ -67,10 +52,9 @@ function TeamController($scope, $rootScope, $state, API, AuthService, Codekit, M
 app.controller("TeamController", TeamController);
 TeamController.$inject = [
   "$scope",
-  "$rootScope",
-  "$state",
   "API",
   "AuthService",
   "Codekit",
-  "ModalsService"
+  "ModalsService",
+  "Account"
 ];

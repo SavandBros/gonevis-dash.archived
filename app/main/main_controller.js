@@ -1,29 +1,10 @@
 "use strict";
 
-/**
- * @class MainController
- *
- * @param $scope
- * @param $state
- * @param $stateParams
- * @param AuthService
- * @param API
- * @param Codekit
- * @param Comment
- * @param Entry
- */
-function MainController($scope, $state, $stateParams, AuthService, API, Codekit, Comment, Entry) {
+function MainController($scope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
-    $scope.auth = AuthService;
-    $scope.user = AuthService.getAuthenticatedUser();
-
     $scope.state = $state;
     $scope.param = $stateParams;
 
@@ -38,23 +19,20 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
   }
 
   /**
-   * @name Comment
-   * @type {Object}
+   * @type {object}
    */
   $scope.Comment = {
     /**
-     * @name list
-     * @type Array
+     * @type {array}
      */
     list: [],
     /**
-     * @method initialize
      * @desc initialize comments
      */
     initialize: function () {
       $scope.Comment.loading = true;
 
-      API.Comments.get({ site: site },
+      API.Comments.get({ site: site, limit: 10 },
         function (data) {
           $scope.Comment.loading = true;
           angular.forEach(data.results, function (data) {
@@ -66,23 +44,20 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
   };
 
   /**
-   * @name Entry
-   * @type {Object}
+   * @type {object}
    */
   $scope.Entry = {
     /**
-     * @name list
-     * @type Array
+     * @type {array}
      */
     list: [],
     /**
-     * @method initialize
      * @desc Initialize entries
      */
     initialize: function () {
       $scope.Entry.loading = true;
 
-      API.Entries.get({ site: site },
+      API.Entries.get({ site: site, limit: 10 },
         function (data) {
           $scope.Entry.loading = true;
           angular.forEach(data.results, function (data) {
@@ -94,12 +69,10 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
   };
 
   /**
-   * @name Metrics
-   * @type {Object}
+   * @type {object}
    */
   $scope.Metrics = {
     /**
-     * @method initialize
      * @desc Initialize metrics
      */
     initialize: function () {
@@ -115,11 +88,10 @@ function MainController($scope, $state, $stateParams, AuthService, API, Codekit,
   };
 
   /**
-   * @event gonevisDash.Comment:reply
    * @desc Reply comment
    *
-   * @param event {Event}
-   * @param comment {Object}
+   * @param {Event} event
+   * @param {object} comment
    */
   $scope.$on("gonevisDash.Comment:reply", function (event, comment) {
     $scope.Comment.list.unshift(new Comment(comment));
@@ -135,7 +107,6 @@ MainController.$inject = [
   "$stateParams",
   "AuthService",
   "API",
-  "Codekit",
   "Comment",
   "Entry"
 ];

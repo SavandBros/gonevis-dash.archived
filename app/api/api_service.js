@@ -1,15 +1,6 @@
 "use strict";
 
-/**
- * API Service
- *
- * @param $http
- * @param $resource
- * @param ENV
- *
- * @returns {{Service: API.service}}
- */
-function API($http, $resource, ENV) {
+function API($resource, ENV) {
   var BASE_API = ENV.apiEndpoint;
   var apiData = {};
 
@@ -21,6 +12,9 @@ function API($http, $resource, ENV) {
     }, {
       name: "Signup",
       endpoint: "account/register/"
+    }, {
+      name: "SignupAccount",
+      endpoint: "account/register-account-only/"
     }, {
       name: "Profile",
       endpoint: "profile/"
@@ -45,6 +39,9 @@ function API($http, $resource, ENV) {
     }, {
       name: "EmailConfirmationResend",
       endpoint: "account/resend-email-confirmation/" // GET
+    }, {
+      name: "AccountRefresh",
+      endpoint: "account/refresh/" // POST
     },
     // Entry
     {
@@ -82,6 +79,9 @@ function API($http, $resource, ENV) {
       name: "SiteMetrics",
       endpoint: "website/site/:siteId/metrics/" // GET
     }, {
+      name: "SiteTemplatesPublic",
+      endpoint: "website/templates/" // GET
+    }, {
       name: "SiteTemplateConfig",
       endpoint: "website/site/:siteId/template-config/" // GET
     }, {
@@ -114,6 +114,9 @@ function API($http, $resource, ENV) {
     }, {
       name: "RemoveTeamPending",
       endpoint: "website/site/:siteId/remove-pending-member/" // PUT
+    }, {
+      name: "DomainCheck",
+      endpoint: "website/domain-check/" // POST
     },
     // Tagool
     {
@@ -153,7 +156,6 @@ function API($http, $resource, ENV) {
 
 app.service("API", API);
 API.$inject = [
-  "$http",
   "$resource",
   "ENV"
 ];

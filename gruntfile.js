@@ -77,6 +77,7 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: "localhost",
+        // hostname: "0.0.0.0",
         livereload: 35729
       },
       livereload: {
@@ -235,6 +236,13 @@ module.exports = function (grunt) {
           // "<%= gonevisDash.dist %>/assets/img/fav/*.*",
           "<%= gonevisDash.dist %>/assets/css/fonts/*",
         ]
+      }
+    },
+
+    uglify: {
+      options: {
+        sourceMap: true,
+        sourceMapIncludeSources: true
       }
     },
 
@@ -459,11 +467,18 @@ module.exports = function (grunt) {
           "angularModalService",
           "angular-sortable-view",
           "angular-loading-bar",
+          "angular-preload-image",
           "toaster"
         ],
         constants: {
           Client: {
-            version: 1
+            version: 3
+          },
+          Utils: {
+            texts: {
+              noPermission: "You don't have permission to perform this action.",
+              unverifiedEmail: "Your email is not verified.",
+            }
           }
         }
       },
@@ -471,7 +486,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: "development",
-            apiEndpoint: "http://gonevis.dev:8000/api/v1/"
+            apiEndpoint: "http://gonevis.dev:8000/api/v1/",
+            SENTRY_DSN: "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
           }
         }
       },
@@ -479,7 +495,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: "staging",
-            apiEndpoint: "http://draft.gonevis.com/api/v1/"
+            apiEndpoint: "http://draft.gonevis.com/api/v1/",
+            SENTRY_DSN: "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
           }
         }
       },
@@ -487,7 +504,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: "production",
-            apiEndpoint: "https://www.gonevis.com/api/v1/"
+            apiEndpoint: "https://www.gonevis.com/api/v1/",
+            SENTRY_DSN: "https://34664609d2d7416493b4360ea445b452@sentry.io/198251"
           }
         }
       }

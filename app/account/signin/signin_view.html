@@ -8,10 +8,11 @@
           <h3 class="o-fade-soft">Login <small>to dash</small></h3>
           <hr>
           <!-- Username -->
-          <div class="form-group" ng-class="{'has-error': form.errors.username}">
+          <div class="form-group" ng-class="{'has-error': form.errors.username || form.errors.email}">
             <input id="username" class="form-control input-lg" type="text"
-              ng-model="form.username" placeholder="Username" required/>
+              ng-model="form.username" placeholder="Username or email" required/>
             <span id="username" class="help-block" ng-show="form.errors.username">{{ form.errors.username[0] }}</span>
+            <span id="username" class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</span>
           </div>
           <!-- Password -->
           <div class="form-group" ng-class="{'has-error': form.errors.password}">

@@ -1,38 +1,24 @@
 "use strict";
 
-/**
- * @class TeamModalController
- *
- * @param $scope
- * @param toaster
- * @param API
- * @param team
- * @param Codekit
- * @param AuthService
- * @param ModalsService
- */
 function TeamModalController($scope, toaster, API, team, Codekit, AuthService, ModalsService) {
 
-  var site = AuthService.getCurrentSite();
-
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.team = team;
     $scope.teamRoles = Codekit.teamRoles;
   }
 
   /**
-   * @method remove
    * @desc Remove a user from team
    *
-   * @param team {Object}
+   * @param {object} team
    */
   $scope.remove = function (team) {
-    team.title = team.email ? team.email : team.user.name;
+    team.title = team.user.get.email ? team.user.get.email : team.user.get.name;
+  
+    if (team.isPending) {
+      team.title = team.email;
+    }
 
     if (!confirm("Remove from team?\n\nAre you sure you want to remove '" + team.title + "' from team?")) {
       return;
@@ -43,16 +29,16 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
 
     if (!team.isPending) {
       api = API.RemoveTeam;
-      payload = { team_member_id: team.user.id };
+      payload = { team_member_id: team.user.get.id };
     }
 
-    api.put({ siteId: site }, payload,
+    api.put({ siteId: AuthService.getCurrentSite() }, payload,
       function () {
         team.isRemoved = true;
         ModalsService.close("team");
         toaster.success(
           "Removed",
-          "Removed " + team.title + " (" + $scope.teamRoles[team.role].label.toLowerCase() + ") from team."
+          team.title + " (" + $scope.teamRoles[team.role].label.toLowerCase() + ") from team."
         );
       },
       function () {

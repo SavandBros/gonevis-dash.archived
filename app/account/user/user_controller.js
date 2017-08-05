@@ -1,49 +1,27 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name gonevisDash.controller:UserController
- * Controller of the gonevisDash
- *
- * @param $scope
- * @param $rootScope
- * @param toaster
- * @param AuthService
- * @param API
- * @param DolphinService
- * @param Upload
- * @param ENV
- */
-function UserController($scope, $rootScope, toaster, AuthService, API, DolphinService, Upload, ENV) {
+function UserController($scope, $rootScope, $stateParams, AuthService, API, DolphinService, Upload, ENV, toaster) {
 
   var toasters = {};
 
-  /**
-   * constructor
-   *
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
-    $scope.user = AuthService.getAuthenticatedUser();
-    $scope.sites = $scope.user.sites;
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.dolphinService = DolphinService;
-    API.User.get({ user_id: $scope.user.id },
+    $scope.param = $stateParams;
+
+    API.User.get({ user_id: $scope.user.get.id },
       function (data) {
-        $scope.user = data;
+        $scope.user = AuthService.setAuthenticatedUser(data, true);
         $scope.viewLoaded = true;
       }
     );
   }
 
   /**
-   * updateProfile
-   *
-   * @method updateProfile
    * @desc update user profile via api call
-   * 
-   * @param key {string}
-   * @param value {string}
+   *
+   * @param {string} key
+   * @param {string} value
    */
   $scope.updateProfile = function (key, value) {
 
@@ -56,10 +34,12 @@ function UserController($scope, $rootScope, toaster, AuthService, API, DolphinSe
 
     API.UserUpdate.put(payload,
       function (data) {
-        $scope.user[key] = data[key];
-        $scope.user.sites = $scope.sites;
-
-        AuthService.setAuthenticatedUser($scope.user);
+        if (key === "picture") {
+          $scope.user.get.media[key] = data.media[null];
+        } else {
+          $scope.user[key] = data[key];
+        }
+        $scope.user = AuthService.setAuthenticatedUser($scope.user.get, true);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
         toaster.clear(toasters[key]);
@@ -118,7 +98,11 @@ function UserController($scope, $rootScope, toaster, AuthService, API, DolphinSe
   };
   $scope.upload.accept = $scope.upload.acceptList.join(",");
 
-  // upload on file select
+  /**
+   * @desc Upload on file select
+   *
+   * @param {object} file
+   */
   $scope.uploadFile = function (file) {
     Upload.upload({
       url: ENV.apiEndpoint + "account/update-profile/",
@@ -126,7 +110,7 @@ function UserController($scope, $rootScope, toaster, AuthService, API, DolphinSe
       method: "PUT"
     }).then(function (data) {
       toaster.info("Done", "Profile picture updated");
-      $scope.user.media = data.data.media;
+      $scope.user.get.media = data.data.media;
     }, function (data) {
       $scope.errors = data.data;
       toaster.error("Error", "An error has occured while uploading profile picture, try again.");
@@ -136,15 +120,15 @@ function UserController($scope, $rootScope, toaster, AuthService, API, DolphinSe
   constructor();
 }
 
-
 app.controller("UserController", UserController);
 UserController.$inject = [
   "$scope",
   "$rootScope",
-  "toaster",
+  "$stateParams",
   "AuthService",
   "API",
   "DolphinService",
   "Upload",
-  "ENV"
+  "ENV",
+  "toaster"
 ];

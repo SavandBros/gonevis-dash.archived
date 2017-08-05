@@ -8,7 +8,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ui-sref="dash.main({s: param.s})">Dash</a>
+      <a class="navbar-brand" ng-if="auth.isAuthenticated()"  ui-sref="dash.main({s: param.s})">Dash</a>
+      <a class="navbar-brand" ng-if="!auth.isAuthenticated()" ui-sref="start">GoNevis</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav" ng-if="auth.isAuthenticated() && param.s">
@@ -50,23 +51,35 @@
         <li ng-class="{'active': state.includes('dash.team')}">
           <a ui-sref="dash.team({s: param.s})">Team</a>
         </li>
+        <li ng-class="{'active': state.includes('dash.site')}">
+          <a ui-sref="dash.site({s: param.s})">Settings</a>
+        </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-if="!auth.isAuthenticated()" ng-class="{'active': state.includes('signin')}">
+      <!-- If user is not Authenticated -->
+      <ul class="nav navbar-nav" ng-if="!auth.isAuthenticated()">
+        <li ng-class="{'active': state.includes('start')}">
+          <a ui-sref="start">Get Started</a>
+        </li>
+      </ul>
+      <!-- If user is not Authenticated -->
+      <ul class="nav navbar-nav navbar-right" ng-if="!auth.isAuthenticated()">
+        <li ng-class="{'active': state.includes('signin')}">
           <a ui-sref="signin">Login</a>
         </li>
-        <li ng-if="!auth.isAuthenticated()"
-          ng-class="{'active': state.includes('signup') || state.includes('collaborate')}">
+        <li ng-class="{'active': state.includes('signup') || state.includes('collaborate')}">
           <a ui-sref="signup">Register</a>
         </li>
+      </ul>
+      <!-- If user is Authenticated -->
+      <ul class="nav navbar-nav navbar-right" ng-if="auth.isAuthenticated()">
         <li class="animated fadeIn" ng-if="param.lights">
           <a ng-click="set.lights = !set.lights">
             <i class="fa fa-lightbulb-o nav-icon"></i>
           </a>
         </li>
-        <li class="dropdown" ng-if="auth.isAuthenticated()">
+        <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            {{ user.name || user.username }} <i class="fa fa-caret-down o-fade-hard"></i>
+            {{ user.getDisplayName() }} <i class="fa fa-caret-down o-fade-hard"></i>
           </a>
           <ul class="dropdown-menu">
             <li>
@@ -76,19 +89,15 @@
               </a>
             </li>
             <li role="separator" class="divider"></li>
-            <li ng-repeat="site in user.sites" ng-class="{'active': param.s == $index}">
+            <li ng-repeat="site in user.get.sites" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
-              <a ui-sref="dash.site({s: param.s})"
-                class="nav-link-in-link" ng-if="param.s == $index">
-                <i class="fa fa-cog fa-fw" init></i>
-              </a>
             </li>
             <li>
               <a ui-sref="site-new({s: param.s})" class="o-fade small">CREATE NEW SITE</a>
             </li>
             <li role="separator" class="divider"></li>
             <li><a href="mailto:hello@gonevis.com"><i class="fa fa-envelope-o"></i> Feedback</a></li>
-            <li><a ng-click="auth.logout()"><i class="fa fa-sign-out"></i> Sign out</a></li>
+            <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> Sign out</a></li>
           </ul>
         </li>
       </ul>

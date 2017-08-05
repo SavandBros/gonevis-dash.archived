@@ -1,31 +1,10 @@
 "use strict";
 
-/**
- * @class DolphinController
- *
- * @param $scope
- * @param $state
- * @param $stateParams
- * @param $resource
- * @param Dolphin
- * @param Codekit
- * @param API
- * @param ENV
- * @param AuthService
- * @param Upload
- * @param Pagination
- * @param toaster
- * @param source
- */
-function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
-  Dolphin, Codekit, API, ENV, AuthService, Upload, Pagination, Search, toaster, source) {
+function DolphinController($scope, $rootScope, Dolphin,
+  Codekit, API, AuthService, Upload, Pagination, Search, toaster, source) {
 
   var site = AuthService.getCurrentSite();
 
-  /**
-   * @method constructor
-   * @desc Init function for controller
-   */
   function constructor() {
     $scope.view = localStorage.dolphinView || "list";
     $scope.dolphins = [];
@@ -52,10 +31,9 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
     );
 
     /**
-     * @method setView
      * @desc Set item view style
      *
-     * @param view {String}
+     * @param {string} view
      */
     $scope.setView = function (view) {
       $scope.view = view;
@@ -113,15 +91,14 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
 
 
   /**
-   * @method uploadFile
    * @desc Handle for file uploads
    *
-   * @param files {File}
-   * @param errFiles {File}
+   * @param {array} files
+   * @param {array} errorFiles
    */
-  $scope.uploadFile = function (files, errFiles) {
+  $scope.uploadFile = function (files, errorFiles) {
     $scope.upload.files = files;
-    $scope.errFiles = errFiles;
+    $scope.errorFiles = errorFiles;
 
     angular.forEach($scope.upload.files,
       function (file) {
@@ -158,6 +135,7 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
                     file.done = true;
                     toaster.success("Upload Complete", file.name);
                     $scope.dolphins.unshift(new Dolphin(data));
+                    $scope.currentTab = "dolphin";
                   }
                 );
               },
@@ -175,7 +153,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
   };
 
   /**
-   * @method update
    * @desc Handler for dolphin changes
    */
   function update() {
@@ -183,10 +160,9 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
   }
 
   /**
-   * @method action
    * @desc Action is used to determine the action for the current state.
    *
-   * @param dolphin {Dolphin}
+   * @param {Dolphin} dolphin
    */
   $scope.action = function (dolphin) {
     if ($rootScope.selectionMode) {
@@ -198,7 +174,6 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
   };
 
   /**
-   * @method loadMore
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
@@ -206,6 +181,12 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
   $scope.$on("gonevisDash.Dolphin:update", update);
   $scope.$on("gonevisDash.Dolphin:remove", update);
 
+  /**
+   * @desc Load more callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
   $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       $scope.dolphinForm.page = data.page;
@@ -215,6 +196,12 @@ function DolphinController($scope, $rootScope, $state, $stateParams, $resource,
     }
   });
 
+  /**
+   * @desc Search callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
   $scope.$on("gonevisDash.Search:submit", function (event, data) {
     if (data.success) {
       $scope.dolphinForm = data.dolphinForm;
@@ -233,13 +220,9 @@ app.controller("DolphinController", DolphinController);
 DolphinController.$inject = [
   "$scope",
   "$rootScope",
-  "$state",
-  "$stateParams",
-  "$resource",
   "Dolphin",
   "Codekit",
   "API",
-  "ENV",
   "AuthService",
   "Upload",
   "Pagination",
