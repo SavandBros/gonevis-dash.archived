@@ -1,24 +1,34 @@
 "use strict";
 
-function Tour() {
+function Tour(TourStep) {
   return function (steps) {
 
+    /**
+     * @private
+     */
     var self = this;
 
-    this.steps = steps;
+    /**
+     * @type {array}
+     */
+    this.steps = [];
 
+    /**
+     * @type {number}
+     */
     this.step = 0;
 
     /**
-     * @name getStep
-     * @type {Function}
-     *
+     * @type {function}
      * @returns {TourStep}
      */
     this.getStep = function () {
       return this.steps[this.step];
     };
 
+    /**
+     * @type {function}
+     */
     this.nextStep = function () {
       // Hide old step
       this.getStep().hide();
@@ -35,7 +45,12 @@ function Tour() {
     };
 
     var constructor = function () {
+      // Start the tour
       self.getStep().show();
+      // Instantiate steps
+      angular.forEach(steps, function (step) {
+        self.steps.push(new TourStep(step[0], step[1], step[2], step[3]));
+      });
     };
 
     constructor();
@@ -43,3 +58,6 @@ function Tour() {
 }
 
 app.service("Tour", Tour);
+Tour.$inject = [
+  "TourStep"
+];
