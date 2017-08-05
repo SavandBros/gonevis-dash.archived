@@ -3,33 +3,59 @@
 function TourStep() {
   return function (selector, title, content, placement) {
 
+    /**
+     * @private
+     */
+    var self = this;
+
+    /**
+     * @type {string}
+     */
     this.title = title;
 
+    /**
+     * @type {string}
+     */
     this.content = content;
 
+    /**
+     * @type {object}
+     */
     this.element = angular.element(selector);
 
+    /**
+     * @type {object}
+     */
     this.tourElement = angular.element(".tour");
 
+    /**
+     * @type {string}
+     */
     this.placement = placement || "top";
 
+    /**
+     * @type {function}
+     */
     this.show = function () {
-      this.tourElement.removeClass("fadeOutUp").addClass("fadeIn");
-      this.element.addClass("popover-target");
-      this.element.popover({
+      self.tourElement.removeClass("fadeOutUp").addClass("fadeIn");
+      self.element.addClass("popover-target");
+      self.element.popover({
         html: true,
-        template: this.tourElement,
-        placement: this.placement,
-        content: this.content,
-        title: this.title,
+        template: self.tourElement,
+        placement: self.placement,
+        content: self.content,
+        title: self.title,
         trigger: "manual"
       });
-      this.element.popover("show");
+      self.element.popover("show");
     };
 
+    /**
+     * @type {function}
+     */
     this.hide = function () {
-      this.element.removeClass("popover-target");
-      this.tourElement.removeClass("fadeIn").addClass("fadeOutUp");
+      self.element.removeClass("popover-target");
+      self.tourElement.removeClass("fadeIn").addClass("fadeOutUp");
     };
   };
 }
