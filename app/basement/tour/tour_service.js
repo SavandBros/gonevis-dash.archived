@@ -44,6 +44,10 @@ function Tour(TourStep) {
       }, 1000);
     };
 
+    /**
+     * @private
+     * @type {function}
+     */
     var constructor = function () {
       // Start the tour
       self.getStep().show();
