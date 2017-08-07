@@ -29,7 +29,7 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
   function responseError(response) {
     // Authentication check
     if (response.status === 403) {
-      if (JSON.stringify(response.data).indexOf(Utils.texts.noPermission) === -1) {
+      if (JSON.stringify(response.data).indexOf(Utils.texts.noPermission) !== -1) {
         $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
       }
     }
