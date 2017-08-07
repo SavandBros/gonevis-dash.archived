@@ -37,9 +37,7 @@
           <hr>
         </div>
         <span ng-if="!team.isPending && team.role != 0">
-          <a data-toggle="dropdown">
-            Change role
-          </a>
+          <a data-toggle="dropdown">Change role</a>
           <ul class="dropdown-menu">
             <li class="dropdown-header">Change Role</li>
             <li ng-repeat="role in teamRoles" ng-if="$index > 0">
