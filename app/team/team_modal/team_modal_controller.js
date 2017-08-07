@@ -51,6 +51,9 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
 
   /**
    * @desc Change team member role
+   * 
+   * @param {string} email
+   * @param {object} role
    */
   $scope.setRole = function (email, role) {
     var payload = { email: email, role: role.id };
