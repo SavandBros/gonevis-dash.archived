@@ -65,8 +65,6 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
           "Done",
           "Changed role to " + role.label
         );
-      }, function (data) {
-        console.log(data);        
       }
     )
   }
