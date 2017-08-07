@@ -41,9 +41,7 @@
           <ul class="dropdown-menu">
             <li class="dropdown-header">Change Role</li>
             <li ng-repeat="role in teamRoles" ng-if="$index > 0">
-              <a ng-click="setRole(team.user.get.email, role)">
-                {{ role.label }}
-              </a>
+              <a ng-click="setRole(team.user.get.email, role)">{{ role.label }}</a>
             </li>
           </ul>
         </span>
