@@ -4,7 +4,7 @@
 </button>
 <!-- Main -->
 <div class="container container-light pad-top">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <!-- Top bar -->
     <ng-include src="'basement/view/top_bar.html'"></ng-include>
     <!-- Search noresult -->
@@ -20,7 +20,7 @@
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <div class="row">
-              <div class="col-md-4 col-sm-6" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
+              <div class="col-md-3 col-sm-4" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
                 <a class="thumbnail s-pad-no" ui-sref="dash.entry-edit({ entryId: entry.get.id })"
                   ng-click="entry.cache()">
                   <img ng-src="{{ entry.get.media.cover_image.thumbnail_256x256 ?
@@ -42,7 +42,7 @@
       <!-- Entry list -->
       <div class="panel panel-default s-box s-mar-x-soft animated fadeIn" ng-if="view == 'list'">
         <div class="panel-heading">
-            <!-- Action dropdown -->
+          <!-- Action dropdown -->
           <div class="dropdown options pull-right" title="options">
             <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
               Action <i class="fa fa-caret-down"></i>
@@ -68,13 +68,13 @@
             <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': entry.get.status == 1}"
               ng-repeat="entry in entries" ng-show="!entry.isDeleted">
               <!--Title and slug-->
-              <div class="col-xs-7 col-sm-8 col-md-8 col-lg-8 t-line">
+              <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9 t-line">
                 <input type="checkbox" ng-model="entry.isSelected" ng-change="countSelected(entry)">
                 <a ui-sref="dash.entry-edit({entryId: entry.get.id})" ng-click="entry.cache()">{{ entry.get.title }}</a>
                 <small class="dis-b o-fade">/{{ entry.get.slug }}</small>
               </div>
               <!-- Date -->
-              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right o-fade s-pad-no">
+              <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right o-fade s-pad-no">
                 <span class="hidden-xs">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
                 <span class="visible-xs small">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
                 <small class="dis-b o-fade" ng-if="entry.get.status === 1">Publication</small>

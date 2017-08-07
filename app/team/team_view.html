@@ -5,7 +5,7 @@
 
 <!-- Main -->
 <div class="container container-light pad-top">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
     <!-- List -->
     <div class="panel panel-default s-box animated fadeIn" ng-if="initialled">
       <div class="panel-heading">Team</div>
@@ -13,23 +13,28 @@
         <!-- Team -->
         <div class="list-group s-mar-no">
           <a class="list-group-item b-no" ng-repeat="team in team.list" ng-show="!team.isRemoved" ng-click="view(team)">
-            <h4>
+            <div class="row">
               <!-- Avatar -->
-              <img class="img-circle" ng-class="{'o-fade-hard': team.isPending || !team.user.get.media.picture}"
-                height="64" ng-src="{{
-                  !team.isPending && team.user.get.media.picture ? team.user.get.media.thumbnail_128x128 : 'assets/img/avatar.png'
-                }}">
+              <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+                <img class="img-circle" ng-class="{'o-fade-hard': team.isPending || !team.user.get.media.picture}"
+                  height="64" ng-src="{{
+                    !team.isPending && team.user.get.media.picture ? team.user.get.media.thumbnail_128x128 : 'assets/img/avatar.png'
+                  }}">
+              </div>
               <!-- Name/email -->
-              <span class="s-mar-left">{{ !team.isPending ? team.user.getFullName() : team.email }}</span>
-              <!-- Right side -->
-              <span class="pull-right" style="margin-top: 22px">
+              <div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+                <h4 class="team-member t-line">{{ !team.isPending ? team.user.getFullName() : team.email }}</h4>
+              </div>
+              <!-- Role Label  -->
+              <div class="col-xs-10 col-sm-3 col-md-3 col-lg-3 team-role">
                 <!-- Pending label -->
                 <span class="t-small outline text-muted" ng-if="team.isPending">PENDING</span>
                 <!-- Role label -->
-                <span class="t-small outline {{ teamRoles[team.role].color }}" style="margin-top: 8px">
+                <span class="t-small outline {{ teamRoles[team.role].color }}">
                   {{ teamRoles[team.role].label | uppercase }}
                 </span>
-            </h4>
+              </div>
+            </div>
           </a>
         </div>
       </div>
