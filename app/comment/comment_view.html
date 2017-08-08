@@ -12,17 +12,17 @@
     <!-- List -->
     <div class="panel panel-default animated fadeIn" ng-if="comments.length">
       <ul class="panel-body panel-list">
-        <li class="panel-list-item b-left row s-mar-no {{ comment.getStatus().class }}" ng-class="{'animated fadeOut': comment.isDeleted}"
+        <li class="list-panel b-left row s-mar-no {{ comment.getStatus().class }}" ng-class="{'animated fadeOut': comment.isDeleted}"
           ng-repeat="comment in comments" ng-show="!comment.isDeleted">
           <!-- Image -->
-          <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
-            <img class="comment pull-left img-circle"
-                 ng-src="{{
+          <div class="col-md-1 col-lg-1 col-sm-1 col-xs-2 comment">
+            <img class="img-circle"
+                ng-src="{{
               comment.user.get.media.picture ? comment.user.get.media.thumbnail_48x48 : 'assets/img/avatar.png'
             }}">
           </div>
           <!-- Info -->
-          <div class="col-md-11 col-lg-11 col-sm-11 col-xs-11 t-line">
+          <div class="col-md-10 col-lg-10 col-sm-10 col-xs-8 t-line">
             <small>
               <a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">
                 {{ comment.user.getDisplayName() }}
@@ -36,12 +36,15 @@
             </small>
           </div>
           <!-- Comment -->
-          <div class="col-md-11 col-lg-11 col-sm-11 col-xs-11 t-line">
+          <div class="col-md-10 col-lg-10 col-sm-10 col-xs-8 t-line">
             <a ng-click="comment.view()">{{ comment.get.comment }}</a>
           </div>
           <!-- Options -->
-          <span class="panel-list-item-button s-mar-top-soft">
-            <i class="fa fa-fw fa-ellipsis-v" data-toggle="dropdown"></i>
+          <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 pull-right">
+            <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
+              style="margin-top: -20px;">
+              <i class="fa fa-fw fa-ellipsis-v"></i>
+            </button>
             <ul class="dropdown-menu dropdown-menu-right">
               <li class="dropdown-header">Change status</li>
               <li ng-repeat="status in statuses" ng-class="{'active': comment.getStatus().label == status.label}">
@@ -56,7 +59,7 @@
                 </a>
               </li>
             </ul>
-          </span>
+          </div>
         </li>
       </ul>
     </div>
