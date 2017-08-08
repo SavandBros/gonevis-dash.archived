@@ -35,16 +35,20 @@
             </a>
           </h4>
           <hr>
+          <h4 ng-if="!team.isPending && team.role != 0">
+            <small>Role:</small>
+            <div class="pull-right">
+              <a data-toggle="dropdown" class="btn btn-link s-pad-no">{{ teamRoles[team.role].label }}</a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header">Change Role</li>
+                <li ng-repeat="role in teamRoles" ng-if="$index > 0">
+                  <a ng-click="setRole(team.user.get.email, role)">{{ role.label }}</a>
+                </li>
+              </ul>
+            </div>
+          </h4>
+          <hr>
         </div>
-        <span ng-if="!team.isPending && team.role != 0">
-          <a data-toggle="dropdown">Change role</a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-header">Change Role</li>
-            <li ng-repeat="role in teamRoles" ng-if="$index > 0">
-              <a ng-click="setRole(team.user.get.email, role)">{{ role.label }}</a>
-            </li>
-          </ul>
-        </span>
         <!-- Remove -->
         <button class="btn btn-danger stack-element"
           ng-click="remove(team)"
