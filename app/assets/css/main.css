@@ -1059,6 +1059,7 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 .modal-header:not(.modal-header-clickable) {
     background: rgba(0, 0, 0, 0.05);
     padding: 30px 20px;
+    word-wrap: break-word;
 }
 
 .modal-header-clickable {
