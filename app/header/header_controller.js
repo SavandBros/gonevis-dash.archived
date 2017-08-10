@@ -1,7 +1,7 @@
 "use strict";
 
-function HeaderController($scope, $rootScope, $state, $stateParams,
-  AuthService, DolphinService, Codekit, Entry, API, ModalsService, toaster) {
+function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
+  AuthService, DolphinService, Codekit, Entry, API, ModalsService, TourService, toaster) {
 
   function constructor() {
     // User
@@ -19,7 +19,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   /**
    * @desc Retrieve user data
    */
-  function retrieveUser () {
+  function retrieveUser() {
     // Get fresh user data if is authenticated
     if (AuthService.isAuthenticated()) {
       API.AccountRefresh.save({ token: AuthService.getToken() },
@@ -174,11 +174,13 @@ HeaderController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
+  "$timeout",
   "AuthService",
   "DolphinService",
   "Codekit",
   "Entry",
   "API",
   "ModalsService",
+  "TourService",
   "toaster"
 ];
