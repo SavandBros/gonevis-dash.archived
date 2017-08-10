@@ -65,3 +65,47 @@ app.service("Tour", Tour);
 Tour.$inject = [
   "TourStep"
 ];
+
+function TourService(Tour) {
+
+  /**
+   * @desc Check if current view has tours and show if user didn't complete them
+   *
+   * @param {string} tourName
+   *
+   * @returns {Tour|boolean}
+   */
+  function checkForView(tourName) {
+    var steps;
+
+    // Tours for main view
+    if (tourName === "main") {
+      steps = [
+        ["#entries", "Entries Overview", "Entries are listed here, click on them to open in editor.<br><br>On the right side, you can see the likes, comments and views counter."],
+        ["#site", "Site Overview", "You can see your followers and current template.<br><br>Click on the header for the full settings page."],
+      ];
+    }
+
+    if (tourName === "files") {
+      steps = [
+        [".search-form", "Search", "Start typing to search through your files.", "bottom"],
+        [".view-buttons", "Layout", "Choose between grid layout or listview.", "bottom"]
+      ];
+    }
+
+    if (!steps) {
+      return false;
+    }
+
+    return new Tour(tourName, steps);
+  }
+
+  return {
+    checkForView: checkForView
+  };
+}
+
+app.service("TourService", TourService);
+TourService.$inject = [
+  "Tour"
+];
