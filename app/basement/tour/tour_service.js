@@ -1,12 +1,18 @@
 "use strict";
 
-function Tour(TourStep) {
-  return function (steps) {
+function Tour($timeout, TourStep) {
+  return function (name, steps) {
 
     /**
      * @private
      */
     var self = this;
+
+    /**
+     * @desc Backend key name
+     * @type {string}
+     */
+    this.name = name;
 
     /**
      * @type {array}
@@ -38,8 +44,8 @@ function Tour(TourStep) {
       }
       // Next step
       this.step++;
-      // Show new step after a while
-      setTimeout(function () {
+      // Show new step after animation
+      $timeout(function () {
         self.getStep().show();
       }, 1000);
     };
@@ -49,12 +55,14 @@ function Tour(TourStep) {
      * @type {function}
      */
     var constructor = function () {
-      // Start the tour
-      self.getStep().show();
       // Instantiate steps
       angular.forEach(steps, function (step) {
         self.steps.push(new TourStep(step[0], step[1], step[2], step[3]));
       });
+      // Keep it in header so it doesn't get destroyed
+      self.steps.push(new TourStep(".popover-hideout", "none", "none", null, true));
+      // Start the tour
+      self.getStep().show();
     };
 
     constructor();
@@ -63,6 +71,7 @@ function Tour(TourStep) {
 
 app.service("Tour", Tour);
 Tour.$inject = [
+  "$timeout",
   "TourStep"
 ];
 
