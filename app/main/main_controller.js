@@ -1,6 +1,6 @@
 "use strict";
 
-function MainController($scope, $state, $stateParams, AuthService, API, Comment, Entry, Tour) {
+function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
 
@@ -16,14 +16,6 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
     API.SiteTemplateConfig.get({ siteId: site }, function (data) {
       $scope.siteTemplate = data.template_config;
     });
-
-    // Tour
-    setTimeout(function () {
-      $scope.tour = new Tour([
-        ["#entries", "Entries Overview", "Check out your latest entries and some info."],
-        ["#site", "Entries Overview 2", "Check out your latest entries and some info."],
-      ]);
-    }, 2000);
   }
 
   /**
@@ -71,6 +63,8 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
           angular.forEach(data.results, function (data) {
             $scope.Entry.list.push(new Entry(data));
           });
+          // Tour is ready
+          $rootScope.$broadcast("gonevisDash.Tour.readyToCheck", "main");
         }
       );
     }
@@ -111,11 +105,11 @@ function MainController($scope, $state, $stateParams, AuthService, API, Comment,
 app.controller("MainController", MainController);
 MainController.$inject = [
   "$scope",
+  "$rootScope",
   "$state",
   "$stateParams",
   "AuthService",
   "API",
   "Comment",
-  "Entry",
-  "Tour"
+  "Entry"
 ];
