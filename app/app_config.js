@@ -44,7 +44,6 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, 
       // Using RavenJS for exception logging.
       Raven.config(ENV.SENTRY_DSN).install();
       return function (exception, cause) {
-        console.log("FUCK");
         Raven.captureException(exception);
         $delegate(exception, cause);
       };

@@ -129,6 +129,14 @@ hr[soft] {
         position: relative;
         top: 4px;
     }
+    .team-member {
+        padding: 20px 0 0 25px;
+    }
+    .team-role {
+        margin-top: 20px;
+        float: right;
+        text-align: right;
+    }
 }
 
 
@@ -1080,6 +1088,7 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 .modal-header:not(.modal-header-clickable) {
     background: rgba(0, 0, 0, 0.05);
     padding: 30px 20px;
+    word-wrap: break-word;
 }
 
 .modal-header-clickable {
@@ -1270,12 +1279,19 @@ img.modal-image {
     margin-bottom: 10px;
 }
 
-img.comment {
+.comment img {
     width: 32px;
     height: 32px;
-    margin-left: -9px;
-    margin-right: 9px;
-    margin-top: 2px;
+    margin: 4px 0 0 -10px;
+}
+
+@media(min-width: 1200px) {
+    .comment {
+        margin-right: -25px;
+    }
+    .dolphin-image {
+        margin-right: -30px;
+    }
 }
 
 
@@ -1813,5 +1829,11 @@ img.cache {
     .panel-heading .btn {
         width: 100%;
         margin-top: 20px;
+    }
+    .team-member {
+        padding: 5px 0 0 20px;
+    }
+    .team-role {
+        padding: 10px 0 0 35px;
     }
 }

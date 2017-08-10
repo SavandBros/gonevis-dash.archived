@@ -476,7 +476,7 @@ module.exports = function (grunt) {
           },
           Utils: {
             texts: {
-              noPermission: "You don't have permission to perform this action.",
+              noPermission: "You do not have permission to perform this action.",
               unverifiedEmail: "Your email is not verified.",
             }
           }
