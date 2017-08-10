@@ -367,6 +367,10 @@ hr[soft] {
     cursor: move;
 }
 
+.c-no {
+    pointer-events: none;
+}
+
 
 /* Hovers */
 
@@ -1680,11 +1684,13 @@ img.tag {
     border-color: #dcdcdc;
     box-shadow: none;
     padding: 0;
-    max-width: 350px;
+    max-width: 308px;
+    min-width: 308px;
     box-shadow: 0 0 0 100000px rgba(0, 0, 0, 0.6);
 }
 
-.popover-target {
+.popover-target,
+.popover-relative.on {
     position: relative;
     z-index: 10000;
 }
