@@ -1,6 +1,6 @@
 <!-- View button -->
 <button type="button" class="btn btn-default btn-corner btn-corner-navbar"
-  ng-click="sidebar = true" ng-init="sidebar = false">
+  ng-click="toggleModal(true)">
   <i class="fa fa-chevron-right"></i>
 </button>
 
@@ -9,7 +9,7 @@
   class="editor-draft-mode animated"
   uib-tooltip="Entry is not published"
   tooltip-placement="top"
-  ng-click="sidebar = true"
+  ng-click="toggleModal(true)"
   ng-class="{'fadeInUp': form.get.status === 0, 'fadeOutDown': form.get.status === 1}">
   <i class="fa fa-pencil fa-fw"></i> DRAFT MODE
 </div>
@@ -40,10 +40,10 @@
 </div>
 
 <!-- Sidebar -->
-<div class="modal sidebar sidebar-small pre" ng-class="{'preIn': sidebar}">
+<div class="modal sidebar sidebar-small pre">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header modal-header-clickable" ng-click="sidebar = false">
+      <div class="modal-header modal-header-clickable" ng-click="toggleModal(false)">
         <i class="fa fa-chevron-left"></i>
       </div>
       <div class="modal-body">
