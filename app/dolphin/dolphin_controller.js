@@ -27,6 +27,8 @@ function DolphinController($scope, $rootScope, Dolphin,
           $scope.dolphinForm, data, {}
         );
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.dolphinForm, API.Dolphins.get, data, payload);
+        // Tour is ready
+        $rootScope.$broadcast("gonevisDash.Tour.readyToCheck", "files");
       }
     );
 
