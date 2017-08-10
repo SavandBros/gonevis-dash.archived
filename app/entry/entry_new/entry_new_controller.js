@@ -61,6 +61,15 @@ function EntryNewController($scope, $state, $timeout, $q,
     });
   };
 
+  /**
+   * @desc Toggle sidebar modal
+   *
+   * @param {boolean} bool
+   */
+  $scope.toggleModal = function (bool) {
+    var sidebarModal = angular.element(".modal.sidebar");
+    sidebarModal.toggleClass("preIn", bool);
+  };
 
   /**
    * @desc Submit newPost form
