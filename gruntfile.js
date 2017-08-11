@@ -468,11 +468,12 @@ module.exports = function (grunt) {
           "angular-sortable-view",
           "angular-loading-bar",
           "angular-preload-image",
-          "toaster"
+          "toaster",
+          "LocalStorageModule"
         ],
         constants: {
           Client: {
-            version: 3
+            version: 4
           },
           Utils: {
             texts: {

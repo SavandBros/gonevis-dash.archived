@@ -1,9 +1,9 @@
 "use strict";
 
-function TagController($scope, Tag, API, AuthService, Pagination, Search) {
+function TagController($scope, Tag, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
-    $scope.view = localStorage.tagView || "list";
+    $scope.view = localStorageService.get("tagView") || "list";
     $scope.filters = { name: "" };
     $scope.search = Search;
     $scope.pageForm = {};
@@ -33,7 +33,7 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search) {
    */
   $scope.setView = function (view) {
     $scope.view = view;
-    localStorage.tagView = view;
+    localStorageService.set("tagView", view);
   };
 
   /**
@@ -111,5 +111,6 @@ TagController.$inject = [
   "API",
   "AuthService",
   "Pagination",
-  "Search"
+  "Search",
+  "localStorageService"
 ];

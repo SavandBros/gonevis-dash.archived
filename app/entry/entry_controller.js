@@ -1,9 +1,9 @@
 "use strict";
 
-function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, Search) {
+function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
-    $scope.view = localStorage.entryView || "list";
+    $scope.view = localStorageService.get("entryView") || "list";
     $scope.filters = { title: "" };
     $scope.statuses = Codekit.entryStatuses;
     $scope.search = Search;
@@ -76,7 +76,7 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
    */
   $scope.setView = function (view) {
     $scope.view = view;
-    localStorage.entryView = view;
+    localStorageService.set("entryView", view);
   };
 
   /**
@@ -155,5 +155,6 @@ EntryController.$inject = [
   "API",
   "AuthService",
   "Pagination",
-  "Search"
+  "Search",
+  "localStorageService"
 ];

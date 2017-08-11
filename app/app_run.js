@@ -2,7 +2,7 @@
 
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   ENV, AuthService, DolphinService, Codekit, Client, editableOptions, taOptions, taRegisterTool,
-  textAngularManager, taToolFunctions) {
+  textAngularManager, taToolFunctions, localStorageService) {
 
   /**
    * @name cache
@@ -79,13 +79,13 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     );
 
     // Client version control (if not current version)
-    if (Client.version !== parseInt($window.localStorage.getItem("version"))) {
+    if (Client.version !== parseInt(localStorageService.get("version"))) {
 
       // Store auth to use after data reset
       var isAuthed = AuthService.isAuthenticated(true);
 
       // Reset localStorage version
-      $window.localStorage.setItem("version", Client.version);
+      localStorageService.set("version", Client.version);
       AuthService.signOut();
 
       // Redirect to signin and toast (If logged in)
@@ -193,5 +193,6 @@ RunNevisRun.$inject = [
   "taOptions",
   "taRegisterTool",
   "textAngularManager",
-  "taToolFunctions"
+  "taToolFunctions",
+  "localStorageService"
 ];
