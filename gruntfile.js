@@ -473,7 +473,7 @@ module.exports = function (grunt) {
         ],
         constants: {
           Client: {
-            version: 3
+            version: 4
           },
           Utils: {
             texts: {
