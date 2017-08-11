@@ -96,6 +96,16 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
+   * @desc Toggle sidebar modal
+   *
+   * @param {boolean} bool
+   */
+  $scope.toggleModal = function (bool) {
+    var sidebarModal = angular.element(".modal.sidebar");
+    sidebarModal.toggleClass("preIn", bool);
+  };
+
+  /**
    * @desc Update entry API callback
    *
    * @param {object} form
@@ -123,6 +133,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         toaster.info("Done", "Updated " + payload.title);
         form.loading = false;
         form.errors = null;
+        $scope.toggleModal(true);
       },
       function (data) {
         toaster.error("Error", "Entry couldn't be updated, try again.");
