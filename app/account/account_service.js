@@ -32,6 +32,12 @@ function Account() {
       small: self.get.media.thumbnail_128x128,
       tiny: self.get.media.thumbnail_48x48
     };
+
+    /**
+     * @type {boolean}
+     */
+    this.hasMedia = self.media.full;
+
      * @desc Get first part of full name if name is available
      * @type {function}
      * @returns {string|boolean}
