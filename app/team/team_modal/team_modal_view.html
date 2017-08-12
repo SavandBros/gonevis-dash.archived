@@ -19,19 +19,19 @@
         </h3>
         <br>
         <!-- Info -->
-        <div class="s-mar-top-soft o-fade-soft">
+        <div class="s-mar-top-soft">
           <!-- Username -->
           <h4 ng-if="!team.isPending">
-            <small>Username:</small>
-            <span class="pull-right">
-              <small>@</small>{{ team.user.get.username }}
-            </span>
-            <hr>
+            <i class="fa fa-fw fa-user-circle"></i>
+            <a class="pull-right" ng-href="{{ team.user.url }}" target="_blank">
+              @{{ team.user.get.username }}
+            </a>
           </h4>
+          <hr>
           <!-- Email -->
           <h4 class="t-line kv" ng-if="team.user.get.email">
-            <a href="mailto:{{ team.user.get.email }}" target="_blank">
-              <i class="fa fa-envelope-o"></i>
+            <a href="mailto:{{ team.user.get.email }}">
+              <i class="fa fa-fw fa-envelope"></i>
               <span>{{ team.isPending ? team.email : team.user.get.email }}</span>
             </a>
           </h4>
