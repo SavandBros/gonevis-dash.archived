@@ -18,6 +18,12 @@ function Account() {
     this.get = data;
 
     /**
+     * @desc GoNevis profile address of user
+     * @type {string}
+     */
+    this.url = self.get.get_absolute_uri;
+
+    /**
      * @desc Get first part of full name if name is available
      * @type {function}
      * @returns {string|boolean}
