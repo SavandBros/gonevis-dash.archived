@@ -38,6 +38,22 @@ function Account() {
      */
     this.hasMedia = self.media.full;
 
+    /**
+     * @desc Get media or default picture
+     * @type {function}
+     *
+     * @param {string} size
+     *
+     * @returns {string} URL of the image
+     */
+    this.getMedia = function (size) {
+      if (self.media[size]) {
+        return self.media[size];
+      }
+      return "assets/img/avatar.png";
+    };
+
+    /**
      * @desc Get first part of full name if name is available
      * @type {function}
      * @returns {string|boolean}
