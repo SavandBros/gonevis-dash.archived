@@ -35,8 +35,9 @@
             </a>
           </h4>
           <hr>
+          <!-- Role -->
           <h4 ng-if="!team.isPending && team.role != 0">
-            <small>Role:</small>
+            <i class="fa fa-fw fa-cube"></i>
             <div class="pull-right">
               <a data-toggle="dropdown" class="btn btn-link s-pad-no">{{ teamRoles[team.role].label }}</a>
               <ul class="dropdown-menu dropdown-menu-right">
