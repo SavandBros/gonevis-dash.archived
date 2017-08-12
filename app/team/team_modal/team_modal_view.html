@@ -7,13 +7,14 @@
       <div class="modal-body">
         <!-- Cover -->
         <div class="cover" ng-class="{open: open}" ng-click="open = !open" 
-          ng-init="open = false" style="background-image:
-          url({{ team.user.get.media.picture && !team.isPending ? team.user.get.media.thumbnail_256x256 : 'assets/img/avatar.png' }})">
+          ng-init="open = false" style="background-image: url({{ team.user.getMedia('medium') }})">
         </div>
-        <!-- Name -->
+        <!-- Title -->
         <h3 class="c-white t-shadow">
+          <!-- Name -->
           <span ng-if="!team.isPending">{{ team.user.getFullName() || team.user.get.username }}</span>
           <br>
+          <!-- Role -->
           <small class="c-white">{{ teamRoles[team.role].label }}</small>
         </h3>
         <br>
