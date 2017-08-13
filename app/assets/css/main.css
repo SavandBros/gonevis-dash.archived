@@ -1142,6 +1142,11 @@ img.modal-image {
     right: 0;
 }
 
+.modal.sidebar .dropdown-menu {
+    margin-top: -80px;
+    margin-right: 10px;
+}
+
 .modal .cover {
     transition: all 0.3s ease-in-out;
     height: 150px;

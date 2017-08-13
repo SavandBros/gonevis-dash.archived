@@ -18,6 +18,42 @@ function Account() {
     this.get = data;
 
     /**
+     * @desc GoNevis profile address of user
+     * @type {string}
+     */
+    this.url = self.get.get_absolute_uri;
+
+    /**
+     * @type {object}
+     */
+    this.media = {
+      full: self.get.media.picture,
+      medium: self.get.media.thumbnail_256x256,
+      small: self.get.media.thumbnail_128x128,
+      tiny: self.get.media.thumbnail_48x48
+    };
+
+    /**
+     * @type {boolean}
+     */
+    this.hasMedia = self.media.full;
+
+    /**
+     * @desc Get media or default picture
+     * @type {function}
+     *
+     * @param {string} size
+     *
+     * @returns {string} URL of the image
+     */
+    this.getMedia = function (size) {
+      if (self.media[size]) {
+        return self.media[size];
+      }
+      return "assets/img/avatar.png";
+    };
+
+    /**
      * @desc Get first part of full name if name is available
      * @type {function}
      * @returns {string|boolean}
