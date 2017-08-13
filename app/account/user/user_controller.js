@@ -1,7 +1,7 @@
 'use strict';
 
 function UserController($scope, $rootScope, $stateParams,
-    AuthService, API, DolphinService, Upload, ENV, toaster, Account) {
+    AuthService, API, DolphinService, Upload, ENV, Account, toaster) {
 
   var toasters = {};
 
@@ -131,6 +131,6 @@ UserController.$inject = [
   "DolphinService",
   "Upload",
   "ENV",
-  "toaster",
-  "Account"
+  "Account",
+  "toaster"
 ];
