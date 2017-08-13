@@ -17,9 +17,7 @@
               <!-- Avatar -->
               <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
                 <img class="img-circle" ng-class="{'o-fade-hard': team.isPending || !team.user.get.media.picture}"
-                  height="64" ng-src="{{
-                    !team.isPending && team.user.get.media.picture ? team.user.get.media.thumbnail_128x128 : 'assets/img/avatar.png'
-                  }}">
+                  height="64" ng-src="{{ !team.isPending ? team.user.getMedia('small') : 'assets/img/avatar.png' }}">
               </div>
               <!-- Name/email -->
               <div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
