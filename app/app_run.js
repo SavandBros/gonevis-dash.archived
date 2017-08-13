@@ -1,7 +1,7 @@
 "use strict";
 
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
-  ENV, AuthService, DolphinService, Codekit, Client, editableOptions, taOptions, taRegisterTool,
+  ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, taOptions, taRegisterTool,
   textAngularManager, taToolFunctions, localStorageService) {
 
   /**
@@ -70,6 +70,11 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @param toParams {Object}
    */
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
+
+    // No routing if running tour
+    if (TourService.isTourOn()) {
+      event.preventDefault();
+    }
 
     // Close open modals
     angular.element(".modal, .modal-backdrop").fadeOut(
@@ -189,6 +194,7 @@ RunNevisRun.$inject = [
   "DolphinService",
   "Codekit",
   "Client",
+  "TourService",
   "editableOptions",
   "taOptions",
   "taRegisterTool",
