@@ -8,7 +8,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @name cache
    * @desc Predefined rootscope variable
    *
-   * @type {Object}
+   * @type {object}
    */
   $rootScope.cache = {};
 
@@ -16,9 +16,13 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @name set
    * @desc Predefined rootScope variable
    *
-   * @type {Object}
+   * @type {object}
    */
   $rootScope.set = {
+    /**
+     * @desc Lights for the editor
+     * @type {boolean}
+     */
     lights: true
   };
 
@@ -65,9 +69,10 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @event $stateChangeStart
    * @desc Starting to change state callback
    *
-   * @param event {Event}
-   * @param toState {Object}
-   * @param toParams {Object}
+   * @param {Event} event
+   * @param {object} toState
+   * @param {object} toParams
+   * @param {object} fromState
    */
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
 
@@ -147,8 +152,8 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @desc Changed state succesfully
    *
    * @param event {Event}
-   * @param toState {Object}
-   * @param toParams {Object}
+   * @param toState {object}
+   * @param toParams {object}
    */
   $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams) {
     // Analytics
