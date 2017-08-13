@@ -109,8 +109,13 @@ function TourService(Tour) {
     return new Tour(tourName, steps);
   }
 
+  function isTourOn() {
+    return angular.element(".popover-hideout").siblings(".popover").length === 1;
+  }
+
   return {
-    checkForView: checkForView
+    checkForView: checkForView,
+    isTourOn: isTourOn
   };
 }
 
