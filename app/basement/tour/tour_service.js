@@ -114,7 +114,7 @@ function TourService(Tour) {
    * @returns {boolean}
    */
   function isTourOn() {
-    return angular.element(".popover-hideout").siblings(".popover").length === 1;
+    return angular.element(".popover-hideout").siblings(".popover").length === 0;
   }
 
   return {

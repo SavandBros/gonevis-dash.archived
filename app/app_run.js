@@ -77,7 +77,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
 
     // No routing if running tour
-    if (TourService.isTourOn()) {
+    if (TourService.isTourOn() && fromState.name) {
       event.preventDefault();
     }
 
