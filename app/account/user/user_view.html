@@ -6,7 +6,7 @@
           <div class="col-sm-4">
             <div class="avatar avatar-outside">
               <span ng-if="!user.get.media.picture">{{ user.getDisplayName()[0] }}</span>
-              <img ng-if="user.get.media.picture" class="img-circle" ng-src="{{ user.get.media.thumbnail_128x128 }}" />
+              <img ng-if="user.get.media.picture" class="img-circle" ng-src="{{ user.getMedia('small') }}" />
               <div class="dropdown">
                 <h3 class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i></h3>
                 <ul class="dropdown-menu">
