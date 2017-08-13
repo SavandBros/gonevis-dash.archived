@@ -1,6 +1,7 @@
 'use strict';
 
-function UserController($scope, $rootScope, $stateParams, AuthService, API, DolphinService, Upload, ENV, toaster) {
+function UserController($scope, $rootScope, $stateParams,
+    AuthService, API, DolphinService, Upload, ENV, toaster, Account) {
 
   var toasters = {};
 
@@ -110,7 +111,7 @@ function UserController($scope, $rootScope, $stateParams, AuthService, API, Dolp
       method: "PUT"
     }).then(function (data) {
       toaster.info("Done", "Profile picture updated");
-      $scope.user.get.media = data.data.media;
+      $scope.user = new Account(data.data);
     }, function (data) {
       $scope.errors = data.data;
       toaster.error("Error", "An error has occured while uploading profile picture, try again.");
@@ -130,5 +131,6 @@ UserController.$inject = [
   "DolphinService",
   "Upload",
   "ENV",
-  "toaster"
+  "toaster",
+  "Account"
 ];
