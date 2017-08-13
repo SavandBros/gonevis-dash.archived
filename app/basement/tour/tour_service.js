@@ -97,8 +97,8 @@ function TourService(Tour) {
 
     if (tourName === "files") {
       steps = [
-        [".search-form", "Search", "Start typing to search through your files.", "bottom"],
-        [".view-buttons", "Layout", "Choose between grid layout or listview.", "bottom"]
+        ["#dolphin .search-form", "Search", "Start typing to search through your files.", "bottom"],
+        ["#dolphin .view-buttons", "Layout", "Choose between grid layout or listview.", "bottom"]
       ];
     }
 
