@@ -6,8 +6,8 @@
       </div>
       <div class="modal-body">
         <!-- Cover -->
-        <div class="cover" ng-class="{open: open}" ng-click="open = !open" 
-          ng-init="open = false" style="background-image: url({{ team.user.getMedia('medium') }})">
+        <div class="cover" ng-class="{open: open}" ng-click="open = !open" ng-init="open = false"
+          style="background-image: url({{ !team.isPending ? team.user.getMedia('medium') : 'assets/img/avatar.png' }})">
         </div>
         <!-- Title -->
         <h3 class="c-white t-shadow">
