@@ -109,6 +109,10 @@ function TourService(Tour) {
     return new Tour(tourName, steps);
   }
 
+  /**
+   * @desc Check if any tour is running
+   * @returns {boolean}
+   */
   function isTourOn() {
     return angular.element(".popover-hideout").siblings(".popover").length === 1;
   }
