@@ -7,36 +7,54 @@
       <div class="modal-body">
         <!-- Cover -->
         <div class="cover" ng-class="{open: open}" ng-click="open = !open" 
-          ng-init="open = false" style="background-image:
-          url({{ team.user.get.media.picture && !team.isPending ? team.user.get.media.thumbnail_256x256 : 'assets/img/avatar.png' }})">
+          ng-init="open = false" style="background-image: url({{ team.user.getMedia('medium') }})">
         </div>
-        <!-- Name -->
+        <!-- Title -->
         <h3 class="c-white t-shadow">
+          <!-- Name -->
           <span ng-if="!team.isPending">{{ team.user.getFullName() || team.user.get.username }}</span>
           <br>
+          <!-- Role -->
           <small class="c-white">{{ teamRoles[team.role].label }}</small>
         </h3>
         <br>
         <!-- Info -->
-        <div class="s-mar-top-soft o-fade-soft">
+        <div class="s-mar-top-soft">
           <!-- Username -->
           <h4 ng-if="!team.isPending">
-            <small>Username:</small>
-            <span class="pull-right">
-              <small>@</small>{{ team.user.get.username }}
-            </span>
-            <hr>
+            <i class="fa fa-fw fa-user-circle"></i>
+            <a class="pull-right" ng-href="{{ team.user.url }}" target="_blank">
+              @{{ team.user.get.username }}
+            </a>
           </h4>
+          <hr>
           <!-- Email -->
           <h4 class="t-line kv" ng-if="team.user.get.email">
-            <a href="mailto:{{ team.user.get.email }}" target="_blank">
-              <i class="fa fa-envelope-o"></i>
+            <a href="mailto:{{ team.user.get.email }}">
+              <i class="fa fa-fw fa-envelope"></i>
               <span>{{ team.isPending ? team.email : team.user.get.email }}</span>
             </a>
           </h4>
           <hr>
+          <!-- Role -->
+          <h4 ng-if="!team.isPending && team.role != 0">
+            <i class="fa fa-fw fa-cube"></i>
+            <div class="pull-right">
+              <a data-toggle="dropdown">
+                {{ teamRoles[team.role].label }}
+                <i class="fa fa-caret-down o-fade"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header">Change role</li>
+                <li ng-repeat="role in teamRoles" ng-if="$index > 0"
+                  ng-class="{active: team.role === $index}">
+                  <a ng-click="setRole(team.user.get.email, role)">{{ role.label }}</a>
+                </li>
+              </ul>
+            </div>
+            <hr>
+          </h4>
         </div>
-        <br>
         <!-- Remove -->
         <button class="btn btn-danger stack-element"
           ng-click="remove(team)"

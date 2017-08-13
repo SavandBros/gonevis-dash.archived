@@ -1,12 +1,12 @@
 "use strict";
 
 function DolphinController($scope, $rootScope, Dolphin,
-  Codekit, API, AuthService, Upload, Pagination, Search, toaster, source) {
+  Codekit, API, AuthService, Upload, Pagination, Search, toaster, source, localStorageService) {
 
   var site = AuthService.getCurrentSite();
 
   function constructor() {
-    $scope.view = localStorage.dolphinView || "list";
+    $scope.view = localStorageService.get("dolphinView") || "list";
     $scope.dolphins = [];
     $scope.dolphinForm = {};
     $scope.search = Search;
@@ -39,7 +39,7 @@ function DolphinController($scope, $rootScope, Dolphin,
      */
     $scope.setView = function (view) {
       $scope.view = view;
-      localStorage.dolphinView = view;
+      localStorageService.set("dolphinView", view);
     };
 
     $scope.upload = {
@@ -230,5 +230,6 @@ DolphinController.$inject = [
   "Pagination",
   "Search",
   "toaster",
-  "source"
+  "source",
+  "localStorageService"
 ];
