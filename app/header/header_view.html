@@ -88,7 +88,7 @@
               </a>
             </li>
             <li role="separator" class="divider"></li>
-            <li ng-repeat="site in user.get.sites" ng-class="{'active': param.s == $index}">
+            <li ng-repeat="site in user.getSites()" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
             </li>
             <li>
