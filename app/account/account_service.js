@@ -98,6 +98,11 @@ function Account() {
       // Full name
       return self.getFullName();
     };
+
+    /**
+     * @desc Get user sites
+     * @returns {array}
+     */
     this.getSites = function () {
       if (self.get.sites.length > 0) {
         return self.get.sites;
