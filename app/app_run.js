@@ -100,7 +100,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
 
     var isAuthenticated = AuthService.isAuthenticated();
     var toDash = toState.name.indexOf("dash.") !== -1;
-    var sites = isAuthenticated ? AuthService.getAuthenticatedUser(true).get.sites : [];
+    var sites = isAuthenticated ? AuthService.getAuthenticatedUser(true).getSites() : [];
 
     // If requires unauthenticated access only and user is authenticated or
     // If state requires authenticated access only and user is not authenticated
