@@ -22,4 +22,17 @@ describe("Password", function () {
 
     password = new Password();
   }));
+
+  describe("isValid", function () {
+    it("should validate password", function () {
+      password.password = "hello, I'm valid and long";
+      expect(password.isValid()).toBeTruthy();
+
+      password.password = "short";
+      expect(password.isValid()).toBeFalsy();
+
+      password.password = null;
+      expect(password.isValid()).toBeFalsy();
+    });
+  });
 });
