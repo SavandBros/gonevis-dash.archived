@@ -35,4 +35,18 @@ describe("Password", function () {
       expect(password.isValid()).toBeFalsy();
     });
   });
+
+  describe("getColor", function () {
+    it("should get color based on strength", function () {
+      password.strength = 4;
+      expect(password.getColor()).toBe("info");
+
+      password.strength = 1;
+      expect(password.getColor()).toBe("danger");
+
+      password.strength = 5;
+      expect(password.getColor()).toBe("success");
+    });
+  });
+
 });
