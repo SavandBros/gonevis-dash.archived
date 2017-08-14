@@ -49,4 +49,22 @@ describe("Password", function () {
     });
   });
 
+  describe("getPercentage", function () {
+    it("should return strength percentage", function () {
+      password.password = "pass";
+      expect(password.getPercentage()).toEqual(20);
+
+      password.password = "password";
+      expect(password.getPercentage()).toEqual(40);
+
+      password.password = "password1";
+      expect(password.getPercentage()).toEqual(60);
+
+      password.password = "Password1";
+      expect(password.getPercentage()).toEqual(80);
+
+      password.password = "Password1$";
+      expect(password.getPercentage()).toEqual(100);
+    });
+  });
 });
