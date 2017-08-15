@@ -67,4 +67,17 @@ describe("Password", function () {
       expect(password.getPercentage()).toEqual(100);
     });
   });
+  
+  describe("getStrength", function () {
+    it("should return password strength", function () {
+      password.password = "";
+      expect(password.getStrength()).toEqual(null);
+
+      password.password = "long and simple password";
+      expect(password.getStrength()).toEqual("Weak");
+
+      password.password = "Long & excellent passw0rd";
+      expect(password.getStrength()).toEqual("Excellent");
+    });
+  });
 });
