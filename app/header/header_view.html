@@ -76,26 +76,32 @@
             <i class="fa fa-lightbulb-o nav-icon"></i>
           </a>
         </li>
+        <!-- Account dropdown -->
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            {{ user.getDisplayName() }} <i class="fa fa-caret-down o-fade-hard"></i>
+            <!-- Display name -->
+            <span ng-if="!user.hasMedia">{{ user.getDisplayName() }}</span>
+            <!-- Profile picture -->
+            <img ng-if="user.hasMedia" ng-src="{{ user.getMedia('tiny') }}" alt="{{ user.getDisplayName() }}"/>
+            <!-- Caret -->
+            <i class="fa fa-caret-down o-fade-hard"></i>
           </a>
           <ul class="dropdown-menu">
+            <!-- Account settings -->
             <li>
-              <a ui-sref="user({s: param.s})">
-                View Account<br>
-                <small class="o-fade">{{ user.email }}</small>
-              </a>
+              <a ui-sref="user({s: param.s})">View Account<br><small class="o-fade">{{ user.get.email }}</small></a>
             </li>
             <li role="separator" class="divider"></li>
+            <!-- Sites -->
             <li ng-repeat="site in user.getSites()" ng-class="{'active': param.s == $index}">
               <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
             </li>
-            <li>
-              <a ui-sref="site-new({s: param.s})" class="o-fade small">CREATE NEW SITE</a>
-            </li>
+            <!-- New site -->
+            <li><a ui-sref="site-new({s: param.s})" class="o-fade small">CREATE NEW SITE</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="mailto:hello@gonevis.com"><i class="fa fa-envelope-o"></i> Feedback</a></li>
+            <!-- Feedback -->
+            <li><a ng-href="mailto:hello@gonevis.com"><i class="fa fa-envelope-o"></i> Feedback</a></li>
+            <!-- Sign out -->
             <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> Sign out</a></li>
           </ul>
         </li>
