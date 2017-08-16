@@ -66,7 +66,7 @@ describe("Account", function () {
   });
 
   describe("getMedia", function () {
-    it("should return image url by size", function () {
+    it("should return true", function () {
       expect(account.getMedia("full")).toBe("fake-url-picture");
       expect(account.getMedia("medium")).toBe("fake-url-256");
       expect(account.getMedia("small")).toBe("fake-url-128");
