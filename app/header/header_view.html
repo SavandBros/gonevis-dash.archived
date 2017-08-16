@@ -84,10 +84,7 @@
           <ul class="dropdown-menu">
             <!-- Account settings -->
             <li>
-              <a ui-sref="user({s: param.s})">
-                View Account<br>
-                <small class="o-fade">{{ user.email }}</small>
-              </a>
+              <a ui-sref="user({s: param.s})">View Account<br><small class="o-fade">{{ user.get.email }}</small></a>
             </li>
             <li role="separator" class="divider"></li>
             <!-- Sites -->
