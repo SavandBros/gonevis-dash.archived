@@ -49,7 +49,7 @@ describe("Account", function () {
   });
   
   describe("hasMedia", function () {
-    it("should return image url", function () {
+    it("should return true", function () {
       expect(account.hasMedia).toBeTruthy();
     });
 
