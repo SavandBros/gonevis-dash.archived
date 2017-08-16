@@ -79,7 +79,12 @@
         <!-- Account dropdown -->
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            {{ user.getDisplayName() }} <i class="fa fa-caret-down o-fade-hard"></i>
+            <!-- Display name -->
+            <span ng-if="!user.hasMedia">{{ user.getDisplayName() }}</span>
+            <!-- Profile picture -->
+            <img ng-if="user.hasMedia" ng-src="{{ user.getMedia('tiny') }}" alt="{{ user.getDisplayName() }}"/>
+            <!-- Caret -->
+            <i class="fa fa-caret-down o-fade-hard"></i>
           </a>
           <ul class="dropdown-menu">
             <!-- Account settings -->
