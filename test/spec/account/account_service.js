@@ -53,7 +53,7 @@ describe("Account", function () {
       expect(account.hasMedia).toBeTruthy();
     });
 
-    it("should return null", function () {
+    it("should return false", function () {
       data.media.picture = null;
       data.media.thumbnail_256x256 = null;
       data.media.thumbnail_128x128 = null;
