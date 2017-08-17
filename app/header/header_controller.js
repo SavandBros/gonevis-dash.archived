@@ -1,7 +1,7 @@
 "use strict";
 
 function HeaderController($scope, $rootScope, $state, $stateParams,
-  AuthService, DolphinService, Codekit, Entry, API, ModalsService, toaster) {
+  AuthService, DolphinService, Codekit, Entry, Account, API, ModalsService, toaster) {
 
   function constructor() {
     // User
@@ -149,8 +149,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   /**
    * @desc User update
    */
-  $scope.$on("gonevisDash.UserController:update", constructor);
-
+  $scope.$on("gonevisDash.UserController:update", function (event, data) {
+    $scope.user = AuthService.setAuthenticatedUser(data, true);
+  });
+  
   constructor();
   retrieveUser();
 }
@@ -165,6 +167,7 @@ HeaderController.$inject = [
   "DolphinService",
   "Codekit",
   "Entry",
+  "Account",
   "API",
   "ModalsService",
   "toaster"
