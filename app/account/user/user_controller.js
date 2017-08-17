@@ -41,7 +41,7 @@ function UserController($scope, $rootScope, $stateParams,
           $scope.user[key] = data[key];
         }
         $scope.user = AuthService.setAuthenticatedUser($scope.user.get, true);
-        $rootScope.$broadcast("gonevisDash.UserController:update", data);
+        $rootScope.$broadcast("gonevisDash.UserController:update");
 
         toaster.clear(toasters[key]);
         toaster.info("Done", "Profile " + keyString + " updated", 3000);
@@ -112,7 +112,8 @@ function UserController($scope, $rootScope, $stateParams,
     }).then(function (data) {
       toaster.info("Done", "Profile picture updated");
       $scope.user = new Account(data.data);
-      $rootScope.$broadcast("gonevisDash.UserController:update", data.data);
+      $scope.user = AuthService.setAuthenticatedUser(data.data, true);
+      $rootScope.$broadcast("gonevisDash.UserController:update");
     }, function (data) {
       $scope.errors = data.data;
       toaster.error("Error", "An error has occured while uploading profile picture, try again.");
