@@ -4,6 +4,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   AuthService, DolphinService, Codekit, Entry, API, ModalsService, toaster) {
 
   function constructor() {
+
     // User
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser(true);
@@ -19,7 +20,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams,
   /**
    * @desc Retrieve user data
    */
-  function retrieveUser () {
+  function retrieveUser() {
     // Get fresh user data if is authenticated
     if (AuthService.isAuthenticated()) {
       API.AccountRefresh.save({ token: AuthService.getToken() },
