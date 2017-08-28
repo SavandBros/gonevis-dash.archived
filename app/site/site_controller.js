@@ -21,9 +21,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     API.SiteTemplateConfig.get({ siteId: site },
       function (data) {
         $scope.siteTemplate = data.template_config;
-        $scope.siteTemplate.hasFields = !Codekit.isEmptyObj(
-          $scope.siteTemplate.fields
-        );
+        $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
       }
     );
   }
