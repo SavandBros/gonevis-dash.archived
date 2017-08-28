@@ -49,8 +49,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
           $scope.site[key] = data[key];
         }
 
-        var index = Codekit.getIndex($scope.user.sites, $scope.site);
-        $scope.user.sites[index][key] = data[key];
+        $scope.user.sites[$stateParams.s][key] = data[key];
         AuthService.setAuthenticatedUser($scope.user);
 
         $rootScope.$broadcast("gonevisDash.SiteController:update");
@@ -78,7 +77,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     API.Site.delete({ siteId: site },
       function () {
         // Remove site from user object
-        $scope.user.sites.splice(Codekit.getIndex($scope.user.sites, site));
+        $scope.user.sites.splice($stateParams.s, 1);
         // Update local user object
         AuthService.setAuthenticatedUser($scope.user);
         // Announce site removal
