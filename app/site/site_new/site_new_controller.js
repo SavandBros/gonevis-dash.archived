@@ -25,12 +25,12 @@ function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthSe
     API.SiteNew.save(form,
       function (data) {
         form.loading = false;
-        var index = $scope.user.sites.push(data);
+        $scope.user.sites.unshift(data);
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.SiteNewController:Create");
 
         toaster.success("Awesome", "Created " + data.title + ".");
-        $state.go("dash.main", { s: index - 1 });
+        $state.go("dash.main", { s: 0 });
       },
       function (data) {
         form.errors = data.data;
