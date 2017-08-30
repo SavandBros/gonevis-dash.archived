@@ -9,13 +9,12 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
 
       API.EmailConfirmation.save({}, { token: $state.params.token },
         function (data) {
+          AuthService.setToken(data.token);
+          AuthService.setAuthenticatedUser(data.user);
+          $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
+
           $scope.loading = false;
           toaster.success("Done", "Thanks for verifying your email.");
-
-          AuthService.setAuthenticatedUser(data.user);
-          AuthService.setToken(data.token);
-
-          $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
         },
         function () {
           $scope.loading = false;

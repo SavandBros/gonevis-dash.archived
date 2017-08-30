@@ -5,8 +5,7 @@
       <div class="modal-header">
         <div class="row">
           <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1">
-            <img class="img-circle" height="48"
-              ng-src="{{ comment.user.get.media.picture ? comment.user.get.media.thumbnail_48x48 : 'assets/img/avatar.png'}}">
+            <img class="img-circle" height="48" ng-src="{{ comment.user.getMedia('tiny') }}">
           </div>
           <div class="col-md-11 col-xs-10 col-sm-11 col-lg-11">
             <div class="s-pad-left-soft">

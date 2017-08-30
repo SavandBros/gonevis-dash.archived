@@ -4,6 +4,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
   AuthService, DolphinService, Codekit, Entry, API, ModalsService, TourService, toaster) {
 
   function constructor() {
+
     // User
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser(true);
@@ -100,7 +101,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
   $scope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
     // Go to main or new site page if has no other sites
-    if ($scope.user.get.sites.length > 0) {
+    if ($scope.user.getSites().length > 0) {
       $state.go("dash.main", { s: 0 });
     } else {
       $state.go("site-new");

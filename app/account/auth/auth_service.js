@@ -77,11 +77,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   this.setAuthenticatedUser = function (userData, separateSites) {
     // Separated sites
     if (separateSites) {
-      userData.sites = self.getAuthenticatedUser(true).get.sites;
-    }
-    // Reverse sites so older comes first
-    if (!$cookies.get("user")) {
-      userData.sites = userData.sites.slice().reverse();
+      userData.sites = self.getAuthenticatedUser(true).getSites();
     }
     // Store authentication
     $cookies.put("user", JSON.stringify(userData));
