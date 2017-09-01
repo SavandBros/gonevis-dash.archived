@@ -81,7 +81,7 @@ Tour.$inject = [
   "AuthService"
 ];
 
-function TourService(Tour) {
+function TourService(Tour, AuthService) {
 
   /**
    * @desc Check if current view has tours and show if user didn't complete them
@@ -101,17 +101,20 @@ function TourService(Tour) {
       ];
     }
 
-    if (tourName === "files") {
-      steps = [
-        ["#dolphin .search-form", "Search", "Start typing to search through your files.", "bottom"],
-        ["#dolphin .view-buttons", "Layout", "Choose between grid layout or listview.", "bottom"]
-      ];
-    }
+    // Tours for files view
+    // if (tourName === "files") {
+    //   steps = [
+    //     ["#dolphin .search-form", "Search", "Start typing to search through your files.", "bottom"],
+    //     ["#dolphin .view-buttons", "Layout", "Choose between grid layout or listview.", "bottom"]
+    //   ];
+    // }
 
-    if (!steps) {
+    // If already done or no tour for this view
+    if (!steps || AuthService.getTourStatus(tourName)) {
       return false;
     }
 
+    // Intiate the tour
     return new Tour(tourName, steps);
   }
 
@@ -131,5 +134,6 @@ function TourService(Tour) {
 
 app.service("TourService", TourService);
 TourService.$inject = [
-  "Tour"
+  "Tour",
+  "AuthService"
 ];
