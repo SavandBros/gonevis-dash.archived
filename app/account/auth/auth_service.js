@@ -205,6 +205,18 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   this.getTourStatus = function (tour) {
     return self.getAuthenticatedUser().tour[tour] === true;
   };
+  this.setTourStatus = function (tour, status) {
+    // Get user and update tour status
+    var user = self.getAuthenticatedUser();
+    user.tour[tour] = status;
+    // Update from backend
+    API.UserUpdate.put({ tour: user.tour }, function (data) {
+      // Get user data
+      user = data;
+    });
+    // Update local storage
+    self.setAuthenticatedUser(user, true);
+  };
 }
 
 app.service("AuthService", AuthService);
