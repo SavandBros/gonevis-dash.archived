@@ -194,6 +194,9 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
 
     Raven.setUserContext(person);
   };
+  this.getTourStatus = function (tour) {
+    return self.getAuthenticatedUser().tour[tour] === true;
+  };
 }
 
 app.service("AuthService", AuthService);
