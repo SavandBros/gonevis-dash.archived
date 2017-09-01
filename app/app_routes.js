@@ -111,7 +111,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: "MainController",
       templateUrl: "main/main_view.html",
       auth: true,
-      tour: "main_view" // @todo Get the real key from backend
     })
     .state("dash.navigation", {
       url: "/navigation",
@@ -129,7 +128,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "dolphin/dolphin_view.html",
       auth: true,
       title: "Dolphin",
-      tour: "dolphin_view", // @todo Get the real key from backend
       resolve: {
         // Used to determine source of selection
         source: function () {
