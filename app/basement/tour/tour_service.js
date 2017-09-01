@@ -1,6 +1,6 @@
 "use strict";
 
-function Tour($timeout, TourStep) {
+function Tour($timeout, TourStep, AuthService) {
   return function (name, steps) {
 
     /**
@@ -37,9 +37,14 @@ function Tour($timeout, TourStep) {
      */
     this.nextStep = function () {
       // Hide old step
-      this.getStep().hide();
+      self.getStep().hide();
       // If this is the last step
-      if (this.step === this.steps.length - 1) {
+      if (self.step === self.steps.length - 2) {
+        // Done with tour
+        AuthService.setTourStatus(self.name, true);
+      }
+      // If this is the last step to hide popover for this view
+      if (self.step === self.steps.length - 1) {
         return;
       }
       // Next step
@@ -72,7 +77,8 @@ function Tour($timeout, TourStep) {
 app.service("Tour", Tour);
 Tour.$inject = [
   "$timeout",
-  "TourStep"
+  "TourStep",
+  "AuthService"
 ];
 
 function TourService(Tour) {
