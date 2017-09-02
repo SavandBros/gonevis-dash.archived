@@ -34,7 +34,7 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
 
       API.Comments.get({ site: site, limit: 10 },
         function (data) {
-          $scope.Comment.loading = true;
+          $scope.Comment.loading = false;
           angular.forEach(data.results, function (data) {
             $scope.Comment.list.push(new Comment(data));
           });
