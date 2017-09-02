@@ -15,15 +15,15 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav" ng-if="auth.isAuthenticated() && param.s">
         <li ng-class="{'active': state.includes('dash.entry-new')}">
-          <a ui-sref="dash.entry-new({s: param.s})">Nevis</a>
+          <a ui-sref="dash.entry-new({s: param.s})">New</a>
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            <span class="hidden visible-xs">Nevis More <i class="fa fa-caret-down"></i></span>
+            <span class="hidden visible-xs">More <i class="fa fa-caret-down"></i></span>
             <i class="fa fa-caret-down o-fade-hard hidden-xs"></i>
           </a>
           <ul class="dropdown-menu">
-            <li class="dropdown-header hidden-xs">MORE TO NEVIS</li>
+            <li class="dropdown-header hidden-xs">MORE</li>
             <li role="separator" class="divider"></li>
             <li ng-repeat="(key, format) in entryFormats" ng-if="key !== 'text'">
               <a ng-click="nevis(key)" ng-disabled="format.disabled"
