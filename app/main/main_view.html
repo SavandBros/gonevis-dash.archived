@@ -3,12 +3,15 @@
     <!-- Left -->
     <div class="col-md-8">
       <!-- Latest comments -->
-      <div class="panel panel-default" ng-if="Comment.list.length">
+      <div class="panel panel-default">
         <div class="panel-heading">
           <a ui-sref="dash.comment-list" class="header-link">Comments</a>
           <span class="label label-default">{{ Metrics.list.comment_count }}</span>
         </div>
-        <div class="list-group">
+        <h4 ng-if="!Comment.list.length && !Comment.loading" class="text-center s-pad-y o-fade">
+          <em>No comments yet.</em>
+        </h4>
+        <div class="list-group" ng-if="Comment.list.length">
           <!-- Comment -->
           <a class="list-group-item"
              ng-click="comment.view()"
