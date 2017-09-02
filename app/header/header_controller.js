@@ -1,7 +1,7 @@
 "use strict";
 
-function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
-  AuthService, DolphinService, Codekit, Entry, API, ModalsService, TourService, toaster) {
+function HeaderController($scope, $rootScope, $state, $stateParams,
+  AuthService, DolphinService, Codekit, Entry, API, ModalsService, toaster) {
 
   function constructor() {
 
@@ -152,19 +152,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
    */
   $scope.$on("gonevisDash.UserController:update", constructor);
 
-  /**
-   * @desc Check for tours
-   *
-   * @param {Event} event
-   * @param {string} tourName
-   */
-  $scope.$on("gonevisDash.Tour.readyToCheck", function (event, tourName) {
-    // Wait for DOM to finish rendering
-    $timeout(function () {
-      $scope.tour = TourService.checkForView(tourName);
-    });
-  });
-
   constructor();
   retrieveUser();
 }
@@ -175,13 +162,11 @@ HeaderController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
-  "$timeout",
   "AuthService",
   "DolphinService",
   "Codekit",
   "Entry",
   "API",
   "ModalsService",
-  "TourService",
   "toaster"
 ];

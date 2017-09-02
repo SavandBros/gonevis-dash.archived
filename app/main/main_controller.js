@@ -1,6 +1,6 @@
 "use strict";
 
-function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry) {
+function MainController($scope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
 
@@ -63,8 +63,6 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
           angular.forEach(data.results, function (data) {
             $scope.Entry.list.push(new Entry(data));
           });
-          // Tour is ready
-          $rootScope.$broadcast("gonevisDash.Tour.readyToCheck", "main");
         }
       );
     }
@@ -105,7 +103,6 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
 app.controller("MainController", MainController);
 MainController.$inject = [
   "$scope",
-  "$rootScope",
   "$state",
   "$stateParams",
   "AuthService",

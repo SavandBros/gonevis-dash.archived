@@ -1,14 +1,14 @@
 "use strict";
 
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
-  ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, taOptions, taRegisterTool,
+  ENV, AuthService, DolphinService, Codekit, Client, editableOptions, taOptions, taRegisterTool,
   textAngularManager, taToolFunctions, localStorageService) {
 
   /**
    * @name cache
    * @desc Predefined rootscope variable
    *
-   * @type {object}
+   * @type {Object}
    */
   $rootScope.cache = {};
 
@@ -16,13 +16,9 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @name set
    * @desc Predefined rootScope variable
    *
-   * @type {object}
+   * @type {Object}
    */
   $rootScope.set = {
-    /**
-     * @desc Lights for the editor
-     * @type {boolean}
-     */
     lights: true
   };
 
@@ -69,17 +65,11 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @event $stateChangeStart
    * @desc Starting to change state callback
    *
-   * @param {Event} event
-   * @param {object} toState
-   * @param {object} toParams
-   * @param {object} fromState
+   * @param event {Event}
+   * @param toState {Object}
+   * @param toParams {Object}
    */
   $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
-
-    // No routing if running tour
-    if (TourService.isTourOn() && fromState.name) {
-      event.preventDefault();
-    }
 
     // Close open modals
     angular.element(".modal, .modal-backdrop").fadeOut(
@@ -152,8 +142,8 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @desc Changed state succesfully
    *
    * @param event {Event}
-   * @param toState {object}
-   * @param toParams {object}
+   * @param toState {Object}
+   * @param toParams {Object}
    */
   $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams) {
     // Analytics
@@ -199,7 +189,6 @@ RunNevisRun.$inject = [
   "DolphinService",
   "Codekit",
   "Client",
-  "TourService",
   "editableOptions",
   "taOptions",
   "taRegisterTool",

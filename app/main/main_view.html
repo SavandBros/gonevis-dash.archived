@@ -29,7 +29,7 @@
         </div>
       </div>
       <!-- Latest entries -->
-      <div class="panel panel-default" ng-if="Entry.list.length" id="entries">
+      <div class="panel panel-default" ng-if="Entry.list.length">
         <!-- Title -->
         <div class="panel-heading">
           <a ui-sref="dash.entry-list" class="header-link">Entries</a>
@@ -125,7 +125,7 @@
         </ul>
       </div>
       <!-- Site Overview -->
-      <div class="panel panel-default" ng-if="Metrics.list" id="site">
+      <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading">
           <a ui-sref="dash.site" class="header-link">Site overview</a>
