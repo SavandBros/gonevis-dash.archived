@@ -5,8 +5,8 @@
  *       States with s param don't require site index, so it is given to it for later navigation.
  */
 app.config(function ($stateProvider, $urlRouterProvider) {
-  $stateProvider
   // Other states that are not a child of dash state
+  $stateProvider
     .state("start", {
       url: "/",
       controller: "StartController",
@@ -61,8 +61,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       auth: false,
       title: "Register"
     })
+    // Same as Signup but different url
     .state("collaborate", {
-      // Same as Signup but different url
       url: "/start-collaborating/:token",
       controller: "SignupController",
       templateUrl: "account/signup/signup_view.html",
@@ -93,8 +93,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         s: 0,
         token: null
       }
-    })
-    // Dash states that require authentication and site index
+    });
+
+  // Dash states that require authentication and site index
+  $stateProvider
     .state("dash", {
       url: "/:s",
       abstract: true,
@@ -108,7 +110,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/",
       controller: "MainController",
       templateUrl: "main/main_view.html",
-      auth: true
+      auth: true,
     })
     .state("dash.navigation", {
       url: "/navigation",

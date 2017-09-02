@@ -17,6 +17,19 @@ body {
     font-family: "Lato", Helvetica, sans-serif;
 }
 
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+    font-family: "Lato", sans-serif;
+}
+
 textarea {
     max-width: 100%;
 }
@@ -371,6 +384,10 @@ hr[soft] {
     cursor: move;
 }
 
+.c-no {
+    pointer-events: none;
+}
+
 
 /* Hovers */
 
@@ -630,6 +647,18 @@ md-toast {
     font-size: 0.3em;
     display: block;
     margin-top: 5px;
+}
+
+
+/* Panel */
+
+.panel {
+    border-radius: 2px;
+}
+
+.panel,
+.panel-heading {
+    border-color: #dcdcdc !important;
 }
 
 
@@ -1675,6 +1704,49 @@ img.tag {
 
 .bg-no {
     background: none;
+}
+
+
+/* Popover */
+
+.popover {
+    border-radius: 2px;
+    border-color: #dcdcdc;
+    box-shadow: none;
+    padding: 0;
+    max-width: 308px;
+    min-width: 308px;
+    box-shadow: 0 0 0 100000px rgba(0, 0, 0, 0.6);
+}
+
+.popover-target,
+.popover-relative.on {
+    position: relative;
+    z-index: 10000;
+}
+
+.popover button {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 12px;
+}
+
+.popover-title {
+    padding: 20px;
+    border-radius: 2px 2px 0 0;
+    font-size: large;
+    background: #eee;
+}
+
+.popover-content {
+    padding: 20px;
+}
+
+.popover.top .arrow {
+    border-top-color: #ccc;
 }
 
 
