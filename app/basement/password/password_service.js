@@ -11,14 +11,12 @@ function Password() {
     /**
      * @type {number}
      * @private
-     * @type {number}
      */
     var minLength = 6;
 
     /**
      * @type {object}
      * @private
-     * @type {object}
      */
     var strengthWords = [
       null, "Short", "Weak", "Good", "Strong", "Excellent"
@@ -27,7 +25,6 @@ function Password() {
     /**
      * @type {object}
      * @private
-     * @type {object}
      */
     var strengthColors = [
       "danger", "danger", "warning", null, "info", "success"

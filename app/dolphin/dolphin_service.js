@@ -4,17 +4,11 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
   return function (data) {
 
     /**
-     * @private
+     * @desc Super variable for getting this in functions
+     *
+     * @type {Dolphin}
      */
     var self = this;
-
-    /**
-     * @private
-     */
-    var constructor = function () {
-      self.extension = self.get.ext.split("/")[1].toUpperCase();
-      self.get.site = AuthService.getCurrentSite();
-    };
 
     /**
      * @readonly
@@ -63,6 +57,10 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
       ModalsService.open("dolphin", "DolphinModalController", { dolphin: self });
     };
 
+    function constructor() {
+      self.extension = self.get.ext.split("/")[1].toUpperCase();
+      self.get.site = AuthService.getCurrentSite();
+    }
     constructor();
   };
 
