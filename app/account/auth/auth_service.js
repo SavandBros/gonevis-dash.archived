@@ -75,6 +75,15 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @param {boolean} separateSites Set user data without effecting sites
    */
   this.setAuthenticatedUser = function (userData, separateSites) {
+    // Sanitize tour object
+    if (!userData.tour) {
+      userData.tour = {
+        files: true,
+        settings: true,
+        user: true,
+        main: true
+      };
+    }
     // Separated sites
     if (separateSites) {
       userData.sites = self.getAuthenticatedUser(true).getSites();
