@@ -32,14 +32,18 @@
         </div>
       </div>
       <!-- Latest entries -->
-      <div class="panel panel-default" ng-if="Entry.list.length" id="entries">
+      <div class="panel panel-default" ng-if="!Entry.loading" id="entries">
         <!-- Title -->
         <div class="panel-heading">
           <a ui-sref="dash.entry-list" class="header-link">Entries</a>
           <span class="label label-default">{{ Metrics.list.entry_count }}</span>
         </div>
+        <!-- No entries message -->
+        <h4 ng-if="!Entry.list.length" class="text-center s-pad-y o-fade">
+          <em>Nothing here yet.</em>
+        </h4>
         <!-- Entry list -->
-        <div class="list-group">
+        <div class="list-group" ng-if="Entry.list.length">
           <a class="list-group-item t-line"
              ng-repeat="entry in Entry.list"
              ng-if="!entry.isDeleted"
