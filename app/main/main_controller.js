@@ -59,7 +59,7 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
 
       API.Entries.get({ site: site, limit: 10 },
         function (data) {
-          $scope.Entry.loading = true;
+          $scope.Entry.loading = false;
           angular.forEach(data.results, function (data) {
             $scope.Entry.list.push(new Entry(data));
           });
