@@ -19,6 +19,15 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
   }
 
   /**
+   * @desc Check if comments and entries are loaded
+   */
+  function initializeTour() {
+    if (!$scope.Comment.loading && !$scope.Entry.loading) {
+      $rootScope.$broadcast("gonevisDash.Tour.readyToCheck", "main");
+    }
+  }
+
+  /**
    * @type {object}
    */
   $scope.Comment = {
@@ -38,7 +47,7 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
           angular.forEach(data.results, function (data) {
             $scope.Comment.list.push(new Comment(data));
           });
-          Check();
+          initializeTour();
         }
       );
     }
@@ -64,7 +73,7 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
           angular.forEach(data.results, function (data) {
             $scope.Entry.list.push(new Entry(data));
           });
-          Check();
+          initializeTour();
         }
       );
     }
@@ -88,15 +97,6 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
       );
     }
   };
-  
-  /**
-   * @desc Check if comments and entries are loaded
-   */
-  function Check() {
-    if (!$scope.Comment.loading && !$scope.Entry.loading) {
-      $rootScope.$broadcast("gonevisDash.Tour.readyToCheck", "main");
-    }
-  }
 
   /**
    * @desc Reply comment
