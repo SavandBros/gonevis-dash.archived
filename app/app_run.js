@@ -1,8 +1,7 @@
 "use strict";
 
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
-  ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, taOptions, taRegisterTool,
-  textAngularManager, taToolFunctions, localStorageService) {
+  ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, localStorageService) {
 
   /**
    * @name cache
@@ -31,39 +30,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
 
   // Editable texts config
   editableOptions.theme = "bs3";
-
-  // Editor toolbar (register)
-  taRegisterTool("code", {
-    iconclass: "fa fa-code t-bold",
-    tooltiptext: "Insert code (Preformatted text)",
-    action: function () {
-      return this.$editor().wrapSelection("formatBlock", "<pre>");
-    },
-    activeState: function () {
-      return this.$editor().queryFormatBlockState("pre");
-    }
-  });
-  taRegisterTool("addImage", {
-    iconclass: "fa fa-picture-o",
-    tooltiptext: "Insert Image",
-    action: function () {
-      this.$editor().wrapSelection("insertImage", "assets/img/avatar.png", false);
-      DolphinService.viewSelection("editorAddImage");
-    },
-    onElementSelect: {
-      element: "img",
-      action: taToolFunctions.imgOnSelectAction
-    }
-  });
-
-  // Editor toolbar
-  taOptions.toolbar = [
-    ["h1", "h2", "h3", "code", "quote"],
-    ["bold", "italics", "underline", "strikeThrough"],
-    ["ul", "ol", "clear"],
-    ["justifyLeft", "justifyCenter", "justifyRight", "indent", "outdent"],
-    ["html", "addImage", "insertLink", /**"insertVideo"**/ ]
-  ];
 
   /**
    * @event $stateChangeStart
@@ -201,9 +167,5 @@ RunNevisRun.$inject = [
   "Client",
   "TourService",
   "editableOptions",
-  "taOptions",
-  "taRegisterTool",
-  "textAngularManager",
-  "taToolFunctions",
   "localStorageService"
 ];
