@@ -1,8 +1,7 @@
 "use strict";
 
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
-  ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, taOptions, taRegisterTool,
-  textAngularManager, taToolFunctions, localStorageService) {
+  ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, localStorageService) {
 
   /**
    * @name cache
@@ -23,7 +22,80 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
      * @desc Lights for the editor
      * @type {boolean}
      */
-    lights: true
+    lights: true,
+    /**
+     * @desc Medium editor options
+     * @type {object}
+     */
+    editorOptions: {
+      activeButtonClass: "active",
+      toolbar: {
+        static: true,
+        sticky: true,
+        buttonLabels: "fontawesome",
+        buttons: [{
+          name: "h1",
+          aria: "Heading 1",
+          contentDefault: "H1"
+        }, {
+          name: "h2",
+          aria: "Heading 2",
+          contentDefault: "H2"
+        }, {
+          name: "h3",
+          aria: "Heading 3",
+          contentDefault: "H3"
+        }, {
+          name: "bold",
+          aria: "Bold",
+          contentDefault: "B"
+        }, {
+          name: "italic",
+          aria: "Italic",
+          contentDefault: "<em>I</em>"
+        }, {
+          name: "underline",
+          aria: "Underline",
+          contentDefault: "<u>U</u>"
+        }, {
+          name: "strikethrough",
+          aria: "Strikethrough",
+          contentDefault: "<s>S</s>"
+        }, {
+          name: "anchor",
+          aria: "Link",
+          contentDefault: "<i class='fa fa-link'></i>"
+        }, {
+          name: "quote",
+          aria: "Block quote",
+          contentDefault: "<i class='fa fa-quote-left'></i>"
+        }, {
+          name: "pre",
+          aria: "Preformatted text",
+          contentDefault: "<i class='fa fa-code'></i>"
+        }, {
+          name: "unorderedlist",
+          aria: "List (unordered)",
+          contentDefault: "<i class='fa fa-list-ul'></i>"
+        }, {
+          name: "justifyLeft",
+          aria: "Left align",
+          contentDefault: "<i class='fa fa-align-left'></i>"
+        }, {
+          name: "justifyCenter",
+          aria: "Center align",
+          contentDefault: "<i class='fa fa-align-center'></i>"
+        }, {
+          name: "justifyRight",
+          aria: "Right align",
+          contentDefault: "<i class='fa fa-align-right'></i>"
+        }, {
+          name: "removeFormat",
+          aria: "Clear formatting",
+          contentDefault: "<i class='fa fa-ban'><i>",
+        }]
+      }
+    }
   };
 
   // Set user tracking info
@@ -31,39 +103,6 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
 
   // Editable texts config
   editableOptions.theme = "bs3";
-
-  // Editor toolbar (register)
-  taRegisterTool("code", {
-    iconclass: "fa fa-code t-bold",
-    tooltiptext: "Insert code (Preformatted text)",
-    action: function () {
-      return this.$editor().wrapSelection("formatBlock", "<pre>");
-    },
-    activeState: function () {
-      return this.$editor().queryFormatBlockState("pre");
-    }
-  });
-  taRegisterTool("addImage", {
-    iconclass: "fa fa-picture-o",
-    tooltiptext: "Insert Image",
-    action: function () {
-      this.$editor().wrapSelection("insertImage", "assets/img/avatar.png", false);
-      DolphinService.viewSelection("editorAddImage");
-    },
-    onElementSelect: {
-      element: "img",
-      action: taToolFunctions.imgOnSelectAction
-    }
-  });
-
-  // Editor toolbar
-  taOptions.toolbar = [
-    ["h1", "h2", "h3", "code", "quote"],
-    ["bold", "italics", "underline", "strikeThrough"],
-    ["ul", "ol", "clear"],
-    ["justifyLeft", "justifyCenter", "justifyRight", "indent", "outdent"],
-    ["html", "addImage", "insertLink", /**"insertVideo"**/ ]
-  ];
 
   /**
    * @event $stateChangeStart
@@ -201,9 +240,5 @@ RunNevisRun.$inject = [
   "Client",
   "TourService",
   "editableOptions",
-  "taOptions",
-  "taRegisterTool",
-  "textAngularManager",
-  "taToolFunctions",
   "localStorageService"
 ];

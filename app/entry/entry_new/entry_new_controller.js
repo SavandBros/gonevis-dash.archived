@@ -113,6 +113,20 @@ function EntryNewController($scope, $state, $timeout, $q,
     }
   });
 
+  /**
+   * @desc Stick toolbar to top of screen but under navbar
+   */
+  angular.element(window).scroll(function () {
+    var topOffset = window.scrollY;
+    var maxOffset = angular.element(".navbar-static-top").height() + 2;
+    var offset = -maxOffset;
+    // If not passed navbar height
+    if (topOffset < maxOffset) {
+      offset = -topOffset;
+    }
+    angular.element(".static-toolbar").animate({ marginTop: offset }, 0);
+  });
+
   constructor();
 }
 

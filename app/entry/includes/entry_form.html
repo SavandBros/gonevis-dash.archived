@@ -1,6 +1,6 @@
 <!-- View button -->
 <button type="button" class="btn btn-default btn-corner btn-corner-navbar"
-  ng-click="sidebar = true" ng-init="sidebar = false">
+  ng-click="sidebar = true" ng-init="sidebar = false" title="Publish Menu">
   <i class="fa fa-chevron-right"></i>
 </button>
 
@@ -20,14 +20,11 @@
   <div class="form-group editor" ng-class="{'editingContent': editingContent}">
     <!-- Title -->
     <input id="title" class="form-control" type="text" ng-model="form.get.title" placeholder="TITLE" autocomplete="off">
-    <small class="help-block" ng-show="form.errors.title">
-      {{ form.errors.title[0] }}
-    </small>
+    <!-- Title error -->
+    <small class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
     <br>
     <!-- Editor (description) -->
-    <div text-angular ng-model="form.get.content" placeholder="CONTENT" name="editor"
-      ng-focus="editingContent = true" ng-blur="editingContent = false"  ng-show="form.get.format === formats.text.id">
-    </div>
+    <div medium-editor ng-model="form.get.content" data-placeholder="CONTENT" name="editor" bind-options="set.editorOptions"></div>
     <!-- Entry formats -->
     <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
       <!-- Image -->

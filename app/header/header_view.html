@@ -20,19 +20,19 @@
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">
-            <span class="hidden visible-xs">More <i class="fa fa-caret-down"></i></span>
-            <i class="fa fa-caret-down o-fade-hard hidden-xs"></i>
+            <span class="hidden visible-xs visible-sm">More <i class="fa fa-caret-down"></i></span>
+            <i class="fa fa-caret-down o-fade-hard hidden-xs hidden-sm"></i>
           </a>
           <ul class="dropdown-menu">
-            <li class="dropdown-header hidden-xs">MORE</li>
-            <li role="separator" class="divider"></li>
+            <li class="dropdown-header hidden-xs hidden-sm">MORE</li>
+            <li role="separator" class="divider hidden-xs hidden-sm"></li>
             <li ng-repeat="(key, format) in entryFormats" ng-if="key !== 'text'">
               <a ng-click="nevis(key)" ng-disabled="format.disabled"
                 ng-class="{'o-fade-soft': format.disabled}" title="{{ format.disabled ? 'Coming soon' : null }}">
                 <i class="fa fa-{{ format.icon }}"></i> {{ format.label }}
               </a>
             </li>
-            <li role="separator" class="divider hidden visible-xs"></li>
+            <li role="separator" class="divider hidden visible-xs visible-sm"></li>
           </ul>
         </li>
         <li ng-class="{'active': state.includes('dash.entry-list')}">
@@ -76,7 +76,7 @@
       <ul class="nav navbar-nav navbar-right" ng-if="auth.isAuthenticated()">
         <li class="animated fadeIn" ng-if="param.lights">
           <a ng-click="set.lights = !set.lights">
-            <i class="fa fa-lightbulb-o nav-icon"></i>
+            <span class="hidden-lg hidden-md">Lights</span> <i class="fa fa-lightbulb-o nav-icon"></i>
           </a>
         </li>
         <!-- Account dropdown -->
