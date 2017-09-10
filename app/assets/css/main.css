@@ -790,6 +790,21 @@ md-toast {
 }
 
 
+/* Editor */
+
+[medium-editor],
+.medium-editor-toolbar,
+.medium-editor-action {
+    transition: 0.3s ease-in-out;
+    transition-property: background, border;
+}
+
+.editor-container {
+    background: #fff;
+    border: 1px solid #e7e7e7;
+}
+
+
 /* Medium editor */
 
 [medium-editor] {
