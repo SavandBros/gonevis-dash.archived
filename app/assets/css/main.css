@@ -802,6 +802,103 @@ md-toast {
 }
 
 
+/* Medium editor toolbar */
+
+.medium-editor-toolbar {
+    visibility: visible;
+    box-shadow: none;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    top: 61px !important;
+    left: 0 !important;
+    z-index: 9;
+}
+
+@media (max-width: 991px) {
+    .medium-editor-toolbar {
+        top: 51px !important;
+    }
+}
+
+.medium-editor-toolbar-actions {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: initial;
+    width: 1170px;
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .medium-editor-toolbar-actions {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .medium-editor-toolbar-actions {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .medium-editor-toolbar-actions {
+        width: 1170px;
+    }
+}
+
+.medium-editor-toolbar li {
+    width: initial;
+}
+
+.medium-editor-action {
+    background: none !important;
+    color: #777 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    box-shadow: none !important;
+    height: initial !important;
+    min-width: initial !important;
+    padding: 12px !important;
+    padding-bottom: 10px !important;
+    margin-bottom: -1px !important;
+    font-weight: bold;
+}
+
+.medium-editor-toolbar-active .medium-editor-action {
+    opacity: 1;
+}
+
+.medium-editor-toolbar-active .medium-editor-action:hover,
+.medium-editor-toolbar-active .medium-editor-action.active {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+
+.medium-editor-toolbar-active .medium-editor-action.active {
+    color: #222 !important;
+    border-color: #d17100 !important;
+}
+
+.medium-editor-action-bold,
+.medium-editor-action-anchor,
+.medium-editor-action-justifyLeft,
+.medium-editor-button-last {
+    margin-left: 25px !important;
+}
+
+.medium-editor-toolbar li .medium-editor-action-pre {
+    font-size: 14px !important;
+}
+
+
 /* Editor */
 
 .editor #title {
