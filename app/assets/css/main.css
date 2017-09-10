@@ -1222,6 +1222,12 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     height: 61px;
 }
 
+@media (max-width: 992px) {
+    .modal-header-clickable {
+        height: 51px;
+    }
+}
+
 .lights.off .modal-header-clickable {
     background: #1f1f1f;
     border-bottom: 1px solid #070707;
