@@ -461,7 +461,6 @@ hr[soft] {
 
 .trans,
 .dolphin,
-.ta-toolbar,
 .modal.sidebar.pre {
     transition: all 0.3s ease-in-out;
 }
@@ -810,9 +809,10 @@ md-toast {
 [medium-editor] {
     min-height: 500px !important;
     padding: 10px;
+    padding-bottom: 50px;
 }
 
-[medium-editor] > *:first-of-type {
+[medium-editor]>*:first-of-type {
     margin-top: 0;
 }
 
@@ -916,16 +916,19 @@ md-toast {
 
 /* Editor */
 
+.editor {
+    font-size: 1.4em;
+    position: relative;
+    z-index: 9;
+}
+
 .editor #title {
     box-shadow: none !important;
-    background: transparent;
+    background: transparent !important;
     border: none;
     font-size: 1.5em;
     padding: 10px;
-}
-
-.editor {
-    font-size: 1.4em;
+    margin-top: 40px;
 }
 
 .editor p {
@@ -984,15 +987,20 @@ md-toast {
 
 .lights.off .editor,
 .lights.off .editor .form-control,
-.lights.off .ta-toolbar {
-    background: #333;
+.lights.off~.medium-editor-toolbar {
+    background: #333 !important;
+    border-color: #222 !important;
     color: #fff;
 }
 
 .lights.off .editor-draft-mode,
-.lights.off .ta-toolbar .btn {
-    color: #ddd;
+.lights.off~.medium-editor-toolbar .medium-editor-action {
+    color: #ddd !important;
     border-color: #222;
+}
+
+.lights.off~.medium-editor-toolbar-active .medium-editor-action.active {
+    background: #222 !important;
 }
 
 .lights.off code {
@@ -1017,7 +1025,7 @@ md-toast {
 code,
 pre {
     transition-duration: 0.3s;
-    transition-property: background, box-shadow, color;
+    transition-property: background, box-shadow, color, border;
     transition-timing-function: ease-in-out;
 }
 
