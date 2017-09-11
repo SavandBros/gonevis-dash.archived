@@ -50,7 +50,7 @@
         <!-- Description -->
         <div class="panel panel-default panel-body">
           <div class="row">
-            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2" style="word-break: break-all;">
+            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
               <small class="o-fade">DESCRIPTION</small>
             </div>
             <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
@@ -69,7 +69,7 @@
         <br>
         <div uib-collapse="advanced">
           <!-- Meta Description -->
-          <div class="panel panel-default panel-body" style="word-break: break-all;">
+          <div class="panel panel-default panel-body">
             <div class="row">
               <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
                 <small class="o-fade">META DESCRIPTION</small>
@@ -79,6 +79,47 @@
                   onbeforesave="updateSite('meta_description', $data)">
                   {{ site.meta_description || "Nothing here..." }}
                 </span>
+              </div>
+            </div>
+          </div>
+          <!-- Post Per Page -->
+          <div class="panel panel-default panel-body">
+            <div class="row">
+              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+                <small class="o-fade">Number of posts show at most</small>
+              </div>
+              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10 t-line">
+                <select class="form-control" ng-change="updateSite('paginate_by', site.paginate_by)" ng-model="site.paginate_by">
+                  <option ng-repeat="number in postPerPage track by $index" ng-value="$index">{{ $index }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Commenting -->
+          <div class="panel panel-default panel-body">
+            <div class="row">
+              <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+                <small class="o-fade">Allow visitors to comment on my site</small>
+              </div>
+              <div class="col-xs-9 col-sm-8 col-md-8 col-lg-8 t-line">
+                <div class="checkbox checkbox-primary">
+                  <input id="commenting" type="checkbox" ng-model="site.commenting" ng-change="updateSite('commenting', site.commenting)">
+                  <label for="commenting">Enable commenting</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Voting -->
+          <div class="panel panel-default panel-body">
+            <div class="row">
+              <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
+                <small class="o-fade">Allow visitors to vote on my posts</small>
+              </div>
+              <div class="col-xs-9 col-sm-8 col-md-8 col-lg-8 t-line">
+                <div class="checkbox checkbox-primary">
+                  <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
+                  <label for="voting">Enable voting</label>
+                </div>
               </div>
             </div>
           </div>
