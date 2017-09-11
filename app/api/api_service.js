@@ -76,6 +76,9 @@ function API($resource, ENV) {
       name: "Site",
       endpoint: "website/site/:siteId/" // GET, PUT
     }, {
+      name: "SiteSettings",
+      endpoint: "website/site/:siteId/settings/" // GET
+    }, {
       name: "SiteMetrics",
       endpoint: "website/site/:siteId/metrics/" // GET
     }, {
