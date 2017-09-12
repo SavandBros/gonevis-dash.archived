@@ -67,6 +67,10 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
           aria: "Link",
           contentDefault: "<i class='fa fa-link'></i>"
         }, {
+          name: "image",
+          aria: "Insert image",
+          contentDefault: "<i class='fa fa-image'></i>"
+        }, {
           name: "quote",
           aria: "Block quote",
           contentDefault: "<i class='fa fa-quote-left'></i>"
