@@ -148,6 +148,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "entry/entry_new/entry_new_view.html",
       auth: true,
       clickEvent: true,
+      editor: true,
       params: {
         lights: true,
       },
@@ -159,6 +160,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: "entry/entry_edit/entry_edit_view.html",
       auth: true,
       clickEvent: true,
+      editor: true,
       params: {
         entryId: null,
         lights: true
