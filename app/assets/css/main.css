@@ -461,7 +461,8 @@ hr[soft] {
 
 .trans,
 .dolphin,
-.modal.sidebar.pre {
+.modal.sidebar.pre,
+.container-fluid {
     transition: all 0.3s ease-in-out;
 }
 
@@ -793,7 +794,8 @@ md-toast {
 
 [medium-editor],
 .medium-editor-toolbar,
-.medium-editor-action {
+.medium-editor-action,
+.editor-container {
     transition: 0.3s ease-in-out;
     transition-property: background, border;
 }
@@ -981,11 +983,8 @@ md-toast {
 
 /* Lights */
 
-.lights.off .editor {
-    box-shadow: 0 0 0 10000px #333;
-}
-
-.lights.off .editor,
+.lights.off .container-fluid,
+.lights.off .editor-container,
 .lights.off .editor .form-control,
 .lights.off~.medium-editor-toolbar {
     background: #333 !important;
