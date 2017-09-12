@@ -851,6 +851,7 @@ md-toast {
     position: initial;
     width: 1170px;
     padding: 0;
+    display: block !important;
 }
 
 @media (min-width: 768px) {
@@ -913,6 +914,32 @@ md-toast {
 
 .medium-editor-toolbar li .medium-editor-action-pre {
     font-size: 14px !important;
+}
+
+.medium-editor-toolbar-form {
+    position: fixed;
+    top: 20%;
+    left: calc(50% - 194px);
+    overflow: hidden;
+    background: #e7e7e7;
+    border: 2px solid #e7e7e7;
+    width: 388px;
+    border-radius: 0;
+    box-shadow: 0 0 0 100000px rgba(0, 0, 0, 0.5);
+}
+
+.medium-editor-toolbar-form .medium-editor-toolbar-input {
+    background: #fff !important;
+    padding: 10px 15px;
+    height: initial;
+    color: #333;
+    width: 310px;
+}
+
+.medium-editor-toolbar-form a {
+    position: relative;
+    top: 4px;
+    color: #666;
 }
 
 
