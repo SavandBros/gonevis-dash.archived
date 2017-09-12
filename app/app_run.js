@@ -245,6 +245,33 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       }
     }
   });
+
+  /**
+   * @desc Change callback
+   */
+  angular.element("*").on("DOMSubtreeModified", function (event) {
+    if ($state.current.editor) {
+      var el = angular.element(event.target);
+
+      // Editor handler
+      if (el.parents("[medium-editor]").length) {
+        var isInChild = el.children("img").length;
+        // Image upload handler
+        if (el.prop("tagName") === "IMG" || isInChild) {
+          // Get the img
+          var img = isInChild ? el.children("img") : el;
+          // Already handling or handled
+          if (img.attr("data-selection") === "true" || typeof img.attr("alt") !== "undefined") {
+            return;
+          }
+          // Show file selection modal
+          DolphinService.viewSelection("editorAddImage");
+          // Set to uploading
+          img.attr("data-selection", "true");
+        }
+      }
+    }
+  });
 }
 
 app.run(RunNevisRun);
