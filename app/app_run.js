@@ -33,6 +33,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
         static: true,
         sticky: true,
         buttonLabels: "fontawesome",
+        updateOnEmptySelection: true,
         buttons: [{
           name: "h1",
           aria: "Heading 1",
