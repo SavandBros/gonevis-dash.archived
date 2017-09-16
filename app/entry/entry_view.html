@@ -11,7 +11,7 @@
     <ng-include src="'basement/search/search_noresult.html'"></ng-include>
     <!-- Nothing -->
     <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult && initialled"
-      ng-init="nothingText = 'No entries yet.'">
+      ng-init="nothingText = 'No posts yet.'">
     </ng-include>
     <!-- List -->
     <div ng-if="entries.length">
@@ -110,7 +110,7 @@
                   <li class="divider"></li>
                   <li>
                     <a ng-click="entry.remove()">
-                      <i class="fa fa-fw fa-trash text-danger"></i> Delete entry
+                      <i class="fa fa-fw fa-trash text-danger"></i> Delete
                     </a>
                   </li>
                 </ul>
