@@ -122,7 +122,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
     }
     // Sign out completely
     AuthService.unAuthenticate();
-    $state.go("signin");
+    $state.go("start");
   });
 
   /**
