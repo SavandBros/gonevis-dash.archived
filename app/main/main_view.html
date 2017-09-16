@@ -35,7 +35,7 @@
       <div class="panel panel-default" ng-if="!Entry.loading" id="entries">
         <!-- Title -->
         <div class="panel-heading">
-          <a ui-sref="dash.entry-list" class="header-link">Entries</a>
+          <a ui-sref="dash.entry-list" class="header-link">Posts</a>
           <span class="label label-default">{{ Metrics.list.entry_count }}</span>
         </div>
         <!-- No entries message -->
@@ -83,13 +83,13 @@
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.entry_count}">
-            Entries <b class="pull-right text-primary">{{ Metrics.list.entry_count }}</b>
+            Posts <b class="pull-right text-primary">{{ Metrics.list.entry_count }}</b>
           </li>
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.published_entry_count}">
-            Published entries <b class="pull-right text-primary">{{ Metrics.list.published_entry_count }}</b>
+            Published posts <b class="pull-right text-primary">{{ Metrics.list.published_entry_count }}</b>
           </li>
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.draft_entry_count}">
-            Draft entries <b class="pull-right text-primary">{{ Metrics.list.draft_entry_count }}</b>
+            Draft posts <b class="pull-right text-primary">{{ Metrics.list.draft_entry_count }}</b>
           </li>
         </ul>
       </div>

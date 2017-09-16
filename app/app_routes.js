@@ -168,11 +168,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       title: "Nevis"
     })
     .state("dash.entry-list", {
-      url: "/entries",
+      url: "/posts",
       controller: "EntryController",
       templateUrl: "entry/entry_view.html",
       auth: true,
-      title: "Entries"
+      title: "Posts"
     })
     .state("dash.site", {
       url: "/site",
