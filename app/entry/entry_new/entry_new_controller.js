@@ -10,6 +10,7 @@ function EntryNewController($scope, $state, $timeout, $q,
     $scope.statuses = Codekit.entryStatuses;
     $scope.formats = Codekit.entryFormats;
     $scope.form = new Entry({
+      content: "<p><br></p>", // Start with an empty paragraph (for editor)
       status: $scope.statuses[0].id,
       format: Codekit.entryFormats.text.id
     });
