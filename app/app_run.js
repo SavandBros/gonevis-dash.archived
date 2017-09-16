@@ -218,9 +218,9 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @event gonevisDash.Dolphin:select
    * @desc Dolphin selection callback, depends on state @editor
    *
-   * @param event {Event}
-   * @param dolphin {Dolphin}
-   * @param source {String}
+   * @param {Event} event
+   * @param {Dolphin} dolphin
+   * @param {string} source
    */
   $rootScope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     if ($state.current.editor && source === "editorAddImage") {
@@ -248,6 +248,8 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
 
   /**
    * @desc Change callback
+   *
+   * @param {Event} event
    */
   angular.element("*").on("DOMSubtreeModified", function (event) {
     if ($state.current.editor) {
