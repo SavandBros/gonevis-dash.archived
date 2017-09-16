@@ -232,6 +232,12 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   });
 
   /**
+   * @event goNevis.ModalsService.close
+   * @desc On modal close
+   *
+   * @param {Event} event
+   * @param {string} template
+   */
   $rootScope.$on("goNevis.ModalsService.close", function (event, template) {
     if (template === "dolphinSelection") {
       // Check editor for images without source and remove them
@@ -242,6 +248,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     }
   });
 
+  /**
    * @event document.click
    * @desc Click callback, depends on state @clickEvent
    */
