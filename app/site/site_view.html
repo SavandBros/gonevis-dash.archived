@@ -75,7 +75,7 @@
                 <small class="o-fade">META DESCRIPTION</small>
               </div>
               <div class="col-xs-9 col-sm-10">
-                <span editable-textarea="site.meta_description"
+                <span editable-textarea="site.meta_description" e-maxlength="160"
                   onbeforesave="updateSite('meta_description', $data)">
                   {{ site.meta_description || "Nothing here..." }}
                 </span>
