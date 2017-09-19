@@ -85,12 +85,15 @@
           <!-- Post Per Page -->
           <div class="panel panel-default panel-body">
             <div class="row">
-              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-                <small class="o-fade">Number of posts show at most</small>
+              <div class="col-xs-8 col-sm-9">
+                <small style="margin-top: 10px" class="dis-b">NUMBER OF POSTS PER PAGE</small>
               </div>
-              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10 t-line">
-                <select class="form-control" ng-change="updateSite('paginate_by', site.paginate_by)" ng-model="site.paginate_by">
-                  <option ng-repeat="number in postPerPage track by $index" ng-value="$index">{{ $index }}</option>
+              <div class="col-xs-4 col-sm-3">
+                <select class="form-control" ng-model="site.paginate_by"
+                  ng-change="updateSite('paginate_by', site.paginate_by)">
+                  <option ng-value="$index" ng-if="$index > 2" ng-repeat="number in postPerPage track by $index">
+                    {{ $index }}
+                  </option>
                 </select>
               </div>
             </div>
