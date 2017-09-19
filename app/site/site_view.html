@@ -113,6 +113,15 @@
               <label for="voting">Allow visitors to vote on my posts</label>
             </div>
           </div>
+          <!-- Voting -->
+          <div class="panel panel-default panel-body">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="search_engine_visibility" type="checkbox"
+                ng-change="updateSite('search_engine_visibility', site.search_engine_visibility)"
+                ng-model="site.search_engine_visibility">
+              <label for="search_engine_visibility">Let search engine discover my site</label>
+            </div>
+          </div>
         </div>
         <!-- Image -->
         <div class="btn-group stack stack-equal" role="group">
