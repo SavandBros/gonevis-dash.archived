@@ -100,30 +100,17 @@
           </div>
           <!-- Commenting -->
           <div class="panel panel-default panel-body">
-            <div class="row">
-              <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
-                <small class="o-fade">Allow visitors to comment on my site</small>
-              </div>
-              <div class="col-xs-9 col-sm-8 col-md-8 col-lg-8 t-line">
-                <div class="checkbox checkbox-primary">
-                  <input id="commenting" type="checkbox" ng-model="site.commenting" ng-change="updateSite('commenting', site.commenting)">
-                  <label for="commenting">Enable commenting</label>
-                </div>
-              </div>
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="commenting" type="checkbox" ng-model="site.commenting"
+                ng-change="updateSite('commenting', site.commenting)">
+              <label for="commenting">Allow visitors to comment on my posts</label>
             </div>
           </div>
           <!-- Voting -->
           <div class="panel panel-default panel-body">
-            <div class="row">
-              <div class="col-xs-3 col-sm-4 col-md-4 col-lg-4">
-                <small class="o-fade">Allow visitors to vote on my posts</small>
-              </div>
-              <div class="col-xs-9 col-sm-8 col-md-8 col-lg-8 t-line">
-                <div class="checkbox checkbox-primary">
-                  <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
-                  <label for="voting">Enable voting</label>
-                </div>
-              </div>
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
+              <label for="voting">Allow visitors to vote on my posts</label>
             </div>
           </div>
         </div>
