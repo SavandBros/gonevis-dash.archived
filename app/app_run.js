@@ -33,6 +33,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
         static: true,
         sticky: true,
         buttonLabels: "fontawesome",
+        updateOnEmptySelection: true,
         buttons: [{
           name: "h1",
           aria: "Heading 1",
@@ -65,6 +66,10 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
           name: "anchor",
           aria: "Link",
           contentDefault: "<i class='fa fa-link'></i>"
+        }, {
+          name: "image",
+          aria: "Insert image",
+          contentDefault: "<i class='fa fa-image'></i>"
         }, {
           name: "quote",
           aria: "Block quote",
@@ -210,6 +215,40 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
   });
 
   /**
+   * @event gonevisDash.Dolphin:select
+   * @desc Dolphin selection callback, depends on state @editor
+   *
+   * @param {Event} event
+   * @param {Dolphin} dolphin
+   * @param {string} source
+   */
+  $rootScope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
+    if ($state.current.editor && source === "editorAddImage") {
+      var img = angular.element("img[data-selection=true]");
+      img.attr("src", dolphin.get.file);
+      img.attr("alt", dolphin.get.meta_data.name);
+      img.removeAttr("data-selection");
+    }
+  });
+
+  /**
+   * @event goNevis.ModalsService.close
+   * @desc On modal close
+   *
+   * @param {Event} event
+   * @param {string} template
+   */
+  $rootScope.$on("goNevis.ModalsService.close", function (event, template) {
+    if (template === "dolphinSelection") {
+      // Check editor for images without source and remove them
+      var img = angular.element("[medium-editor] img");
+      if (typeof img.attr("src") === "undefined") {
+        img.remove();
+      }
+    }
+  });
+
+  /**
    * @event document.click
    * @desc Click callback, depends on state @clickEvent
    */
@@ -220,6 +259,35 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       // Sidebar handler
       if (el.hasClass("preIn")) {
         angular.element("[ng-click='sidebar = false']").trigger("click");
+      }
+    }
+  });
+
+  /**
+   * @desc Change callback
+   *
+   * @param {Event} event
+   */
+  angular.element("*").on("DOMSubtreeModified", function (event) {
+    if ($state.current.editor) {
+      var el = angular.element(event.target);
+
+      // Editor handler
+      if (el.parents("[medium-editor]").length) {
+        var isInChild = el.children("img").length;
+        // Image upload handler
+        if (el.prop("tagName") === "IMG" || isInChild) {
+          // Get the img
+          var img = isInChild ? el.children("img") : el;
+          // Already handling or handled
+          if (img.attr("data-selection") === "true" || typeof img.attr("alt") !== "undefined") {
+            return;
+          }
+          // Show file selection modal
+          DolphinService.viewSelection("editorAddImage");
+          // Set to uploading
+          img.attr("data-selection", "true");
+        }
       }
     }
   });

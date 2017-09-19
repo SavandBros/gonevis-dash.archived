@@ -4,7 +4,7 @@
  * @desc Modal service to work with bootstrap's modal
  *       Each modal should have an id same as its template name
  */
-function ModalsService(ModalService) {
+function ModalsService($rootScope, ModalService) {
 
   /**
    * @desc All modal templates are defined here
@@ -47,6 +47,10 @@ function ModalsService(ModalService) {
     }).then(function (modal) {
       modals[template] = modal;
       modals[template].element.modal();
+
+      angular.element("#" + template).on("hidden.bs.modal", function () {
+        $rootScope.$broadcast("goNevis.ModalsService.close", template);
+      });
     });
   }
 
@@ -74,5 +78,6 @@ function ModalsService(ModalService) {
 
 app.factory("ModalsService", ModalsService);
 ModalsService.$inject = [
+  "$rootScope",
   "ModalService"
 ];
