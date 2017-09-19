@@ -24,10 +24,10 @@
         <!-- Title -->
         <div class="panel panel-default panel-body">
           <div class="row">
-            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-              <small class="o-fade">TITLE</small>
+            <div class="col-xs-3 col-sm-2">
+              <small>TITLE</small>
             </div>
-            <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+            <div class="col-xs-9 col-sm-10">
               <span editable-text="site.title" onbeforesave="updateSite('title', $data)">
                 {{ site.title || "Nothing here..." }}
               </span>
@@ -37,10 +37,10 @@
         <!-- URL -->
         <div class="panel panel-default panel-body">
           <div class="row">
-            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-              <small class="o-fade">URL</small>
+            <div class="col-xs-3 col-sm-2">
+              <small>URL</small>
             </div>
-            <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10 t-line">
+            <div class="col-xs-9 col-sm-10 t-line">
               <a ng-href="{{ site.absolute_uri }}" target="_blank" title="Can not be changed.">
                 {{ site.absolute_uri || "Nothing here..." }}
               </a>
@@ -50,13 +50,13 @@
         <!-- Description -->
         <div class="panel panel-default panel-body">
           <div class="row">
-            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2" style="word-break: break-all;">
-              <small class="o-fade">DESCRIPTION</small>
+            <div class="col-xs-12 col-sm-2">
+              <small>DESCRIPTION</small>
             </div>
-            <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-            <span editable-textarea="site.description" onbeforesave="updateSite('description', $data)">
-              {{ site.description || "Nothing here..." }}
-            </span>
+            <div class="col-xs-9 col-sm-10">
+              <span editable-textarea="site.description" onbeforesave="updateSite('description', $data)">
+                {{ site.description || "Nothing here..." }}
+              </span>
             </div>
           </div>
         </div>
@@ -69,17 +69,48 @@
         <br>
         <div uib-collapse="advanced">
           <!-- Meta Description -->
-          <div class="panel panel-default panel-body" style="word-break: break-all;">
+          <div class="panel panel-default panel-body">
             <div class="row">
-              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-                <small class="o-fade">META DESCRIPTION</small>
+              <div class="col-xs-12 col-sm-2">
+                <small>META DESCRIPTION</small>
               </div>
-              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10 t-line">
-                <span editable-textarea="site.meta_description"
+              <div class="col-xs-9 col-sm-10">
+                <span editable-textarea="site.meta_description" e-maxlength="160"
                   onbeforesave="updateSite('meta_description', $data)">
                   {{ site.meta_description || "Nothing here..." }}
                 </span>
               </div>
+            </div>
+          </div>
+          <!-- Post Per Page -->
+          <div class="panel panel-default panel-body">
+            <div class="row">
+              <div class="col-xs-8 col-sm-9">
+                <small style="margin-top: 10px" class="dis-b">NUMBER OF POSTS PER PAGE</small>
+              </div>
+              <div class="col-xs-4 col-sm-3">
+                <select class="form-control" ng-model="site.paginate_by"
+                  ng-change="updateSite('paginate_by', site.paginate_by)">
+                  <option ng-value="$index" ng-if="$index > 2" ng-repeat="number in postPerPage track by $index">
+                    {{ $index }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Commenting -->
+          <div class="panel panel-default panel-body">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="commenting" type="checkbox" ng-model="site.commenting"
+                ng-change="updateSite('commenting', site.commenting)">
+              <label for="commenting">Allow visitors to comment on my posts</label>
+            </div>
+          </div>
+          <!-- Voting -->
+          <div class="panel panel-default panel-body">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
+              <label for="voting">Allow visitors to vote on my posts</label>
             </div>
           </div>
         </div>
@@ -130,12 +161,12 @@
           <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
             placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
           </textarea>
-          <span class="help-block">{{ field.help_text }}</span>
+          <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
         </div>
         <hr>
         <!-- Update button -->
-        <button class="btn btn-sm btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
-          <i class="fa fa-fw fa-check"></i> Save Changes
+        <button class="btn btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
+          <i class="fa fa-fw fa-check text-primary"></i> Save Changes
         </button>
       </div>
     </form>

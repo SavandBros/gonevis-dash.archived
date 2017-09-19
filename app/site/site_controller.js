@@ -10,8 +10,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     $scope.user = AuthService.getAuthenticatedUser(false);
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
+    $scope.postPerPage = new Array(25);
 
-    API.Site.get({ siteId: site },
+    API.SiteSettings.get({ siteId: site },
       function (data) {
         $scope.site = data;
         Codekit.setTitle($scope.site.title);

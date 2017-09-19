@@ -1191,8 +1191,8 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 
 .btn-corner {
     position: fixed;
-    top: 30px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     border-radius: 100%;
     width: 60px;
     height: 60px;
@@ -1208,7 +1208,6 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     box-shadow: none;
     bottom: initial;
     top: 30px;
-    right: 30px;
     position: absolute;
 }
 
