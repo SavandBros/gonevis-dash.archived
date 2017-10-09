@@ -1,0 +1,68 @@
+# Translators:
+# Alireza Savand <alireza.savand@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Last-Translator: Alireza Savand <alireza.savand@gmail.com>, 2017\n"
+"Language-Team: Persian (https://www.transifex.com/alir3z4/teams/79386/fa/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/comment/comment_modal/comment_modal_view.html:53
+#: app/comment/comment_view.html:46
+msgid "Change status"
+msgstr "تغییر موقعیت"
+
+#: app/dolphin/dolphin_view.html:118 app/dolphin/dolphin_view.html:70
+msgid "Delete"
+msgstr "حذف"
+
+#: app/comment/comment_view.html:55
+msgid "Delete comment"
+msgstr "حذف نظر"
+
+#: app/dolphin/dolphin_view.html:116 app/dolphin/dolphin_view.html:68
+msgid "Download"
+msgstr "بارگذاری"
+
+#: app/dolphin/dolphin_selection.html:14
+msgid "Files"
+msgstr "فایل ها"
+
+#: app/basement/pagination/pagination_loadmore.html:5
+msgid "LOAD MORE"
+msgstr "نمایش بیشتر"
+
+#: app/basement/search/search_noresult.html:3
+msgid "No results found for <b>{{ searchForm.searchedQuery }}</b>"
+msgstr "نتیجه یافت نشد برای <b>{{ searchForm.searchedQuery }}</b>"
+
+#: app/dolphin/dolphin_selection.html:21
+msgid "Remove Media"
+msgstr "حذف رسانه"
+
+#: app/comment/comment_modal/comment_modal_view.html:44
+msgid "Reply"
+msgstr "پاسخ"
+
+#: app/basement/search/search_form.html:4
+msgid "Search"
+msgstr "جستجو"
+
+#: app/dolphin/dolphin_selection.html:68
+msgid "Select File"
+msgstr "انتخاب فایل"
+
+#: app/dolphin/dolphin_selection.html:6
+msgid "Select an image"
+msgstr "انتخاب یک تصویر"
+
+#: app/dolphin/dolphin_selection.html:18
+msgid "Upload More"
+msgstr "آپلود بیشتر"
+
+#: app/dolphin/dolphin_view.html:115
+msgid "View"
+msgstr "نمایش"
