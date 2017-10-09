@@ -43,7 +43,7 @@
               <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-header">Change status</li>
+              <li class="dropdown-header" translate>Change status</li>
               <li ng-repeat="status in statuses" ng-class="{'active': comment.getStatus().label == status.label}">
                 <a ng-click="comment.setStatus(status.property, status.value)">
                   <i class="fa fa-{{ status.icon }}"></i> {{ status.label }}
@@ -52,7 +52,7 @@
               <li class="divider"></li>
               <li>
                 <a ng-click="comment.remove()">
-                  <i class="fa fa-fw fa-trash text-danger"></i> Delete comment
+                  <i class="fa fa-fw fa-trash text-danger"></i> <span translate>Delete comment</span>
                 </a>
               </li>
             </ul>

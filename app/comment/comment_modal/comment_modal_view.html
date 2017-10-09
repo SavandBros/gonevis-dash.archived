@@ -42,7 +42,7 @@
       <div class="modal-footer">
         <!-- Comment status -->
         <button class="btn btn-sm btn-primary pull-left s-mar-right-soft"
-          ng-click="comment.reply(form.comment)" ng-disabled="comment.isReplying || form.$invalid">
+          ng-click="comment.reply(form.comment)" ng-disabled="comment.isReplying || form.$invalid" translate>
           Reply
         </button>
         <div class="dropdown options s-pad-no pull-left">
@@ -50,7 +50,7 @@
             {{ comment.getStatus().label }} <li class="fa fa-caret-down"></li>
           </button>
           <ul class="dropdown-menu">
-            <li class="dropdown-header">Change status</li>
+            <li class="dropdown-header" translate>Change status</li>
             <li ng-repeat="status in statuses" ng-class="{active: comment.getStatus().label === status.label}">
               <a ng-click="comment.setStatus(status.property, status.value)">
                 <i class="fa fa-{{ status.icon }}"></i> {{ status.label }}

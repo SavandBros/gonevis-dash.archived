@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: app/comment/comment_modal/comment_modal_view.html:53
+#: app/comment/comment_view.html:46
+msgid "Change status"
+msgstr ""
+
+#: app/dolphin/dolphin_view.html:118
+#: app/dolphin/dolphin_view.html:70
+msgid "Delete"
+msgstr ""
+
+#: app/comment/comment_view.html:55
+msgid "Delete comment"
+msgstr ""
+
+#: app/dolphin/dolphin_view.html:116
+#: app/dolphin/dolphin_view.html:68
+msgid "Download"
+msgstr ""
+
+#: app/dolphin/dolphin_selection.html:14
+msgid "Files"
+msgstr ""
+
+#: app/basement/pagination/pagination_loadmore.html:5
+msgid "LOAD MORE"
+msgstr ""
+
+#: app/basement/search/search_noresult.html:3
+msgid "No results found for <b>{{ searchForm.searchedQuery }}</b>"
+msgstr ""
+
+#: app/dolphin/dolphin_selection.html:21
+msgid "Remove Media"
+msgstr ""
+
+#: app/comment/comment_modal/comment_modal_view.html:44
+msgid "Reply"
+msgstr ""
+
+#: app/basement/search/search_form.html:4
+msgid "Search"
+msgstr ""
+
+#: app/dolphin/dolphin_selection.html:68
+msgid "Select File"
+msgstr ""
+
+#: app/dolphin/dolphin_selection.html:6
+msgid "Select an image"
+msgstr ""
+
+#: app/dolphin/dolphin_selection.html:18
+msgid "Upload More"
+msgstr ""
+
+#: app/dolphin/dolphin_view.html:115
+msgid "View"
+msgstr ""
