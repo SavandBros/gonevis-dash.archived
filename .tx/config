@@ -1,12 +1,14 @@
 [main]
 host = https://www.transifex.com
 
-[gonevisDash.templates]
+[gonevis-dash.templates]
 file_filter = translations/templates/<lang>.pot
 source_file = translations/templates/en.pot
 source_lang = en
+type = PO
 
-[gonevisDash.scripts]
+[gonevis-dash.scripts]
 file_filter = translations/scripts/<lang>.pot
 source_file = translations/scripts/en.pot
 source_lang = en
+type = PO
