@@ -20,13 +20,14 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks("grunt-ng-constant");
+  grunt.loadNpmTasks('grunt-angular-gettext');
 
   var serveStatic = require("serve-static");
 
   // Configurable paths for the application
   var appConfig = {
     app: require("./bower.json").appPath || "app",
-    dist: "dist"
+    dist: "dist",
   };
 
   // Define the configuration for all the tasks
@@ -510,7 +511,25 @@ module.exports = function (grunt) {
           }
         }
       }
-    }
+    },
+    nggettext_extract: {
+      pot: {
+          files: {
+              'translations/templates/en.pot': ['<%= gonevisDash.app %>/**/*.html'],
+              'translations/scripts/en.pot': ['<%= gonevisDash.app %>/**/*.js']
+          }
+      }
+    },
+    nggettext_compile: {
+        all: {
+            options: {
+                module: 'gonevisDash.translations'
+            },
+            files: {
+                '<%= gonevisDash.app %>/basement/translations.js': ['translations/**/*.pot']
+            }
+        }
+    },
   });
 
   // release
