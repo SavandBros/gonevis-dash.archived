@@ -72,6 +72,7 @@
             <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
               <div class="progress s-mar-top-soft s-mar-no" ng-class="{active: file.progress != 100}">
                 <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
+                  <!-- TODO: Translate -->
                   <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
                 </div>
               </div>
