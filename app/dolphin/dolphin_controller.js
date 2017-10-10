@@ -16,11 +16,13 @@ function DolphinController($scope, $rootScope, Dolphin,
       $scope.currentTab = "dolphin";
     }
 
-    var payload = { site: site };
+    var payload = {
+      site: site
+    };
     API.Dolphins.get(payload,
-      function (data) {
+      function(data) {
         $scope.initialled = true;
-        angular.forEach(data.results, function (data) {
+        angular.forEach(data.results, function(data) {
           $scope.dolphins.push(new Dolphin(data));
         });
         $scope.dolphinForm = Pagination.paginate(
@@ -37,7 +39,7 @@ function DolphinController($scope, $rootScope, Dolphin,
      *
      * @param {string} view
      */
-    $scope.setView = function (view) {
+    $scope.setView = function(view) {
       $scope.view = view;
       localStorageService.set("dolphinView", view);
     };
@@ -98,12 +100,12 @@ function DolphinController($scope, $rootScope, Dolphin,
    * @param {array} files
    * @param {array} errorFiles
    */
-  $scope.uploadFile = function (files, errorFiles) {
+  $scope.uploadFile = function(files, errorFiles) {
     $scope.upload.files = files;
     $scope.errorFiles = errorFiles;
 
     angular.forEach($scope.upload.files,
-      function (file) {
+      function(file) {
         // UploadUrl payload
         var payload = {
           file_name: file.name,
@@ -111,8 +113,10 @@ function DolphinController($scope, $rootScope, Dolphin,
           mime_type: file.type
         };
         // Get data from UploadUrl
-        API.UploadUrl.post({ siteId: site }, payload,
-          function (data) {
+        API.UploadUrl.post({
+            siteId: site
+          }, payload,
+          function(data) {
             data.post_data.fields.file = file;
 
             // Upload the file
@@ -131,9 +135,9 @@ function DolphinController($scope, $rootScope, Dolphin,
             };
 
             file.upload.then(
-              function () {
+              function() {
                 API.Dolphins.post(payload,
-                  function (data) {
+                  function(data) {
                     file.done = true;
                     toaster.success("Upload Complete", file.name);
                     $scope.dolphins.unshift(new Dolphin(data));
@@ -141,10 +145,10 @@ function DolphinController($scope, $rootScope, Dolphin,
                   }
                 );
               },
-              function () {
+              function() {
                 toaster.error("Error", "Something went wrong, couldn't upload file.");
               },
-              function (event) {
+              function(event) {
                 file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
               }
             );
@@ -166,7 +170,7 @@ function DolphinController($scope, $rootScope, Dolphin,
    *
    * @param {Dolphin} dolphin
    */
-  $scope.action = function (dolphin) {
+  $scope.action = function(dolphin) {
     if ($rootScope.selectionMode) {
       $rootScope.$broadcast("gonevisDash.Dolphin:select", dolphin, source);
       $rootScope.selectionMode = false;
@@ -189,10 +193,10 @@ function DolphinController($scope, $rootScope, Dolphin,
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+  $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
     if (data.success) {
       $scope.dolphinForm.page = data.page;
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         $scope.dolphins.push(new Dolphin(data));
       });
     }
@@ -204,11 +208,11 @@ function DolphinController($scope, $rootScope, Dolphin,
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+  $scope.$on("gonevisDash.Search:submit", function(event, data) {
     if (data.success) {
       $scope.dolphinForm = data.dolphinForm;
       $scope.dolphins = [];
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         $scope.dolphins.push(new Dolphin(data));
       });
       $scope.searchForm = data.form;

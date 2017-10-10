@@ -15,16 +15,18 @@ function ResetPassController($scope, $state, AuthService, API, Password) {
    *
    * @param {object} form
    */
-  $scope.resetPassword = function (form) {
+  $scope.resetPassword = function(form) {
     // Save token to reset password
     AuthService.setToken($state.params.token);
     form.loading = true;
 
-    API.ResetPassword.save({ password: $scope.password.password },
-      function () {
+    API.ResetPassword.save({
+        password: $scope.password.password
+      },
+      function() {
         AuthService.signOut();
       },
-      function (data) {
+      function(data) {
         form.loading = false;
         form.errors = data.data;
       }

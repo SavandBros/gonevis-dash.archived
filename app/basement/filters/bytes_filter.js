@@ -1,7 +1,7 @@
 "use strict";
 
 function BytesFilter() {
-  return function (bytes, precision) {
+  return function(bytes, precision) {
     if (bytes === 0) {
       return "0 bytes";
     }

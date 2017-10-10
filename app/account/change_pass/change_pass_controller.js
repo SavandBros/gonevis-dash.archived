@@ -7,7 +7,7 @@ function ChangePassController($scope, $state, toaster, API, ModalsService) {
    * 
    * @param {object} form
    */
-  $scope.changePassword = function (form) {
+  $scope.changePassword = function(form) {
     // Is a new password
     if (form.old_password === form.password) {
       form.errors = {
@@ -27,11 +27,11 @@ function ChangePassController($scope, $state, toaster, API, ModalsService) {
     form.errors = null;
 
     API.ChangePassword.save(form,
-      function () {
+      function() {
         toaster.info("Done", "Password changed");
         $state.go("dash.user");
       },
-      function (data) {
+      function(data) {
         form.loading = false;
         form.errors = data.data;
       }
@@ -41,7 +41,7 @@ function ChangePassController($scope, $state, toaster, API, ModalsService) {
   /**
    * @desc Opens modal
    */
-  $scope.forgotPassword = function () {
+  $scope.forgotPassword = function() {
     ModalsService.open("forgotPassword", "ForgotModalController");
   };
 }

@@ -15,11 +15,14 @@ function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
    *
    * @param {object} form Form and dolphin data object
    */
-  $scope.update = function (form) {
+  $scope.update = function(form) {
     form.loading = true;
 
-    API.Dolphin.put({ siteId: form.data.site, fileId: form.data.id }, form.data,
-      function (data) {
+    API.Dolphin.put({
+        siteId: form.data.site,
+        fileId: form.data.id
+      }, form.data,
+      function(data) {
         form.loading = false;
         toaster.info("Done", "File " + form.data.meta_data.name + " updated.");
         $rootScope.$broadcast('gonevisDash.Dolphin:update', {
@@ -28,7 +31,7 @@ function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
           success: true
         });
       },
-      function (data) {
+      function(data) {
         form.loading = false;
         form.errors = data.data;
       }

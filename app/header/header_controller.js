@@ -23,8 +23,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
   function retrieveUser() {
     // Get fresh user data if is authenticated
     if (AuthService.isAuthenticated()) {
-      API.AccountRefresh.save({ token: AuthService.getToken() },
-        function (data) {
+      API.AccountRefresh.save({
+          token: AuthService.getToken()
+        },
+        function(data) {
           $scope.user = AuthService.setAuthenticatedUser(data.user);
         }
       );
@@ -51,7 +53,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
     }
     // Entry submission
     entry.create(
-      function (data) {
+      function(data) {
         // Prevent older cache
         entry.cache(true);
         toaster.success("Done", "Entry created!");
@@ -61,7 +63,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
           entryId: data.id
         });
       },
-      function () {
+      function() {
         toaster.error("Error", "Something went wrong, failed to create entry.");
       }
     );
@@ -74,7 +76,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
    *
    * @param {string} format
    */
-  $scope.nevis = function (format) {
+  $scope.nevis = function(format) {
     $scope.nevisFormat = format;
     if (format === "image") {
       DolphinService.viewSelection("headerNevis");
@@ -88,7 +90,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
    * @param {Dolphin} dolphin
    * @param {string} source
    */
-  $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
     // If we're dealing with quick nevis
     if (source === "headerNevis") {
       handleNevis($scope.nevisFormat, dolphin);
@@ -98,11 +100,13 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
   /**
    * @desc Authentication loads
    */
-  $scope.$on("gonevisDash.AuthService:Authenticated", function () {
+  $scope.$on("gonevisDash.AuthService:Authenticated", function() {
     constructor();
     // Go to main or new site page if has no other sites
     if ($scope.user.getSites().length > 0) {
-      $state.go("dash.main", { s: 0 });
+      $state.go("dash.main", {
+        s: 0
+      });
     } else {
       $state.go("site-new");
     }
@@ -114,7 +118,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
    * @param {Event} event
    * @param {boolean} sessionExpired
    */
-  $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
+  $scope.$on("gonevisDash.AuthService:SignedOut", function(event, sessionExpired) {
     // Session expired message
     if (sessionExpired) {
       toaster.clear($scope.signOutToast);
@@ -128,7 +132,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
   /**
    * @desc Email is not confirmed for an action
    */
-  $scope.$on("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess", function () {
+  $scope.$on("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess", function() {
     ModalsService.open("emailConfirmation", "EmailConfirmationController");
   });
 
@@ -158,9 +162,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
    * @param {Event} event
    * @param {string} tourName
    */
-  $scope.$on("gonevisDash.Tour.readyToCheck", function (event, tourName) {
+  $scope.$on("gonevisDash.Tour.readyToCheck", function(event, tourName) {
     // Wait for DOM to finish rendering
-    $timeout(function () {
+    $timeout(function() {
       $scope.tour = TourService.checkForView(tourName);
     });
   });

@@ -1,7 +1,7 @@
 "use strict";
 
 function Entry($rootScope, $state, API, Codekit, toaster) {
-  return function (data) {
+  return function(data) {
 
     /**
      * @desc Super variable for getting this in functions
@@ -33,7 +33,7 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
      *
      * @param {boolean} clear
      */
-    this.cache = function (clear) {
+    this.cache = function(clear) {
       $rootScope.cache.entry = clear ? null : this;
     };
 
@@ -43,12 +43,14 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
      * @param {string} key Property name
      * @param {string|number} value Property value
      */
-    this.setProperty = function (key, value) {
+    this.setProperty = function(key, value) {
       var payload = {};
       payload[key] = value;
 
-      API.Entry.patch({ entry_id: this.get.id }, payload,
-        function () {
+      API.Entry.patch({
+          entry_id: this.get.id
+        }, payload,
+        function() {
           self.get[key] = value;
           self.isSelected = true;
         }
@@ -63,16 +65,18 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
      *
      * @returns {Promise}
      */
-    this.create = function (success, fail) {
+    this.create = function(success, fail) {
       return API.Entry.save(this.get, success, fail);
     };
 
     /**
      * @desc Delete entries via API call
      */
-    this.remove = function () {
-      API.Entry.delete({ entry_id: this.get.id },
-        function () {
+    this.remove = function() {
+      API.Entry.delete({
+          entry_id: this.get.id
+        },
+        function() {
           self.isDeleted = true;
           self.isSelected = false;
           toaster.success("Done", "Entry deleted!");
@@ -89,7 +93,7 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
      *
      * @returns {string}
      */
-    this.getUrl = function () {
+    this.getUrl = function() {
       var params = "";
 
       if (this.get.status === Codekit.entryStatuses[0].id) {
@@ -102,7 +106,7 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     /**
      * @desc Add entry to navigation
      */
-    this.addToNavigation = function () {
+    this.addToNavigation = function() {
       $state.go("dash.navigation", {
         add: {
           label: this.get.title,

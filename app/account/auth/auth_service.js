@@ -14,7 +14,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    *
    * @returns {Account|boolean}
    */
-  this.getAuthenticatedUser = function (useInstance) {
+  this.getAuthenticatedUser = function(useInstance) {
     if (!this.isAuthenticated()) {
       return false;
     }
@@ -36,7 +36,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    *
    * @returns {object}
    */
-  this.parseJwt = function (token) {
+  this.parseJwt = function(token) {
     var base64Url = token.split(".")[1];
 
     if (typeof base64Url === "undefined") {
@@ -54,7 +54,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    *
    * @param {string} token
    */
-  this.setToken = function (token) {
+  this.setToken = function(token) {
     $cookies.put("JWT", token);
   };
 
@@ -63,7 +63,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    *
    * @returns {string}
    */
-  this.getToken = function () {
+  this.getToken = function() {
     return $cookies.get("JWT");
   };
 
@@ -74,7 +74,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @param {object} userData
    * @param {boolean} separateSites Set user data without effecting sites
    */
-  this.setAuthenticatedUser = function (userData, separateSites) {
+  this.setAuthenticatedUser = function(userData, separateSites) {
     // Sanitize tour object
     if (!userData.tour) {
       userData.tour = {
@@ -99,7 +99,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   /**
    * @desc Delete all stored authentiaction data
    */
-  this.unAuthenticate = function () {
+  this.unAuthenticate = function() {
     $cookies.remove("JWT");
     $cookies.remove("user");
     $cookies.remove("sessionid"); // Set by django admin
@@ -111,7 +111,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @desc Check if the current user is authenticated
    * @returns {boolean}
    */
-  this.isAuthenticated = function () {
+  this.isAuthenticated = function() {
     if (!$cookies.get("user")) {
       self.unAuthenticate();
       return false;
@@ -141,18 +141,18 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @param {function} success
    * @param {function} fail
    */
-  this.signIn = function (username, password, success, fail) {
+  this.signIn = function(username, password, success, fail) {
     API.Signin.post({
         username: username,
         password: password
       },
-      function (data) {
+      function(data) {
         self.setToken(data.token);
         self.setAuthenticatedUser(data.user);
         $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
         success(data);
       },
-      function (data) {
+      function(data) {
         fail(data);
       }
     );
@@ -161,7 +161,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   /**
    * @desc Clear credentials (sign user out)
    */
-  this.signOut = function () {
+  this.signOut = function() {
     self.unAuthenticate();
     $rootScope.$broadcast("gonevisDash.AuthService:SignedOut");
   };
@@ -171,7 +171,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    *
    * @returns {string} Site UUID
    */
-  this.getCurrentSite = function () {
+  this.getCurrentSite = function() {
     var sites = self.getAuthenticatedUser().sites;
     var siteIndex = $stateParams.s || 0;
 
@@ -183,7 +183,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    *
    * @param {boolean} remove Skip and remove
    */
-  this.setTrackingInfo = function (remove) {
+  this.setTrackingInfo = function(remove) {
     if (!Raven.isSetup()) {
       return;
     }
@@ -211,7 +211,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    *
    * @returns {boolean}
    */
-  this.getTourStatus = function (tour) {
+  this.getTourStatus = function(tour) {
     return self.getAuthenticatedUser().tour[tour] === true;
   };
 
@@ -221,12 +221,14 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @param {string} tour
    * @param {boolean} status
    */
-  this.setTourStatus = function (tour, status) {
+  this.setTourStatus = function(tour, status) {
     // Get user and update tour status
     var user = self.getAuthenticatedUser();
     user.tour[tour] = status;
     // Update from backend
-    API.UserUpdate.put({ tour: user.tour }, function (data) {
+    API.UserUpdate.put({
+      tour: user.tour
+    }, function(data) {
       // Get user data
       user = data;
     });

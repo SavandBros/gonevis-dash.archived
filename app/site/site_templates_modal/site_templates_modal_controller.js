@@ -6,8 +6,10 @@ function SiteTemplatesModalController($scope, $rootScope, API, AuthService, curr
     $scope.site = site;
     $scope.current = currentTemplate;
 
-    API.SiteTemplates.get({ siteId: AuthService.getCurrentSite() },
-      function (data) {
+    API.SiteTemplates.get({
+        siteId: AuthService.getCurrentSite()
+      },
+      function(data) {
         $scope.siteTemplates = data.templates;
       }
     );
@@ -18,8 +20,10 @@ function SiteTemplatesModalController($scope, $rootScope, API, AuthService, curr
    *
    * @param {object} template
    */
-  $scope.setTemplate = function (template) {
-    $rootScope.$broadcast("gonevisDash.SiteTemplatesModalController:setTemplate", { template: template });
+  $scope.setTemplate = function(template) {
+    $rootScope.$broadcast("gonevisDash.SiteTemplatesModalController:setTemplate", {
+      template: template
+    });
   };
 
   constructor();

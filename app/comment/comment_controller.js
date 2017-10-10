@@ -10,11 +10,13 @@ function CommentController($scope, $rootScope, API,
     $scope.comments = [];
     $scope.pageForm = {};
 
-    var payload = { site: AuthService.getCurrentSite() };
+    var payload = {
+      site: AuthService.getCurrentSite()
+    };
     API.Comments.get(payload,
-      function (data) {
+      function(data) {
         $scope.initialled = true;
-        angular.forEach(data.results, function (data) {
+        angular.forEach(data.results, function(data) {
           $scope.comments.push(new Comment(data));
         });
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
@@ -31,7 +33,7 @@ function CommentController($scope, $rootScope, API,
   /**
    * @desc Remove comment
    */
-  $rootScope.$on("gonevisDash.Comment:remove", function () {
+  $rootScope.$on("gonevisDash.Comment:remove", function() {
     Codekit.timeoutSlice($scope.comments);
   });
 
@@ -41,11 +43,11 @@ function CommentController($scope, $rootScope, API,
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+  $scope.$on("gonevisDash.Search:submit", function(event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
       $scope.comments = [];
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         $scope.comments.push(new Comment(data));
       });
       $scope.searchForm = data.form;
@@ -58,10 +60,10 @@ function CommentController($scope, $rootScope, API,
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+  $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         $scope.comments.push(new Comment(data));
       });
     }
@@ -73,7 +75,7 @@ function CommentController($scope, $rootScope, API,
    * @param {Event} event
    * @param {object} comment
    */
-  $scope.$on("gonevisDash.Comment:reply", function (event, comment) {
+  $scope.$on("gonevisDash.Comment:reply", function(event, comment) {
     $scope.comments.unshift(new Comment(comment));
   });
 

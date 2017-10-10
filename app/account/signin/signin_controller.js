@@ -17,16 +17,16 @@ function SigninController($scope, $stateParams, AuthService, ModalsService, toas
    *
    * @param {object} form
    */
-  $scope.signin = function (form) {
+  $scope.signin = function(form) {
     form.loading = true;
 
     AuthService.signIn(form.username, form.password,
-      function (data) {
+      function(data) {
         form.loading = false;
         form.errors = null;
         toaster.info("Logged in", "Welcome back " + data.user.username);
       },
-      function (data) {
+      function(data) {
         form.loading = false;
         form.errors = data.data;
       }
@@ -36,7 +36,7 @@ function SigninController($scope, $stateParams, AuthService, ModalsService, toas
   /**
    * @desc Open up forgot password modal
    */
-  $scope.forgotPassword = function () {
+  $scope.forgotPassword = function() {
     ModalsService.open("forgotPassword", "ForgotModalController");
   };
 

@@ -12,15 +12,19 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     $scope.dolphinService = DolphinService;
     $scope.postPerPage = new Array(25);
 
-    API.SiteSettings.get({ siteId: site },
-      function (data) {
+    API.SiteSettings.get({
+        siteId: site
+      },
+      function(data) {
         $scope.site = data;
         Codekit.setTitle($scope.site.title);
       }
     );
 
-    API.SiteTemplateConfig.get({ siteId: site },
-      function (data) {
+    API.SiteTemplateConfig.get({
+        siteId: site
+      },
+      function(data) {
         $scope.siteTemplate = data.template_config;
         $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
       }
@@ -33,7 +37,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
    * @param {string} key
    * @param {string} value
    */
-  $scope.updateSite = function (key, value) {
+  $scope.updateSite = function(key, value) {
 
     var keyString = key.replace("_", " ");
 
@@ -42,8 +46,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     var payload = {};
     payload[key] = value;
 
-    API.SiteUpdate.put({ siteId: site }, payload,
-      function (data) {
+    API.SiteUpdate.put({
+        siteId: site
+      }, payload,
+      function(data) {
         if (key === "cover_image" || key === "logo") {
           $scope.site.media[key] = data.media[key];
         } else {
@@ -58,7 +64,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         toaster.clear(toasters[key]);
         toaster.info("Done", "Site " + keyString + " updated", 3000);
       },
-      function () {
+      function() {
         toaster.error("Error", "Something went wrong, couldn't update " + keyString);
       }
     );
@@ -67,7 +73,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   /**
    * @desc Delete site via API call
    */
-  $scope.remove = function () {
+  $scope.remove = function() {
     // How sure? Like confirm-a-confirm sure?
     if (window.prompt(
         "Delete site?\nDeleting site can not be undone!\n\nType in the site title to confirm:"
@@ -75,8 +81,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
       return;
     }
 
-    API.Site.delete({ siteId: site },
-      function () {
+    API.Site.delete({
+        siteId: site
+      },
+      function() {
         // Remove site from user object
         $scope.user.sites.splice($stateParams.s, 1);
         // Update local user object
@@ -87,7 +95,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
         // Go to main or new site page if has no other sites
         $state.go($scope.user.sites.length > 0 ? "dash.main" : "site-new");
       },
-      function () {
+      function() {
         toaster.error("Error", "Something went wrong, couldn't delete site");
       }
     );
@@ -98,7 +106,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
    *
    * @param {string} image Image property of site (logo, cover, etc)
    */
-  $scope.selectImage = function (image) {
+  $scope.selectImage = function(image) {
     $scope.editing = image;
     $scope.dolphinService.viewSelection("siteImage");
   };
@@ -106,15 +114,19 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   /**
    * @desc Save template config
    */
-  $scope.saveConfig = function () {
+  $scope.saveConfig = function() {
     $scope.loadingTemplate = true;
 
-    API.SetSiteTemplateConfig.put({ siteId: site }, { config_fields: $scope.siteTemplate.fields },
-      function () {
+    API.SetSiteTemplateConfig.put({
+        siteId: site
+      }, {
+        config_fields: $scope.siteTemplate.fields
+      },
+      function() {
         $scope.loadingTemplate = false;
         toaster.info("Done", "Site template updated");
       },
-      function (data) {
+      function(data) {
         $scope.loadingTemplate = false;
         toaster.error("Error", data.detail ? data.detail : "Something went wrong, we couldn't update site template.");
       }
@@ -128,7 +140,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
    * @param {Dolphin} dolphin
    * @param {string} source
    */
-  $scope.$on("gonevisDash.Dolphin:select", function (data, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function(data, dolphin, source) {
     if (source === "siteImage") {
       $scope.site.media[$scope.editing] = dolphin ? dolphin.get.id : null;
       $scope.updateSite($scope.editing, dolphin ? dolphin.get.id : null);
@@ -141,11 +153,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function (event, data) {
+  $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function(event, data) {
     $scope.loadingTemplate = true;
 
-    API.SiteSetTemplate.put({ siteId: site }, { site_template_id: data.template.id },
-      function () {
+    API.SiteSetTemplate.put({
+        siteId: site
+      }, {
+        site_template_id: data.template.id
+      },
+      function() {
         $scope.loadingTemplate = false;
         $scope.siteTemplate = data.template.config;
         $scope.siteTemplate.hasFields = !Codekit.isEmptyObj(
@@ -154,7 +170,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
 
         toaster.info("Done", "Site template updated");
       },
-      function () {
+      function() {
         toaster.error("Error", "Something went wrong, we couldn't update site template.");
       }
     );
@@ -163,7 +179,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   /**
    * @desc Open modal
    */
-  $scope.siteTemplates = function () {
+  $scope.siteTemplates = function() {
     ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
       site: $scope.site,
       currentTemplate: $scope.siteTemplate

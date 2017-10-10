@@ -44,11 +44,11 @@ function ModalsService($rootScope, ModalService) {
       templateUrl: templates[template],
       controller: controller,
       inputs: data
-    }).then(function (modal) {
+    }).then(function(modal) {
       modals[template] = modal;
       modals[template].element.modal();
 
-      angular.element("#" + template).on("hidden.bs.modal", function () {
+      angular.element("#" + template).on("hidden.bs.modal", function() {
         $rootScope.$broadcast("goNevis.ModalsService.close", template);
       });
     });
@@ -63,7 +63,7 @@ function ModalsService($rootScope, ModalService) {
     // Trigger the close button
     angular.element("#" + template + " [data-dismiss=modal]").trigger("click");
     // Make sure backdrop is gone
-    setTimeout(function () {
+    setTimeout(function() {
       if (!angular.element(".modal.fade.in").length) {
         angular.element("body.backdrop").removeClass("backdrop");
       }

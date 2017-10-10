@@ -7,8 +7,10 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
     if ($state.params.token) {
       $scope.loading = true;
 
-      API.EmailConfirmation.save({}, { token: $state.params.token },
-        function (data) {
+      API.EmailConfirmation.save({}, {
+          token: $state.params.token
+        },
+        function(data) {
           AuthService.setToken(data.token);
           AuthService.setAuthenticatedUser(data.user);
           $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
@@ -16,7 +18,7 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
           $scope.loading = false;
           toaster.success("Done", "Thanks for verifying your email.");
         },
-        function () {
+        function() {
           $scope.loading = false;
           $scope.error = true;
         }
@@ -36,14 +38,16 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
    *
    * @param {object} form
    */
-  $scope.resend = function (form) {
-    API.EmailConfirmationResend.save({ email: form.email },
-      function () {
+  $scope.resend = function(form) {
+    API.EmailConfirmationResend.save({
+        email: form.email
+      },
+      function() {
         ModalsService.close("forgotPassword");
         toaster.success("Sent", "Email verification sent to " + form.email);
         $state.go("signin");
       },
-      function (data) {
+      function(data) {
         form.errors = data.data;
       }
     );

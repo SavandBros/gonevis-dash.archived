@@ -4,7 +4,9 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
 
   function constructor() {
     $scope.view = localStorageService.get("tagView") || "list";
-    $scope.filters = { name: "" };
+    $scope.filters = {
+      name: ""
+    };
     $scope.search = Search;
     $scope.pageForm = {};
     $scope.tags = [];
@@ -15,8 +17,8 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
     };
 
     API.Tags.get(payload,
-      function (data) {
-        angular.forEach(data.results, function (data) {
+      function(data) {
+        angular.forEach(data.results, function(data) {
           $scope.tags.push(new Tag(data));
         });
         $scope.initialled = true;
@@ -31,7 +33,7 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
    *
    * @param {string} view
    */
-  $scope.setView = function (view) {
+  $scope.setView = function(view) {
     $scope.view = view;
     localStorageService.set("tagView", view);
   };
@@ -39,9 +41,11 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
   /**
    * @desc Search through tags
    */
-  $scope.search = function () {
-    API.Tags.get({ search: $scope.filters.name },
-      function (data) {
+  $scope.search = function() {
+    API.Tags.get({
+        search: $scope.filters.name
+      },
+      function(data) {
         $scope.tags = data.results;
         if (!data.count) {
           $scope.noResults = true;
@@ -63,7 +67,7 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Tag:create", function (event, data) {
+  $scope.$on("gonevisDash.Tag:create", function(event, data) {
     if (data.success) {
       $scope.tags.push(new Tag(data.data));
     }
@@ -75,10 +79,10 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+  $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         $scope.tags.push(new Tag(data));
       });
     }
@@ -90,11 +94,11 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+  $scope.$on("gonevisDash.Search:submit", function(event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
       $scope.tags = [];
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         $scope.tags.push(new Tag(data));
       });
       $scope.searchForm = data.form;

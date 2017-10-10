@@ -4,7 +4,9 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
 
   function constructor() {
     $scope.view = localStorageService.get("entryView") || "list";
-    $scope.filters = { title: "" };
+    $scope.filters = {
+      title: ""
+    };
     $scope.statuses = Codekit.entryStatuses;
     $scope.search = Search;
     $scope.pageForm = {};
@@ -41,11 +43,13 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
       value: false
     }];
 
-    var payload = { site: AuthService.getCurrentSite() };
+    var payload = {
+      site: AuthService.getCurrentSite()
+    };
 
     API.Entries.get(payload,
-      function (data) {
-        angular.forEach(data.results, function (item) {
+      function(data) {
+        angular.forEach(data.results, function(item) {
           $scope.entries.push(new Entry(item));
         });
         $scope.initialled = true;
@@ -61,8 +65,8 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
    * @param {string} key
    * @param {boolean|number} value
    */
-  $scope.setProperty = function (key, value) {
-    angular.forEach($scope.entries, function (entry) {
+  $scope.setProperty = function(key, value) {
+    angular.forEach($scope.entries, function(entry) {
       if (entry.isSelected) {
         entry.setProperty(key, value);
       }
@@ -74,7 +78,7 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
    *
    * @param {string} view
    */
-  $scope.setView = function (view) {
+  $scope.setView = function(view) {
     $scope.view = view;
     localStorageService.set("entryView", view);
   };
@@ -82,10 +86,10 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
   /**
    * @desc Remove selected entries
    */
-  $scope.removeSelected = function () {
+  $scope.removeSelected = function() {
 
     if (confirm("Delete selected posts?\nDeleting posts can not be undone!") === true) {
-      angular.forEach($scope.entries, function (entry) {
+      angular.forEach($scope.entries, function(entry) {
         if (entry.isSelected) {
           entry.remove();
         }
@@ -98,9 +102,9 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
   /**
    * @desc Count selected entries
    */
-  $scope.countSelected = function () {
+  $scope.countSelected = function() {
     $scope.selectCount = 0;
-    angular.forEach($scope.entries, function (entry) {
+    angular.forEach($scope.entries, function(entry) {
       if (entry.isSelected) {
         $scope.selectCount++;
       }
@@ -118,10 +122,10 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+  $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
     if (data.success) {
       $scope.pageForm.page = data.page;
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         $scope.entries.push(new Entry(data));
       });
     }
@@ -133,11 +137,11 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Search:submit", function (event, data) {
+  $scope.$on("gonevisDash.Search:submit", function(event, data) {
     if (data.success) {
       $scope.pageForm = data.pageForm;
       $scope.entries = [];
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         $scope.entries.push(new Entry(data));
       });
       $scope.searchForm = data.form;

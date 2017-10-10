@@ -10,7 +10,7 @@ function TimeSinceFilter() {
 
     if (typeof date == "string") date = new Date(date);
 
-    var seconds = reversed ? Math.floor((date - new Date()) / 1000): Math.floor((new Date() - date) / 1000);
+    var seconds = reversed ? Math.floor((date - new Date()) / 1000) : Math.floor((new Date() - date) / 1000);
     var INTERVALS = {
       YEAR: {
         seconds: 31536000,

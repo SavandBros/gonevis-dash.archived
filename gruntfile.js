@@ -6,7 +6,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   process.env.QT_QPA_PLATFORM = "";
 
   // Time how long tasks take. Can help when optimizing build times
@@ -44,7 +44,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ["<%= gonevisDash.app %>/**/*.js"],
-        tasks: ["newer:jshint:all", "newer:jscs:all"],
+        tasks: ["jsbeautifier", "newer:jshint:all", "newer:jscs:all"],
         options: {
           livereload: "<%= connect.options.livereload %>"
         }
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               serveStatic(".tmp"),
               connect().use(
@@ -103,7 +103,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           port: 9001,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               serveStatic(".tmp"),
               serveStatic("test"),
@@ -180,7 +180,9 @@ module.exports = function (grunt) {
     postcss: {
       options: {
         processors: [
-          require("autoprefixer-core")({ browsers: ["last 1 version"] })
+          require("autoprefixer-core")({
+            browsers: ["last 1 version"]
+          })
         ]
       },
       server: {
@@ -514,21 +516,38 @@ module.exports = function (grunt) {
     },
     nggettext_extract: {
       pot: {
-          files: {
-              'translations/templates/en.pot': ['<%= gonevisDash.app %>/**/*.html'],
-              'translations/scripts/en.pot': ['<%= gonevisDash.app %>/**/*.js']
-          }
+        files: {
+          'translations/templates/en.pot': ['<%= gonevisDash.app %>/**/*.html'],
+          'translations/scripts/en.pot': ['<%= gonevisDash.app %>/**/*.js']
+        }
       }
     },
     nggettext_compile: {
-        all: {
-            options: {
-                module: 'gonevisDash.translations'
-            },
-            files: {
-                '<%= gonevisDash.app %>/basement/translations.js': ['translations/**/*.pot']
-            }
+      all: {
+        options: {
+          module: 'gonevisDash.translations'
+        },
+        files: {
+          '<%= gonevisDash.app %>/basement/translations.js': ['translations/**/*.pot']
         }
+      }
+    },
+    jsbeautifier: {
+      "default": {
+        src: [
+          "<%= gonevisDash.app %>/**/*.js",
+          'package.json',
+          'Gruntfile.js'
+        ],
+        options: {
+          js: {
+            indentLevel: 0,
+            indentSize: 2,
+            indentWithTabs: false,
+            spaceInParen: false
+          }
+        }
+      }
     },
   });
 
@@ -554,6 +573,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask("staging", [
     "clean:dist",
+    "jsbeautifier",
     "ngconstant:staging",
     "wiredep",
     "useminPrepare",
@@ -572,7 +592,7 @@ module.exports = function (grunt) {
   ]);
 
 
-  grunt.registerTask("serve", "Compile then start a connect web server", function (target) {
+  grunt.registerTask("serve", "Compile then start a connect web server", function(target) {
     if (target === "dist") {
       return grunt.task.run(["build", "connect:dist:keepalive"]);
     }
@@ -580,6 +600,7 @@ module.exports = function (grunt) {
     if (target === "staging") {
       return grunt.task.run([
         "clean:server",
+        "jsbeautifier",
         "ngconstant:staging",
         "wiredep",
         "concurrent:server",
@@ -591,6 +612,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       "clean:server",
+      "jsbeautifier",
       "ngconstant:development",
       "wiredep",
       "concurrent:server",
@@ -602,6 +624,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask("test", [
     "clean:server",
+    "jsbeautifier",
     "ngconstant:development",
     "wiredep",
     "concurrent:test",
@@ -612,6 +635,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask("build", [
     "clean:dist",
+    "jsbeautifier",
     "ngconstant:production",
     "wiredep",
     "useminPrepare",
@@ -637,7 +661,7 @@ module.exports = function (grunt) {
   ]);
 
   // Rock'nRolla
-  grunt.registerTask("rock", function () {
+  grunt.registerTask("rock", function() {
     var isProduction = (process.env.PRODUCTION !== undefined && process.env.PRODUCTION === "true");
 
     if (isProduction) {

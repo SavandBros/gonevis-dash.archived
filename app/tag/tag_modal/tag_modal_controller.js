@@ -20,7 +20,7 @@ function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
    * @param {Dolphin} dolphin
    * @param {string} source
    */
-  $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
     if (source === "tagCover") {
       $scope.form.data.cover_image = dolphin ? dolphin.get.id : null;
     }
@@ -29,21 +29,21 @@ function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
   /**
    * @desc Remove tag callback
    */
-  $scope.$on("gonevisDash.Tag:remove", function () {
+  $scope.$on("gonevisDash.Tag:remove", function() {
     $scope.modalsService.close("tag");
   });
 
   /**
    * @desc Slugify title and update slug
    */
-  $scope.updateSlug = function () {
+  $scope.updateSlug = function() {
     $scope.form.data.slug = Slug.slugify($scope.form.data.name);
   };
 
   /**
    * @desc Update modal
    */
-  $scope.$on("gonevisDash.Tag:update", function (event, data) {
+  $scope.$on("gonevisDash.Tag:update", function(event, data) {
     $scope.form.data = data.data;
   });
 

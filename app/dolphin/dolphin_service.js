@@ -1,7 +1,7 @@
 "use strict";
 
 function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
-  return function (data) {
+  return function(data) {
 
     /**
      * @private
@@ -11,7 +11,7 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
     /**
      * @private
      */
-    var constructor = function () {
+    var constructor = function() {
       self.extension = self.get.ext.split("/")[1].toUpperCase();
       self.get.site = AuthService.getCurrentSite();
     };
@@ -32,9 +32,12 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
     /**
      * @desc Delete a dolphin and broadcast it
      */
-    this.remove = function () {
-      API.Dolphin.remove({ siteId: this.get.site, fileId: this.get.id },
-        function (data) {
+    this.remove = function() {
+      API.Dolphin.remove({
+          siteId: this.get.site,
+          fileId: this.get.id
+        },
+        function(data) {
           self.isDeleted = true;
           toaster.success("Done", "Deleted " + self.get.meta_data.name);
 
@@ -44,7 +47,7 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
             success: true
           });
         },
-        function (data) {
+        function(data) {
           toaster.error("Error", "Something went wrong, couldn't remove file.");
 
           $rootScope.$broadcast("gonevisDash.Dolphin:remove", {
@@ -59,8 +62,10 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
     /**
      * @desc Dolphin view via modal
      */
-    this.view = function () {
-      ModalsService.open("dolphin", "DolphinModalController", { dolphin: self });
+    this.view = function() {
+      ModalsService.open("dolphin", "DolphinModalController", {
+        dolphin: self
+      });
     };
 
     constructor();
@@ -85,7 +90,9 @@ function DolphinService($rootScope, ModalsService) {
    */
   function viewSelection(source) {
     $rootScope.selectionMode = true;
-    ModalsService.open("dolphinSelection", "DolphinController", { source: source });
+    ModalsService.open("dolphinSelection", "DolphinController", {
+      source: source
+    });
   }
 
   return {

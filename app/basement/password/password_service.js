@@ -1,7 +1,7 @@
 "use strict";
 
 function Password() {
-  return function () {
+  return function() {
 
     /**
      * @private
@@ -46,7 +46,7 @@ function Password() {
     /**
      * @desc Update strength based on password
      */
-    this.updateStrength = function () {
+    this.updateStrength = function() {
 
       var strongness = 0;
 
@@ -88,7 +88,7 @@ function Password() {
      *
      * @returns {string}
      */
-    this.getStrength = function () {
+    this.getStrength = function() {
       self.updateStrength();
       return strengthWords[self.strength];
     };
@@ -98,7 +98,7 @@ function Password() {
      *
      * @returns {number}
      */
-    this.getPercentage = function () {
+    this.getPercentage = function() {
       self.updateStrength();
       return (self.strength / (strengthWords.length - 1)) * 100;
     };
@@ -108,7 +108,7 @@ function Password() {
      *
      * @returns {string}
      */
-    this.getColor = function () {
+    this.getColor = function() {
       return strengthColors[self.strength];
     };
 
@@ -117,7 +117,7 @@ function Password() {
      *
      * @returns {boolean}
      */
-    this.isValid = function () {
+    this.isValid = function() {
       if (!self.password) {
         return false;
       }
