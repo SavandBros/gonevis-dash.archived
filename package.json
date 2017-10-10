@@ -3,8 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "devDependencies": {
-    "grunt-angular-gettext": "^2.3.6",
-    "grunt-jsbeautifier": "^0.2.13",
     "grunt-jscs": "^3.0.1",
     "grunt-karma": "^2.0.0",
     "grunt-shell": "^2.1.0",
@@ -40,12 +38,14 @@
     "grunt-svgmin": "^4.0.0",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^3.0.1",
+    "grunt-angular-gettext": "^2.3.6",
+    "grunt-jsbeautifier": "^0.2.13",
     "gzippo": "^0.2.0",
     "jit-grunt": "^0.10.0",
     "morgan": "^1.7.0",
     "serve-static": "^1.11.1",
     "jshint-stylish": "^2.2.0",
-    "time-grunt": "^1.0.0"
+    "time-grunt": "^1.0.0",
   },
   "engines": {
     "node": ">=0.10.0"
