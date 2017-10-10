@@ -549,6 +549,20 @@ module.exports = function(grunt) {
         }
       }
     },
+    shell: {
+      gitPush: {
+        command: 'git push origin master'
+      },
+      gitPull: {
+        command: 'git pull origin master'
+      },
+      txPush: {
+        command: 'tx push -s'
+      },
+      txPull: {
+        command: 'tx pull -a'
+      }
+    }
   });
 
   // release
