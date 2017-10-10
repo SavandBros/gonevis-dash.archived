@@ -12,8 +12,24 @@ msgstr ""
 msgid "ABOUT"
 msgstr ""
 
+#: app/entry/entry_view.html:49
+msgid "Action"
+msgstr ""
+
+#: app/entry/entry_view.html:108
+msgid "Add to navigation"
+msgstr ""
+
+#: app/entry/includes/entry_form.html:77
+msgid "Advanced options"
+msgstr ""
+
 #: app/account/signup/signup_view.html:53
 msgid "Already have an account?"
+msgstr ""
+
+#: app/entry/includes/entry_form.html:27
+msgid "CONTENT"
 msgstr ""
 
 #: app/account/change_pass/change_pass_view.html:23
@@ -35,17 +51,35 @@ msgstr ""
 msgid "Change status"
 msgstr ""
 
+#: app/entry/includes/entry_form.html:115
+msgid "Comment enabled"
+msgstr ""
+
+#: app/entry/entry_view.html:92
+msgid "Comments enabled"
+msgstr ""
+
 #: app/account/change_pass/change_pass_view.html:18
 #: app/account/reset_pass/reset_pass_view.html:25
 msgid "Confirm new password"
+msgstr ""
+
+#: app/entry/entry_view.html:82
+msgid "Creation"
 msgstr ""
 
 #: app/account/change_pass/change_pass_view.html:9
 msgid "Current Password"
 msgstr ""
 
+#: app/entry/includes/entry_form.html:14
+msgid "DRAFT MODE"
+msgstr ""
+
 #: app/dolphin/dolphin_view.html:118
 #: app/dolphin/dolphin_view.html:70
+#: app/entry/entry_view.html:114
+#: app/entry/includes/entry_form.html:144
 msgid "Delete"
 msgstr ""
 
@@ -74,6 +108,11 @@ msgstr ""
 
 #: app/account/email_confirmation/email_confirmation_view.html:15
 msgid "Email address"
+msgstr ""
+
+#: app/entry/entry_view.html:95
+#: app/entry/includes/entry_form.html:120
+msgid "Featured"
 msgstr ""
 
 #: app/dolphin/dolphin_modal/dolphin_modal_view.html:15
@@ -105,6 +144,10 @@ msgstr ""
 msgid "LOCATION"
 msgstr ""
 
+#: app/entry/includes/entry_form.html:85
+msgid "Lead paragraph"
+msgstr ""
+
 #: app/account/signin/signin_view.html:36
 #: app/account/signup/signup_view.html:53
 msgid "Login"
@@ -112,6 +155,10 @@ msgstr ""
 
 #: app/account/signin/signin_view.html:8
 msgid "Login <small>to dash</small>"
+msgstr ""
+
+#: app/entry/includes/entry_form.html:103
+msgid "Meta description (200 chars)"
 msgstr ""
 
 #: app/account/signup/signup_view.html:28
@@ -143,8 +190,16 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: app/entry/entry_view.html:98
+msgid "Passworded"
+msgstr ""
+
 #: app/account/reset_pass/reset_pass_view.html:27
 msgid "Passwords don't match!"
+msgstr ""
+
+#: app/entry/entry_view.html:81
+msgid "Publication"
 msgstr ""
 
 #: app/account/user/user_view.html:59
@@ -162,6 +217,10 @@ msgstr ""
 
 #: app/dolphin/dolphin_selection.html:21
 msgid "Remove Media"
+msgstr ""
+
+#: app/entry/entry_view.html:60
+msgid "Remove selected"
 msgstr ""
 
 #: app/comment/comment_modal/comment_modal_view.html:48
@@ -192,6 +251,10 @@ msgstr ""
 msgid "Select an image"
 msgstr ""
 
+#: app/entry/includes/entry_form.html:66
+msgid "Select cover image"
+msgstr ""
+
 #: app/account/email_confirmation/email_confirmation_modal.html:14
 msgid "Send a verification link to my email."
 msgstr ""
@@ -200,12 +263,28 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
+#: app/entry/includes/entry_form.html:91
+msgid "Slug (URL)"
+msgstr ""
+
+#: app/entry/includes/entry_form.html:109
+msgid "Start publication"
+msgstr ""
+
+#: app/entry/includes/entry_form.html:22
+msgid "TITLE"
+msgstr ""
+
 #: app/account/email_confirmation/email_confirmation_modal.html:11
 msgid "To access all GoNevis features, please verify your email first."
 msgstr ""
 
 #: app/comment/comment_modal/comment_modal_view.html:25
 msgid "To:"
+msgstr ""
+
+#: app/entry/includes/entry_form.html:142
+msgid "UPDATE"
 msgstr ""
 
 #: app/dolphin/dolphin_modal/dolphin_modal_view.html:31
@@ -242,4 +321,9 @@ msgstr ""
 
 #: app/dolphin/dolphin_view.html:115
 msgid "View"
+msgstr ""
+
+#: app/entry/entry_view.html:103
+#: app/entry/includes/entry_form.html:69
+msgid "View on site"
 msgstr ""
