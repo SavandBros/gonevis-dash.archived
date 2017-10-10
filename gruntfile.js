@@ -20,7 +20,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks("grunt-ng-constant");
-  grunt.loadNpmTasks('grunt-angular-gettext');
+  grunt.loadNpmTasks("grunt-angular-gettext");
 
   var serveStatic = require("serve-static");
 
@@ -517,18 +517,18 @@ module.exports = function(grunt) {
     nggettext_extract: {
       pot: {
         files: {
-          'translations/templates/en.pot': ['<%= gonevisDash.app %>/**/*.html'],
-          'translations/scripts/en.pot': ['<%= gonevisDash.app %>/**/*.js']
+          "translations/templates/en.pot": ["<%= gonevisDash.app %>/**/*.html"],
+          "translations/scripts/en.pot": ["<%= gonevisDash.app %>/**/*.js"]
         }
       }
     },
     nggettext_compile: {
       all: {
         options: {
-          module: 'gonevisDash.translations'
+          module: "gonevisDash.translations"
         },
         files: {
-          '<%= gonevisDash.app %>/basement/translations.js': ['translations/**/*.pot']
+          "<%= gonevisDash.app %>/basement/translations.js": ["translations/**/*.pot"]
         }
       }
     },
@@ -536,8 +536,8 @@ module.exports = function(grunt) {
       "default": {
         src: [
           "<%= gonevisDash.app %>/**/*.js",
-          'package.json',
-          'Gruntfile.js'
+          "package.json",
+          "Gruntfile.js"
         ],
         options: {
           js: {
@@ -551,16 +551,16 @@ module.exports = function(grunt) {
     },
     shell: {
       gitPush: {
-        command: 'git push origin master'
+        command: "git push origin master"
       },
       gitPull: {
-        command: 'git pull origin master'
+        command: "git pull origin master"
       },
       txPush: {
-        command: 'tx push -s'
+        command: "tx push -s"
       },
       txPull: {
-        command: 'tx pull -a'
+        command: "tx pull -a"
       }
     }
   });
