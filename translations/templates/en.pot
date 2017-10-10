@@ -4,9 +4,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: app/comment/comment_modal/comment_modal_view.html:53
+#: app/account/reset_pass/reset_pass_view.html:46
+msgid "<span class=\"s-mar-no o-fade\">Back to </span> <a ui-sref=\"signin\">Login</a>"
+msgstr ""
+
+#: app/account/user/user_view.html:32
+msgid "ABOUT"
+msgstr ""
+
+#: app/account/signup/signup_view.html:53
+msgid "Already have an account?"
+msgstr ""
+
+#: app/account/change_pass/change_pass_view.html:23
+msgid "Change"
+msgstr ""
+
+#: app/account/change_pass/change_pass_view.html:6
+#: app/account/reset_pass/reset_pass_view.html:42
+#: app/account/user/user_view.html:66
+msgid "Change Password"
+msgstr ""
+
+#: app/account/user/user_view.html:13
+msgid "Change photo"
+msgstr ""
+
+#: app/comment/comment_modal/comment_modal_view.html:55
 #: app/comment/comment_view.html:46
 msgid "Change status"
+msgstr ""
+
+#: app/account/change_pass/change_pass_view.html:18
+#: app/account/reset_pass/reset_pass_view.html:25
+msgid "Confirm new password"
+msgstr ""
+
+#: app/account/change_pass/change_pass_view.html:9
+msgid "Current Password"
 msgstr ""
 
 #: app/dolphin/dolphin_view.html:118
@@ -18,29 +53,131 @@ msgstr ""
 msgid "Delete comment"
 msgstr ""
 
+#: app/dolphin/dolphin_modal/dolphin_modal_view.html:20
+msgid "Description"
+msgstr ""
+
+#: app/account/signin/signin_view.html:40
+msgid "Don't have an account?"
+msgstr ""
+
+#: app/dolphin/dolphin_modal/dolphin_modal_view.html:34
 #: app/dolphin/dolphin_view.html:116
 #: app/dolphin/dolphin_view.html:68
 msgid "Download"
+msgstr ""
+
+#: app/account/forgot_modal/forgot_modal_view.html:14
+#: app/account/signup/signup_view.html:12
+msgid "Email"
+msgstr ""
+
+#: app/account/email_confirmation/email_confirmation_view.html:15
+msgid "Email address"
+msgstr ""
+
+#: app/dolphin/dolphin_modal/dolphin_modal_view.html:15
+msgid "File name"
 msgstr ""
 
 #: app/dolphin/dolphin_selection.html:14
 msgid "Files"
 msgstr ""
 
+#: app/account/forgot_modal/forgot_modal_view.html:6
+msgid "Forgot Password"
+msgstr ""
+
+#: app/account/change_pass/change_pass_view.html:27
+#: app/account/signin/signin_view.html:42
+msgid "Forgot password?"
+msgstr ""
+
+#: app/account/forgot_modal/forgot_modal_view.html:19
+msgid "Get Reset Link"
+msgstr ""
+
 #: app/basement/pagination/pagination_loadmore.html:5
 msgid "LOAD MORE"
+msgstr ""
+
+#: app/account/user/user_view.html:45
+msgid "LOCATION"
+msgstr ""
+
+#: app/account/signin/signin_view.html:36
+#: app/account/signup/signup_view.html:53
+msgid "Login"
+msgstr ""
+
+#: app/account/signin/signin_view.html:8
+msgid "Login <small>to dash</small>"
+msgstr ""
+
+#: app/account/signup/signup_view.html:28
+msgid "Must be at least 8 characters."
+msgstr ""
+
+#: app/navigation/navigation_view.html:11
+msgid "Navigations"
+msgstr ""
+
+#: app/account/change_pass/change_pass_view.html:14
+msgid "New Password"
+msgstr ""
+
+#: app/account/reset_pass/reset_pass_view.html:15
+msgid "New password"
 msgstr ""
 
 #: app/basement/search/search_noresult.html:3
 msgid "No results found for <b>{{ searchForm.searchedQuery }}</b>"
 msgstr ""
 
+#: app/account/email_confirmation/email_confirmation_view.html:11
+msgid "Oh... Invalid verification link."
+msgstr ""
+
+#: app/account/signin/signin_view.html:22
+#: app/account/signup/signup_view.html:29
+msgid "Password"
+msgstr ""
+
+#: app/account/reset_pass/reset_pass_view.html:27
+msgid "Passwords don't match!"
+msgstr ""
+
+#: app/account/user/user_view.html:59
+msgid "Receive email notification"
+msgstr ""
+
+#: app/account/signin/signin_view.html:40
+#: app/account/signup/signup_view.html:47
+msgid "Register"
+msgstr ""
+
+#: app/account/user/user_view.html:14
+msgid "Remove"
+msgstr ""
+
 #: app/dolphin/dolphin_selection.html:21
 msgid "Remove Media"
 msgstr ""
 
-#: app/comment/comment_modal/comment_modal_view.html:44
+#: app/comment/comment_modal/comment_modal_view.html:48
 msgid "Reply"
+msgstr ""
+
+#: app/account/email_confirmation/email_confirmation_view.html:18
+msgid "Resend Verification Link"
+msgstr ""
+
+#: app/account/reset_pass/reset_pass_view.html:9
+msgid "Reset Password"
+msgstr ""
+
+#: app/navigation/navigation_view.html:60
+msgid "Save Changes"
 msgstr ""
 
 #: app/basement/search/search_form.html:4
@@ -55,8 +192,52 @@ msgstr ""
 msgid "Select an image"
 msgstr ""
 
+#: app/account/email_confirmation/email_confirmation_modal.html:14
+msgid "Send a verification link to my email."
+msgstr ""
+
+#: app/account/reset_pass/reset_pass_view.html:37
+msgid "Show password"
+msgstr ""
+
+#: app/account/email_confirmation/email_confirmation_modal.html:11
+msgid "To access all GoNevis features, please verify your email first."
+msgstr ""
+
+#: app/comment/comment_modal/comment_modal_view.html:25
+msgid "To:"
+msgstr ""
+
+#: app/dolphin/dolphin_modal/dolphin_modal_view.html:31
+msgid "Update File"
+msgstr ""
+
 #: app/dolphin/dolphin_selection.html:18
 msgid "Upload More"
+msgstr ""
+
+#: app/account/signup/signup_view.html:19
+msgid "Used in your public profile."
+msgstr ""
+
+#: app/account/signup/signup_view.html:20
+msgid "Username"
+msgstr ""
+
+#: app/account/signin/signin_view.html:13
+msgid "Username or email"
+msgstr ""
+
+#: app/account/email_confirmation/email_confirmation_modal.html:6
+msgid "Verify your email"
+msgstr ""
+
+#: app/account/email_confirmation/email_confirmation_modal.html:15
+msgid "Verify {{ user.get.email }}"
+msgstr ""
+
+#: app/account/email_confirmation/email_confirmation_view.html:6
+msgid "Verifying your email..."
 msgstr ""
 
 #: app/dolphin/dolphin_view.html:115
