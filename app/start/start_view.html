@@ -72,7 +72,7 @@
 
         <!-- Templatews -->
         <div class="row">
-          <div class="col-md-4 col-sm-6 text-center" ng-repeat="template in templates">
+          <div class="col-md-4 col-sm-6 text-center" ng-repeat="template in templates" ng-if="template.name !== 'one'">
             <div class="thumbnail thumbnail-selection dis-ib" ng-click="selectTemplate(template)"
               ng-class="{active: selectedTemplate.id === template.id}">
               <span>
