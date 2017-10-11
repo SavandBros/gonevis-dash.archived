@@ -9,15 +9,15 @@
           <!-- Email -->
           <div class="form-group" ng-class="{'has-error': form.errors.email}">
             <input id="email" class="form-control input-lg" type="email"
-              ng-model="form.data.email" placeholder="Email" required/>
+              ng-model="form.data.email" placeholder="{{ 'Email' | translate }}" required/>
             <span class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</span>
           </div>
           <!-- Username -->
           <div class="form-group" ng-class="{'has-error': form.errors.username}">
             <input id="username" class="form-control input-lg" type="username"
               ng-focus="form.focused.username = true" ng-blur="form.focused.username = false"
-              uib-tooltip="Used in your public profile." tooltip-trigger="'focus'" tooltip-class="init"
-              ng-model="form.data.username" placeholder="Username" required/>
+              uib-tooltip="{{ 'Used in your public profile.' | translate }}" tooltip-trigger="'focus'" tooltip-class="init"
+              ng-model="form.data.username" placeholder="{{ 'Username' | translate }}" required/>
             <span class="help-block" ng-show="form.errors.username">{{ form.errors.username[0] }}</span>
           </div>
           <!-- Password -->
@@ -25,8 +25,8 @@
             <div class="input-group">
               <!-- Input -->
               <input id="password" class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
-                uib-tooltip="Must be at least 8 characters." tooltip-trigger="'focus'" tooltip-class="init"
-                ng-model="password.password" ng-trim="false" placeholder="Password" required>
+                uib-tooltip="{{ 'Must be at least 8 characters.' | translate }}" tooltip-trigger="'focus'" tooltip-class="init"
+                ng-model="password.password" ng-trim="false" placeholder="{{ 'Password' | translate }}" required>
               <!-- Show/hide button -->
               <span class="input-group-btn">
                 <button class="btn btn-default btn-lg" type="button" ng-model="showPassword" uib-btn-checkbox>
@@ -44,13 +44,13 @@
           <!-- Button -->
           <button class="btn btn-success btn-block btn-lg"
             ng-disabled="form.loading || form.$invalid || !password.isValid()">
-            Register
+            <translate>Register</translate>
           </button>
         </form>
       </div>
       <!-- Footer -->
       <div class="panel-footer s-pad">
-        <span class="s-mar-no o-fade">Already have an account?</span> <a ui-sref="signin">Login</a>
+        <span class="s-mar-no o-fade" translate>Already have an account?</span> <a ui-sref="signin" translate>Login</a>
       </div>
     </div>
   </div>

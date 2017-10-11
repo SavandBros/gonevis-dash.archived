@@ -3,16 +3,16 @@
     <div class="modal-content">
       <!-- Header -->
       <h4 class="modal-header">
-        Verify your email <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+        <translate>Verify your email</translate> <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
       </h4>
       <!-- Body -->
       <div class="modal-body">
         <!-- Title -->
-        <p>To access all GoNevis features, please verify your email first.</p>
+        <p translate>To access all GoNevis features, please verify your email first.</p>
         <br>
         <!-- Button -->
-        <button class="btn btn-warning btn-block" title="Send a verification link to my email." ng-click="resend(form)">
-          <i class="fa fa-check"></i> Verify {{ user.get.email }}
+        <button class="btn btn-warning btn-block" title="{{ 'Send a verification link to my email.' | translate }}" ng-click="resend(form)">
+          <i class="fa fa-check"></i> <translate>Verify {{ user.get.email }}</translate>
         </button>
       </div>
     </div>

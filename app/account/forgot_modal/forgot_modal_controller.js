@@ -7,17 +7,17 @@ function ForgotModalController($scope, toaster, API, ModalsService) {
    *
    * @param {object} form
    */
-  $scope.forgotPassword = function (form) {
+  $scope.forgotPassword = function(form) {
     form.loading = true;
 
     API.ForgotPassword.save(form.data,
-      function () {
+      function() {
         ModalsService.close("forgotPassword");
         toaster.success(
           "Sent", "Please check your email, instruction to reset your password sent to " + form.data.email, 10000
         );
       },
-      function (data) {
+      function(data) {
         form.loading = false;
         form.errors = data.data;
       }

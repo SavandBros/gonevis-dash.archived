@@ -33,15 +33,15 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
 
     // Get site templates
     API.SiteTemplatesPublic.get({},
-      function (data) {
+      function(data) {
         $scope.templates = data.results;
-        angular.forEach($scope.templates, function (template) {
+        angular.forEach($scope.templates, function(template) {
           if (template.name === "zero") {
             $scope.selectedTemplate = template;
           }
         });
       },
-      function () {
+      function() {
         // Failed to get templates, this step is skipped
         $scope.steps.slice($scope.steps.indexOf("template"), 1);
       }
@@ -51,9 +51,9 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
   /**
    * @desc Take user to next step of getting started
    */
-  $scope.next = function () {
+  $scope.next = function() {
     $scope.isNexting = true;
-    $timeout(function () {
+    $timeout(function() {
       $scope.step++;
       $scope.isNexting = false;
     }, 500);
@@ -62,9 +62,9 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
   /**
    * @desc Take user to the prev step of getting started
    */
-  $scope.prev = function () {
+  $scope.prev = function() {
     $scope.isPreving = true;
-    $timeout(function () {
+    $timeout(function() {
       $scope.step--;
       $scope.isPreving = false;
     }, 500);
@@ -75,16 +75,18 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
    *
    * @param {object} form Domain form
    */
-  $scope.checkDomain = function (form) {
+  $scope.checkDomain = function(form) {
     form.loading = true;
 
-    API.DomainCheck.post({ domain: form.name },
-      function () {
+    API.DomainCheck.post({
+        domain: form.name
+      },
+      function() {
         form.checkedName = form.name;
         form.loading = false;
         form.available = true;
       },
-      function (data) {
+      function(data) {
         form.checkedName = form.name;
         form.loading = false;
         form.available = false;
@@ -98,7 +100,7 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
    *
    * @param {object} template Selected template object
    */
-  $scope.selectTemplate = function (template) {
+  $scope.selectTemplate = function(template) {
     $scope.selectedTemplate = template;
     $scope.next();
   };
@@ -108,7 +110,7 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
    * 
    * @param {object} form Signup form
    */
-  $scope.signup = function (form) {
+  $scope.signup = function(form) {
     form.loading = true;
 
     var payload = {
@@ -120,13 +122,13 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
     };
 
     API.Signup.post(payload,
-      function () {
+      function() {
         form.errors = [];
         // Sign user in
         AuthService.signIn(
           form.data.email,
           $scope.password.password,
-          function () {
+          function() {
             toaster.success(
               "Awesome!",
               "Thanks for registering at GoNevis, a link has been sent to your email for account verification."
@@ -134,7 +136,7 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
           }
         );
       },
-      function (data) {
+      function(data) {
         form.loading = false;
         form.errors = data.data;
       }

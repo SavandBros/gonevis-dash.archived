@@ -28,7 +28,7 @@ function Pagination($resource, $rootScope) {
    */
   function loadMore(form) {
     $resource(form.page.next).get(form.page.payload,
-      function (data) {
+      function(data) {
         form = paginate(form, data, form.page.payload);
         $rootScope.$broadcast("gonevisDash.Pagination:loadedMore", {
           success: true,

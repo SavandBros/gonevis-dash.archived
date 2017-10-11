@@ -3,19 +3,19 @@
     <span ng-if="loading">
       <i class="fa fa-circle-o-notch fa-spin fa-5x text-primary"></i>
       <hr>
-      <h3 class="o-fade">Verifying your email...</h3>
+      <h3 class="o-fade" translate>Verifying your email...</h3>
     </span>
     <span ng-if="!loading && error">
       <i class="fa fa-close fa-5x text-danger"></i>
       <br>
-      <h4 class="text-danger">Oh... Invalid verification link.</h4>
+      <h4 class="text-danger" translate>Oh... Invalid verification link.</h4>
       <hr>
       <form ng-submit="resend(form)">
         <div class="form-group" ng-class="{'has-error': form.errors.email}">
-          <input type="email" class="form-control input-lg" placeholder="Email address" ng-model="form.email" required>
+          <input type="email" class="form-control input-lg" placeholder="{{ 'Email address' | translate }}" ng-model="form.email" required>
           <small id="email" class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</small>
         </div>
-        <button class="btn btn-default btn-block">Resend Verification Link</button>
+        <button class="btn btn-default btn-block" translate>Resend Verification Link</button>
       </form>
     </span>
   </div>

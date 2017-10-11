@@ -1,7 +1,7 @@
 "use strict";
 
 function TimeUntilFilter($filter) {
-  return function (date) {
+  return function(date) {
     return $filter("timesince")(date, true);
   }
 }

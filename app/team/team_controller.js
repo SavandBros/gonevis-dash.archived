@@ -5,8 +5,10 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService, Accoun
   function constructor() {
     $scope.teamRoles = Codekit.teamRoles;
 
-    API.Team.get({ siteId: AuthService.getCurrentSite() },
-      function (data) {
+    API.Team.get({
+        siteId: AuthService.getCurrentSite()
+      },
+      function(data) {
         $scope.initialled = true;
         $scope.team = data;
         $scope.team.list = data.team;
@@ -16,7 +18,7 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService, Accoun
           $scope.team.list.push(data.team_pending[i]);
         }
 
-        angular.forEach($scope.team.list, function (team) {
+        angular.forEach($scope.team.list, function(team) {
           team.user = new Account(team.user);
         });
       }
@@ -26,7 +28,7 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService, Accoun
   /**
    * @desc Open up invite modal
    */
-  $scope.invite = function () {
+  $scope.invite = function() {
     ModalsService.open("invite", "TeamInviteModalController");
   };
 
@@ -35,14 +37,16 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService, Accoun
    *
    * @param {object} team
    */
-  $scope.view = function (team) {
-    ModalsService.open("team", "TeamModalController", { team: team });
+  $scope.view = function(team) {
+    ModalsService.open("team", "TeamModalController", {
+      team: team
+    });
   };
 
   /**
    * @desc Team invite callback
    */
-  $scope.$on("gonevisDash.TeamService.invite", function () {
+  $scope.$on("gonevisDash.TeamService.invite", function() {
     constructor();
   });
 

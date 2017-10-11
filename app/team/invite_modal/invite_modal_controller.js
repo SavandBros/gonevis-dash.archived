@@ -17,11 +17,13 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
    * 
    * @param {object} form
    */
-  $scope.invite = function (form) {
+  $scope.invite = function(form) {
     form.loading = true;
 
-    API.TeamPromote.put({ siteId: AuthService.getCurrentSite() }, form.data,
-      function (data) {
+    API.TeamPromote.put({
+        siteId: AuthService.getCurrentSite()
+      }, form.data,
+      function(data) {
         $rootScope.$broadcast("gonevisDash.TeamService.invite", data);
         ModalsService.close("invite");
         toaster.success(
@@ -29,7 +31,7 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
           "Invited " + form.data.email + " as " + $scope.teamRoles[form.data.role - 1].label.toLowerCase() + " into the team."
         );
       },
-      function (data) {
+      function(data) {
         form.errors = data.data;
         form.loading = false;
       }

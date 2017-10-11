@@ -24,7 +24,9 @@ function Search($rootScope, Pagination) {
    * @returns {object}
    */
   function searchify(form, pageForm, api, data, payload) {
-    data = data || { results: [] };
+    data = data || {
+      results: []
+    };
     payload = payload || {};
 
     form = {
@@ -48,10 +50,12 @@ function Search($rootScope, Pagination) {
    * @param {object} form Main searchified variable
    */
   function submit(form) {
-    var payload = angular.extend({ search: form.query }, form.payload);
+    var payload = angular.extend({
+      search: form.query
+    }, form.payload);
 
     form.api(payload,
-      function (data) {
+      function(data) {
         form.data = data;
         form.searchedQuery = form.query;
 

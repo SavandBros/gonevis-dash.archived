@@ -22,9 +22,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       });
     }
 
-    API.Tags.get({ site: AuthService.getCurrentSite() },
-      function (data) {
-        angular.forEach(data.results, function (data) {
+    API.Tags.get({
+        site: AuthService.getCurrentSite()
+      },
+      function(data) {
+        angular.forEach(data.results, function(data) {
           var tag = new Tag({
             slug: data.slug,
             id: data.id,
@@ -36,8 +38,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       }
     );
 
-    API.Entry.get({ entry_id: $scope.form.get.id },
-      function (data) {
+    API.Entry.get({
+        entry_id: $scope.form.get.id
+      },
+      function(data) {
         if (data.start_publication) {
           data.start_publication = new Date(data.start_publication);
         }
@@ -50,7 +54,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         Codekit.setTitle($scope.form.get.title);
 
         // Get entry tags
-        angular.forEach($scope.form.get.tags, function (data) {
+        angular.forEach($scope.form.get.tags, function(data) {
           var tag = new Tag({
             slug: data.slug,
             id: data.id,
@@ -64,7 +68,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
     // Add space from top for toolbar
     if (Codekit.isMobile()) {
-      $timeout(function () {
+      $timeout(function() {
         angular.element(".editor").css(
           'margin-top', angular.element(".ta-toolbar").height()
         );
@@ -86,10 +90,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    *
    * @param {string} query
    */
-  $scope.loadTags = function (query) {
-    return load().then(function (response) {
+  $scope.loadTags = function(query) {
+    return load().then(function(response) {
       $scope.tags = response;
-      return $scope.tags.filter(function (tag) {
+      return $scope.tags.filter(function(tag) {
         return tag.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
       });
     });
@@ -100,13 +104,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    *
    * @param {object} form
    */
-  $scope.update = function (form) {
+  $scope.update = function(form) {
     form.loading = true;
 
     var payload = form.get;
     payload.tag_ids = [];
 
-    angular.forEach($scope.tagsToSubmit, function (tag) {
+    angular.forEach($scope.tagsToSubmit, function(tag) {
       payload.tag_ids.push(tag.id);
     });
 
@@ -115,8 +119,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
       .replace(/<p><\/p>/g, "");
 
-    API.Entry.put({ entry_id: payload.id }, payload,
-      function (data) {
+    API.Entry.put({
+        entry_id: payload.id
+      }, payload,
+      function(data) {
         form.get = data;
         form.url = $scope.form.getUrl();
         Codekit.setTitle(form.get.title);
@@ -124,7 +130,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         form.loading = false;
         form.errors = null;
       },
-      function (data) {
+      function(data) {
         toaster.error("Error", "Entry couldn't be updated, try again.");
         form.loading = false;
         form.errors = data.data;
@@ -139,7 +145,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    * @param {dolphin} dolphin
    * @param {string} source
    */
-  $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
     if (source === "entryCover") {
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
     } else if (source === "editorAddImage") {
@@ -153,7 +159,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Entry:remove", function (event, data) {
+  $scope.$on("gonevisDash.Entry:remove", function(event, data) {
     if (data.success) {
       $state.go("dash.entry-list");
     }
@@ -162,7 +168,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   /**
    * @desc Stick toolbar to top of screen but under navbar
    */
-  angular.element(window).scroll(function () {
+  angular.element(window).scroll(function() {
     var topOffset = window.scrollY;
     var maxOffset = angular.element(".navbar-static-top .container").height() + 2;
     var offset = -maxOffset;
@@ -170,7 +176,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     if (topOffset < maxOffset) {
       offset = -topOffset;
     }
-    angular.element(".static-toolbar").animate({ marginTop: offset }, 0);
+    angular.element(".static-toolbar").animate({
+      marginTop: offset
+    }, 0);
   });
 
   constructor();

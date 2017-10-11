@@ -9,7 +9,9 @@ function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthSe
     if ($stateParams.site) {
       var name = $stateParams.site.split(".")[0];
       if (name.length >= 3) {
-        $scope.form = { url: name };
+        $scope.form = {
+          url: name
+        };
       }
     }
   }
@@ -19,20 +21,22 @@ function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthSe
    *
    * @param {object} form
    */
-  $scope.createSite = function (form) {
+  $scope.createSite = function(form) {
     form.loading = true;
 
     API.SiteNew.save(form,
-      function (data) {
+      function(data) {
         form.loading = false;
         $scope.user.sites.unshift(data);
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.SiteNewController:Create");
 
         toaster.success("Awesome", "Created " + data.title + ".");
-        $state.go("dash.main", { s: 0 });
+        $state.go("dash.main", {
+          s: 0
+        });
       },
-      function (data) {
+      function(data) {
         form.errors = data.data;
         form.loading = false;
       }

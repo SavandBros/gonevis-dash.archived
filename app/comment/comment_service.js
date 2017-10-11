@@ -1,7 +1,7 @@
 "use strict";
 
 function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
-  return function (data) {
+  return function(data) {
 
     /**
      * @desc Super variable for getting this in functions
@@ -42,9 +42,11 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
     /**
      * @desc Delete comment, notify and broadcast for controllers to use.
      */
-    this.remove = function () {
-      API.Comment.delete({ comment_id: this.get.id },
-        function (data) {
+    this.remove = function() {
+      API.Comment.delete({
+          comment_id: this.get.id
+        },
+        function(data) {
           toaster.success("Done", "Comment deleted");
           self.isDeleted = true;
 
@@ -54,7 +56,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
             success: true
           });
         },
-        function (data) {
+        function(data) {
           toaster.error("Error", "Deleting comment failed");
 
           $rootScope.$broadcast("gonevisDash.Comment:remove", {
@@ -69,7 +71,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
     /**
      * @desc Reply to comment.
      */
-    this.reply = function (comment) {
+    this.reply = function(comment) {
 
       this.isReplying = true;
 
@@ -79,7 +81,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
         object_pk: this.get.object_pk
       };
       API.Comments.save(payload,
-        function (data) {
+        function(data) {
           self.isReplying = false;
           $rootScope.$broadcast("gonevisDash.Comment:reply", data);
         }
@@ -89,7 +91,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
     /**
      * @desc Get comment's current status.
      */
-    this.getStatus = function () {
+    this.getStatus = function() {
       return Codekit.commentStatuses[this.get.status];
     };
 
@@ -99,12 +101,14 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
      * @param {string} key
      * @param {number} value
      */
-    this.setStatus = function (key, value) {
+    this.setStatus = function(key, value) {
       var payload = {};
       payload[key] = value;
 
-      API.Comment.patch({ comment_id: this.get.id }, payload,
-        function () {
+      API.Comment.patch({
+          comment_id: this.get.id
+        }, payload,
+        function() {
           self.get[key] = value;
           self.get.statusLabel = this.getStatus();
         }
@@ -114,8 +118,10 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
     /**
      * @desc View comment as modal (detailed mode).
      */
-    this.view = function () {
-      ModalsService.open("comment", "CommentModalController", { comment: this });
+    this.view = function() {
+      ModalsService.open("comment", "CommentModalController", {
+        comment: this
+      });
     };
 
   };

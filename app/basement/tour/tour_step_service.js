@@ -1,7 +1,7 @@
 "use strict";
 
 function TourStep($timeout) {
-  return function (selector, title, content, placement, isLast) {
+  return function(selector, title, content, placement, isLast) {
 
     /**
      * @private
@@ -41,7 +41,7 @@ function TourStep($timeout) {
     /**
      * @type {function}
      */
-    this.show = function () {
+    this.show = function() {
       angular.element(".popover-relative").addClass("on");
 
       self.element.addClass("popover-target");
@@ -64,7 +64,7 @@ function TourStep($timeout) {
     /**
      * @type {function}
      */
-    this.hide = function () {
+    this.hide = function() {
       // Instant hide
       if (self.isLast) {
         self.tourElement.hide();
@@ -74,7 +74,7 @@ function TourStep($timeout) {
       self.element.removeClass("popover-target");
       self.tourElement.removeClass("fadeIn").addClass("fadeOutUp");
       // Hide it completely when animation has finished
-      $timeout(function () {
+      $timeout(function() {
         self.tourElement.hide();
         angular.element(".popover-relative").removeClass("on");
       }, 1000);

@@ -13,7 +13,9 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
     $scope.Metrics.initialize();
 
     // Get site template
-    API.SiteTemplateConfig.get({ siteId: site }, function (data) {
+    API.SiteTemplateConfig.get({
+      siteId: site
+    }, function(data) {
       $scope.siteTemplate = data.template_config;
     });
   }
@@ -38,13 +40,16 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
     /**
      * @desc initialize comments
      */
-    initialize: function () {
+    initialize: function() {
       $scope.Comment.loading = true;
 
-      API.Comments.get({ site: site, limit: 10 },
-        function (data) {
+      API.Comments.get({
+          site: site,
+          limit: 10
+        },
+        function(data) {
           $scope.Comment.loading = false;
-          angular.forEach(data.results, function (data) {
+          angular.forEach(data.results, function(data) {
             $scope.Comment.list.push(new Comment(data));
           });
           initializeTour();
@@ -64,13 +69,16 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
     /**
      * @desc Initialize entries
      */
-    initialize: function () {
+    initialize: function() {
       $scope.Entry.loading = true;
 
-      API.Entries.get({ site: site, limit: 10 },
-        function (data) {
+      API.Entries.get({
+          site: site,
+          limit: 10
+        },
+        function(data) {
           $scope.Entry.loading = false;
-          angular.forEach(data.results, function (data) {
+          angular.forEach(data.results, function(data) {
             $scope.Entry.list.push(new Entry(data));
           });
           initializeTour();
@@ -86,11 +94,13 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
     /**
      * @desc Initialize metrics
      */
-    initialize: function () {
+    initialize: function() {
       $scope.Metrics.loading = true;
 
-      API.SiteMetrics.get({ siteId: site },
-        function (data) {
+      API.SiteMetrics.get({
+          siteId: site
+        },
+        function(data) {
           $scope.Metrics.loading = false;
           $scope.Metrics.list = data.metrics;
         }
@@ -104,7 +114,7 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
    * @param {Event} event
    * @param {object} comment
    */
-  $scope.$on("gonevisDash.Comment:reply", function (event, comment) {
+  $scope.$on("gonevisDash.Comment:reply", function(event, comment) {
     $scope.Comment.list.unshift(new Comment(comment));
   });
 

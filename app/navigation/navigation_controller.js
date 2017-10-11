@@ -7,8 +7,10 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
   function constructor() {
     $scope.navigations = [];
 
-    API.Navigation.get({ siteId: site },
-      function (data) {
+    API.Navigation.get({
+        siteId: site
+      },
+      function(data) {
         $scope.initialled = true;
         $scope.navigations = data.navigation;
 
@@ -30,20 +32,24 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
    *
    * @param {object} form
    */
-  $scope.update = function (form) {
+  $scope.update = function(form) {
     form.loading = true;
 
     for (var n in $scope.navigations) {
       $scope.navigations[n].sort_number = n;
     }
 
-    API.UpdateNavigation.put({ siteId: site }, { navigation: $scope.navigations },
-      function (data) {
+    API.UpdateNavigation.put({
+        siteId: site
+      }, {
+        navigation: $scope.navigations
+      },
+      function(data) {
         toaster.info("Done", "Navigation updated");
         form.loading = false;
         $scope.navigations = data.navigation;
       },
-      function () {
+      function() {
         form.loading = false;
         toaster.error("Error", "Something went wrong, we couldn't update navigations.");
       }
@@ -53,7 +59,7 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
   /**
    * @desc Nav creation function
    */
-  $scope.create = function () {
+  $scope.create = function() {
     $scope.navigations.push({
       label: "New Nav",
       url: "/",
@@ -66,7 +72,7 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
    *
    * @param {number} index
    */
-  $scope.remove = function (index) {
+  $scope.remove = function(index) {
     $scope.navigations.splice(index, 1);
   };
 

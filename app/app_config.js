@@ -33,7 +33,7 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, 
   });
 
   // Custom exception handler
-  $provide.decorator("$exceptionHandler", ["$delegate", "$window", function ($delegate) {
+  $provide.decorator("$exceptionHandler", ["$delegate", "$window", function($delegate) {
     // Check if in localhost/127.0.0.1 or not
     var localhost = (
       window.location.href.indexOf("localhost") > 0 ||
@@ -43,13 +43,13 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, 
     if (!localhost) {
       // Using RavenJS for exception logging.
       Raven.config(ENV.SENTRY_DSN).install();
-      return function (exception, cause) {
+      return function(exception, cause) {
         Raven.captureException(exception);
         $delegate(exception, cause);
       };
     } else {
       // Using AngularJS standard exception logging.
-      return function (exception, cause) {
+      return function(exception, cause) {
         $delegate(exception, cause);
       };
     }

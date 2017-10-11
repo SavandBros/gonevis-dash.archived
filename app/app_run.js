@@ -118,7 +118,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @param {object} toParams
    * @param {object} fromState
    */
-  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState) {
 
     // No routing if running tour
     if (TourService.isTourOn() && fromState.name) {
@@ -127,7 +127,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
 
     // Close open modals
     angular.element(".modal, .modal-backdrop").fadeOut(
-      function () {
+      function() {
         angular.element(this).remove();
       }
     );
@@ -164,7 +164,9 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       // If current state is invalid (first page)
       if (!fromState.name) {
         if (isAuthenticated) {
-          $state.go("dash.main", { s: 0 });
+          $state.go("dash.main", {
+            s: 0
+          });
         } else {
           $state.go("signin");
         }
@@ -199,10 +201,12 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @param toState {object}
    * @param toParams {object}
    */
-  $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams) {
+  $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams) {
     // Analytics
     if (ENV.name === "production") {
-      $window.ga("send", "pageview", { page: $location.url() });
+      $window.ga("send", "pageview", {
+        page: $location.url()
+      });
     }
 
     // Update title
@@ -222,7 +226,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @param {Dolphin} dolphin
    * @param {string} source
    */
-  $rootScope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
+  $rootScope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
     if ($state.current.editor && source === "editorAddImage") {
       var img = angular.element("img[data-selection=true]");
       img.attr("src", dolphin.get.file);
@@ -238,7 +242,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @param {Event} event
    * @param {string} template
    */
-  $rootScope.$on("goNevis.ModalsService.close", function (event, template) {
+  $rootScope.$on("goNevis.ModalsService.close", function(event, template) {
     if (template === "dolphinSelection") {
       // Check editor for images without source and remove them
       var img = angular.element("[medium-editor] img");
@@ -252,7 +256,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @event document.click
    * @desc Click callback, depends on state @clickEvent
    */
-  angular.element("*").on("click", function (event) {
+  angular.element("*").on("click", function(event) {
     if ($state.current.clickEvent) {
       var el = angular.element(event.target);
 
@@ -268,7 +272,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    *
    * @param {Event} event
    */
-  angular.element("*").on("DOMSubtreeModified", function (event) {
+  angular.element("*").on("DOMSubtreeModified", function(event) {
     if ($state.current.editor) {
       var el = angular.element(event.target);
 

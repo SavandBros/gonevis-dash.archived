@@ -112,10 +112,21 @@ function Codekit($timeout, $window, $log) {
    *
    * @type {array}
    */
-  var teamRoles = [
-    { id: 0, color: "text-primary", label: "Owner" },
-    { id: 1, color: "text-info", label: "Administrator" },
-    { id: 2, color: "text-warning", label: "Editor" }
+  var teamRoles = [{
+      id: 0,
+      color: "text-primary",
+      label: "Owner"
+    },
+    {
+      id: 1,
+      color: "text-info",
+      label: "Administrator"
+    },
+    {
+      id: 2,
+      color: "text-warning",
+      label: "Editor"
+    }
   ];
 
   /**
@@ -129,7 +140,7 @@ function Codekit($timeout, $window, $log) {
     key = key || "isDeleted";
     delay = delay || 1000;
 
-    $timeout(function () {
+    $timeout(function() {
       for (var i in master) {
         if (master[i][key] === true) {
           master.splice(i, 1);
@@ -153,7 +164,7 @@ function Codekit($timeout, $window, $log) {
    * @param {string} selector
    */
   function focus(selector) {
-    $timeout(function () {
+    $timeout(function() {
       angular.element(selector).focus();
     }, 200);
   }

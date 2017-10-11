@@ -3,10 +3,14 @@
 function TagNewModalController($scope, Tag, AuthService, Slug, DolphinService, Codekit) {
 
   function constructor() {
-    $scope.Tag = new Tag({ site: AuthService.getCurrentSite() });
+    $scope.Tag = new Tag({
+      site: AuthService.getCurrentSite()
+    });
     $scope.dolphinService = DolphinService;
     $scope.form = {
-      data: { site: $scope.Tag.get.site }
+      data: {
+        site: $scope.Tag.get.site
+      }
     };
 
     Codekit.focus("input.name:last");
@@ -15,7 +19,7 @@ function TagNewModalController($scope, Tag, AuthService, Slug, DolphinService, C
   /**
    * @desc Slugify title and update slug
    */
-  $scope.updateSlug = function () {
+  $scope.updateSlug = function() {
     $scope.form.data.slug = Slug.slugify($scope.form.data.name);
   };
 
@@ -26,7 +30,7 @@ function TagNewModalController($scope, Tag, AuthService, Slug, DolphinService, C
    * @param {Dolphin} dolphin
    * @param {string} source
    */
-  $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
     if (source === "tagCover") {
       $scope.form.data.cover_image = dolphin ? dolphin.get.id : null;
     }

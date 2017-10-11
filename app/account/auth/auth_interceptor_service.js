@@ -18,7 +18,7 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
 
     return config;
   }
-  
+
   /**
    * @desc Handler for http response
    *

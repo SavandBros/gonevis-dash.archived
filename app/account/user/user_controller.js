@@ -10,8 +10,10 @@ function UserController($scope, $rootScope, $stateParams,
     $scope.dolphinService = DolphinService;
     $scope.param = $stateParams;
 
-    API.User.get({ user_id: $scope.user.get.id },
-      function (data) {
+    API.User.get({
+        user_id: $scope.user.get.id
+      },
+      function(data) {
         $scope.user = AuthService.setAuthenticatedUser(data, true);
         $scope.viewLoaded = true;
       }
@@ -24,7 +26,7 @@ function UserController($scope, $rootScope, $stateParams,
    * @param {string} key
    * @param {string} value
    */
-  $scope.updateProfile = function (key, value) {
+  $scope.updateProfile = function(key, value) {
 
     var keyString = key.replace(/_/g, " ");
 
@@ -34,7 +36,7 @@ function UserController($scope, $rootScope, $stateParams,
     payload[key] = value;
 
     API.UserUpdate.put(payload,
-      function (data) {
+      function(data) {
         if (key === "picture") {
           $scope.user.get.media[key] = data.media[null];
         } else {
@@ -46,7 +48,7 @@ function UserController($scope, $rootScope, $stateParams,
         toaster.clear(toasters[key]);
         toaster.info("Done", "Profile " + keyString + " updated", 3000);
       },
-      function () {
+      function() {
         toaster.error("Error", "An error has occurred while updating profile, try again.");
       }
     );
@@ -104,17 +106,20 @@ function UserController($scope, $rootScope, $stateParams,
    *
    * @param {object} file
    */
-  $scope.uploadFile = function (file) {
+  $scope.uploadFile = function(file) {
     Upload.upload({
       url: ENV.apiEndpoint + "account/update-profile/",
-      data: { picture: file, key: file.name },
+      data: {
+        picture: file,
+        key: file.name
+      },
       method: "PUT"
-    }).then(function (data) {
+    }).then(function(data) {
       toaster.info("Done", "Profile picture updated");
       $scope.user = new Account(data.data);
       $scope.user = AuthService.setAuthenticatedUser(data.data, true);
       $rootScope.$broadcast("gonevisDash.UserController:update");
-    }, function (data) {
+    }, function(data) {
       $scope.errors = data.data;
       toaster.error("Error", "An error has occured while uploading profile picture, try again.");
     });

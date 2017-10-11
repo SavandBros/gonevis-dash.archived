@@ -1,6 +1,6 @@
 <!-- Back area -->
 <div class="container-fluid container-image" ng-if="site.media.cover_image" ng-click="selectImage('cover_image')"
-  style="background-image: url({{ site.media.cover_image.file }})" title="Click to change cover image">
+  style="background-image: url('{{ site.media.cover_image.file }}')" title="Click to change cover image">
   <h1><i class="fa fa-edit"></i></h1>
 </div>
 <!-- Main -->
@@ -91,7 +91,7 @@
               <div class="col-xs-4 col-sm-3">
                 <select class="form-control" ng-model="site.paginate_by"
                   ng-change="updateSite('paginate_by', site.paginate_by)">
-                  <option ng-value="$index" ng-if="$index > 2" ng-repeat="number in postPerPage track by $index">
+                  <option ng-value="$index" ng-if="$index" ng-repeat="number in postPerPage track by $index">
                     {{ $index }}
                   </option>
                 </select>

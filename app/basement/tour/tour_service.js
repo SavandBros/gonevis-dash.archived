@@ -1,7 +1,7 @@
 "use strict";
 
 function Tour($timeout, TourStep, AuthService) {
-  return function (name, steps) {
+  return function(name, steps) {
 
     /**
      * @private
@@ -28,14 +28,14 @@ function Tour($timeout, TourStep, AuthService) {
      * @type {function}
      * @returns {TourStep}
      */
-    this.getStep = function () {
+    this.getStep = function() {
       return this.steps[this.step];
     };
 
     /**
      * @type {function}
      */
-    this.nextStep = function () {
+    this.nextStep = function() {
       // Hide old step
       self.getStep().hide();
       // If this is the last step
@@ -50,7 +50,7 @@ function Tour($timeout, TourStep, AuthService) {
       // Next step
       this.step++;
       // Show new step after animation
-      $timeout(function () {
+      $timeout(function() {
         self.getStep().show();
       }, 1000);
     };
@@ -59,9 +59,9 @@ function Tour($timeout, TourStep, AuthService) {
      * @private
      * @type {function}
      */
-    var constructor = function () {
+    var constructor = function() {
       // Instantiate steps
-      angular.forEach(steps, function (step) {
+      angular.forEach(steps, function(step) {
         self.steps.push(new TourStep(step[0], step[1], step[2], step[3]));
       });
       // Keep it in header so it doesn't get destroyed

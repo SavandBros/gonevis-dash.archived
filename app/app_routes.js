@@ -4,7 +4,7 @@
  * @desc Every child of dash state follows site id that user is into.
  *       States with s param don't require site index, so it is given to it for later navigation.
  */
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
   // Other states that are not a child of dash state
   $stateProvider
     .state("start", {
@@ -130,7 +130,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       title: "Dolphin",
       resolve: {
         // Used to determine source of selection
-        source: function () {
+        source: function() {
           return null;
         }
       }
@@ -204,12 +204,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       title: "Team"
     });
 
-  $urlRouterProvider.otherwise(function ($injector) {
+  $urlRouterProvider.otherwise(function($injector) {
     var state = $injector.get("$state");
     var AuthService = $injector.get("AuthService");
 
     if (AuthService.isAuthenticated()) {
-      state.go("dash.main", { s: 0 });
+      state.go("dash.main", {
+        s: 0
+      });
     } else {
       state.go("start");
     }
