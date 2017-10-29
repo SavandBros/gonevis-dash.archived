@@ -113,6 +113,27 @@
   </div>
 </nav>
 
+<!-- Sidebar content -->
+<div class="sidebar-content" ng-class="{'sidebar-close': !set.sidebar}">
+  <!-- Header -->
+  <a class="main">
+    <!-- Logo -->
+    <img ng-src="https://gonevis.s3.amazonaws.com/dolphin/0d415604-d361-4d9a-ac35-b0eccae5d1b2/thumb_48x48_1501084754086_Twenty-One-Pilots-twenty-one-pilots-39730211-1440-1153_2017_05_17_23_29_36_UTC.jpg">
+    <!-- Title -->
+    {{ user.getSites()[param.s].title || "Dashboard" }}
+  </a>
+  <br>
+  <!-- Main navs -->
+  <a ui-sref="{{ nav.sref }}" ng-repeat="nav in mainNavs" ng-class="{'active': state.includes(nav.sref)}">
+    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }}
+  </a>
+  <br>
+  <!-- Toggle view -->
+  <a ng-click="set.sidebar = !set.sidebar">
+    <i class="fa fa-fw" ng-class="{'fa-chevron-right': !set.sidebar, 'fa-chevron-left': set.sidebar}"></i>
+  </a>
+</div>
+
 <!-- Toaster -->
 <toaster-container
   toaster-options="{'position-class': 'toast-bottom-left'}">
