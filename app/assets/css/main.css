@@ -898,6 +898,7 @@ md-toast {
 
 .editor-container {
     background: #fff;
+    padding-left: 0 !important;
     border: 1px solid #e7e7e7;
 }
 
@@ -921,22 +922,22 @@ md-toast {
     visibility: visible;
     box-shadow: none;
     background: #fff;
-    border: 1px solid #e7e7e7;
-    border-right: none;
-    border-left: none;
+    border: none;
+    border-bottom: 1px solid #e7e7e7;
     border-radius: 0;
-    padding: 0;
-    width: 100%;
     position: fixed;
-    top: 61px !important;
-    left: 0 !important;
     z-index: 9;
+    margin: 0 !important;
+    padding: 0 !important;
+    top: 0 !important;
+    left: 60px !important;
+    width: calc(100% - 60px);
+    transition: all 0.2s ease-in-out;
 }
 
-@media (max-width: 991px) {
-    .medium-editor-toolbar {
-        top: 51px !important;
-    }
+#content:not(.full)~.medium-editor-toolbar {
+    left: 250px !important;
+    width: calc(100% - 250px) !important;
 }
 
 .medium-editor-toolbar-actions {
@@ -1086,9 +1087,9 @@ md-toast {
 
 .editor-draft-mode {
     position: fixed;
-    bottom: 20px;
     border: 2px solid #d17100;
-    left: 20px;
+    bottom: 25px;
+    right: 25px;
     z-index: 11;
     padding: 5px 12px;
     font-size: smaller;
@@ -1303,8 +1304,12 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     color: #d17100;
     box-shadow: none;
     bottom: initial;
-    top: 30px;
-    position: absolute;
+    top: 50px;
+    right: 25px;
+    position: fixed;
+    border-radius: 2px;
+    height: 40px;
+    line-height: 40px;
 }
 
 .btn-corner:focus,
@@ -1322,24 +1327,6 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     color: #fff !important;
     background: #333;
     border-color: #222;
-}
-
-@media (max-width: 1400px) {
-    .btn-corner.btn-corner-navbar {
-        top: 8px;
-        right: 66px;
-        width: 44px;
-        height: 34px;
-        line-height: 34px;
-        font-size: 1em;
-        border-radius: 4px;
-    }
-}
-
-@media(min-width: 992px) and (max-width: 1400px) {
-    .btn-corner.btn-corner-navbar {
-        top: 65px;
-    }
 }
 
 
@@ -1363,8 +1350,8 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 .modal-header-clickable {
     background: rgba(0, 0, 0, 0.05);
     color: rgba(0, 0, 0, 0.3);
-    padding: 20px 15px;
-    height: 61px;
+    padding: 12px 15px;
+    height: 42px;
 }
 
 @media (max-width: 992px) {
