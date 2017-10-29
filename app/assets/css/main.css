@@ -1,5 +1,19 @@
 /* Global */
 
+::-webkit-scrollbar-track,
+::-webkit-scrollbar {
+    background: white;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+}
+
 *,
 *:focus,
 *:hover,
