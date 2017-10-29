@@ -49,9 +49,11 @@
     </p>
   <![endif]-->
 
-  <ng-include src="'header/header_view.html'" ng-controller="HeaderController"></ng-include>
+  <!-- Sidebar -->
+  <div id="sidebar" ng-include="'header/header_view.html'" ng-controller="HeaderController"></div>
 
-  <div ui-view class="lights" ng-class="{'off': !set.lights}"></div>
+  <!-- Content -->
+  <div id="content" class="lights" ui-view ng-class="{off: !set.lights, full: !set.sidebar}"></div>
 
   <!-- Google analytics -->
   <script>
