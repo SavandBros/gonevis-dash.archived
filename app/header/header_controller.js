@@ -15,6 +15,45 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
 
     // Entry formats
     $scope.entryFormats = Codekit.entryFormats;
+
+    // Navs
+    $scope.mainNavs = [{
+      label: "Dashboard",
+      sref: "dash.main",
+      icon: "fa-dashboard"
+    }, {
+      label: "Write",
+      sref: "dash.entry-new",
+      icon: "fa-plus"
+    }, {
+      label: "Posts",
+      sref: "dash.entry-list",
+      icon: "fa-book"
+    }, {
+      label: "Tags",
+      sref: "dash.tag-list",
+      icon: "fa-tag"
+    }, {
+      label: "Comments",
+      sref: "dash.comment-list",
+      icon: "fa-comments-o"
+    }, {
+      label: "Files",
+      sref: "dash.dolphin",
+      icon: "fa-file-image-o"
+    }, {
+      label: "Navigations",
+      sref: "dash.navigation",
+      icon: "fa-bars"
+    }, {
+      label: "Team",
+      sref: "dash.team",
+      icon: "fa-users"
+    }, {
+      label: "Settings",
+      sref: "dash.site",
+      icon: "fa-cog"
+    }];
   }
 
   /**
