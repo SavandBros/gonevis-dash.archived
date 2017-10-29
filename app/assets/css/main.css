@@ -89,6 +89,88 @@ hr[soft] {
 }
 
 
+/* Sidebar */
+
+.sidebar-content {
+    background: #2f323b;
+    height: 500px;
+    color: #fff;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: width 0.3s ease-in-out;
+    z-index: 100;
+}
+
+.sidebar-content.sidebar-close {
+    width: 60px !important;
+}
+
+.sidebar-content>a {
+    padding: 15px 20px;
+    display: block;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    width: 250px;
+}
+
+.sidebar-content>a.active,
+.sidebar-content>a:focus,
+.sidebar-content>a:hover {
+    color: #fff;
+}
+
+.sidebar-content>a.active {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-content>a>.fa {
+    margin-right: 18px;
+}
+
+.sidebar-content>a.main {
+    background: #27282d;
+    padding: 20px;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.sidebar-content>a.main img {
+    margin: -5px -8px;
+    margin-right: 12px;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+}
+
+
+/* Content */
+
+#content .container,
+#content .container-fluid {
+    padding-left: 75px;
+    max-width: 100%;
+    transition: padding 0.2s ease-in-out;
+}
+
+@media (min-width: 768px) and (max-width: 1550px) {
+    #content:not(.full) .container,
+    #content:not(.full) .container-fluid {
+        padding-left: 265px;
+    }
+}
+
+#content .container {
+    padding-top: 15px;
+}
+
+
 /* Image container */
 
 .container-image {
