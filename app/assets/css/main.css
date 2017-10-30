@@ -110,7 +110,7 @@ hr[soft] {
     width: 60px !important;
 }
 
-.sidebar-content>a {
+.sidebar-content a {
     padding: 15px 20px;
     display: block;
     color: rgba(255, 255, 255, 0.5);
@@ -119,29 +119,37 @@ hr[soft] {
     width: 250px;
 }
 
-.sidebar-content>a.active,
-.sidebar-content>a:focus,
-.sidebar-content>a:hover {
+.sidebar-content a.active,
+.sidebar-content a:focus,
+.sidebar-content a:hover {
     color: #fff;
 }
 
-.sidebar-content>a.active {
+.sidebar-content a.active {
     background: rgba(0, 0, 0, 0.3);
 }
 
-.sidebar-content>a>.fa {
-    margin-right: 18px;
+.sidebar-content a>.fa {
+    margin-right: 20px;
+    margin-left: -2px;
 }
 
-.sidebar-content>a.main {
-    background: #27282d;
+.sidebar-content a.main {
     padding: 20px;
-    color: #fff;
     font-size: 1.8rem;
-    font-weight: bold;
 }
 
-.sidebar-content>a.main img {
+.sidebar-content a.main:not(.main-light) {
+    background: #27282d;
+    font-weight: bold;
+    color: #fff;
+}
+
+.sidebar-content a.main .fa {
+    margin-left: 5px;
+}
+
+.sidebar-content a.main img {
     margin: -5px -8px;
     margin-right: 12px;
     border-radius: 100%;

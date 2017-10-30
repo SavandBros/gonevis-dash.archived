@@ -143,6 +143,31 @@
     <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }}
   </a>
   <br>
+  <!-- Account dropdown -->
+  <div class="dropup dis-g">
+    <!-- Header -->
+    <a class="main main-light dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
+      <!-- Profile picture -->
+      <img ng-if="user.hasMedia" ng-src="{{ user.getMedia('tiny') }}" alt="{{ user.getDisplayName() }}"/>
+      <!-- Display name -->
+      {{ user.getDisplayName() }}
+      <!-- Caret -->
+      <i class="fa fa-caret-up o-fade"></i>
+    </a>
+    <!-- Header dropdown -->
+    <ul class="dropdown-menu">
+      <!-- Account settings -->
+      <li ng-class="{active: state.includes('user')}">
+        <a ui-sref="user({s: param.s})">View Account<br><small class="o-fade">{{ user.get.email }}</small></a>
+      </li>
+      <li class="divider"></li>
+      <!-- Feedback -->
+      <li><a ng-href="mailto:hello@gonevis.com"><i class="fa fa-smile-o"></i> Feedback</a></li>
+      <!-- Sign out -->
+      <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> Sign out</a></li>
+    </ul>
+  </div>
+  <br>
   <!-- Toggle view -->
   <button class="btn btn-default" ng-click="set.sidebar = !set.sidebar">
     <i class="fa fa-fw" ng-class="{'fa-chevron-right': !set.sidebar, 'fa-chevron-left': set.sidebar}"></i>
