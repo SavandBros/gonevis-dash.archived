@@ -24,7 +24,7 @@
     <small class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
     <br>
     <!-- Editor (description) -->
-    <div medium-editor ng-model="form.get.content" data-placeholder="{{ 'CONTENT' | translate }}" name="editor" bind-options="set.editorOptions"></div>
+    <div medium-editor ng-model="form.get.content" data-placeholder="{{ 'CONTENT' | translate }}" name="editor" bind-options="editorOptions"></div>
     <!-- Entry formats -->
     <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
       <!-- Image -->
