@@ -150,6 +150,26 @@ hr[soft] {
 }
 
 
+/* Sidebar button */
+
+.sidebar-content>button {
+    border-radius: 0 3px 3px 0;
+    position: fixed;
+    left: 250px;
+    bottom: 25px;
+    height: 60px;
+    padding: 0;
+    border: 0;
+    padding-right: 2px;
+    background: #2f323b !important;
+    color: #fff !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar-content.sidebar-close>button {
+    left: 60px;
+}
+
 /* Content */
 
 #content .container,
