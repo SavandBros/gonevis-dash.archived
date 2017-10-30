@@ -533,21 +533,21 @@ module.exports = function(grunt) {
       }
     },
     jsbeautifier: {
-      "default": {
-        src: [
-          "<%= gonevisDash.app %>/**/*.js",
-          "package.json",
-          "Gruntfile.js"
-        ],
-        options: {
-          js: {
-            indentLevel: 0,
-            indentSize: 2,
-            indentWithTabs: false,
-            spaceInParen: false
-          }
-        }
-      }
+      // "default": {
+      //   src: [
+      //     "<%= gonevisDash.app %>/**/*.js",
+      //     "package.json",
+      //     "Gruntfile.js"
+      //   ],
+      //   options: {
+      //     js: {
+      //       indentLevel: 0,
+      //       indentSize: 2,
+      //       indentWithTabs: false,
+      //       spaceInParen: false
+      //     }
+      //   }
+      // }
     },
     shell: {
       gitPush: {
