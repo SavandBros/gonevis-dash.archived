@@ -11,26 +11,33 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    */
   $rootScope.cache = {};
 
-  /**
-   * @name set
-   * @desc Predefined rootScope variable
-   *
-   * @type {object}
-   */
-  $rootScope.set = {
+  if (localStorageService.get("set")) {
 
-    /**
-     * @desc Lights for the editor
-     * @type {boolean}
-     */
-    lights: true,
+    // Load from localStorage
+    $rootScope.set = localStorageService.get("set");
 
+  } else {
     /**
-     * @desc Sidebar status
-     * @type {boolean}
+     * @name set
+     * @desc Predefined rootScope variable
+     *
+     * @type {object}
      */
-    sidebar: true
-  };
+    $rootScope.set = {
+
+      /**
+       * @desc Lights for the editor
+       * @type {boolean}
+       */
+      lights: true,
+
+      /**
+       * @desc Sidebar status
+       * @type {boolean}
+       */
+      sidebar: true
+    };
+  }
 
   /**
    * @desc Medium editor options
