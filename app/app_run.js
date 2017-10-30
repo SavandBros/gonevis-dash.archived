@@ -18,6 +18,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @type {object}
    */
   $rootScope.set = {
+
     /**
      * @desc Lights for the editor
      * @type {boolean}
@@ -28,6 +29,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
      * @desc Sidebar status
      * @type {boolean}
      */
+    sidebar: true
   };
 
   /**
@@ -257,6 +259,15 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       }
     }
   });
+
+  /**
+   * @event $rootScope.set
+   * @desc Update settings to local storage
+   */
+  $rootScope.$watch(function () { return $rootScope.set }, function () {
+    // Update localStorage
+    localStorageService.set("set", $rootScope.set);
+  }, true);
 
   /**
    * @event document.click
