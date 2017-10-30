@@ -115,13 +115,28 @@
 
 <!-- Sidebar content -->
 <div class="sidebar-content" ng-class="{'sidebar-close': !set.sidebar}">
-  <!-- Header -->
-  <a class="main">
-    <!-- Logo -->
-    <img ng-src="https://gonevis.s3.amazonaws.com/dolphin/0d415604-d361-4d9a-ac35-b0eccae5d1b2/thumb_48x48_1501084754086_Twenty-One-Pilots-twenty-one-pilots-39730211-1440-1153_2017_05_17_23_29_36_UTC.jpg">
-    <!-- Title -->
-    {{ user.getSites()[param.s].title || "Dashboard" }} <i class="fa fa-caret-down"></i>
-  </a>
+  <!-- Sites dropdown -->
+  <div class="dropdown dis-g">
+    <!-- Header -->
+    <a class="main  dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
+      <!-- Logo -->
+      <img ng-src="https://gonevis.s3.amazonaws.com/dolphin/0d415604-d361-4d9a-ac35-b0eccae5d1b2/thumb_48x48_1501084754086_Twenty-One-Pilots-twenty-one-pilots-39730211-1440-1153_2017_05_17_23_29_36_UTC.jpg">
+      <!-- Title -->
+      {{ user.getSites()[param.s].title || "Dashboard" }}
+      <!-- Caret -->
+      <i class="fa fa-caret-down o-fade"></i>
+    </a>
+    <!-- Header dropdown -->
+    <ul class="dropdown-menu">
+      <!-- Sites -->
+      <li ng-repeat="site in user.getSites()" ng-class="{'active': param.s == $index}">
+        <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
+      </li>
+      <li class="divider"></li>
+      <!-- New site -->
+      <li><a ui-sref="site-new({s: param.s})"><small>CREATE NEW SITE</small></a></li>
+    </ul>
+  </div>
   <br>
   <!-- Main navs -->
   <a ui-sref="{{ nav.sref }}" ng-repeat="nav in mainNavs" ng-class="{'active': state.includes(nav.sref)}">
