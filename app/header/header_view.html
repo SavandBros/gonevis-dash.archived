@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-default navbar-static-top" ng-class="{'navbar-default': set.lights, 'navbar-inverse': !set.lights}" hidden>
+<nav class="navbar navbar-default navbar-static-top" ng-if="!auth.isAuthenticated()">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -8,63 +8,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ng-if="auth.isAuthenticated()"  ui-sref="dash.main({s: param.s})">
-        {{ user.getSites()[param.s].title || 'Dash' }}
-      </a>
-      <a class="navbar-brand" ng-if="!auth.isAuthenticated()" ui-sref="start">GoNevis</a>
+      <a class="navbar-brand" ui-sref="start">GoNevis</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
-      <ul class="nav navbar-nav" ng-if="auth.isAuthenticated() && param.s">
-        <li ng-class="{'active': state.includes('dash.entry-new')}">
-          <a ui-sref="dash.entry-new({s: param.s})">New</a>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">
-            <span class="hidden visible-xs visible-sm">More <i class="fa fa-caret-down"></i></span>
-            <i class="fa fa-caret-down o-fade-hard hidden-xs hidden-sm"></i>
-          </a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-header hidden-xs hidden-sm">MORE</li>
-            <li role="separator" class="divider hidden-xs hidden-sm"></li>
-            <li ng-repeat="(key, format) in entryFormats" ng-if="key !== 'text'">
-              <a ng-click="nevis(key)" ng-disabled="format.disabled"
-                ng-class="{'o-fade-soft': format.disabled}" title="{{ format.disabled ? 'Coming soon' : null }}">
-                <i class="fa fa-{{ format.icon }}"></i> {{ format.label }}
-              </a>
-            </li>
-            <li role="separator" class="divider hidden visible-xs visible-sm"></li>
-          </ul>
-        </li>
-        <li ng-class="{'active': state.includes('dash.entry-list')}">
-          <a ui-sref="dash.entry-list({s: param.s})">Posts</a>
-        </li>
-        <li ng-class="{'active': state.includes('dash.tag-list')}">
-          <a ui-sref="dash.tag-list({s: param.s})">Tags</a>
-        </li>
-        <li ng-class="{'active': state.includes('dash.comment-list')}">
-          <a ui-sref="dash.comment-list({s: param.s})">Comments</a>
-        </li>
-        <li ng-class="{'active': state.includes('dash.dolphin')}">
-          <a ui-sref="dash.dolphin({s: param.s})">Files</a>
-        </li>
-        <li ng-class="{'active': state.includes('dash.navigation')}">
-          <a ui-sref="dash.navigation({s: param.s})">Navigations</a>
-        </li>
-        <li ng-class="{'active': state.includes('dash.team')}">
-          <a ui-sref="dash.team({s: param.s})">Team</a>
-        </li>
-        <li ng-class="{'active': state.includes('dash.site')}">
-          <a ui-sref="dash.site({s: param.s})">Settings</a>
-        </li>
-      </ul>
-      <!-- If user is not Authenticated -->
-      <ul class="nav navbar-nav" ng-if="!auth.isAuthenticated()">
+      <ul class="nav navbar-nav">
         <li ng-class="{'active': state.includes('start')}">
           <a ui-sref="start">Get Started</a>
         </li>
       </ul>
-      <!-- If user is not Authenticated -->
-      <ul class="nav navbar-nav navbar-right" ng-if="!auth.isAuthenticated()">
+      <ul class="nav navbar-nav navbar-right">
         <li ng-class="{'active': state.includes('signin')}">
           <a ui-sref="signin">Login</a>
         </li>
@@ -72,49 +24,12 @@
           <a ui-sref="signup">Register</a>
         </li>
       </ul>
-      <!-- If user is Authenticated -->
-      <ul class="nav navbar-nav navbar-right" ng-if="auth.isAuthenticated()">
-        <li class="animated fadeIn" ng-if="param.lights">
-          <a ng-click="set.lights = !set.lights">
-            <span class="hidden-lg hidden-md">Lights</span> <i class="fa fa-lightbulb-o nav-icon"></i>
-          </a>
-        </li>
-        <!-- Account dropdown -->
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown">
-            <!-- Display name -->
-            <span ng-if="!user.hasMedia">{{ user.getDisplayName() }}</span>
-            <!-- Profile picture -->
-            <img ng-if="user.hasMedia" ng-src="{{ user.getMedia('tiny') }}" alt="{{ user.getDisplayName() }}"/>
-            <!-- Caret -->
-            <i class="fa fa-caret-down o-fade-hard"></i>
-          </a>
-          <ul class="dropdown-menu">
-            <!-- Account settings -->
-            <li>
-              <a ui-sref="user({s: param.s})">View Account<br><small class="o-fade">{{ user.get.email }}</small></a>
-            </li>
-            <li role="separator" class="divider"></li>
-            <!-- Sites -->
-            <li ng-repeat="site in user.getSites()" ng-class="{'active': param.s == $index}">
-              <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
-            </li>
-            <!-- New site -->
-            <li><a ui-sref="site-new({s: param.s})" class="o-fade small">CREATE NEW SITE</a></li>
-            <li role="separator" class="divider"></li>
-            <!-- Feedback -->
-            <li><a ng-href="mailto:hello@gonevis.com"><i class="fa fa-envelope-o"></i> Feedback</a></li>
-            <!-- Sign out -->
-            <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> Sign out</a></li>
-          </ul>
-        </li>
-      </ul>
     </div>
   </div>
 </nav>
 
 <!-- Sidebar content -->
-<div class="sidebar-content" ng-class="{'sidebar-close': !set.sidebar}">
+<div class="sidebar-content" ng-class="{'sidebar-close': !set.sidebar}" ng-if="auth.isAuthenticated()">
   <!-- Sites dropdown -->
   <div class="dropdown dis-g">
     <!-- Header -->
