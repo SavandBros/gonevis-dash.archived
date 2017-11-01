@@ -15,11 +15,8 @@ function ActionsController($scope, $state, $stateParams, AuthService) {
         // Find site by given id
         angular.forEach($scope.user.getSites(), function(site, index) {
           if ($scope.params.actionParam === site.id) {
-
             // Go to site dashboard
-            $state.go("dash.main", {
-              s: index
-            });
+            $state.go("dash.main", { s: index });
           }
         });
       }
