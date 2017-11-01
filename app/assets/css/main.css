@@ -89,6 +89,21 @@ hr[soft] {
 }
 
 
+/* No sidebar */
+
+.no-sidebar .sidebar-content {
+    opacity: 0;
+}
+
+.no-sidebar .navbar-static-top {
+    opacity: 1;
+}
+
+.navbar-static-top {
+    opacity: 0;
+}
+
+
 /* Sidebar */
 
 .sidebar-content {
@@ -102,7 +117,7 @@ hr[soft] {
     top: 0;
     overflow: hidden;
     overflow-y: auto;
-    transition: width 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     z-index: 100;
 }
 
@@ -262,7 +277,7 @@ hr[soft] {
 
 .navbar,
 .navbar li {
-    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .navbar-brand {
