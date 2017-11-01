@@ -34,6 +34,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
         s: 0
       }
     })
+    .state("action", {
+      url: "/actions/:action/:actionParam",
+      controller: "ActionsController",
+    })
     .state("change-password", {
       url: "/change-password",
       controller: "ChangePassController",
