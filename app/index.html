@@ -50,7 +50,8 @@
   <![endif]-->
 
   <!-- Sidebar -->
-  <div id="sidebar" ng-include="'header/header_view.html'" ng-controller="HeaderController"></div>
+  <div id="sidebar" ng-include="'header/header_view.html'" ng-controller="HeaderController"
+    ng-class="{'no-sidebar': !auth.isAuthenticated()}"></div>
 
   <!-- Content -->
   <div id="content" class="lights" ui-view ng-class="{off: !set.lights, full: !set.sidebar}"></div>

@@ -215,21 +215,21 @@ hr[soft] {
 
 /* Content */
 
-#content .container,
-#content .container-fluid {
+#sidebar:not(.no-sidebar)~#content .container,
+#sidebar:not(.no-sidebar)~#content .container-fluid {
     padding-left: 75px;
     max-width: 100%;
     transition: padding 0.2s ease-in-out;
 }
 
 @media (min-width: 768px) and (max-width: 1550px) {
-    #content:not(.full) .container,
-    #content:not(.full) .container-fluid {
+    #sidebar:not(.no-sidebar)~#content:not(.full) .container,
+    #sidebar:not(.no-sidebar)~#content:not(.full) .container-fluid {
         padding-left: 265px;
     }
 }
 
-#content .container {
+#sidebar:not(.no-sidebar)~#content .container {
     padding-top: 15px;
 }
 
