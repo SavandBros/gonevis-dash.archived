@@ -116,7 +116,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
         contentDefault: "<i class='fa fa-ban'><i>",
       }]
     }
-  }
+  };
 
   // Set user tracking info
   AuthService.setTrackingInfo();
@@ -271,7 +271,7 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
    * @event $rootScope.set
    * @desc Update settings to local storage
    */
-  $rootScope.$watch(function() { return $rootScope.set }, function() {
+  $rootScope.$watch(function() { return $rootScope.set; }, function() {
     // Update localStorage
     localStorageService.set("set", $rootScope.set);
   }, true);
