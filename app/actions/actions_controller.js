@@ -7,12 +7,12 @@ function ActionsController($scope, $state, $stateParams, AuthService) {
     $scope.user = AuthService.getAuthenticatedUser(true);
 
     if ($scope.params.action && $scope.params.actionParam) {
-      if ($scope.params.action == "dashboard") {
+      if ($scope.params.action === "dashboard") {
         angular.forEach($scope.user.getSites(), function(site, index) {
-          if ($scope.params.actionParam == site.id) {
+          if ($scope.params.actionParam === site.id) {
             $state.go("dash.main", {
               s: index
-            })
+            });
           }
         });
       }
