@@ -1,5 +1,19 @@
 /* Global */
 
+::-webkit-scrollbar-track,
+::-webkit-scrollbar {
+    background: white;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+}
+
 *,
 *:focus,
 *:hover,
@@ -75,6 +89,166 @@ hr[soft] {
 }
 
 
+/* No sidebar */
+
+.no-sidebar .sidebar-content {
+    opacity: 0;
+}
+
+.no-sidebar .navbar-static-top {
+    opacity: 1;
+}
+
+.navbar-static-top {
+    opacity: 0;
+}
+
+
+/* Sidebar */
+
+.sidebar-content {
+    background: #2f323b;
+    height: 500px;
+    color: #fff;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out;
+    z-index: 100;
+}
+
+.sidebar-content.sidebar-close {
+    width: 60px !important;
+}
+
+.sidebar-content a {
+    padding: 15px 20px;
+    display: block;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    width: 250px;
+}
+
+.sidebar-content a.active,
+.sidebar-content a:focus,
+.sidebar-content a:hover {
+    color: #fff;
+}
+
+.sidebar-content a.active {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-content a>.fa {
+    margin-right: 20px;
+    margin-left: -2px;
+}
+
+.sidebar-content a.main {
+    padding: 20px;
+    font-size: 1.8rem;
+}
+
+.sidebar-content a.main:not(.main-light) {
+    background: #27282d;
+    font-weight: bold;
+    color: #fff;
+}
+
+.sidebar-content a.main .fa {
+    margin-left: 5px;
+}
+
+.sidebar-content a.main img {
+    margin: -5px -8px;
+    margin-right: 12px;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+}
+
+
+/* Sidebar button */
+
+.sidebar-content>button {
+    border-radius: 0 3px 3px 0;
+    position: fixed;
+    left: 250px;
+    bottom: 25px;
+    height: 60px;
+    padding: 0;
+    border: 0;
+    padding-right: 2px;
+    background: #2f323b !important;
+    color: #fff !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar-content.sidebar-close>button {
+    left: 60px;
+}
+
+
+/* Sidebar dropdown */
+
+.sidebar-content .dropdown-menu {
+    width: 250px;
+    margin-top: -1px;
+    margin-bottom: 0;
+    border-radius: 0;
+    padding: 0;
+    background: #27282d;
+    box-shadow: none;
+}
+
+.sidebar-content .dropdown-menu a {
+    color: rgba(255, 255, 255, 0.6);
+    padding: 15px 15px !important;
+    font-size: 1.6rem;
+}
+
+.sidebar-content .dropdown-menu .active a,
+.sidebar-content .dropdown-menu a:hover,
+.sidebar-content .dropdown-menu a:focus {
+    color: #fff;
+    background: transparent !important;
+}
+
+.sidebar-content .dropdown-menu .active a {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.sidebar-content .dropdown-menu .divider {
+    background: #222;
+}
+
+
+/* Content */
+
+#sidebar:not(.no-sidebar)~#content .container,
+#sidebar:not(.no-sidebar)~#content .container-fluid {
+    padding-left: 75px;
+    max-width: 100%;
+    transition: padding 0.2s ease-in-out;
+}
+
+@media (min-width: 768px) and (max-width: 1550px) {
+    #sidebar:not(.no-sidebar)~#content:not(.full) .container,
+    #sidebar:not(.no-sidebar)~#content:not(.full) .container-fluid {
+        padding-left: 265px;
+    }
+}
+
+#sidebar:not(.no-sidebar)~#content .container {
+    padding-top: 15px;
+}
+
+
 /* Image container */
 
 .container-image {
@@ -103,7 +277,7 @@ hr[soft] {
 
 .navbar,
 .navbar li {
-    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .navbar-brand {
@@ -423,6 +597,10 @@ hr[soft] {
 
 .dis-ib {
     display: inline-block;
+}
+
+.dis-g {
+    display: grid;
 }
 
 
@@ -802,6 +980,7 @@ md-toast {
 
 .editor-container {
     background: #fff;
+    padding-left: 0 !important;
     border: 1px solid #e7e7e7;
 }
 
@@ -825,22 +1004,22 @@ md-toast {
     visibility: visible;
     box-shadow: none;
     background: #fff;
-    border: 1px solid #e7e7e7;
-    border-right: none;
-    border-left: none;
+    border: none;
+    border-bottom: 1px solid #e7e7e7;
     border-radius: 0;
-    padding: 0;
-    width: 100%;
     position: fixed;
-    top: 61px !important;
-    left: 0 !important;
     z-index: 9;
+    margin: 0 !important;
+    padding: 0 !important;
+    top: 0 !important;
+    left: 60px !important;
+    width: calc(100% - 60px);
+    transition: all 0.2s ease-in-out;
 }
 
-@media (max-width: 991px) {
-    .medium-editor-toolbar {
-        top: 51px !important;
-    }
+#content:not(.full)~.medium-editor-toolbar {
+    left: 250px !important;
+    width: calc(100% - 250px) !important;
 }
 
 .medium-editor-toolbar-actions {
@@ -990,9 +1169,9 @@ md-toast {
 
 .editor-draft-mode {
     position: fixed;
-    bottom: 20px;
     border: 2px solid #d17100;
-    left: 20px;
+    bottom: 25px;
+    right: 25px;
     z-index: 11;
     padding: 5px 12px;
     font-size: smaller;
@@ -1207,8 +1386,12 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     color: #d17100;
     box-shadow: none;
     bottom: initial;
-    top: 30px;
-    position: absolute;
+    top: 50px;
+    right: 25px;
+    position: fixed;
+    border-radius: 2px;
+    height: 40px;
+    line-height: 40px;
 }
 
 .btn-corner:focus,
@@ -1226,24 +1409,6 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     color: #fff !important;
     background: #333;
     border-color: #222;
-}
-
-@media (max-width: 1400px) {
-    .btn-corner.btn-corner-navbar {
-        top: 8px;
-        right: 66px;
-        width: 44px;
-        height: 34px;
-        line-height: 34px;
-        font-size: 1em;
-        border-radius: 4px;
-    }
-}
-
-@media(min-width: 992px) and (max-width: 1400px) {
-    .btn-corner.btn-corner-navbar {
-        top: 65px;
-    }
 }
 
 
@@ -1267,8 +1432,8 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 .modal-header-clickable {
     background: rgba(0, 0, 0, 0.05);
     color: rgba(0, 0, 0, 0.3);
-    padding: 20px 15px;
-    height: 61px;
+    padding: 12px 15px;
+    height: 42px;
 }
 
 @media (max-width: 992px) {
