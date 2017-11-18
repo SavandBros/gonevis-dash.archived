@@ -231,6 +231,9 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
     if (toParams.lights !== true) {
       $rootScope.set.lights = true;
     }
+
+    // Init dropdowns
+    angular.element(".dropdown-toggle").dropdown();
   });
 
   /**
