@@ -35,7 +35,8 @@
     <!-- Header -->
     <a class="main dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
       <!-- Logo -->
-      <img ng-src="{{ user.getSites()[param.s].media.logo.thumbnail_48x48 }}">
+      <img ng-src="{{ user.getSites()[param.s].media.logo.thumbnail_48x48 }}"
+        ng-if="user.getSites()[param.s].media.logo.thumbnail_48x48">
       <!-- Title -->
       {{ user.getSites()[param.s].title || "Dashboard" }}
       <!-- Caret -->
