@@ -49,9 +49,12 @@
     </p>
   <![endif]-->
 
-  <ng-include src="'header/header_view.html'" ng-controller="HeaderController"></ng-include>
+  <!-- Sidebar -->
+  <div id="sidebar" ng-include="'header/header_view.html'" ng-controller="HeaderController"
+    ng-class="{'no-sidebar': !auth.isAuthenticated()}"></div>
 
-  <div ui-view class="lights" ng-class="{'off': !set.lights}"></div>
+  <!-- Content -->
+  <div id="content" class="lights" ui-view ng-class="{off: !set.lights, full: !set.sidebar}"></div>
 
   <!-- Google analytics -->
   <script>
@@ -60,8 +63,8 @@
           (A[l].q = A[l].q || []).push(arguments)
         }, A[l].l = +new Date, a = n.createElement(g),
         r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-58251754-3');
+    }(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+    ga("create", "UA-58251754-3");
   </script>
 
   <!-- build:js(.) scripts/vendor.js -->
