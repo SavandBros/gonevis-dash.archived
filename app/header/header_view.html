@@ -33,9 +33,9 @@
   <!-- Sites dropdown -->
   <div class="dropdown dis-g">
     <!-- Header -->
-    <a class="main  dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
+    <a class="main dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
       <!-- Logo -->
-      <img ng-src="https://gonevis.s3.amazonaws.com/dolphin/0d415604-d361-4d9a-ac35-b0eccae5d1b2/thumb_48x48_1501084754086_Twenty-One-Pilots-twenty-one-pilots-39730211-1440-1153_2017_05_17_23_29_36_UTC.jpg">
+      <img ng-src="{{ user.getSites()[param.s].media.logo.thumbnail_48x48 }}">
       <!-- Title -->
       {{ user.getSites()[param.s].title || "Dashboard" }}
       <!-- Caret -->
