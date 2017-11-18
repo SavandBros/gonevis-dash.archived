@@ -1,6 +1,6 @@
 "use strict";
 
-function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
+function RunNevisRun($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
   ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, localStorageService) {
 
   /**
@@ -232,8 +232,10 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, toaster,
       $rootScope.set.lights = true;
     }
 
-    // Init dropdowns
-    angular.element(".dropdown-toggle").dropdown();
+    // Init dropdowns after render
+    $timeout(function () {
+      angular.element(".dropdown-toggle").dropdown();
+    });
   });
 
   /**
@@ -331,6 +333,7 @@ RunNevisRun.$inject = [
   "$location",
   "$cookies",
   "$state",
+  "$timeout",
   "toaster",
   "ENV",
   "AuthService",
