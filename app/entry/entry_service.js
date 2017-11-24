@@ -5,7 +5,6 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
 
     /**
      * @desc Super variable for getting this in functions
-     *
      * @type {Tag}
      */
     var self = this;
@@ -58,6 +57,17 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
     };
 
     /**
+     * @desc Check if has cover image
+     * @returns {boolean}
+     */
+    this.hasCoverImage = function () {
+      if (self.get.media && self.get.media.cover_image) {
+        return true;
+      }
+      return false;
+    };
+
+    /**
      * @desc Entry creation
      *
      * @param {function} success
@@ -90,7 +100,6 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
 
     /**
      * @desc Add draft parameters if entry is draft
-     *
      * @returns {string}
      */
     this.getUrl = function() {

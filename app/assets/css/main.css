@@ -67,7 +67,8 @@ h6 {
 }
 
 a,
-button {
+button,
+[ng-click] {
     cursor: pointer;
     outline: 0 !important;
 }
@@ -1542,6 +1543,14 @@ img.modal-image {
     background-position: center;
     box-shadow: inset 0 0 10000px rgba(0, 0, 0, 0.5);
     border-bottom: 1px solid #bbb;
+}
+
+.modal .cover.cover-full {
+    margin-bottom: 10px;
+    box-shadow: none;
+    border: none;
+    background-color: #333;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .modal .cover.open {
