@@ -58,7 +58,8 @@ h6 {
 }
 
 a,
-button {
+button,
+[ng-click] {
     cursor: pointer;
     outline: 0 !important;
 }
