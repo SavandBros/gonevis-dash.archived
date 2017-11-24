@@ -44,6 +44,11 @@
         <i class="fa fa-chevron-left"></i>
       </div>
       <div class="modal-body">
+        <!-- Cover -->
+        <div class="cover cover-full animated slideInLeft" ng-if="form.get.media.cover_image"
+          ng-click="dolphinService.viewSelection('entryCover')"
+          style="background-image: url({{ form.get.media.cover_image.thumbnail_256x256 }})">
+        </div>
         <!-- Tag -->
         <div class="form-group" ng-class="{'has-error': form.errors.tag_ids}">
           <tags-input ng-model="tagsToSubmit" display-property="name" replace-spaces-with-dashes="false"
