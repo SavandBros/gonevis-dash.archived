@@ -111,9 +111,26 @@ function EntryNewController($scope, $state, $timeout, $q,
    * @param {string} source
    */
   $scope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
+    // Cover image
     if (source === "entryCover") {
+      // Store ID to uploda
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
-    } else if (source === "editorAddImage") {
+      // If selected a file
+      if (dolphin) {
+        // Already has a cover image
+        if ($scope.form.hasCoverImage()) {
+          $scope.form.get.media.cover_image.thumbnail_256x256 = dolphin.get.thumbnail_256x256;
+        }
+        // Create cover image object for preview
+        else {
+          $scope.form.get.media = {
+            cover_image: { thumbnail_256x256: dolphin.get.thumbnail_256x256 }
+          };
+        }
+      } else {
+        $scope.form.get.media = null;
+      }
+    }
       $scope.form.get.content = $scope.form.get.content.replace("assets/img/avatar.png", dolphin.get.file);
     }
   });
