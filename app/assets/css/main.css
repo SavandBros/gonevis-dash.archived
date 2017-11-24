@@ -236,6 +236,10 @@ hr[soft] {
     background: #222;
 }
 
+.sidebar-content .dropup.open {
+    background: rgba(0, 0, 0, 0.2);
+}
+
 
 /* Content */
 
