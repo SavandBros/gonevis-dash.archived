@@ -131,7 +131,19 @@ function EntryNewController($scope, $state, $timeout, $q,
         $scope.form.get.media = null;
       }
     }
+    // Inserting an image to editor
+    else if (source === "editorAddImage") {
+      // Find the image and set the url to selected file
       $scope.form.get.content = $scope.form.get.content.replace("assets/img/avatar.png", dolphin.get.file);
+      // If has no cover image, set this image as cover image
+      if (!$scope.form.hasCoverImage()) {
+        // Store to upload
+        $scope.form.cover_image = dolphin.get.id;
+        // Store to preview
+        $scope.form.get.media = {
+          cover_image: { thumbnail_256x256: dolphin.get.thumbnail_256x256 }
+        };
+      }
     }
   });
 
