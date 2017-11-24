@@ -14,6 +14,15 @@
     background: rgba(0, 0, 0, 0.4);
 }
 
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 *,
 *:focus,
 *:hover,
@@ -225,6 +234,10 @@ hr[soft] {
 
 .sidebar-content .dropdown-menu .divider {
     background: #222;
+}
+
+.sidebar-content .dropup.open {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 
