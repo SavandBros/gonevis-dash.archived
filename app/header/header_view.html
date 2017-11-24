@@ -29,7 +29,7 @@
 </nav>
 
 <!-- Sidebar content -->
-<div class="sidebar-content" ng-class="{'sidebar-close': !set.sidebar}" ng-if="auth.isAuthenticated()">
+<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar}" ng-if="auth.isAuthenticated()">
   <!-- Sites dropdown -->
   <div class="dropdown dis-g">
     <!-- Header -->
@@ -38,9 +38,10 @@
       <img ng-src="{{ user.getSites()[param.s].media.logo.thumbnail_48x48 }}"
         ng-if="user.getSites()[param.s].media.logo.thumbnail_48x48">
       <!-- Title -->
-      {{ user.getSites()[param.s].title || "Dashboard" }}
+      <span ng-if="!set.sidebar">{{ user.getSites()[param.s].title[0] || "D" }}</span>
+      <span ng-if="set.sidebar">{{ user.getSites()[param.s].title || "Dashboard" }}</span>
       <!-- Caret -->
-      <i class="fa fa-caret-down o-fade"></i>
+      <i class="fa fa-caret-down o-fade" ng-if="set.sidebar"></i>
     </a>
     <!-- Header dropdown -->
     <ul class="dropdown-menu">
