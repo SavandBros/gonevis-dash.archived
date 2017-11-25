@@ -111,10 +111,39 @@ function EntryNewController($scope, $state, $timeout, $q,
    * @param {string} source
    */
   $scope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
+    // Cover image
     if (source === "entryCover") {
+      // Store ID to uploda
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
-    } else if (source === "editorAddImage") {
-      $scope.form.get.content = $scope.form.get.content.replace("assets/img/avatar.png", dolphin.get.file);
+      // If selected a file
+      if (dolphin) {
+        // Already has a cover image
+        if ($scope.form.hasCoverImage()) {
+          $scope.form.get.media.cover_image.thumbnail_256x256 = dolphin.get.thumbnail_256x256;
+        }
+        // Create cover image object for preview
+        else {
+          $scope.form.get.media = {
+            cover_image: { thumbnail_256x256: dolphin.get.thumbnail_256x256 }
+          };
+        }
+      } else {
+        $scope.form.get.media = null;
+      }
+    }
+    // Inserting an image to editor
+    else if (source === "editorAddImage") {
+      // Get the modified content (inserted image)
+      $scope.form.get.content = angular.element("[medium-editor][name=editor]").html();
+      // If has no cover image, set this image as cover image
+      if (!$scope.form.hasCoverImage()) {
+        // Store to upload
+        $scope.form.cover_image = dolphin.get.id;
+        // Store to preview
+        $scope.form.get.media = {
+          cover_image: { thumbnail_256x256: dolphin.get.thumbnail_256x256 }
+        };
+      }
     }
   });
 
