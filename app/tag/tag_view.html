@@ -42,13 +42,13 @@
             <!-- Tag (List) -->
             <li class="row list-panel" ng-repeat="tag in tags track by $index" ng-show="!tag.isDeleted">
               <div class="col-md-11 col-xs-9 col-sm-10">
-                <div class="media of-visible">
+                <div class="media">
                   <div class="media-left">
                     <img class="tag media-object img-rounded" ng-src="{{ tag.get.media.cover_image.thumbnail_48x48 ?
                       tag.get.media.cover_image.thumbnail_48x48 : '../assets/img/default/48x48.png'
                     }}">
                   </div>
-                  <div class="media-body of-visible">
+                  <div class="media-body">
                     <span class="media-heading">
                       <div class="row">
                         <!-- Name -->
