@@ -60,6 +60,7 @@
             </div>
           </div>
         </div>
+        <!-- Advanced Options -->
         <a class="btn btn-default btn-sm"
           ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
           <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
@@ -120,6 +121,29 @@
                 ng-change="updateSite('search_engine_visibility', site.search_engine_visibility)"
                 ng-model="site.search_engine_visibility">
               <label for="search_engine_visibility">Let search engine discover my site</label>
+            </div>
+          </div>
+        </div>
+        <!-- Domain -->
+        <a class="btn btn-default btn-sm"
+          ng-model="domain" ng-init="domain = true" ng-click="domain = !domain">
+          <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !domain, 'fa-chevron-down': domain}"></i>
+          Custom Domain
+        </a>
+        <br>
+        <br>
+        <div uib-collapse="domain">
+          <!-- Custom URL -->
+          <div class="panel panel-default panel-body">
+            <div class="row">
+              <div class="col-xs-3 col-sm-2">
+                <small>Domain</small>
+              </div>
+              <div class="col-xs-9 col-sm-10 t-line">
+                <span editable-textarea="site.description" onbeforesave="updateSite('description', $data)">
+                  {{ site.description || "Nothing here..." }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
