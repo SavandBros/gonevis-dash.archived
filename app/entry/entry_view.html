@@ -18,26 +18,77 @@
     <div ng-if="entries.length">
       <!-- Entry grid -->
       <div class="animated fadeIn" ng-if="view == 'grid'">
-        <div class="panel-body s-pad-y-no">
-          <ul class="list-unstyled s-mar-no">
-            <div class="row">
-              <div class="col-md-3 col-sm-4" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
-                <a class="thumbnail s-pad-no" ui-sref="dash.entry-edit({ entryId: entry.get.id })"
-                  ng-click="entry.cache()">
-                  <img ng-src="{{ entry.get.media.cover_image.thumbnail_256x256 ?
-                      entry.get.media.cover_image.thumbnail_256x256 : '../assets/img/default/256x256.png'
-                    }}">
-                  <div class="caption t-line">
-                    <small class="text-primary">{{ entry.get.title }}</small>
-                    <hr soft>
-                    <i class="fa fa-fw fa-comments text-muted" ng-if="entry.get.comment_enabled"></i>
-                    <i class="fa fa-fw fa-star text-primary" ng-if="entry.get.featured"></i>
-                    <i class="fa fa-fw fa-lock text-danger" ng-if="entry.get.password"></i>
-                  </div>
-                </a>
+        <div class="col-xs-12 col-md-4" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
+          <div class="post">
+            <div class="post-img" style="background-image: url({{ entry.get.media.cover_image.thumbnail_256x256 ?
+              entry.get.media.cover_image.thumbnail_256x256 : '../assets/img/default/256x256.png' }});">
+              <div class="post-featured" ng-if="entry.get.featured">
+                <i class="fa fa-star-o fa-fw text-warning c-white "></i>
+              </div>
+              <!-- Options -->
+              <div class="dropdown options" title="options">
+                <button class="btn btn-default dropdown-toggle o-fade-hard o-fade-hover-full bg-no c-white b-no"
+                  data-toggle="dropdown" style="padding: 5px;">
+                  <i class="fa fa-fw fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li>
+                    <a ng-href="{{ entry.getUrl() }}" target="_blank">
+                      <i class="fa fa-fw fa-external-link"></i> <translate>View on site</translate>
+                    </a>
+                  </li>
+                  <li>
+                    <a ng-click="entry.addToNavigation()">
+                      <i class="fa fa-fw fa-bars"></i> <translate>Add to navigation</translate>
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a ng-click="entry.remove()">
+                      <i class="fa fa-fw fa-trash text-danger"></i> <translate>Delete</translate>
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
-          </ul>
+            <div class="post-body s-pad-x-soft s-pad-y-soft">
+              <!-- Status -->
+              <span class="post-info o-fade">
+                {{ entry.get.status == 1 ? "Published" : "Draft" }} &bull; {{ entry.get.created | date }}
+              </span>
+              <!-- Title -->
+              <a class="c-sky" ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
+                <h4 class="t-line">{{ entry.get.title }}</h4>
+              </a>
+              <p class="o-fade-soft t-line" style="margin-top: 5px;">
+                {{ entry.get.lead ? entry.get.lead : entry.get.excerpt }}
+              </p>
+            </div>
+            <div class="post-footer">
+              <div class="row o-tooltip">
+                <div class="col-md-4 col-xs-4 text-center">
+                  <div class="s-pad-soft"
+                    uib-tooltip="Comments {{ entry.get.comment_enabled ? 'enabled' : 'disabled'}}"
+                    ng-class="{'c-sky': entry.get.comment_enabled, 'o-fade': !entry.get.comment_enabled}">
+                    <i class="fa fa-comments-o fa-fw"></i>
+                    <small>{{ entry.get.comment_count }}</small>
+                  </div>
+                </div>
+                <div class="col-md-4 col-xs-4 text-center o-fade">
+                  <div class="s-pad-soft">
+                    <i class="fa fa-eye fa-fw"></i>
+                    <small>{{ entry.get.view_count }}</small>
+                  </div>
+                </div>
+                <div class="col-md-4 col-xs-4 text-center o-fade">
+                  <div class="s-pad-soft">
+                    <i class="fa fa-heart-o fa-fw"></i>
+                    <small>{{ entry.get.vote_count }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Entry list -->
