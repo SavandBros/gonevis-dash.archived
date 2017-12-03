@@ -509,6 +509,11 @@ hr[soft] {
     padding-left: 30px;
 }
 
+.s-pad-x-soft {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
 .s-pad-x-no {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -691,6 +696,10 @@ hr[soft] {
 
 .c-grey {
     color: #777;
+}
+
+.c-sky {
+    color: #337ab7;
 }
 
 
@@ -1992,6 +2001,18 @@ img.tag {
     border-bottom-color: #d17100;
 }
 
+.o-tooltip .tooltip:not(.init) .tooltip-inner {
+    background: rgba(0,0,0,0.85);
+}
+
+.o-tooltip .tooltip.top:not(.init) .tooltip-arrow {
+    border-top-color: rgba(0,0,0,0.85);
+}
+
+.o-tooltip .tooltip.bottom:not(.init) .tooltip-arrow {
+    border-bottom-color: rgba(0,0,0,0.85);
+}
+
 
 /* Stack element */
 
@@ -2207,4 +2228,54 @@ img.cache {
     .team-role {
         padding: 10px 0 0 35px;
     }
+}
+
+
+/* Entry */
+
+.post {
+    margin-bottom: 30px;
+    border: 1px solid #eee;
+    -webkit-transition: ease-in-out all 0.1s;
+    -moz-transition: ease-in-out all 0.1s;
+    transition: ease-in-out all 0.1s;
+}
+
+.post-img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 160px;
+}
+
+.post-img .options {
+    position: absolute;
+    z-index: 10;
+    margin: 5px;
+    right: 15px;
+    top: 0;
+}
+
+.post-body .post-info {
+    font-size: 0.65em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.post-footer {
+    border-top: 1px solid #eee;
+}
+
+.post-featured {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 50px 50px 0px 0px;
+    border-color: rgba(0,0,0,0.6) transparent transparent transparent;
+}
+
+.post-featured .fa {
+    position: absolute;
+    top: 10px;
+    left: 22px;
 }
