@@ -60,10 +60,12 @@
               <a class="c-sky" ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
                 <h4 class="t-line">{{ entry.get.title }}</h4>
               </a>
+              <!-- Lead or excerpt -->
               <p class="o-fade-soft t-line" style="margin-top: 5px;">
                 {{ entry.get.lead ? entry.get.lead : entry.get.excerpt }}
               </p>
             </div>
+            <!-- Entry Stats -->
             <div class="post-footer">
               <div class="row o-tooltip">
                 <div class="col-md-4 col-xs-4 text-center">
