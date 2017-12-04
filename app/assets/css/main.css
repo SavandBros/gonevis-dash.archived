@@ -541,6 +541,11 @@ hr[soft] {
     padding-right: 15px;
 }
 
+/* Vertical Alignment */
+
+.va-m {
+    vertical-align: middle;
+}
 
 /* Sizes */
 
