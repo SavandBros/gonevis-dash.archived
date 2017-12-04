@@ -4,177 +4,170 @@
 </button>
 <!-- Main -->
 <div class="container container-light pad-top">
-  <div class="col-md-10 col-md-offset-1">
-    <!-- Top bar -->
-    <ng-include src="'basement/view/top_bar.html'"></ng-include>
-    <!-- Search noresult -->
-    <ng-include src="'basement/search/search_noresult.html'"></ng-include>
-    <!-- Nothing -->
-    <!-- TODO: Translate -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult && initialled"
-      ng-init="nothingText = 'No posts yet.'">
-    </ng-include>
-    <!-- List -->
-    <div ng-if="entries.length">
-      <!-- Entry grid -->
-      <div class="animated fadeIn" ng-if="view == 'grid'">
-        <div class="col-xs-12 col-md-4" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
-          <div class="post">
-            <div class="post-img" style="background-image: url({{ entry.get.media.cover_image.thumbnail_256x256 ?
-              entry.get.media.cover_image.thumbnail_256x256 : '../assets/img/default/256x256.png' }});">
-              <div class="post-featured" ng-if="entry.get.featured">
-                <i class="fa fa-star-o fa-fw text-warning c-white "></i>
-              </div>
-              <!-- Options -->
-              <div class="dropdown options" title="options">
-                <button class="btn btn-default dropdown-toggle o-fade-hard o-fade-hover-full bg-no c-white b-no"
-                  data-toggle="dropdown" style="padding: 5px;">
-                  <i class="fa fa-fw fa-ellipsis-v"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li>
-                    <a ng-href="{{ entry.getUrl() }}" target="_blank">
-                      <i class="fa fa-fw fa-external-link"></i> <translate>View on site</translate>
-                    </a>
-                  </li>
-                  <li>
-                    <a ng-click="entry.addToNavigation()">
-                      <i class="fa fa-fw fa-bars"></i> <translate>Add to navigation</translate>
-                    </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <a ng-click="entry.remove()">
-                      <i class="fa fa-fw fa-trash text-danger"></i> <translate>Delete</translate>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+  <!-- Top bar -->
+  <ng-include src="'basement/view/top_bar.html'"></ng-include>
+  <!-- Search noresult -->
+  <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+  <!-- Nothing -->
+  <!-- TODO: Translate -->
+  <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult && initialled"
+    ng-init="nothingText = 'No posts yet.'">
+  </ng-include>
+  <!-- List -->
+  <div ng-if="entries.length">
+    <!-- Entry grid -->
+    <div class="animated fadeIn" ng-if="view == 'grid'">
+      <div class="col-xs-12 col-md-4 col-lg-3" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
+        <div class="post">
+          <div class="post-img" style="background-image: url({{ entry.get.media.cover_image.thumbnail_256x256 ?
+            entry.get.media.cover_image.thumbnail_256x256 : '../assets/img/default/256x256.png' }});">
+            <div class="post-featured" ng-if="entry.get.featured">
+              <i class="fa fa-star-o fa-fw text-warning c-white "></i>
             </div>
-            <div class="post-body s-pad-x-soft s-pad-y-soft">
-              <!-- Status -->
-              <span class="post-info o-fade">
-                {{ entry.get.status == 1 ? "Published" : "Draft" }} &bull; {{ entry.get.created | date }}
-              </span>
-              <!-- Title -->
-              <a class="c-sky" ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
-                <h4 class="t-line">{{ entry.get.title }}</h4>
-              </a>
-              <!-- Lead or excerpt -->
-              <p class="o-fade-soft t-line" style="margin-top: 5px;">
-                {{ entry.get.lead ? entry.get.lead : entry.get.excerpt }}
-              </p>
+            <!-- Options -->
+            <div class="dropdown options" title="options">
+              <button class="btn btn-default dropdown-toggle o-fade-hard o-fade-hover-full bg-no c-white b-no"
+                data-toggle="dropdown" style="padding: 5px;">
+                <i class="fa fa-fw fa-ellipsis-v"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a ng-href="{{ entry.getUrl() }}" target="_blank">
+                    <i class="fa fa-fw fa-external-link"></i> <translate>View on site</translate>
+                  </a>
+                </li>
+                <li>
+                  <a ng-click="entry.addToNavigation()">
+                    <i class="fa fa-fw fa-bars"></i> <translate>Add to navigation</translate>
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a ng-click="entry.remove()">
+                    <i class="fa fa-fw fa-trash text-danger"></i> <translate>Delete</translate>
+                  </a>
+                </li>
+              </ul>
             </div>
-            <!-- Entry Stats -->
-            <div class="post-footer">
-              <div class="row o-tooltip">
-                <div class="col-md-4 col-xs-4 text-center">
-                  <div class="s-pad-soft"
-                    uib-tooltip="Comments {{ entry.get.comment_enabled ? 'enabled' : 'disabled'}}"
-                    ng-class="{'c-sky': entry.get.comment_enabled, 'o-fade': !entry.get.comment_enabled}">
-                    <i class="fa fa-comments-o fa-fw"></i>
-                    <small>{{ entry.get.comment_count }}</small>
-                  </div>
+          </div>
+          <div class="post-body" style="padding: 10px 15px">
+            <!-- Status -->
+            <p class="post-info o-fade s-mar-no">
+              <span ng-if="entry.get.status === 1">Published &bull; {{ entry.get.published | date }}</span>
+              <span ng-if="entry.get.status !== 1">Draft &bull; {{ entry.get.created | date }}</span>
+            </p>
+            <!-- Title -->
+            <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
+              <p class="s-mar-no">{{ entry.get.title }}</p>
+            </a>
+          </div>
+          <!-- Entry Stats -->
+          <div class="post-footer">
+            <div class="row o-tooltip">
+              <!-- Comments -->
+              <div class="col-md-4 col-xs-4 text-center">
+                <div class="s-pad-soft" title="Comments {{ entry.get.comment_enabled ? 'enabled' : 'disabled'}}">
+                  <i class="fa fa-comments-o fa-fw"></i>
+                  <small>{{ entry.get.comment_count }}</small>
                 </div>
-                <div class="col-md-4 col-xs-4 text-center o-fade">
-                  <div class="s-pad-soft">
-                    <i class="fa fa-eye fa-fw"></i>
-                    <small>{{ entry.get.view_count }}</small>
-                  </div>
+              </div>
+              <!-- Views -->
+              <div class="col-md-4 col-xs-4 text-center">
+                <div class="s-pad-soft">
+                  <i class="fa fa-eye fa-fw"></i> <small>{{ entry.get.view_count }}</small>
                 </div>
-                <div class="col-md-4 col-xs-4 text-center o-fade">
-                  <div class="s-pad-soft">
-                    <i class="fa fa-heart-o fa-fw"></i>
-                    <small>{{ entry.get.vote_count }}</small>
-                  </div>
+              </div>
+              <!-- Likes -->
+              <div class="col-md-4 col-xs-4 text-center">
+                <div class="s-pad-soft">
+                  <i class="fa fa-heart-o fa-fw"></i> <small>{{ entry.get.vote_count }}</small>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- Entry list -->
-      <div class="panel panel-default s-box s-mar-x-soft animated fadeIn" ng-if="view == 'list'">
-        <div class="panel-heading">
-          <!-- Action dropdown -->
-          <div class="dropdown options pull-right" title="options">
-            <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
-              <translate>Action</translate> <i class="fa fa-caret-down"></i>
-            </button>
-            <ul class="dropdown-menu">
-              <li ng-repeat="a in actions">
-                <a ng-click="setProperty(a.property, a.value)">
-                  <i class="fa fa-{{ a.icon }}"></i>{{ a.label }}
-                </a>
-              </li>
-              <hr>
-              <li>
-                <a ng-click="removeSelected()">
-                  <i class="fa fa-trash text-danger"></i> <translate>Remove selected</translate>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-        <div class="panel-body s-pad-y-no">
-          <ul class="list-unstyled s-mar-no">
-            <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': entry.get.status == 1}"
-              ng-repeat="entry in entries" ng-show="!entry.isDeleted">
-              <!--Title and slug-->
-              <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9 t-line">
-                <input type="checkbox" ng-model="entry.isSelected" ng-change="countSelected(entry)">
-                <a ui-sref="dash.entry-edit({entryId: entry.get.id})" ng-click="entry.cache()">{{ entry.get.title }}</a>
-                <small class="dis-b o-fade">/{{ entry.get.slug }}</small>
-              </div>
-              <!-- Date -->
-              <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right o-fade s-pad-no">
-                <span class="hidden-xs">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
-                <span class="visible-xs small">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
-                <small class="dis-b o-fade" ng-if="entry.get.status === 1" translate>Publication</small>
-                <small class="dis-b o-fade" ng-if="entry.get.status === 0" translate>Creation</small>
-              </div>
-              <!-- Tools -->
-              <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 text-right s-pad-no">
-                <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
-                        style="margin-top: 5px;">
-                  <i class="fa fa-fw fa-ellipsis-v"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li class="dropdown-header" ng-if="entry.get.comment_enabled">
-                    <i init class="fa fa-fw fa-comments text-muted"></i> <translate>Comments enabled</translate>
-                  </li>
-                  <li class="dropdown-header" ng-if="entry.get.featured ">
-                    <i init class="fa fa-fw fa-star text-primary"></i> <translate>Featured</translate>
-                  </li>
-                  <li class="dropdown-header" ng-if="entry.get.password ">
-                    <i init class="fa fa-fw fa-lock text-danger"></i> <translate>Passworded</translate>
-                  </li>
-                  <li class="divider" ng-show="entry.get.password || entry.get.featured || entry.get.comment_enabled"></li>
-                  <li>
-                    <a ng-href="{{ entry.getUrl() }}" target="_blank">
-                      <i class="fa fa-fw fa-external-link"></i> <translate>View on site</translate>
-                    </a>
-                  </li>
-                  <li>
-                    <a ng-click="entry.addToNavigation()">
-                      <i class="fa fa-fw fa-bars"></i> <translate>Add to navigation</translate>
-                    </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <a ng-click="entry.remove()">
-                      <i class="fa fa-fw fa-trash text-danger"></i> <translate>Delete</translate>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
-    <!-- More -->
-    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
-  </div>
+    <!-- Entry list -->
+    <div class="panel panel-default s-box s-mar-x-soft animated fadeIn" ng-if="view == 'list'">
+      <div class="panel-heading">
+        <!-- Action dropdown -->
+        <div class="dropdown options pull-right" title="options">
+          <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
+            <translate>Action</translate> <i class="fa fa-caret-down"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="a in actions">
+              <a ng-click="setProperty(a.property, a.value)">
+                <i class="fa fa-{{ a.icon }}"></i>{{ a.label }}
+              </a>
+            </li>
+            <hr>
+            <li>
+              <a ng-click="removeSelected()">
+                <i class="fa fa-trash text-danger"></i> <translate>Remove selected</translate>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-body s-pad-y-no">
+        <ul class="list-unstyled s-mar-no">
+          <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': entry.get.status == 1}"
+            ng-repeat="entry in entries" ng-show="!entry.isDeleted">
+            <!--Title and slug-->
+            <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9 t-line">
+              <input type="checkbox" ng-model="entry.isSelected" ng-change="countSelected(entry)">
+              <a ui-sref="dash.entry-edit({entryId: entry.get.id})" ng-click="entry.cache()">{{ entry.get.title }}</a>
+              <small class="dis-b o-fade">/{{ entry.get.slug }}</small>
+            </div>
+            <!-- Date -->
+            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right o-fade s-pad-no">
+              <span class="hidden-xs">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
+              <span class="visible-xs small">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
+              <small class="dis-b o-fade" ng-if="entry.get.status === 1" translate>Publication</small>
+              <small class="dis-b o-fade" ng-if="entry.get.status === 0" translate>Creation</small>
+            </div>
+            <!-- Tools -->
+            <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 text-right s-pad-no">
+              <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
+                      style="margin-top: 5px;">
+                <i class="fa fa-fw fa-ellipsis-v"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header" ng-if="entry.get.comment_enabled">
+                  <i init class="fa fa-fw fa-comments text-muted"></i> <translate>Comments enabled</translate>
+                </li>
+                <li class="dropdown-header" ng-if="entry.get.featured ">
+                  <i init class="fa fa-fw fa-star text-primary"></i> <translate>Featured</translate>
+                </li>
+                <li class="dropdown-header" ng-if="entry.get.password ">
+                  <i init class="fa fa-fw fa-lock text-danger"></i> <translate>Passworded</translate>
+                </li>
+                <li class="divider" ng-show="entry.get.password || entry.get.featured || entry.get.comment_enabled"></li>
+                <li>
+                  <a ng-href="{{ entry.getUrl() }}" target="_blank">
+                    <i class="fa fa-fw fa-external-link"></i> <translate>View on site</translate>
+                  </a>
+                </li>
+                <li>
+                  <a ng-click="entry.addToNavigation()">
+                    <i class="fa fa-fw fa-bars"></i> <translate>Add to navigation</translate>
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a ng-click="entry.remove()">
+                    <i class="fa fa-fw fa-trash text-danger"></i> <translate>Delete</translate>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <!-- More -->
+  <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
 </div>
