@@ -541,6 +541,11 @@ hr[soft] {
     padding-right: 15px;
 }
 
+/* Vertical Alignment */
+
+.va-m {
+    vertical-align: middle;
+}
 
 /* Sizes */
 
@@ -1974,7 +1979,6 @@ a.thumbnail.active {
 img.tag {
     width: 32px;
     float: left;
-    margin-right: 10px;
 }
 
 
