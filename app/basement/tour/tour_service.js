@@ -96,8 +96,8 @@ function TourService(Tour, AuthService) {
     // Tours for main view
     if (tourName === "main") {
       steps = [
-        ["#entries", "Posts Overview", "Posts are listed here, click on them to open in editor.<br><br>On the right side, you can see the likes, comments and views counter."],
-        ["#site", "Site Overview", "You can see your followers and current template.<br><br>Click on the header for the full settings page."],
+        ["#entries", "Posts Overview", "Posts are listed here, click on them to open in editor.<br><br>On the right side, you can see the likes, comments and views counter.", "bottom"],
+        ["#site", "Site Overview", "You can see your followers and current template.<br><br>Click on the header for the full settings page.", "bottom"],
       ];
     }
 
