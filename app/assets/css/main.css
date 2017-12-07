@@ -2283,3 +2283,23 @@ img.cache {
     top: 10px;
     left: 22px;
 }
+
+
+/* Comments */
+
+.comments {
+    border: 1px solid #eee;
+}
+
+.comments .media {
+    margin-top: 0;
+    padding: 10px;
+}
+
+.comments .media:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+.comments .media,
+.comments .media-body {
+    overflow: visible;
+}
