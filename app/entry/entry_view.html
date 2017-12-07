@@ -17,7 +17,7 @@
   <div ng-if="entries.length">
     <!-- Entry grid -->
     <div class="animated fadeIn" ng-if="view == 'grid'">
-      <div class="col-xs-12 col-md-4 col-lg-3" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
+      <div class="col-xs-12 col-md-4" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
         <div class="post">
           <div class="post-img" style="background-image: url({{ entry.get.media.cover_image.thumbnail_256x256 ?
             entry.get.media.cover_image.thumbnail_256x256 : '../assets/img/default/256x256.png' }});">
@@ -53,12 +53,12 @@
           <div class="post-body" style="padding: 10px 15px">
             <!-- Status -->
             <p class="post-info o-fade s-mar-no">
-              <span ng-if="entry.get.status === 1">Published &bull; {{ entry.get.published | date }}</span>
-              <span ng-if="entry.get.status !== 1">Draft &bull; {{ entry.get.created | date }}</span>
+              <span ng-if="entry.get.status === 1">Published &middot; {{ entry.get.published | date }}</span>
+              <span ng-if="entry.get.status !== 1">Draft &middot; {{ entry.get.created | date }}</span>
             </p>
             <!-- Title -->
             <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
-              <p class="s-mar-no">{{ entry.get.title }}</p>
+              <p class="s-mar-no t-line">{{ entry.get.title }}</p>
             </a>
           </div>
           <!-- Entry Stats -->
