@@ -10,7 +10,7 @@
       ng-init="nothingText = 'You have no comments.'">
     </ng-include>
     <!-- List -->
-    <div class="comments" ng-if="comments.length">
+    <div class="list-view" ng-if="comments.length">
       <div class="media animated fadeIn" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
         <div class="media-left">
           <img class="media-object img-circle" ng-src="{{ comment.user.getMedia('tiny') }}">
