@@ -24,9 +24,9 @@
             </a>
             <!-- Option -->
             <div class="dropdown pull-right">
-              <a class="dropdown-toggle" data-toggle="dropdown">
+              <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown">
                 <i class="fa fa-fw fa-ellipsis-v"></i>
-              </a>
+              </button>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-header" translate>Change status</li>
                 <li ng-repeat="status in statuses" ng-class="{'active': comment.getStatus().label == status.label}">
