@@ -13,7 +13,7 @@
     <div class="list-view" ng-if="comments.length">
       <div class="media animated fadeIn" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
         <div class="media-left">
-          <img class="media-object img-circle" ng-src="{{ comment.user.getMedia('tiny') }}">
+          <img class="media-object img-circle" style="max-width: 48px" ng-src="{{ comment.user.getMedia('tiny') }}">
         </div>
         <div class="media-body">
           <div class="media-heading s-mar-no">
