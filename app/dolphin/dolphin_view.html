@@ -79,7 +79,8 @@
           <!-- Image -->
           <div class="media-left">
             <!-- Img -->
-            <img class="media-object" ng-src="{{ dolphin.get.thumbnail_48x48 }}" ng-if="dolphin.get.is_image">
+            <img class="media-object" style="max-width: 48px"
+              ng-src="{{ dolphin.get.thumbnail_48x48 }}" ng-if="dolphin.get.is_image">
             <!-- Icon -->
             <i class="fa fa-2x o-fade media-object" style="background: #eee;padding: 10px 12px;" ng-class="{
               'fa-file-archive-o': dolphin.extension == 'ZIP',
