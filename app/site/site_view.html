@@ -133,18 +133,24 @@
         <br>
         <br>
         <div uib-collapse="domain">
-          <!-- Custom URL -->
-          <div class="panel panel-default panel-body">
-            <div class="row">
-              <div class="col-xs-3 col-sm-2">
-                <small>Domain</small>
-              </div>
-              <div class="col-xs-9 col-sm-10 t-line">
-                <span editable-textarea="site.description" onbeforesave="updateSite('description', $data)">
-                  {{ site.description || "Nothing here..." }}
-                </span>
-              </div>
+          <!-- Custom domain -->
+          <div class="panel panel-default panel-body" ng-repeat="domain in customDomains">
+            <!-- Label -->
+            <div class="col-xs-3 col-sm-2"><small>Domain {{ $index + 1 }}</small></div>
+            <!-- Domain URL -->
+            <div class="col-xs-7 col-sm-9 t-line">{{ domain.domain }}</div>
+            <!-- Remove button -->
+            <div class="col-xs-1 text-right">
+              <i ng-click="removeDomain($index)" class="fa fa-close"></i>
             </div>
+          </div>
+          <!-- Add custom domain -->
+          <div ng-if="customDomains.length < maxCustomDomains">
+            <button class="btn btn-default" ng-click="addDomain()">
+              <i class="fa fa-plus"></i> Add Domain
+            </button>
+            <br>
+            <br>
           </div>
         </div>
         <!-- Image -->
