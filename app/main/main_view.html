@@ -6,7 +6,7 @@
       <div class="panel panel-default" ng-if="!Comment.loading">
         <div class="panel-heading">
           <a ui-sref="dash.comment-list" class="header-link">Comments</a>
-          <span class="label label-default">{{ Metrics.list.comment_count }}</span>
+          <span class="panel-label">{{ Metrics.list.comment_count }}</span>
         </div>
         <h4 ng-if="!Comment.list.length" class="text-center s-pad-y o-fade">
           <em>No comments yet.</em>
@@ -36,7 +36,7 @@
         <!-- Title -->
         <div class="panel-heading">
           <a ui-sref="dash.entry-list" class="header-link">Posts</a>
-          <span class="label label-default">{{ Metrics.list.entry_count }}</span>
+          <span class="panel-label">{{ Metrics.list.entry_count }}</span>
         </div>
         <!-- No entries message -->
         <h4 ng-if="!Entry.list.length" class="text-center s-pad-y o-fade">
@@ -54,18 +54,20 @@
                 <p class="list-group-item-text t-line">{{ entry.get.title }}</p>
               </div>
               <div class="col-md-4 col-xs-4 col-lg-3 col-sm-4">
-                <!-- Views -->
-                <span class="pull-right label label-default" ng-if="entry.get.view_count">
-                  {{ entry.get.view_count }} <i class="fa fa-eye o-fade"></i>
-                </span>
-                <!-- Comments -->
-                <span class="pull-right label label-default" ng-if="entry.get.comment_count">
-                  {{ entry.get.comment_count }} <i class="fa fa-comments o-fade"></i>
-                </span>
-                <!-- Votes -->
-                <span class="pull-right label label-default" ng-if="entry.get.vote_count">
-                  {{ entry.get.vote_count }} <i class="fa fa-heart o-fade"></i>
-                </span>
+                <div class="list-group-label"> 
+                  <!-- Views -->
+                  <span ng-if="entry.get.view_count" class="s-mar-right-soft">
+                    <i class="fa fa-eye o-fade"></i> {{ entry.get.view_count }}
+                  </span>
+                  <!-- Comments -->
+                  <span ng-if="entry.get.comment_count" class="s-mar-right-soft">
+                    <i class="fa fa-comment-o o-fade"></i> {{ entry.get.comment_count }}
+                  </span>
+                  <!-- Votes -->
+                  <span ng-if="entry.get.vote_count">
+                    <i class="fa fa-heart-o o-fade"></i> {{ entry.get.vote_count }}
+                  </span>
+                </div>
               </div>
             </div>
           </a>
