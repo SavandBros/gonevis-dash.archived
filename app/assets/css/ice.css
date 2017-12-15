@@ -1,0 +1,233 @@
+/*!
+ * Ice
+ *
+ * Text colors:
+ *  #6F7A8B
+ *  #FFFFFF
+ *
+ * Background colors:
+ *  #EAEDF1
+ *  #FFFFFF
+ *  #2F323B
+ *
+ * Border colors:
+ *  #E8E8E8
+**/
+
+
+/* Global */
+
+body {
+    background-color: #EAEDF1;
+    font-family: "Lato", Helvetica, sans-serif;
+    color: #6F7A8B;
+}
+
+
+/* Panel */
+
+.panel {
+    box-shadow: none;
+    border: none !important;
+    cursor: default;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+    background-color: #FFFFFF !important;
+    padding: 18px 12px !important;
+    border-bottom: 2px solid #EAEDF1 !important;
+}
+
+.panel-heading,
+.panel-heading a {
+    color: #6F7A8B !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* Panel label */
+
+.panel-label {
+    float: right;
+    padding: 6px 10px;
+    margin-top: -6px;
+    background: #EAEDF1;
+    border: 1px solid transparent;
+    font-weight: bold;
+    color: #6F7A8B;
+}
+
+
+/* Sidebar */
+
+.sidebar-content {
+    background: #2F323B;
+    height: 500px;
+    color: #fff;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out;
+    z-index: 100;
+}
+
+.sidebar-content.sidebar-close {
+    width: 60px !important;
+}
+
+.sidebar-content a {
+    padding: 12px 20px;
+    display: block;
+    color: #6F7A8B;
+    font-size: 1.4rem;
+    width: 250px;
+}
+
+.sidebar-content>a {
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-content a.active,
+.sidebar-content a:focus,
+.sidebar-content a:hover {
+    color: #fff;
+}
+
+.sidebar-content>a.active {
+    border-left-color: #d17100;
+}
+
+.sidebar-content a.active {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-content a>.fa {
+    margin-right: 20px;
+    margin-left: -2px;
+    font-size: 1.7rem;
+    position: relative;
+    top: 2px;
+    font-weight: lighter;
+}
+
+.sidebar-content a.active .fa {
+    color: #d17100;
+}
+
+.sidebar-content a.main {
+    padding: 20px;
+    font-size: 1.4rem;
+}
+
+.sidebar-content a.main span {
+    margin-left: 2px;
+}
+
+.sidebar-content a.main:not(.main-light) {
+    background: #27282d;
+    font-weight: bold;
+    color: #fff;
+}
+
+.sidebar-content a.main .fa {
+    margin-left: 5px;
+}
+
+.sidebar-content a.main img {
+    margin: -5px -8px;
+    margin-right: 12px;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+}
+
+
+/* Sidebar button */
+
+.sidebar-content>button {
+    border-radius: 0 3px 3px 0;
+    position: fixed;
+    left: 250px;
+    bottom: 25px;
+    height: 60px;
+    padding: 0;
+    border: 0;
+    padding-right: 2px;
+    background: #2F323B !important;
+    color: #fff !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar-content.sidebar-close>button {
+    left: 60px;
+}
+
+
+/* Sidebar dropdown */
+
+.sidebar-content .dropdown-menu {
+    width: 250px;
+    margin-top: -1px;
+    margin-bottom: 0;
+    border-radius: 0;
+    padding: 0;
+    background: #27282d;
+    box-shadow: none;
+}
+
+.sidebar-content .dropdown-menu a {
+    color: rgba(255, 255, 255, 0.6);
+    padding: 15px 15px !important;
+}
+
+.sidebar-content .dropdown-menu .active a,
+.sidebar-content .dropdown-menu a:hover,
+.sidebar-content .dropdown-menu a:focus {
+    color: #fff;
+    background: transparent !important;
+}
+
+.sidebar-content .dropdown-menu .active a {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.sidebar-content .dropdown-menu .divider {
+    background: #222;
+}
+
+.sidebar-content .dropup.open {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+
+/* List group label */
+
+.list-group-label {
+    font-size: smaller;
+    color: #6f7a8b;
+    background: #eaedf1;
+    display: initial;
+    float: right;
+    padding: 4px 10px;
+    margin: -3px;
+    border-radius: 1000px;
+    opacity: 0.4;
+}
+
+.list-group-label.visible {
+    opacity: 1;
+}
+
+.list-group-item:hover .list-group-label {
+    opacity: 1;
+}
