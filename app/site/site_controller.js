@@ -11,6 +11,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
     $scope.postPerPage = new Array(25);
+    $scope.customDomains = [{
+      domain: "google.com"
+    }];
+    $scope.maxCustomDomains = 5;
 
     API.SiteSettings.get({
         siteId: site
