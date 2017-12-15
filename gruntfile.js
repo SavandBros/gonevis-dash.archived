@@ -6,7 +6,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   process.env.QT_QPA_PLATFORM = "";
 
   // Time how long tasks take. Can help when optimizing build times
@@ -88,7 +88,7 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               serveStatic(".tmp"),
               connect().use(
@@ -107,7 +107,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           port: 9001,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               serveStatic(".tmp"),
               serveStatic("test"),
@@ -610,7 +610,7 @@ module.exports = function (grunt) {
   ]);
 
 
-  grunt.registerTask("serve", "Compile then start a connect web server", function (target) {
+  grunt.registerTask("serve", "Compile then start a connect web server", function(target) {
     if (target === "dist") {
       return grunt.task.run(["build", "connect:dist:keepalive"]);
     }
@@ -620,6 +620,19 @@ module.exports = function (grunt) {
         "clean:server",
         // "jsbeautifier",
         "ngconstant:staging",
+        "wiredep",
+        "concurrent:server",
+        "postcss:server",
+        "connect:livereload",
+        "watch"
+      ]);
+    }
+
+    if (target === "production") {
+      return grunt.task.run([
+        "clean:server",
+        // "jsbeautifier",
+        "ngconstant:production",
         "wiredep",
         "concurrent:server",
         "postcss:server",
@@ -679,7 +692,7 @@ module.exports = function (grunt) {
   ]);
 
   // Rock'nRolla
-  grunt.registerTask("rock", function () {
+  grunt.registerTask("rock", function() {
     var isProduction = (process.env.PRODUCTION !== undefined && process.env.PRODUCTION === "true");
 
     if (isProduction) {
