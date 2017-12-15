@@ -134,6 +134,16 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
+   * @desc Open modal
+   */
+  $scope.siteTemplates = function() {
+    ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
+      site: $scope.site,
+      currentTemplate: $scope.siteTemplate
+    });
+  };
+
+  /**
    * @desc Image selection callback
    *
    * @param {Event} event
