@@ -34,8 +34,6 @@
     text-decoration: none !important;
 }
 
-
-
 html,
 body,
 h1,
@@ -283,8 +281,7 @@ hr[soft] {
 
 .trans,
 .dolphin,
-.modal.sidebar.pre,
-.container-fluid {
+.modal.sidebar.pre {
     transition: all 0.3s ease-in-out;
 }
 
@@ -1497,6 +1494,13 @@ a.thumbnail.active {
 }
 
 
+/* Progress */
+
+.progress {
+    box-shadow: none;
+}
+
+
 /* Progress Input */
 
 .progress-input {
@@ -1509,17 +1513,6 @@ a.thumbnail.active {
 .progress-input .progress-bar {
     padding-top: 8px;
     transition: all 0.3s ease-in-out !important;
-}
-
-
-/* List group item */
-
-.list-group-item .pull-right.btn-sm {
-    margin-top: -5px;
-}
-
-.list-group-item {
-    border-color: whitesmoke;
 }
 
 
@@ -1904,6 +1897,7 @@ img.cache {
 
 .list-view {
     border: 1px solid #eee;
+    background: #fff;
 }
 
 .list-view .media {
