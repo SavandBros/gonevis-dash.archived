@@ -144,6 +144,20 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
+   * Remove domain from domain list, if all deleted add an empty one
+   *
+   * @param {number} index
+   */
+  $scope.removeDomain = function(index) {
+    $scope.customDomains.splice(index, 1);
+    
+    // All deleted, add an empty one
+    if ($scope.customDomains.length === 0) {
+      $scope.customDomains = [{ domain: "" }];
+    }
+  };
+
+  /**
    * @desc Image selection callback
    *
    * @param {Event} event
