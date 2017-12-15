@@ -144,6 +144,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
+   * Add custom domain to domain list
+   */
+  $scope.addDomain = function() {
+    $scope.customDomains.push({ domain: "" });
+  };
+
+  /**
    * Remove domain from domain list, if all deleted add an empty one
    *
    * @param {number} index
