@@ -12,6 +12,7 @@
  *
  * Border colors:
  *  #E8E8E8
+ *  #F0F0F0
 **/
 
 
@@ -43,8 +44,12 @@ body {
 .panel-heading a {
     color: #6F7A8B !important;
     font-weight: bold;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+.panel-heading:not(.lower),
+.panel-heading:not(.lower) a {
+    text-transform: uppercase;
 }
 
 
@@ -74,7 +79,7 @@ body {
     top: 0;
     overflow: hidden;
     overflow-y: auto;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     z-index: 100;
 }
 
@@ -83,10 +88,10 @@ body {
 }
 
 .sidebar-content a {
-    padding: 12px 20px;
+    padding: 13px 20px;
     display: block;
     color: #6F7A8B;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     width: 250px;
 }
 
@@ -116,7 +121,8 @@ body {
 .sidebar-content a.active,
 .sidebar-content a:focus,
 .sidebar-content a:hover {
-    color: #fff;
+    color: #EEEEEE;
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-content>a.active {
@@ -130,10 +136,6 @@ body {
 .sidebar-content a>.fa {
     margin-right: 20px;
     margin-left: -2px;
-    font-size: 1.7rem;
-    position: relative;
-    top: 2px;
-    font-weight: lighter;
 }
 
 .sidebar-content a.active .fa {
@@ -246,4 +248,20 @@ body {
 
 .list-group-item:hover .list-group-label {
     opacity: 1;
+}
+
+/* List group item */
+
+.list-group-item .pull-right.btn-sm {
+    margin-top: -5px;
+}
+
+.list-group-item {
+    border-color: #F0F0F0;
+}
+
+/* Dropdown */
+
+.dropdown-menu a {
+    text-transform: initial !important;
 }
