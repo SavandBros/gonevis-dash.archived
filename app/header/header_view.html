@@ -57,7 +57,7 @@
   <br>
   <!-- Main navs -->
   <a ui-sref="{{ nav.sref }}" ng-repeat="nav in mainNavs" ng-class="{'active': state.includes(nav.sref)}">
-    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }}
+    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
   </a>
   <br>
   <!-- Account dropdown -->
