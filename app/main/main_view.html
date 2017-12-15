@@ -79,8 +79,8 @@
       <!-- Metrics:Entry -->
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
-        <div class="panel-heading">
-          <i class="fa fa-list-alt text-primary"></i> Publication
+        <div class="panel-heading lower">
+          Publication <div class="panel-label img-circle"><i class="fa fa-list-alt"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
@@ -98,8 +98,8 @@
       <!-- Metrics:Comment -->
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
-        <div class="panel-heading">
-          Comment overview <i class="fa fa-comment text-primary"></i>
+        <div class="panel-heading lower">
+          Comment overview <div class="panel-label img-circle"><i class="fa fa-comment"></i></div>
         </div>
         <!-- Overview (Chart -->
         <ul class="panel-body panel-body-chart s-pad-no list-group">
@@ -112,12 +112,12 @@
             <!-- Chart -->
             <div class="s-pad">
               <canvas class="chart chart-doughnut"
-                      chart-labels="[' Active Comments', ' Pending Comments', ' Hidden Comments']"
+                      chart-labels="['Active Comments', 'Pending Comments', 'Hidden Comments']"
                       chart-data="[
-                Metrics.list.active_comment_count,
-                Metrics.list.pending_comment_count,
-                Metrics.list.hidden_comment_count
-              ]">
+                        Metrics.list.active_comment_count,
+                        Metrics.list.pending_comment_count,
+                        Metrics.list.hidden_comment_count
+                      ]">
               </canvas>
             </div>
           </div>
@@ -136,9 +136,9 @@
       <!-- Site Overview -->
       <div class="panel panel-default" ng-if="Metrics.list" id="site">
         <!-- Title -->
-        <div class="panel-heading">
+        <div class="panel-heading lower">
           <a ui-sref="dash.site" class="header-link">Site overview</a>
-          <i class="fa fa-globe text-primary"></i>
+          <div class="panel-label img-circle"><i class="fa fa-globe"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
@@ -159,9 +159,9 @@
       <!-- Metrics:Dolphin -->
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
-        <div class="panel-heading">
+        <div class="panel-heading lower">
           <a ui-sref="dash.dolphin" class="header-link">Storage</a>
-          <i class="fa fa-cubes text-primary"></i>
+          <div class="panel-label img-circle"><i class="fa fa-cubes"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
@@ -198,9 +198,9 @@
       <!-- Metrics:Team -->
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
-        <div class="panel-heading">
+        <div class="panel-heading lower">
           <a ui-sref="dash.team" class="header-link">Team</a>
-          <i class="fa fa-users text-primary"></i>
+          <div class="panel-label img-circle"><i class="fa fa-users"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
