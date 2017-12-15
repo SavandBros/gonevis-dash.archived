@@ -1900,22 +1900,22 @@ img.cache {
 }
 
 
-/* Comments */
+/* list-view */
 
-.comments {
+.list-view {
     border: 1px solid #eee;
 }
 
-.comments .media {
+.list-view .media {
     margin-top: 0;
     padding: 10px;
 }
 
-.comments .media:not(:last-child) {
+.list-view .media:not(:last-child) {
     border-bottom: 1px solid #eee;
 }
 
-.comments .media,
-.comments .media-body {
+.list-view .media,
+.list-view .media-body {
     overflow: visible;
 }
