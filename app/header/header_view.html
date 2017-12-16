@@ -57,7 +57,7 @@
   <br>
   <!-- Main navs -->
   <a ui-sref="{{ nav.sref }}" ng-repeat="nav in mainNavs" ng-class="{'active': state.includes(nav.sref)}">
-    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }}
+    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
   </a>
   <br>
   <!-- Account dropdown -->
@@ -67,13 +67,15 @@
       <!-- Profile picture -->
       <img ng-if="user.hasMedia" ng-src="{{ user.getMedia('tiny') }}" alt="{{ user.getDisplayName() }}"/>
       <!-- Display name -->
-      {{ user.getDisplayName() }}
+      <span>{{ user.getDisplayName() }}</span>
+      <!-- Caret -->
+      <i class="fa fa-caret-up o-fade"></i>
     </a>
     <!-- Header dropdown -->
     <ul class="dropdown-menu">
       <!-- Account settings -->
       <li ng-class="{active: state.includes('user')}">
-        <a ui-sref="user({s: param.s})">View Account<br><small class="o-fade">{{ user.get.email }}</small></a>
+        <a ui-sref="user({s: param.s})">View Account<br><span class="o-fade">{{ user.get.email }}</span></a>
       </li>
       <li class="divider"></li>
       <!-- Feedback -->
