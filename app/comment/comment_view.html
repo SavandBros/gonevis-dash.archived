@@ -11,7 +11,7 @@
     </ng-include>
     <!-- List -->
     <div class="list-view" ng-if="comments.length">
-      <div class="media animated fadeIn" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
+      <div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
         <div class="media-left">
           <img class="media-object img-circle" style="max-width: 48px" ng-src="{{ comment.user.getMedia('tiny') }}">
         </div>
