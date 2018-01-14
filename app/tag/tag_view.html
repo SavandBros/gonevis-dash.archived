@@ -4,7 +4,7 @@
 </button>
 <!-- Main -->
 <div class="container container-light pad-top">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-12">
     <!-- Top bar -->
     <ng-include src="'basement/view/top_bar.html'"></ng-include>
     <!-- Search noresult -->
@@ -36,29 +36,34 @@
         </ul>
       </div>
       <!-- List view -->
-      <div ng-show="view == 'list'" class="panel panel-default s-box s-mar-x-soft">
+      <div ng-show="view == 'list'" class="panel panel-default s-mar-x-soft">
         <div class="panel-body s-pad-y-no">
           <ul class="list-unstyled s-mar-no">
             <!-- Tag (List) -->
             <li class="row list-panel" ng-repeat="tag in tags track by $index" ng-show="!tag.isDeleted">
-              <!-- Image -->
-              <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
-                <img class="tag img-rounded" ng-src="{{ tag.get.media.cover_image.thumbnail_48x48 ?
-                    tag.get.media.cover_image.thumbnail_48x48 : '../assets/img/default/48x48.png'
-                  }}">
+              <div class="col-md-11 col-xs-9 col-sm-10 s-pad-no">
+                <div class="media">
+                  <!-- Image -->
+                  <div class="media-left va-m">
+                    <img class="tag media-object img-circle" ng-src="{{ tag.get.media.cover_image.thumbnail_48x48 ?
+                      tag.get.media.cover_image.thumbnail_48x48 : '../assets/img/default/48x48.png'
+                    }}">
+                  </div>
+                  <div class="media-body">
+                    <!-- Name and count -->
+                    <span class="media-heading">
+                      <a ng-click="tag.view()">
+                        <span>{{ tag.get.name }}</span>
+                        <small class="o-fade text-muted">x{{ tag.get.tagged_items_count | number }}</small>
+                      </a>
+                    </span>
+                    <!-- Description -->
+                    <small class="dis-b o-fade">{{ tag.get.description || "#" + tag.get.slug }}</small>
+                  </div>
+                </div>
               </div>
-              <!-- Title and slug -->
-              <div class="col-xs-8 col-md-10 col-sm-10 col-lg-3 t-line">
-                <a ng-click="tag.view()">{{ tag.get.name }}</a>
-                <small class="dis-b o-fade">
-                  #{{ tag.get.slug }}
-                  <span class="o-fade-soft">({{ tag.get.tagged_items_count | number }})</span>
-                </small>
-              </div>
-              <!-- Description -->
-              <div class="col-lg-7 text-left o-fade t-line hidden-xs hidden-sm hidden-md">{{ tag.get.description }}</div>
               <!-- Options -->
-              <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 text-right">
+              <div class="dropdown text-right col-md-1 col-xs-3 col-sm-2 s-pad-no">
                 <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
                   style="margin-top: 4px;">
                   <i class="fa fa-fw fa-ellipsis-v"></i>
