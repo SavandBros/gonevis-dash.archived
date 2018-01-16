@@ -183,7 +183,7 @@ body {
     padding-right: 2px;
     background: #2F323B !important;
     color: #fff !important;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .sidebar-content.sidebar-close>button {
