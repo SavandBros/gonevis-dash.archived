@@ -22,7 +22,7 @@
       </h3>
       <div class="panel-body s-pad">
         <!-- Title -->
-        <div class="panel panel-default panel-body">
+        <div class="input-panel">
           <div class="row">
             <div class="col-xs-3 col-sm-2">
               <small>TITLE</small>
@@ -35,7 +35,7 @@
           </div>
         </div>
         <!-- URL -->
-        <div class="panel panel-default panel-body">
+        <div class="input-panel">
           <div class="row">
             <div class="col-xs-3 col-sm-2">
               <small>URL</small>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <!-- Description -->
-        <div class="panel panel-default panel-body">
+        <div class="input-panel">
           <div class="row">
             <div class="col-xs-12 col-sm-2">
               <small>DESCRIPTION</small>
@@ -70,7 +70,7 @@
         <br>
         <div uib-collapse="advanced">
           <!-- Meta Description -->
-          <div class="panel panel-default panel-body">
+          <div class="input-panel">
             <div class="row">
               <div class="col-xs-12 col-sm-2">
                 <small>META DESCRIPTION</small>
@@ -84,7 +84,7 @@
             </div>
           </div>
           <!-- Post Per Page -->
-          <div class="panel panel-default panel-body">
+          <div class="input-panel">
             <div class="row">
               <div class="col-xs-8 col-sm-9">
                 <small style="margin-top: 10px" class="dis-b">NUMBER OF POSTS PER PAGE</small>
@@ -100,7 +100,7 @@
             </div>
           </div>
           <!-- Commenting -->
-          <div class="panel panel-default panel-body">
+          <div class="input-panel">
             <div class="checkbox checkbox-primary checkbox-small">
               <input id="commenting" type="checkbox" ng-model="site.commenting"
                 ng-change="updateSite('commenting', site.commenting)">
@@ -108,14 +108,14 @@
             </div>
           </div>
           <!-- Voting -->
-          <div class="panel panel-default panel-body">
+          <div class="input-panel">
             <div class="checkbox checkbox-primary checkbox-small">
               <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
               <label for="voting">Allow visitors to vote on my posts</label>
             </div>
           </div>
           <!-- Voting -->
-          <div class="panel panel-default panel-body">
+          <div class="input-panel">
             <div class="checkbox checkbox-primary checkbox-small">
               <input id="search_engine_visibility" type="checkbox"
                 ng-change="updateSite('search_engine_visibility', site.search_engine_visibility)"
