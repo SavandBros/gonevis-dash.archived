@@ -1674,6 +1674,15 @@ img.tag {
 }
 
 
+/* Input panel */
+
+.input-panel {
+    padding: 15px;
+    border-bottom: 2px solid #EAEDF1;
+    margin-bottom: 15px;
+}
+
+
 /* SV Reorder */
 
 .sv-visibility-hidden * {
