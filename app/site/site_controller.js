@@ -16,23 +16,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     }];
     $scope.maxCustomDomains = 5;
 
-    API.SiteSettings.get({
-        siteId: site
-      },
-      function(data) {
-        $scope.site = data;
-        Codekit.setTitle($scope.site.title);
-      }
-    );
+    API.SiteSettings.get({ siteId: site }, function(data) {
+      $scope.site = data;
+      Codekit.setTitle($scope.site.title);
+    });
 
-    API.SiteTemplateConfig.get({
-        siteId: site
-      },
-      function(data) {
-        $scope.siteTemplate = data.template_config;
-        $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
-      }
-    );
+    API.SiteTemplateConfig.get({ siteId: site }, function(data) {
+      $scope.siteTemplate = data.template_config;
+      $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
+    });
   }
 
   /**
@@ -154,7 +146,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     $scope.customDomains.push({ domain: "" });
   };
 
-  $scope.setDomain = function (domain) {
+  $scope.setDomain = function(domain) {
     API.SetCustomDomain.put({ siteId: site }, { domain: domain });
   };
 
@@ -165,7 +157,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
    */
   $scope.removeDomain = function(index) {
     $scope.customDomains.splice(index, 1);
-    
+
     // All deleted, add an empty one
     if ($scope.customDomains.length === 0) {
       $scope.customDomains = [{ domain: "" }];
