@@ -1,22 +1,24 @@
 <!-- Back area -->
 <div class="container-fluid container-image" ng-if="site.media.cover_image" ng-click="selectImage('cover_image')"
-  style="background-image: url('{{ site.media.cover_image.file }}')" title="Click to change cover image">
-  <h1><i class="fa fa-edit"></i></h1>
+  style="background-image: url('{{ site.media.cover_image.file }}')">
+  <p><i class="fa fa-fw fa-edit"></i> Change cover image</p>
 </div>
 <!-- Main -->
 <div class="container container-light animated fadeIn">
   <!-- Site settings -->
   <div class="col-md-8">
-    <div class="panel panel-default s-box s-mar-top">
-      <h3 class="panel-heading">
+    
+    <!-- Settings -->
+    <div class="panel panel-default">
+      <h4 class="panel-heading lower">
         <!-- Logo -->
         <img class="img-circle heading-image" ng-if="site.media.logo" ng-src="{{ site.media.logo.thumbnail_48x48 }}">
         <!-- Title -->
         <span style="line-height: 40px">{{ site.title }}</span>
         <!-- Visit -->
-        <a class="btn btn-default btn-sm pull-right"
-          href="{{ site.absolute_uri }}" target="_blank" title="Go to site.">
-          <i class="fa fa-external-link"></i> View site
+        <a class="btn btn-default pull-right"
+          ng-href="{{ site.absolute_uri }}" target="_blank" title="Go to site.">
+          View site
         </a>
         <div class="clearfix"></div>
       </h3>
@@ -24,9 +26,7 @@
         <!-- Title -->
         <div class="input-panel">
           <div class="row">
-            <div class="col-xs-3 col-sm-2">
-              <small>TITLE</small>
-            </div>
+            <div class="col-xs-3 col-sm-2"><small>TITLE</small></div>
             <div class="col-xs-9 col-sm-10">
               <span editable-text="site.title" onbeforesave="updateSite('title', $data)">
                 {{ site.title || "Nothing here..." }}
@@ -37,9 +37,7 @@
         <!-- URL -->
         <div class="input-panel">
           <div class="row">
-            <div class="col-xs-3 col-sm-2">
-              <small>URL</small>
-            </div>
+            <div class="col-xs-3 col-sm-2"><small>URL</small></div>
             <div class="col-xs-9 col-sm-10 t-line">
               <a ng-href="{{ site.absolute_uri }}" target="_blank" title="Can not be changed.">
                 {{ site.absolute_uri || "Nothing here..." }}
@@ -50,9 +48,7 @@
         <!-- Description -->
         <div class="input-panel">
           <div class="row">
-            <div class="col-xs-12 col-sm-2">
-              <small>DESCRIPTION</small>
-            </div>
+            <div class="col-xs-12 col-sm-2"><small>DESCRIPTION</small></div>
             <div class="col-xs-9 col-sm-10">
               <span editable-textarea="site.description" onbeforesave="updateSite('description', $data)">
                 {{ site.description || "Nothing here..." }}
@@ -60,132 +56,96 @@
             </div>
           </div>
         </div>
-        <!-- Advanced Options -->
-        <a class="btn btn-default btn-sm"
-          ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
-          <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
-          Advanced options
-        </a>
-        <br>
-        <br>
-        <div uib-collapse="advanced">
-          <!-- Meta Description -->
-          <div class="input-panel">
-            <div class="row">
-              <div class="col-xs-12 col-sm-2">
-                <small>META DESCRIPTION</small>
-              </div>
-              <div class="col-xs-9 col-sm-10">
-                <span editable-textarea="site.meta_description" e-maxlength="160"
-                  onbeforesave="updateSite('meta_description', $data)">
-                  {{ site.meta_description || "Nothing here..." }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <!-- Post Per Page -->
-          <div class="input-panel">
-            <div class="row">
-              <div class="col-xs-8 col-sm-9">
-                <small style="margin-top: 10px" class="dis-b">NUMBER OF POSTS PER PAGE</small>
-              </div>
-              <div class="col-xs-4 col-sm-3">
-                <select class="form-control" ng-model="site.paginate_by"
-                  ng-change="updateSite('paginate_by', site.paginate_by)">
-                  <option ng-value="$index" ng-if="$index" ng-repeat="number in postPerPage track by $index">
-                    {{ $index }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <!-- Commenting -->
-          <div class="input-panel">
-            <div class="checkbox checkbox-primary checkbox-small">
-              <input id="commenting" type="checkbox" ng-model="site.commenting"
-                ng-change="updateSite('commenting', site.commenting)">
-              <label for="commenting">Allow visitors to comment on my posts</label>
-            </div>
-          </div>
-          <!-- Voting -->
-          <div class="input-panel">
-            <div class="checkbox checkbox-primary checkbox-small">
-              <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
-              <label for="voting">Allow visitors to vote on my posts</label>
-            </div>
-          </div>
-          <!-- Voting -->
-          <div class="input-panel">
-            <div class="checkbox checkbox-primary checkbox-small">
-              <input id="search_engine_visibility" type="checkbox"
-                ng-change="updateSite('search_engine_visibility', site.search_engine_visibility)"
-                ng-model="site.search_engine_visibility">
-              <label for="search_engine_visibility">Let search engine discover my site</label>
+      </div>
+    </div>
+
+    <!-- Advanced -->
+    <div class="panel panel-default">
+      <div class="panel-heading lower">Advanced</div>
+      <div class="panel-body s-pad">
+        <!-- Meta Description -->
+        <div class="input-panel">
+          <div class="row">
+            <div class="col-sm-3"><small>META DESCRIPTION</small></div>
+            <div class="col-sm-9">
+              <span editable-textarea="site.meta_description" e-maxlength="160"
+                onbeforesave="updateSite('meta_description', $data)">
+                {{ site.meta_description || "Nothing here..." }}
+              </span>
             </div>
           </div>
         </div>
-        <!-- Domain -->
-        <a class="btn btn-default btn-sm"
-          ng-model="domain" ng-init="domain = true" ng-click="domain = !domain">
-          <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !domain, 'fa-chevron-down': domain}"></i>
-          Custom Domain
-        </a>
-        <br>
-        <br>
-        <div uib-collapse="domain">
-          <!-- Custom domain -->
-          <div class="panel panel-default panel-body" ng-repeat="domain in customDomains">
-            <!-- Label -->
-            <div class="col-xs-3 col-sm-2"><small>Domain {{ $index + 1 }}</small></div>
-            <!-- Domain URL -->
-            <div class="col-xs-7 col-sm-9 t-line">{{ domain.domain }}</div>
-            <!-- Remove button -->
-            <div class="col-xs-1 text-right">
-              <i ng-click="removeDomain($index)" class="fa fa-close"></i>
+        <!-- Post Per Page -->
+        <div class="input-panel">
+          <div class="row">
+            <div class="col-xs-8 col-sm-9">
+              <small style="margin-top: 10px" class="dis-b">NUMBER OF POSTS PER PAGE</small>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+              <select class="form-control" ng-model="site.paginate_by"
+                ng-change="updateSite('paginate_by', site.paginate_by)">
+                <option ng-value="$index" ng-if="$index" ng-repeat="number in postPerPage track by $index">
+                  {{ $index }}
+                </option>
+              </select>
             </div>
           </div>
-          <!-- Add custom domain -->
-          <div ng-if="customDomains.length < maxCustomDomains">
-            <button class="btn btn-default" ng-click="addDomain()">
-              <i class="fa fa-plus"></i> Add Domain
-            </button>
-            <br>
-            <br>
+        </div>
+        <!-- Commenting -->
+        <div class="s-mar-y">
+          <div class="checkbox checkbox-primary checkbox-small">
+            <input id="commenting" type="checkbox" ng-model="site.commenting"
+              ng-change="updateSite('commenting', site.commenting)">
+            <label for="commenting">Allow visitors to comment on my posts</label>
           </div>
         </div>
-        <!-- Image -->
-        <div class="btn-group stack stack-equal" role="group">
-          <button class="btn btn-default" ng-click="selectImage('logo')" title="Change site logo.">
-            <i class="fa fa-image"></i> Logo
-          </button>
-          <button class="btn btn-default" ng-click="selectImage('cover_image')" title="Change site cover image.">
-            <i class="fa fa-image"></i> Cover Image
-          </button>
+        <!-- Voting -->
+        <div class="s-mar-y">
+          <div class="checkbox checkbox-primary checkbox-small">
+            <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
+            <label for="voting">Allow visitors to vote on my posts</label>
+          </div>
+        </div>
+        <!-- Voting -->
+        <div class="s-mar-y">
+          <div class="checkbox checkbox-primary checkbox-small">
+            <input id="search_engine_visibility" type="checkbox"
+              ng-change="updateSite('search_engine_visibility', site.search_engine_visibility)"
+              ng-model="site.search_engine_visibility">
+            <label for="search_engine_visibility">Let search engine discover my site</label>
+          </div>
         </div>
       </div>
       <div class="panel-footer">
         <!-- Delete -->
-        <button class="btn btn-danger btn-sm" ng-click="remove(site.id)">
-          <i class="fa fa-trash"></i> Delete Site
+        <button class="btn btn-danger" ng-click="remove(site.id)">
+          <i class="fa fa-fw fa-trash"></i> Delete Site
         </button>
       </div>
     </div>
   </div>
+
   <!-- Template -->
   <div class="col-md-4 animated fadeIn" ng-if="siteTemplate">
-    <form class="panel panel-default s-box s-mar-top">
-      <h3 class="panel-heading" style="line-height: 40px">Appearance</h3>
+    <form class="panel panel-default">
+      <h3 class="panel-heading lower" style="line-height: 40px">Appearance</h3>
       <div class="panel-body">
-        <!-- Template modal -->
-        <div class="form-group s-mar-no">
-          <label>Template:</label>
-          <button class="btn btn-primary btn-block stack-element btn-lg t-shadow-small"
-            ng-click="siteTemplates()" ng-disabled="loadingTemplate">
-            <i class="fa btn-icon fa-cube"></i> {{ siteTemplate.name | uppercase }}
+        <!-- Template -->
+        <button class="btn btn-primary btn-block btn-lg" ng-click="siteTemplates()" ng-disabled="loadingTemplate">
+          <small>Theme:</small> {{ siteTemplate.name | uppercase }}
+        </button>
+        <br>
+        <!-- Site images -->
+        <div class="btn-group stack stack-equal">
+          <button class="btn btn-default" ng-click="selectImage('logo')" title="Change site log image">
+            Site Logo
+          </button>
+          <button class="btn btn-default" ng-click="selectImage('cover_image')" title="Change site cover image">
+            Site Cover
           </button>
         </div>
-      </div>
-      <div class="panel-footer" ng-if="siteTemplate.hasFields">
+        <!-- Theme options -->
+        <p class="s-mar-y"><i class="fa fa-cog"></i> <b>Theme options</b></p>
         <!-- Template fields -->
         <div class="form-grop" ng-repeat="(key, field) in siteTemplate.fields"
           ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
@@ -195,14 +155,14 @@
             class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
             ng-model="siteTemplate.fields[key].value">
           <!-- Field label -->
-          <label for="{{ key }}">{{ field.verbose_name }}</label>
+          <label for="{{ key }}"><b>{{ field.verbose_name }}</b></label>
           <!-- Text field -->
           <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
             placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
           </textarea>
           <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
         </div>
-        <hr>
+        <br>
         <!-- Update button -->
         <button class="btn btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
           <i class="fa fa-fw fa-check text-primary"></i> Save Changes
