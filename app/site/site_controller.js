@@ -154,6 +154,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     $scope.customDomains.push({ domain: "" });
   };
 
+  $scope.setDomain = function (domain) {
+    API.SetCustomDomain.put({ siteId: site }, { domain: domain });
+  };
+
   /**
    * Remove domain from domain list, if all deleted add an empty one
    *
