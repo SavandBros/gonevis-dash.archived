@@ -11,17 +11,16 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
     $scope.postPerPage = new Array(25);
-    $scope.customDomains = [{
-      domain: "google.com"
-    }];
     $scope.maxCustomDomains = 5;
     $scope.hideDelete = true; // Should remove this later
 
+    // Get site settings
     API.SiteSettings.get({ siteId: site }, function(data) {
       $scope.site = data;
       Codekit.setTitle($scope.site.title);
     });
 
+    // Get site template config
     API.SiteTemplateConfig.get({ siteId: site }, function(data) {
       $scope.siteTemplate = data.template_config;
       $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
@@ -141,28 +140,22 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
-   * Add custom domain to domain list
+   * @desc Open themes modal
    */
-  $scope.addDomain = function() {
-    $scope.customDomains.push({ domain: "" });
-  };
-
-  $scope.setDomain = function(domain) {
-    API.SetCustomDomain.put({ siteId: site }, { domain: domain });
+  $scope.siteTemplates = function() {
+    ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
+      site: $scope.site,
+      currentTemplate: $scope.siteTemplate
+    });
   };
 
   /**
-   * Remove domain from domain list, if all deleted add an empty one
+   * @desc Add/set new custom domain for the site (instead of the current sub domain)
    *
-   * @param {number} index
+   * @param {string} domain 
    */
-  $scope.removeDomain = function(index) {
-    $scope.customDomains.splice(index, 1);
-
-    // All deleted, add an empty one
-    if ($scope.customDomains.length === 0) {
-      $scope.customDomains = [{ domain: "" }];
-    }
+  $scope.setCustomDomain = function(domain) {
+    API.SetCustomDomain.put({ siteId: site }, { domain: domain });
   };
 
   /**
@@ -207,16 +200,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
       }
     );
   });
-
-  /**
-   * @desc Open modal
-   */
-  $scope.siteTemplates = function() {
-    ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
-      site: $scope.site,
-      currentTemplate: $scope.siteTemplate
-    });
-  };
 
   constructor();
 }
