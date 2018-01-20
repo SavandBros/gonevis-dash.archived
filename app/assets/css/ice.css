@@ -24,6 +24,19 @@ body {
     color: #6F7A8B;
 }
 
+::-webkit-scrollbar-track,
+::-webkit-scrollbar {
+    background: #EAEDF1;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6F7A8B;
+}
+
 
 /* Panel */
 
@@ -250,6 +263,7 @@ body {
     opacity: 1;
 }
 
+
 /* List group item */
 
 .list-group-item .pull-right.btn-sm {
@@ -259,6 +273,7 @@ body {
 .list-group-item {
     border-color: #F0F0F0;
 }
+
 
 /* Dropdown */
 
