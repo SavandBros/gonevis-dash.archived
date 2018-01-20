@@ -267,6 +267,14 @@ body {
     opacity: 1;
 }
 
+.list-group-label>span {
+    margin-right: 10px;
+}
+
+.list-group-label>span:last-child {
+    margin-right: 0;
+}
+
 
 /* List group item */
 

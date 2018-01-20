@@ -57,11 +57,11 @@
                 <div class="list-group-label"
                   ng-if="entry.get.view_count || entry.get.comment_count || entry.get.vote_count"> 
                   <!-- Views -->
-                  <span ng-if="entry.get.view_count" class="s-mar-right-soft">
+                  <span ng-if="entry.get.view_count">
                     <i class="fa fa-eye o-fade"></i> {{ entry.get.view_count }}
                   </span>
                   <!-- Comments -->
-                  <span ng-if="entry.get.comment_count" class="s-mar-right-soft">
+                  <span ng-if="entry.get.comment_count">
                     <i class="fa fa-comment-o o-fade"></i> {{ entry.get.comment_count }}
                   </span>
                   <!-- Votes -->
