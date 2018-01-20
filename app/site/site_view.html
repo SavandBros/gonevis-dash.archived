@@ -1,11 +1,13 @@
-<!-- Back area -->
+<!-- Site cover image -->
 <div class="container-fluid container-image" ng-if="site.media.cover_image" ng-click="selectImage('cover_image')"
   style="background-image: url('{{ site.media.cover_image.file }}')">
   <p><i class="fa fa-fw fa-edit"></i> Change cover image</p>
 </div>
+
 <!-- Main -->
 <div class="container container-light animated fadeIn">
-  <!-- Site settings -->
+
+  <!-- Left panels -->
   <div class="col-md-8">
     
     <!-- Settings -->
@@ -125,8 +127,10 @@
     </div>
   </div>
 
-  <!-- Template -->
+  <!-- Right panels -->
   <div class="col-md-4 animated fadeIn" ng-if="siteTemplate">
+
+    <!-- Appearance -->
     <form class="panel panel-default">
       <h3 class="panel-heading lower" style="line-height: 40px">Appearance</h3>
       <div class="panel-body">
