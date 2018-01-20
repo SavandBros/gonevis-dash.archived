@@ -1,10 +1,17 @@
 "use strict";
 
-function SiteController($scope, $rootScope, $state, $stateParams, toaster,
+function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
   API, ModalsService, AuthService, DolphinService, Codekit) {
 
   var site = AuthService.getCurrentSite();
   var toasters = {};
+
+  function getSiteSettings() {
+    API.SiteSettings.get({ siteId: site }, function(data) {
+      $scope.site = data;
+      Codekit.setTitle($scope.site.title);
+    });
+  }
 
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(false);
@@ -15,10 +22,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     $scope.hideDelete = true; // Should remove this later
 
     // Get site settings
-    API.SiteSettings.get({ siteId: site }, function(data) {
-      $scope.site = data;
-      Codekit.setTitle($scope.site.title);
-    });
+    getSiteSettings();
 
     // Get site template config
     API.SiteTemplateConfig.get({ siteId: site }, function(data) {
@@ -69,17 +73,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   /**
    * @desc Delete site via API call
    */
-  $scope.remove = function() {
+  $scope.deleteSite = function() {
     // How sure? Like confirm-a-confirm sure?
-    if (window.prompt(
-        "Delete site?\nDeleting site can not be undone!\n\nType in the site title to confirm:"
-      ) !== $scope.site.title) {
+    var text = "Delete site?\nDeleting site can not be undone!\n\nType in the site title to confirm:";
+    if ($window.prompt(text) !== $scope.site.title) {
       return;
     }
 
-    API.Site.delete({
-        siteId: site
-      },
+    API.Site.delete({ siteId: site },
       function() {
         // Remove site from user object
         $scope.user.sites.splice($stateParams.s, 1);
@@ -151,11 +152,40 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
 
   /**
    * @desc Add/set new custom domain for the site (instead of the current sub domain)
-   *
-   * @param {string} domain 
    */
-  $scope.setCustomDomain = function(domain) {
-    API.SetCustomDomain.put({ siteId: site }, { domain: domain });
+  $scope.addDomain = function() {
+    // Domain url
+    var domain = $window.prompt("Enter your custom domain address:");
+
+    API.CustomDomain.put({ siteId: site }, { domain: domain },
+      function() {
+        toaster.success("Custom domain set", (
+          "Supply '" + domain + "' to your DNS provider for the destination " +
+          "of CNAME or ALIAS records."
+        ));
+        getSiteSettings();
+      },
+      function() {
+        toaster.error("Error", "Domain is already taken or invalid.");
+      }
+    );
+  };
+
+  /**
+   * @desc Delete a custom domain
+   *
+   * @param {string} domain
+   */
+  $scope.deleteDomain = function(domain) {
+    // How sure? Like confirm-a-confirm sure?
+    if (!$window.confirm("Are you sure you want to delete '" + domain.domain + "' domain?")) {
+      return;
+    }
+
+    API.CustomDomain.delete({ siteId: site }, { domain: domain }, function() {
+      toaster.success("Done", "Deleted custom domain.");
+      getSiteSettings();
+    });
   };
 
   /**
@@ -210,6 +240,7 @@ SiteController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
+  "$window",
   "toaster",
   "API",
   "ModalsService",
