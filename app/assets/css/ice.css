@@ -65,6 +65,10 @@ body {
     text-transform: uppercase;
 }
 
+.panel-footer {
+    border-top: 2px solid #eaedf1;
+}
+
 
 /* Panel label */
 
