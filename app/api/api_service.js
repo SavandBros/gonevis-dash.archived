@@ -97,7 +97,7 @@ function API($resource, ENV) {
       name: "SiteSetTemplate",
       endpoint: "website/site/:siteId/set-template/" // PUT
     }, {
-      name: "SetCustomDomain",
+      name: "CustomDomain",
       endpoint: "website/site/:siteId/set-custom-domain/" // PUT
     }, {
       name: "SiteUpdate",
