@@ -1,34 +1,34 @@
 "use strict";
 
-function SiteController($scope, $rootScope, $state, $stateParams, toaster,
+function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
   API, ModalsService, AuthService, DolphinService, Codekit) {
 
   var site = AuthService.getCurrentSite();
   var toasters = {};
+
+  function getSiteSettings() {
+    API.SiteSettings.get({ siteId: site }, function(data) {
+      $scope.site = data;
+      Codekit.setTitle($scope.site.title);
+    });
+  }
 
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(false);
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
     $scope.postPerPage = new Array(25);
+    $scope.maxCustomDomains = 5;
+    $scope.hideDelete = true; // Should remove this later
 
-    API.SiteSettings.get({
-        siteId: site
-      },
-      function(data) {
-        $scope.site = data;
-        Codekit.setTitle($scope.site.title);
-      }
-    );
+    // Get site settings
+    getSiteSettings();
 
-    API.SiteTemplateConfig.get({
-        siteId: site
-      },
-      function(data) {
-        $scope.siteTemplate = data.template_config;
-        $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
-      }
-    );
+    // Get site template config
+    API.SiteTemplateConfig.get({ siteId: site }, function(data) {
+      $scope.siteTemplate = data.template_config;
+      $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
+    });
   }
 
   /**
@@ -73,17 +73,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   /**
    * @desc Delete site via API call
    */
-  $scope.remove = function() {
+  $scope.deleteSite = function() {
     // How sure? Like confirm-a-confirm sure?
-    if (window.prompt(
-        "Delete site?\nDeleting site can not be undone!\n\nType in the site title to confirm:"
-      ) !== $scope.site.title) {
+    var text = "Delete site?\nDeleting site can not be undone!\n\nType in the site title to confirm:";
+    if ($window.prompt(text) !== $scope.site.title) {
       return;
     }
 
-    API.Site.delete({
-        siteId: site
-      },
+    API.Site.delete({ siteId: site },
       function() {
         // Remove site from user object
         $scope.user.sites.splice($stateParams.s, 1);
@@ -134,6 +131,64 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
   };
 
   /**
+   * @desc Open modal
+   */
+  $scope.siteTemplates = function() {
+    ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
+      site: $scope.site,
+      currentTemplate: $scope.siteTemplate
+    });
+  };
+
+  /**
+   * @desc Open themes modal
+   */
+  $scope.siteTemplates = function() {
+    ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
+      site: $scope.site,
+      currentTemplate: $scope.siteTemplate
+    });
+  };
+
+  /**
+   * @desc Add/set new custom domain for the site (instead of the current sub domain)
+   */
+  $scope.addDomain = function() {
+    // Domain url
+    var domain = $window.prompt("Enter your custom domain address:");
+
+    API.SetCustomDomain.put({ siteId: site }, { domain: domain },
+      function() {
+        toaster.success("Custom domain set", (
+          "Supply '" + $scope.site.absolute_uri + "' to your DNS provider " +
+          "for the destination of CNAME or ALIAS records."
+        ));
+        getSiteSettings();
+      },
+      function() {
+        toaster.error("Error", "Domain is already taken or invalid.");
+      }
+    );
+  };
+
+  /**
+   * @desc Delete a custom domain
+   *
+   * @param {string} domain
+   */
+  $scope.deleteDomain = function(domain) {
+    // How sure? Like confirm-a-confirm sure?
+    if (!$window.confirm("Are you sure you want to delete '" + domain.domain + "' domain?")) {
+      return;
+    }
+
+    API.RemoveCustomDomain.put({ siteId: site }, { domain_id: domain.id }, function() {
+      toaster.success("Done", "Deleted custom domain '" + domain.domain + "'.");
+      getSiteSettings();
+    });
+  };
+
+  /**
    * @desc Image selection callback
    *
    * @param {Event} event
@@ -176,16 +231,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, toaster,
     );
   });
 
-  /**
-   * @desc Open modal
-   */
-  $scope.siteTemplates = function() {
-    ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
-      site: $scope.site,
-      currentTemplate: $scope.siteTemplate
-    });
-  };
-
   constructor();
 }
 
@@ -195,6 +240,7 @@ SiteController.$inject = [
   "$rootScope",
   "$state",
   "$stateParams",
+  "$window",
   "toaster",
   "API",
   "ModalsService",

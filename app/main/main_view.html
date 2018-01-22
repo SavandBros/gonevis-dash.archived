@@ -18,12 +18,12 @@
              ng-repeat="comment in Comment.list"
              ng-if="!comment.isDeleted">
             <div class="row">
-              <div class="col-md-10 col-xs-8 col-lg-10 col-sm-10">
+              <div class="col-md-9 col-sm-10 col-xs-8">
                 <p class="list-group-item-text">
                   <span class="o-fade-soft small">{{ comment.user.getFullName() }}:</span> {{ comment.get.comment }}
                 </p>
               </div>
-              <div class="col-md-2 col-xs-4 col-lg-2 col-sm-2">
+              <div class="col-md-3 col-sm-2 col-xs-4">
                 <span class="o-fade-soft pull-right small">{{ comment.get.created | date }}</span>
               </div>
             </div>
@@ -54,13 +54,14 @@
                 <p class="list-group-item-text t-line">{{ entry.get.title }}</p>
               </div>
               <div class="col-md-4 col-xs-4 col-lg-3 col-sm-4">
-                <div class="list-group-label"> 
+                <div class="list-group-label"
+                  ng-if="entry.get.view_count || entry.get.comment_count || entry.get.vote_count"> 
                   <!-- Views -->
-                  <span ng-if="entry.get.view_count" class="s-mar-right-soft">
+                  <span ng-if="entry.get.view_count">
                     <i class="fa fa-eye o-fade"></i> {{ entry.get.view_count }}
                   </span>
                   <!-- Comments -->
-                  <span ng-if="entry.get.comment_count" class="s-mar-right-soft">
+                  <span ng-if="entry.get.comment_count">
                     <i class="fa fa-comment-o o-fade"></i> {{ entry.get.comment_count }}
                   </span>
                   <!-- Votes -->
