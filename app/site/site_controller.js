@@ -157,11 +157,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     // Domain url
     var domain = $window.prompt("Enter your custom domain address:");
 
-    API.CustomDomain.put({ siteId: site }, { domain: domain },
+    API.SetCustomDomain.put({ siteId: site }, { domain: domain },
       function() {
         toaster.success("Custom domain set", (
-          "Supply '" + domain + "' to your DNS provider for the destination " +
-          "of CNAME or ALIAS records."
+          "Supply '" + $scope.site.absolute_uri + "' to your DNS provider " +
+          "for the destination of CNAME or ALIAS records."
         ));
         getSiteSettings();
       },
@@ -182,8 +182,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       return;
     }
 
-    API.CustomDomain.delete({ siteId: site }, { domain: domain }, function() {
-      toaster.success("Done", "Deleted custom domain.");
+    API.RemoveCustomDomain.put({ siteId: site }, { domain_id: domain.id }, function() {
+      toaster.success("Done", "Deleted custom domain '" + domain.domain + "'.");
       getSiteSettings();
     });
   };
