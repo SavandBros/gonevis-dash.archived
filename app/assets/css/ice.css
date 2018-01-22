@@ -24,6 +24,19 @@ body {
     color: #6F7A8B;
 }
 
+::-webkit-scrollbar-track,
+::-webkit-scrollbar {
+    background: #EAEDF1;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6F7A8B;
+}
+
 
 /* Panel */
 
@@ -50,6 +63,10 @@ body {
 .panel-heading:not(.lower),
 .panel-heading:not(.lower) a {
     text-transform: uppercase;
+}
+
+.panel-footer {
+    border-top: 2px solid #eaedf1;
 }
 
 
@@ -250,6 +267,15 @@ body {
     opacity: 1;
 }
 
+.list-group-label>span {
+    margin-right: 10px;
+}
+
+.list-group-label>span:last-child {
+    margin-right: 0;
+}
+
+
 /* List group item */
 
 .list-group-item .pull-right.btn-sm {
@@ -259,6 +285,7 @@ body {
 .list-group-item {
     border-color: #F0F0F0;
 }
+
 
 /* Dropdown */
 

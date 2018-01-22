@@ -1,19 +1,5 @@
 /* Global */
 
-::-webkit-scrollbar-track,
-::-webkit-scrollbar {
-    background: white;
-}
-
-::-webkit-scrollbar {
-    width: 4px;
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.4);
-}
-
 .noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -136,16 +122,26 @@ hr[soft] {
     margin-top: -20px;
     background-size: cover;
     background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
     margin-bottom: -100px;
     color: transparent;
-    text-align: center;
     padding-top: 70px;
-    transition: all 0.1s ease-in-out;
 }
 
-.container-image:hover {
+.container-image p {
+    transition: all 0.1s ease-in-out;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 100px;
+    opacity: 0.9;
+    letter-spacing: 1px;
+    font-size: larger;
+}
+
+.container-image:hover p {
     color: #fff;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px #000;
 }
 
 
@@ -1535,6 +1531,10 @@ a.thumbnail.active {
 
 .t-cap {
     text-transform: capitalize;
+}
+
+.t-upp {
+    text-transform: uppercase;
 }
 
 .t-line {

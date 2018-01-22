@@ -51,6 +51,11 @@
     margin-bottom: 30px;
 }
 
+.s-mar-y-soft {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 .s-mar-top-hard {
     margin-top: 80px;
 }
