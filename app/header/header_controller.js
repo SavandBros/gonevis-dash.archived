@@ -111,6 +111,15 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   /**
+   * @desc Get the ui-sref value with site index included as paramter
+   *
+   * @param {string} sref 
+   */
+  $scope.getSref = function (sref) {
+    return sref + "({s: " + $stateParams.s + "})";
+  };
+
+  /**
    * @desc Entry with different format
    *
    * @param {string} format
