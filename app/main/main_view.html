@@ -20,7 +20,8 @@
             <div class="row">
               <div class="col-md-9 col-sm-10 col-xs-8">
                 <p class="list-group-item-text">
-                  <span class="o-fade-soft small">{{ comment.user.getFullName() }}:</span> {{ comment.get.comment }}
+                  <span class="o-fade-soft small">{{ comment.user.getFullName() }}:</span>
+                  <span ng-bind-html="comment.get.comment"></span>
                 </p>
               </div>
               <div class="col-md-3 col-sm-2 col-xs-4">
