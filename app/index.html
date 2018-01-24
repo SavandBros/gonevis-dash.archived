@@ -43,7 +43,7 @@
   <!-- endbuild -->
 </head>
 
-<body ng-app="gonevisDash">
+<body ng-app="gonevisDash" class="lights" ng-class="{off: !set.lights, full: !set.sidebar}">
   <!--[if lte IE 8
     <p class="browsehappy">
       You are using an <strong>outdated</strong> browser.
@@ -56,7 +56,7 @@
     ng-class="{'no-sidebar': !auth.isAuthenticated()}"></div>
 
   <!-- Content -->
-  <div id="content" class="lights" ui-view ng-class="{off: !set.lights, full: !set.sidebar}"></div>
+  <div id="content" ui-view></div>
 
   <!-- Google analytics -->
   <script>

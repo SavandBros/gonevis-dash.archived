@@ -634,6 +634,13 @@ md-toast {
 }
 
 
+/* Medium editor placeholder */
+
+.medium-editor-placeholder:after {
+    font-style: normal;
+}
+
+
 /* Medium editor toolbar */
 
 .medium-editor-toolbar {
@@ -792,6 +799,10 @@ md-toast {
     background: #eee;
 }
 
+.lights.off .editor img {
+    background: #222;
+}
+
 .editor img[src="assets/img/avatar.png"] {
     display: none;
 }
@@ -832,19 +843,19 @@ md-toast {
 .lights.off .container-fluid,
 .lights.off .editor-container,
 .lights.off .editor .form-control,
-.lights.off~.medium-editor-toolbar {
+.lights.off #content~.medium-editor-toolbar {
     background: #333 !important;
     border-color: #222 !important;
     color: #fff;
 }
 
 .lights.off .editor-draft-mode,
-.lights.off~.medium-editor-toolbar .medium-editor-action {
+.lights.off #content~.medium-editor-toolbar .medium-editor-action {
     color: #ddd !important;
     border-color: #222;
 }
 
-.lights.off~.medium-editor-toolbar-active .medium-editor-action.active {
+.lights.off #content~.medium-editor-toolbar-active .medium-editor-action.active {
     background: #222 !important;
 }
 

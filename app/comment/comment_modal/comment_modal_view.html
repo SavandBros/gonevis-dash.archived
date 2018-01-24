@@ -20,7 +20,7 @@
       </div>
       <div class="modal-body">
         <!-- Comment content -->
-        <h3>{{ comment.get.comment }}</h3>
+        <h3 ng-bind-html="comment.get.comment"></h3>
         <div class="c-grey small s-mar-top-soft">
           <span translate>To:</span>
           <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })" data-dismiss="modal">
