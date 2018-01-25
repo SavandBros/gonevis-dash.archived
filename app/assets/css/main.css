@@ -99,12 +99,12 @@ hr[soft] {
     transition: padding 0.2s ease-in-out;
 }
 
-#sidebar:not(.no-sidebar)~#content:not(.full) .container-fluid {
+#sidebar:not(.no-sidebar)~#content:not(.full-content) .container-fluid {
     padding-left: 265px;
 }
 
 @media (min-width: 768px) and (max-width: 1550px) {
-    #sidebar:not(.no-sidebar)~#content:not(.full) .container {
+    #sidebar:not(.no-sidebar)~#content:not(.full-content) .container {
         padding-left: 265px;
     }
 }
@@ -660,7 +660,7 @@ md-toast {
     transition: all 0.2s ease-in-out;
 }
 
-#content:not(.full)~.medium-editor-toolbar {
+#content:not(.full-content)~.medium-editor-toolbar {
     left: 250px !important;
     width: calc(100% - 250px) !important;
 }

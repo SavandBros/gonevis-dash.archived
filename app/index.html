@@ -56,7 +56,7 @@
     ng-class="{'no-sidebar': !auth.isAuthenticated()}"></div>
 
   <!-- Content -->
-  <div id="content" ui-view></div>
+  <div id="content" ng-class="{'full-content': !set.sidebar}" ui-view></div>
 
   <!-- Google analytics -->
   <script>
