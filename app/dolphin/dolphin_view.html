@@ -17,6 +17,12 @@
           <i class="fa fa-fw fa-upload"></i>
         </button>
       </div>
+
+      <!-- Drag/Drop -->
+      <div ngf-drop="uploadFile($files, $invalidFiles)" ngf-drag="drag($isDragging, $class, $event)"
+        class="drop-box" ngf-drag-over-class="'dragover'" ngf-max-size="100MB" ngf-multiple="true"
+        ngf-accept="upload.accept">Drop Images or PDFs files here</div>
+      <div ngf-no-file-drop>
     </div>
 
     <!-- Search noresult -->
