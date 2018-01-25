@@ -158,6 +158,10 @@ function DolphinController($scope, $rootScope, Dolphin,
     );
   };
 
+  $scope.drag = function(a, b, c) {
+    console.log(a, b, c);
+  }
+
   /**
    * @desc Handler for dolphin changes
    */
