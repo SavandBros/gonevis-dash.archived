@@ -1,8 +1,16 @@
 "use strict";
 
-function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
+function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
+    $scope.isPageView = $state.includes("dash.page-list");
+
+    if ($scope.isPageView) {
+      $scope.pageNothingText = "No pages yet.";
+    } else {
+      $scope.pageNothingText = "No posts yet.";
+    }
+
     $scope.view = localStorageService.get("entryView") || "list";
     $scope.filters = {
       title: ""
@@ -44,7 +52,8 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
     }];
 
     var payload = {
-      site: AuthService.getCurrentSite()
+      site: AuthService.getCurrentSite(),
+      is_page: $scope.isPageView
     };
 
     API.Entries.get(payload,
@@ -154,6 +163,7 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
 app.controller("EntryController", EntryController);
 EntryController.$inject = [
   "$scope",
+  "$state",
   "Entry",
   "Codekit",
   "API",
