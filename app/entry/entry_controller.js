@@ -6,9 +6,9 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
     $scope.isPageView = $state.includes("dash.page-list");
 
     if ($scope.isPageView) {
-      $scope.pageNothingText = "No pages yet."
+      $scope.pageNothingText = "No pages yet.";
     } else {
-      $scope.pageNothingText = "No posts yet."
+      $scope.pageNothingText = "No posts yet.";
     }
 
     $scope.view = localStorageService.get("entryView") || "list";
