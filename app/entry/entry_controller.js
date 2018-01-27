@@ -1,8 +1,9 @@
 "use strict";
 
-function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
+function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
+    $scope.isPageView = $state.includes("dash.page-list");
     $scope.view = localStorageService.get("entryView") || "list";
     $scope.filters = {
       title: ""
@@ -50,7 +51,11 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
     API.Entries.get(payload,
       function(data) {
         angular.forEach(data.results, function(item) {
-          $scope.entries.push(new Entry(item));
+          if ($scope.isPageView && item.is_page) {
+            $scope.entries.push(new Entry(item));
+          } else if (!$scope.isPageView && !item.is_page) {
+            $scope.entries.push(new Entry(item));
+          }
         });
         $scope.initialled = true;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
@@ -154,6 +159,7 @@ function EntryController($scope, Entry, Codekit, API, AuthService, Pagination, S
 app.controller("EntryController", EntryController);
 EntryController.$inject = [
   "$scope",
+  "$state",
   "Entry",
   "Codekit",
   "API",
