@@ -30,6 +30,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
       sref: "dash.entry-list",
       icon: "fa-book"
     }, {
+      label: "Pages",
+      sref: "dash.page-list",
+      icon: "fa-desktop"
+    }, {
       label: "Tags",
       sref: "dash.tag-list",
       icon: "fa-tag"
