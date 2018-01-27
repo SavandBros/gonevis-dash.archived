@@ -11,7 +11,7 @@
   <!-- Nothing -->
   <!-- TODO: Translate -->
   <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult && initialled"
-    ng-init="nothingText = 'No posts yet.'">
+    ng-init="nothingText = pageNothingText">
   </ng-include>
   <!-- List -->
   <div ng-if="entries.length">
