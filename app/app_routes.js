@@ -178,6 +178,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
       auth: true,
       title: "Posts"
     })
+    .state("dash.page-list", {
+      url: "/pages",
+      controller: "EntryController",
+      templateUrl: "entry/entry_view.html",
+      auth: true,
+      title: "Pages"
+    })
     .state("dash.site", {
       url: "/site",
       controller: "SiteController",
