@@ -157,7 +157,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     // Domain url
     var domain = $window.prompt("Enter your custom domain address:");
 
-    // Check if cancelled || null
+    // Check if cancelled
     if (domain === null) {
       return;
     }
