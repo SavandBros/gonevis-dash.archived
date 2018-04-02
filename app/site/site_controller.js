@@ -157,6 +157,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     // Domain url
     var domain = $window.prompt("Enter your custom domain address:");
 
+    // Check if cancelled
+    if (domain === null) {
+      return;
+    }
+
     API.SetCustomDomain.put({ siteId: site }, { domain: domain },
       function() {
         toaster.success("Custom domain set", (
