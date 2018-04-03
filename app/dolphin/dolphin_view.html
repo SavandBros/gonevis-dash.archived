@@ -1,4 +1,4 @@
-<div class="container container-light pad-top" id="dolphin">
+<div class="container container-light pad-top" ngf-drop ngf-drag-over-class="{ accept:'dragover', reject:'dragover-err'}" id="dolphin">
   <div class="row">
     <!-- Top bar -->
     <div class="row animated fadeIn s-mar-no popover-relative" ng-show="initialled">
@@ -18,11 +18,10 @@
         </button>
       </div>
 
-      <!-- Drag/Drop -->
-      <div ngf-drop="uploadFile($files, $invalidFiles)" ngf-drag="drag($isDragging, $class, $event)"
-        class="drop-box" ngf-drag-over-class="'dragover'" ngf-max-size="100MB" ngf-multiple="true"
-        ngf-accept="upload.accept">Drop Images or PDFs files here</div>
-      <div ngf-no-file-drop>
+      <!-- Drag/Drop Upload -->
+      <div class="col-md-12">
+        <ng-include src="'dolphin/upload/upload.html'"></ng-include>
+      </div>
     </div>
 
     <!-- Search noresult -->
