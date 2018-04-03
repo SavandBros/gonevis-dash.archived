@@ -60,24 +60,7 @@
         <!-- Upload -->
         <div class="text-center" ng-show="currentTab == 'upload'">
           <!-- Select -->
-          <button type="file" class="btn btn-primary btn-lg animated fadeIn"
-            ngf-select="uploadFile($files, $invalidFiles)"
-            ngf-accept="upload.accept"
-            ngf-max-size="25MB"
-            ngf-multiple="true">
-            <i class="fa fa-fw fa-plus"></i> <span translate>Select File</span>
-          </button>
-          <!-- Progress Bars -->
-          <div class="row">
-            <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
-              <div class="progress s-mar-top-soft s-mar-no" ng-class="{active: file.progress != 100}">
-                <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
-                  <!-- TODO: Translate -->
-                  <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ng-include src="'dolphin/upload/upload.html'"></ng-include>
         </div>
       </div>
     </div>
