@@ -1,0 +1,27 @@
+<!-- Drag/Drop -->
+<div ngf-drop="uploadFile($files, $invalidFiles)" class="drop-box"
+  ngf-max-size="100MB" ngf-multiple="true" ngf-accept="upload.accept">
+
+  <h3>Drag and drop files here</h3>
+
+  <!-- Divider -->
+  <div class="s-mar-y-soft o-fade-soft">or</div>
+
+  <!-- Browse Files -->
+  <button class="btn btn-primary btn-large" ngf-select="uploadFile($files, $invalidFiles)"
+    ngf-accept="upload.accept" ngf-max-size="100MB" ngf-multiple="true">Browse Files</button>
+</div>
+
+<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+
+<!-- Progress Bars -->
+<div class="row">
+  <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
+    <div class="progress s-mar-top-soft s-mar-no" ng-class="{active: file.progress != 100}">
+      <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
+        <!-- TODO: Translate -->
+        <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
+      </div>
+    </div>
+  </div>
+</div>
