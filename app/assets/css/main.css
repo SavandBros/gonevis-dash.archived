@@ -1934,3 +1934,19 @@ img.cache {
 .list-view .media-body {
     overflow: visible;
 }
+
+
+/* Drag And Drop */
+
+.drop-box {
+    padding: 50px;
+    border: 3px dashed;
+    text-align: center;
+    font-size: 1.5em;
+    display: none;
+}
+
+div.dragover .drop-box {
+    border-color: #b96400;
+    display: block;
+}
