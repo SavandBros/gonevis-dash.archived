@@ -13,7 +13,7 @@
               <br>
               <!-- TODO: Translate -->
               <small class="o-fade">Commented {{ comment.get.created | timesince }} ago</small>
-              <i class="fa fa-close o-fade pull-right c-p" data-dismiss="modal"></i>
+              <i class="fas fa-times o-fade pull-right c-p" data-dismiss="modal"></i>
             </div>
           </div>
         </div>
@@ -49,20 +49,20 @@
         </button>
         <div class="dropdown options s-pad-no pull-left">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
-            {{ comment.getStatus().label }} <li class="fa fa-caret-down"></li>
+            {{ comment.getStatus().label }} <li class="fas fa-caret-down"></li>
           </button>
           <ul class="dropdown-menu">
             <li class="dropdown-header" translate>Change status</li>
             <li ng-repeat="status in statuses" ng-class="{active: comment.getStatus().label === status.label}">
               <a ng-click="comment.setStatus(status.property, status.value)">
-                <i class="fa fa-{{ status.icon }}"></i> {{ status.label }}
+                <i class="{{ status.icon }}"></i> {{ status.label }}
               </a>
             </li>
           </ul>
         </div>
         <!-- Delete comment -->
         <button class="btn btn-sm btn-danger pull-right" ng-click="comment.remove()" data-dismiss="modal">
-          <i class="fa fa-trash"></i>
+          <i class="fas fa-trash"></i>
         </button>
       </div>
     </div>

@@ -55,12 +55,12 @@ function Codekit($timeout, $window, $log) {
     text: {
       id: 0,
       label: "Text",
-      icon: "file-text-o"
+      icon: "file-alt"
     },
     image: {
       id: 1,
       label: "Image",
-      icon: "picture-o"
+      icon: "image"
     },
     video: {
       id: 2,
@@ -77,7 +77,7 @@ function Codekit($timeout, $window, $log) {
     status: {
       id: 4,
       label: "Status",
-      icon: "smile-o",
+      icon: "smile",
       disabled: true
     }
   };
@@ -89,19 +89,19 @@ function Codekit($timeout, $window, $log) {
    */
   var commentStatuses = [{
     label: "Pending approval",
-    icon: "clock-o",
+    icon: "far fa-clock",
     property: "status",
     value: 0,
     class: "b-color-0"
   }, {
     label: "Active",
-    icon: "globe",
+    icon: "fas fa-globe",
     property: "status",
     value: 1,
     class: "b-color-2"
   }, {
     label: "Hidden",
-    icon: "user-secret",
+    icon: "fas fa-user-secret",
     property: "status",
     value: 2,
     class: "b-color-1"

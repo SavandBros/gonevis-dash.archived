@@ -1,6 +1,6 @@
 <!-- Add button -->
 <button type="button" class="btn btn-primary btn-corner" ng-click="Tag.viewCreate()">
-  <i class="fa fa-plus"></i>
+  <i class="fas fa-plus"></i>
 </button>
 <!-- Main -->
 <div class="container container-light pad-top">
@@ -66,22 +66,22 @@
               <div class="dropdown text-right col-md-1 col-xs-3 col-sm-2 s-pad-no">
                 <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
                   style="margin-top: 4px;">
-                  <i class="fa fa-fw fa-ellipsis-v"></i>
+                  <i class="fas fa-fw fa-ellipsis-v"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a ng-click="tag.view()"><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-click="tag.view()"><i class="fas fa-eye"></i> View</a></li>
                   <li>
                     <a href="{{ tag.get.absolute_uri }}" target="_blank">
-                      <i class="fa fa-fw fa-external-link"></i> View on site
+                      <i class="fas fa-fw fa-external-link-alt"></i> View on site
                     </a>
                   </li>
                   <li>
                     <a ng-click="tag.addToNavigation()">
-                      <i class="fa fa-fw fa-bars"></i> Add to navigation
+                      <i class="fas fa-fw fa-bars"></i> Add to navigation
                     </a>
                   </li>
                   <li class="divider"></li>
-                  <li><a ng-click="tag.remove()"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                  <li><a ng-click="tag.remove()"><i class="fas fa-trash text-danger"></i> Delete</a></li>
                 </ul>
               </div>
             </li>

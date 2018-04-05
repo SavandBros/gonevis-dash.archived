@@ -3,8 +3,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4>
-          <i class="fa fa-image text-primary fa-fw"></i> <span translate>Select an image</span>
-          <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+          <i class="far fa-image text-primary fa-fw"></i> <span translate>Select an image</span>
+          <i class="fas fa-times close pull-right" data-dismiss="modal"></i>
         </h4>
       </div>
       <div class="modal-body">
@@ -15,7 +15,7 @@
           </li>
           <li ng-class="{active: currentTab == 'upload'}">
             <a ng-click="currentTab = 'upload'">
-              <i class="fa fa-upload"></i> <span translate>Upload More</span></a>
+              <i class="fas fa-upload"></i> <span translate>Upload More</span></a>
           </li>
           <button class="btn btn-link pull-right" ng-click="action(null)" data-dismiss="modal">
             <span class="text-danger" translate>Remove Media</span>
@@ -37,7 +37,7 @@
 
           <!-- Loading -->
           <div class="s-pad text-center" ng-if="!initialled">
-            <i class="fa fa-5x fa-arrow-down fa-spin animated infinity bounce text-primary"></i>
+            <i class="fas fa-5x fa-arrow-down animated infinite bounce text-primary"></i>
           </div>
 
           <!-- Dolphins -->
@@ -65,7 +65,7 @@
             ngf-accept="upload.accept"
             ngf-max-size="25MB"
             ngf-multiple="true">
-            <i class="fa fa-fw fa-plus"></i> <span translate>Select File</span>
+            <i class="fas fa-fw fa-plus"></i> <span translate>Select File</span>
           </button>
           <!-- Progress Bars -->
           <div class="row">

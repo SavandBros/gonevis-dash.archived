@@ -1,7 +1,7 @@
 <!-- View button -->
 <button type="button" class="btn btn-default btn-corner btn-corner-navbar"
   ng-click="sidebar = true" ng-init="sidebar = false" title="Publish Menu">
-  <i class="fa fa-chevron-right"></i>
+  <i class="fas fa-chevron-right"></i>
 </button>
 
 <!-- Draft mode -->
@@ -11,7 +11,7 @@
   tooltip-placement="top"
   ng-click="sidebar = true"
   ng-class="{'fadeInUp': form.get.status === 0, 'fadeOutDown': form.get.status === 1}">
-  <i class="fa fa-pencil fa-fw"></i> <translate>DRAFT MODE</translate>
+  <i class="fas fa-pencil-alt fa-fw"></i> <translate>DRAFT MODE</translate>
 </div>
 
 <!-- Main -->
@@ -41,7 +41,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header modal-header-clickable" ng-click="sidebar = false">
-        <i class="fa fa-chevron-left"></i>
+        <i class="fas fa-chevron-left"></i>
       </div>
       <div class="modal-body">
         <!-- Cover -->
@@ -68,17 +68,17 @@
         <!-- Cover select and view entry on site -->
         <div class="form-group">
           <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection('entryCover')" type="button">
-            <i class="fa fa-fw fa-image"></i> <translate>Select cover image</translate>
+            <i class="far fa-fw fa-image"></i> <translate>Select cover image</translate>
           </button>
           <a ng-href="{{ form.url }}" class="btn btn-default btn-sm btn-block" target="_blank" ng-if="editing">
-            <i class="fa fa-external-link"></i> <translate>View on site</translate>
+            <i class="fas fa-external-link-alt"></i> <translate>View on site</translate>
           </a>
         </div>
         <!-- Advanced options -->
         <div class="form-group">
           <button class="btn btn-default btn-sm btn-block stack-element"
             type="button" ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
-            <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
+            <i class="fas fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
             <translate>Advanced options</translate>
           </button>
         </div>
@@ -135,7 +135,7 @@
           <label class="btn btn-{{ status.color }}" ng-repeat="status in statuses"
             ng-model="form.get.status" uib-btn-radio="status.id"
             ng-class="{'t-bold': form.get.status === status.id, 'o-fade-soft': form.get.status !== status.id}">
-            <i class="fa fa-fw fa-{{ status.icon }} left"></i> {{ status.label }}
+            <i class="fas fa-fw fa-{{ status.icon }} left"></i> {{ status.label }}
           </label>
         </div>
         <!-- New button -->
@@ -147,7 +147,7 @@
           <button class="btn btn-primary" ng-disabled="form.loading || form.$invalid" translate>UPDATE</button>
           <button class="btn btn-default" ng-disabled="form.loading || form.$invalid"
             title="{{ 'Delete' | translate }}" type="button" ng-click="form.remove()">
-            <i class="fa fa-trash"></i>
+            <i class="fas fa-trash"></i>
           </button>
         </div>
       </div>

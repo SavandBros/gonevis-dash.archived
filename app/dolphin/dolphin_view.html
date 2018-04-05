@@ -14,7 +14,7 @@
       <div class="col-sm-12 col-md-1 col-xs-3 s-mar-bottom-soft">
         <button type="file" class="btn btn-primary btn-block" ngf-select="uploadFile($files, $invalidFiles)"
           ngf-accept="upload.accept" ngf-max-size="100MB" ngf-multiple="true">
-          <i class="fa fa-fw fa-upload"></i>
+          <i class="fas fa-fw fa-upload"></i>
         </button>
       </div>
     </div>
@@ -31,7 +31,7 @@
       <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="file in upload.files" ng-if="!file.done">
         <div class="dolphin" ngf-thumbnail="file" ngf-as-background="true" style="display: block !important"
           ngf-resize="{quality: 1}" ng-class="{'not-image': !file.isImage}">
-          <i class="fa fa-5x fa-file-o c-white" ng-if="!file.isImage"></i>
+          <i class="far fa-5x fa-file c-white" ng-if="!file.isImage"></i>
           <p class="caption progress progress-striped">
             <span class="progress-bar progress-bar-primary active" style="width: {{ file.progress }}%"></span>
           </p>
@@ -49,9 +49,9 @@
         <a ng-click="action(dolphin)" class="dolphin" style="background-image: url({{ dolphin.get.thumbnail_256x256 }})"
           ng-class="{'not-image': !dolphin.get.is_image}">
           <!-- Icon -->
-          <i class="fa fa-5x" ng-class="{
-            'fa-file-archive-o': dolphin.extension == 'ZIP',
-            'fa-file-pdf-o': dolphin.extension == 'PDF'
+          <i class="far fa-5x" ng-class="{
+            'fa-file-archive': dolphin.extension == 'ZIP',
+            'fa-file-pdf': dolphin.extension == 'PDF'
             }" ng-if="!dolphin.get.is_image">
           </i>
           <!-- Caption -->
@@ -61,13 +61,13 @@
         <div class="dropdown options" title="options">
           <button class="btn btn-default dropdown-toggle o-fade-hard o-fade-hover-full bg-no c-white b-no"
             id="options{{ $index }}" data-toggle="dropdown">
-            <i class="fa fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-right">
-            <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> <tranlate>View</tranlate> </a></li>
-            <li><a ng-href="{{ dolphin.get.file }}" download><i class="fa fa-download"></i> <translate>Download</translate></a></li>
+            <li><a ng-click="dolphin.view()"><i class="fas fa-eye"></i> <tranlate>View</tranlate> </a></li>
+            <li><a ng-href="{{ dolphin.get.file }}" download><i class="fas fa-download"></i> <translate>Download</translate></a></li>
             <li class="divider"></li>
-            <li><a ng-click="dolphin.remove()"><i class="fa fa-trash text-danger"></i> <translate>Delete</translate></a></li>
+            <li><a ng-click="dolphin.remove()"><i class="fas fa-trash text-danger"></i> <translate>Delete</translate></a></li>
           </ul>
         </div>
       </div>
@@ -82,9 +82,9 @@
             <img class="media-object" style="max-width: 48px"
               ng-src="{{ dolphin.get.thumbnail_48x48 }}" ng-if="dolphin.get.is_image">
             <!-- Icon -->
-            <i class="fa fa-2x o-fade media-object" style="background: #eee;padding: 10px 12px;" ng-class="{
-              'fa-file-archive-o': dolphin.extension == 'ZIP',
-              'fa-file-pdf-o': dolphin.extension == 'PDF'
+            <i class="far fa-2x o-fade media-object" style="background: #eee;padding: 10px 12px;" ng-class="{
+              'fa-file-archive': dolphin.extension == 'ZIP',
+              'fa-file-pdf': dolphin.extension == 'PDF'
               }" ng-if="!dolphin.get.is_image">
             </i>
           </div>
@@ -94,22 +94,22 @@
               <!-- Option -->
               <div class="dropdown pull-right">
                 <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" id="options{{ $index }}" data-toggle="dropdown">
-                  <i class="fa fa-fw fa-ellipsis-v"></i>
+                  <i class="fas fa-fw fa-ellipsis-v"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> <translate>View</translate></a></li>
-                  <li><a ng-href="{{ dolphin.get.file }}" download><i class="fa fa-download"></i> <translate>Download</translate></a></li>
+                  <li><a ng-click="dolphin.view()"><i class="fas fa-eye"></i> <translate>View</translate></a></li>
+                  <li><a ng-href="{{ dolphin.get.file }}" download><i class="fas fa-download"></i> <translate>Download</translate></a></li>
                   <li class="divider"></li>
-                  <li><a ng-click="dolphin.remove()"><i class="fa fa-trash text-danger"></i> <translate>Delete</translate></a></li>
+                  <li><a ng-click="dolphin.remove()"><i class="fas fa-trash text-danger"></i> <translate>Delete</translate></a></li>
                 </ul>
               </div>
             </div>
             <!-- Info -->
             <small class="o-fade-soft">
               <span>
-                <i class="fa fa-fw fa-hdd-o"
+                <i class="far fa-fw fa-hdd"
                   title="Size"></i> {{ dolphin.get.size_human }}
-                <i class="fa fa-fw fa-file-o s-mar-left-soft"
+                <i class="far fa-fw fa-file s-mar-left-soft"
                   title="Extension"></i> {{ dolphin.extension | lowercase }}
               </span>
               <a class="s-mar-left-soft" ng-click="dolphin.view()">Open</a>

@@ -59,15 +59,15 @@
                   ng-if="entry.get.view_count || entry.get.comment_count || entry.get.vote_count"> 
                   <!-- Views -->
                   <span ng-if="entry.get.view_count">
-                    <i class="fa fa-eye o-fade"></i> {{ entry.get.view_count }}
+                    <i class="fas fa-eye o-fade"></i> {{ entry.get.view_count }}
                   </span>
                   <!-- Comments -->
                   <span ng-if="entry.get.comment_count">
-                    <i class="fa fa-comment-o o-fade"></i> {{ entry.get.comment_count }}
+                    <i class="far fa-comment o-fade"></i> {{ entry.get.comment_count }}
                   </span>
                   <!-- Votes -->
                   <span ng-if="entry.get.vote_count">
-                    <i class="fa fa-heart-o o-fade"></i> {{ entry.get.vote_count }}
+                    <i class="far fa-heart o-fade"></i> {{ entry.get.vote_count }}
                   </span>
                 </div>
               </div>
@@ -82,7 +82,7 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading lower">
-          Publication <div class="panel-label img-circle"><i class="fa fa-list-alt"></i></div>
+          Publication <div class="panel-label img-circle"><i class="fas fa-list-alt"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
@@ -101,7 +101,7 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading lower">
-          Comment overview <div class="panel-label img-circle"><i class="fa fa-comment"></i></div>
+          Comment overview <div class="panel-label img-circle"><i class="fas fa-comment"></i></div>
         </div>
         <!-- Overview (Chart -->
         <ul class="panel-body panel-body-chart s-pad-no list-group">
@@ -125,7 +125,7 @@
           </div>
           <li class="list-group-item"
               ng-if="Metrics.list.comment_count && Metrics.list.active_comment_count == Metrics.list.comment_count">
-            <i class="fa fa-border fa-check"></i> All comments are approved
+            <i class="fas fa-border fa-pull-left fa-check"></i> All comments are approved
             <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
           </li>
           <li class="list-group-item"
@@ -140,18 +140,18 @@
         <!-- Title -->
         <div class="panel-heading lower">
           <a ui-sref="dash.site" class="header-link">Site overview</a>
-          <div class="panel-label img-circle"><i class="fa fa-globe"></i></div>
+          <div class="panel-label img-circle"><i class="fas fa-globe"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
           <!-- Followers -->
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.subscriber_count}">
-            <i class="fa fa-border fa-user-plus"></i> Followers
+            <i class="fas fa-border fa-pull-left fa-user-plus"></i> Followers
             <b class="pull-right text-primary">{{ Metrics.list.subscriber_count }}</b>
           </li>
           <!-- Template -->
           <li class="list-group-item" ng-if="siteTemplate">
-            <i class="fa fa-border fa-paint-brush"></i> Theme and Layout
+            <i class="fas fa-border fa-pull-left fa-paint-brush"></i> Theme and Layout
             <a class="pull-right btn btn-primary btn-sm" ui-sref="dash.site">
               {{ siteTemplate.name | uppercase }}
             </a>
@@ -163,7 +163,7 @@
         <!-- Title -->
         <div class="panel-heading lower">
           <a ui-sref="dash.dolphin" class="header-link">Storage</a>
-          <div class="panel-label img-circle"><i class="fa fa-cubes"></i></div>
+          <div class="panel-label img-circle"><i class="fas fa-cubes"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
@@ -202,7 +202,7 @@
         <!-- Title -->
         <div class="panel-heading lower">
           <a ui-sref="dash.team" class="header-link">Team</a>
-          <div class="panel-label img-circle"><i class="fa fa-users"></i></div>
+          <div class="panel-label img-circle"><i class="fas fa-users"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
