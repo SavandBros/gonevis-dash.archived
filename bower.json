@@ -4,7 +4,6 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "angular": "^1.6.8",
-    "bootstrap": "^3.3.7",
     "angular-animate": "^1.6.8",
     "angular-cookies": "^1.6.8",
     "angular-messages": "^1.6.8",
@@ -35,15 +34,6 @@
   },
   "appPath": "app",
   "moduleName": "gonevisDash",
-  "overrides": {
-    "bootstrap": {
-      "main": [
-        "less/bootstrap.less",
-        "dist/css/bootstrap.css",
-        "dist/js/bootstrap.js"
-      ]
-    }
-  },
   "resolutions": {
     "angular": "^1.6.8"
   }
