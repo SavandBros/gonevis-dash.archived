@@ -408,11 +408,6 @@ module.exports = function(grunt) {
           cwd: ".tmp/images",
           dest: "<%= gonevisDash.dist %>/assets/img",
           src: ["generated/*"]
-        }, {
-          expand: true,
-          cwd: "bower_components/bootstrap/dist",
-          src: "fonts/*",
-          dest: "<%= gonevisDash.dist %>"
         }]
       },
       styles: {
