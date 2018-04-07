@@ -1,6 +1,6 @@
 "use strict";
 
-function EntryNewController($scope, $state, $timeout, $q,
+function EntryNewController($scope, $state, $timeout, $q, $stateParams,
   Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
   function constructor() {
@@ -14,6 +14,7 @@ function EntryNewController($scope, $state, $timeout, $q,
       status: $scope.statuses[0].id,
       format: Codekit.entryFormats.text.id
     });
+    $scope.form.get.is_page = $stateParams.isPage;
 
     // Add space from top for toolbar
     if (Codekit.isMobile()) {
@@ -156,6 +157,7 @@ EntryNewController.$inject = [
   "$state",
   "$timeout",
   "$q",
+  "$stateParams",
   "Entry",
   "Tag",
   "Codekit",
