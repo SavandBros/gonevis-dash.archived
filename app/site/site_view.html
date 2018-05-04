@@ -137,19 +137,28 @@
         </p>
         <hr>
         <!-- Domain list -->
-        <div ng-repeat="domain in site.domains">
-          <div>
-            <!-- Domain link -->
-            <a ng-href="https://{{ domain.domain }}" target="_blank">{{ domain.domain }}</a>
-            <!-- Remove button -->
-            <button class="btn btn-xs btn-default pull-right o-fade-hard o-fade-hover-full"
-              title="Delete this domain" ng-click="deleteDomain(domain)">
-              <i class="fa fa-close"></i>
-            </button>
-          </div>
-          <br ng-if="!$last">
-          <hr ng-if="$last">
-        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Domain Name</th>
+              <th>DNS Target</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="domain in site.domains">
+              <!-- Domain link -->
+              <td><a ng-href="https://{{ domain.domain }}" target="_blank">{{ domain.domain }}</a></td>
+              <!-- Domain DNS Target -->
+              <td>{{ domain.cname }}</td>
+              <!-- Remove button -->
+              <td><button class="btn btn-xs btn-default pull-right o-fade-hard o-fade-hover-full"
+                title="Delete this domain" ng-click="deleteDomain(domain)">
+                <i class="fa fa-close"></i>
+              </button></td>
+            </tr>
+          </tbody>
+        </table>
         <!-- Add domain -->
         <button class="btn btn-default" ng-click="addDomain()"
           ng-disabled="site.domains.length == maxCustomDomains">Add Domain</button>
