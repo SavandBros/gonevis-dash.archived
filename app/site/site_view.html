@@ -117,6 +117,16 @@
             <label for="search_engine_visibility">Let search engine discover my site</label>
           </div>
         </div>
+        <!-- Branding -->
+        <div class="s-mar-top">
+          <div class="checkbox checkbox-primary checkbox-small"
+            title="Logo or name of the GoNevis.com will not appear anymore.">
+            <input id="remove_branding" type="checkbox"
+              ng-change="updateSite('remove_branding', site.remove_branding)"
+              ng-model="site.remove_branding">
+            <label for="remove_branding">Remove GoNevis.com branding</label>
+          </div>
+        </div>
       </div>
       <div class="panel-footer" ng-if="!hideDelete">
         <!-- Delete -->
