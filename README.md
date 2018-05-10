@@ -81,4 +81,4 @@ After merging the pull request into **production**, the CI will build and deploy
 
 ## License
 
-Gonevis Dash is licensed and distrubuted under GPLv3.
+GoNevis Dash is licensed and distributed under GPLv3.
