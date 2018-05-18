@@ -108,7 +108,7 @@
             <label for="voting">Allow visitors to vote on my posts.</label>
           </div>
         </div>
-        <!-- Voting -->
+        <!-- Search engine visibility -->
         <div class="s-mar-top">
           <div class="checkbox checkbox-primary checkbox-small">
             <input id="search_engine_visibility" type="checkbox"
@@ -125,6 +125,18 @@
               ng-change="updateSite('remove_branding', site.remove_branding)"
               ng-model="site.remove_branding">
             <label for="remove_branding">Remove GoNevis.com branding.</label>
+          </div>
+        </div>
+        <!-- Footer text -->
+        <div class="input-panel s-mar-top" ng-if="site.remove_branding">
+          <div class="row">
+            <div class="col-sm-3"><small>FOOTER TEXT</small></div>
+            <div class="col-sm-9">
+              <span editable-textarea="site.footer_text" e-maxlength="500"
+                onbeforesave="updateSite('footer_text', $data)">
+                {{ site.footer_text || "Nothing here..." }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
