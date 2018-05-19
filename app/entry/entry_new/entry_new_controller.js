@@ -78,8 +78,13 @@ function EntryNewController($scope, $state, $timeout, $q, $stateParams,
 
     var payload = form.get;
     payload.tag_ids = [];
+    payload.new_tags = [];
 
     angular.forEach($scope.tagsToSubmit, function(tag) {
+      // Check tags validation
+      if (!tag.id) {
+        payload.new_tags.push(tag.name);
+      }
       payload.tag_ids.push(tag.id);
     });
 
