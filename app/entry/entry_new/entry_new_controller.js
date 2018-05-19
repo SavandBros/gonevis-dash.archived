@@ -67,17 +67,20 @@ function EntryNewController($scope, $state, $timeout, $q, $stateParams,
 
 
   /**
-   * @desc Submit newPost form
+   * @desc Submit form (new post)
    *
    * @param {object} form Form data to submit
+   * @param {number} status
    */
-  $scope.newPost = function(form) {
+  $scope.submit = function(form, status) {
     form.loading = true;
     form.get.site = AuthService.getCurrentSite();
     form.get.user = AuthService.getAuthenticatedUser(false);
 
     var payload = form.get;
+
     payload.tag_ids = [];
+    payload.status = status || payload.status;
 
     angular.forEach($scope.tagsToSubmit, function(tag) {
       payload.tag_ids.push(tag.id);

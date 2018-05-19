@@ -100,15 +100,18 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
-   * @desc Update entry API callback
+   * @desc Submit form (update entry API callback)
    *
    * @param {object} form
+   * @param {number} status
    */
-  $scope.update = function(form) {
+  $scope.submit = function(form, status) {
     form.loading = true;
 
     var payload = form.get;
+
     payload.tag_ids = [];
+    payload.status = status || payload.status
 
     angular.forEach($scope.tagsToSubmit, function(tag) {
       payload.tag_ids.push(tag.id);
