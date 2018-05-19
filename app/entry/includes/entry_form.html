@@ -1,8 +1,30 @@
-<!-- View button -->
-<button type="button" class="btn btn-default btn-corner btn-corner-navbar"
-  ng-click="sidebar = true" ng-init="sidebar = false" title="Publish Menu">
-  <i class="fa fa-chevron-right"></i>
-</button>
+<!-- Corner -->
+<div class="entry-form-corner">
+
+  <!-- Publish -->
+  <button type="button" class="btn btn-default btn-primary" tranlate
+    ng-disabled="form.loading || form.$invalid" ng-if="!editing || form.get.status != 1" ng-click="submit(form, 1)">
+    Publish
+  </button>
+
+  <!-- Update -->
+  <button class="btn btn-default btn-info" tranlate
+    ng-disabled="form.loading || form.$invalid" ng-if="editing && form.get.status == 1">
+    Update
+  </button>
+
+  <!-- Preview -->
+  <a class="btn btn-default" title="View on site" target="_blank"
+    ng-href="{{ form.url }}" ng-if="editing">
+    <i class="fa fa-fw fa-eye"></i>
+  </a>
+
+  <!-- Sidebar -->
+  <button type="button" class="btn btn-default" title="Open Settings Sidebar"
+    ng-click="sidebar = true" ng-init="sidebar = false">
+    <i class="fa fa-fw fa-cog"></i>
+  </button>
+</div>
 
 <!-- Draft mode -->
 <div ng-show="form.get.status === 0"
@@ -41,7 +63,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header modal-header-clickable" ng-click="sidebar = false">
-        <i class="fa fa-chevron-left"></i>
+        <i class="fa fa-chevron-right"></i>
       </div>
       <div class="modal-body">
         <!-- Cover -->
@@ -65,18 +87,15 @@
             </div>
           </script>
         </div>
-        <!-- Cover select and view entry on site -->
+        <!-- Cover select -->
         <div class="form-group">
-          <button class="btn btn-default btn-sm btn-block" ng-click="dolphinService.viewSelection('entryCover')" type="button">
+          <button class="btn btn-default btn-block" ng-click="dolphinService.viewSelection('entryCover')" type="button">
             <i class="fa fa-fw fa-image"></i> <translate>Select cover image</translate>
           </button>
-          <a ng-href="{{ form.url }}" class="btn btn-default btn-sm btn-block" target="_blank" ng-if="editing">
-            <i class="fa fa-external-link"></i> <translate>View on site</translate>
-          </a>
         </div>
         <!-- Advanced options -->
         <div class="form-group">
-          <button class="btn btn-default btn-sm btn-block stack-element"
+          <button class="btn btn-default btn-block stack-element"
             type="button" ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
             <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
             <translate>Advanced options</translate>
