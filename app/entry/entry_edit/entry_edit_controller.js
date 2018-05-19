@@ -22,9 +22,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       });
     }
 
-    API.Tags.get({
-        site: AuthService.getCurrentSite()
-      },
+    API.Tags.get({ site: AuthService.getCurrentSite() },
       function(data) {
         angular.forEach(data.results, function(data) {
           var tag = new Tag({
@@ -121,6 +119,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     payload.content = payload.content
       .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
       .replace(/<p><\/p>/g, "");
+
 
     API.Entry.put({
         entry_id: payload.id

@@ -25,9 +25,7 @@ function EntryNewController($scope, $state, $timeout, $q, $stateParams,
       }, 1000);
     }
 
-    API.Tags.get({
-        site: AuthService.getCurrentSite()
-      },
+    API.Tags.get({ site: AuthService.getCurrentSite() },
       function(data) {
         angular.forEach(data.results, function(data) {
           var tag = new Tag({
