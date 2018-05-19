@@ -22,9 +22,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       });
     }
 
-    API.Tags.get({
-        site: AuthService.getCurrentSite()
-      },
+    API.Tags.get({ site: AuthService.getCurrentSite() },
       function(data) {
         angular.forEach(data.results, function(data) {
           var tag = new Tag({
@@ -100,15 +98,18 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
-   * @desc Update entry API callback
+   * @desc Submit form (update entry API callback)
    *
    * @param {object} form
+   * @param {number} status
    */
-  $scope.update = function(form) {
+  $scope.submit = function(form, status) {
     form.loading = true;
 
     var payload = form.get;
+
     payload.tag_ids = [];
+    payload.status = status || payload.status;
 
     angular.forEach($scope.tagsToSubmit, function(tag) {
       payload.tag_ids.push(tag.id);
@@ -118,6 +119,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     payload.content = payload.content
       .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
       .replace(/<p><\/p>/g, "");
+
 
     API.Entry.put({
         entry_id: payload.id
