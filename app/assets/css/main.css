@@ -1033,6 +1033,12 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     font-weight: bold;
 }
 
+@media (max-width: 1000px) {
+    .entry-form-corner {
+        top: 62px;
+    }
+}
+
 
 /* Button Corner @btn */
 
