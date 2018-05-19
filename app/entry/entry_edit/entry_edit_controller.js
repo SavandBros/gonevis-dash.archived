@@ -109,7 +109,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     var payload = form.get;
 
     payload.tag_ids = [];
-    payload.status = status || payload.status
+    payload.status = status || payload.status;
 
     angular.forEach($scope.tagsToSubmit, function(tag) {
       payload.tag_ids.push(tag.id);
