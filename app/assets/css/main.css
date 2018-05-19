@@ -705,12 +705,13 @@ md-toast {
     border: none !important;
     border-bottom: 2px solid transparent !important;
     box-shadow: none !important;
-    height: initial !important;
+    height: 62px !important;
     min-width: initial !important;
-    padding: 12px !important;
     padding-bottom: 10px !important;
     margin-bottom: -1px !important;
     font-weight: bold;
+    padding: 0 12px !important;
+    line-height: 64px !important;
 }
 
 .medium-editor-toolbar-active .medium-editor-action {
@@ -1012,6 +1013,23 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     color: gray;
 }
 
+/* Entry Form Corner */
+
+.entry-form-corner {
+    position: fixed;
+    top: 0;
+    right: 15px;
+    height: 62px;
+    width: 220px;
+    z-index: 11;
+    text-align: right;
+}
+
+.entry-form-corner .btn {
+    margin: 12px 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 
 /* Button Corner @btn */
 
@@ -1079,8 +1097,8 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 .modal-header-clickable {
     background: rgba(0, 0, 0, 0.05);
     color: rgba(0, 0, 0, 0.3);
-    padding: 12px 15px;
-    height: 42px;
+    padding: 22px;
+    height: 62px;
 }
 
 @media (max-width: 992px) {
@@ -1131,6 +1149,7 @@ img.modal-image {
     height: 100%;
     border: 0;
     overflow-y: scroll;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
 }
 
 .modal.sidebar .modal-content::-webkit-scrollbar {
