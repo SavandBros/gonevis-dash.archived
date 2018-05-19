@@ -1,6 +1,12 @@
 <!-- Corner -->
 <div class="entry-form-corner">
 
+  <!-- Publish -->
+  <button type="button" class="btn btn-default btn-primary" tranlate
+    ng-disabled="form.loading || form.$invalid" ng-if="!editing || form.get.status != 1" ng-click="submit(form, 1)">
+    Publish
+  </button>
+
 </div>
 
 <!-- Draft mode -->
