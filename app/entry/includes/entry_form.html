@@ -7,6 +7,12 @@
     Publish
   </button>
 
+  <!-- Update -->
+  <button class="btn btn-default btn-info" tranlate
+    ng-disabled="form.loading || form.$invalid" ng-if="editing && form.get.status == 1">
+    Update
+  </button>
+
 </div>
 
 <!-- Draft mode -->
