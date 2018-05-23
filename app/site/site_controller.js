@@ -38,12 +38,17 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {string} value
    */
   $scope.updateSite = function(key, value) {
-
     var keyString = key.replace("_", " ");
+    var payload = {};
+
+    // Check for GAC
+    if (key === "google_analytics_code" && value.length && !(/^ua-\d{4,9}-\d{1,4}$/i).test(value.toString())) {
+      toaster.error("Error updating code", "Incorrect google analytics code format (UA-XXXXX-X).");
+      $scope.site.google_analytics_code = null;
+      return;
+    }
 
     toasters[key] = toaster.info("Updating " + keyString + "...");
-
-    var payload = {};
     payload[key] = value;
 
     API.SiteUpdate.put({
