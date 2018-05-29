@@ -1,7 +1,7 @@
 "use strict";
 
 function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
-  cfpLoadingBarProvider, ChartJsProvider, ENV) {
+  cfpLoadingBarProvider, ChartJsProvider, ENV, $translateProvider) {
 
   // Http
   $httpProvider.interceptors.push("AuthInterceptorService");
@@ -54,6 +54,15 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, 
       };
     }
   }]);
+
+  // Translation
+  $translateProvider.useSanitizeValueStrategy(null);
+  $translateProvider.preferredLanguage("en");
+  $translateProvider.useLocalStorage();
+  $translateProvider.useStaticFilesLoader({
+    prefix: "/languages/",
+    suffix: ".json"
+  });
 }
 
 app.config(Config);
@@ -65,5 +74,6 @@ Config.$inject = [
   "$provide",
   "cfpLoadingBarProvider",
   "ChartJsProvider",
-  "ENV"
+  "ENV",
+  "$translateProvider"
 ];
