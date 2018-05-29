@@ -1089,9 +1089,9 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 /* Button icon */
 
 .btn svg.left {
-    padding: 4px 0;
     position: absolute;
     left: 10px;
+    top: 9px;
 }
 
 
