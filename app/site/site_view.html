@@ -93,18 +93,6 @@
             </div>
           </div>
         </div>
-        <!-- GA -->
-        <div class="input-panel">
-          <div class="row">
-            <div class="col-xs-8 col-sm-9"><small>GOOGLE ANALYTICS CODE</small></div>
-            <div class="col-xs-4 col-sm-3">
-              <span editable-text="site.google_analytics_code" e-maxlength="500"
-                onaftersave="updateSite('google_analytics_code', $data)">
-                {{ site.google_analytics_code || "Nothing here..." }}
-              </span>
-            </div>
-          </div>
-        </div>
         <!-- Commenting -->
         <div class="s-mar-y">
           <div class="checkbox checkbox-primary checkbox-small">
@@ -147,6 +135,27 @@
               <span editable-textarea="site.footer_text" e-maxlength="500"
                 onbeforesave="updateSite('footer_text', $data)">
                 {{ site.footer_text || "Nothing here..." }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Enable Google Analytics -->
+        <div class="s-mar-top">
+          <div class="checkbox checkbox-primary checkbox-small">
+            <input id="google_analytics_enabled" type="checkbox"
+              ng-change="updateSite('google_analytics_enabled', site.google_analytics_enabled)"
+              ng-model="site.google_analytics_enabled">
+            <label for="google_analytics_enabled">Enable Google Analytics.</label>
+          </div>
+        </div>
+        <!-- Google Analytics code -->
+        <div class="input-panel s-mar-top" ng-if="site.google_analytics_enabled">
+          <div class="row">
+            <div class="col-xs-8 col-sm-9"><small>GOOGLE ANALYTICS CODE</small></div>
+            <div class="col-xs-4 col-sm-3">
+              <span editable-text="site.google_analytics_code" e-maxlength="100"
+                onaftersave="updateSite('google_analytics_code', $data)">
+                {{ site.google_analytics_code || "Nothing here..." }}
               </span>
             </div>
           </div>
