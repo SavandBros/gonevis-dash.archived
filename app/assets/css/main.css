@@ -178,7 +178,7 @@ hr[soft] {
         padding-top: 20px !important;
         padding-bottom: 20px !important;
     }
-    .navbar a .fa.nav-icon {
+    .navbar a svg.nav-icon {
         font-size: 24px;
         margin-top: -6px;
         position: relative;
@@ -439,7 +439,7 @@ md-toast {
     width: 24px;
 }
 
-.panel-list .panel-list-item-button>.fa {
+.panel-list .panel-list-item-button>svg {
     opacity: 0.6;
     font-size: 1.3em;
     cursor: pointer;
@@ -472,7 +472,7 @@ md-toast {
     min-width: 34px;
 }
 
-.panel-heading>.fa:not(.init) {
+.panel-heading>svg:not(.init) {
     float: right;
     color: #d17100;
     background: rgba(0, 0, 0, 0.1);
@@ -588,7 +588,7 @@ md-toast {
     top: 0;
 }
 
-.dolphin .fa {
+.dolphin svg {
     opacity: 0.6;
     padding: 72px 0;
     font-size: 6em;
@@ -1088,10 +1088,10 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 
 /* Button icon */
 
-.btn .fa.left {
-    padding: 4px 0;
+.btn svg.left {
     position: absolute;
     left: 10px;
+    top: 9px;
 }
 
 
@@ -1286,7 +1286,7 @@ img.modal-image {
     background-color: #f5f5f5;
 }
 
-.dropdown-menu .fa:not([init]) {
+.dropdown-menu svg:not([init]) {
     width: 26px;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1297,7 +1297,7 @@ img.modal-image {
     padding: 2px;
 }
 
-.dropdown-menu>[ng-click]>.fa {
+.dropdown-menu>[ng-click]>svg {
     top: 10px;
 }
 
@@ -1611,7 +1611,7 @@ a.thumbnail.active {
     margin-left: 25px;
 }
 
-.kv .fa {
+.kv svg {
     position: absolute;
     color: #777;
     left: 15px;
@@ -1943,7 +1943,7 @@ img.cache {
     border-color: rgba(0, 0, 0, 0.6) transparent transparent transparent;
 }
 
-.post-featured .fa {
+.post-featured svg {
     position: absolute;
     top: 10px;
     left: 22px;

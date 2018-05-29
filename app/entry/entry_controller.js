@@ -21,7 +21,7 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
     $scope.entries = [];
     $scope.actions = [{
       label: "Draft",
-      icon: "pencil",
+      icon: "pencil-alt",
       property: "status",
       value: 0
     }, {
@@ -36,7 +36,7 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
       value: true
     }, {
       label: "Unpin",
-      icon: "star-o",
+      icon: "star",
       property: "featured",
       value: false
     }, {

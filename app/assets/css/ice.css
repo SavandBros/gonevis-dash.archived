@@ -169,12 +169,12 @@ body {
     background: rgba(0, 0, 0, 0.3);
 }
 
-.sidebar-content a>.fa {
+.sidebar-content a> svg {
     margin-right: 20px;
     margin-left: -2px;
 }
 
-.sidebar-content a.active .fa {
+.sidebar-content a.active svg {
     color: #d17100;
 }
 
@@ -193,7 +193,7 @@ body {
     color: #fff;
 }
 
-.sidebar-content a.main .fa {
+.sidebar-content a.main svg {
     margin-left: 5px;
 }
 

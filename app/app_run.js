@@ -81,39 +81,39 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, $timeout,
       }, {
         name: "anchor",
         aria: "Link",
-        contentDefault: "<i class='fa fa-link'></i>"
+        contentDefault: "<i class='fas fa-link'></i>"
       }, {
         name: "image",
         aria: "Insert image",
-        contentDefault: "<i class='fa fa-image'></i>"
+        contentDefault: "<i class='fas fa-image'></i>"
       }, {
         name: "quote",
         aria: "Block quote",
-        contentDefault: "<i class='fa fa-quote-left'></i>"
+        contentDefault: "<i class='fas fa-quote-left'></i>"
       }, {
         name: "pre",
         aria: "Preformatted text",
-        contentDefault: "<i class='fa fa-code'></i>"
+        contentDefault: "<i class='fas fa-code'></i>"
       }, {
         name: "unorderedlist",
         aria: "List (unordered)",
-        contentDefault: "<i class='fa fa-list-ul'></i>"
+        contentDefault: "<i class='fas fa-list-ul'></i>"
       }, {
         name: "justifyLeft",
         aria: "Left align",
-        contentDefault: "<i class='fa fa-align-left'></i>"
+        contentDefault: "<i class='fas fa-align-left'></i>"
       }, {
         name: "justifyCenter",
         aria: "Center align",
-        contentDefault: "<i class='fa fa-align-center'></i>"
+        contentDefault: "<i class='fas fa-align-center'></i>"
       }, {
         name: "justifyRight",
         aria: "Right align",
-        contentDefault: "<i class='fa fa-align-right'></i>"
+        contentDefault: "<i class='fas fa-align-right'></i>"
       }, {
         name: "removeFormat",
         aria: "Clear formatting",
-        contentDefault: "<i class='fa fa-ban'><i>",
+        contentDefault: "<i class='fas fa-ban'><i>",
       }]
     }
   };

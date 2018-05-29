@@ -1,12 +1,12 @@
 <div class="container container-light pad-top">
   <div class="panel panel-body s-box s-mar-top s-pad col-md-4 col-md-offset-4 text-center">
     <span ng-if="loading">
-      <i class="fa fa-circle-o-notch fa-spin fa-5x text-primary"></i>
+      <i class="fas fa-circle-notch fa-spin fa-5x text-primary"></i>
       <hr>
       <h3 class="o-fade" translate>Verifying your email...</h3>
     </span>
     <span ng-if="!loading && error">
-      <i class="fa fa-close fa-5x text-danger"></i>
+      <i class="fas fa-times fa-5x text-danger"></i>
       <br>
       <h4 class="text-danger" translate>Oh... Invalid verification link.</h4>
       <hr>

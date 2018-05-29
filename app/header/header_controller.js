@@ -20,7 +20,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
     $scope.mainNavs = [{
       label: "Dashboard",
       sref: "dash.main",
-      icon: "fa-dashboard"
+      icon: "fa-tachometer-alt"
     }, {
       label: "Write",
       sref: "dash.entry-new",
@@ -40,11 +40,11 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
     }, {
       label: "Comments",
       sref: "dash.comment-list",
-      icon: "fa-comments-o"
+      icon: "fa-comments"
     }, {
       label: "Files",
       sref: "dash.dolphin",
-      icon: "fa-file-image-o"
+      icon: "fa-file-image"
     }, {
       label: "Navigations",
       sref: "dash.navigation",

@@ -41,7 +41,7 @@
       <span ng-if="!set.sidebar">{{ user.getSites()[param.s].title[0] || "D" }}</span>
       <span ng-if="set.sidebar">{{ user.getSites()[param.s].title || "Dashboard" }}</span>
       <!-- Caret -->
-      <i class="fa fa-caret-down o-fade" ng-if="set.sidebar"></i>
+      <i class="fas fa-caret-down o-fade" ng-if="set.sidebar"></i>
     </a>
     <!-- Header dropdown -->
     <ul class="dropdown-menu">
@@ -57,12 +57,12 @@
   <br>
   <!-- Main navs -->
   <a ng-href="{{ state.href(nav.sref, {s: param.s}) }}" ng-repeat="nav in mainNavs" ng-class="{active: state.includes(nav.sref)}">
-    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
+    <i class="fas fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
   </a>
   <br>
   <!-- Lights switch -->
   <a ng-class="{'active-minimal': set.lights}" ng-if="param.lights" ng-click="set.lights = !set.lights">
-    <i class="fa fa-fw fa-lightbulb-o"></i> Lights
+    <i class="far fa-fw fa-lightbulb"></i> Lights
   </a>
   <br>
   <!-- Account dropdown -->
@@ -74,7 +74,7 @@
       <!-- Display name -->
       <span>{{ user.getDisplayName() }}</span>
       <!-- Caret -->
-      <i class="fa fa-caret-up o-fade"></i>
+      <i class="fas fa-caret-up o-fade"></i>
     </a>
     <!-- Header dropdown -->
     <ul class="dropdown-menu">
@@ -84,15 +84,15 @@
       </li>
       <li class="divider"></li>
       <!-- Feedback -->
-      <li><a ng-href="mailto:hello@gonevis.com"><i class="fa fa-smile-o"></i> Feedback</a></li>
+      <li><a ng-href="mailto:hello@gonevis.com"><i class="far fa-smile"></i> Feedback</a></li>
       <!-- Log out -->
-      <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> Log out</a></li>
+      <li><a ng-click="auth.signOut()"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
     </ul>
   </div>
   <br>
   <!-- Toggle view -->
   <button class="btn btn-default" ng-click="set.sidebar = !set.sidebar">
-    <i class="fa fa-fw" ng-class="{'fa-chevron-right': !set.sidebar, 'fa-chevron-left': set.sidebar}"></i>
+    <i class="fas fa-fw" ng-class="{'fa-chevron-right': !set.sidebar, 'fa-chevron-left': set.sidebar}"></i>
   </button>
 </div>
 
@@ -103,7 +103,7 @@
 <div class="popover tour animated">
   <div class="arrow"></div>
   <button class="btn btn-success" ng-click="tour.nextStep()">
-    <i class="fa fa-check"></i>
+    <i class="fas fa-check"></i>
   </button>
   <div class="popover-title"></div>
   <div class="popover-content"></div>

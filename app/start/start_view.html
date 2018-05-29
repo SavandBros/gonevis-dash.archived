@@ -29,14 +29,14 @@
           <div class="arrow"></div>
           <div class="popover-content">
             <div ng-if="domainForm.loading">
-              <i class="fa fa-circle-o-notch fa-spin"></i> Checking...
+              <i class="fas fa-circle-notch fa-spin"></i> Checking...
             </div>
             <div ng-if="!domainForm.loading" ng-class="{'o-fade': domainForm.loading}">
               <span ng-if="domainForm.available">
-                <b><i class="fa fa-fw fa-check text-success"></i> Awesome!</b> {{ domainForm.checkedName }} is available.
+                <b><i class="fas fa-fw fa-check text-success"></i> Awesome!</b> {{ domainForm.checkedName }} is available.
               </span>
               <span ng-if="!domainForm.available">
-                <b><i class="fa fa-fw fa-times text-danger"></i> Oh...</b> {{ domainForm.error.domain[0] }}.
+                <b><i class="fas fa-fw fa-times text-danger"></i> Oh...</b> {{ domainForm.error.domain[0] }}.
               </span>
             </div>
           </div>
@@ -47,7 +47,7 @@
           <div class="animated fadeIn">
             <button class="btn btn-primary btn-lg col-md-3 col-md-offset-4 col-xs-12"
               ng-disabled="domainForm.loading" ng-click="next()">
-              Continue <i class="fa fa-fw fa-arrow-right"></i>
+              Continue <i class="fas fa-fw fa-arrow-right"></i>
             </button>
           </div>
         </div>
@@ -58,7 +58,7 @@
 
         <!-- Go back -->
         <button class="btn btn-sm btn-default" ng-click="prev()">
-          <i class="fa fa-fw fa-reply"></i> Go Back
+          <i class="fas fa-fw fa-reply"></i> Go Back
         </button>
 
         <!-- Sub header -->
@@ -66,7 +66,7 @@
           Pick a theme
           <button class="btn btn-primary btn-sm pull-right"
             ng-click="selectTemplate(templates[0])">
-            Skip <i class="fa fa-fw fa-arrow-right"></i>
+            Skip <i class="fas fa-fw fa-arrow-right"></i>
           </button>
         </h4>
 
@@ -76,7 +76,7 @@
             <div class="thumbnail thumbnail-selection dis-ib" ng-click="selectTemplate(template)"
               ng-class="{active: selectedTemplate.id === template.id}">
               <span>
-                <i class="fa fa-3x" ng-class="{
+                <i class="fas fa-3x" ng-class="{
                   'fa-check': selectedTemplate.id !== template.id,
                   'fa-check-circle': selectedTemplate.id === template.id
                 }"></i>
@@ -98,7 +98,7 @@
             <h2 class="text-center">
               <!-- Go back -->
               <button class="btn btn-sm btn-default pull-left" ng-click="prev()" style="margin-top: 4px">
-                <i class="fa fa-fw fa-reply"></i>
+                <i class="fas fa-fw fa-reply"></i>
               </button>
               <span>You're almost done!</span>
             </h2>
@@ -126,7 +126,7 @@
                   <!-- Show/hide button -->
                   <span class="input-group-btn">
                     <button class="btn btn-default btn-lg" type="button" ng-model="showPassword" uib-btn-checkbox>
-                      <i class="fa fa-fw" ng-class="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+                      <i class="fas fa-fw" ng-class="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
                     </button>
                   </span>
                 </div>

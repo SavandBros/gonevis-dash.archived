@@ -1,7 +1,7 @@
 <!-- Site cover image -->
 <div class="container-fluid container-image" ng-if="site.media.cover_image" ng-click="selectImage('cover_image')"
   style="background-image: url('{{ site.media.cover_image.file }}')">
-  <p><i class="fa fa-fw fa-edit"></i> Change cover image</p>
+  <p><i class="fas fa-fw fa-edit"></i> Change cover image</p>
 </div>
 
 <!-- Main -->
@@ -143,7 +143,7 @@
       <div class="panel-footer" ng-if="!hideDelete">
         <!-- Delete -->
         <button class="btn btn-danger" ng-click="deleteSite()">
-          <i class="fa fa-fw fa-trash"></i> Delete Site
+          <i class="fas fa-fw fa-trash"></i> Delete Site
         </button>
       </div>
     </div>
@@ -154,7 +154,7 @@
       <div class="panel-body">
         <!-- Help text -->
         <p>
-          <i class="fa fa-info-circle"></i>
+          <i class="fas fa-info-circle"></i>
           Supply domain URLs to your DNS provider for the destination of CNAME or ALIAS records.
         </p>
         <hr>
@@ -177,7 +177,7 @@
               <td>
                 <button class="btn btn-xs btn-default pull-right o-fade-hard o-fade-hover-full"
                   title="Delete this domain" ng-click="deleteDomain(domain)">
-                  <i class="fa fa-close"></i>
+                  <i class="fas fa-times"></i>
                 </button>
               </td>
             </tr>
@@ -212,7 +212,7 @@
           </button>
         </div>
         <!-- Theme options -->
-        <p class="s-mar-y"><i class="fa fa-cog"></i> <b>Theme options</b></p>
+        <p class="s-mar-y"><i class="fas fa-cog"></i> <b>Theme options</b></p>
         <!-- Template fields -->
         <div class="form-grop" ng-repeat="(key, field) in siteTemplate.fields"
           ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
@@ -232,7 +232,7 @@
         <br>
         <!-- Update button -->
         <button class="btn btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
-          <i class="fa fa-fw fa-check text-primary"></i> Save Changes
+          <i class="fas fa-fw fa-check text-primary"></i> Save Changes
         </button>
       </div>
     </form>
