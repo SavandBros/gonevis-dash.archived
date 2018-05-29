@@ -1,5 +1,5 @@
 <!-- Add button -->
-<button type="button" class="btn btn-primary btn-corner" ui-sref="dash.entry-new">
+<button type="button" class="btn btn-primary btn-corner" ui-sref="dash.entry-new({isPage: isPageView})">
   <i class="fas fa-plus"></i>
 </button>
 <!-- Main -->
@@ -168,6 +168,7 @@
         </ul>
       </div>
     </div>
-  <!-- More -->
-  <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
+    <!-- More -->
+    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
+  </div>
 </div>

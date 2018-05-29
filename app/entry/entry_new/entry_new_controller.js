@@ -1,6 +1,6 @@
 "use strict";
 
-function EntryNewController($scope, $state, $timeout, $q,
+function EntryNewController($scope, $state, $timeout, $q, $stateParams,
   Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
   function constructor() {
@@ -14,6 +14,7 @@ function EntryNewController($scope, $state, $timeout, $q,
       status: $scope.statuses[0].id,
       format: Codekit.entryFormats.text.id
     });
+    $scope.form.get.is_page = $stateParams.isPage;
 
     // Add space from top for toolbar
     if (Codekit.isMobile()) {
@@ -24,9 +25,7 @@ function EntryNewController($scope, $state, $timeout, $q,
       }, 1000);
     }
 
-    API.Tags.get({
-        site: AuthService.getCurrentSite()
-      },
+    API.Tags.get({ site: AuthService.getCurrentSite() },
       function(data) {
         angular.forEach(data.results, function(data) {
           var tag = new Tag({
@@ -66,17 +65,20 @@ function EntryNewController($scope, $state, $timeout, $q,
 
 
   /**
-   * @desc Submit newPost form
+   * @desc Submit form (new post)
    *
    * @param {object} form Form data to submit
+   * @param {number} status
    */
-  $scope.newPost = function(form) {
+  $scope.submit = function(form, status) {
     form.loading = true;
     form.get.site = AuthService.getCurrentSite();
     form.get.user = AuthService.getAuthenticatedUser(false);
 
     var payload = form.get;
+
     payload.tag_ids = [];
+    payload.status = status || payload.status;
 
     angular.forEach($scope.tagsToSubmit, function(tag) {
       payload.tag_ids.push(tag.id);
@@ -156,6 +158,7 @@ EntryNewController.$inject = [
   "$state",
   "$timeout",
   "$q",
+  "$stateParams",
   "Entry",
   "Tag",
   "Codekit",

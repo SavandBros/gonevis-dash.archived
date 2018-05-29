@@ -183,10 +183,9 @@ module.exports = function(grunt) {
     // Add vendor prefixed styles
     postcss: {
       options: {
+        map: true,
         processors: [
-          require("autoprefixer-core")({
-            browsers: ["last 1 version"]
-          })
+          require("autoprefixer")
         ]
       },
       server: {
@@ -489,7 +488,7 @@ module.exports = function(grunt) {
         constants: {
           ENV: {
             name: "development",
-            apiEndpoint: "http://gonevis.dev:8000/api/v1/",
+            apiEndpoint: "http://gonevis.local:8000/api/v1/",
             SENTRY_DSN: "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
           }
         }
