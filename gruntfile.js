@@ -473,7 +473,8 @@ module.exports = function(grunt) {
           "angular-loading-bar",
           "angular-preload-image",
           "toaster",
-          "LocalStorageModule"
+          "LocalStorageModule",
+          "pascalprecht.translate"
         ],
         constants: {
           Client: {
