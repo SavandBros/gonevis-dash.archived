@@ -139,6 +139,28 @@
             </div>
           </div>
         </div>
+        <!-- Allow Google Analytics -->
+        <div class="s-mar-top">
+          <div class="checkbox checkbox-primary checkbox-small"
+            title="If disabled, GoNevis will no longer use Google Analytics code on the website, either it own or your provided Google Analytics code.">
+            <input id="google_analytics_enabled" type="checkbox"
+              ng-change="updateSite('google_analytics_enabled', site.google_analytics_enabled)"
+              ng-model="site.google_analytics_enabled">
+            <label for="google_analytics_enabled">Allow Google Analytics.</label>
+          </div>
+        </div>
+        <!-- Google Analytics code -->
+        <div class="input-panel s-mar-top" ng-if="site.google_analytics_enabled">
+          <div class="row">
+            <div class="col-xs-8 col-sm-9"><small>GOOGLE ANALYTICS CODE</small></div>
+            <div class="col-xs-4 col-sm-3">
+              <span editable-text="site.google_analytics_code" e-maxlength="100"
+                onaftersave="updateSite('google_analytics_code', $data)">
+                {{ site.google_analytics_code || "Nothing here..." }}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="panel-footer" ng-if="!hideDelete">
         <!-- Delete -->
