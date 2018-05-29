@@ -1,10 +1,9 @@
 /*!
- * Font Awesome Free 5.0.9 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.0.13 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
-svg:not(:root).svg-inline--fa {
-  overflow: visible;
-  }
+ svg:not(:root).svg-inline--fa {
+  overflow: visible; }
 
 .svg-inline--fa {
   display: inline-block;
@@ -65,8 +64,7 @@ svg:not(:root).svg-inline--fa {
   .svg-inline--fa.fa-li {
     width: 2em; }
   .svg-inline--fa.fa-fw {
-    width: 1.25em;
-    }
+    width: 1.25em; }
 
 .fa-layers svg.svg-inline--fa {
   bottom: 0;
@@ -171,8 +169,7 @@ svg:not(:root).svg-inline--fa {
   font-size: 1em; }
 
 .fa-2x {
-  font-size: 2em;
-  }
+  font-size: 2em; }
 
 .fa-3x {
   font-size: 3em; }
