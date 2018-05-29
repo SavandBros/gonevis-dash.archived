@@ -20,7 +20,6 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks("grunt-ng-constant");
-  grunt.loadNpmTasks("grunt-angular-gettext");
 
   var serveStatic = require("serve-static");
 
@@ -466,7 +465,6 @@ module.exports = function(grunt) {
           "ui.router",
           "ui.bootstrap",
           "chart.js",
-          "gettext",
           "xeditable",
           "slugifier",
           "angularModalService",
@@ -514,24 +512,6 @@ module.exports = function(grunt) {
             apiEndpoint: "https://www.gonevis.com/api/v1/",
             SENTRY_DSN: "https://34664609d2d7416493b4360ea445b452@sentry.io/198251"
           }
-        }
-      }
-    },
-    nggettext_extract: {
-      pot: {
-        files: {
-          "translations/templates/en.pot": ["<%= gonevisDash.app %>/**/*.html"],
-          "translations/scripts/en.pot": ["<%= gonevisDash.app %>/**/*.js"]
-        }
-      }
-    },
-    nggettext_compile: {
-      all: {
-        options: {
-          module: "gonevisDash.translations"
-        },
-        files: {
-          "<%= gonevisDash.app %>/basement/translations.js": ["translations/**/*.pot"]
         }
       }
     },
