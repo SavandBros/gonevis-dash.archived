@@ -265,10 +265,12 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, $timeout,
   $rootScope.$on("goNevis.ModalsService.close", function(event, template) {
     if (template === "dolphinSelection") {
       // Check editor for images without source and remove them
-      var img = angular.element("[medium-editor] img");
-      if (typeof img.attr("src") === "undefined") {
-        img.remove();
-      }
+      angular.forEach(angular.element("[medium-editor] img"), function (element) {
+        var img = angular.element(element);
+        if (typeof img.attr("src") === "undefined") {
+          img.remove();
+        }
+      });
     }
   });
 

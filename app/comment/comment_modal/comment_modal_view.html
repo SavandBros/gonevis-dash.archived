@@ -22,7 +22,7 @@
         <!-- Comment content -->
         <h3 ng-bind-html="comment.get.comment"></h3>
         <div class="c-grey small s-mar-top-soft">
-          <span translate>To:</span>
+          <span>To:</span>
           <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })" data-dismiss="modal">
             {{ comment.get.commented_object_minimal_data.title }}
           </a>
@@ -45,14 +45,14 @@
         <!-- Comment status -->
         <button class="btn btn-sm btn-primary pull-left s-mar-right-soft"
           ng-click="comment.reply(form.comment)" ng-disabled="comment.isReplying || form.$invalid">
-          <translate>Reply</translate>
+          Reply
         </button>
         <div class="dropdown options s-pad-no pull-left">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
             {{ comment.getStatus().label }} <li class="fas fa-caret-down"></li>
           </button>
           <ul class="dropdown-menu">
-            <li class="dropdown-header" translate>Change status</li>
+            <li class="dropdown-header">Change status</li>
             <li ng-repeat="status in statuses" ng-class="{active: comment.getStatus().label === status.label}">
               <a ng-click="comment.setStatus(status.property, status.value)">
                 <i class="{{ status.icon }}"></i> {{ status.label }}

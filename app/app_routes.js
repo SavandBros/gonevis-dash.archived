@@ -155,6 +155,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       editor: true,
       params: {
         lights: true,
+        isPage: false
       },
       title: "Nevis"
     })

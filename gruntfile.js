@@ -20,7 +20,6 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks("grunt-ng-constant");
-  grunt.loadNpmTasks("grunt-angular-gettext");
 
   var serveStatic = require("serve-static");
 
@@ -183,10 +182,9 @@ module.exports = function(grunt) {
     // Add vendor prefixed styles
     postcss: {
       options: {
+        map: true,
         processors: [
-          require("autoprefixer-core")({
-            browsers: ["last 1 version"]
-          })
+          require("autoprefixer")
         ]
       },
       server: {
@@ -457,7 +455,6 @@ module.exports = function(grunt) {
           "ui.router",
           "ui.bootstrap",
           "chart.js",
-          "gettext",
           "xeditable",
           "slugifier",
           "angularModalService",
@@ -484,7 +481,7 @@ module.exports = function(grunt) {
         constants: {
           ENV: {
             name: "development",
-            apiEndpoint: "http://gonevis.dev:8000/api/v1/",
+            apiEndpoint: "http://gonevis.local:8000/api/v1/",
             SENTRY_DSN: "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
           }
         }
@@ -505,24 +502,6 @@ module.exports = function(grunt) {
             apiEndpoint: "https://www.gonevis.com/api/v1/",
             SENTRY_DSN: "https://34664609d2d7416493b4360ea445b452@sentry.io/198251"
           }
-        }
-      }
-    },
-    nggettext_extract: {
-      pot: {
-        files: {
-          "translations/templates/en.pot": ["<%= gonevisDash.app %>/**/*.html"],
-          "translations/scripts/en.pot": ["<%= gonevisDash.app %>/**/*.js"]
-        }
-      }
-    },
-    nggettext_compile: {
-      all: {
-        options: {
-          module: "gonevisDash.translations"
-        },
-        files: {
-          "<%= gonevisDash.app %>/basement/translations.js": ["translations/**/*.pot"]
         }
       }
     },

@@ -6,13 +6,13 @@
       <form ng-submit="resetPassword(form)" name="form">
         <!-- Title -->
         <h3 class="o-fade-soft">
-          <translate>Reset Password</translate> <i class="fas fa-lock fa-fw text-danger pull-right"></i>
+          Reset Password <i class="fa fa-lock fa-fw text-danger pull-right"></i>
         </h3>
         <hr>
         <!-- Password -->
         <div class="form-group" ng-class="{'has-error': form.errors.password}">
           <input class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
-            name="password" ng-trim="false" placeholder="{{ 'New password' | translate }}"
+            name="password" ng-trim="false" placeholder="New password"
             ng-model="password.password" required style="position: relative"/>
           <ng-include src="'basement/password/password_strength.html'"></ng-include>
           <span class="help-block text-danger animated fadeInDown" ng-if="form.errors.password[0]">
@@ -22,9 +22,9 @@
         <!-- Confirm password -->
         <div class="form-group">
           <input class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}" name="passsword2"
-            placeholder="{{ 'Confirm new password' | translate }}" ng-model="form.confirm" required/>
+            placeholder="Confirm new password" ng-model="form.confirm" required/>
           <span id="password2" class="help-block" ng-show="password.password !== form.confirm && password.password.length > 8">
-            <span class="text-danger"><translate>Passwords don't match!</translate></span>
+            <span class="text-danger">Passwords don't match!</span>
           </span>
         </div>
         <!-- Errors -->
@@ -34,16 +34,16 @@
         <!-- Show/hide password -->
         <div class="form-group checkbox checkbox-primary ">
           <input id="showPassword" type="checkbox" ng-model="showPassword">
-          <label for="showPassword" translate>Show password</label>
+          <label for="showPassword">Show password</label>
         </div>
         <!-- Submit -->
         <button class="btn btn-primary btn-block btn-lg"
           ng-disabled="form.loading || form.$invalid || password.password !== form.confirm || !password.isValid()">
-          <translate>Change Password</translate>
+          Change Password
         </button>
       </form>
       </div>
-      <div class="panel-footer s-pad" translate>
+      <div class="panel-footer s-pad">
         <span class="s-mar-no o-fade">Back to </span> <a ui-sref="signin">Login</a>
       </div>
     </div>

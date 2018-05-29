@@ -98,23 +98,67 @@
           <div class="checkbox checkbox-primary checkbox-small">
             <input id="commenting" type="checkbox" ng-model="site.commenting"
               ng-change="updateSite('commenting', site.commenting)">
-            <label for="commenting">Allow visitors to comment on my posts</label>
+            <label for="commenting">Allow visitors to comment on my posts.</label>
           </div>
         </div>
         <!-- Voting -->
         <div class="s-mar-y">
           <div class="checkbox checkbox-primary checkbox-small">
             <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
-            <label for="voting">Allow visitors to vote on my posts</label>
+            <label for="voting">Allow visitors to vote on my posts.</label>
           </div>
         </div>
-        <!-- Voting -->
+        <!-- Search engine visibility -->
         <div class="s-mar-top">
           <div class="checkbox checkbox-primary checkbox-small">
             <input id="search_engine_visibility" type="checkbox"
               ng-change="updateSite('search_engine_visibility', site.search_engine_visibility)"
               ng-model="site.search_engine_visibility">
-            <label for="search_engine_visibility">Let search engine discover my site</label>
+            <label for="search_engine_visibility">Let search engine discover my site.</label>
+          </div>
+        </div>
+        <!-- Branding -->
+        <div class="s-mar-top">
+          <div class="checkbox checkbox-primary checkbox-small"
+            title="Logo or name of the GoNevis.com will not appear anymore.">
+            <input id="remove_branding" type="checkbox"
+              ng-change="updateSite('remove_branding', site.remove_branding)"
+              ng-model="site.remove_branding">
+            <label for="remove_branding">Remove GoNevis.com branding.</label>
+          </div>
+        </div>
+        <!-- Footer text -->
+        <div class="input-panel s-mar-top" ng-if="site.remove_branding">
+          <div class="row">
+            <div class="col-sm-3"><small>FOOTER TEXT</small></div>
+            <div class="col-sm-9">
+              <span editable-textarea="site.footer_text" e-maxlength="500"
+                onbeforesave="updateSite('footer_text', $data)">
+                {{ site.footer_text || "Nothing here..." }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Allow Google Analytics -->
+        <div class="s-mar-top">
+          <div class="checkbox checkbox-primary checkbox-small"
+            title="If disabled, GoNevis will no longer use Google Analytics code on the website, either it own or your provided Google Analytics code.">
+            <input id="google_analytics_enabled" type="checkbox"
+              ng-change="updateSite('google_analytics_enabled', site.google_analytics_enabled)"
+              ng-model="site.google_analytics_enabled">
+            <label for="google_analytics_enabled">Allow Google Analytics.</label>
+          </div>
+        </div>
+        <!-- Google Analytics code -->
+        <div class="input-panel s-mar-top" ng-if="site.google_analytics_enabled">
+          <div class="row">
+            <div class="col-xs-8 col-sm-9"><small>GOOGLE ANALYTICS CODE</small></div>
+            <div class="col-xs-4 col-sm-3">
+              <span editable-text="site.google_analytics_code" e-maxlength="100"
+                onaftersave="updateSite('google_analytics_code', $data)">
+                {{ site.google_analytics_code || "Nothing here..." }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -137,19 +181,30 @@
         </p>
         <hr>
         <!-- Domain list -->
-        <div ng-repeat="domain in site.domains">
-          <div>
-            <!-- Domain link -->
-            <a ng-href="https://{{ domain.domain }}" target="_blank">{{ domain.domain }}</a>
-            <!-- Remove button -->
-            <button class="btn btn-xs btn-default pull-right o-fade-hard o-fade-hover-full"
-              title="Delete this domain" ng-click="deleteDomain(domain)">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-          <br ng-if="!$last">
-          <hr ng-if="$last">
-        </div>
+        <table class="table table-hover" ng-if="site.domains.length">
+          <thead>
+            <tr>
+              <th>Domain Name</th>
+              <th>DNS Target</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="domain in site.domains">
+              <!-- Domain link -->
+              <td><a ng-href="https://{{ domain.domain }}" target="_blank">{{ domain.domain }}</a></td>
+              <!-- Domain DNS Target -->
+              <td>{{ domain.cname }}</td>
+              <!-- Remove button -->
+              <td>
+                <button class="btn btn-xs btn-default pull-right o-fade-hard o-fade-hover-full"
+                  title="Delete this domain" ng-click="deleteDomain(domain)">
+                  <i class="fa fa-close"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <!-- Add domain -->
         <button class="btn btn-default" ng-click="addDomain()"
           ng-disabled="site.domains.length == maxCustomDomains">Add Domain</button>
