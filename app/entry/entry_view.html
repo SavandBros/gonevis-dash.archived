@@ -33,18 +33,18 @@
               <ul class="dropdown-menu dropdown-menu-right">
                 <li>
                   <a ng-href="{{ entry.getUrl() }}" target="_blank">
-                    <i class="fa fa-fw fa-external-link"></i> <translate>View on site</translate>
+                    <i class="fa fa-fw fa-external-link"></i> View on site
                   </a>
                 </li>
                 <li>
                   <a ng-click="entry.addToNavigation()">
-                    <i class="fa fa-fw fa-bars"></i> <translate>Add to navigation</translate>
+                    <i class="fa fa-fw fa-bars"></i> Add to navigation
                   </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                   <a ng-click="entry.remove()">
-                    <i class="fa fa-fw fa-trash text-danger"></i> <translate>Delete</translate>
+                    <i class="fa fa-fw fa-trash text-danger"></i> Delete
                   </a>
                 </li>
               </ul>
@@ -94,7 +94,7 @@
         <!-- Action dropdown -->
         <div class="dropdown options pull-right" title="options">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
-            <translate>Action</translate> <i class="fa fa-caret-down"></i>
+            Action <i class="fa fa-caret-down"></i>
           </button>
           <ul class="dropdown-menu">
             <li ng-repeat="a in actions">
@@ -105,7 +105,7 @@
             <hr>
             <li>
               <a ng-click="removeSelected()">
-                <i class="fa fa-trash text-danger"></i> <translate>Remove selected</translate>
+                <i class="fa fa-trash text-danger"></i> Remove selected
               </a>
             </li>
           </ul>
@@ -126,8 +126,8 @@
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right o-fade s-pad-no">
               <span class="hidden-xs">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
               <span class="visible-xs small">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
-              <small class="dis-b o-fade" ng-if="entry.get.status === 1" translate>Publication</small>
-              <small class="dis-b o-fade" ng-if="entry.get.status === 0" translate>Creation</small>
+              <small class="dis-b o-fade" ng-if="entry.get.status === 1">Publication</small>
+              <small class="dis-b o-fade" ng-if="entry.get.status === 0">Creation</small>
             </div>
             <!-- Tools -->
             <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 text-right s-pad-no">
@@ -137,29 +137,29 @@
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-header" ng-if="entry.get.comment_enabled">
-                  <i init class="fa fa-fw fa-comments text-muted"></i> <translate>Comments enabled</translate>
+                  <i init class="fa fa-fw fa-comments text-muted"></i> Comments enabled
                 </li>
                 <li class="dropdown-header" ng-if="entry.get.featured ">
-                  <i init class="fa fa-fw fa-star text-primary"></i> <translate>Featured</translate>
+                  <i init class="fa fa-fw fa-star text-primary"></i> Featured
                 </li>
                 <li class="dropdown-header" ng-if="entry.get.password ">
-                  <i init class="fa fa-fw fa-lock text-danger"></i> <translate>Passworded</translate>
+                  <i init class="fa fa-fw fa-lock text-danger"></i> Passworded
                 </li>
                 <li class="divider" ng-show="entry.get.password || entry.get.featured || entry.get.comment_enabled"></li>
                 <li>
                   <a ng-href="{{ entry.getUrl() }}" target="_blank">
-                    <i class="fa fa-fw fa-external-link"></i> <translate>View on site</translate>
+                    <i class="fa fa-fw fa-external-link"></i> View on site
                   </a>
                 </li>
                 <li>
                   <a ng-click="entry.addToNavigation()">
-                    <i class="fa fa-fw fa-bars"></i> <translate>Add to navigation</translate>
+                    <i class="fa fa-fw fa-bars"></i> Add to navigation
                   </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                   <a ng-click="entry.remove()">
-                    <i class="fa fa-fw fa-trash text-danger"></i> <translate>Delete</translate>
+                    <i class="fa fa-fw fa-trash text-danger"></i> Delete
                   </a>
                 </li>
               </ul>
