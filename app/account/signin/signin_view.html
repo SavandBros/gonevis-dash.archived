@@ -5,12 +5,12 @@
         <!-- Form -->
         <form ng-submit="signin(form)" name="form">
           <!-- Title -->
-          <h3 class="o-fade-soft" translate>Login <small>to dash</small></h3>
+          <h3 class="o-fade-soft">Login <small>to dash</small></h3>
           <hr>
           <!-- Username -->
           <div class="form-group" ng-class="{'has-error': form.errors.username || form.errors.email}">
             <input id="username" class="form-control input-lg" type="text"
-              ng-model="form.username" placeholder="{{ 'Username or email' | translate }}" required/>
+              ng-model="form.username" placeholder="Username or email" required/>
             <span id="username" class="help-block" ng-show="form.errors.username">{{ form.errors.username[0] }}</span>
             <span id="username" class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</span>
           </div>
@@ -19,7 +19,7 @@
             <div class="input-group">
               <!-- Input -->
               <input id="password" class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
-                ng-model="form.password" placeholder="{{ 'Password' | translate }}" required>
+                ng-model="form.password" placeholder="Password" required>
               <!-- Show/hide button -->
               <span class="input-group-btn">
                 <button class="btn btn-default btn-lg" type="button" ng-model="showPassword" uib-btn-checkbox>
@@ -33,13 +33,13 @@
             {{ form.errors.non_field_errors[0] }}
           </div>
           <!-- Submit -->
-          <button class="btn btn-primary btn-lg btn-block" ng-disabled="form.loading || form.$invalid" translate>Login</button>
+          <button class="btn btn-primary btn-lg btn-block" ng-disabled="form.loading || form.$invalid">Login</button>
         </form>
       </div>
       <div class="panel-footer s-pad">
-        <span class="s-mar-no o-fade" translate>Don't have an account?</span> <a ui-sref="signup" translate>Register</a>
+        <span class="s-mar-no o-fade">Don't have an account?</span> <a ui-sref="signup">Register</a>
         <br>
-        <a ng-click="forgotPassword()" translate>Forgot password?</a>
+        <a ng-click="forgotPassword()">Forgot password?</a>
       </div>
     </div>
   </div>

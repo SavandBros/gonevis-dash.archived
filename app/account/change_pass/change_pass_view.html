@@ -3,7 +3,7 @@
     <div class="panel panel-default s-box">
       <div class="panel-body s-pad">
         <form ng-submit="changePassword(form)" name="form" autocomplete="off">
-          <h3 class="o-fade-soft"><translate>Change Password</translate></h3>
+          <h3 class="o-fade-soft">Change Password</h3>
           <hr>
           <div class="form-group" ng-class="{'has-error': form.errors.old_password}">
             <input id="password" class="form-control input-lg" type="password" ng-model="form.old_password" placeholder="{{ 'Current Password' | translate }}" required/>
@@ -20,11 +20,11 @@
           <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
             {{ form.errors.non_field_errors[0] }}
           </div>
-          <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid"><translate>Change</translate></button>
+          <button class="btn btn-success btn-block btn-lg" ng-disabled="form.loading || form.$invalid">Change</button>
         </form>
       </div>
       <div class="panel-footer">
-        <a ng-click="forgotPassword()"><translate>Forgot password?</translate></a>
+        <a ng-click="forgotPassword()">Forgot password?</a>
       </div>
     </div>
   </div>

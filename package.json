@@ -17,7 +17,6 @@
     "autoprefixer": "^8.5.0",
     "express": "^4.16.3",
     "grunt": "^1.0.2",
-    "grunt-angular-gettext": "^2.3.9",
     "grunt-angular-templates": "^1.1.0",
     "grunt-concurrent": "^2.3.1",
     "grunt-contrib-clean": "^1.1.0",
