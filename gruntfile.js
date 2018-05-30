@@ -35,6 +35,13 @@ module.exports = function(grunt) {
     // Project settings
     gonevisDash: appConfig,
 
+    browserify: {
+      main: {
+          src: 'app/app_module.js',
+          dest: 'app/bundle.js'
+      }
+   },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -451,29 +458,29 @@ module.exports = function(grunt) {
     ngconstant: {
       options: {
         space: "  ",
-        wrap: "\"use strict\";\n\n var app = {%= __ngModule %}",
+        template: grunt.file.read('custom.tpl.ejs'),
         name: "gonevisDash",
         dest: "<%= gonevisDash.app %>/app_module.js",
         deps: [
-          "ngAnimate",
-          "ngMessages",
-          "ngResource",
-          "ngCookies",
-          "ngSanitize",
-          "ngTagsInput",
-          "ngFileUpload",
-          "ui.router",
-          "ui.bootstrap",
-          "chart.js",
-          "xeditable",
-          "slugifier",
-          "angularModalService",
-          "angular-medium-editor",
-          "angular-sortable-view",
-          "angular-loading-bar",
-          "angular-preload-image",
-          "toaster",
-          "LocalStorageModule"
+          "require('ngAnimate')",
+          "require('ngMessages')",
+          "require('ngResource')",
+          "require('ngCookies')",
+          "require('ngSanitize')",
+          "require('ngTagsInput')",
+          "require('ngFileUpload')",
+          "require('ui.router')",
+          "require('ui.bootstrap')",
+          "require('chart.js')",
+          "require('xeditable')",
+          "require('slugifier')",
+          "require('angularModalService')",
+          "require('angular-medium-editor')",
+          "require('angular-sortable-view')",
+          "require('angular-loading-bar')",
+          "require('angular-preload-image')",
+          "require('toaster')",
+          "require('LocalStorageModule')"
         ],
         constants: {
           Client: {
