@@ -91,8 +91,8 @@ module.exports = function(grunt) {
             return [
               serveStatic(".tmp"),
               connect().use(
-                "/bower_components",
-                serveStatic("./bower_components")
+                "/node_modules",
+                serveStatic("./node_modules")
               ),
               connect().use(
                 "/app/assets/css",
@@ -111,8 +111,8 @@ module.exports = function(grunt) {
               serveStatic(".tmp"),
               serveStatic("test"),
               connect().use(
-                "/bower_components",
-                serveStatic("./bower_components")
+                "/node_modules",
+                serveStatic("./node_modules")
               ),
               serveStatic(appConfig.app)
             ];
@@ -408,12 +408,12 @@ module.exports = function(grunt) {
           src: ["generated/*"]
         }, {
           expand: true,
-          cwd: "bower_components/bootstrap/dist",
+          cwd: "node_modules/bootstrap/dist",
           src: "fonts/*",
           dest: "<%= gonevisDash.dist %>"
         }, {
           expand: true,
-          cwd: "bower_components/font-awesome",
+          cwd: "node_modules/font-awesome",
           src: "fonts/*",
           dest: "<%= gonevisDash.dist %>"
         }]
@@ -471,7 +471,6 @@ module.exports = function(grunt) {
           "angular-medium-editor",
           "angular-sortable-view",
           "angular-loading-bar",
-          "angular-preload-image",
           "toaster",
           "LocalStorageModule"
         ],
