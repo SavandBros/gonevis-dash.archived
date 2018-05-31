@@ -174,3 +174,5 @@ API.$inject = [
   "$resource",
   "ENV"
 ];
+
+module.exports = API;
