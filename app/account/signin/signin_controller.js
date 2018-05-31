@@ -51,3 +51,5 @@ SigninController.$inject = [
   "ModalsService",
   "toaster"
 ];
+
+module.exports = SigninController;

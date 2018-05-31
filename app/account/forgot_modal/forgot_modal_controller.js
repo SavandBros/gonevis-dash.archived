@@ -33,3 +33,6 @@ ForgotModalController.$inject = [
   "API",
   "ModalsService"
 ];
+
+
+module.exports = ForgotModalController;

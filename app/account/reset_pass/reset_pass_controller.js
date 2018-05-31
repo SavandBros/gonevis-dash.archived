@@ -44,3 +44,5 @@ ResetPassController.$inject = [
   "API",
   "Password"
 ];
+
+module.exports = ResetPassController;

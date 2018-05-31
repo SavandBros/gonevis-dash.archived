@@ -141,3 +141,6 @@ UserController.$inject = [
   "Account",
   "toaster"
 ];
+
+
+module.exports = UserController;

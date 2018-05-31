@@ -1,0 +1,1 @@
+require('./signup_controller');

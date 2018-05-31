@@ -66,3 +66,6 @@ EmailConfirmationController.$inject = [
   "AuthService",
   "ModalsService"
 ];
+
+
+module.exports = EmailConfirmationController;

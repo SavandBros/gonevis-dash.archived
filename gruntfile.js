@@ -38,7 +38,7 @@ module.exports = function(grunt) {
     browserify: {
       main: {
           src: 'app/app_module.js',
-          dest: 'app/bundle.js'
+          dest: "<%= gonevisDash.dist %>/js/bundle.js"
       }
    },
 

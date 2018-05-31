@@ -87,3 +87,5 @@ SignupController.$inject = [
   "Password",
   "toaster"
 ];
+
+module.exports = SignupController;
