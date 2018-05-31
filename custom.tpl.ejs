@@ -2,6 +2,8 @@
 
 var angular = require('angular');
 
-angular.module("{%- moduleName %}", {%= deps %})
+var app = angular.module("{%- moduleName %}", {%= deps %})
 
 {% constants.forEach(function(constant) { %}.constant("{%- constant.name %}", {%= constant.value %}){% }) %}
+
+module.exports = app;

@@ -67,3 +67,5 @@ Config.$inject = [
   "ChartJsProvider",
   "ENV"
 ];
+
+module.exports = Config;

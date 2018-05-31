@@ -346,3 +346,5 @@ RunNevisRun.$inject = [
   "editableOptions",
   "localStorageService"
 ];
+
+module.exports = RunNevisRun;
