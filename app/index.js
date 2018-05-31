@@ -5,3 +5,4 @@ require('./app_run');
 
 // Application Scripts
 require('./api');
+require('./modals');

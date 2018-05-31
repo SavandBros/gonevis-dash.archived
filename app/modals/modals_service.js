@@ -81,3 +81,5 @@ ModalsService.$inject = [
   "$rootScope",
   "ModalService"
 ];
+
+module.exports = ModalsService;
