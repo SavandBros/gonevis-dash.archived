@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function TourStep($timeout) {
   return function(selector, title, content, placement, isLast) {
 

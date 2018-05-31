@@ -1,4 +1,6 @@
-'use strict';
+"use strict";
+
+var app = require("../../app_module");
 
 function UserController($scope, $rootScope, $stateParams,
   AuthService, API, DolphinService, Upload, ENV, Account, toaster) {

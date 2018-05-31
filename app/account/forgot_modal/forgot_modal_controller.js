@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function ForgotModalController($scope, toaster, API, ModalsService) {
 
   /**

@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 
     browserify: {
       main: {
-          src: 'app/index.js',
+          src: "app/index.js",
           dest: "<%= gonevisDash.dist %>/js/bundle.js"
       }
    },
@@ -53,7 +53,8 @@ module.exports = function(grunt) {
         tasks: [
           // "jsbeautifier",
           "newer:jshint:all",
-          "newer:jscs:all"
+          "newer:jscs:all",
+          "browserify"
         ],
         options: {
           livereload: "<%= connect.options.livereload %>"
@@ -100,6 +101,10 @@ module.exports = function(grunt) {
               connect().use(
                 "/bower_components",
                 serveStatic("./bower_components")
+              ),
+              connect().use(
+                "/js",
+                serveStatic("./dist/js")
               ),
               connect().use(
                 "/app/assets/css",
@@ -458,7 +463,7 @@ module.exports = function(grunt) {
     ngconstant: {
       options: {
         space: "  ",
-        template: grunt.file.read('custom.tpl.ejs'),
+        template: grunt.file.read("custom.tpl.ejs"),
         name: "gonevisDash",
         dest: "<%= gonevisDash.app %>/app_module.js",
         deps: [
@@ -578,6 +583,7 @@ module.exports = function(grunt) {
     "clean:dist",
     // "jsbeautifier",
     "ngconstant:staging",
+    "browserify",
     "wiredep",
     "useminPrepare",
     "concurrent:dist",
@@ -605,6 +611,7 @@ module.exports = function(grunt) {
         "clean:server",
         // "jsbeautifier",
         "ngconstant:staging",
+        "browserify",
         "wiredep",
         "concurrent:server",
         "postcss:server",

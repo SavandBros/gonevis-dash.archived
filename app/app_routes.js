@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("./app_module");
+
 /**
  * @desc Every child of dash state follows site id that user is into.
  *       States with s param don't require site index, so it is given to it for later navigation.
@@ -233,10 +235,10 @@ class Routes {
 }
 
 
-app.config('Routes', Routes);
+app.config("Routes", Routes);
 Routes.$inject = [
-  '$stateProvider', 
-  '$urlRouterProvider'
+  "$stateProvider", 
+  "$urlRouterProvider"
 ];
 
 module.exports = Routes;

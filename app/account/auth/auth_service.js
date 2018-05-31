@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 class AuthService {
   constructor($state, $rootScope, $cookies, $window, $stateParams, API, Account) {
 

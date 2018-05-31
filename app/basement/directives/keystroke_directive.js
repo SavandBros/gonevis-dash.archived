@@ -1,5 +1,8 @@
 "use strict";
 
+var app = require("../../app_module");
+
+
 /**
  * @desc Update scope even with spaces
  *

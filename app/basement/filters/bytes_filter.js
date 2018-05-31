@@ -1,5 +1,8 @@
 "use strict";
 
+var app = require("../../app_module");
+
+
 function BytesFilter() {
   return function(bytes, precision) {
     if (bytes === 0) {

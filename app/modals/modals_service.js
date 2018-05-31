@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 /**
  * @desc Modal service to work with bootstrap's modal
  *       Each modal should have an id same as its template name

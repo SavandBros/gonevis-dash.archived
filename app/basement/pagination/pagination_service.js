@@ -1,5 +1,8 @@
 "use strict";
 
+var app = require("../../app_module");
+
+
 function Pagination($resource, $rootScope) {
 
   /**

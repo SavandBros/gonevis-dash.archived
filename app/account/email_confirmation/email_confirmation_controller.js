@@ -1,5 +1,8 @@
 "use strict";
 
+var app = require("../../app_module");
+
+
 function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService, ModalsService) {
 
   function constructor() {

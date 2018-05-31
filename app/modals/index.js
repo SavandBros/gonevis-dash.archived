@@ -1,1 +1,1 @@
-require('./modals_service');
+require("./modals_service");

@@ -1,4 +1,7 @@
 "use strict";
+
+var app = require("../../app_module");
+
 class ChangePassController {
   constructor($scope, $state, toaster, API, ModalsService) {
 

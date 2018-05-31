@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 /**
  * @desc Calculate time since from given date object.
  *       3 days, 1 month, one year...

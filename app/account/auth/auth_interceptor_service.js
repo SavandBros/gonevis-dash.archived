@@ -1,5 +1,8 @@
 "use strict";
 
+var app = require("../../app_module");
+
+
 class AuthInterceptorService {
   constructor($rootScope, $cookies, $q, ENV, Utils) {
 

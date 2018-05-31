@@ -1,5 +1,8 @@
 "use strict";
 
+var app = require("../../app_module");
+
+
 /**
  * @desc Search service for controllers:
  *       Inject the Search to controller
