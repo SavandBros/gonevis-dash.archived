@@ -10,3 +10,5 @@ app.filter("timeuntil", TimeUntilFilter);
 TimeUntilFilter.$inject = [
   "$filter"
 ];
+
+module.exports = TimeUntilFilter;

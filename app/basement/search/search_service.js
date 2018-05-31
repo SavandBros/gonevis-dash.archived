@@ -86,3 +86,5 @@ Search.$inject = [
   "$rootScope",
   "Pagination"
 ];
+
+module.exports = Search;

@@ -17,3 +17,6 @@ function ngKeyStroke() {
 }
 
 app.directive("ngKeyStroke", ngKeyStroke);
+
+
+module.exports = ngKeyStroke;

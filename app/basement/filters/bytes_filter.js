@@ -23,3 +23,5 @@ function BytesFilter() {
 }
 
 app.filter("bytes", BytesFilter);
+
+module.exports = BytesFilter;

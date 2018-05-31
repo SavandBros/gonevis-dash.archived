@@ -52,3 +52,5 @@ Pagination.$inject = [
   "$resource",
   "$rootScope"
 ];
+
+module.exports = Pagination;

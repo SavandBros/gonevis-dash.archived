@@ -86,3 +86,5 @@ app.service("TourStep", TourStep);
 TourStep.$inject = [
   "$timeout"
 ];
+
+module.exports = TourStep;

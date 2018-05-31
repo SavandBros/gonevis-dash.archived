@@ -127,3 +127,5 @@ function Password() {
 }
 
 app.service("Password", Password);
+
+module.exports = Password;

@@ -65,3 +65,5 @@ function TimeSinceFilter() {
 }
 
 app.filter("timesince", TimeSinceFilter);
+
+module.exports = TimeSinceFilter;

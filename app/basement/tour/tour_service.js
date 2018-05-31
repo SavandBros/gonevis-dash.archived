@@ -137,3 +137,5 @@ TourService.$inject = [
   "Tour",
   "AuthService"
 ];
+
+module.exports = TourService;

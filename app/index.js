@@ -6,3 +6,5 @@ require('./app_run');
 // Application Scripts
 require('./api');
 require('./modals');
+require('./basement');
+require('./account');

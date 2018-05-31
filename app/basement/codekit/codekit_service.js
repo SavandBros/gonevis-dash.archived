@@ -230,3 +230,7 @@ Codekit.$inject = [
   "$timeout",
   "$window"
 ];
+
+
+
+module.exports = Codekit;
