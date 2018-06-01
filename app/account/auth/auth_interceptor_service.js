@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
 
   /**
@@ -58,3 +60,5 @@ AuthInterceptorService.$inject = [
   "ENV",
   "Utils"
 ];
+
+module.exports = AuthInterceptorService;

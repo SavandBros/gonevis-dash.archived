@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function SigninController($scope, $stateParams, AuthService, ModalsService, toaster) {
 
   function constructor() {
@@ -51,3 +53,5 @@ SigninController.$inject = [
   "ModalsService",
   "toaster"
 ];
+
+module.exports = SigninController;

@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function API($resource, ENV) {
   var BASE_API = ENV.apiEndpoint;
   var apiData = {};
@@ -174,3 +176,5 @@ API.$inject = [
   "$resource",
   "ENV"
 ];
+
+module.exports = API;

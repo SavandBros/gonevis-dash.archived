@@ -1,0 +1,13 @@
+'use strict';
+
+var $ = require('jquery');
+var angular = require('angular');
+
+{% deps.require.forEach(function(dep) { %}{%= dep %};
+{% }) %}
+
+var app = angular.module("{%- moduleName %}", {%= JSON.stringify(deps.regular) %})
+
+{% constants.forEach(function(constant) { %}.constant("{%- constant.name %}", {%= constant.value %}){% }) %}
+
+module.exports = app;

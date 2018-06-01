@@ -1,5 +1,6 @@
 "use strict";
 
+var app = require("../app_module");
 function NavigationController($scope, toaster, $stateParams, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
@@ -87,3 +88,5 @@ NavigationController.$inject = [
   "API",
   "AuthService"
 ];
+
+module.exports = NavigationController;

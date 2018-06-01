@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 /**
  * @desc Codekit service is a basement filled with useful function and constant data,
  *       It stops repeating code such as functions, static variables, etc...
@@ -230,3 +232,7 @@ Codekit.$inject = [
   "$timeout",
   "$window"
 ];
+
+
+
+module.exports = Codekit;

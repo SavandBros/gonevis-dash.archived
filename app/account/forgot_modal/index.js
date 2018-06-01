@@ -1,0 +1,1 @@
+require('./forgot_modal_controller');

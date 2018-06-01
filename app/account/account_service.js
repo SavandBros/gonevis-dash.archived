@@ -1,5 +1,6 @@
 "use strict";
 
+var app = require("../app_module");
 /**
  * @desc Class for any user account to get better data easily.
  *       Instantiate this class via backend data of any user.
@@ -113,3 +114,5 @@ function Account() {
 }
 
 app.service("Account", Account);
+
+module.exports = Account;

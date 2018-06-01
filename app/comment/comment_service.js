@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
   return function(data) {
 
@@ -136,3 +138,5 @@ Comment.$inject = [
   "Codekit",
   "Account"
 ];
+
+module.exports = Comment;

@@ -1,5 +1,6 @@
 "use strict";
 
+var app = require("../app_module");
 function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
 
   function constructor() {
@@ -62,3 +63,5 @@ TeamController.$inject = [
   "ModalsService",
   "Account"
 ];
+
+module.exports = TeamController;

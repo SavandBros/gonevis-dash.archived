@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("./app_module");
+
 function RunNevisRun($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
   ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, localStorageService) {
 
@@ -346,3 +348,5 @@ RunNevisRun.$inject = [
   "editableOptions",
   "localStorageService"
 ];
+
+module.exports = RunNevisRun;

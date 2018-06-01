@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("./app_module");
+
 function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
   cfpLoadingBarProvider, ChartJsProvider, ENV) {
 
@@ -67,3 +69,5 @@ Config.$inject = [
   "ChartJsProvider",
   "ENV"
 ];
+
+module.exports = Config;

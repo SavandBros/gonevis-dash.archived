@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require('../../app_module');
+
 function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthService, toaster) {
 
   function constructor() {
@@ -56,3 +58,6 @@ SiteNewController.$inject = [
   "AuthService",
   "toaster"
 ];
+
+
+module.exports = SiteNewController;

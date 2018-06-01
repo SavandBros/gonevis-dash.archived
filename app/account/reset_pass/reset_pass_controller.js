@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function ResetPassController($scope, $state, AuthService, API, Password) {
 
   function constructor() {
@@ -44,3 +46,5 @@ ResetPassController.$inject = [
   "API",
   "Password"
 ];
+
+module.exports = ResetPassController;

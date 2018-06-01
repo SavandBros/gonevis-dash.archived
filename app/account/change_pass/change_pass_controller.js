@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function ChangePassController($scope, $state, toaster, API, ModalsService) {
 
   /**
@@ -54,3 +56,5 @@ ChangePassController.$inject = [
   "API",
   "ModalsService"
 ];
+
+module.exports = ChangePassController;

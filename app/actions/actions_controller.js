@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function ActionsController($scope, $state, $stateParams, AuthService) {
 
   function constructor() {
@@ -33,3 +35,6 @@ ActionsController.$inject = [
   "$stateParams",
   "AuthService"
 ];
+
+
+module.exports = ActionsController;

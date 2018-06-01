@@ -1,5 +1,8 @@
 "use strict";
 
+var app = require("../../app_module");
+
+
 /**
  * @desc Update scope even with spaces
  *
@@ -17,3 +20,6 @@ function ngKeyStroke() {
 }
 
 app.directive("ngKeyStroke", ngKeyStroke);
+
+
+module.exports = ngKeyStroke;

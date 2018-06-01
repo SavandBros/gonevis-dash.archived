@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function SiteTemplatesModalController($scope, $rootScope, API, AuthService, currentTemplate, site) {
 
   function constructor() {
@@ -38,3 +40,5 @@ SiteTemplatesModalController.$inject = [
   "currentTemplate",
   "site"
 ];
+
+module.exports = SiteTemplatesModalController;

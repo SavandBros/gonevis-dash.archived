@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function Entry($rootScope, $state, API, Codekit, toaster) {
   return function(data) {
 
@@ -134,3 +136,5 @@ Entry.$inject = [
   "Codekit",
   "toaster"
 ];
+
+module.exports = Entry;

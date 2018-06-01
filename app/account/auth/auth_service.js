@@ -1,5 +1,8 @@
 "use strict";
 
+var app = require("../../app_module");
+var Raven = require('raven-js');
+
 function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, Account) {
 
   /**
@@ -247,3 +250,6 @@ AuthService.$inject = [
   "API",
   "Account"
 ];
+
+
+module.exports = AuthService;

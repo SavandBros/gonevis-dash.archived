@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function Password() {
   return function() {
 
@@ -127,3 +129,5 @@ function Password() {
 }
 
 app.service("Password", Password);
+
+module.exports = Password;

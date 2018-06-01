@@ -1,5 +1,6 @@
 "use strict";
 
+var app = require("../app_module");
 function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
   AuthService, DolphinService, Codekit, Entry, API, ModalsService, TourService, toaster) {
 
@@ -232,3 +233,5 @@ HeaderController.$inject = [
   "TourService",
   "toaster"
 ];
+
+module.exports = HeaderController;

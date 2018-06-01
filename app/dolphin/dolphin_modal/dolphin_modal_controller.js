@@ -1,5 +1,7 @@
 'use strict';
 
+var app = require("../../app_module");
+
 function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
 
   function constructor() {
@@ -49,3 +51,5 @@ DolphinModalController.$inject = [
   'dolphin',
   'API'
 ];
+
+module.exports = DolphinModalController;
