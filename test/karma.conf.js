@@ -26,6 +26,7 @@ module.exports = function(config) {
     files: [
       'node_modules/jquery/dist/jquery.js',
       'node_modules/angular/angular.js',
+      'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/bootstrap/dist/js/bootstrap.js',
       'node_modules/angular-animate/angular-animate.js',
       'node_modules/angular-cookies/angular-cookies.js',
@@ -53,6 +54,7 @@ module.exports = function(config) {
       'node_modules/angular-chart.js/dist/angular-chart.js',
       'node_modules/raven-js/dist/raven.js',
       'node_modules/angular-local-storage/dist/angular-local-storage.js',
+      'node_modules/medium-editor/dist/js/medium-editor.js',
       'node_modules/angular-medium-editor/dist/angular-medium-editor.js',
       'app/app_module.js',
       'app/app_config.js',
