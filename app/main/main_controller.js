@@ -1,5 +1,6 @@
 "use strict";
 
+var app = require("../app_module");
 function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
@@ -132,3 +133,5 @@ MainController.$inject = [
   "Comment",
   "Entry"
 ];
+
+module.exports = MainController;
