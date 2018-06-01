@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require("./bower.json").appPath || "app",
+    app: "app",
     dist: "dist",
   };
 
@@ -38,16 +38,12 @@ module.exports = function(grunt) {
     browserify: {
       main: {
           src: "app/index.js",
-          dest: "<%= gonevisDash.dist %>/js/bundle.js"
+          dest: ".tmp/bundle.js"
       }
    },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ["bower.json"],
-        tasks: ["wiredep"]
-      },
       js: {
         files: ["<%= gonevisDash.app %>/**/*.js"],
         tasks: [
@@ -448,8 +444,8 @@ module.exports = function(grunt) {
       ],
       dist: [
         "copy:styles",
-        "imagemin",
-        "svgmin"
+        // "imagemin",
+        // "svgmin"
       ]
     },
 
@@ -589,7 +585,7 @@ module.exports = function(grunt) {
   grunt.registerTask("release", [
     "clean:dist",
     "ngconstant:production",
-    "wiredep",
+    // "wiredep",
     "useminPrepare",
     "concurrent:dist",
     "postcss",
@@ -597,9 +593,9 @@ module.exports = function(grunt) {
     "concat",
     "ngAnnotate",
     "copy:dist",
-    "cdnify",
+    // "cdnify",
     "cssmin",
-    "uglify",
+    // "uglify",
     "filerev",
     "usemin",
     "htmlmin"
@@ -610,7 +606,7 @@ module.exports = function(grunt) {
     // "jsbeautifier",
     "ngconstant:staging",
     "browserify",
-    "wiredep",
+    // "wiredep",
     "useminPrepare",
     "concurrent:dist",
     "postcss",
@@ -618,9 +614,9 @@ module.exports = function(grunt) {
     "concat",
     "ngAnnotate",
     "copy:dist",
-    "cdnify",
+    // "cdnify",
     "cssmin",
-    "uglify",
+    // "uglify",
     "filerev",
     "usemin",
     "htmlmin"
@@ -638,7 +634,7 @@ module.exports = function(grunt) {
         // "jsbeautifier",
         "ngconstant:staging",
         "browserify",
-        "wiredep",
+        // "wiredep",
         "concurrent:server",
         "postcss:server",
         "connect:livereload",
@@ -651,7 +647,7 @@ module.exports = function(grunt) {
         "clean:server",
         // "jsbeautifier",
         "ngconstant:production",
-        "wiredep",
+        // "wiredep",
         "concurrent:server",
         "postcss:server",
         "connect:livereload",
@@ -663,7 +659,7 @@ module.exports = function(grunt) {
       "clean:server",
       // "jsbeautifier",
       "ngconstant:development",
-      "wiredep",
+      // "wiredep",
       "concurrent:server",
       "postcss:server",
       "connect:livereload",
@@ -675,7 +671,8 @@ module.exports = function(grunt) {
     "clean:server",
     // "jsbeautifier",
     "ngconstant:development",
-    "wiredep",
+    // "wiredep",
+    "browserify",
     "concurrent:test",
     "postcss",
     "connect:test",
@@ -686,7 +683,8 @@ module.exports = function(grunt) {
     "clean:dist",
     // "jsbeautifier",
     "ngconstant:production",
-    "wiredep",
+    "browserify",
+    // "wiredep",
     "useminPrepare",
     "concurrent:dist",
     "postcss",
@@ -694,9 +692,9 @@ module.exports = function(grunt) {
     "concat",
     "ngAnnotate",
     "copy:dist",
-    "cdnify",
-    "cssmin",
-    "uglify",
+    // "cdnify",
+    // "cssmin",
+    // "uglify",
     "filerev",
     "usemin",
     "htmlmin"
