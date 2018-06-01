@@ -1,5 +1,6 @@
 "use strict";
 
+var app = require("../../app_module");
 function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService, Codekit, ModalsService) {
 
   function constructor() {
@@ -51,3 +52,5 @@ TeamInviteModalController.$inject = [
   "Codekit",
   "ModalsService"
 ];
+
+module.exports = TeamInviteModalController;
