@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function CommentModalController($scope, comment, Codekit) {
 
   function constructor() {
@@ -16,3 +18,5 @@ CommentModalController.$inject = [
   "comment",
   "Codekit"
 ];
+
+module.exports = CommentModalController;

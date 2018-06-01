@@ -10,3 +10,4 @@ require("./basement");
 require("./account");
 require("./actions");
 require("./site");
+require("./comment");

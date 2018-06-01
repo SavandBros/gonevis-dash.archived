@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function CommentController($scope, $rootScope, API,
   AuthService, Comment, Pagination, Search, Codekit) {
 
@@ -93,3 +95,5 @@ CommentController.$inject = [
   "Search",
   "Codekit"
 ];
+
+module.exports = CommentController;
