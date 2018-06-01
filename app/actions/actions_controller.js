@@ -1,6 +1,6 @@
 "use strict";
 
-var app = require("../../app_module");
+var app = require("../app_module");
 
 function ActionsController($scope, $state, $stateParams, AuthService) {
 
@@ -35,3 +35,6 @@ ActionsController.$inject = [
   "$stateParams",
   "AuthService"
 ];
+
+
+module.exports = ActionsController;

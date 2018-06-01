@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
   API, ModalsService, AuthService, DolphinService, Codekit) {
 
@@ -258,3 +260,5 @@ SiteController.$inject = [
   "DolphinService",
   "Codekit"
 ];
+
+module.exports = SiteController;
