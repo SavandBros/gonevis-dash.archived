@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
   return function(data) {
 
@@ -105,3 +107,5 @@ DolphinService.$inject = [
   "$rootScope",
   "ModalsService"
 ];
+
+module.exports = DolphinService;

@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function DolphinController($scope, $rootScope, Dolphin,
   Codekit, API, AuthService, Upload, Pagination, Search, toaster, source, localStorageService) {
 
@@ -237,3 +239,5 @@ DolphinController.$inject = [
   "source",
   "localStorageService"
 ];
+
+module.exports = DolphinController;

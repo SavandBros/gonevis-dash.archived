@@ -14,3 +14,4 @@ require("./comment");
 require("./entry");
 require("./tag");
 require("./team");
+require("./dolphin");
