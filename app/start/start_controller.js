@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function StartController($scope, $timeout, Password, AuthService, API, toaster) {
 
   function constructor() {
@@ -155,3 +157,5 @@ StartController.$inject = [
   "API",
   "toaster"
 ];
+
+module.exports = StartController;

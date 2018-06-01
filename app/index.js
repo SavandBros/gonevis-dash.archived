@@ -15,3 +15,4 @@ require("./entry");
 require("./tag");
 require("./team");
 require("./dolphin");
+require("./start");
