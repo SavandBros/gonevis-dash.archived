@@ -1,3 +1,4 @@
+require("./account_service");
 require("./auth");
 require("./change_pass");
 require("./email_confirmation");

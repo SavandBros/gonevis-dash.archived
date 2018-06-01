@@ -1,13 +1,12 @@
 "use strict";
 
-var app = require("../../app_module");
+var app = require("../app_module");
 /**
  * @desc Class for any user account to get better data easily.
  *       Instantiate this class via backend data of any user.
  */
-export class Account {
-  constructor(data) {
-
+function Account() {
+  return function(data) {
     /**
      * @private
      */
@@ -48,7 +47,7 @@ export class Account {
      *
      * @returns {string} URL of the image
      */
-    this.getMedia = function (size) {
+    this.getMedia = function(size) {
       if (self.media[size]) {
         return self.media[size];
       }
@@ -60,7 +59,7 @@ export class Account {
      * @type {function}
      * @returns {string|boolean}
      */
-    this.getFirstName = function () {
+    this.getFirstName = function() {
       // Check name
       if (self.get.name) {
         // Get first part of name
@@ -78,7 +77,7 @@ export class Account {
      * @type {function}
      * @returns {string}
      */
-    this.getFullName = function () {
+    this.getFullName = function() {
       // Full name
       if (self.get.name) {
         return self.get.name;
@@ -92,7 +91,7 @@ export class Account {
      * @type {function}
      * @returns {string}
      */
-    this.getDisplayName = function () {
+    this.getDisplayName = function() {
       // First name
       if (self.getFirstName()) {
         return self.getFirstName();
@@ -105,14 +104,15 @@ export class Account {
      * @desc Get user sites
      * @returns {array}
      */
-    this.getSites = function () {
+    this.getSites = function() {
       if (self.get.sites.length > 0) {
         return self.get.sites;
       }
       return [];
     };
-  }
+  };
 }
 
-
 app.service("Account", Account);
+
+module.exports = Account;

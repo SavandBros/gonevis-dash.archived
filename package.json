@@ -35,6 +35,8 @@
     "animate.css": "^3.5.2",
     "autoprefixer": "^8.5.0",
     "bootstrap": "^3.3.7",
+    "browserify": "^16.2.2",
+    "browserify-shim": "^3.8.14",
     "express": "^4.16.3",
     "font-awesome": "^4.7.0",
     "grunt": "^1.0.2",
@@ -69,10 +71,24 @@
     "ng-file-upload": "^12.2.13",
     "ng-tags-input": "^3.2.0",
     "rangy": "^1.3.0",
+    "raven": "^2.6.2",
     "raven-js": "^3.25.2",
     "serve-static": "^1.13.2",
     "slugifier": "^0.1.0",
     "time-grunt": "^1.4.0"
+  },
+  "browserify": {
+    "transform": ["browserify-shim"]
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.js"
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "angular": {
+      "exports": "angular",
+      "depends": ["jquery"]
+    }
   },
   "engines": {
     "node": "6.10.3"

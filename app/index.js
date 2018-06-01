@@ -17,3 +17,5 @@ require("./team");
 require("./dolphin");
 require("./start");
 require("./header");
+require("./main");
+require("./navigation");
