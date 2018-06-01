@@ -1,8 +1,7 @@
 dependencies:
   override:
-    - npm install -g grunt-cli bower
+    - npm install -g grunt-cli browserify
     - npm install
-    - bower install
 test:
   override:
     - 'grunt jshint'

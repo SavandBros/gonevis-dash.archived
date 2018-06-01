@@ -78,7 +78,9 @@
     "time-grunt": "^1.4.0"
   },
   "browserify": {
-    "transform": ["browserify-shim"]
+    "transform": [
+      "browserify-shim"
+    ]
   },
   "browser": {
     "jquery": "./node_modules/jquery/dist/jquery.js"
@@ -87,7 +89,9 @@
     "jquery": "$",
     "angular": {
       "exports": "angular",
-      "depends": ["jquery"]
+      "depends": [
+        "jquery"
+      ]
     }
   },
   "engines": {
@@ -95,7 +99,7 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "npm install -g bower grunt-cli && bower install && grunt rock"
+    "postinstall": "npm install -g browserify grunt-cli && grunt rock"
   },
   "repository": {
     "type": "git",
