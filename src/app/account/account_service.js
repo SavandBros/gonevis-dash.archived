@@ -50,7 +50,7 @@ function Account() {
       if (self.media[size]) {
         return self.media[size];
       }
-      return "assets/img/avatar.png";
+      return "style/img/avatar.png";
     };
 
     /**

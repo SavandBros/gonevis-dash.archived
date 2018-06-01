@@ -1,6 +1,6 @@
 "use strict";
 
-function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
+const GoNevisConfig = function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
   cfpLoadingBarProvider, ChartJsProvider, ENV) {
 
   // Http
@@ -54,16 +54,6 @@ function Config($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, 
       };
     }
   }]);
-}
+};
 
-app.config(Config);
-Config.$inject = [
-  "$httpProvider",
-  "$resourceProvider",
-  "$cookiesProvider",
-  "$qProvider",
-  "$provide",
-  "cfpLoadingBarProvider",
-  "ChartJsProvider",
-  "ENV"
-];
+export default GoNevisConfig;

@@ -81,10 +81,10 @@ describe("Account", function () {
 
       account = new Account(data);
 
-      expect(account.getMedia("full")).toBe("assets/img/avatar.png");
-      expect(account.getMedia("medium")).toBe("assets/img/avatar.png");
-      expect(account.getMedia("small")).toBe("assets/img/avatar.png");
-      expect(account.getMedia("tiny")).toBe("assets/img/avatar.png");
+      expect(account.getMedia("full")).toBe("style/img/avatar.png");
+      expect(account.getMedia("medium")).toBe("style/img/avatar.png");
+      expect(account.getMedia("small")).toBe("style/img/avatar.png");
+      expect(account.getMedia("tiny")).toBe("style/img/avatar.png");
     });
   });
 

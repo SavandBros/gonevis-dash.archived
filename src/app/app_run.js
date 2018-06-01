@@ -1,7 +1,7 @@
 "use strict";
 
-function RunNevisRun($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
-  ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, localStorageService) {
+const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
+                              ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, localStorageService) {
 
   /**
    * @name cache
@@ -326,23 +326,8 @@ function RunNevisRun($rootScope, $window, $location, $cookies, $state, $timeout,
       }
     }
   });
-}
+};
 
-app.run(RunNevisRun);
-RunNevisRun.$inject = [
-  "$rootScope",
-  "$window",
-  "$location",
-  "$cookies",
-  "$state",
-  "$timeout",
-  "toaster",
-  "ENV",
-  "AuthService",
-  "DolphinService",
-  "Codekit",
-  "Client",
-  "TourService",
-  "editableOptions",
-  "localStorageService"
-];
+
+export default RunNevisRun;
+
