@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
 
   function constructor() {
@@ -58,3 +60,5 @@ TagModalController.$inject = [
   "DolphinService",
   "ModalsService"
 ];
+
+module.exports = TagModalController;

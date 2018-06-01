@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function TagController($scope, Tag, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
@@ -118,3 +120,5 @@ TagController.$inject = [
   "Search",
   "localStorageService"
 ];
+
+module.exports = TagController;

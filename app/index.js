@@ -12,3 +12,4 @@ require("./actions");
 require("./site");
 require("./comment");
 require("./entry");
+require("./tag");

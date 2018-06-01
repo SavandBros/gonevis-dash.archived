@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../app_module");
+
 function Tag($rootScope, $state, toaster, API, ModalsService) {
   return function(data) {
     /**
@@ -152,3 +154,5 @@ Tag.$inject = [
   "API",
   "ModalsService"
 ];
+
+module.exports = Tag;

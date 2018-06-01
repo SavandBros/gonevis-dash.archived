@@ -1,5 +1,6 @@
 "use strict";
 
+var app = require("../../app_module");
 function TagNewModalController($scope, Tag, AuthService, Slug, DolphinService, Codekit) {
 
   function constructor() {
@@ -48,3 +49,5 @@ TagNewModalController.$inject = [
   "DolphinService",
   "Codekit"
 ];
+
+module.exports = TagNewModalController;
