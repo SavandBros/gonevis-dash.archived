@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
 
@@ -215,3 +217,5 @@ EntryEditController.$inject = [
   "DolphinService",
   "toaster"
 ];
+
+module.exports = EntryEditController;

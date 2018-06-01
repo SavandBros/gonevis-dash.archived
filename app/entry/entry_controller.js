@@ -1,4 +1,5 @@
 "use strict";
+var app = require("../app_module");
 
 function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
 
@@ -172,3 +173,5 @@ EntryController.$inject = [
   "Search",
   "localStorageService"
 ];
+
+module.exports = EntryController;

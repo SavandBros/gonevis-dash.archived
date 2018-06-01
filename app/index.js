@@ -11,3 +11,4 @@ require("./account");
 require("./actions");
 require("./site");
 require("./comment");
+require("./entry");

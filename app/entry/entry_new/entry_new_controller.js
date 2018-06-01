@@ -1,5 +1,7 @@
 "use strict";
 
+var app = require("../../app_module");
+
 function EntryNewController($scope, $state, $timeout, $q, $stateParams,
   Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
@@ -167,3 +169,5 @@ EntryNewController.$inject = [
   "DolphinService",
   "toaster"
 ];
+
+module.exports = EntryNewController;
