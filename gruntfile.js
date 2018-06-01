@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require("./bower.json").appPath || "app",
+    app: "app",
     dist: "dist",
   };
 
@@ -37,10 +37,6 @@ module.exports = function(grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ["bower.json"],
-        tasks: ["wiredep"]
-      },
       js: {
         files: ["<%= gonevisDash.app %>/**/*.js"],
         tasks: [
@@ -551,7 +547,7 @@ module.exports = function(grunt) {
   grunt.registerTask("release", [
     "clean:dist",
     "ngconstant:production",
-    "wiredep",
+    // "wiredep",
     "useminPrepare",
     "concurrent:dist",
     "postcss",
@@ -571,7 +567,7 @@ module.exports = function(grunt) {
     "clean:dist",
     // "jsbeautifier",
     "ngconstant:staging",
-    "wiredep",
+    // "wiredep",
     "useminPrepare",
     "concurrent:dist",
     "postcss",
@@ -598,7 +594,7 @@ module.exports = function(grunt) {
         "clean:server",
         // "jsbeautifier",
         "ngconstant:staging",
-        "wiredep",
+        // "wiredep",
         "concurrent:server",
         "postcss:server",
         "connect:livereload",
@@ -611,7 +607,7 @@ module.exports = function(grunt) {
         "clean:server",
         // "jsbeautifier",
         "ngconstant:production",
-        "wiredep",
+        // "wiredep",
         "concurrent:server",
         "postcss:server",
         "connect:livereload",
@@ -623,7 +619,7 @@ module.exports = function(grunt) {
       "clean:server",
       // "jsbeautifier",
       "ngconstant:development",
-      "wiredep",
+      // "wiredep",
       "concurrent:server",
       "postcss:server",
       "connect:livereload",
@@ -635,7 +631,7 @@ module.exports = function(grunt) {
     "clean:server",
     // "jsbeautifier",
     "ngconstant:development",
-    "wiredep",
+    // "wiredep",
     "concurrent:test",
     "postcss",
     "connect:test",
@@ -646,7 +642,7 @@ module.exports = function(grunt) {
     "clean:dist",
     // "jsbeautifier",
     "ngconstant:production",
-    "wiredep",
+    // "wiredep",
     "useminPrepare",
     "concurrent:dist",
     "postcss",
