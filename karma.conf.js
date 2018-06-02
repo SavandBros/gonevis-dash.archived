@@ -22,15 +22,12 @@ module.exports = function(config) {
   config.set({
     frameworks: ['jasmine'],
     files: [
-      // 'src/app/index.js',
       'test/tests.webpack.js'
     ],
     preprocessors: {
       // Reference: http://webpack.github.io/docs/testing.html
       // Reference: https://github.com/webpack/karma-webpack
-      // Convert files with webpack and load sourcemaps
-      // 'src/app/index.js': ['webpack', 'babel'],
-      // 'test/spec/**/*.js': ['webpack', 'babel', 'sourcemap', 'coverage'],
+      // Convert files with webpack and load sourcemap
       'test/tests.webpack.js': ['webpack', 'babel', 'sourcemap', 'coverage']
     },
     browsers: browsers,
@@ -50,7 +47,7 @@ module.exports = function(config) {
       'karma-sourcemap-loader',
       'karma-webpack',
       'karma-spec-reporter',
-      'karma-babel-preprocessor',
+      'karma-babel-preprocessor'
       // 'karma-coveralls',
     ],
     singleRun: true,
