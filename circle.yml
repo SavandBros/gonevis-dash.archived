@@ -1,12 +1,9 @@
 dependencies:
   override:
-    - npm install -g grunt-cli
     - npm install
 test:
   override:
-    - 'grunt jshint'
-    - 'grunt jscs'
-    - 'grunt test'
+    - 'npm test'
   post:
     - bash <(curl -s https://codecov.io/bash)
 deployment:
