@@ -1,5 +1,7 @@
 "use strict";
 
+import app from '../../app';
+
 function TourStep($timeout) {
   return function(selector, title, content, placement, isLast) {
 
@@ -83,6 +85,3 @@ function TourStep($timeout) {
 }
 
 app.service("TourStep", TourStep);
-TourStep.$inject = [
-  "$timeout"
-];

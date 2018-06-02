@@ -8,9 +8,6 @@ import ngCookies from "angular-cookies"
 import ngSanitize from "angular-sanitize"
 import ngTagsInput from "ng-tags-input"
 import ngFileUpload from "ng-file-upload"
-import GoNevisRoutes from "./app_routes";
-import GoNevisConfig from './app_config'
-import RunNevisRun from "./app_run";
 
 require('angular-loading-bar');
 require('angular-loading-bar/build/loading-bar.css');
@@ -27,6 +24,7 @@ require('angular-modal-service');
 require('angular-medium-editor');
 require('angular-sortable-view');
 require('angular-local-storage');
+
 
 const deps = [
   'ngAnimate',
@@ -49,7 +47,7 @@ const deps = [
   'LocalStorageModule'
 ];
 const MODULE_NAME = 'gonevisDash';
-angular.module(MODULE_NAME, deps)
+const app = angular.module(MODULE_NAME, deps)
   .constant('Client', {version: 4})
   .constant('Utils', {
     texts: {
@@ -61,9 +59,6 @@ angular.module(MODULE_NAME, deps)
     name: 'staging',
     apiEndpoint: 'http://draft.gonevis.com/api/v1/',
     SENTRY_DSN: 'https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809'
-  })
-  .config(GoNevisRoutes)
-  .config(GoNevisConfig)
-  .run(RunNevisRun);
+  });
 
-export default MODULE_NAME;
+export default app;

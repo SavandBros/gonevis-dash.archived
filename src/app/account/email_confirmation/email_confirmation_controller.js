@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService, ModalsService) {
 
   function constructor() {
@@ -56,13 +58,4 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
   constructor();
 }
 
-app.controller("EmailConfirmationController", EmailConfirmationController);
-EmailConfirmationController.$inject = [
-  "$scope",
-  "$rootScope",
-  "$state",
-  "toaster",
-  "API",
-  "AuthService",
-  "ModalsService"
-];
+app.controller("EmailConfirmationController", EmailConfirmationController)

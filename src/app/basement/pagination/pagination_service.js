@@ -1,5 +1,7 @@
 "use strict";
 
+import app from '../../app';
+
 function Pagination($resource, $rootScope) {
 
   /**
@@ -48,7 +50,3 @@ function Pagination($resource, $rootScope) {
 }
 
 app.factory("Pagination", Pagination);
-Pagination.$inject = [
-  "$resource",
-  "$rootScope"
-];

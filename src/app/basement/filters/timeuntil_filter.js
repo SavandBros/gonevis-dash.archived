@@ -1,5 +1,7 @@
 "use strict";
 
+import app from '../../app';
+
 function TimeUntilFilter($filter) {
   return function(date) {
     return $filter("timesince")(date, true);
@@ -7,6 +9,3 @@ function TimeUntilFilter($filter) {
 }
 
 app.filter("timeuntil", TimeUntilFilter);
-TimeUntilFilter.$inject = [
-  "$filter"
-];

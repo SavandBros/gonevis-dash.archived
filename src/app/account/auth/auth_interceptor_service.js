@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
 
   /**
@@ -50,11 +52,4 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
   };
 }
 
-app.factory("AuthInterceptorService", AuthInterceptorService);
-AuthInterceptorService.$inject = [
-  "$rootScope",
-  "$cookies",
-  "$q",
-  "ENV",
-  "Utils"
-];
+app.service("Account", AuthInterceptorService);

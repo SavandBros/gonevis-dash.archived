@@ -1,5 +1,8 @@
 "use strict";
 
+
+import app from '../../app';
+
 /**
  * @desc Calculate time since from given date object.
  *       3 days, 1 month, one year...

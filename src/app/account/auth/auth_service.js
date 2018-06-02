@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, Account) {
 
   /**
@@ -238,12 +240,3 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
 }
 
 app.service("AuthService", AuthService);
-AuthService.$inject = [
-  "$state",
-  "$rootScope",
-  "$cookies",
-  "$window",
-  "$stateParams",
-  "API",
-  "Account"
-];

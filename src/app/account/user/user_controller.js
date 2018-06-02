@@ -1,7 +1,9 @@
 'use strict';
 
+import app from "../../app";
+
 function UserController($scope, $rootScope, $stateParams,
-  AuthService, API, DolphinService, Upload, ENV, Account, toaster) {
+                        AuthService, API, DolphinService, Upload, ENV, Account, toaster) {
 
   var toasters = {};
 
@@ -129,15 +131,3 @@ function UserController($scope, $rootScope, $stateParams,
 }
 
 app.controller("UserController", UserController);
-UserController.$inject = [
-  "$scope",
-  "$rootScope",
-  "$stateParams",
-  "AuthService",
-  "API",
-  "DolphinService",
-  "Upload",
-  "ENV",
-  "Account",
-  "toaster"
-];

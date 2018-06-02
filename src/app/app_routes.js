@@ -1,10 +1,12 @@
 "use strict";
 
+import app from "./app";
+
 /**
  * @desc Every child of dash state follows site id that user is into.
  *       States with s param don't require site index, so it is given to it for later navigation.
  */
-const GoNevisRoutes = function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
   // Other states that are not a child of dash state
   $stateProvider
     .state("start", {
@@ -228,6 +230,4 @@ const GoNevisRoutes = function($stateProvider, $urlRouterProvider) {
       state.go("start");
     }
   });
-};
-
-export default GoNevisRoutes;
+});

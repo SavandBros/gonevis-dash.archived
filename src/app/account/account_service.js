@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 /**
  * @desc Class for any user account to get better data easily.
  *       Instantiate this class via backend data of any user.
@@ -113,3 +115,4 @@ function Account() {
 }
 
 app.service("Account", Account);
+

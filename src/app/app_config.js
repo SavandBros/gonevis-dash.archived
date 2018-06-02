@@ -1,6 +1,8 @@
 "use strict";
 
-const GoNevisConfig = function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
+import app from "./app";
+
+app.config(function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
   cfpLoadingBarProvider, ChartJsProvider, ENV) {
 
   // Http
@@ -54,6 +56,4 @@ const GoNevisConfig = function($httpProvider, $resourceProvider, $cookiesProvide
       };
     }
   }]);
-};
-
-export default GoNevisConfig;
+});

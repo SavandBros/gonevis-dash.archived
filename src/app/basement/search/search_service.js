@@ -1,5 +1,8 @@
 "use strict";
 
+
+import app from '../../app';
+
 /**
  * @desc Search service for controllers:
  *       Inject the Search to controller
@@ -82,7 +85,3 @@ function Search($rootScope, Pagination) {
 }
 
 app.factory("Search", Search);
-Search.$inject = [
-  "$rootScope",
-  "Pagination"
-];

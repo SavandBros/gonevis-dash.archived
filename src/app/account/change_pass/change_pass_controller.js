@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function ChangePassController($scope, $state, toaster, API, ModalsService) {
 
   /**
@@ -47,10 +49,3 @@ function ChangePassController($scope, $state, toaster, API, ModalsService) {
 }
 
 app.controller("ChangePassController", ChangePassController);
-ChangePassController.$inject = [
-  "$scope",
-  "$state",
-  "toaster",
-  "API",
-  "ModalsService"
-];

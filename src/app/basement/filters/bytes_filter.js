@@ -1,5 +1,7 @@
 "use strict";
 
+import app from '../../app';
+
 function BytesFilter() {
   return function(bytes, precision) {
     if (bytes === 0) {

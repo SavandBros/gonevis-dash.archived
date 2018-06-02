@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 /**
  * @desc Modal service to work with bootstrap's modal
  *       Each modal should have an id same as its template name
@@ -77,7 +79,3 @@ function ModalsService($rootScope, ModalService) {
 }
 
 app.factory("ModalsService", ModalsService);
-ModalsService.$inject = [
-  "$rootScope",
-  "ModalService"
-];

@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function API($resource, ENV) {
   var BASE_API = ENV.apiEndpoint;
   var apiData = {};
@@ -170,7 +172,3 @@ function API($resource, ENV) {
 }
 
 app.service("API", API);
-API.$inject = [
-  "$resource",
-  "ENV"
-];

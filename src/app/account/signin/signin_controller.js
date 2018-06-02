@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function SigninController($scope, $stateParams, AuthService, ModalsService, toaster) {
 
   function constructor() {
@@ -44,10 +46,3 @@ function SigninController($scope, $stateParams, AuthService, ModalsService, toas
 }
 
 app.controller("SigninController", SigninController);
-SigninController.$inject = [
-  "$scope",
-  "$stateParams",
-  "AuthService",
-  "ModalsService",
-  "toaster"
-];

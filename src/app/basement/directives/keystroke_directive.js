@@ -1,5 +1,7 @@
 "use strict";
 
+import app from '../../app';
+
 /**
  * @desc Update scope even with spaces
  *

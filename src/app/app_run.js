@@ -1,7 +1,10 @@
 "use strict";
 
-const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
-                              ENV, AuthService, DolphinService, Codekit, Client, TourService, editableOptions, localStorageService) {
+import app from "./app";
+
+app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
+                     ENV, AuthService, DolphinService, Codekit, Client, TourService,
+                     editableOptions, localStorageService) {
 
   /**
    * @name cache
@@ -133,7 +136,7 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
    * @param {object} toParams
    * @param {object} fromState
    */
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState) {
+  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
 
     // No routing if running tour
     if (TourService.isTourOn() && fromState.name) {
@@ -142,7 +145,7 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
 
     // Close open modals
     angular.element(".modal, .modal-backdrop").fadeOut(
-      function() {
+      function () {
         angular.element(this).remove();
       }
     );
@@ -216,7 +219,7 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
    * @param toState {object}
    * @param toParams {object}
    */
-  $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams) {
+  $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams) {
     // Analytics
     if (ENV.name === "production") {
       $window.ga("send", "pageview", {
@@ -246,7 +249,7 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
    * @param {Dolphin} dolphin
    * @param {string} source
    */
-  $rootScope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
+  $rootScope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     if ($state.current.editor && source === "editorAddImage") {
       var img = angular.element("img[data-selection=true]");
       img.attr("src", dolphin.get.file);
@@ -262,7 +265,7 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
    * @param {Event} event
    * @param {string} template
    */
-  $rootScope.$on("goNevis.ModalsService.close", function(event, template) {
+  $rootScope.$on("goNevis.ModalsService.close", function (event, template) {
     if (template === "dolphinSelection") {
       // Check editor for images without source and remove them
       angular.forEach(angular.element("[medium-editor] img"), function (element) {
@@ -278,7 +281,9 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
    * @event $rootScope.set
    * @desc Update settings to local storage
    */
-  $rootScope.$watch(function() { return $rootScope.set; }, function() {
+  $rootScope.$watch(function () {
+    return $rootScope.set;
+  }, function () {
     // Update localStorage
     localStorageService.set("set", $rootScope.set);
   }, true);
@@ -287,7 +292,7 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
    * @event document.click
    * @desc Click callback, depends on state @clickEvent
    */
-  angular.element("*").on("click", function(event) {
+  angular.element("*").on("click", function (event) {
     if ($state.current.clickEvent) {
       var el = angular.element(event.target);
 
@@ -303,7 +308,7 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
    *
    * @param {Event} event
    */
-  angular.element("*").on("DOMSubtreeModified", function(event) {
+  angular.element("*").on("DOMSubtreeModified", function (event) {
     if ($state.current.editor) {
       var el = angular.element(event.target);
 
@@ -326,8 +331,5 @@ const RunNevisRun = function($rootScope, $window, $location, $cookies, $state, $
       }
     }
   });
-};
-
-
-export default RunNevisRun;
+});
 

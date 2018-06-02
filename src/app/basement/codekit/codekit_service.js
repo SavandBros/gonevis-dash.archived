@@ -1,5 +1,7 @@
 "use strict";
 
+import app from '../../app';
+
 /**
  * @desc Codekit service is a basement filled with useful function and constant data,
  *       It stops repeating code such as functions, static variables, etc...
@@ -225,8 +227,4 @@ function Codekit($timeout, $window, $log) {
   };
 }
 
-app.factory("Codekit", Codekit);
-Codekit.$inject = [
-  "$timeout",
-  "$window"
-];
+app.factory("Codekit", Codekit)

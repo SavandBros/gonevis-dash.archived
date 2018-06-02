@@ -1,5 +1,7 @@
 "use strict";
 
+import app from '../../app';
+
 function Password() {
   return function() {
 

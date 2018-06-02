@@ -1,5 +1,7 @@
 "use strict";
 
+import app from '../../app';
+
 function Tour($timeout, TourStep, AuthService) {
   return function(name, steps) {
 
@@ -133,7 +135,3 @@ function TourService(Tour, AuthService) {
 }
 
 app.service("TourService", TourService);
-TourService.$inject = [
-  "Tour",
-  "AuthService"
-];
