@@ -1,7 +1,9 @@
 "use strict";
 
+import app from "../app";
+
 function CommentController($scope, $rootScope, API,
-  AuthService, Comment, Pagination, Search, Codekit) {
+                           AuthService, Comment, Pagination, Search, Codekit) {
 
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(true);
@@ -83,13 +85,3 @@ function CommentController($scope, $rootScope, API,
 }
 
 app.controller("CommentController", CommentController);
-CommentController.$inject = [
-  "$scope",
-  "$rootScope",
-  "API",
-  "AuthService",
-  "Comment",
-  "Pagination",
-  "Search",
-  "Codekit"
-];

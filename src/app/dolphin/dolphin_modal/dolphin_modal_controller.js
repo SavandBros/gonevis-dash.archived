@@ -1,5 +1,7 @@
 'use strict';
 
+import app from "../../app";
+
 function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
 
   function constructor() {
@@ -42,10 +44,3 @@ function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
 }
 
 app.controller("DolphinModalController", DolphinModalController);
-DolphinModalController.$inject = [
-  '$scope',
-  '$rootScope',
-  'toaster',
-  'dolphin',
-  'API'
-];

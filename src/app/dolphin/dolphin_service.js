@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
   return function(data) {
 
@@ -74,13 +76,6 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
 }
 
 app.service("Dolphin", Dolphin);
-Dolphin.$inject = [
-  "$rootScope",
-  "API",
-  "AuthService",
-  "ModalsService",
-  "toaster"
-];
 
 function DolphinService($rootScope, ModalsService) {
   /**
@@ -101,7 +96,3 @@ function DolphinService($rootScope, ModalsService) {
 }
 
 app.service("DolphinService", DolphinService);
-DolphinService.$inject = [
-  "$rootScope",
-  "ModalsService"
-];

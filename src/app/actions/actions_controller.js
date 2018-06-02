@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function ActionsController($scope, $state, $stateParams, AuthService) {
 
   function constructor() {
@@ -27,9 +29,3 @@ function ActionsController($scope, $state, $stateParams, AuthService) {
 }
 
 app.controller("ActionsController", ActionsController);
-ActionsController.$inject = [
-  "$scope",
-  "$state",
-  "$stateParams",
-  "AuthService"
-];

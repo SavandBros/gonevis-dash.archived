@@ -1,7 +1,9 @@
 "use strict";
 
+import app from "../app";
+
 function DolphinController($scope, $rootScope, Dolphin,
-  Codekit, API, AuthService, Upload, Pagination, Search, toaster, source, localStorageService) {
+                           Codekit, API, AuthService, Upload, Pagination, Search, toaster, source, localStorageService) {
 
   var site = AuthService.getCurrentSite();
 
@@ -223,17 +225,3 @@ function DolphinController($scope, $rootScope, Dolphin,
 }
 
 app.controller("DolphinController", DolphinController);
-DolphinController.$inject = [
-  "$scope",
-  "$rootScope",
-  "Dolphin",
-  "Codekit",
-  "API",
-  "AuthService",
-  "Upload",
-  "Pagination",
-  "Search",
-  "toaster",
-  "source",
-  "localStorageService"
-];

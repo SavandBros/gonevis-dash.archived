@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function StartController($scope, $timeout, Password, AuthService, API, toaster) {
 
   function constructor() {
@@ -147,11 +149,3 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
 }
 
 app.controller("StartController", StartController);
-StartController.$inject = [
-  "$scope",
-  "$timeout",
-  "Password",
-  "AuthService",
-  "API",
-  "toaster"
-];

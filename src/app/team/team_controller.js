@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
 
   function constructor() {
@@ -54,11 +56,3 @@ function TeamController($scope, API, AuthService, Codekit, ModalsService, Accoun
 }
 
 app.controller("TeamController", TeamController);
-TeamController.$inject = [
-  "$scope",
-  "API",
-  "AuthService",
-  "Codekit",
-  "ModalsService",
-  "Account"
-];

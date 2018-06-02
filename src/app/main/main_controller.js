@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   var site = AuthService.getCurrentSite();
@@ -122,13 +124,3 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
 }
 
 app.controller("MainController", MainController);
-MainController.$inject = [
-  "$scope",
-  "$rootScope",
-  "$state",
-  "$stateParams",
-  "AuthService",
-  "API",
-  "Comment",
-  "Entry"
-];

@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
 
   function constructor() {
@@ -51,10 +53,3 @@ function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
 }
 
 app.controller("TagModalController", TagModalController);
-TagModalController.$inject = [
-  "$scope",
-  "tag",
-  "Slug",
-  "DolphinService",
-  "ModalsService"
-];

@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function Entry($rootScope, $state, API, Codekit, toaster) {
   return function(data) {
 
@@ -127,10 +129,3 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
 }
 
 app.service("Entry", Entry);
-Entry.$inject = [
-  "$rootScope",
-  "$state",
-  "API",
-  "Codekit",
-  "toaster"
-];

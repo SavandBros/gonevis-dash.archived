@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function Tag($rootScope, $state, toaster, API, ModalsService) {
   return function(data) {
     /**
@@ -145,10 +147,3 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
 }
 
 app.service("Tag", Tag);
-Tag.$inject = [
-  "$rootScope",
-  "$state",
-  "toaster",
-  "API",
-  "ModalsService"
-];

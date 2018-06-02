@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function CommentModalController($scope, comment, Codekit) {
 
   function constructor() {
@@ -11,8 +13,3 @@ function CommentModalController($scope, comment, Codekit) {
 }
 
 app.controller("CommentModalController", CommentModalController);
-CommentModalController.$inject = [
-  "$scope",
-  "comment",
-  "Codekit"
-];

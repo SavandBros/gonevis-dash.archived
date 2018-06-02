@@ -1,7 +1,9 @@
 "use strict";
 
+import app from "../app";
+
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
-  API, ModalsService, AuthService, DolphinService, Codekit) {
+                        API, ModalsService, AuthService, DolphinService, Codekit) {
 
   var site = AuthService.getCurrentSite();
   var toasters = {};
@@ -244,17 +246,4 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   constructor();
 }
 
-app.controller("SiteController", SiteController);
-SiteController.$inject = [
-  "$scope",
-  "$rootScope",
-  "$state",
-  "$stateParams",
-  "$window",
-  "toaster",
-  "API",
-  "ModalsService",
-  "AuthService",
-  "DolphinService",
-  "Codekit"
-];
+app.controller("SiteController", SiteController)

@@ -1,7 +1,9 @@
 "use strict";
 
+import app from "../../app";
+
 function EntryNewController($scope, $state, $timeout, $q, $stateParams,
-  Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
+                            Entry, Tag, Codekit, AuthService, API, DolphinService, toaster) {
 
   function constructor() {
     $scope.tags = [];
@@ -153,17 +155,3 @@ function EntryNewController($scope, $state, $timeout, $q, $stateParams,
 }
 
 app.controller("EntryNewController", EntryNewController);
-EntryNewController.$inject = [
-  "$scope",
-  "$state",
-  "$timeout",
-  "$q",
-  "$stateParams",
-  "Entry",
-  "Tag",
-  "Codekit",
-  "AuthService",
-  "API",
-  "DolphinService",
-  "toaster"
-];

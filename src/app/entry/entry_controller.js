@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
@@ -160,15 +162,4 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
   constructor();
 }
 
-app.controller("EntryController", EntryController);
-EntryController.$inject = [
-  "$scope",
-  "$state",
-  "Entry",
-  "Codekit",
-  "API",
-  "AuthService",
-  "Pagination",
-  "Search",
-  "localStorageService"
-];
+app.controller("EntryController", EntryController)

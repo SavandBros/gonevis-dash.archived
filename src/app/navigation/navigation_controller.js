@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function NavigationController($scope, toaster, $stateParams, API, AuthService) {
 
   var site = AuthService.getCurrentSite();
@@ -80,10 +82,3 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
 }
 
 app.controller("NavigationController", NavigationController);
-NavigationController.$inject = [
-  "$scope",
-  "toaster",
-  "$stateParams",
-  "API",
-  "AuthService"
-];

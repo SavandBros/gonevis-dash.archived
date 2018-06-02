@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function TagController($scope, Tag, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
@@ -108,13 +110,4 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
   constructor();
 }
 
-app.controller("TagController", TagController);
-TagController.$inject = [
-  "$scope",
-  "Tag",
-  "API",
-  "AuthService",
-  "Pagination",
-  "Search",
-  "localStorageService"
-];
+app.controller("TagController", TagController)

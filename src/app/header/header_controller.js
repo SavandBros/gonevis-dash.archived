@@ -1,7 +1,9 @@
 "use strict";
 
+import app from "../app";
+
 function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
-  AuthService, DolphinService, Codekit, Entry, API, ModalsService, TourService, toaster) {
+                          AuthService, DolphinService, Codekit, Entry, API, ModalsService, TourService, toaster) {
 
   function constructor() {
 
@@ -217,18 +219,3 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
 }
 
 app.controller("HeaderController", HeaderController);
-HeaderController.$inject = [
-  "$scope",
-  "$rootScope",
-  "$state",
-  "$stateParams",
-  "$timeout",
-  "AuthService",
-  "DolphinService",
-  "Codekit",
-  "Entry",
-  "API",
-  "ModalsService",
-  "TourService",
-  "toaster"
-];

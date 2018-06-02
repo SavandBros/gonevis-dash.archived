@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthService, toaster) {
 
   function constructor() {
@@ -47,12 +49,3 @@ function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthSe
 }
 
 app.controller("SiteNewController", SiteNewController);
-SiteNewController.$inject = [
-  "$scope",
-  "$rootScope",
-  "$state",
-  "$stateParams",
-  "API",
-  "AuthService",
-  "toaster"
-];

@@ -1,7 +1,9 @@
 "use strict";
 
+import app from "../../app";
+
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
+                             Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
 
   function constructor() {
     $scope.dolphinService = DolphinService;
@@ -200,18 +202,3 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 }
 
 app.controller("EntryEditController", EntryEditController);
-EntryEditController.$inject = [
-  "$scope",
-  "$rootScope",
-  "$state",
-  "$stateParams",
-  "$timeout",
-  "$q",
-  "Entry",
-  "Tag",
-  "Codekit",
-  "API",
-  "AuthService",
-  "DolphinService",
-  "toaster"
-];

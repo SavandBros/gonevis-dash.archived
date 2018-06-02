@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../app";
+
 function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
   return function(data) {
 
@@ -128,11 +130,3 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
 }
 
 app.factory("Comment", Comment);
-Comment.$inject = [
-  "$rootScope",
-  "toaster",
-  "API",
-  "ModalsService",
-  "Codekit",
-  "Account"
-];

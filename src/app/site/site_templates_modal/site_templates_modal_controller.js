@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function SiteTemplatesModalController($scope, $rootScope, API, AuthService, currentTemplate, site) {
 
   function constructor() {
@@ -30,11 +32,3 @@ function SiteTemplatesModalController($scope, $rootScope, API, AuthService, curr
 }
 
 app.controller("SiteTemplatesModalController", SiteTemplatesModalController);
-SiteTemplatesModalController.$inject = [
-  "$scope",
-  "$rootScope",
-  "API",
-  "AuthService",
-  "currentTemplate",
-  "site"
-];

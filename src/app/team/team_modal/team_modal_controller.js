@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function TeamModalController($scope, toaster, API, team, Codekit, AuthService, ModalsService) {
 
   var site = AuthService.getCurrentSite();
@@ -84,12 +86,3 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
 }
 
 app.controller("TeamModalController", TeamModalController);
-TeamModalController.$inject = [
-  "$scope",
-  "toaster",
-  "API",
-  "team",
-  "Codekit",
-  "AuthService",
-  "ModalsService"
-];

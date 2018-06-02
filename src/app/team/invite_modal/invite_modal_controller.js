@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService, Codekit, ModalsService) {
 
   function constructor() {
@@ -42,12 +44,3 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
 }
 
 app.controller("TeamInviteModalController", TeamInviteModalController);
-TeamInviteModalController.$inject = [
-  "$scope",
-  "$rootScope",
-  "toaster",
-  "API",
-  "AuthService",
-  "Codekit",
-  "ModalsService"
-];
