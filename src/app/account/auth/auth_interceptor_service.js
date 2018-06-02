@@ -1,8 +1,7 @@
 "use strict";
-
 import app from "../../app";
 
-function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
+const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils) {
 
   /**
    * @desc Automatically attach Authorization header
@@ -50,6 +49,8 @@ function AuthInterceptorService($rootScope, $cookies, $q, ENV, Utils) {
     request: request,
     responseError: responseError
   };
-}
+};
 
 app.service("Account", AuthInterceptorService);
+
+export default AuthInterceptorService;

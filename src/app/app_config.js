@@ -1,14 +1,17 @@
 "use strict";
 
 import app from "./app";
+import AuthInterceptorService from "./account/auth/auth_interceptor_service";
 
 let Raven = require('raven-js');
+
+
 
 app.config(function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
   cfpLoadingBarProvider, ChartJsProvider, ENV) {
 
   // Http
-  $httpProvider.interceptors.push("AuthInterceptorService");
+  $httpProvider.interceptors.push(AuthInterceptorService);
 
   // Resource
   $resourceProvider.defaults.stripTrailingSlashes = false;
