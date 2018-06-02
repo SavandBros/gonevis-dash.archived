@@ -2,7 +2,7 @@
 /* global AuthService */
 
 describe("Dolphin", function () {
-  beforeEach(module("gonevisDash"));
+  beforeEach(angular.mock.module("gonevisDash"));
 
   var Dolphin, AuthService;
   var data = { ext: "application/zip" };

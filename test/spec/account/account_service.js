@@ -1,7 +1,7 @@
 "use strict";
 
 describe("Account", function () {
-  beforeEach(module("gonevisDash"));
+  beforeEach(angular.mock.module("gonevisDash"));
 
   var Account;
   var account;

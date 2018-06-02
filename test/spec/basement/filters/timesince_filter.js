@@ -1,10 +1,12 @@
+"use strict";
+
 describe("The TimeSince filter", function () {
   "use strict";
 
   var $filter;
 
   beforeEach(function () {
-    module("gonevisDash");
+    angular.mock.module("gonevisDash");
 
     inject(function (_$filter_) {
       $filter = _$filter_;
