@@ -3,7 +3,7 @@
     <div class="col-md-10 col-md-offset-1">
 
       <!-- Cache -->
-      <img class="cache" preload-image ng-repeat="template in templates"
+      <img class="cache" ng-repeat="template in templates"
         ng-src="{{ template.media.thumbnail_512x512 }}" default-image="assets/img/default/512x512.png">
 
       <!-- Step: Domain -->
@@ -81,7 +81,7 @@
                   'fa-check-circle': selectedTemplate.id === template.id
                 }"></i>
               </span>
-              <img preload-image ng-src="{{ template.media.thumbnail_512x512 }}" default-image="assets/img/default/512x512.png">
+              <img ng-src="{{ template.media.thumbnail_512x512 }}" default-image="assets/img/default/512x512.png">
               <div class="t-cap">{{ template.name }}</div>
             </div>
           </div>
@@ -130,7 +130,7 @@
                     </button>
                   </span>
                 </div>
-                <ng-include src="'basement/password/password_strength.html'"></ng-include>
+                <!--<ng-include src="'basement/password/password_strength.html'"></ng-include>-->
                 <span class="help-block" ng-show="signupForm.errors.password">{{ signupForm.errors.password[0] }}</span>
               </div>
 

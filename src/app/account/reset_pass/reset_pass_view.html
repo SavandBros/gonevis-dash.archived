@@ -14,7 +14,7 @@
           <input class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
             name="password" ng-trim="false" placeholder="New password"
             ng-model="password.password" required style="position: relative"/>
-          <ng-include src="'basement/password/password_strength.html'"></ng-include>
+          <!--<ng-include src="'basement/password/password_strength.html'"></ng-include>-->
           <span class="help-block text-danger animated fadeInDown" ng-if="form.errors.password[0]">
             {{ form.errors.password[0] }}
           </span>
