@@ -1,22 +1,10 @@
 // Karma configuration
 // Generated on 2016-06-11
 
-const coverage_reporters = [
-  { type: 'text-summary' }
-];
 const reporters = ['progress', 'coverage'];
 var browsers = ['PhantomJS']; // for local builds
 
-if (process.env.TRAVIS) {
-  console.log('On Travis; pushing coverage reports');
-  coverage_reporters.push( { type : 'lcov', dir : 'coverage' } );
-  // reporters.push('coveralls');
-} else {
-  console.log('Not on Travis so not coverage reports');
-  coverage_reporters.push( { type : 'html', dir : 'coverage', 'subdir' : '.' } );
-}
-
-module.exports = function(config) {
+module.exports = function (config) {
   'use strict';
 
   config.set({
@@ -33,7 +21,11 @@ module.exports = function(config) {
     browsers: browsers,
     reporters: reporters,
     coverageReporter: {
-      reporters: coverage_reporters,
+      reporters: [
+        {type: 'text-summary'},
+        {type: 'lcovonly', subdir: '.'},
+        {type: 'json', subdir: '.'},
+      ],
     },
     webpack: require('./webpack.config'),
     // Hide webpack build information from output
@@ -48,7 +40,6 @@ module.exports = function(config) {
       'karma-webpack',
       'karma-spec-reporter',
       'karma-babel-preprocessor'
-      // 'karma-coveralls',
     ],
     singleRun: true,
     colors: true,

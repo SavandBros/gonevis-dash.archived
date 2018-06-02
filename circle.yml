@@ -1,9 +1,13 @@
 machine:
   node:
     version: 8.2.0
+dependencies:
+  override:
+    - npm install -g codecov
+    - npm install
 test:
   post:
-    - bash <(curl -s https://codecov.io/bash)
+    - codecov
 deployment:
   production:
     branch: production

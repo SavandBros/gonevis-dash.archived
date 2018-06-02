@@ -75,6 +75,7 @@
     "server": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
+    "report-coverage": "codecov",
     "start": "npm run server"
   },
   "engines": {
