@@ -1,4 +1,5 @@
 "use strict";
+import headerTemplate from "./header_view.html"
 
 import app from "../app";
 
@@ -218,4 +219,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
   retrieveUser();
 }
 
-app.controller("HeaderController", HeaderController);
+app.component("header", {
+  template: headerTemplate,
+  controller: HeaderController
+});

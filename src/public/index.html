@@ -34,8 +34,10 @@
   <![endif]-->
 
   <!-- Sidebar -->
-  <div id="sidebar" ng-include="'../header/header_view.html'" ng-controller="HeaderController"
-       ng-class="{'no-sidebar': !auth.isAuthenticated()}"></div>
+  <!--<div id="sidebar" ng-include="'../app/header/header_view.html'" ng-controller="HeaderController"-->
+       <!--&gt;</div>-->
+
+  <header ng-class="{'no-sidebar': !auth.isAuthenticated()}"></header>
 
   <!-- Content -->
   <div id="content" ng-class="{'full-content': !set.sidebar}" ui-view></div>
