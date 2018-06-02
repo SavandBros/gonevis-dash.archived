@@ -168,7 +168,10 @@ module.exports = function makeWebpackConfig() {
           plugins: [autoprefixer]
         }
       }
-    })
+    }),
+    new webpack.ProvidePlugin({
+      "window.jQuery": "jquery"
+    }),
   ];
 
   // Skip rendering index.html in test mode

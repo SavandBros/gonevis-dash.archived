@@ -2,6 +2,8 @@
 
 import app from "./app";
 
+let Raven = require('raven-js');
+
 app.config(function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
   cfpLoadingBarProvider, ChartJsProvider, ENV) {
 

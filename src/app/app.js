@@ -1,13 +1,12 @@
-require('jquery');
+require('angular');
+require("angular-animate");
+require('angular-messages');
+require("angular-resource");
+require("angular-cookies");
+require("angular-sanitize");
+require("ng-tags-input");
+require("ng-file-upload");
 
-import angular from 'angular';
-import ngAnimate from "angular-animate"
-import ngMessages from "angular-messages"
-import ngResource from "angular-resource"
-import ngCookies from "angular-cookies"
-import ngSanitize from "angular-sanitize"
-import ngTagsInput from "ng-tags-input"
-import ngFileUpload from "ng-file-upload"
 
 require('angular-loading-bar');
 require('angular-loading-bar/build/loading-bar.css');
@@ -15,8 +14,8 @@ require('angular-loading-bar/build/loading-bar.css');
 require('angular-ui-router');
 require('angular-ui-bootstrap');
 require('angularjs-toaster');
-require('angular-chart.js')
-require('chart.js')
+require('angular-chart.js');
+require('chart.js');
 require('@uirouter/angularjs');
 require('angular-xeditable');
 require('angular-slugify');

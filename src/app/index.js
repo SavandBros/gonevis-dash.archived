@@ -1,6 +1,7 @@
 require('./app_config');
 require('./app_routes');
 require('./app_run');
+require('./app');
 // Application
 require('./api/api_service');
 require('./modals/modals_service');

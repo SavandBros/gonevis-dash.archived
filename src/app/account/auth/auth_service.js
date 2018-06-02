@@ -1,6 +1,7 @@
 "use strict";
 
 import app from "../../app";
+let Raven = require('raven-js');
 
 function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, Account) {
 
