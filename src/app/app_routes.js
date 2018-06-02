@@ -12,14 +12,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("start", {
       url: "/",
       controller: "StartController",
-      templateUrl: require("./start/start_view.html"),
+      template: require("./start/start_view.html"),
       auth: false,
       title: "Get Started"
     })
     .state("site-new", {
       url: "/new-site?site",
       controller: "SiteNewController",
-      templateUrl: require("./site/site_new/site_new_view.html"),
+      template: require("./site/site_new/site_new_view.html"),
       auth: true,
       title: "New Site",
       params: {
@@ -29,7 +29,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("user", {
       url: "/user",
       controller: "UserController",
-      templateUrl: require("./account/user/user_view.html"),
+      template: require("./account/user/user_view.html"),
       auth: true,
       title: "Account",
       params: {
@@ -43,7 +43,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("change-password", {
       url: "/change-password",
       controller: "ChangePassController",
-      templateUrl: require("./account/change_pass/change_pass_view.html"),
+      template: require("./account/change_pass/change_pass_view.html"),
       auth: true,
       title: "Change Password",
       params: {
@@ -53,7 +53,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("signin", {
       url: "/login/:action",
       controller: "SigninController",
-      templateUrl: require("./account/signin/signin_view.html"),
+      template: require("./account/signin/signin_view.html"),
       auth: false,
       title: "Login",
       params: {
@@ -63,7 +63,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("signup", {
       url: "/register?username",
       controller: "SignupController",
-      templateUrl: require("./account/signup/signup_view.html"),
+      template: require("./account/signup/signup_view.html"),
       auth: false,
       title: "Register"
     })
@@ -71,7 +71,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("collaborate", {
       url: "/start-collaborating/:token",
       controller: "SignupController",
-      templateUrl: require("./account/signup/signup_view.html"),
+      template: require("./account/signup/signup_view.html"),
       auth: false,
       title: "Start Collaborating",
       params: {
@@ -81,7 +81,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("reset-pass", {
       url: "/reset-password/:token",
       controller: "ResetPassController",
-      templateUrl: require("./account/reset_pass/reset_pass_view.html"),
+      template: require("./account/reset_pass/reset_pass_view.html"),
       auth: -1,
       title: "Reset password",
       params: {
@@ -92,7 +92,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("email-confirmation", {
       url: "/email-verification/:token",
       controller: "EmailConfirmationController",
-      templateUrl: require("./account/email_confirmation/email_confirmation_view.html"),
+      template: require("./account/email_confirmation/email_confirmation_view.html"),
       auth: -1,
       title: "Email Verification",
       params: {
@@ -115,13 +115,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("dash.main", {
       url: "/",
       controller: "MainController",
-      templateUrl: require("./main/main_view.html"),
+      template: require("./main/main_view.html"),
       auth: true,
     })
     .state("dash.navigation", {
       url: "/navigation",
       controller: "NavigationController",
-      templateUrl: require("./navigation/navigation_view.html"),
+      template: require("./navigation/navigation_view.html"),
       auth: true,
       title: "Navigations",
       params: {
@@ -131,7 +131,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("dash.dolphin", {
       url: "/files",
       controller: "DolphinController",
-      templateUrl: require("./dolphin/dolphin_view.html"),
+      template: require("./dolphin/dolphin_view.html"),
       auth: true,
       title: "Dolphin",
       resolve: {
@@ -144,14 +144,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("dash.comment-list", {
       url: "/comments",
       controller: "CommentController",
-      templateUrl: require("./comment/comment_view.html"),
+      template: require("./comment/comment_view.html"),
       auth: true,
       title: "Comments"
     })
     .state("dash.entry-new", {
       url: "/new",
       controller: "EntryNewController",
-      templateUrl: require("./entry/entry_new/entry_new_view.html"),
+      template: require("./entry/entry_new/entry_new_view.html"),
       auth: true,
       clickEvent: true,
       editor: true,
@@ -164,7 +164,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("dash.entry-edit", {
       url: "/entry/:entryId",
       controller: "EntryEditController",
-      templateUrl: require("./entry/entry_edit/entry_edit_view.html"),
+      template: require("./entry/entry_edit/entry_edit_view.html"),
       auth: true,
       clickEvent: true,
       editor: true,
@@ -177,27 +177,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("dash.entry-list", {
       url: "/posts",
       controller: "EntryController",
-      templateUrl: require("./entry/entry_view.html"),
+      template: require("./entry/entry_view.html"),
       auth: true,
       title: "Posts"
     })
     .state("dash.page-list", {
       url: "/pages",
       controller: "EntryController",
-      templateUrl: require("./entry/entry_view.html"),
+      template: require("./entry/entry_view.html"),
       auth: true,
       title: "Pages"
     })
     .state("dash.site", {
       url: "/site",
       controller: "SiteController",
-      templateUrl: require("./site/site_view.html"),
+      template: require("./site/site_view.html"),
       auth: true
     })
     // .state("dash.tag-edit", {
     //   url: "/tag-list/:tagId",
     //   controller: "TagEditController",
-    //   templateUrl: require("./tag/tag_edit/tag_edit_view.html"),
+    //   template: require("./tag/tag_edit/tag_edit_view.html"),
     //   auth: true,
     //   params: {
     //     tagId: null
@@ -206,14 +206,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state("dash.tag-list", {
       url: "/tags",
       controller: "TagController",
-      templateUrl: require("./tag/tag_view.html"),
+      template: require("./tag/tag_view.html"),
       auth: true,
       title: "Tags"
     })
     .state("dash.team", {
       url: "/team",
       controller: "TeamController",
-      templateUrl: require("./team/team_view.html"),
+      template: require("./team/team_view.html"),
       auth: true,
       title: "Team"
     });
