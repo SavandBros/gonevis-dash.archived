@@ -5,14 +5,12 @@
 <!-- Main -->
 <div class="container container-light pad-top">
   <!-- Top bar -->
-  <ng-include src="'basement/view/top_bar.html'"></ng-include>
+  <topbar></topbar>
   <!-- Search noresult -->
-  <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+  <noresult></noresult>
   <!-- Nothing -->
   <!-- TODO: Translate -->
-  <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult && initialled"
-    ng-init="nothingText = pageNothingText">
-  </ng-include>
+  <nothing ng-if="!entries.length && !searchForm.noResult && initialled"></nothing>
   <!-- List -->
   <div ng-if="entries.length">
     <!-- Entry grid -->
@@ -169,6 +167,6 @@
       </div>
     </div>
     <!-- More -->
-    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
+    <pagination ng-if="initialled"></pagination>
   </div>
 </div>
