@@ -16,7 +16,19 @@ let isTest = ENV === 'test' || ENV === 'test-watch';
 let isProd = ENV === 'build';
 let isDev = ENV === "server-dev";
 
-module.exports = env => {
+let envFileName = function () {
+  let envFileName = "staging";
+  if (isProd){
+    envFileName = "production";
+  } else if (isTest || isDev) {
+    envFileName = "dev";
+  }
+
+  return `./envs/${envFileName}.json`;
+}();
+
+
+module.exports = function makeWebpackConfig() {
   /**
    * Config
    * Reference: http://webpack.github.io/docs/configuration.html
@@ -33,20 +45,6 @@ module.exports = env => {
   config.entry = isTest ? void 0 : {
     app: './src/app/index.js'
   };
-
-  /**
-   * Environment constants
-   */
-  let envFileName = function () {
-    let envFileName = "staging";
-    if (isProd){
-      envFileName = "production";
-    } else if (isTest || isDev) {
-      envFileName = "dev";
-    }
-
-    return `./envs/${envFileName}.json`;
-  }();
 
   /**
    * Output
@@ -240,4 +238,4 @@ module.exports = env => {
   };
 
   return config;
-};
+}();

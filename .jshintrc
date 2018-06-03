@@ -16,6 +16,6 @@
     "app": false,
     "Raven": false,
     "confirm": false,
-    "global": false
+    "GoNevisEnv": false
   }
 }

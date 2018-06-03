@@ -32,15 +32,6 @@ module.exports = function (config) {
     webpackMiddleware: {
       noInfo: 'errors-only'
     },
-    plugins: [
-      'karma-phantomjs-launcher',
-      'karma-jasmine',
-      'karma-coverage',
-      'karma-sourcemap-loader',
-      'karma-webpack',
-      'karma-spec-reporter',
-      'karma-babel-preprocessor'
-    ],
     singleRun: true,
     colors: true,
 
