@@ -38,14 +38,14 @@ module.exports = env => {
    * Environment constants
    */
   let envFileName = function () {
-    let envFileName = "staging.json";
+    let envFileName = "staging";
     if (isProd){
-      envFileName = "production.json";
+      envFileName = "production";
     } else if (isTest || isDev) {
-      envFileName = "dev.json";
+      envFileName = "dev";
     }
 
-    return `./envs/${envFileName}`;
+    return `./envs/${envFileName}.json`;
   }();
 
   /**
