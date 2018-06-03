@@ -14,10 +14,10 @@ import 'medium-editor/dist/css/themes/default.css'
 import 'angularjs-toaster/toaster.css'
 
 // Our own styles <3
+import '../style/css/shorties.css'
 import '../style/css/main.css'
 import '../style/css/ice.css'
 import '../style/css/checkbox.css'
-import '../style/css/shorties.css'
 
 // Application
 require('./api/api_service');
