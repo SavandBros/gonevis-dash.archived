@@ -1,7 +1,7 @@
 <!-- Search -->
-<form ng-submit="search.submit(searchForm)" class="animated fadeIn s-mar-bottom-soft search-form">
+<form ng-submit="$parent.$parent.search.submit($parent.$parent.searchForm)" class="animated fadeIn s-mar-bottom-soft search-form">
 	<div class="input-group">
-		<input type="text" class="form-control" placeholder="{{ 'Search' | translate }}" ng-model="searchForm.query">
+		<input type="text" class="form-control" placeholder="{{ 'Search' }}" ng-model="$parent.$parent.searchForm.query">
 		<span class="input-group-btn">
       <button class="btn btn-default" type="submit">
         <span class="fa fa-search"></span>
