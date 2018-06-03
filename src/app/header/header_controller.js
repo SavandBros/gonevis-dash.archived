@@ -8,6 +8,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
 
   function constructor() {
 
+    // Settings
+    $scope.set = $rootScope.set;
+
     // User
     $scope.auth = AuthService;
     $scope.user = AuthService.getAuthenticatedUser(true);
