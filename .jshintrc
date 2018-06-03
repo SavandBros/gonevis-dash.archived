@@ -15,6 +15,7 @@
     "angular": false,
     "app": false,
     "Raven": false,
-    "confirm": false
+    "confirm": false,
+    "global": false
   }
 }

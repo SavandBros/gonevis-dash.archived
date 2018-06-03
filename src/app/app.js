@@ -1,3 +1,5 @@
+/*global GoNevisEnv*/
+
 require('jquery');
 require('angular');
 require("angular-animate");
@@ -55,10 +57,6 @@ const app = angular.module(MODULE_NAME, deps)
       unverifiedEmail: 'Your email is not verified.'
     }
   })
-  .constant('ENV', {
-    name: 'staging',
-    apiEndpoint: 'http://draft.gonevis.com/api/v1/',
-    SENTRY_DSN: 'https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809'
-  });
+  .constant('ENV', GoNevisEnv);
 
 export default app;

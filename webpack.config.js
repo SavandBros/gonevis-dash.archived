@@ -1,28 +1,28 @@
 'use strict';
 
 // Modules
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+let webpack = require('webpack');
+let autoprefixer = require('autoprefixer');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**
  * Env
  * Get npm lifecycle event to identify the environment
  */
-var ENV = process.env.npm_lifecycle_event;
-var isTest = ENV === 'test' || ENV === 'test-watch';
-var isProd = ENV === 'build';
+let ENV = process.env.npm_lifecycle_event;
+let isTest = ENV === 'test' || ENV === 'test-watch';
+let isProd = ENV === 'build';
+let isDev = ENV === "server-dev";
 
-
-module.exports = function makeWebpackConfig() {
+module.exports = env => {
   /**
    * Config
    * Reference: http://webpack.github.io/docs/configuration.html
    * This is the object where all configuration gets set
    */
-  var config = {};
+  let config = {};
 
   /**
    * Entry
@@ -33,6 +33,20 @@ module.exports = function makeWebpackConfig() {
   config.entry = isTest ? void 0 : {
     app: './src/app/index.js'
   };
+
+  /**
+   * Environment constants
+   */
+  let envFileName = function () {
+    let envFileName = "staging.json";
+    if (isProd){
+      envFileName = "production.json";
+    } else if (isTest || isDev) {
+      envFileName = "dev.json";
+    }
+
+    return `./envs/${envFileName}`;
+  }();
 
   /**
    * Output
@@ -172,6 +186,9 @@ module.exports = function makeWebpackConfig() {
     new webpack.ProvidePlugin({
       "window.jQuery": "jquery"
     }),
+    new webpack.DefinePlugin({
+      "GoNevisEnv": JSON.stringify(require(envFileName)),
+    })
   ];
 
   // Skip rendering index.html in test mode
@@ -223,4 +240,4 @@ module.exports = function makeWebpackConfig() {
   };
 
   return config;
-}();
+};
