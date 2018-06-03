@@ -92,25 +92,25 @@ hr[soft] {
 
 /* Content */
 
-#sidebar:not(.no-sidebar)~#content .container,
-#sidebar:not(.no-sidebar)~#content .container-fluid {
+header:not(.no-sidebar)~#content .container,
+header:not(.no-sidebar)~#content .container-fluid {
     padding-left: 75px;
     max-width: 100%;
     transition: padding 0.2s ease-in-out;
 }
 
-#sidebar:not(.no-sidebar)~#content:not(.full-content) .container-fluid {
+header:not(.no-sidebar)~#content:not(.full-content) .container-fluid {
     padding-left: 265px;
 }
 
 @media (min-width: 768px) and (max-width: 1550px) {
-    #sidebar:not(.no-sidebar)~#content:not(.full-content) .container {
+    header:not(.no-sidebar)~#content:not(.full-content) .container {
         padding-left: 265px;
     }
 }
 
-#sidebar:not(.no-sidebar)~#content .container,
-#sidebar:not(.no-sidebar)~#content .container-fluid {
+header:not(.no-sidebar)~#content .container,
+header:not(.no-sidebar)~#content .container-fluid {
     padding-top: 15px;
 }
 
