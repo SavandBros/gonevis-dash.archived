@@ -4,7 +4,6 @@ require('./app_run');
 require('./app');
 
 // Styles!
-import 'jquery'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
 import 'angular-xeditable/dist/css/xeditable.css'
