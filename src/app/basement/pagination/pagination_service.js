@@ -1,4 +1,5 @@
 "use strict";
+import paginationTemplate from "./pagination_loadmore.html";
 
 import app from '../../app';
 
@@ -50,3 +51,4 @@ function Pagination($resource, $rootScope) {
 }
 
 app.factory("Pagination", Pagination);
+app.component("pagination", { template: paginationTemplate });
