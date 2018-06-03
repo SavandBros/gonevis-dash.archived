@@ -7,6 +7,7 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
   var site = AuthService.getCurrentSite();
 
   function constructor() {
+    $scope.nothingText = "It's lonely here... Try adding some navigations.";
     $scope.navigations = [];
 
     API.Navigation.get({
