@@ -11,6 +11,7 @@ import 'ng-tags-input/build/ng-tags-input.css'
 import 'animate.css/animate.css'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
+import 'angularjs-toaster/toaster.css'
 
 // Our own styles <3
 import '../style/css/main.css'
