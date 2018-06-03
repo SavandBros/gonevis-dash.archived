@@ -1,5 +1,5 @@
 "use strict";
-import headerTemplate from "./header_view.html"
+import headerTemplate from "./header_view.html";
 
 import app from "../app";
 
