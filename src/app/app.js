@@ -1,33 +1,5 @@
 /*global GoNevisEnv*/
 
-require('jquery');
-require('angular');
-require("angular-animate");
-require('angular-messages');
-require("angular-resource");
-require("angular-cookies");
-require("angular-sanitize");
-require("ng-tags-input");
-require("ng-file-upload");
-
-
-require('angular-loading-bar');
-require('angular-loading-bar/build/loading-bar.css');
-
-require('angular-ui-router');
-require('angular-ui-bootstrap');
-require('angularjs-toaster');
-require('angular-chart.js');
-require('chart.js');
-require('@uirouter/angularjs');
-require('angular-xeditable');
-require('angular-slugify');
-require('angular-modal-service');
-require('angular-medium-editor');
-require('angular-sortable-view');
-require('angular-local-storage');
-
-
 const deps = [
   'ngAnimate',
   'ngMessages',

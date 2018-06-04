@@ -1,5 +1,8 @@
 "use strict";
 
+
+import app from "../../app";
+
 function ForgotModalController($scope, toaster, API, ModalsService) {
 
   /**
@@ -27,9 +30,3 @@ function ForgotModalController($scope, toaster, API, ModalsService) {
 }
 
 app.controller("ForgotModalController", ForgotModalController);
-ForgotModalController.$inject = [
-  "$scope",
-  "toaster",
-  "API",
-  "ModalsService"
-];

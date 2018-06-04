@@ -115,4 +115,5 @@ function Account() {
 }
 
 app.service("Account", Account);
+export default Account;
 

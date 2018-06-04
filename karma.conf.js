@@ -2,7 +2,8 @@
 // Generated on 2016-06-11
 
 const reporters = ['progress', 'coverage'];
-var browsers = ['PhantomJS']; // for local builds
+const browsers = ['PhantomJS']; // for local builds
+const webpack = require("./webpack.config");
 
 module.exports = function (config) {
   'use strict';
@@ -12,11 +13,9 @@ module.exports = function (config) {
     files: [
       'test/tests.webpack.js'
     ],
+    compressing: false,
     preprocessors: {
-      // Reference: http://webpack.github.io/docs/testing.html
-      // Reference: https://github.com/webpack/karma-webpack
-      // Convert files with webpack and load sourcemap
-      'test/tests.webpack.js': ['webpack', 'babel', 'sourcemap', 'coverage']
+      'test/tests.webpack.js': ['coverage', 'webpack', 'sourcemap'],
     },
     browsers: browsers,
     reporters: reporters,
@@ -27,10 +26,11 @@ module.exports = function (config) {
         {type: 'json', subdir: '.'},
       ],
     },
-    webpack: require('./webpack.config'),
+    webpack,
     // Hide webpack build information from output
     webpackMiddleware: {
-      noInfo: 'errors-only'
+      noInfo: true,
+      stats: "errors-only"
     },
     singleRun: true,
     colors: true,
