@@ -85,7 +85,7 @@
     "start": "npm run server"
   },
   "engines": {
-    "node": "6.10.3"
+    "node": "8.2.0"
   },
   "repository": {
     "type": "git",
