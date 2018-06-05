@@ -6,6 +6,7 @@ function CommentController($scope, $rootScope, API,
                            AuthService, Comment, Pagination, Search, Codekit) {
 
   function constructor() {
+    $scope.nothingText = "You have no comments.";
     $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.statuses = Codekit.commentStatuses;
     $scope.search = Search;
