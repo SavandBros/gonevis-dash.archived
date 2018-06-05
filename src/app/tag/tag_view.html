@@ -6,13 +6,11 @@
 <div class="container container-light pad-top">
   <div class="col-md-12">
     <!-- Top bar -->
-    <ng-include src="'basement/view/top_bar.html'"></ng-include>
+    <topbar></topbar>
     <!-- Search noresult -->
-    <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+    <noresult></noresult>
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!tags.length && !searchForm.noResult && initialled"
-      ng-init="nothingText = 'It\'s lonely here... Try adding some tags.'">
-    </ng-include>
+    <nothing ng-if="!tags.length && !searchForm.noResult && initialled"></nothing>
     <!-- List -->
     <div ng-if="tags.length" class="animated fadeIn">
       <!-- Grid view -->
@@ -90,6 +88,6 @@
       </div>
     </div>
     <!-- More -->
-    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
+    <pagination ng-if="initialled"></pagination>
   </div>
 </div>
