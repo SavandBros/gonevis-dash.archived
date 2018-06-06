@@ -12,7 +12,6 @@ function DolphinController($scope, $rootScope, Dolphin,
     $scope.dolphins = [];
     $scope.dolphinForm = {};
     $scope.search = Search;
-    $scope.nothingText = "It's lonely here... Go ahead and upload some files.";
 
     if ($rootScope.selectionMode) {
       $scope.currentTab = "dolphin";
