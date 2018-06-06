@@ -1,7 +1,6 @@
 "use strict";
+import entryFormTemplate from "./includes/entry_form.html";
 import topBarTemplate from "../basement/view/top_bar.html";
-import searchTemplate from "../basement/search/search_form.html";
-import viewButtonsTemplate from "../basement/view/view_buttons.html";
 import nothingTemplate from "../basement/nothing/nothing.html";
 
 import app from "../app";
@@ -167,7 +166,6 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
 }
 
 app.controller("EntryController", EntryController);
+app.component("entryform", { template: entryFormTemplate });
 app.component("topbar", { template: topBarTemplate });
-app.component("search", { template: searchTemplate });
-app.component("viewbuttons", { template: viewButtonsTemplate });
 app.component("nothing", { template: nothingTemplate });
