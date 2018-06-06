@@ -82,7 +82,8 @@
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
     "report-coverage": "codecov",
-    "start": "npm run server"
+    "start": "npm run server",
+    "postinstall": "npm run build"
   },
   "engines": {
     "node": "8.2.0",
