@@ -8,6 +8,7 @@ require('./directives/keystroke_directive');
 require('./filters/timesince_filter');
 require('./filters/timeuntil_filter');
 require('./filters/bytes_filter');
+require('./view/view_buttons');
 
 
 
