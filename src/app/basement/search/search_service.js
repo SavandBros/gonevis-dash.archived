@@ -86,7 +86,13 @@ function Search($rootScope, Pagination) {
 }
 
 app.factory("Search", Search);
-app.component("noresult", { template: noResultTemplate });
+app.component("noResult", {
+  template: noResultTemplate,
+  bindings: {
+    searchForm: "=",
+    view: "<"
+  }
+});
 app.component("search", {
   template: searchFormTemplate,
   controller: Search,
