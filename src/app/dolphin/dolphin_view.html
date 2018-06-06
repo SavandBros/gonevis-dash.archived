@@ -24,7 +24,8 @@
     <no-result search-form="searchForm" view="view"></no-result>
 
     <!-- Nothing -->
-    <nothing ng-if="!dolphins.length && !searchForm.noResult && initialled"></nothing>
+    <nothing text="It's lonely here... Go ahead and upload some files." view="view"
+      ng-if="!dolphins.length && !searchForm.noResult && initialled"></nothing>
 
     <!-- Uploading preview -->
     <div class="dolphin-uploads text-center dis-ib sz-full">
