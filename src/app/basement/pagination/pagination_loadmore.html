@@ -1,9 +1,9 @@
 <div class="load-more col-xs-12">
-  <button class="btn btn-default btn-lg s-pad-x" ng-if="!$parent.$parent.pageForm.page.noMore"
-    ng-disabled="$parent.$parent.pageForm.page.loading" ng-click="$parent.$parent.loadMore($parent.$parent.pageForm)">
+  <button class="btn btn-default btn-lg s-pad-x" ng-if="!$ctrl.pageForm.page.noMore"
+    ng-disabled="$ctrl.pageForm.page.loading" ng-click="$ctrl.loadMore($ctrl.pageForm)">
     <!-- Load more -->
-    <span ng-if="!$parent.$parent.pageForm.page.loading">LOAD MORE</span>
+    <span ng-if="!$ctrl.pageForm.page.loading">LOAD MORE</span>
     <!-- Loading more -->
-    <i ng-if="$parent.$parent.pageForm.page.loading" class="fa fa-2x fa-arrow-down fa-spin animated infinity bounce"></i>
+    <i ng-if="$ctrl.pageForm.page.loading" class="fa fa-2x fa-arrow-down fa-spin animated infinity bounce"></i>
   </button>
 </div>
