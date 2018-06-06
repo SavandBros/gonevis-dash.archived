@@ -11,16 +11,16 @@ function ViewButtonsController($scope) {
    * @param {string} view
    */
   $scope.changeView = function (view) {
-    ctrl.setview({view: view});
+    ctrl.setView({view: view});
   };
 }
 
 app.controller("ViewButtonsController", ViewButtonsController);
-app.component("viewbuttons", {
+app.component("viewButtons", {
   template: viewButtonsTemplate,
   controller: ViewButtonsController,
   bindings: {
     view: '=',
-    setview: '&',
+    setView: '&',
   }
 });
