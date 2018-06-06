@@ -51,4 +51,10 @@ function Pagination($resource, $rootScope) {
 }
 
 app.factory("Pagination", Pagination);
-app.component("pagination", { template: paginationTemplate });
+app.component("pagination", {
+  template: paginationTemplate,
+  controller: Pagination,
+  bindings: {
+    pageForm: "<"
+  }
+});
