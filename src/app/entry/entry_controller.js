@@ -1,6 +1,5 @@
 "use strict";
 import entryFormTemplate from "./includes/entry_form.html";
-import topBarTemplate from "../basement/view/top_bar.html";
 
 import app from "../app";
 
@@ -166,4 +165,3 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
 
 app.controller("EntryController", EntryController);
 app.component("entryform", { template: entryFormTemplate });
-app.component("topbar", { template: topBarTemplate });
