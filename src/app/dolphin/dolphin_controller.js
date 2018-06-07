@@ -22,10 +22,10 @@ function DolphinController($scope, $rootScope, Dolphin,
     };
     API.Dolphins.get(payload,
       function(data) {
-        $scope.initialled = true;
         angular.forEach(data.results, function(data) {
           $scope.dolphins.push(new Dolphin(data));
         });
+        $scope.initialled = true;
         $scope.dolphinForm = Pagination.paginate(
           $scope.dolphinForm, data, {}
         );
@@ -211,7 +211,7 @@ function DolphinController($scope, $rootScope, Dolphin,
    */
   $scope.$on("gonevisDash.Search:submit", function(event, data) {
     if (data.success) {
-      $scope.dolphinForm = data.dolphinForm;
+      $scope.dolphinForm = data.pageForm;
       $scope.dolphins = [];
       angular.forEach(data.data.results, function(data) {
         $scope.dolphins.push(new Dolphin(data));
