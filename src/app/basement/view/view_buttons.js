@@ -2,16 +2,18 @@
 import viewButtonsTemplate from "./view_buttons.html";
 import app from "../../app";
 
-function ViewButtonsController($scope) {
+function ViewButtonsController($scope, localStorageService) {
 
   var ctrl = this;
+
   /**
    * @desc Set item view style
    *
    * @param {string} view
    */
-  $scope.changeView = function (view) {
-    ctrl.setView({view: view});
+  $scope.setView = function (view) {
+    ctrl.view = view;
+    localStorageService.set(ctrl.viewName, ctrl.view);
   };
 }
 
@@ -21,6 +23,6 @@ app.component("viewButtons", {
   controller: ViewButtonsController,
   bindings: {
     view: '=',
-    setView: '&',
+    viewName: '@',
   }
 });
