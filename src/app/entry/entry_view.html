@@ -5,12 +5,12 @@
 <!-- Main -->
 <div class="container container-light pad-top">
   <!-- Top bar -->
-  <topbar></topbar>
+  <top-bar search-form="searchForm" view="view" view-name="entryView"></top-bar>
   <!-- Search noresult -->
-  <noresult></noresult>
+  <no-result search-form="searchForm" view="view"></no-result>
   <!-- Nothing -->
   <!-- TODO: Translate -->
-  <nothing ng-if="!entries.length && !searchForm.noResult && initialled"></nothing>
+  <nothing text="nothingText" view="view" ng-if="!entries.length && !searchForm.noResult && initialled"></nothing>
   <!-- List -->
   <div ng-if="entries.length">
     <!-- Entry grid -->
@@ -167,6 +167,6 @@
       </div>
     </div>
     <!-- More -->
-    <pagination ng-if="initialled"></pagination>
+    <pagination page-form="pageForm" ng-if="initialled"></pagination>
   </div>
 </div>
