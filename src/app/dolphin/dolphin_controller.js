@@ -35,16 +35,6 @@ function DolphinController($scope, $rootScope, Dolphin,
       }
     );
 
-    /**
-     * @desc Set item view style
-     *
-     * @param {string} view
-     */
-    $scope.setView = function(view) {
-      $scope.view = view;
-      localStorageService.set("dolphinView", view);
-    };
-
     $scope.upload = {
       files: [],
       accept: "",
