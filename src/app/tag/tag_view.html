@@ -6,11 +6,12 @@
 <div class="container container-light pad-top">
   <div class="col-md-12">
     <!-- Top bar -->
-    <topbar></topbar>
+    <top-bar search-form="searchForm" view="view" view-name="tagView"></top-bar>
     <!-- Search noresult -->
-    <noresult></noresult>
+    <no-result search-form="searchForm" view="view"></no-result>
     <!-- Nothing -->
-    <nothing ng-if="!tags.length && !searchForm.noResult && initialled"></nothing>
+    <nothing text="It's lonely here... Try adding some tags." view="view"
+      ng-if="!tags.length && !searchForm.noResult && initialled"></nothing>
     <!-- List -->
     <div ng-if="tags.length" class="animated fadeIn">
       <!-- Grid view -->
@@ -88,6 +89,6 @@
       </div>
     </div>
     <!-- More -->
-    <pagination ng-if="initialled"></pagination>
+    <pagination page-form="pageForm" ng-if="initialled"></pagination>
   </div>
 </div>
