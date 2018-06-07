@@ -1,11 +1,11 @@
 <div class="container container-light pad-top">
   <div class="col-md-12">
     <!-- Search form -->
-    <search ng-if="initialled"></search>
+    <search search-form="searchForm" ng-if="initialled"></search>
     <!-- Search noresult -->
-    <noresult ></noresult>
+    <no-result search-form="searchForm" view="view"></no-result>
     <!-- Nothing -->
-    <nothing ng-if="!comments.length && !searchForm.noResult && initialled"></nothing>
+    <nothing text="You have no comments." ng-if="!comments.length && !searchForm.noResult && initialled"></nothing>
     <!-- List -->
     <div class="list-view" ng-if="comments.length">
       <div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
@@ -54,6 +54,6 @@
       </div>
     </div>
     <!-- More -->
-    <pagination ng-if="initialled"></pagination>
+    <pagination page-form="pageForm" ng-if="initialled"></pagination>
   </div>
 </div>
