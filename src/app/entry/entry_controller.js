@@ -86,16 +86,6 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
   };
 
   /**
-   * @desc Set item view style
-   *
-   * @param {string} view
-   */
-  $scope.setView = function(view) {
-    $scope.view = view;
-    localStorageService.set("entryView", view);
-  };
-
-  /**
    * @desc Remove selected entries
    */
   $scope.removeSelected = function() {
