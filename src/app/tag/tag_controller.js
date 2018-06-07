@@ -5,7 +5,6 @@ import app from "../app";
 function TagController($scope, Tag, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
-    $scope.nothingText = "It's lonely here... Try adding some tags.";
     $scope.view = localStorageService.get("tagView") || "list";
     $scope.filters = {
       name: ""
@@ -30,16 +29,6 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
       }
     );
   }
-
-  /**
-   * @desc Set item view style
-   *
-   * @param {string} view
-   */
-  $scope.setView = function(view) {
-    $scope.view = view;
-    localStorageService.set("tagView", view);
-  };
 
   /**
    * @desc Search through tags
