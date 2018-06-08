@@ -148,21 +148,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       auth: true,
       title: "Comments"
     })
-    .state("dash.entry-new", {
-      url: "/new",
-      controller: "EntryNewController",
-      template: require("./entry/entry_new/entry_new_view.html"),
-      auth: true,
-      clickEvent: true,
-      editor: true,
-      params: {
-        lights: true,
-        isPage: false
-      },
-      title: "Nevis"
-    })
     .state("dash.entry-edit", {
-      url: "/entry/:entryId",
+      url: "/write/:entryId",
       controller: "EntryEditController",
       template: require("./entry/entry_edit/entry_edit_view.html"),
       auth: true,
@@ -170,7 +157,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       editor: true,
       params: {
         entryId: null,
-        lights: true
+        lights: true,
+        isPage: false
       },
       title: "Nevis",
       lazyLoad: ($transition$) => {

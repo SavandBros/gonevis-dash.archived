@@ -29,7 +29,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
       icon: "fa-dashboard"
     }, {
       label: "Write",
-      sref: "dash.entry-new",
+      sref: "dash.entry-edit",
       icon: "fa-plus"
     }, {
       label: "Posts",

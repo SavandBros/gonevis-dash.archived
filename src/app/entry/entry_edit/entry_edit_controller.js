@@ -5,26 +5,16 @@ require('../../basement/medium_editor/medium_editor');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
                              Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
+  var payload;
 
   function constructor() {
+    $scope.tags = [];
     $scope.dolphinService = DolphinService;
+    $scope.tagsToSubmit = [];
     $scope.statuses = Codekit.entryStatuses;
     $scope.formats = Codekit.entryFormats;
-    $scope.editing = true;
-    $scope.tags = [];
-    $scope.tagsToSubmit = [];
 
-    // Load from cache if available
-    if ($rootScope.cache.entry) {
-      $scope.form = $rootScope.cache.entry;
-      Codekit.setTitle($scope.form.get.title);
-    } else {
-      $scope.form = new Entry({
-        site: AuthService.getCurrentSite(),
-        id: $stateParams.entryId
-      });
-    }
-
+    // Get tags from API
     API.Tags.get({ site: AuthService.getCurrentSite() },
       function(data) {
         angular.forEach(data.results, function(data) {
@@ -39,33 +29,59 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       }
     );
 
-    API.Entry.get({
-        entry_id: $scope.form.get.id
-      },
-      function(data) {
-        if (data.start_publication) {
-          data.start_publication = new Date(data.start_publication);
-        }
-        if (data.end_publication) {
-          data.end_publication = new Date(data.end_publication);
-        }
-        // Get entry data
-        $scope.form.get = data;
-        $scope.form.url = $scope.form.getUrl();
+    if ($stateParams.entryId) {
+      $scope.editing = true;
+      // Load from cache if available
+      if ($rootScope.cache.entry && $rootScope.cache.entry.get.id === $stateParams.entryId) {
+        $scope.form = $rootScope.cache.entry;
         Codekit.setTitle($scope.form.get.title);
-
-        // Get entry tags
-        angular.forEach($scope.form.get.tags, function(data) {
-          var tag = new Tag({
-            slug: data.slug,
-            id: data.id,
-            name: data.name,
-            count: data.tagged_items_count
-          });
-          $scope.tagsToSubmit.push(tag.get);
+      } else {
+        $scope.form = new Entry({
+          site: AuthService.getCurrentSite(),
+          id: $stateParams.entryId
         });
       }
-    );
+
+      // Get entry from API
+      API.Entry.get({
+          entry_id: $scope.form.get.id
+        },
+        function(data) {
+          if (data.start_publication) {
+            data.start_publication = new Date(data.start_publication);
+          }
+          if (data.end_publication) {
+            data.end_publication = new Date(data.end_publication);
+          }
+          // Get entry data
+          $scope.form.get = data;
+          $scope.form.url = $scope.form.getUrl();
+          Codekit.setTitle($scope.form.get.title);
+
+          // Get entry tags
+          angular.forEach($scope.form.get.tags, function(data) {
+            var tag = new Tag({
+              slug: data.slug,
+              id: data.id,
+              name: data.name,
+              count: data.tagged_items_count
+            });
+            $scope.tagsToSubmit.push(tag.get);
+          });
+        }, function(data) {
+          $state.go("dash.entry-edit", { entryId: null });
+          toaster.error("Oops!", "Can't get post.");
+        }
+      );
+    } else {
+      $scope.editing = false;
+      $scope.form = new Entry({
+        content: "<p><br></p>", // Start with an empty paragraph (for editor)
+        status: $scope.statuses[0].id,
+        format: Codekit.entryFormats.text.id
+      });
+      $scope.form.get.is_page = $stateParams.isPage;
+    }
 
     // Add space from top for toolbar
     if (Codekit.isMobile()) {
@@ -101,15 +117,17 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
-   * @desc Submit form (update entry API callback)
+   * @desc Save form
    *
-   * @param {object} form
+   * @param {object} form Form data to submit
    * @param {number} status
    */
-  $scope.submit = function(form, status) {
+  $scope.save = function(form, status) {
     form.loading = true;
+    form.get.site = AuthService.getCurrentSite();
+    form.get.user = AuthService.getAuthenticatedUser(false);
 
-    var payload = form.get;
+    payload = form.get;
 
     payload.tag_ids = [];
     payload.status = status || payload.status;
@@ -123,7 +141,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
       .replace(/<p><\/p>/g, "");
 
+    $scope.editing ? $scope.updateEntry(form) : $scope.addEntry(form);
+  };
 
+  $scope.updateEntry = function (form) {
     API.Entry.put({
         entry_id: payload.id
       }, payload,
@@ -141,7 +162,24 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         form.errors = data.data;
       }
     );
-  };
+  }
+
+  $scope.addEntry = function (form) {
+    API.EntryAdd.save(payload,
+      function(data) {
+        $scope.form.cache(true);
+        toaster.success("Done", "Created " + payload.title);
+        $state.go("dash.entry-edit", {
+          entryId: data.id
+        });
+      },
+      function(data) {
+        toaster.error("Error", "Failed to add entry");
+        form.loading = false;
+        form.errors = data.data;
+      }
+    );
+  }
 
   /**
    * @desc Image selection callback
