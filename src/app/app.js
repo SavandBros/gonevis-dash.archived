@@ -14,12 +14,12 @@ const deps = [
   'xeditable',
   'slugifier',
   'angularModalService',
-  'angular-medium-editor',
   'angular-sortable-view',
   'angular-loading-bar',
   'toaster',
   'LocalStorageModule'
 ];
+
 const MODULE_NAME = 'gonevisDash';
 const app = angular.module(MODULE_NAME, deps)
   .constant('Client', {version: 4})

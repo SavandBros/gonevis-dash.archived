@@ -20,7 +20,6 @@ require('chart.js');
 require('angular-xeditable');
 require('angular-slugify');
 require('angular-modal-service');
-require('angular-medium-editor');
 require('angular-sortable-view');
 require('angular-local-storage');
 
