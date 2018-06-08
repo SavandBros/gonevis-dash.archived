@@ -1,5 +1,6 @@
 /*global GoNevisEnv*/
 
+
 const deps = [
   'ngAnimate',
   'ngMessages',
@@ -11,7 +12,6 @@ const deps = [
   'ui.router',
   'oc.lazyLoad',
   'ui.bootstrap',
-  'chart.js',
   'xeditable',
   'slugifier',
   'angularModalService',

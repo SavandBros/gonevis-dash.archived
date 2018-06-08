@@ -117,6 +117,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
       controller: "MainController",
       template: require("./main/main_view.html"),
       auth: true,
+      lazyLoad: ($transition$) => {
+        const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
+
+        return import(/* webpackChunkName: "main" */ "./main/main_controller")
+          .then(mod => {
+            $ocLazyLoad.inject('chart.js');
+            $ocLazyLoad.load([mod.MAIN_DASH_MODULE]);
+          })
+          .catch(err => {
+            throw new Error("Ooops, something went wrong, " + err);
+          });
+      }
     })
     .state("dash.navigation", {
       url: "/navigation",
