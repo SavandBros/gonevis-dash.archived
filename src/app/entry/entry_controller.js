@@ -1,6 +1,4 @@
 "use strict";
-import entryFormTemplate from "./includes/entry_form.html";
-
 import app from "../app";
 
 function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
@@ -154,4 +152,3 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
 }
 
 app.controller("EntryController", EntryController);
-app.component("entryform", { template: entryFormTemplate });
