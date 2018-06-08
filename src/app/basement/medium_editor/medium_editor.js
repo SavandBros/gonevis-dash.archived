@@ -1,4 +1,3 @@
-import app from "../../app";
 import MediumEditor from 'medium-editor';
 
 class MediumEditorDirective {
@@ -53,4 +52,4 @@ class MediumEditorDirective {
   }
 }
 
-app.directive('mediumEditor', () => new MediumEditorDirective);
+angular.module('gonevisDash').directive('mediumEditor', () => new MediumEditorDirective);

@@ -6,7 +6,7 @@ require("angular-resource");
 require("angular-cookies");
 require("angular-sanitize");
 require('@uirouter/angularjs');
-
+require("oclazyload");
 // Third party
 require("ng-tags-input");
 require("ng-file-upload");
@@ -16,7 +16,6 @@ require('angular-ui-bootstrap');
 require('angularjs-toaster');
 require('angular-chart.js');
 require('chart.js');
-require('medium-editor');
 require('angular-xeditable');
 require('angular-slugify');
 require('angular-modal-service');
@@ -29,6 +28,6 @@ import 'font-awesome/css/font-awesome.css'
 import 'angular-xeditable/dist/css/xeditable.css'
 import 'ng-tags-input/build/ng-tags-input.css'
 import 'animate.css/animate.css'
+import 'angularjs-toaster/toaster.css'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
-import 'angularjs-toaster/toaster.css'

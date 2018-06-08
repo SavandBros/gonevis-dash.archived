@@ -1,4 +1,19 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["angularjs-annotate"]
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "safari 7"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "syntax-dynamic-import",
+    "angularjs-annotate"
+  ]
 }

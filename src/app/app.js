@@ -9,6 +9,7 @@ const deps = [
   'ngTagsInput',
   'ngFileUpload',
   'ui.router',
+  'oc.lazyLoad',
   'ui.bootstrap',
   'chart.js',
   'xeditable',

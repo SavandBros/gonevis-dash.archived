@@ -1,6 +1,7 @@
 "use strict";
 
-import app from "../../app";
+require('medium-editor');
+require('../../basement/medium_editor/medium_editor');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
                              Entry, Tag, Codekit, API, AuthService, DolphinService, toaster) {
@@ -201,4 +202,5 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   constructor();
 }
 
-app.controller("EntryEditController", EntryEditController);
+const EDIT_ENTRY_MODULE = angular.module('gonevisDash').controller("EntryEditController", EntryEditController);
+export { EDIT_ENTRY_MODULE };

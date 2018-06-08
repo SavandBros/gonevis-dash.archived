@@ -172,7 +172,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
         entryId: null,
         lights: true
       },
-      title: "Nevis"
+      title: "Nevis",
+      lazyLoad: ($transition$) => {
+        const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
+
+        return import(/* webpackChunkName: "entry-edit" */ "./entry/entry_edit/entry_edit_controller")
+          .then(mod => $ocLazyLoad.load(mod.EDIT_ENTRY_MODULE))
+          .catch(err => {
+            throw new Error("Ooops, something went wrong, " + err);
+          });
+      }
     })
     .state("dash.entry-list", {
       url: "/posts",
