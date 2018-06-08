@@ -11,7 +11,4 @@ require('./filters/bytes_filter');
 require('./nothing/nothing');
 require('./view/top_bar');
 require('./view/view_buttons');
-
-
-
-
+require('./medium_editor/medium_editor');

@@ -16,7 +16,7 @@ require('angular-ui-bootstrap');
 require('angularjs-toaster');
 require('angular-chart.js');
 require('chart.js');
-
+require('medium-editor');
 require('angular-xeditable');
 require('angular-slugify');
 require('angular-modal-service');

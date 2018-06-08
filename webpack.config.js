@@ -47,6 +47,7 @@ if (isTest) {
  * This is the object where all configuration gets set
  */
 module.exports = {
+  mode: "development",
   cache: true,
   /**
    * Entry
@@ -182,6 +183,7 @@ module.exports = {
 
 // Add build specific plugins
 if (isProd) {
+  module.exports.mode = 'production';
   module.exports.optimization = {
     splitChunks: {
       chunks: "async",
