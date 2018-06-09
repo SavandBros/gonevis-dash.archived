@@ -10,6 +10,7 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
     $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.team = team;
     $scope.teamRoles = Codekit.teamRoles;
+    $scope.codekit = Codekit;
   }
 
   /**
@@ -59,7 +60,7 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
 
   /**
    * @desc Change team member role
-   * 
+   *
    * @param {string} email
    * @param {object} role
    */
