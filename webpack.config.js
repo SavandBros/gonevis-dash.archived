@@ -5,10 +5,6 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /**
  * Env
@@ -130,12 +126,6 @@ module.exports = {
       // You can add here any file extension you want to get copied to your output
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       use: 'file-loader'
-    }, {
-      // HTML LOADER
-      // Reference: https://github.com/webpack/raw-loader
-      // Allow loading html through js
-      test: /\.html$/,
-      use: 'raw-loader'
     }]
   },
 
@@ -188,14 +178,49 @@ module.exports = {
 
 
 if (isStats) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
   module.exports.plugins.push(
     new BundleAnalyzerPlugin()
   );
 }
 
+if (!isProd) {
+  module.exports.module.rules.push({
+      // HTML LOADER
+      // Reference: https://github.com/webpack-contrib/html-loader
+      // Allow loading html through js
+      test: /\.html$/,
+      use: [{
+        loader: 'html-loader'
+      }]
+    }
+  );
+}
+
 // Add build specific plugins
 if (isProd) {
+  const CopyWebpackPlugin = require('copy-webpack-plugin');
+  const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+  const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+  const CompressionPlugin = require("compression-webpack-plugin");
+
   module.exports.mode = 'production';
+  module.exports.module.rules.push({
+      // HTML LOADER
+      // Reference: https://github.com/webpack-contrib/html-loader
+      // Allow loading html through js
+      test: /\.html$/,
+      use: [{
+        loader: 'html-loader',
+        options: {
+          minimize: true,
+          collapseWhitespace: true,
+          removeComments: true,
+        }
+      }]
+    }
+  );
   module.exports.optimization = {
     splitChunks: {
       chunks: "async",
@@ -222,7 +247,7 @@ if (isProd) {
         cache: true,
         parallel: true,
         sourceMap: true, // set to true if you want JS source maps,
-        exclude: /\/test/
+        exclude: /\/test/,
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
@@ -233,6 +258,7 @@ if (isProd) {
     new CopyWebpackPlugin([{
       from: __dirname + '/src/public'
     }]),
+    new CompressionPlugin()
   )
 }
 
