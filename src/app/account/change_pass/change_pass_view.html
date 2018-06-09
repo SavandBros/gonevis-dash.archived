@@ -6,16 +6,16 @@
           <h3 class="o-fade-soft">Change Password</h3>
           <hr>
           <div class="form-group" ng-class="{'has-error': form.errors.old_password}">
-            <input id="password" class="form-control input-lg" type="password" ng-model="form.old_password" placeholder="{{ 'Current Password' | translate }}" required/>
-            <small id="password" class="help-block">{{ form.errors.old_password[0] }}</small>
+            <input id="oldPassword" class="form-control input-lg" type="password" ng-model="form.old_password" placeholder="{{ 'Current Password' }}" required/>
+            <small class="help-block">{{ form.errors.old_password[0] }}</small>
           </div>
           <hr>
           <div class="form-group" ng-class="{'has-error': form.errors.password}">
-            <input id="password" class="form-control input-lg" type="password" ng-model="form.password" placeholder="{{ 'New Password' | translate }}" required/>
-            <small id="password" class="help-block">{{ form.errors.password[0] }}</small>
+            <input id="newPassword" class="form-control input-lg" type="password" ng-model="form.password" placeholder="{{ 'New Password' }}" required/>
+            <small class="help-block">{{ form.errors.password[0] }}</small>
           </div>
           <div class="form-group" ng-class="{'has-error': form.errors.confirm_password}">
-            <input id="confirmPassword" class="form-control input-lg" type="password" ng-model="form.confirm_password" placeholder="{{ 'Confirm new password' | translate }}" required/>
+            <input id="confirmPassword" class="form-control input-lg" type="password" ng-model="form.confirm_password" placeholder="{{ 'Confirm new password' }}" required/>
           </div>
           <div class="form-group alert alert-danger" ng-show="form.errors.non_field_errors">
             {{ form.errors.non_field_errors[0] }}
