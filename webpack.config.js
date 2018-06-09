@@ -160,7 +160,9 @@ module.exports = {
       }
     }),
     new webpack.ProvidePlugin({
-      "window.jQuery": "jquery"
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery",
     }),
     new webpack.DefinePlugin({
       "GoNevisEnv": JSON.stringify(require(envFileName)),
