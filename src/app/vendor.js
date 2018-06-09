@@ -7,6 +7,8 @@ require("angular-cookies");
 require("angular-sanitize");
 require('@uirouter/angularjs');
 require("oclazyload");
+require('bootstrap');
+
 // Third party
 require("ng-tags-input");
 require("ng-file-upload");
