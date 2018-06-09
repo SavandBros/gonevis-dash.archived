@@ -5,7 +5,6 @@ import DolphinModalView from "../dolphin/dolphin_modal/dolphin_modal_view.html";
 import TagModalView from "../tag/tag_modal/tag_modal_view.html";
 import DolphinSelectionView from "../dolphin/dolphin_selection.html";
 import CommentModalView from "../comment/comment_modal/comment_modal_view.html";
-import TagCreateModalView from "../tag/tag_new_modal/tag_new_modal_view.html";
 import InviteModalView from "../team/invite_modal/invite_modal_view.html";
 import ForgotPasswordModalView from "../account/forgot_modal/forgot_modal_view.html";
 import SiteTemplatesModalView from "../site/site_templates_modal/site_templates_modal_view.html";
@@ -29,7 +28,6 @@ function ModalsService($rootScope, ModalService) {
     dolphinSelection: DolphinSelectionView,
     comment: CommentModalView,
     tag: TagModalView,
-    tagCreate: TagCreateModalView,
     invite: InviteModalView,
     forgotPassword: ForgotPasswordModalView,
     siteTemplates: SiteTemplatesModalView,
