@@ -8,15 +8,17 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /**
  * Env
  * Get npm lifecycle event to identify the environment
  */
-let ENV = process.env.npm_lifecycle_event;
-let isTest = ENV === 'test' || ENV === 'test-watch';
-let isProd = ENV === 'build';
-let isDev = ENV === "server-dev";
+const ENV = process.env.npm_lifecycle_event;
+const isTest = ENV === 'test' || ENV === 'test-watch';
+const isProd = ENV === 'build';
+const isDev = ENV === "server-dev";
+const isStats = ENV === 'stats';
 let devtool = 'eval-source-map';
 
 let envFileName = function () {
@@ -166,7 +168,8 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "GoNevisEnv": JSON.stringify(require(envFileName)),
-    })
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
 
   /**
@@ -182,6 +185,13 @@ module.exports = {
     host: 'localhost'
   }
 };
+
+
+if (isStats) {
+  module.exports.plugins.push(
+    new BundleAnalyzerPlugin()
+  );
+}
 
 // Add build specific plugins
 if (isProd) {
