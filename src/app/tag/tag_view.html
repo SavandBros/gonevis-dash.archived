@@ -1,5 +1,5 @@
 <!-- Add button -->
-<button type="button" class="btn btn-primary btn-corner" ng-click="Tag.viewCreate()">
+<button type="button" class="btn btn-primary btn-corner" ng-click="Tag.view(false)">
   <i class="fa fa-plus"></i>
 </button>
 <!-- Main -->
@@ -20,7 +20,7 @@
           <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4"  ng-repeat="tag in tags track by $index" ng-show="!tag.isDeleted">
               <!-- Tag (thumbnail) -->
-              <a class="thumbnail text-center s-pad-no" ng-click="tag.view()">
+              <a class="thumbnail text-center s-pad-no" ng-click="tag.view(true)">
                 <!-- Image -->
                 <img ng-src="{{ tag.get.media.cover_image.thumbnail_128x128 ?
                     tag.get.media.cover_image.thumbnail_128x128 : '../assets/img/default/128x128.png'
@@ -51,7 +51,7 @@
                   <div class="media-body">
                     <!-- Name and count -->
                     <span class="media-heading">
-                      <a ng-click="tag.view()">
+                      <a ng-click="tag.view(true)">
                         <span>{{ tag.get.name }}</span>
                         <small class="o-fade text-muted">x{{ tag.get.tagged_items_count | number }}</small>
                       </a>
@@ -68,7 +68,7 @@
                   <i class="fa fa-fw fa-ellipsis-v"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a ng-click="tag.view()"><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-click="tag.view(true)"><i class="fa fa-eye"></i> View</a></li>
                   <li>
                     <a href="{{ tag.get.absolute_uri }}" target="_blank">
                       <i class="fa fa-fw fa-external-link"></i> View on site
