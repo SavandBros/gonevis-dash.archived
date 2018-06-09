@@ -1,5 +1,5 @@
 "use strict";
-
+import avatar from "../../public/img/avatar.png"
 import app from "../app";
 
 /**
@@ -52,7 +52,7 @@ function Account() {
       if (self.media[size]) {
         return self.media[size];
       }
-      return "style/img/avatar.png";
+      return avatar;
     };
 
     /**
@@ -116,4 +116,3 @@ function Account() {
 
 app.service("Account", Account);
 export default Account;
-
