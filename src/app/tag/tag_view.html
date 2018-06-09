@@ -23,7 +23,7 @@
               <a class="thumbnail text-center s-pad-no" ng-click="tag.view(true)">
                 <!-- Image -->
                 <img ng-src="{{ tag.get.media.cover_image.thumbnail_128x128 ?
-                    tag.get.media.cover_image.thumbnail_128x128 : '../assets/img/default/128x128.png'
+                    tag.get.media.cover_image.thumbnail_128x128 : codekit.getDefaultImage('small')
                   }}" width="100%">
                 <!-- Name -->
                 <div class="caption t-line">
@@ -45,7 +45,7 @@
                   <!-- Image -->
                   <div class="media-left va-m">
                     <img class="tag media-object img-circle" ng-src="{{ tag.get.media.cover_image.thumbnail_48x48 ?
-                      tag.get.media.cover_image.thumbnail_48x48 : '../assets/img/default/48x48.png'
+                      tag.get.media.cover_image.thumbnail_48x48 : codekit.getDefaultImage('tiny')
                     }}">
                   </div>
                   <div class="media-body">

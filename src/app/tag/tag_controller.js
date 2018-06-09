@@ -2,9 +2,10 @@
 
 import app from "../app";
 
-function TagController($scope, Tag, API, AuthService, Pagination, Search, localStorageService) {
+function TagController($scope, Tag, API, AuthService, Pagination, Search, localStorageService, Codekit) {
 
   function constructor() {
+    $scope.codekit = Codekit;
     $scope.view = localStorageService.get("tagView") || "list";
     $scope.filters = {
       name: ""
