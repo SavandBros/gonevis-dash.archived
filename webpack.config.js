@@ -5,10 +5,6 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /**
  * Env
@@ -186,6 +182,8 @@ module.exports = {
 
 
 if (isStats) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
   module.exports.plugins.push(
     new BundleAnalyzerPlugin()
   );
@@ -193,6 +191,10 @@ if (isStats) {
 
 // Add build specific plugins
 if (isProd) {
+  const CopyWebpackPlugin = require('copy-webpack-plugin');
+  const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+  const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
   module.exports.mode = 'production';
   module.exports.optimization = {
     splitChunks: {
