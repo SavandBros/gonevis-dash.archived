@@ -14,10 +14,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
  * Env
  * Get npm lifecycle event to identify the environment
  */
-let ENV = process.env.npm_lifecycle_event;
-let isTest = ENV === 'test' || ENV === 'test-watch';
-let isProd = ENV === 'build';
-let isDev = ENV === "server-dev";
+const ENV = process.env.npm_lifecycle_event;
+const isTest = ENV === 'test' || ENV === 'test-watch';
+const isProd = ENV === 'build';
+const isDev = ENV === "server-dev";
 const isStats = ENV === 'stats';
 let devtool = 'eval-source-map';
 
@@ -167,6 +167,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "GoNevisEnv": JSON.stringify(require(envFileName)),
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
 
   /**
