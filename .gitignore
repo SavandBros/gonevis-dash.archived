@@ -8,3 +8,4 @@ jsconfig.json
 /app/app_module.js
 .vscode/
 coverage/
+stats.json
