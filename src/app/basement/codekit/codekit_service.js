@@ -1,4 +1,9 @@
 "use strict";
+import avatar from "../../../public/img/avatar.png";
+import tinyImage from "../../../public/img/default/48x48.png";
+import smallImage from "../../../public/img/default/128x128.png";
+import mediumImage from "../../../public/img/default/256x256.png";
+import largeImage from "../../../public/img/default/512x512.png";
 
 import app from '../../app';
 
@@ -132,6 +137,28 @@ function Codekit($timeout, $window, $log) {
   ];
 
   /**
+   * @desc All default images.
+   *
+   * @type {object}
+   */
+  var defaultImages = {
+    avatar: avatar,
+    tiny: tinyImage,
+    small: smallImage,
+    medium: mediumImage,
+    large: largeImage
+  }
+
+  /**
+   * @desc Return default images
+   *
+   * @param {string} size
+   */
+  function getDefaultImage(size) {
+    return defaultImages[size];
+  }
+
+  /**
    * @desc Delete an item if has property isDeleted
    *
    * @param {object} master Master data to search in
@@ -213,6 +240,7 @@ function Codekit($timeout, $window, $log) {
   }
 
   return {
+    getDefaultImage: getDefaultImage,
     getIndex: getIndex,
     entryStatuses: entryStatuses,
     entryFormats: entryFormats,
