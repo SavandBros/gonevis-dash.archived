@@ -47,7 +47,7 @@ describe("Account", function () {
       expect(account.url).toBe("fake-uri");
     });
   });
-  
+
   describe("hasMedia", function () {
     it("should return true", function () {
       expect(account.hasMedia).toBeTruthy();
@@ -81,6 +81,7 @@ describe("Account", function () {
 
       account = new Account(data);
 
+      // FIX HERE
       expect(account.getMedia("full")).toBe("style/img/avatar.png");
       expect(account.getMedia("medium")).toBe("style/img/avatar.png");
       expect(account.getMedia("small")).toBe("style/img/avatar.png");
