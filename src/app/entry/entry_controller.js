@@ -1,9 +1,11 @@
 "use strict";
+
 import app from "../app";
 
 function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
+    $scope.codekit = Codekit;
     $scope.isPageView = $state.includes("dash.page-list");
 
     if ($scope.isPageView) {

@@ -18,7 +18,7 @@
       <div class="col-xs-12 col-md-4" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
         <div class="post">
           <div class="post-img" style="background-image: url({{ entry.get.media.cover_image.thumbnail_256x256 ?
-            entry.get.media.cover_image.thumbnail_256x256 : '../assets/img/default/256x256.png' }});">
+            entry.get.media.cover_image.thumbnail_256x256 : codekit.getDefaultImage('medium') }});">
             <div class="post-featured" ng-if="entry.get.featured">
               <i class="fa fa-star-o fa-fw text-warning c-white "></i>
             </div>
