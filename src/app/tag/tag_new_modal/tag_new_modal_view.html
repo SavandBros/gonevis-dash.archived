@@ -11,7 +11,7 @@
       </div>
       <div class="modal-body">
         <form ng-submit="Tag.create(form)" name="form">
-          <ng-include src="'tag/includes/tag_form.html'"></ng-include>
+          <tag-form></tag-form>
           <button class="btn btn-success btn-block" ng-disabled="form.loading || form.$invalid">Create</button>
         </form>
       </div>
