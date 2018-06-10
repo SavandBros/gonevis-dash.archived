@@ -1,4 +1,5 @@
 "use strict";
+import AvatarImage from "../../../src/public/img/avatar.png"
 
 describe("Account", function () {
   beforeEach(angular.mock.module("gonevisDash"));
@@ -82,10 +83,10 @@ describe("Account", function () {
       account = new Account(data);
 
       // FIX HERE
-      expect(account.getMedia("full")).toBe("style/img/avatar.png");
-      expect(account.getMedia("medium")).toBe("style/img/avatar.png");
-      expect(account.getMedia("small")).toBe("style/img/avatar.png");
-      expect(account.getMedia("tiny")).toBe("style/img/avatar.png");
+      expect(account.getMedia("full")).toBe(AvatarImage);
+      expect(account.getMedia("medium")).toBe(AvatarImage);
+      expect(account.getMedia("small")).toBe(AvatarImage);
+      expect(account.getMedia("tiny")).toBe(AvatarImage);
     });
   });
 
