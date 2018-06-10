@@ -8,30 +8,31 @@ This project is the source code of the [GoNevis Dash](http://dash.gonevis.com), 
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+Run `npm run build` for building and `npm start` for preview.
 
 ### Staging backend API
 
-To run the server that uses GoNevis draft/staging API:
+To run the server that uses GoNevis draft/staging API you don't need to run a differen command. `npm start` or `npm run server` use the staging server API by default,
 
 ```bash
-> grunt serve:staging
+> npm server
 ```
 
-### Code Quality
-
-GoNevis Dash uses code quality checkers & linters.
-On each pull request the CI runs them.
-
-Before making a pull patch, be sure to run:
+Running against development server:
 
 ```bash
-> grunt jshint
+> npm run server-dev
+```
+
+Finally to let the application consume production server:
+
+```bash
+> npm run server-prod
 ```
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma.
+Running `npm test` will run the unit tests with karma.
 
 ## Branching
 
