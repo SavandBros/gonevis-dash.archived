@@ -8,20 +8,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ui-sref="start">GoNevis</a>
+      <a class="navbar-brand" ui-sref="start" translate>GONEVIS</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
         <li ng-class="{active: state.includes('start')}">
-          <a ui-sref="start">Get Started</a>
+          <a ui-sref="start" translate>GET_STARTED</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li ng-class="{active: state.includes('signin')}">
-          <a ui-sref="signin">Login</a>
+          <a ui-sref="signin" translate>LOGIN</a>
         </li>
         <li ng-class="{active: state.includes('signup') || state.includes('collaborate')}">
-          <a ui-sref="signup">Register</a>
+          <a ui-sref="signup" translate>REGISTER</a>
         </li>
       </ul>
     </div>
@@ -36,10 +36,10 @@
     <a class="main dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
       <!-- Logo -->
       <img ng-src="{{ user.getSites()[param.s].media.logo.thumbnail_48x48 }}"
-        ng-if="user.getSites()[param.s].media.logo.thumbnail_48x48">
+           ng-if="user.getSites()[param.s].media.logo.thumbnail_48x48">
       <!-- Title -->
-      <span ng-if="!set.sidebar">{{ user.getSites()[param.s].title[0] || "D" }}</span>
-      <span ng-if="set.sidebar">{{ user.getSites()[param.s].title || "Dashboard" }}</span>
+      <span ng-if="!set.sidebar">{{ user.getSites()[param.s].title[0] || "DASHBOARD_SHORT" | translate }}</span>
+      <span ng-if="set.sidebar">{{ user.getSites()[param.s].title || "DASHBOARD" | translate }}</span>
       <!-- Caret -->
       <i class="fa fa-caret-down o-fade" ng-if="set.sidebar"></i>
     </a>
@@ -51,18 +51,21 @@
       </li>
       <li class="divider"></li>
       <!-- New blog -->
-      <li><a ui-sref="site-new({s: param.s})"><small>START A NEW BLOG</small></a></li>
+      <li><a ui-sref="site-new({s: param.s})">
+        <small translate>START_A_BLOG</small>
+      </a></li>
     </ul>
   </div>
   <br>
   <!-- Main navs -->
-  <a ng-href="{{ state.href(nav.sref, {s: param.s}) }}" ng-repeat="nav in mainNavs" ng-class="{active: state.includes(nav.sref)}">
+  <a ng-href="{{ state.href(nav.sref, {s: param.s}) }}" ng-repeat="nav in mainNavs"
+     ng-class="{active: state.includes(nav.sref)}">
     <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
   </a>
   <br>
   <!-- Lights switch -->
   <a ng-class="{'active-minimal': set.lights}" ng-if="param.lights" ng-click="set.lights = !set.lights">
-    <i class="fa fa-fw fa-lightbulb-o"></i> Lights
+    <i class="fa fa-fw fa-lightbulb-o"></i> {{ 'LIGHTS' | translate }}
   </a>
   <br>
   <!-- Account dropdown -->
@@ -80,13 +83,14 @@
     <ul class="dropdown-menu">
       <!-- Account settings -->
       <li ng-class="{active: state.includes('user')}">
-        <a ui-sref="user({s: param.s})">View Account<br><span class="o-fade">{{ user.get.email }}</span></a>
+        <a ui-sref="user({s: param.s})">{{ "VIEW_ACCOUNT" | translate }}<br><span
+          class="o-fade">{{ user.get.email }}</span></a>
       </li>
       <li class="divider"></li>
       <!-- Feedback -->
-      <li><a ng-href="mailto:hello@gonevis.com"><i class="fa fa-smile-o"></i> Feedback</a></li>
+      <li><a ng-href="mailto:hello@gonevis.com"><i class="fa fa-smile-o"></i> {{ 'FEEDBACK' | translate }}</a></li>
       <!-- Log out -->
-      <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> Log out</a></li>
+      <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> {{ 'LOG_OUT' | translate }}</a></li>
     </ul>
   </div>
   <br>
