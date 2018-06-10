@@ -20,6 +20,11 @@ require('angular-slugify');
 require('angular-modal-service');
 require('angular-sortable-view');
 require('angular-local-storage');
+require('angular-translate');
+require('angular-translate-loader-url');
+require('angular-translate-loader-static-files');
+require('angular-translate-storage-local');
+require('angular-translate-storage-cookie');
 
 // Styles!
 require('angular-loading-bar/build/loading-bar.css');

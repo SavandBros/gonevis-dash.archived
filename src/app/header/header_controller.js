@@ -3,8 +3,8 @@ import headerTemplate from "./header_view.html";
 
 import app from "../app";
 
-function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
-                          AuthService, DolphinService, Codekit, Entry, API, ModalsService, TourService, toaster) {
+function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, AuthService, DolphinService, Codekit,
+                          Entry, API, ModalsService, TourService, toaster, $translate) {
 
   function constructor() {
 
@@ -22,48 +22,53 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
     // Entry formats
     $scope.entryFormats = Codekit.entryFormats;
 
-    // Navs
-    $scope.mainNavs = [{
-      label: "Dashboard",
-      sref: "dash.main",
-      icon: "fa-dashboard"
-    }, {
-      label: "Write",
-      sref: "dash.entry-edit",
-      icon: "fa-plus"
-    }, {
-      label: "Posts",
-      sref: "dash.entry-list",
-      icon: "fa-book"
-    }, {
-      label: "Pages",
-      sref: "dash.page-list",
-      icon: "fa-book"
-    }, {
-      label: "Tags",
-      sref: "dash.tag-list",
-      icon: "fa-tag"
-    }, {
-      label: "Comments",
-      sref: "dash.comment-list",
-      icon: "fa-comments-o"
-    }, {
-      label: "Files",
-      sref: "dash.dolphin",
-      icon: "fa-file-image-o"
-    }, {
-      label: "Navigations",
-      sref: "dash.navigation",
-      icon: "fa-bars"
-    }, {
-      label: "Team",
-      sref: "dash.team",
-      icon: "fa-users"
-    }, {
-      label: "Settings",
-      sref: "dash.site",
-      icon: "fa-cog"
-    }];
+    $translate([
+      "DASHBOARD", "WRITE", "POSTS", "PAGES", "TAGS",
+      "COMMENTS", "FILES", "NAVIGATIONS", "TEAM", "SETTINGS"
+    ]).then(function(translations) {
+      // Navs
+      $scope.mainNavs = [{
+        label: translations.DASHBOARD,
+        sref: "dash.main",
+        icon: "fa-dashboard"
+      }, {
+        label: translations.WRITE,
+        sref: "dash.entry-edit",
+        icon: "fa-plus"
+      }, {
+        label: translations.POSTS,
+        sref: "dash.entry-list",
+        icon: "fa-book"
+      }, {
+        label: translations.PAGES,
+        sref: "dash.page-list",
+        icon: "fa-book"
+      }, {
+        label: translations.TAGS,
+        sref: "dash.tag-list",
+        icon: "fa-tag"
+      }, {
+        label: translations.COMMENTS,
+        sref: "dash.comment-list",
+        icon: "fa-comments-o"
+      }, {
+        label: translations.FILES,
+        sref: "dash.dolphin",
+        icon: "fa-file-image-o"
+      }, {
+        label: translations.NAVIGATIONS,
+        sref: "dash.navigation",
+        icon: "fa-bars"
+      }, {
+        label: translations.TEAM,
+        sref: "dash.team",
+        icon: "fa-users"
+      }, {
+        label: translations.SETTINGS,
+        sref: "dash.site",
+        icon: "fa-cog"
+      }];
+    });
   }
 
   /**
@@ -105,7 +110,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
       function(data) {
         // Prevent older cache
         entry.cache(true);
-        toaster.success("Done", "Entry created!");
+        $translate(["DONE", "ENTRY_CREATED"]).then(function(translations) {
+          toaster.success(translations.DONE, translations.ENTRY_CREATED);
+        });
         // Go for edit
         $state.go("dash.entry-edit", {
           s: $stateParams.s,
@@ -113,7 +120,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
         });
       },
       function() {
-        toaster.error("Error", "Something went wrong, failed to create entry.");
+        $translate(["ERROR", "WRONG_POST_CREATION_FAILED"]).then(function(translations) {
+          toaster.success(translations.ERROR, translations.WRONG_POST_CREATION_FAILED);
+        });
       }
     );
     // Clear
@@ -171,7 +180,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
     // Session expired message
     if (sessionExpired) {
       toaster.clear($scope.signOutToast);
-      $scope.signOutToast = toaster.info("Logged out", "Looks like your session has expired, login again.");
+      $translate(["LOGGED_OUT", "SESSION_EXPIRED"]).then(function(translations) {
+        $scope.signOutToast = toaster.info(translations.LOGGED_OUT, translations.SESSION_EXPIRED);
+      });
     }
     // Sign out completely
     AuthService.unAuthenticate();
@@ -226,3 +237,19 @@ app.component("header", {
   template: headerTemplate,
   controller: HeaderController
 });
+HeaderController.$inject = [
+  "$scope",
+  "$rootScope",
+  "$state",
+  "$stateParams",
+  "$timeout",
+  "AuthService",
+  "DolphinService",
+  "Codekit",
+  "Entry",
+  "API",
+  "ModalsService",
+  "TourService",
+  "toaster",
+  "$translate"
+];
