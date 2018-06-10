@@ -3,12 +3,11 @@
 import app from "./app";
 import AuthInterceptorService from "./account/auth/auth_interceptor_service";
 
-let Raven = require('raven-js');
+const Raven = require('raven-js');
 
 
-
-app.config(function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
-  cfpLoadingBarProvider, ENV) {
+const Config = function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
+  cfpLoadingBarProvider, ENV, $translateProvider) {
 
   // Http
   $httpProvider.interceptors.push(AuthInterceptorService);
@@ -28,7 +27,7 @@ app.config(function($httpProvider, $resourceProvider, $cookiesProvider, $qProvid
   // Custom exception handler
   $provide.decorator("$exceptionHandler", ["$delegate", "$window", function($delegate) {
     // Check if in localhost/127.0.0.1 or not
-    var localhost = (
+    const localhost = (
       window.location.href.indexOf("localhost") > 0 ||
       window.location.href.indexOf("127.0.0.1") > 0
     );
@@ -47,4 +46,25 @@ app.config(function($httpProvider, $resourceProvider, $cookiesProvider, $qProvid
       };
     }
   }]);
-});
+
+  // Translation
+  $translateProvider.useSanitizeValueStrategy(null);
+  $translateProvider.preferredLanguage("en");
+  $translateProvider.useLocalStorage();
+  $translateProvider.useStaticFilesLoader({
+    prefix: "/languages/",
+    suffix: ".json"
+  });
+};
+
+app.config(Config);
+Config.$inject = [
+  "$httpProvider",
+  "$resourceProvider",
+  "$cookiesProvider",
+  "$qProvider",
+  "$provide",
+  "cfpLoadingBarProvider",
+  "ENV",
+  "$translateProvider"
+];

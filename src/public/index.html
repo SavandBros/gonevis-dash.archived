@@ -26,17 +26,6 @@
 
 
 <body ng-app="gonevisDash" class="lights" ng-class="{off: !set.lights, full: !set.sidebar}">
-  <!--[if lte IE 8
-    <p class="browsehappy">
-      You are using an <strong>outdated</strong> browser.
-      Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-    </p>
-  <![endif]-->
-
-  <!-- Sidebar -->
-  <!--<div id="sidebar" ng-include="'../app/header/header_view.html'" ng-controller="HeaderController"-->
-       <!--&gt;</div>-->
-
   <header ng-class="{'no-sidebar': !auth.isAuthenticated()}"></header>
 
   <!-- Content -->
