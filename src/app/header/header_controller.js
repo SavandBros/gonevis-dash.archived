@@ -33,7 +33,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         icon: "fa-dashboard"
       }, {
         label: translations.WRITE,
-        sref: "dash.entry-new",
+        sref: "dash.entry-edit",
         icon: "fa-plus"
       }, {
         label: translations.POSTS,
