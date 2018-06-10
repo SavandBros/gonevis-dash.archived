@@ -1,18 +1,17 @@
 <!-- Add button -->
-<button type="button" class="btn btn-primary btn-corner" ng-click="Tag.viewCreate()">
+<button type="button" class="btn btn-primary btn-corner" ng-click="Tag.view(false)">
   <i class="fa fa-plus"></i>
 </button>
 <!-- Main -->
 <div class="container container-light pad-top">
   <div class="col-md-12">
     <!-- Top bar -->
-    <ng-include src="'basement/view/top_bar.html'"></ng-include>
+    <top-bar search-form="searchForm" view="view" view-name="tagView"></top-bar>
     <!-- Search noresult -->
-    <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+    <no-result search-form="searchForm" view="view"></no-result>
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!tags.length && !searchForm.noResult && initialled"
-      ng-init="nothingText = 'It\'s lonely here... Try adding some tags.'">
-    </ng-include>
+    <nothing text="It's lonely here... Try adding some tags." view="view"
+      ng-if="!tags.length && !searchForm.noResult && initialled"></nothing>
     <!-- List -->
     <div ng-if="tags.length" class="animated fadeIn">
       <!-- Grid view -->
@@ -21,10 +20,10 @@
           <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4"  ng-repeat="tag in tags track by $index" ng-show="!tag.isDeleted">
               <!-- Tag (thumbnail) -->
-              <a class="thumbnail text-center s-pad-no" ng-click="tag.view()">
+              <a class="thumbnail text-center s-pad-no" ng-click="tag.view(true)">
                 <!-- Image -->
                 <img ng-src="{{ tag.get.media.cover_image.thumbnail_128x128 ?
-                    tag.get.media.cover_image.thumbnail_128x128 : '../assets/img/default/128x128.png'
+                    tag.get.media.cover_image.thumbnail_128x128 : codekit.getDefaultImage('small')
                   }}" width="100%">
                 <!-- Name -->
                 <div class="caption t-line">
@@ -46,13 +45,13 @@
                   <!-- Image -->
                   <div class="media-left va-m">
                     <img class="tag media-object img-circle" ng-src="{{ tag.get.media.cover_image.thumbnail_48x48 ?
-                      tag.get.media.cover_image.thumbnail_48x48 : '../assets/img/default/48x48.png'
+                      tag.get.media.cover_image.thumbnail_48x48 : codekit.getDefaultImage('tiny')
                     }}">
                   </div>
                   <div class="media-body">
                     <!-- Name and count -->
                     <span class="media-heading">
-                      <a ng-click="tag.view()">
+                      <a ng-click="tag.view(true)">
                         <span>{{ tag.get.name }}</span>
                         <small class="o-fade text-muted">x{{ tag.get.tagged_items_count | number }}</small>
                       </a>
@@ -69,7 +68,7 @@
                   <i class="fa fa-fw fa-ellipsis-v"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a ng-click="tag.view()"><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-click="tag.view(true)"><i class="fa fa-eye"></i> View</a></li>
                   <li>
                     <a href="{{ tag.get.absolute_uri }}" target="_blank">
                       <i class="fa fa-fw fa-external-link"></i> View on site
@@ -90,6 +89,6 @@
       </div>
     </div>
     <!-- More -->
-    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
+    <pagination page-form="pageForm" ng-if="initialled"></pagination>
   </div>
 </div>

@@ -12,7 +12,6 @@ function DolphinController($scope, $rootScope, Dolphin,
     $scope.dolphins = [];
     $scope.dolphinForm = {};
     $scope.search = Search;
-    $scope.nothingText = "It's lonely here... Go ahead and upload some files.";
 
     if ($rootScope.selectionMode) {
       $scope.currentTab = "dolphin";
@@ -23,10 +22,10 @@ function DolphinController($scope, $rootScope, Dolphin,
     };
     API.Dolphins.get(payload,
       function(data) {
-        $scope.initialled = true;
         angular.forEach(data.results, function(data) {
           $scope.dolphins.push(new Dolphin(data));
         });
+        $scope.initialled = true;
         $scope.dolphinForm = Pagination.paginate(
           $scope.dolphinForm, data, {}
         );
@@ -35,16 +34,6 @@ function DolphinController($scope, $rootScope, Dolphin,
         $rootScope.$broadcast("gonevisDash.Tour.readyToCheck", "files");
       }
     );
-
-    /**
-     * @desc Set item view style
-     *
-     * @param {string} view
-     */
-    $scope.setView = function(view) {
-      $scope.view = view;
-      localStorageService.set("dolphinView", view);
-    };
 
     $scope.upload = {
       files: [],
@@ -212,7 +201,7 @@ function DolphinController($scope, $rootScope, Dolphin,
    */
   $scope.$on("gonevisDash.Search:submit", function(event, data) {
     if (data.success) {
-      $scope.dolphinForm = data.dolphinForm;
+      $scope.dolphinForm = data.pageForm;
       $scope.dolphins = [];
       angular.forEach(data.data.results, function(data) {
         $scope.dolphins.push(new Dolphin(data));

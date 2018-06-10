@@ -1,0 +1,5 @@
+{
+  "name": "staging",
+  "apiEndpoint": "http://draft.gonevis.com/api/v1/",
+  "SENTRY_DSN": "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
+}

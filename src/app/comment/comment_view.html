@@ -1,14 +1,11 @@
 <div class="container container-light pad-top">
   <div class="col-md-12">
     <!-- Search form -->
-    <ng-include src="'basement/search/search_form.html'" ng-if="initialled">
-    </ng-include>
+    <search search-form="searchForm" ng-if="initialled"></search>
     <!-- Search noresult -->
-    <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+    <no-result search-form="searchForm"></no-result>
     <!-- Nothing -->
-    <ng-include src="'basement/nothing/nothing.html'" ng-if="!comments.length && !searchForm.noResult && initialled"
-      ng-init="nothingText = 'You have no comments.'">
-    </ng-include>
+    <nothing text="You have no comments." ng-if="!comments.length && !searchForm.noResult && initialled"></nothing>
     <!-- List -->
     <div class="list-view" ng-if="comments.length">
       <div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
@@ -57,6 +54,6 @@
       </div>
     </div>
     <!-- More -->
-    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
+    <pagination page-form="pageForm" ng-if="initialled"></pagination>
   </div>
 </div>

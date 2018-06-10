@@ -1,5 +1,5 @@
 "use strict";
-import headerTemplate from "./header_view.html"
+import headerTemplate from "./header_view.html";
 
 import app from "../app";
 
@@ -7,6 +7,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
                           AuthService, DolphinService, Codekit, Entry, API, ModalsService, TourService, toaster) {
 
   function constructor() {
+
+    // Settings
+    $scope.set = $rootScope.set;
 
     // User
     $scope.auth = AuthService;
@@ -26,7 +29,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout,
       icon: "fa-dashboard"
     }, {
       label: "Write",
-      sref: "dash.entry-new",
+      sref: "dash.entry-edit",
       icon: "fa-plus"
     }, {
       label: "Posts",

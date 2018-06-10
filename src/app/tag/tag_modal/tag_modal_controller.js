@@ -2,18 +2,46 @@
 
 import app from "../../app";
 
-function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
+function TagModalController($scope, Tag, paramTag, Slug, DolphinService, AuthService, ModalsService, Codekit) {
 
   function constructor() {
     $scope.dolphinService = DolphinService;
     $scope.modalsService = ModalsService;
-    $scope.editing = true;
-    $scope.tag = tag;
-    $scope.form = {
-      data: tag.get,
-      oldSlug: tag.get.slug
-    };
+
+    if (paramTag !== null) {
+      $scope.editing = true;
+      $scope.tag = paramTag;
+      $scope.form = {
+        data: paramTag.get,
+        oldSlug: paramTag.get.slug
+      };
+    } else {
+      $scope.tag = new Tag({ site: AuthService.getCurrentSite() });
+      $scope.form = {
+        data: {
+          site: $scope.tag.get.site
+        }
+      };
+    }
+
+    Codekit.focus("input.name:last");
   }
+
+  /**
+   * @desc Save form
+   *
+   * @param {object} form Form data to submit
+   */
+  $scope.save = function (form) {
+    $scope.editing ? $scope.tag.update(form) : $scope.tag.create(form);
+  };
+
+  /**
+   * @desc Slugify title and update slug
+   */
+  $scope.updateSlug = function() {
+    $scope.form.data.slug = Slug.slugify($scope.form.data.name);
+  };
 
   /**
    * @desc Dolphin selection
@@ -34,13 +62,6 @@ function TagModalController($scope, tag, Slug, DolphinService, ModalsService) {
   $scope.$on("gonevisDash.Tag:remove", function() {
     $scope.modalsService.close("tag");
   });
-
-  /**
-   * @desc Slugify title and update slug
-   */
-  $scope.updateSlug = function() {
-    $scope.form.data.slug = Slug.slugify($scope.form.data.name);
-  };
 
   /**
    * @desc Update modal

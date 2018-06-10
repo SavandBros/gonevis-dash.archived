@@ -25,15 +25,13 @@
         <!-- List -->
         <div ng-show="currentTab == 'dolphin'">
           <!-- Search form -->
-          <ng-include src="'basement/search/search_form.html'" ng-if="initialled"></ng-include>
+          <search search-form="searchForm" ng-if="initialled"></search>
 
           <!-- Search noresult -->
-          <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+          <no-result search-form="searchForm"></no-result>
 
           <!-- Nothing -->
-          <ng-include src="'basement/nothing/nothing.html'" ng-init="nothingPadding = false"
-            ng-if="!dolphins.length && !searchForm.noResult && initialled">
-          </ng-include>
+          <nothing text="You have no images" ng-if="!dolphins.length && !searchForm.noResult && initialled"></nothing>
 
           <!-- Loading -->
           <div class="s-pad text-center" ng-if="!initialled">
@@ -51,9 +49,7 @@
               </a>
             </div>
             <!-- Load more -->
-            <ng-include src="'basement/pagination/pagination_loadmore.html'"
-              ng-init="pageForm = dolphinForm" ng-if="initialled">
-            </ng-include>
+            <pagination page-form="dolphinForm" ng-if="initialled"></pagination>
           </div>
         </div>
 

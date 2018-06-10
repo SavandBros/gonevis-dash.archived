@@ -117,6 +117,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
       controller: "MainController",
       template: require("./main/main_view.html"),
       auth: true,
+      lazyLoad: ($transition$) => {
+        const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
+
+        return import(/* webpackChunkName: "main" */ "./main/main_controller")
+          .then(mod => {
+            $ocLazyLoad.inject('chart.js');
+            $ocLazyLoad.load([mod.MAIN_DASH_MODULE]);
+          })
+          .catch(err => {
+            throw new Error("Ooops, something went wrong, " + err);
+          });
+      }
     })
     .state("dash.navigation", {
       url: "/navigation",
@@ -148,21 +160,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       auth: true,
       title: "Comments"
     })
-    .state("dash.entry-new", {
-      url: "/new",
-      controller: "EntryNewController",
-      template: require("./entry/entry_new/entry_new_view.html"),
-      auth: true,
-      clickEvent: true,
-      editor: true,
-      params: {
-        lights: true,
-        isPage: false
-      },
-      title: "Nevis"
-    })
     .state("dash.entry-edit", {
-      url: "/entry/:entryId",
+      url: "/write/:entryId",
       controller: "EntryEditController",
       template: require("./entry/entry_edit/entry_edit_view.html"),
       auth: true,
@@ -170,9 +169,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
       editor: true,
       params: {
         entryId: null,
-        lights: true
+        lights: true,
+        isPage: false
       },
-      title: "Nevis"
+      title: "Nevis",
+      lazyLoad: ($transition$) => {
+        const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
+
+        return import(/* webpackChunkName: "entry-edit" */ "./entry/entry_edit/entry_edit_controller")
+          .then(mod => $ocLazyLoad.load(mod.EDIT_ENTRY_MODULE))
+          .catch(err => {
+            throw new Error("Ooops, something went wrong, " + err);
+          });
+      }
     })
     .state("dash.entry-list", {
       url: "/posts",

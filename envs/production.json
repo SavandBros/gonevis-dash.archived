@@ -1,0 +1,5 @@
+{
+  "name": "production",
+  "apiEndpoint": "https://www.gonevis.com/api/v1/",
+  "SENTRY_DSN": "https://34664609d2d7416493b4360ea445b452@sentry.io/198251"
+}

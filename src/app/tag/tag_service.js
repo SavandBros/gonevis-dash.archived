@@ -82,11 +82,19 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
 
     /**
      * @desc View tag as modal (detailed mode).
+     *
+     * @param {boolean} editing
      */
-    this.view = function() {
-      ModalsService.open("tag", "TagModalController", {
-        tag: angular.copy(this)
-      });
+    this.view = function(editing) {
+      var param = {};
+
+      if (editing) {
+        param.paramTag = angular.copy(this);
+      } else {
+        param.paramTag = null;
+      }
+
+      ModalsService.open("tag", "TagModalController", param);
     };
 
     /**
@@ -99,13 +107,6 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
           url: "/tag/" + this.get.slug
         }
       });
-    };
-
-    /**
-     * @desc Tag creation modal
-     */
-    this.viewCreate = function() {
-      ModalsService.open("tagCreate", "TagNewModalController");
     };
 
     /**
@@ -125,7 +126,7 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
         function(data) {
           form.loading = false;
           form.data.tagged_items_count = 0;
-          ModalsService.close("tagCreate");
+          ModalsService.close("tag");
           toaster.success("Done", "Tag " + data.name + " created.");
           $rootScope.$broadcast("gonevisDash.Tag:create", {
             success: true,

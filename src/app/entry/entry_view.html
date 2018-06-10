@@ -1,18 +1,16 @@
 <!-- Add button -->
-<button type="button" class="btn btn-primary btn-corner" ui-sref="dash.entry-new({isPage: isPageView})">
+<button type="button" class="btn btn-primary btn-corner" ui-sref="dash.entry-edit({isPage: isPageView})">
   <i class="fa fa-plus"></i>
 </button>
 <!-- Main -->
 <div class="container container-light pad-top">
   <!-- Top bar -->
-  <ng-include src="'basement/view/top_bar.html'"></ng-include>
+  <top-bar search-form="searchForm" view="view" view-name="entryView"></top-bar>
   <!-- Search noresult -->
-  <ng-include src="'basement/search/search_noresult.html'"></ng-include>
+  <no-result search-form="searchForm" view="view"></no-result>
   <!-- Nothing -->
   <!-- TODO: Translate -->
-  <ng-include src="'basement/nothing/nothing.html'" ng-if="!entries.length && !searchForm.noResult && initialled"
-    ng-init="nothingText = pageNothingText">
-  </ng-include>
+  <nothing text="nothingText" view="view" ng-if="!entries.length && !searchForm.noResult && initialled"></nothing>
   <!-- List -->
   <div ng-if="entries.length">
     <!-- Entry grid -->
@@ -20,7 +18,7 @@
       <div class="col-xs-12 col-md-4" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
         <div class="post">
           <div class="post-img" style="background-image: url({{ entry.get.media.cover_image.thumbnail_256x256 ?
-            entry.get.media.cover_image.thumbnail_256x256 : '../assets/img/default/256x256.png' }});">
+            entry.get.media.cover_image.thumbnail_256x256 : codekit.getDefaultImage('medium') }});">
             <div class="post-featured" ng-if="entry.get.featured">
               <i class="fa fa-star-o fa-fw text-warning c-white "></i>
             </div>
@@ -169,6 +167,6 @@
       </div>
     </div>
     <!-- More -->
-    <ng-include src="'basement/pagination/pagination_loadmore.html'" ng-if="initialled"></ng-include>
+    <pagination page-form="pageForm" ng-if="initialled"></pagination>
   </div>
 </div>

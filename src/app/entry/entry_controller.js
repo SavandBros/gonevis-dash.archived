@@ -5,12 +5,13 @@ import app from "../app";
 function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
 
   function constructor() {
+    $scope.codekit = Codekit;
     $scope.isPageView = $state.includes("dash.page-list");
 
     if ($scope.isPageView) {
-      $scope.pageNothingText = "No pages yet.";
+      $scope.nothingText = "No pages yet.";
     } else {
-      $scope.pageNothingText = "No posts yet.";
+      $scope.nothingText = "No posts yet.";
     }
 
     $scope.view = localStorageService.get("entryView") || "list";
@@ -85,16 +86,6 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
   };
 
   /**
-   * @desc Set item view style
-   *
-   * @param {string} view
-   */
-  $scope.setView = function(view) {
-    $scope.view = view;
-    localStorageService.set("entryView", view);
-  };
-
-  /**
    * @desc Remove selected entries
    */
   $scope.removeSelected = function() {
@@ -162,4 +153,4 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
   constructor();
 }
 
-app.controller("EntryController", EntryController)
+app.controller("EntryController", EntryController);

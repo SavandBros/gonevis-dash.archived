@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <i class="fa fa-hashtag text-primary"></i>
-        {{ form.data.name }}
+        {{ editing ? form.data.name : "Create Tag" }}
         <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
         <button class="btn btn-default btn-xs pull-right" ng-click="dolphinService.viewSelection('tagCover')"
           title="Set or Change cover image of site.">
@@ -11,15 +11,54 @@
         </button>
       </div>
       <div class="modal-body">
-        <form ng-submit="tag.update(form)">
-          <ng-include src="'tag/includes/tag_form.html'"></ng-include>
-          <div class="btn-group stack">
+        <form ng-submit="save(form)">
+          <!-- Name -->
+          <div class="form-group" ng-class="{'has-error': form.errors.name}">
+            <input id="name" class="form-control name" type="text" ng-model="form.data.name"
+          		placeholder="Name" ng-change="updateSlug()" required/>
+            <span id="name" class="help-block" ng-show="form.errors.name">{{ form.errors.name[0] }}</span>
+          </div>
+          <!-- Slug -->
+          <div class="form-group" ng-class="{'has-error': form.errors.slug}">
+            <input id="slug" class="form-control" type="text" ng-model="form.data.slug" placeholder="Tag">
+            <span id="slug" class="help-block" ng-show="form.errors.slug">{{ form.errors.slug[0] }}</span>
+          </div>
+          <!-- Descroption -->
+          <div class="form-group" ng-class="{'has-error': form.errors.description}">
+            <textarea id="description" class="form-control" type="text" ng-model="form.data.description"
+          		placeholder="Descroption"></textarea>
+            <span id="description" class="help-block" ng-show="form.errors.description">{{ form.errors.slug[0] }}</span>
+          </div>
+          <!-- Advanced Options and View on site -->
+          <div class="form-group">
+            <a href="{{ form.data.absolute_uri }}"
+               class="btn btn-default btn-sm btn-block"
+               target="_blank"
+               ng-if="editing">
+              <i class="fa fa-external-link"></i> View on site
+            </a>
+            <button class="btn btn-default btn-sm btn-block"
+              type="button" ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
+              <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
+              Advanced Options
+            </button>
+          </div>
+          <!-- Meta Title and Meta Desc -->
+          <div uib-collapse="advanced">
+            <div class="form-group">
+              <input ng-model="form.data.meta_description" placeholder="Meta description" class="form-control">
+            </div>
+          </div>
+          <!-- Update -->
+          <div class="btn-group stack" ng-if="editing">
             <button class="btn btn-primary" ng-disabled="form.loading">Update</button>
             <button class="btn btn-default" ng-disabled="form.loading" type="button"
               title="Delete" type="button" ng-click="tag.remove()">
               <i class="fa fa-trash"></i>
             </button>
           </div>
+          <!-- Create -->
+          <button class="btn btn-success btn-block" ng-disabled="form.loading" ng-if="!editing">Create</button>
         </form>
       </div>
     </div>

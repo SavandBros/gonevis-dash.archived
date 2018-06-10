@@ -5,6 +5,7 @@ import app from "../app";
 function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
 
   function constructor() {
+    $scope.codekit = Codekit;
     $scope.teamRoles = Codekit.teamRoles;
 
     API.Team.get({

@@ -8,7 +8,7 @@ let Raven = require('raven-js');
 
 
 app.config(function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
-  cfpLoadingBarProvider, ChartJsProvider, ENV) {
+  cfpLoadingBarProvider, ENV) {
 
   // Http
   $httpProvider.interceptors.push(AuthInterceptorService);
@@ -24,20 +24,6 @@ app.config(function($httpProvider, $resourceProvider, $cookiesProvider, $qProvid
 
   // CFP loading bar
   cfpLoadingBarProvider.includeSpinner = false;
-
-  // Configure all charts
-  ChartJsProvider.setOptions({
-    chartColors: [
-      "#99FF99",
-      "#FFAA00",
-      "#DDDDDD"
-    ],
-    elements: {
-      arc: {
-        borderWidth: 4
-      }
-    }
-  });
 
   // Custom exception handler
   $provide.decorator("$exceptionHandler", ["$delegate", "$window", function($delegate) {

@@ -1,5 +1,7 @@
 "use strict";
 
+import app from "../../app";
+
 function ResetPassController($scope, $state, AuthService, API, Password) {
 
   function constructor() {
@@ -37,10 +39,3 @@ function ResetPassController($scope, $state, AuthService, API, Password) {
 }
 
 app.controller("ResetPassController", ResetPassController);
-ResetPassController.$inject = [
-  "$scope",
-  "$state",
-  "AuthService",
-  "API",
-  "Password"
-];

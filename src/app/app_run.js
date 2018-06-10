@@ -42,6 +42,8 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
     };
   }
 
+  $rootScope.auth = AuthService;
+
   /**
    * @desc Medium editor options
    * @type {object}

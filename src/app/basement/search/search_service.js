@@ -1,5 +1,6 @@
 "use strict";
-
+import searchFormTemplate from "./search_form.html";
+import noResultTemplate from "./search_noresult.html";
 
 import app from '../../app';
 
@@ -58,7 +59,7 @@ function Search($rootScope, Pagination) {
     }, form.payload);
 
     form.api(payload,
-      function(data) {
+      function (data) {
         form.data = data;
         form.searchedQuery = form.query;
 
@@ -85,3 +86,17 @@ function Search($rootScope, Pagination) {
 }
 
 app.factory("Search", Search);
+app.component("noResult", {
+  template: noResultTemplate,
+  bindings: {
+    searchForm: "=",
+    view: "<"
+  }
+});
+app.component("search", {
+  template: searchFormTemplate,
+  controller: Search,
+  bindings: {
+    searchForm: "<"
+  }
+});
