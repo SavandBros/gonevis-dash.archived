@@ -1,7 +1,7 @@
 "use strict";
 
 describe("Password", function () {
-  beforeEach(module("gonevisDash"));
+  beforeEach(angular.mock.module("gonevisDash"));
 
   var Password;
   var password;

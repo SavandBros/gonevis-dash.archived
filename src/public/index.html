@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>GoNevis Dash</title>
+  <meta name="description" content="Advanced dashboard for GoNevis.">
+  <meta name="viewport" content="width=device-width">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="img/fav/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="img/fav/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="img/fav/manifest.json">
+  <link rel="mask-icon" href="img/fav/safari-pinned-tab.svg" color="#d17100">
+  <link rel="shortcut icon" href="img/fav/favicon.ico">
+  <meta name="apple-mobile-web-app-title" content="GoNevis">
+  <meta name="application-name" content="GoNevis">
+  <meta name="msapplication-config" content="img/fav/browserconfig.xml">
+  <meta name="theme-color" content="#d17100">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+</head>
+
+
+
+<body ng-app="gonevisDash" class="lights" ng-class="{off: !set.lights, full: !set.sidebar}">
+  <!--[if lte IE 8
+    <p class="browsehappy">
+      You are using an <strong>outdated</strong> browser.
+      Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    </p>
+  <![endif]-->
+
+  <!-- Sidebar -->
+  <!--<div id="sidebar" ng-include="'../app/header/header_view.html'" ng-controller="HeaderController"-->
+       <!--&gt;</div>-->
+
+  <header ng-class="{'no-sidebar': !auth.isAuthenticated()}"></header>
+
+  <!-- Content -->
+  <div id="content" ng-class="{'full-content': !set.sidebar}" ui-view></div>
+
+  <!-- Google analytics -->
+  <script>
+    ! function(A, n, g, u, l, a, r) {
+      A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
+          (A[l].q = A[l].q || []).push(arguments)
+        }, A[l].l = +new Date, a = n.createElement(g),
+        r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+    }(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+    ga("create", "UA-58251754-3");
+  </script>
+
+</body>
+
+</html>

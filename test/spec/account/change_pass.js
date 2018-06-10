@@ -1,7 +1,8 @@
 "use strict";
 
+
 describe("ChangePassController", function () {
-  beforeEach(module("gonevisDash"));
+  beforeEach(angular.mock.module("gonevisDash"));
 
   var $controller;
   var $scope;

@@ -1,0 +1,94 @@
+<!-- Add button -->
+<button type="button" class="btn btn-primary btn-corner" ng-click="Tag.view(false)">
+  <i class="fa fa-plus"></i>
+</button>
+<!-- Main -->
+<div class="container container-light pad-top">
+  <div class="col-md-12">
+    <!-- Top bar -->
+    <top-bar search-form="searchForm" view="view" view-name="tagView"></top-bar>
+    <!-- Search noresult -->
+    <no-result search-form="searchForm" view="view"></no-result>
+    <!-- Nothing -->
+    <nothing text="It's lonely here... Try adding some tags." view="view"
+      ng-if="!tags.length && !searchForm.noResult && initialled"></nothing>
+    <!-- List -->
+    <div ng-if="tags.length" class="animated fadeIn">
+      <!-- Grid view -->
+      <div class="panel-body s-pad-y-no" ng-show="view == 'grid'">
+        <ul class="list-unstyled s-mar-no">
+          <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4"  ng-repeat="tag in tags track by $index" ng-show="!tag.isDeleted">
+              <!-- Tag (thumbnail) -->
+              <a class="thumbnail text-center s-pad-no" ng-click="tag.view(true)">
+                <!-- Image -->
+                <img ng-src="{{ tag.get.media.cover_image.thumbnail_128x128 ?
+                    tag.get.media.cover_image.thumbnail_128x128 : codekit.getDefaultImage('small')
+                  }}" width="100%">
+                <!-- Name -->
+                <div class="caption t-line">
+                  <small class="text-primary">{{ tag.get.name }}</small>
+                </div>
+              </a>
+            </div>
+          </div>
+        </ul>
+      </div>
+      <!-- List view -->
+      <div ng-show="view == 'list'" class="panel panel-default s-mar-x-soft">
+        <div class="panel-body s-pad-y-no">
+          <ul class="list-unstyled s-mar-no">
+            <!-- Tag (List) -->
+            <li class="row list-panel" ng-repeat="tag in tags track by $index" ng-show="!tag.isDeleted">
+              <div class="col-md-11 col-xs-9 col-sm-10 s-pad-no">
+                <div class="media">
+                  <!-- Image -->
+                  <div class="media-left va-m">
+                    <img class="tag media-object img-circle" ng-src="{{ tag.get.media.cover_image.thumbnail_48x48 ?
+                      tag.get.media.cover_image.thumbnail_48x48 : codekit.getDefaultImage('tiny')
+                    }}">
+                  </div>
+                  <div class="media-body">
+                    <!-- Name and count -->
+                    <span class="media-heading">
+                      <a ng-click="tag.view(true)">
+                        <span>{{ tag.get.name }}</span>
+                        <small class="o-fade text-muted">x{{ tag.get.tagged_items_count | number }}</small>
+                      </a>
+                    </span>
+                    <!-- Description -->
+                    <small class="dis-b o-fade">{{ tag.get.description || "#" + tag.get.slug }}</small>
+                  </div>
+                </div>
+              </div>
+              <!-- Options -->
+              <div class="dropdown text-right col-md-1 col-xs-3 col-sm-2 s-pad-no">
+                <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
+                  style="margin-top: 4px;">
+                  <i class="fa fa-fw fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a ng-click="tag.view(true)"><i class="fa fa-eye"></i> View</a></li>
+                  <li>
+                    <a href="{{ tag.get.absolute_uri }}" target="_blank">
+                      <i class="fa fa-fw fa-external-link"></i> View on site
+                    </a>
+                  </li>
+                  <li>
+                    <a ng-click="tag.addToNavigation()">
+                      <i class="fa fa-fw fa-bars"></i> Add to navigation
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li><a ng-click="tag.remove()"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- More -->
+    <pagination page-form="pageForm" ng-if="initialled"></pagination>
+  </div>
+</div>

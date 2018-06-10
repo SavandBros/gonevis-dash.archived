@@ -1,15 +1,13 @@
+machine:
+  node:
+    version: 8.2.0
 dependencies:
   override:
-    - npm install -g grunt-cli bower
+    - npm install -g codecov
     - npm install
-    - bower install
 test:
-  override:
-    - 'grunt jshint'
-    - 'grunt jscs'
-    - 'grunt test'
   post:
-    - bash <(curl -s https://codecov.io/bash)
+    - codecov
 deployment:
   production:
     branch: production
