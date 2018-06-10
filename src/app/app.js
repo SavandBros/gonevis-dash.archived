@@ -18,7 +18,8 @@ const deps = [
   'angular-sortable-view',
   'angular-loading-bar',
   'toaster',
-  'LocalStorageModule'
+  'LocalStorageModule',
+  'pascalprecht.translate'
 ];
 
 const MODULE_NAME = 'gonevisDash';
