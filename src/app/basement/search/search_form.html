@@ -1,0 +1,11 @@
+<!-- Search -->
+<form ng-submit="$ctrl.submit($ctrl.searchForm)" class="animated fadeIn s-mar-bottom-soft search-form">
+	<div class="input-group">
+		<input type="text" class="form-control" placeholder="{{ 'Search' }}" ng-model="$ctrl.searchForm.query">
+		<span class="input-group-btn">
+      <button class="btn btn-default" type="submit">
+        <span class="fa fa-search"></span>
+      </button>
+		</span>
+	</div>
+</form>

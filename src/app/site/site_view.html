@@ -1,0 +1,262 @@
+<!-- Site cover image -->
+<div class="container-fluid container-image" ng-if="site.media.cover_image" ng-click="selectImage('cover_image')"
+  style="background-image: url('{{ site.media.cover_image.file }}')">
+  <p><i class="fa fa-fw fa-edit"></i> Change cover image</p>
+</div>
+
+<!-- Main -->
+<div class="container container-light animated fadeIn">
+
+  <!-- Left panels -->
+  <div class="col-md-8">
+    
+    <!-- Settings -->
+    <div class="panel panel-default">
+      <h4 class="panel-heading lower">
+        <!-- Logo -->
+        <img class="img-circle heading-image" ng-if="site.media.logo" ng-src="{{ site.media.logo.thumbnail_48x48 }}">
+        <!-- Title -->
+        <span style="line-height: 40px">{{ site.title }}</span>
+        <!-- Visit -->
+        <a class="btn btn-default pull-right"
+          ng-href="{{ site.absolute_uri }}" target="_blank" title="Go to site.">
+          View site
+        </a>
+        <div class="clearfix"></div>
+      </h4>
+      <div class="panel-body s-pad">
+        <!-- Title -->
+        <div class="input-panel">
+          <div class="row">
+            <div class="col-xs-3 col-sm-2"><small>TITLE</small></div>
+            <div class="col-xs-9 col-sm-10">
+              <span editable-text="site.title" onbeforesave="updateSite('title', $data)">
+                {{ site.title || "Nothing here..." }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- URL -->
+        <div class="input-panel">
+          <div class="row">
+            <div class="col-xs-3 col-sm-2"><small>URL</small></div>
+            <div class="col-xs-9 col-sm-10 t-line">
+              <a ng-href="{{ site.absolute_uri }}" target="_blank" title="Can not be changed.">
+                {{ site.absolute_uri || "Nothing here..." }}
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Description -->
+        <div class="input-panel">
+          <div class="row">
+            <div class="col-xs-12 col-sm-2"><small>DESCRIPTION</small></div>
+            <div class="col-xs-9 col-sm-10">
+              <span editable-textarea="site.description" onbeforesave="updateSite('description', $data)">
+                {{ site.description || "Nothing here..." }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advanced -->
+    <div class="panel panel-default">
+      <div class="panel-heading lower">Advanced</div>
+      <div class="panel-body s-pad">
+        <!-- Meta Description -->
+        <div class="input-panel">
+          <div class="row">
+            <div class="col-sm-3"><small>META DESCRIPTION</small></div>
+            <div class="col-sm-9">
+              <span editable-textarea="site.meta_description" e-maxlength="160"
+                onbeforesave="updateSite('meta_description', $data)">
+                {{ site.meta_description || "Nothing here..." }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Post Per Page -->
+        <div class="input-panel">
+          <div class="row">
+            <div class="col-xs-8 col-sm-9">
+              <small style="margin-top: 10px" class="dis-b">NUMBER OF POSTS PER PAGE</small>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+              <select class="form-control" ng-model="site.paginate_by"
+                ng-change="updateSite('paginate_by', site.paginate_by)">
+                <option ng-value="$index" ng-if="$index" ng-repeat="number in postPerPage track by $index">
+                  {{ $index }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- Commenting -->
+        <div class="s-mar-y">
+          <div class="checkbox checkbox-primary checkbox-small">
+            <input id="commenting" type="checkbox" ng-model="site.commenting"
+              ng-change="updateSite('commenting', site.commenting)">
+            <label for="commenting">Allow visitors to comment on my posts.</label>
+          </div>
+        </div>
+        <!-- Voting -->
+        <div class="s-mar-y">
+          <div class="checkbox checkbox-primary checkbox-small">
+            <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
+            <label for="voting">Allow visitors to vote on my posts.</label>
+          </div>
+        </div>
+        <!-- Search engine visibility -->
+        <div class="s-mar-top">
+          <div class="checkbox checkbox-primary checkbox-small">
+            <input id="search_engine_visibility" type="checkbox"
+              ng-change="updateSite('search_engine_visibility', site.search_engine_visibility)"
+              ng-model="site.search_engine_visibility">
+            <label for="search_engine_visibility">Let search engine discover my site.</label>
+          </div>
+        </div>
+        <!-- Branding -->
+        <div class="s-mar-top">
+          <div class="checkbox checkbox-primary checkbox-small"
+            title="Logo or name of the GoNevis.com will not appear anymore.">
+            <input id="remove_branding" type="checkbox"
+              ng-change="updateSite('remove_branding', site.remove_branding)"
+              ng-model="site.remove_branding">
+            <label for="remove_branding">Remove GoNevis.com branding.</label>
+          </div>
+        </div>
+        <!-- Footer text -->
+        <div class="input-panel s-mar-top" ng-if="site.remove_branding">
+          <div class="row">
+            <div class="col-sm-3"><small>FOOTER TEXT</small></div>
+            <div class="col-sm-9">
+              <span editable-textarea="site.footer_text" e-maxlength="500"
+                onbeforesave="updateSite('footer_text', $data)">
+                {{ site.footer_text || "Nothing here..." }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Allow Google Analytics -->
+        <div class="s-mar-top">
+          <div class="checkbox checkbox-primary checkbox-small"
+            title="If disabled, GoNevis will no longer use Google Analytics code on the website, either it own or your provided Google Analytics code.">
+            <input id="google_analytics_enabled" type="checkbox"
+              ng-change="updateSite('google_analytics_enabled', site.google_analytics_enabled)"
+              ng-model="site.google_analytics_enabled">
+            <label for="google_analytics_enabled">Allow Google Analytics.</label>
+          </div>
+        </div>
+        <!-- Google Analytics code -->
+        <div class="input-panel s-mar-top" ng-if="site.google_analytics_enabled">
+          <div class="row">
+            <div class="col-xs-8 col-sm-9"><small>GOOGLE ANALYTICS CODE</small></div>
+            <div class="col-xs-4 col-sm-3">
+              <span editable-text="site.google_analytics_code" e-maxlength="100"
+                onaftersave="updateSite('google_analytics_code', $data)">
+                {{ site.google_analytics_code || "Nothing here..." }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer" ng-if="!hideDelete">
+        <!-- Delete -->
+        <button class="btn btn-danger" ng-click="deleteSite()">
+          <i class="fa fa-fw fa-trash"></i> Delete Site
+        </button>
+      </div>
+    </div>
+
+    <!-- Custom domains -->
+    <div class="panel panel-default">
+      <div class="panel-heading lower">Domains</div>
+      <div class="panel-body">
+        <!-- Help text -->
+        <p>
+          <i class="fa fa-info-circle"></i>
+          Supply domain URLs to your DNS provider for the destination of CNAME or ALIAS records.
+        </p>
+        <hr>
+        <!-- Domain list -->
+        <table class="table table-hover" ng-if="site.domains.length">
+          <thead>
+            <tr>
+              <th>Domain Name</th>
+              <th>DNS Target</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="domain in site.domains">
+              <!-- Domain link -->
+              <td><a ng-href="https://{{ domain.domain }}" target="_blank">{{ domain.domain }}</a></td>
+              <!-- Domain DNS Target -->
+              <td>{{ domain.cname }}</td>
+              <!-- Remove button -->
+              <td>
+                <button class="btn btn-xs btn-default pull-right o-fade-hard o-fade-hover-full"
+                  title="Delete this domain" ng-click="deleteDomain(domain)">
+                  <i class="fa fa-close"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Add domain -->
+        <button class="btn btn-default" ng-click="addDomain()"
+          ng-disabled="site.domains.length == maxCustomDomains">Add Domain</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right panels -->
+  <div class="col-md-4 animated fadeIn" ng-if="siteTemplate">
+
+    <!-- Appearance -->
+    <form class="panel panel-default">
+      <h3 class="panel-heading lower" style="line-height: 40px">Appearance</h3>
+      <div class="panel-body">
+        <!-- Template -->
+        <button class="btn btn-primary btn-block btn-lg" ng-click="siteTemplates()" ng-disabled="loadingTemplate">
+          <small>Theme:</small> {{ siteTemplate.name | uppercase }}
+        </button>
+        <br>
+        <!-- Site images -->
+        <div class="btn-group stack stack-equal">
+          <button class="btn btn-default" ng-click="selectImage('logo')" title="Change site log image">
+            Site Logo
+          </button>
+          <button class="btn btn-default" ng-click="selectImage('cover_image')" title="Change site cover image">
+            Site Cover
+          </button>
+        </div>
+        <!-- Theme options -->
+        <p class="s-mar-y"><i class="fa fa-cog"></i> <b>Theme options</b></p>
+        <!-- Template fields -->
+        <div class="form-grop" ng-repeat="(key, field) in siteTemplate.fields"
+          ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
+          <hr ng-if="!$first">
+          <!-- Char and boolean field -->
+          <input id="{{ key }}" name="{{ key }}" type="{{ field.type === 'char' ? 'text' : 'checkbox' }}"
+            class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
+            ng-model="siteTemplate.fields[key].value">
+          <!-- Field label -->
+          <label for="{{ key }}"><b>{{ field.verbose_name }}</b></label>
+          <!-- Text field -->
+          <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
+            placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
+          </textarea>
+          <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
+        </div>
+        <br>
+        <!-- Update button -->
+        <button class="btn btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
+          <i class="fa fa-fw fa-check text-primary"></i> Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="modal fade sidebar right" id="team">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header modal-header-clickable" data-dismiss="modal">
+        <i class="fa fa-chevron-left"></i>
+      </div>
+      <div class="modal-body">
+        <!-- Cover -->
+        <div class="cover" ng-class="{open: open}" ng-click="open = !open" ng-init="open = false"
+          style="background-image: url({{ !team.isPending ? team.user.getMedia('medium') : codekit.getDefaultImage('avatar') }})">
+        </div>
+        <!-- Title -->
+        <h3 class="c-white t-shadow">
+          <!-- Name -->
+          <span ng-if="!team.isPending">{{ team.user.getFullName() || team.user.get.username }}</span>
+          <br>
+          <!-- Role -->
+          <small class="c-white">{{ teamRoles[team.role].label }}</small>
+        </h3>
+        <br>
+        <!-- Info -->
+        <div class="s-mar-top-soft">
+          <!-- Username -->
+          <h4 ng-if="!team.isPending">
+            <i class="fa fa-fw fa-user-circle"></i>
+            <a class="pull-right" ng-href="{{ team.user.url }}" target="_blank">
+              @{{ team.user.get.username }}
+            </a>
+          </h4>
+          <hr>
+          <!-- Email -->
+          <h4 class="t-line kv" ng-if="team.user.get.email">
+            <a href="mailto:{{ team.user.get.email }}">
+              <i class="fa fa-fw fa-envelope"></i>
+              <span>{{ team.isPending ? team.email : team.user.get.email }}</span>
+            </a>
+          </h4>
+          <hr>
+          <!-- Role -->
+          <h4 ng-if="!team.isPending && team.role != 0">
+            <i class="fa fa-fw fa-cube"></i>
+            <div class="pull-right">
+              <a data-toggle="dropdown">
+                {{ teamRoles[team.role].label }}
+                <i class="fa fa-caret-down o-fade"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header">Change role</li>
+                <li ng-repeat="role in teamRoles" ng-if="$index > 0"
+                  ng-class="{active: team.role === $index}">
+                  <a ng-click="setRole(team.user.get.email, role)">{{ role.label }}</a>
+                </li>
+              </ul>
+            </div>
+            <hr>
+          </h4>
+        </div>
+        <!-- Remove -->
+        <button class="btn btn-danger stack-element"
+          ng-click="remove(team)"
+          ng-if="team.user.get.id !== user.get.id || team.isPending">
+          <i class="fa fa-trash"></i> Remove from team
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

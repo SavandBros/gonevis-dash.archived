@@ -1,0 +1,10 @@
+<div class="row animated fadeIn s-mar-no" ng-if="$parent.initialled">
+  <!-- Search form -->
+  <div class="col-md-10 col-sm-9">
+    <search search-form="$ctrl.searchForm"></search>
+  </div>
+  <!-- View buttons -->
+  <div class="col-md-2 col-sm-3">
+    <view-buttons view="$ctrl.view" view-name="{{ $ctrl.viewName }}"></view-buttons>
+  </div>
+</div>

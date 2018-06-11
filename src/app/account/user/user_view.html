@@ -1,0 +1,74 @@
+<div class="container container-light">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default s-box avatar-outside-wrapper">
+      <div class="panel-body s-pad">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="avatar avatar-outside">
+              <span ng-if="!user.hasMedia">{{ user.getDisplayName()[0] }}</span>
+              <img ng-if="user.hasMedia" class="img-circle" ng-src="{{ user.getMedia('small') }}" />
+              <div class="dropdown">
+                <h3 class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i></h3>
+                <ul class="dropdown-menu">
+                  <li><a ngf-select="uploadFile($file)"><i class="fa fa-upload"></i> Change photo</a></li>
+                  <li><a ng-click="updateProfile('picture', null)"><i class="fa fa-trash text-danger"></i> Remove</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <br class="hidden visible-xs">
+            <h3 class="text-left o-fade-soft" editable-text="user.get.name" onbeforesave="updateProfile('name', $data)">
+              <!-- TODO: Translate -->
+              {{ user.get.name || "You have no name :-[" }}
+            </h3>
+          </div>
+        </div>
+        <div class="s-mar-top">
+          <!-- About -->
+          <div class="input-panel">
+            <div class="row">
+              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+                <small class="o-fade">ABOUT</small>
+              </div>
+              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+                <span editable-textarea="user.get.about" onbeforesave="updateProfile('about', $data)">
+                  {{ user.get.about || "Nothing here..." }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- Location -->
+          <div class="input-panel">
+            <div class="row">
+              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+                <small class="o-fade">LOCATION</small>
+              </div>
+              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+                <span editable-text="user.get.location" onbeforesave="updateProfile('location', $data)">
+                  {{ user.get.location || "Nothing here..." }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- Receive email notification -->
+          <div class="input-panel s-pad-y-no">
+            <div class="checkbox checkbox-primary">
+              <input id="receive_email_notification" type="checkbox" ng-model="user.get.receive_email_notification"
+                ng-change="updateProfile('receive_email_notification', user.get.receive_email_notification)">
+              <label for="receive_email_notification">Receive email notification</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <a ui-sref="change-password({s: param.s})" class="btn btn-danger btn-sm">
+          <i class="fa fa-lock fa-fw"></i> Change Password
+        </a>
+        <div ng-show="errors">
+          <small class="help-block">{{ errors.picture[0] }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

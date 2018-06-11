@@ -1,0 +1,41 @@
+<!-- Add button -->
+<button type="button" class="btn btn-primary btn-corner" ng-click="invite()">
+  <i class="fa fa-user-plus"></i>
+</button>
+
+<!-- Main -->
+<div class="container container-light pad-top">
+  <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+    <!-- List -->
+    <div class="panel panel-default s-box animated fadeIn" ng-if="initialled">
+      <div class="panel-heading">Team</div>
+      <div class="panel-body s-pad-no">
+        <!-- Team -->
+        <div class="list-group s-mar-no">
+          <a class="list-group-item b-no" ng-repeat="team in team.list" ng-show="!team.isRemoved" ng-click="view(team)">
+            <div class="row">
+              <!-- Avatar -->
+              <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+                <img class="img-circle" ng-class="{'o-fade-hard': team.isPending || !team.user.hasMedia}"
+                  height="64" ng-src="{{ !team.isPending ? team.user.getMedia('small') : codekit.getDefaultImage('small') }}">
+              </div>
+              <!-- Name/email -->
+              <div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+                <h4 class="team-member t-line">{{ !team.isPending ? team.user.getFullName() : team.email }}</h4>
+              </div>
+              <!-- Role Label  -->
+              <div class="col-xs-10 col-sm-3 col-md-3 col-lg-3 team-role">
+                <!-- Pending label -->
+                <span class="t-small outline text-muted" ng-if="team.isPending">PENDING</span>
+                <!-- Role label -->
+                <span class="t-small outline {{ teamRoles[team.role].color }}">
+                  {{ teamRoles[team.role].label | uppercase }}
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

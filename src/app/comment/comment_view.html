@@ -1,0 +1,59 @@
+<div class="container container-light pad-top">
+  <div class="col-md-12">
+    <!-- Search form -->
+    <search search-form="searchForm" ng-if="initialled"></search>
+    <!-- Search noresult -->
+    <no-result search-form="searchForm"></no-result>
+    <!-- Nothing -->
+    <nothing text="You have no comments." ng-if="!comments.length && !searchForm.noResult && initialled"></nothing>
+    <!-- List -->
+    <div class="list-view" ng-if="comments.length">
+      <div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
+        <div class="media-left">
+          <img class="media-object img-circle" style="max-width: 48px" ng-src="{{ comment.user.getMedia('tiny') }}">
+        </div>
+        <div class="media-body">
+          <div class="media-heading s-mar-no">
+            <a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">{{ comment.user.getDisplayName() }}</a>
+            <small class="o-fade-soft">responded to</small>
+            <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
+              {{ comment.get.commented_object_minimal_data.title }}
+            </a>
+            <!-- Option -->
+            <div class="dropdown pull-right">
+              <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown">
+                <i class="fa fa-fw fa-ellipsis-v"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header">Change status</li>
+                <li ng-repeat="status in statuses" ng-class="{'active': comment.getStatus().label == status.label}">
+                  <a ng-click="comment.setStatus(status.property, status.value)">
+                    <i class="fa fa-{{ status.icon }}"></i> {{ status.label }}
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a ng-click="comment.remove()">
+                    <i class="fa fa-fw fa-trash text-danger"></i> <span>Delete comment</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Comment -->
+          <p class="s-mar-no" ng-bind-html="comment.get.comment"></p>
+          <!-- Info -->
+          <small>
+            <span class="o-fade-soft">
+              {{ comment.get.created | date }} &middot;
+              <span ng-if="comment.get.status !== 1">{{ comment.getStatus().label }} &middot;</span>
+            </span>
+            <a ng-click="comment.view()">Open</a>
+          </small>
+        </div>
+      </div>
+    </div>
+    <!-- More -->
+    <pagination page-form="pageForm" ng-if="initialled"></pagination>
+  </div>
+</div>

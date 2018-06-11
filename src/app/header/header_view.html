@@ -1,0 +1,117 @@
+<!-- Navbar -->
+<nav class="navbar navbar-default navbar-static-top" ng-if="!auth.isAuthenticated()">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" ui-sref="start" translate>GONEVIS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li ng-class="{active: state.includes('start')}">
+          <a ui-sref="start" translate>GET_STARTED</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-class="{active: state.includes('signin')}">
+          <a ui-sref="signin" translate>LOGIN</a>
+        </li>
+        <li ng-class="{active: state.includes('signup') || state.includes('collaborate')}">
+          <a ui-sref="signup" translate>REGISTER</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Sidebar content -->
+<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar}" ng-if="auth.isAuthenticated()">
+  <!-- Sites dropdown -->
+  <div class="dropdown dis-g">
+    <!-- Header -->
+    <a class="main dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
+      <!-- Logo -->
+      <img ng-src="{{ user.getSites()[param.s].media.logo.thumbnail_48x48 }}"
+           ng-if="user.getSites()[param.s].media.logo.thumbnail_48x48">
+      <!-- Title -->
+      <span ng-if="!set.sidebar">{{ user.getSites()[param.s].title[0] || "DASHBOARD_SHORT" | translate }}</span>
+      <span ng-if="set.sidebar">{{ user.getSites()[param.s].title || "DASHBOARD" | translate }}</span>
+      <!-- Caret -->
+      <i class="fa fa-caret-down o-fade" ng-if="set.sidebar"></i>
+    </a>
+    <!-- Header dropdown -->
+    <ul class="dropdown-menu">
+      <!-- Sites -->
+      <li ng-repeat="site in user.getSites()" ng-class="{active: param.s == $index}">
+        <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
+      </li>
+      <li class="divider"></li>
+      <!-- New blog -->
+      <li><a ui-sref="site-new({s: param.s})">
+        <small translate>START_A_BLOG</small>
+      </a></li>
+    </ul>
+  </div>
+  <br>
+  <!-- Main navs -->
+  <a ng-href="{{ state.href(nav.sref, {s: param.s}) }}" ng-repeat="nav in mainNavs"
+     ng-class="{active: state.includes(nav.sref)}">
+    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
+  </a>
+  <br>
+  <!-- Lights switch -->
+  <a ng-class="{'active-minimal': set.lights}" ng-if="param.lights" ng-click="set.lights = !set.lights">
+    <i class="fa fa-fw fa-lightbulb-o"></i> {{ 'LIGHTS' | translate }}
+  </a>
+  <br>
+  <!-- Account dropdown -->
+  <div class="dropup dis-g">
+    <!-- Header -->
+    <a class="main main-light dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
+      <!-- Profile picture -->
+      <img ng-if="user.hasMedia" ng-src="{{ user.getMedia('tiny') }}" alt="{{ user.getDisplayName() }}"/>
+      <!-- Display name -->
+      <span>{{ user.getDisplayName() }}</span>
+      <!-- Caret -->
+      <i class="fa fa-caret-up o-fade"></i>
+    </a>
+    <!-- Header dropdown -->
+    <ul class="dropdown-menu">
+      <!-- Account settings -->
+      <li ng-class="{active: state.includes('user')}">
+        <a ui-sref="user({s: param.s})">{{ "VIEW_ACCOUNT" | translate }}<br><span
+          class="o-fade">{{ user.get.email }}</span></a>
+      </li>
+      <li class="divider"></li>
+      <!-- Feedback -->
+      <li><a ng-href="mailto:hello@gonevis.com"><i class="fa fa-smile-o"></i> {{ 'FEEDBACK' | translate }}</a></li>
+      <!-- Log out -->
+      <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> {{ 'LOG_OUT' | translate }}</a></li>
+    </ul>
+  </div>
+  <br>
+  <!-- Toggle view -->
+  <button class="btn btn-default" ng-click="set.sidebar = !set.sidebar">
+    <i class="fa fa-fw" ng-class="{'fa-chevron-right': !set.sidebar, 'fa-chevron-left': set.sidebar}"></i>
+  </button>
+</div>
+
+<!-- Toaster -->
+<toaster-container toaster-options="{'position-class': 'toast-bottom-right'}"></toaster-container>
+
+<!-- Popover -->
+<div class="popover tour animated">
+  <div class="arrow"></div>
+  <button class="btn btn-success" ng-click="tour.nextStep()">
+    <i class="fa fa-check"></i>
+  </button>
+  <div class="popover-title"></div>
+  <div class="popover-content"></div>
+</div>
+
+<!-- Popover hideout -->
+<div class="popover-hideout"></div>

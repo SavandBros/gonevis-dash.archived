@@ -1,0 +1,81 @@
+<div class="modal fade" id="dolphinSelection">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>
+          <i class="fa fa-image text-primary fa-fw"></i> <span>Select an image</span>
+          <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs s-mar-bottom-soft">
+          <li ng-class="{active: currentTab == 'dolphin'}">
+            <a ng-click="currentTab = 'dolphin'">Files</a>
+          </li>
+          <li ng-class="{active: currentTab == 'upload'}">
+            <a ng-click="currentTab = 'upload'">
+              <i class="fa fa-upload"></i> <span>Upload More</span></a>
+          </li>
+          <button class="btn btn-link pull-right" ng-click="action(null)" data-dismiss="modal">
+            <span class="text-danger">Remove Media</span>
+          </button>
+        </ul>
+
+        <!-- List -->
+        <div ng-show="currentTab == 'dolphin'">
+          <!-- Search form -->
+          <search search-form="searchForm" ng-if="initialled"></search>
+
+          <!-- Search noresult -->
+          <no-result search-form="searchForm"></no-result>
+
+          <!-- Nothing -->
+          <nothing text="You have no images" ng-if="!dolphins.length && !searchForm.noResult && initialled"></nothing>
+
+          <!-- Loading -->
+          <div class="s-pad text-center" ng-if="!initialled">
+            <i class="fa fa-5x fa-arrow-down fa-spin animated infinity bounce text-primary"></i>
+          </div>
+
+          <!-- Dolphins -->
+          <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-6 animated fadeIn" ng-repeat="dolphin in dolphins"
+              ng-show="!dolphin.isDeleted" ng-if="dolphin.get.is_image" data-dismiss="modal">
+              <a ng-click="action(dolphin)"
+                class="dolphin"
+                style="background-image: url({{ dolphin.get.thumbnail_256x256 }})">
+                <p class="caption">{{ dolphin.get.meta_data.name }}</p>
+              </a>
+            </div>
+            <!-- Load more -->
+            <pagination page-form="dolphinForm" ng-if="initialled"></pagination>
+          </div>
+        </div>
+
+        <!-- Upload -->
+        <div class="text-center" ng-show="currentTab == 'upload'">
+          <!-- Select -->
+          <button type="file" class="btn btn-primary btn-lg animated fadeIn"
+            ngf-select="uploadFile($files, $invalidFiles)"
+            ngf-accept="upload.accept"
+            ngf-max-size="25MB"
+            ngf-multiple="true">
+            <i class="fa fa-fw fa-plus"></i> <span>Select File</span>
+          </button>
+          <!-- Progress Bars -->
+          <div class="row">
+            <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
+              <div class="progress s-mar-top-soft s-mar-no" ng-class="{active: file.progress != 100}">
+                <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
+                  <!-- TODO: Translate -->
+                  <span>{{ file.progress == 100 ? "Done" : file.progress + "%" }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
