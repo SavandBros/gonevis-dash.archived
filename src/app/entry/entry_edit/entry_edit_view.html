@@ -77,7 +77,7 @@
               <!-- Tag -->
               <div class="form-group" ng-class="{'has-error': form.errors.tag_ids}">
                 <tags-input ng-model="tagsToSubmit" display-property="name" replace-spaces-with-dashes="false"
-                  add-from-autocomplete-only="true">
+                  add-from-autocomplete-only="false">
                   <auto-complete source="loadTags($query)" min-length="0" max-results-to-show="10" template="tag">
                   </auto-complete>
                 </tags-input>
