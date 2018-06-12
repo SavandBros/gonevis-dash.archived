@@ -1,8 +1,5 @@
 "use strict";
 
-require('chart.js');
-require('angular-chart.js');
-
 function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry) {
 
   let site = AuthService.getCurrentSite();
@@ -124,20 +121,5 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
   constructor();
 }
 
-const MAIN_DASH_MODULE = angular.module('gonevisDash')
-  .controller("MainController", MainController)
-  .config(function (ChartJsProvider) {
-    ChartJsProvider.setOptions({
-      chartColors: [
-        "#99FF99",
-        "#FFAA00",
-        "#DDDDDD"
-      ],
-      elements: {
-        arc: {
-          borderWidth: 4
-        }
-      }
-    });
-  });
+const MAIN_DASH_MODULE = angular.module('gonevisDash').controller("MainController", MainController);
 export { MAIN_DASH_MODULE };

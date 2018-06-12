@@ -494,30 +494,6 @@ md-toast {
 }
 
 
-/* Panel Chart */
-
-.panel-body-chart {
-    position: relative;
-}
-
-.panel-body-chart .chart-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #d17100;
-    font-weight: bold;
-}
-
-.panel-body-chart .chart-text small {
-    text-transform: uppercase;
-    font-size: 0.3em;
-    display: block;
-    margin-top: 5px;
-}
-
-
 /* Panel */
 
 .panel {
