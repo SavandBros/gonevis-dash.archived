@@ -1754,6 +1754,7 @@ img.tag {
     position: absolute;
     margin-left: 250px;
     margin-top: 12px;
+    line-height: 30px;
 }
 
 .popover-title {
