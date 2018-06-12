@@ -205,6 +205,12 @@ body {
     height: 32px;
 }
 
+@media (max-height: 645px) {
+    .sidebar-content a:not(.main) {
+        padding: 8px 20px !important;
+    }
+}
+
 
 /* Sidebar button */
 
