@@ -136,13 +136,13 @@
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-header" ng-if="entry.get.comment_enabled">
-                  <i init class="fa fa-fw fa-comments text-muted"></i> {{ 'COMMENTS_ENABLED' | translate }}
+                  <i init class="fa fa-fw fa-comments text-muted"></i> {{ 'COMMENTING_ENABLED' | translate }}
                 </li>
                 <li class="dropdown-header" ng-if="entry.get.featured ">
                   <i init class="fa fa-fw fa-star text-primary"></i> {{ 'FEATURED' | translate }}
                 </li>
                 <li class="dropdown-header" ng-if="entry.get.password ">
-                  <i init class="fa fa-fw fa-lock text-danger"></i> {{ 'PASSWORDED' | translate }}
+                  <i init class="fa fa-fw fa-lock text-danger"></i> {{ 'PASSWORD_PROTECTED' | translate }}
                 </li>
                 <li class="divider" ng-show="entry.get.password || entry.get.featured || entry.get.comment_enabled"></li>
                 <li>
