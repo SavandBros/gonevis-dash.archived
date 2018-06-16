@@ -12,7 +12,9 @@
               <a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">{{ comment.user.getFullName() }}</a>
               <br>
               <!-- TODO: Translate -->
-              <small class="o-fade">Commented {{ comment.get.created | timesince }} ago</small>
+              <small class="o-fade">
+                {{ 'COMMENTED' | translate }} {{ comment.get.created | timesince }} {{ 'AGO' | translate }}
+              </small>
               <i class="fa fa-close o-fade pull-right c-p" data-dismiss="modal"></i>
             </div>
           </div>
@@ -22,7 +24,7 @@
         <!-- Comment content -->
         <h3 ng-bind-html="comment.get.comment"></h3>
         <div class="c-grey small s-mar-top-soft">
-          <span>To:</span>
+          <span translate>TO</span>
           <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })" data-dismiss="modal">
             {{ comment.get.commented_object_minimal_data.title }}
           </a>
@@ -34,7 +36,8 @@
             <!-- Reply comment -->
             <div class="form-group col-md-12">
               <!-- TODO: Translate -->
-              <textarea ng-model="form.comment" placeholder="@{{ comment.user.getFullName() }} (Reply)"
+              <textarea ng-model="form.comment"
+                placeholder="@{{ comment.user.getFullName() }} {{ 'P_REPLY' | translate }}"
                 class="form-control comment" required>
               </textarea>
             </div>
@@ -45,14 +48,14 @@
         <!-- Comment status -->
         <button class="btn btn-sm btn-primary pull-left s-mar-right-soft"
           ng-click="comment.reply(form.comment)" ng-disabled="comment.isReplying || form.$invalid">
-          Reply
+          {{ 'REPLY' | translate }}
         </button>
         <div class="dropdown options s-pad-no pull-left">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
             {{ comment.getStatus().label }} <li class="fa fa-caret-down"></li>
           </button>
           <ul class="dropdown-menu">
-            <li class="dropdown-header">Change status</li>
+            <li class="dropdown-header" translate>CHANGE_STATUS</li>
             <li ng-repeat="status in statuses" ng-class="{active: comment.getStatus().label === status.label}">
               <a ng-click="comment.setStatus(status.property, status.value)">
                 <i class="fa fa-{{ status.icon }}"></i> {{ status.label }}
