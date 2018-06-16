@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
+function Dolphin($rootScope, API, AuthService, ModalsService, toaster, $translate) {
   return function(data) {
 
     /**
@@ -41,7 +41,9 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
         },
         function(data) {
           self.isDeleted = true;
-          toaster.success("Done", "Deleted " + self.get.meta_data.name);
+          $translate(["DONE", "DELETED"]).then(function(translations) {
+            toaster.success(translations.DONE, translations.DELETED + ' ' + self.get.meta_data.name);
+          });
 
           $rootScope.$broadcast("gonevisDash.Dolphin:remove", {
             dolphin: self,
@@ -50,7 +52,9 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster) {
           });
         },
         function(data) {
-          toaster.error("Error", "Something went wrong, couldn't remove file.");
+          $translate(["ERROR", "DOLPHIN_REMOVE_ERROR"]).then(function(translations) {
+            toaster.error(translations.ERROR, translations.DOLPHIN_REMOVE_ERROR);
+          });
 
           $rootScope.$broadcast("gonevisDash.Dolphin:remove", {
             dolphin: self,
