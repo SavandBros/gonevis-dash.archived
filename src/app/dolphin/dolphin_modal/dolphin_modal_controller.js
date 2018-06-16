@@ -2,7 +2,7 @@
 
 import app from "../../app";
 
-function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
+function DolphinModalController($scope, $rootScope, toaster, dolphin, API, $translate) {
 
   function constructor() {
     $scope.dolphin = dolphin;
@@ -26,7 +26,11 @@ function DolphinModalController($scope, $rootScope, toaster, dolphin, API) {
       }, form.data,
       function(data) {
         form.loading = false;
-        toaster.info("Done", "File " + form.data.meta_data.name + " updated.");
+        $translate(["DONE", "FILE", "UPDATED"]).then(function(translations) {
+          toaster.info(
+            translations.DONE, translations.FILE + " " + form.data.meta_data.name + " " + translations.UPDATED
+          );
+        });
         $rootScope.$broadcast('gonevisDash.Dolphin:update', {
           dolphin: data,
           data: data,
