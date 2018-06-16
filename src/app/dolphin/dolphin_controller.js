@@ -2,8 +2,8 @@
 
 import app from "../app";
 
-function DolphinController($scope, $rootScope, Dolphin,
-                           Codekit, API, AuthService, Upload, Pagination, Search, toaster, source, localStorageService) {
+function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthService,
+                          Upload, Pagination, Search, toaster, source, localStorageService, $translate) {
 
   var site = AuthService.getCurrentSite();
 
@@ -130,14 +130,18 @@ function DolphinController($scope, $rootScope, Dolphin,
                 API.Dolphins.post(payload,
                   function(data) {
                     file.done = true;
-                    toaster.success("Upload Complete", file.name);
+                    $translate('UPLOAD_COMPLETED').then(function (uploadCompleted) {
+                      toaster.success(uploadCompleted, file.name);
+                    });
                     $scope.dolphins.unshift(new Dolphin(data));
                     $scope.currentTab = "dolphin";
                   }
                 );
               },
               function() {
-                toaster.error("Error", "Something went wrong, couldn't upload file.");
+                $translate(["ERROR", "UPLOAD_ERROR"]).then(function(translations) {
+                  toaster.error(translations.ERROR, translations.UPLOAD_ERROR);
+                });
               },
               function(event) {
                 file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
