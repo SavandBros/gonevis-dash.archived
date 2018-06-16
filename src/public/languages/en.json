@@ -76,5 +76,7 @@
   "META_DESCRIPTION": "Meta description",
   "ADVANCED_OPTIONS": "Advanced options",
   "CREATE": "Create",
-  "UPDATE": "Update"
+  "UPDATE": "Update",
+  "SEARCH": "Search",
+  "LOAD_MORE": "LOAD MORE"
 }
