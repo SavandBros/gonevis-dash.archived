@@ -12,7 +12,7 @@ import app from '../../app';
  *       It stops repeating code such as functions, static variables, etc...
  *       Using this provider is highly recommended, even got a short name to be used quickly :P
  */
-function Codekit($timeout, $window, $log) {
+function Codekit($timeout, $window, $log, $translate) {
 
   /**
    * @desc Get index of an item in a data
@@ -39,102 +39,113 @@ function Codekit($timeout, $window, $log) {
    *
    * @type {array}
    */
-  var entryStatuses = [{
-    label: "Draft",
-    id: 0,
-    icon: "edit",
-    color: "warning",
-    title: "Set as draft (hidden)"
-  }, {
-    label: "Published",
-    id: 1,
-    icon: "globe",
-    color: "success",
-    title: "Set as Published"
-  }];
+  var entryStatuses = [];
 
   /**
    * @desc All formats available for entries.
    *
-   * @type {object}
+   * @type {array}
    */
-  var entryFormats = {
-    text: {
-      id: 0,
-      label: "Text",
-      icon: "file-text-o"
-    },
-    image: {
-      id: 1,
-      label: "Image",
-      icon: "picture-o"
-    },
-    video: {
-      id: 2,
-      label: "Video",
-      icon: "film",
-      disabled: true
-    },
-    audio: {
-      id: 3,
-      label: "Audio",
-      icon: "headphones",
-      disabled: true
-    },
-    status: {
-      id: 4,
-      label: "Status",
-      icon: "smile-o",
-      disabled: true
-    }
-  };
+  var entryFormats = [];
 
   /**
    * @desc All statuses available for comments.
    *
    * @type {array}
    */
-  var commentStatuses = [{
-    label: "Pending approval",
-    icon: "clock-o",
-    property: "status",
-    value: 0,
-    class: "b-color-0"
-  }, {
-    label: "Active",
-    icon: "globe",
-    property: "status",
-    value: 1,
-    class: "b-color-2"
-  }, {
-    label: "Hidden",
-    icon: "user-secret",
-    property: "status",
-    value: 2,
-    class: "b-color-1"
-  }];
+  var commentStatuses = [];
 
   /**
    * @desc All roles for team.
    *
    * @type {array}
    */
-  var teamRoles = [{
+  var teamRoles = [];
+
+  $translate([
+    'DRAFT', 'SET_DRAFT', 'PUBLISHED', 'SET_PUBLISHED', "TEXT", 'IMAGE', 'VIDEO', "AUDIO", 'STATUS', "PENDING_APPROVAL",
+    "ACTIVE", "HIDDEN", "OWNER", "ADMINISTRATOR", "EDITOR"
+  ]).then(function (translation) {
+
+    entryStatuses.push({
+      label: translation.DRAFT,
+      id: 0,
+      icon: "edit",
+      color: "warning",
+      title: translation.SET_DRAFT
+    }, {
+      label: translation.PUBLISHED,
+      id: 1,
+      icon: "globe",
+      color: "success",
+      title: translation.SET_PUBLISHED
+    });
+
+    entryFormats.push({
+      text: {
+        id: 0,
+        label: translation.TEXT,
+        icon: "file-text-o"
+      },
+      image: {
+        id: 1,
+        label: translation.IMAGE,
+        icon: "picture-o"
+      },
+      video: {
+        id: 2,
+        label: translation.VIDEO,
+        icon: "film",
+        disabled: true
+      },
+      audio: {
+        id: 3,
+        label: translation.AUDIO,
+        icon: "headphones",
+        disabled: true
+      },
+      status: {
+        id: 4,
+        label: translation.STATUS,
+        icon: "smile-o",
+        disabled: true
+      }
+    });
+
+    commentStatuses.push({
+      label: translation.PENDING_APPROVAL,
+      icon: "clock-o",
+      property: "status",
+      value: 0,
+      class: "b-color-0"
+    }, {
+      label: translation.ACTIVE,
+      icon: "globe",
+      property: "status",
+      value: 1,
+      class: "b-color-2"
+    }, {
+      label: translation.HIDDEN,
+      icon: "user-secret",
+      property: "status",
+      value: 2,
+      class: "b-color-1"
+    });
+
+    teamRoles.push({
       id: 0,
       color: "text-primary",
-      label: "Owner"
-    },
-    {
+      label: translation.OWNER
+    }, {
       id: 1,
       color: "text-info",
-      label: "Administrator"
-    },
-    {
+      label: translation.ADMINISTRATOR
+    }, {
       id: 2,
       color: "text-warning",
-      label: "Editor"
-    }
-  ];
+      label: translation.EDITOR
+    });
+  });
 
   /**
    * @desc All default images.
@@ -147,7 +158,7 @@ function Codekit($timeout, $window, $log) {
     small: smallImage,
     medium: mediumImage,
     large: largeImage
-  }
+  };
 
   /**
    * @desc Return default images
@@ -169,7 +180,7 @@ function Codekit($timeout, $window, $log) {
     key = key || "isDeleted";
     delay = delay || 1000;
 
-    $timeout(function() {
+    $timeout(function () {
       for (var i in master) {
         if (master[i][key] === true) {
           master.splice(i, 1);
@@ -193,7 +204,7 @@ function Codekit($timeout, $window, $log) {
    * @param {string} selector
    */
   function focus(selector) {
-    $timeout(function() {
+    $timeout(function () {
       angular.element(selector).focus();
     }, 200);
   }
@@ -255,4 +266,4 @@ function Codekit($timeout, $window, $log) {
   };
 }
 
-app.factory("Codekit", Codekit)
+app.factory("Codekit", Codekit);
