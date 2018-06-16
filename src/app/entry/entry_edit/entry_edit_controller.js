@@ -81,7 +81,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       $scope.form = new Entry({
         content: "<p><br></p>", // Start with an empty paragraph (for editor)
         status: $scope.statuses[0].id,
-        format: Codekit.entryFormats.text.id
+        format: Codekit.entryFormats[0].text.id
       });
       $scope.form.get.is_page = $stateParams.isPage;
     }
