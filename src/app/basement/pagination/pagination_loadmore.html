@@ -2,7 +2,7 @@
   <button class="btn btn-default btn-lg s-pad-x" ng-if="!$ctrl.pageForm.page.noMore"
     ng-disabled="$ctrl.pageForm.page.loading" ng-click="$ctrl.loadMore($ctrl.pageForm)">
     <!-- Load more -->
-    <span ng-if="!$ctrl.pageForm.page.loading">LOAD MORE</span>
+    <span ng-if="!$ctrl.pageForm.page.loading" translate>LOAD_MORE</span>
     <!-- Loading more -->
     <i ng-if="$ctrl.pageForm.page.loading" class="fa fa-2x fa-arrow-down fa-spin animated infinity bounce"></i>
   </button>
