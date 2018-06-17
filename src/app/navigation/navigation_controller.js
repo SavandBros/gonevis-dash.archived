@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function NavigationController($scope, toaster, $stateParams, API, AuthService) {
+function NavigationController($scope, toaster, $stateParams, API, AuthService, $translate) {
 
   var site = AuthService.getCurrentSite();
 
@@ -47,13 +47,17 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
         navigation: $scope.navigations
       },
       function(data) {
-        toaster.info("Done", "Navigation updated");
+        $translate(["DONE", "NAVIGATION_UPDATED"]).then(function(translations) {
+          toaster.info(translations.DONE, translations.NAVIGATION_UPDATED);
+        });
         form.loading = false;
         $scope.navigations = data.navigation;
       },
       function() {
         form.loading = false;
-        toaster.error("Error", "Something went wrong, we couldn't update navigations.");
+        $translate(["ERROR", "NAVIGATION_UPDATE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.NAVIGATION_UPDATE_ERROR);
+        });
       }
     );
   };
@@ -62,10 +66,12 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService) {
    * @desc Nav creation function
    */
   $scope.create = function() {
-    $scope.navigations.push({
-      label: "New Nav",
-      url: "/",
-      sort_number: $scope.navigations.length + 1
+    $translate('NEW_NAV').then(function (newNav) {
+      $scope.navigations.push({
+        label: newNav,
+        url: "/",
+        sort_number: $scope.navigations.length + 1
+      });
     });
   };
 
