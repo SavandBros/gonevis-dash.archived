@@ -42,7 +42,7 @@
  */
 const fs = require('fs');
 const SOURCE_LOCALE = 'en';
-const targetlocales = ['en'];
+const targetlocales = ['fa'];
 
 fs.readFile(`src/public/languages/${SOURCE_LOCALE}.json`, 'utf8', function (err, data) {
   if (err) {
