@@ -8,7 +8,7 @@
   <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
     <!-- List -->
     <div class="panel panel-default s-box animated fadeIn" ng-if="initialled">
-      <div class="panel-heading">Team</div>
+      <div class="panel-heading" translate>TEAM</div>
       <div class="panel-body s-pad-no">
         <!-- Team -->
         <div class="list-group s-mar-no">
@@ -26,7 +26,7 @@
               <!-- Role Label  -->
               <div class="col-xs-10 col-sm-3 col-md-3 col-lg-3 team-role">
                 <!-- Pending label -->
-                <span class="t-small outline text-muted" ng-if="team.isPending">PENDING</span>
+                <span class="t-small outline text-muted" ng-if="team.isPending" translate>PENDING</span>
                 <!-- Role label -->
                 <span class="t-small outline {{ teamRoles[team.role].color }}">
                   {{ teamRoles[team.role].label | uppercase }}
