@@ -4,6 +4,41 @@
  * SyncTrans
  *
  * Will sync all the translation files from the source (English).
+ *
+ * In simple words, when source language has new strings/ids to be translated, it will add those to translation files
+ * so they don't become outdated.
+ *
+ * When the source translation contains:
+ *
+ * en.json
+ * ```json
+ * {
+ *     "HELLO": "Hello my friend!",
+ *     "TUTORIAL": "Tutorial",
+ *     "BLOG": "My GoNevis Blog"
+ * }
+ * ```
+ *
+ * While target translation contains:
+ *
+ * fa.json
+ * ```json
+ * {
+ *     "HELLO": "سلام دوست من!",
+ *     "TUTORIAL": "آموزش"
+ * }
+ * ```
+ *
+ * It wil turn the `fa.json` translation file into:
+ *
+ * fa.json
+ * ```json
+ * {
+ *     "HELLO": "سلام دوست من!",
+ *     "TUTORIAL": "آموزش",
+ *     "BLOG": "My GoNevis Blog"
+ * }
+ * ```
  */
 const fs = require('fs');
 const SOURCE_LOCALE = 'en';
