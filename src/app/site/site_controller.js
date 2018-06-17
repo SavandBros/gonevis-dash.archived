@@ -3,7 +3,7 @@
 import app from "../app";
 
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
-                        API, ModalsService, AuthService, DolphinService, Codekit) {
+                        API, ModalsService, AuthService, DolphinService, Codekit, $translate) {
 
   var site = AuthService.getCurrentSite();
   var toasters = {};
@@ -40,17 +40,20 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {string} value
    */
   $scope.updateSite = function(key, value) {
-    var keyString = key.replace("_", " ");
     var payload = {};
 
     // Check for GAC
     if (key === "google_analytics_code" && value.length && !(/^ua-\d{4,9}-\d{1,4}$/i).test(value.toString())) {
-      toaster.error("Error updating code", "Incorrect google analytics code format (UA-XXXXX-X).");
+      $translate(["ERROR_UPDATING_CODE", "INCORRECT_GOOGLE_ANALYTICS"]).then(function(translations) {
+        toaster.error(translations.ERROR_UPDATING_CODE, translations.INCORRECT_GOOGLE_ANALYTICS);
+      });
       $scope.site.google_analytics_code = null;
       return;
     }
 
-    toasters[key] = toaster.info("Updating " + keyString + "...");
+    $translate('UPDATING_SITE').then(function (updatingSite) {
+      toasters[key] = toaster.info(updatingSite);
+    });
     payload[key] = value;
 
     API.SiteUpdate.put({
@@ -69,10 +72,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         $rootScope.$broadcast("gonevisDash.SiteController:update");
 
         toaster.clear(toasters[key]);
-        toaster.info("Done", "Site " + keyString + " updated", 3000);
+        $translate(["DONE", "SITE_UPDATED"]).then(function(translations) {
+          toaster.info(translations.DONE, translations.SITE_UPDATED);
+        });
       },
       function() {
-        toaster.error("Error", "Something went wrong, couldn't update " + keyString);
+        $translate(["ERROR", "SITE_UPDATE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.SITE_UPDATE_ERROR);
+        });
       }
     );
   };
@@ -95,12 +102,16 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         AuthService.setAuthenticatedUser($scope.user);
         // Announce site removal
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
-        toaster.success("Done", "Site deleted");
+        $translate(["DONE", "SITE_DELETED"]).then(function(translations) {
+          toaster.success(translations.DONE, translations.SITE_DELETED);
+        });
         // Go to main or new site page if has no other sites
         $state.go($scope.user.sites.length > 0 ? "dash.main" : "site-new");
       },
       function() {
-        toaster.error("Error", "Something went wrong, couldn't delete site");
+        $translate(["ERROR", "SITE_DELETE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.SITE_DELETE_ERROR);
+        });
       }
     );
   };
@@ -128,11 +139,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       },
       function() {
         $scope.loadingTemplate = false;
-        toaster.info("Done", "Site template updated");
+        $translate(["DONE", "SITE_TEMPLATE_UPDATED"]).then(function(translations) {
+          toaster.info(translations.DONE, translations.SITE_TEMPLATE_UPDATED);
+        });
       },
       function(data) {
         $scope.loadingTemplate = false;
-        toaster.error("Error", data.detail ? data.detail : "Something went wrong, we couldn't update site template.");
+        $translate(["ERROR", "SITE_TEMPLATE_UPDATE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, data.detail ? data.detail : translations.SITE_TEMPLATE_UPDATE_ERROR);
+        });
       }
     );
   };
@@ -178,7 +193,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         getSiteSettings();
       },
       function() {
-        toaster.error("Error", "Domain is already taken or invalid.");
+        $translate(["ERROR", "DOMAIN_TAKEN_INVALID"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.DOMAIN_TAKEN_INVALID);
+        });
       }
     );
   };
@@ -195,7 +212,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     }
 
     API.RemoveCustomDomain.put({ siteId: site }, { domain_id: domain.id }, function() {
-      toaster.success("Done", "Deleted custom domain '" + domain.domain + "'.");
+      $translate(["DONE", "DELETED_CUSTOM_DOMAIN"]).then(function(translations) {
+        toaster.success(
+          translations.DONE, translations.DELETED_CUSTOM_DOMAIN + " ' " + domain.domain + " ' " + "."
+        );
+      });
       getSiteSettings();
     });
   };
@@ -235,10 +256,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           $scope.siteTemplate.fields
         );
 
-        toaster.info("Done", "Site template updated");
+        $translate(["DONE", "SITE_TEMPLATE_UPDATED"]).then(function(translations) {
+          toaster.info(translations.DONE, translations.SITE_TEMPLATE_UPDATED);
+        });
       },
       function() {
-        toaster.error("Error", "Something went wrong, we couldn't update site template.");
+        $translate(["ERROR", "SITE_TEMPLATE_UPDATE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.SITE_TEMPLATE_UPDATE_ERROR);
+        });
       }
     );
   });
@@ -246,4 +271,4 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   constructor();
 }
 
-app.controller("SiteController", SiteController)
+app.controller("SiteController", SiteController);
