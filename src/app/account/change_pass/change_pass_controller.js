@@ -28,7 +28,7 @@ function ChangePassController($scope, $state, toaster, API, ModalsService) {
     form.loading = true;
     form.errors = null;
 
-    API.ChangePassword.save(form,
+    API.ChangePassword.put(form,
       function() {
         toaster.info("Done", "Password changed");
         $state.go("dash.user");
