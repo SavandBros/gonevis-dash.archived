@@ -91,7 +91,8 @@
     "report-coverage": "codecov",
     "start": "npm run server",
     "stats": "webpack --profile --json > stats.json",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "sync-trans": "node ./scripts/sync_trans.js"
   },
   "engines": {
     "node": "8.2.0",
