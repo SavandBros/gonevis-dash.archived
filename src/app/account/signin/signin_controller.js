@@ -2,7 +2,7 @@
 
 import app from "../../app";
 
-function SigninController($scope, $stateParams, AuthService, ModalsService, toaster) {
+function SigninController($scope, $stateParams, AuthService, ModalsService, toaster, $translate) {
 
   function constructor() {
     $scope.form = {};
@@ -26,7 +26,9 @@ function SigninController($scope, $stateParams, AuthService, ModalsService, toas
       function(data) {
         form.loading = false;
         form.errors = null;
-        toaster.info("Logged in", "Welcome back " + data.user.username);
+        $translate(["LOGGED_IN", "WELCOME_BACK"]).then(function(translations) {
+          toaster.info(translations.LOGGED_IN, translations.WELCOME_BACK + " " + data.user.username);
+        });
       },
       function(data) {
         form.loading = false;
