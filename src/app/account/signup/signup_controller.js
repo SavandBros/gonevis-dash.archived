@@ -2,7 +2,7 @@
 
 import app from "../../app";
 
-function SignupController($scope, $stateParams, AuthService, API, Password, toaster) {
+function SignupController($scope, $stateParams, AuthService, API, Password, toaster, $translate) {
 
   function constructor() {
     // Forn with username (param)
@@ -24,7 +24,7 @@ function SignupController($scope, $stateParams, AuthService, API, Password, toas
 
   /**
    * @desc Submit signup form
-   * 
+   *
    * @param {object} form
    */
   $scope.signup = function(form) {
@@ -48,10 +48,9 @@ function SignupController($scope, $stateParams, AuthService, API, Password, toas
           form.data.username,
           $scope.password.password,
           function() {
-            toaster.success(
-              "Welcome " + form.data.username,
-              "Thanks for registering at GoNevis, a link has been sent to your email for account verification."
-            );
+            $translate(["WELCOME", "REGISTER_VERIFICATION"]).then(function(translations) {
+              toaster.success(translations.WELCOME + " " + form.data.username, translations.REGISTER_VERIFICATION);
+            });
           }
         );
       },
@@ -72,7 +71,9 @@ function SignupController($scope, $stateParams, AuthService, API, Password, toas
         email: email
       },
       function() {
-        toaster.success("Done", "We've send a confirmation link to your email.", 30000);
+        $translate(["DONE", "SEND_CONFIRMATION_LINK"]).then(function(translations) {
+          toaster.success(translations.DONE, translations.SEND_CONFIRMATION_LINK, 30000);
+        });
       }
     );
   };
