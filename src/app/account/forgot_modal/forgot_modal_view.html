@@ -3,7 +3,7 @@
     <div class="modal-content">
       <!-- Header -->
       <h3 class="modal-header">
-        Forgot Password <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+        {{ 'FORGOT_PASSWORD' | translate }} <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
       </h3>
       <div class="modal-body">
         <!-- Form -->
@@ -11,12 +11,13 @@
           <div class="form-group row s-child-mar-bottom-soft" ng-class="{'has-error': form.errors.email}">
             <!-- Email -->
             <div class="col-md-8">
-              <input class="form-control" type="email" ng-model="form.data.email" placeholder="Email" required/>
+              <input class="form-control" type="email" ng-model="form.data.email"
+                placeholder="{{ 'EMAIL' | translate }}" required/>
             </div>
             <!-- Button -->
             <div class="col-md-4">
-              <button class="btn btn-primary btn-block" ng-disabled="form.$invalid || form.loading">
-                Get Reset Link
+              <button class="btn btn-primary btn-block" ng-disabled="form.$invalid || form.loading" translate>
+                GET_RESET_LINK
               </button>
             </div>
           </div>
