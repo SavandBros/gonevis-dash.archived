@@ -2,26 +2,31 @@
 
 import app from "../../app";
 
-function ChangePassController($scope, $state, toaster, API, ModalsService) {
+function ChangePassController($scope, $state, toaster, API, ModalsService, $translate) {
 
   /**
    * @desc for changing password
-   * 
+   *
    * @param {object} form
    */
   $scope.changePassword = function(form) {
     // Is a new password
     if (form.old_password === form.password) {
-      form.errors = {
-        non_field_errors: ["Please, choose a new password."]
-      };
+      $translate("CHANGE_PASSWORD_ERROR_SAME").then(function(error) {
+        form.errors = {
+          non_field_errors: [error]
+        };
+      });
       return;
     }
+
     // Check if Confirm new password and new password were matched, if so raise an error
     if (form.password !== form.confirm_password) {
-      form.errors = {
-        non_field_errors: ["Confirm password does not match."]
-      };
+      $translate("CHANGE_PASSWORD_ERROR_MATCH").then(function(error) {
+        form.errors = {
+          non_field_errors: [error]
+        };
+      });
       return;
     }
 
@@ -30,8 +35,10 @@ function ChangePassController($scope, $state, toaster, API, ModalsService) {
 
     API.ChangePassword.put(form,
       function() {
-        toaster.info("Done", "Password changed");
-        $state.go("dash.user");
+        $translate(["DONE", "PASSWORD_CHANGED"]).then(function(translations) {
+          toaster.info(translations.DONE, translations.PASSWORD_CHANGED);
+        });
+        $state.go("user");
       },
       function(data) {
         form.loading = false;
