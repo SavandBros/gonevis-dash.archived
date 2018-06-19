@@ -26,6 +26,8 @@ describe("Account", function () {
       name: "Arsalan Savand",
       get_absolute_uri: "fake-uri",
       username: "arsalan",
+      about: "some stuff",
+      location: "somewhere",
       media: {
         picture: "fake-url-picture",
         thumbnail_256x256: "fake-url-256",
@@ -94,13 +96,6 @@ describe("Account", function () {
     it("should return first part of the name", function () {
       expect(account.getFirstName()).toEqual("Arsalan");
     });
-
-    it("should return false", function () {
-      delete data.name;
-      account = new Account(data);
-
-      expect(account.getFirstName()).toBeFalsy();
-    });
   });
 
   describe("getFullName", function () {
@@ -144,6 +139,31 @@ describe("Account", function () {
       account = new Account(data);
 
       expect(account.getSites().length).toBe(0);
+    });
+  });
+
+  describe("isProfileComplete", function () {
+    beforeEach(function () {
+      account = new Account(data);
+    });
+    it("should check profile information", function () {
+      expect(account.isProfileComplete()).toBeTruthy();
+    });
+    it("should check about", function () {
+      delete data.about;
+      expect(new Account(data).isProfileComplete()).toBeFalsy();
+    });
+    it("should check location", function () {
+      delete data.about;
+      expect(new Account(data).isProfileComplete()).toBeFalsy();
+    });
+    it("should check media", function () {
+      delete data.media.picture;
+      expect(new Account(data).isProfileComplete()).toBeFalsy();
+    });
+    it("should check name", function () {
+      delete data.name;
+      expect(new Account(data).isProfileComplete()).toBeFalsy();
     });
   });
 });
