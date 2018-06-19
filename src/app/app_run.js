@@ -3,8 +3,8 @@
 import app from "./app";
 
 app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
-  ENV, AuthService, DolphinService, Codekit, Client, TourService,
-  editableOptions, localStorageService, $transitions) {
+                     ENV, AuthService, DolphinService, Codekit, Client, TourService,
+                     editableOptions, localStorageService) {
 
   /**
    * @name cache
@@ -213,14 +213,15 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
     }
   });
 
-
   /**
-   * @event onSuccess
+   * @event $stateChangeSuccess
    * @desc Changed state succesfully
    *
-   * @param $transition {Event}
+   * @param event {Event}
+   * @param toState {object}
+   * @param toParams {object}
    */
-  $transitions.onSuccess({}, function ($transition) {
+  $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams) {
     // Analytics
     if (ENV.name === "production") {
       $window.ga("send", "pageview", {
@@ -228,11 +229,11 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
       });
     }
 
-    // // Update title
-    Codekit.setTitle($transition.$to().self.title);
+    // Update title
+    Codekit.setTitle(toState.title);
 
     // Switch lights
-    if ($transition.params().lights !== true) {
+    if (toParams.lights !== true) {
       $rootScope.set.lights = true;
     }
 
@@ -333,3 +334,4 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
     }
   });
 });
+
