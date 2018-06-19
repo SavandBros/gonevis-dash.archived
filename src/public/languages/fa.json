@@ -25,6 +25,6 @@
   "WRONG_POST_CREATION_FAILED": "یک چیزی اشتباه شده، پست ساخته نشد.",
   "LOGGED_OUT": "حارج شده",
   "SESSION_EXPIRED": "بنظر میرسد جلسه شما منقضی شده، لطفا دوباره وارد شوید.",
-  "INCOMPLETE_PROFILE": "اطلاعات پروفایل شما ناقص است!",
+  "INCOMPLETE_PROFILE": "پروفایل شما ناقص است!",
   "IMPROVE_PROFILE": "بهبود پروفایل"
 }
