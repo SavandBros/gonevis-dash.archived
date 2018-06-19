@@ -79,12 +79,7 @@ function Account() {
      * @returns {string}
      */
     this.getFullName = function() {
-      // Full name
-      if (self.get.name) {
-        return self.get.name;
-      }
-      // Username
-      return self.get.username;
+      return self.get.name || self.get.username;
     };
 
     /**
