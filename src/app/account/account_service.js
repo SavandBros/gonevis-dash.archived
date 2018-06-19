@@ -109,12 +109,24 @@ function Account() {
 
     /**
      * @desc Check whether the profile information is complete or not (name, about, etc.)
+     *
+     * @param {boolean} minimal Check profile for minimal user data (like data of /refresh endpoint)
+     *
      * @returns {boolean}
      */
-    this.isProfileComplete = function() {
-      if (self.hasMedia && self.get.name && self.get.about && self.get.location) {
-        return true;
+    this.isProfileComplete = function(minimal) {
+      // Check for media and name
+      if (self.hasMedia && self.get.name) {
+        // If not checking for minimal data, check for about and location
+        if (!minimal && self.get.about && self.get.location) {
+          return true;
+        }
+        // Checking minimal data
+        if (minimal) {
+          return true;
+        }
       }
+      // Missing info
       return false;
     }
   };
