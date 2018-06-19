@@ -147,36 +147,36 @@ describe("Account", function () {
       account = new Account(data);
     });
     it("should check profile information", function () {
-      expect(account.isProfileComplete()).toBeTrue();
-      expect(account.isProfileComplete(true)).toBeTrue();
+      expect(account.isProfileComplete()).toBeTruthy();
+      expect(account.isProfileComplete(true)).toBeTruthy();
     });
     it("should check media", function () {
       delete data.media.picture;
       account = new Account(data);
 
-      expect(account.isProfileComplete()).toBeFalse();
-      expect(account.isProfileComplete(true)).toBeFalse();
+      expect(account.isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeFalsy();
     });
     it("should check name", function () {
       delete data.name;
       account = new Account(data);
 
-      expect(account.isProfileComplete()).toBeFalse();
-      expect(account.isProfileComplete(true)).toBeFalse();
+      expect(account.isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeFalsy();
     });
     it("should check about", function () {
       delete data.about;
       account = new Account(data);
 
-      expect(account.isProfileComplete()).toBeFalse();
-      expect(account.isProfileComplete(true)).toBeTrue();
+      expect(account.isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeTruthy();
     });
     it("should check location", function () {
       delete data.location;
       account = new Account(data);
 
-      expect(account.isProfileComplete()).toBeFalse();
-      expect(account.isProfileComplete(true)).toBeTrue();
+      expect(account.isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeTruthy();
     });
   });
 });
