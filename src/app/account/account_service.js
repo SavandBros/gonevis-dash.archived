@@ -58,7 +58,7 @@ function Account() {
     /**
      * @desc Get first part of full name if name is available
      * @type {function}
-     * @returns {string|boolean}
+     * @returns {string}
      */
     this.getFirstName = function() {
       // Check name
@@ -70,7 +70,7 @@ function Account() {
         }
       }
       // Name is not set
-      return false;
+      return self.get.username;
     };
 
     /**
