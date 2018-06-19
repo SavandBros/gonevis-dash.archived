@@ -24,5 +24,7 @@
   "ERROR": "Error",
   "WRONG_POST_CREATION_FAILED": "Something went wrong, failed to create post.",
   "LOGGED_OUT": "Logged out",
-  "SESSION_EXPIRED": "Looks like your session has expired, please login again."
+  "SESSION_EXPIRED": "Looks like your session has expired, please login again.",
+  "INCOMPLETE_PROFILE": "Your profile information is incomplete!",
+  "IMPROVE_PROFILE": "Improve Profile"
 }
