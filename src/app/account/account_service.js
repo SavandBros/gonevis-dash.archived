@@ -106,6 +106,17 @@ function Account() {
       }
       return [];
     };
+
+    /**
+     * @desc Check whether the profile information is complete or not (name, about, etc.)
+     * @returns {boolean}
+     */
+    this.isProfileComplete = function() {
+      if (self.hasMedia && self.get.name && self.get.about && self.get.location) {
+        return true;
+      }
+      return false;
+    }
   };
 }
 
