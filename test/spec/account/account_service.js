@@ -148,22 +148,35 @@ describe("Account", function () {
     });
     it("should check profile information", function () {
       expect(account.isProfileComplete()).toBeTruthy();
-    });
-    it("should check about", function () {
-      delete data.about;
-      expect(new Account(data).isProfileComplete()).toBeFalsy();
-    });
-    it("should check location", function () {
-      delete data.about;
-      expect(new Account(data).isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeTruthy();
     });
     it("should check media", function () {
       delete data.media.picture;
-      expect(new Account(data).isProfileComplete()).toBeFalsy();
+      account = new Account(data);
+
+      expect(account.isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeFalsy();
     });
     it("should check name", function () {
       delete data.name;
-      expect(new Account(data).isProfileComplete()).toBeFalsy();
+      account = new Account(data);
+
+      expect(account.isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeFalsy();
+    });
+    it("should check about", function () {
+      delete data.about;
+      account = new Account(data);
+
+      expect(account.isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeTruthy();
+    });
+    it("should check location", function () {
+      delete data.location;
+      account = new Account(data);
+
+      expect(account.isProfileComplete()).toBeFalsy();
+      expect(account.isProfileComplete(true)).toBeTruthy();
     });
   });
 });
