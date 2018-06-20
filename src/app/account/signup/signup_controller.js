@@ -48,9 +48,11 @@ function SignupController($scope, $stateParams, AuthService, API, Password, toas
           form.data.username,
           $scope.password.password,
           function() {
-            $translate(["WELCOME", "REGISTER_VERIFICATION"]).then(function(translations) {
-              toaster.success(translations.WELCOME + " " + form.data.username, translations.REGISTER_VERIFICATION);
-            });
+            $translate(["REGISTER_WELCOME", "REGISTER_VERIFICATION"], {"username": form.data.username}).then(
+              function(translations) {
+                toaster.success(translations.REGISTER_WELCOME, translations.REGISTER_VERIFICATION);
+              }
+            );
           }
         );
       },
