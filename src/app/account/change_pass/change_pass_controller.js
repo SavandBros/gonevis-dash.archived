@@ -12,21 +12,17 @@ function ChangePassController($scope, $state, toaster, API, ModalsService, $tran
   $scope.changePassword = function(form) {
     // Is a new password
     if (form.old_password === form.password) {
-      $translate("CHANGE_PASSWORD_ERROR_SAME").then(function(error) {
-        form.errors = {
-          non_field_errors: [error]
-        };
-      });
+      form.errors = {
+        non_field_errors: [$translate.instant("CHANGE_PASSWORD_ERROR_SAME")]
+      };
       return;
     }
 
     // Check if Confirm new password and new password were matched, if so raise an error
     if (form.password !== form.confirm_password) {
-      $translate("CHANGE_PASSWORD_ERROR_MATCH").then(function(error) {
-        form.errors = {
-          non_field_errors: [error]
-        };
-      });
+      form.errors = {
+        non_field_errors: [$translate.instant("CHANGE_PASSWORD_ERROR_MATCH")]
+      };
       return;
     }
 
