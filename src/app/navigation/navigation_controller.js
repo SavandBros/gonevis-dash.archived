@@ -66,12 +66,10 @@ function NavigationController($scope, toaster, $stateParams, API, AuthService, $
    * @desc Nav creation function
    */
   $scope.create = function() {
-    $translate('NEW_NAV').then(function (newNav) {
-      $scope.navigations.push({
-        label: newNav,
-        url: "/",
-        sort_number: $scope.navigations.length + 1
-      });
+    $scope.navigations.push({
+      label: $translate.instant('NEW_NAV'),
+      url: "/",
+      sort_number: $scope.navigations.length + 1
     });
   };
 
