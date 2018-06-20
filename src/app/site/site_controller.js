@@ -187,10 +187,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     API.SetCustomDomain.put({ siteId: site }, { domain: domain },
       function() {
         $translate(["CUSTOM_DOMAIN_SET", "SUPPLY_URL_TO_DNS"], {"absolute_uri": $scope.site.absolute_uri}).then(
-          function () {
+          function (translations) {
             toaster.success(translations.CUSTOM_DOMAIN_SET, translations.SUPPLY_URL_TO_DNS);
-            getSiteSettings();
         });
+        getSiteSettings();
       },
       function() {
         $translate(["ERROR", "DOMAIN_TAKEN_INVALID"]).then(function(translations) {
