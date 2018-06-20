@@ -16,8 +16,8 @@ function ForgotModalController($scope, toaster, API, ModalsService, $translate) 
     API.ForgotPassword.save(form.data,
       function() {
         ModalsService.close("forgotPassword");
-        $translate(["SENT", "FORGOT_PASSWORD_TOASTER"]).then(function(translations) {
-          toaster.success(translations.SENT, translations.FORGOT_PASSWORD_TOASTER + form.data.email, 10000);
+        $translate(["SENT", "FORGOT_PASSWORD_TOASTER"], {"email": form.data.email}).then(function(translations) {
+          toaster.success(translations.SENT, translations.FORGOT_PASSWORD_TOASTER, 10000);
         });
       },
       function(data) {
