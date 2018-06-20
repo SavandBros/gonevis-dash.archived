@@ -41,8 +41,8 @@ function Dolphin($rootScope, API, AuthService, ModalsService, toaster, $translat
         },
         function(data) {
           self.isDeleted = true;
-          $translate(["DONE", "DELETED"]).then(function(translations) {
-            toaster.success(translations.DONE, translations.DELETED + ' ' + self.get.meta_data.name);
+          $translate(["DONE", "DOLPHIN_DELETED"], {"name": self.get.meta_data.name}).then(function(translations) {
+            toaster.success(translations.DONE, translations.DOLPHIN_DELETED);
           });
 
           $rootScope.$broadcast("gonevisDash.Dolphin:remove", {
