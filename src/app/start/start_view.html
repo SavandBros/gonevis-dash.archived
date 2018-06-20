@@ -7,16 +7,17 @@
         ng-src="{{ template.media.thumbnail_512x512 }}" default-image="assets/img/default/512x512.png">
 
       <!-- Step: Domain -->
-      <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting, 'fadeOutDown': isPreving}" ng-if="steps[step] === 'domain'">
+      <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting, 'fadeOutDown': isPreving}"
+        ng-if="steps[step] === 'domain'">
 
         <!-- Title -->
-        <h2 class="text-center">Let's create your site</h2>
+        <h2 class="text-center" translate>LETS_CREATE_SITE</h2>
 
         <!-- Domain form -->
         <div class="form-group s-mar-y">
           <div class="input-group">
             <input type="text" name="siteName" ng-model="domainForm.name" ng-change="checkDomain(domainForm)"
-              class="form-control input-xlg primary" placeholder="Enter site address"
+              class="form-control input-xlg primary" placeholder="{{ 'ENTER_SITE_ADDRESS' | translate }}"
               ng-model-options='{ debounce: 500 }' ng-minlength="3">
             <span class="input-group-addon" id="subdomain">
               <span class="text-primary">.gonevis.com</span>
@@ -29,7 +30,7 @@
           <div class="arrow"></div>
           <div class="popover-content">
             <div ng-if="domainForm.loading">
-              <i class="fa fa-circle-o-notch fa-spin"></i> Checking...
+              <i class="fa fa-circle-o-notch fa-spin"></i> {{ 'CHECKING' | translate }}
             </div>
             <div ng-if="!domainForm.loading" ng-class="{'o-fade': domainForm.loading}">
               <span ng-if="domainForm.available">
@@ -47,26 +48,27 @@
           <div class="animated fadeIn">
             <button class="btn btn-primary btn-lg col-md-3 col-md-offset-4 col-xs-12"
               ng-disabled="domainForm.loading" ng-click="next()">
-              Continue <i class="fa fa-fw fa-arrow-right"></i>
+              {{ 'CONTINUE' | translate }} <i class="fa fa-fw fa-arrow-right"></i>
             </button>
           </div>
         </div>
       </div>
 
       <!-- Step: Template -->
-      <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting, 'fadeOutDown': isPreving}" ng-if="steps[step] === 'template'">
+      <div class="animated fadeInUp" ng-class="{'fadeOutUp': isNexting, 'fadeOutDown': isPreving}"
+        ng-if="steps[step] === 'template'">
 
         <!-- Go back -->
         <button class="btn btn-sm btn-default" ng-click="prev()">
-          <i class="fa fa-fw fa-reply"></i> Go Back
+          <i class="fa fa-fw fa-reply"></i> {{ 'GO_BACK' | translate }}
         </button>
 
         <!-- Sub header -->
         <h4 class="page-header">
-          Pick a theme
+          {{ 'PICK_THEME' | translate }}
           <button class="btn btn-primary btn-sm pull-right"
             ng-click="selectTemplate(templates[0])">
-            Skip <i class="fa fa-fw fa-arrow-right"></i>
+            {{ 'SKIP' | translate }} <i class="fa fa-fw fa-arrow-right"></i>
           </button>
         </h4>
 
@@ -100,19 +102,19 @@
               <button class="btn btn-sm btn-default pull-left" ng-click="prev()" style="margin-top: 4px">
                 <i class="fa fa-fw fa-reply"></i>
               </button>
-              <span>You're almost done!</span>
+              <span translate>ALMOST_DONE</span>
             </h2>
 
             <!-- Signup form -->
             <form ng-submit="signup(signupForm)" ng-hide="success">
-            
+
               <!-- Sub header -->
-              <h4 class="page-header">Register</h4>
+              <h4 class="page-header" translate>REGISTER</h4>
 
               <!-- Email -->
               <div class="form-group" ng-class="{'has-error': signupForm.errors.email}">
                 <input id="email" class="form-control input-lg" type="email"
-                  ng-model="signupForm.data.email" placeholder="Email" required/>
+                  ng-model="signupForm.data.email" placeholder="{{ 'EMAIL' | translate }}" required/>
                 <span class="help-block" ng-show="signupForm.errors.email">{{ signupForm.errors.email[0] }}</span>
               </div>
 
@@ -121,8 +123,9 @@
                 <div class="input-group">
                   <!-- Input -->
                   <input id="password" class="form-control input-lg" type="{{ showPassword ? 'text' : 'password' }}"
-                    uib-tooltip="Must be at least 8 characters." tooltip-trigger="'focus'" tooltip-class="init"
-                    ng-model="password.password" ng-trim="false" placeholder="Password" required>
+                    uib-tooltip="{{ 'REGISTER_PASSWORD_TOOLTIP' | translate }}" tooltip-trigger="'focus'"
+                    tooltip-class="init" ng-model="password.password" ng-trim="false" placeholder="{{ 'PASSWORD' | translate }}"
+                    required>
                   <!-- Show/hide button -->
                   <span class="input-group-btn">
                     <button class="btn btn-default btn-lg" type="button" ng-model="showPassword" uib-btn-checkbox>
@@ -141,10 +144,9 @@
 
               <!-- Button -->
               <button class="btn btn-success btn-block btn-lg"
-                ng-disabled="signupForm.loading || signupForm.$invalid || !password.isValid()">
-                Register
+                ng-disabled="signupForm.loading || signupForm.$invalid || !password.isValid()" translate>
+                REGISTER
               </button>
-
             </form>
           </div>
         </div>
