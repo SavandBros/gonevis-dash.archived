@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function Entry($rootScope, $state, API, Codekit, toaster) {
+function Entry($rootScope, $state, API, Codekit, toaster, $translate) {
   return function(data) {
 
     /**
@@ -91,7 +91,9 @@ function Entry($rootScope, $state, API, Codekit, toaster) {
         function() {
           self.isDeleted = true;
           self.isSelected = false;
-          toaster.success("Done", "Entry deleted!");
+          $translate(["DONE", "ENTRY_DELETED"]).then(function(translations) {
+            toaster.success(translations.DONE, translations.ENTRY_DELETED);
+          });
           $rootScope.$broadcast("gonevisDash.Entry:remove", {
             entry: self,
             success: true,
