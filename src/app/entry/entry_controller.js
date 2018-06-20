@@ -96,7 +96,7 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
    */
   $scope.removeSelected = function() {
 
-    if (confirm("Delete selected posts?\nDeleting posts can not be undone!") === true) {
+    if (confirm($translate.instant('REMOVE_SELECTED_ENTRY_PROMPT')) === true) {
       angular.forEach($scope.entries, function(entry) {
         if (entry.isSelected) {
           entry.remove();
