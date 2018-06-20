@@ -3,7 +3,7 @@
 import app from "../../app";
 
 function UserController($scope, $rootScope, $stateParams,
-                        AuthService, API, DolphinService, Upload, ENV, Account, toaster) {
+                        AuthService, API, DolphinService, Upload, ENV, Account, toaster, $translate) {
 
   var toasters = {};
 
@@ -29,10 +29,11 @@ function UserController($scope, $rootScope, $stateParams,
    * @param {string} value
    */
   $scope.updateProfile = function(key, value) {
+    var translatedKey = $translate.instant(key.toUpperCase()).toLowerCase();
 
-    var keyString = key.replace(/_/g, " ");
-
-    toasters[key] = toaster.info("", "Updating " + keyString + "...");
+    $translate("UPDATING_PROFILE", {"profileKey": translatedKey}).then(function(updating) {
+      toasters[key] = toaster.info("", updating, 30000);
+    });
 
     var payload = {};
     payload[key] = value;
@@ -48,10 +49,14 @@ function UserController($scope, $rootScope, $stateParams,
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
         toaster.clear(toasters[key]);
-        toaster.info("Done", "Profile " + keyString + " updated", 3000);
+        $translate(["DONE", "PROFILE_UPDATED"], {"profileKey": translatedKey}).then(function(translations) {
+          toaster.info(translations.DONE, translations.PROFILE_UPDATED, 3000);
+        });
       },
       function() {
-        toaster.error("Error", "An error has occurred while updating profile, try again.");
+        $translate(["ERROR", "PROFILE_UPDATE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.PROFILE_UPDATE_ERROR);
+        });
       }
     );
   };
@@ -117,13 +122,17 @@ function UserController($scope, $rootScope, $stateParams,
       },
       method: "PUT"
     }).then(function(data) {
-      toaster.info("Done", "Profile picture updated");
+      $translate(["DONE", "PROFILE_PICTURE_UPDATED"]).then(function(translations) {
+        toaster.info(translations.DONE, translations.PROFILE_PICTURE_UPDATED);
+      });
       $scope.user = new Account(data.data);
       $scope.user = AuthService.setAuthenticatedUser(data.data, true);
       $rootScope.$broadcast("gonevisDash.UserController:update");
     }, function(data) {
       $scope.errors = data.data;
-      toaster.error("Error", "An error has occured while uploading profile picture, try again.");
+      $translate(["ERROR", "PROFILE_PICTURE_UPDATE_ERROR"]).then(function(translations) {
+        toaster.error(translations.ERROR, translations.PROFILE_PICTURE_UPDATE_ERROR);
+      });
     });
   };
 
