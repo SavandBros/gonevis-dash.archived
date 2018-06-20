@@ -26,10 +26,8 @@ function DolphinModalController($scope, $rootScope, toaster, dolphin, API, $tran
       }, form.data,
       function(data) {
         form.loading = false;
-        $translate(["DONE", "FILE", "UPDATED"]).then(function(translations) {
-          toaster.info(
-            translations.DONE, translations.FILE + " " + form.data.meta_data.name + " " + translations.UPDATED
-          );
+        $translate(["DONE", "DOLPHIN_UPDATED"], {'name': form.data.meta_data.name}).then(function(translations) {
+          toaster.info(translations.DONE, translations.DOLPHIN_UPDATED);
         });
         $rootScope.$broadcast('gonevisDash.Dolphin:update', {
           dolphin: data,
