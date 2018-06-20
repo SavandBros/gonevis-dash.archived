@@ -2,7 +2,7 @@
 
 import app from "../../app";
 
-function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService, Codekit, ModalsService) {
+function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService, Codekit, ModalsService, $translate) {
 
   function constructor() {
     $scope.form = {
@@ -16,7 +16,7 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
 
   /**
    * @desc Invite people into the team
-   * 
+   *
    * @param {object} form
    */
   $scope.invite = function(form) {
@@ -28,10 +28,12 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
       function(data) {
         $rootScope.$broadcast("gonevisDash.TeamService.invite", data);
         ModalsService.close("invite");
-        toaster.success(
-          "Invited",
-          "Invited " + form.data.email + " as " + $scope.teamRoles[form.data.role - 1].label.toLowerCase() + " into the team."
-        );
+        $translate(
+          ["INVITED", "TEAM_INVITED_MEMBER"],
+          {"email": form.data.email, "role": $scope.teamRoles[form.data.role - 1].label.toLowerCase()}
+        ).then(function(translations) {
+          toaster.success(translations.INVITED, translations.TEAM_INVITED_MEMBER);
+        });
       },
       function(data) {
         form.errors = data.data;
