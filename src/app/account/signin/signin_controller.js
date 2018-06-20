@@ -26,8 +26,8 @@ function SigninController($scope, $stateParams, AuthService, ModalsService, toas
       function(data) {
         form.loading = false;
         form.errors = null;
-        $translate(["LOGGED_IN", "WELCOME_BACK"]).then(function(translations) {
-          toaster.info(translations.LOGGED_IN, translations.WELCOME_BACK + " " + data.user.username);
+        $translate(["LOGGED_IN", "WELCOME_BACK"], {"username": data.user.username}).then(function(translations) {
+          toaster.info(translations.LOGGED_IN, translations.WELCOME_BACK);
         });
       },
       function(data) {
