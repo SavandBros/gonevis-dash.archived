@@ -89,7 +89,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    */
   $scope.deleteSite = function() {
     // How sure? Like confirm-a-confirm sure?
-    var text = "Delete site?\nDeleting site can not be undone!\n\nType in the site title to confirm:";
+    const text = $translate.instant("DELETE_SITE_PROMPT");
     if ($window.prompt(text) !== $scope.site.title) {
       return;
     }
@@ -177,7 +177,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    */
   $scope.addDomain = function() {
     // Domain url
-    var domain = $window.prompt("Enter your custom domain address:");
+    const domain = $window.prompt($translate.instant("ENTER_DOMAIN_ADDRESS"));
 
     // Check if cancelled
     if (domain === null) {
@@ -186,11 +186,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
 
     API.SetCustomDomain.put({ siteId: site }, { domain: domain },
       function() {
-        toaster.success("Custom domain set", (
-          "Supply '" + $scope.site.absolute_uri + "' to your DNS provider " +
-          "for the destination of CNAME or ALIAS records."
-        ));
-        getSiteSettings();
+        $translate(["CUSTOM_DOMAIN_SET", "SUPPLY_URL_TO_DNS"], {"absolute_uri": $scope.site.absolute_uri}).then(
+          function () {
+            toaster.success(translations.CUSTOM_DOMAIN_SET, translations.SUPPLY_URL_TO_DNS);
+            getSiteSettings();
+        });
       },
       function() {
         $translate(["ERROR", "DOMAIN_TAKEN_INVALID"]).then(function(translations) {
@@ -207,15 +207,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    */
   $scope.deleteDomain = function(domain) {
     // How sure? Like confirm-a-confirm sure?
-    if (!$window.confirm("Are you sure you want to delete '" + domain.domain + "' domain?")) {
+    if (!$window.confirm($translate.instant('CUSTOM_DOMAIN_DELETE_PROMPT', {domain: domain.domain}))) {
       return;
     }
 
     API.RemoveCustomDomain.put({ siteId: site }, { domain_id: domain.id }, function() {
-      $translate(["DONE", "DELETED_CUSTOM_DOMAIN"]).then(function(translations) {
-        toaster.success(
-          translations.DONE, translations.DELETED_CUSTOM_DOMAIN + " ' " + domain.domain + " ' " + "."
-        );
+      $translate(["DONE", "DELETED_CUSTOM_DOMAIN"], {domain: domain.domain}).then(function(translations) {
+        toaster.success(translations.DONE, translations.DELETED_CUSTOM_DOMAIN);
       });
       getSiteSettings();
     });
