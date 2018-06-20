@@ -7,6 +7,7 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
   function constructor() {
     $scope.state = $state;
     $scope.param = $stateParams;
+    $scope.user = AuthService.getAuthenticatedUser(true);
 
     $scope.Comment.initialize();
     $scope.Entry.initialize();

@@ -20,7 +20,7 @@
     "html-webpack-plugin": "^3.2.0",
     "istanbul-instrumenter-loader": "^3.0.1",
     "jasmine-core": "^3.1.0",
-    "karma": "^2.0.2",
+    "karma": "^2.0.3",
     "karma-babel-preprocessor": "^7.0.0",
     "karma-coverage": "^1.1.2",
     "karma-jasmine": "^1.1.2",
@@ -91,7 +91,8 @@
     "report-coverage": "codecov",
     "start": "npm run server",
     "stats": "webpack --profile --json > stats.json",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "sync-trans": "node ./scripts/sync_trans.js"
   },
   "engines": {
     "node": "8.2.0",

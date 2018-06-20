@@ -237,5 +237,7 @@
   "LOAD_MORE": "LOAD MORE",
   "OPEN": "Open",
   "DELETED": "Deleted",
-  "BY": "By"
+  "BY": "By",
+  "INCOMPLETE_PROFILE": "Your profile information is incomplete!",
+  "IMPROVE_PROFILE": "Improve Profile"
 }
