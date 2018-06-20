@@ -141,7 +141,7 @@
   "DELETE_SITE": "Delete Site",
   "DOMAINS": "Domains",
   "DELETED_CUSTOM_DOMAIN": "Deleted custom domain: '{domain}'.",
-  "CUSTOM_DOMAIN_DELETE_PROMPT": "Are you sure you want to delete '{domain}' domain?",
+  "CUSTOM_DOMAIN_DELETE_PROMPT": "Are you sure you want to delete '{{domain}}' domain?",
   "DELETE_SITE_PROMPT": "Delete site?\nDeleting site can not be undone!\nType in the site title to confirm:",
   "DOMAIN_TAKEN_INVALID": "Domain is already taken or invalid.",
   "SUBDOMAIN": "Subdomain",
