@@ -4,7 +4,7 @@ require('medium-editor');
 require('../../basement/medium_editor/medium_editor');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug) {
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate) {
   var payload;
   var tagsToCreate = [];
   var noneTagsCount = 0;
@@ -73,7 +73,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         },
         function () {
           $state.go("dash.entry-edit", { entryId: null });
-          toaster.error("Oops!", "Can't get post.");
+          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function(translations) {
+            toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
+          });
         }
       );
     } else {
@@ -181,12 +183,17 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         form.get = data;
         form.url = $scope.form.getUrl();
         Codekit.setTitle(form.get.title);
-        toaster.info("Done", "Updated " + payload.title);
+
+        $translate(["DONE", "ENTRY_UPDATED"], {"title": payload.title}).then(function (translations) {
+          toaster.info(translations.DONE, translations.ENTRY_UPDATED);
+        });
         form.loading = false;
         form.errors = null;
       },
       function (data) {
-        toaster.error("Error", "Entry couldn't be updated, try again.");
+        $translate(["ERROR", "ENTRY_UPDATE_ERROR"]).then(function (translations) {
+          toaster.error(translations.ERROR, translations.ENTRY_UPDATE_ERROR);
+        });
         form.loading = false;
         form.errors = data.data;
       }
@@ -197,13 +204,17 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     API.EntryAdd.save(payload,
       function (data) {
         $scope.form.cache(true);
-        toaster.success("Done", "Created " + payload.title);
+        $translate(["DONE", "ENTRY_CREATED_API"], {"title": payload.title}).then(function (translations) {
+          toaster.success(translations.DONE, translations.ENTRY_CREATED_API);
+        });
         $state.go("dash.entry-edit", {
           entryId: data.id
         });
       },
       function (data) {
-        toaster.error("Error", "Failed to add entry");
+        $translate(["ERROR", "ENTRY_CREATE_ERROR"]).then(function (translations) {
+          toaster.error(translations.ERROR, translations.ENTRY_CREATE_ERROR);
+        });
         form.loading = false;
         form.errors = data.data;
       }
