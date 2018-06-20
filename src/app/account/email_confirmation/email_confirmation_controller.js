@@ -48,8 +48,8 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
       },
       function() {
         ModalsService.close("forgotPassword");
-        $translate(["SENT", "EMAIL_VERIFICATION_SENT_TO"]).then(function(translations) {
-          toaster.success(translations.SENT, translations.EMAIL_VERIFICATION_SENT_TO + form.email);
+        $translate(["SENT", "EMAIL_VERIFICATION_SENT_TO"], {"email": form.email}).then(function(translations) {
+          toaster.success(translations.SENT, translations.EMAIL_VERIFICATION_SENT_TO);
         });
         $state.go("signin");
       },
