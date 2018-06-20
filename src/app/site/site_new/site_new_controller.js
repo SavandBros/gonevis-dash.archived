@@ -33,8 +33,8 @@ function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthSe
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.SiteNewController:Create");
 
-        $translate(["AWESOME", "CREATED"]).then(function(translations) {
-          toaster.success(translations.AWESOME, translations.CREATED + " " + data.title + ".");
+        $translate(["AWESOME", "SITE_CREATED"], {"title": data.title}).then(function(translations) {
+          toaster.success(translations.AWESOME, translations.SITE_CREATED);
         });
         $state.go("dash.main", {
           s: 0
