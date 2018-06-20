@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function StartController($scope, $timeout, Password, AuthService, API, toaster) {
+function StartController($scope, $timeout, Password, AuthService, API, toaster, $translate) {
 
   function constructor() {
 
@@ -109,7 +109,7 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
 
   /**
    * @desc Submit signup form
-   * 
+   *
    * @param {object} form Signup form
    */
   $scope.signup = function(form) {
@@ -131,10 +131,9 @@ function StartController($scope, $timeout, Password, AuthService, API, toaster) 
           form.data.email,
           $scope.password.password,
           function() {
-            toaster.success(
-              "Awesome!",
-              "Thanks for registering at GoNevis, a link has been sent to your email for account verification."
-            );
+            $translate(["AWESOME", "REGISTER_VERIFICATION"]).then(function(translations) {
+              toaster.success(translations.AWESOME, translations.REGISTER_VERIFICATION);
+            });
           }
         );
       },
