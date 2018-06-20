@@ -130,9 +130,7 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
                 API.Dolphins.post(payload,
                   function(data) {
                     file.done = true;
-                    $translate('UPLOAD_COMPLETED').then(function (uploadCompleted) {
-                      toaster.success(uploadCompleted, file.name);
-                    });
+                    toaster.success($translate.instant('UPLOAD_COMPLETED'), file.name);
                     $scope.dolphins.unshift(new Dolphin(data));
                     $scope.currentTab = "dolphin";
                   }
