@@ -34,10 +34,11 @@
             </div>
             <div ng-if="!domainForm.loading" ng-class="{'o-fade': domainForm.loading}">
               <span ng-if="domainForm.available">
-                <b><i class="fa fa-fw fa-check text-success"></i> Awesome!</b> {{ domainForm.checkedName }} is available.
+                <b><i class="fa fa-fw fa-check text-success"></i> {{ 'AWESOME' | translate }}</b>
+                {{ domainForm.checkedName }} {{ 'IS_AVAILABLE' | translate }}
               </span>
               <span ng-if="!domainForm.available">
-                <b><i class="fa fa-fw fa-times text-danger"></i> Oh...</b> {{ domainForm.error.domain[0] }}.
+                <b><i class="fa fa-fw fa-times text-danger"></i> {{ 'OH' | translate }}</b> {{ domainForm.error.domain[0] }}.
               </span>
             </div>
           </div>
