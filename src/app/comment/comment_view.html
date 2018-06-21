@@ -16,7 +16,7 @@
         <div class="media-body">
           <div class="media-heading s-mar-no">
             <a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">{{ comment.user.getDisplayName() }}</a>
-            <small class="o-fade-soft" translate>RESPONDED_TO</small>
+            <small class="o-fade-soft" translate>WROTE_ON</small>
             <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
               {{ comment.get.commented_object_minimal_data.title }}
             </a>
