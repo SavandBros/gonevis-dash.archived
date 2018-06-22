@@ -19,16 +19,14 @@
                 <img class="media-object img-circle" width="48" ng-src="{{ follower.getMedia('small') }}">
               </div>
               <div class="media-body">
+                <!-- Display name -->
                 <h4 class="media-heading">
                   <a ng-href="{{ follower.get.get_absolute_uri }}" target="_blank">
                     {{ follower.getDisplayName() }}
                   </a>
-                  <small class="small">&middot; @{{ follower.get.username }}</small>
                 </h4>
-                <!-- Location -->
-                <span ng-if="follower.get.location">{{ follower.get.location }} <br></span>
-                <!-- Date joined -->
-                <small class="o-fade">{{ follower.get.date_joined | date }}</small>
+                <!-- Username -->
+                @{{ follower.get.username }}
               </div>
             </div>
 
