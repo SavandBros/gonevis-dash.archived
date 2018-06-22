@@ -321,3 +321,18 @@ body {
 .dropdown-menu a {
     text-transform: initial !important;
 }
+
+
+/* Alert */
+
+.alert {
+    border-radius: 3px;
+    border: 0;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+    letter-spacing: 0.5;
+}
+
+.alert .btn.pull-right {
+    margin-top: -6px;
+    border: 0;
+}

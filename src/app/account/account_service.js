@@ -58,7 +58,7 @@ function Account() {
     /**
      * @desc Get first part of full name if name is available
      * @type {function}
-     * @returns {string|boolean}
+     * @returns {string}
      */
     this.getFirstName = function() {
       // Check name
@@ -70,7 +70,7 @@ function Account() {
         }
       }
       // Name is not set
-      return false;
+      return self.get.username;
     };
 
     /**
@@ -79,12 +79,7 @@ function Account() {
      * @returns {string}
      */
     this.getFullName = function() {
-      // Full name
-      if (self.get.name) {
-        return self.get.name;
-      }
-      // Username
-      return self.get.username;
+      return self.get.name || self.get.username;
     };
 
     /**
@@ -111,6 +106,29 @@ function Account() {
       }
       return [];
     };
+
+    /**
+     * @desc Check whether the profile information is complete or not (name, about, etc.)
+     *
+     * @param {boolean} minimal Check profile for minimal user data (like data of /refresh endpoint)
+     *
+     * @returns {boolean}
+     */
+    this.isProfileComplete = function(minimal) {
+      // Check for media and name
+      if (self.hasMedia && self.get.name) {
+        // If not checking for minimal data, check for about and location
+        if (!minimal && self.get.about && self.get.location) {
+          return true;
+        }
+        // Checking minimal data
+        if (minimal) {
+          return true;
+        }
+      }
+      // Missing info
+      return false;
+    }
   };
 }
 

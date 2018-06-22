@@ -2,6 +2,11 @@
   <div class="row">
     <!-- Left -->
     <div class="col-md-8">
+      <!-- Alerts -->
+      <div class="alert alert-danger" ng-if="!user.isProfileComplete(true)">
+        <translate>INCOMPLETE_PROFILE</translate>
+        <a class="btn btn-default pull-right" ui-sref="user({s: param.s})" translate>IMPROVE_PROFILE</a>
+      </div>
       <!-- Latest comments -->
       <div class="panel panel-default" ng-if="!Comment.loading">
         <div class="panel-heading">
