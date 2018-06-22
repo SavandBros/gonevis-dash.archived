@@ -3,25 +3,32 @@
     <div class="modal-content">
       <div class="modal-header">
         <h3>
-          {{ 'FOLLOWERS' | translate }} <span class="badge">{{ followers.count }}</span>
+          {{ 'FOLLOWERS' | translate }} <span class="badge" ng-if="followers.count">{{ followers.count }}</span>
           </a><i class="fa fa-close close pull-right" data-dismiss="modal"></i>
         </h3>
       </div>
       <div class="modal-body">
         <div class="row">
-          <!-- Templates -->
           <div class="col-md-12">
-            <div class="list-view" ng-repeat="follower in followers">
-              <div class="media">
-                <div class="media-left">
-                  <img class="media-object img-circle" width="48" ng-src="{{ follower.getMedia('small') }}">
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading">
-                    <a ng-href="{{ follower.get.get_absolute_uri }}" target="_blank">{{ follower.getDisplayName() }}</a>
-                  </h4>
-                  @{{ follower.get.username }}
-                </div>
+            <!-- Nothing -->
+            <nothing text="{{ nothingText }}" ng-if="!followers.count && initialled"></nothing>
+
+            <!-- Followers -->
+            <div class="media" ng-repeat="follower in followers" ng-if="followers.count">
+              <div class="media-left">
+                <img class="media-object img-circle" width="48" ng-src="{{ follower.getMedia('small') }}">
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <a ng-href="{{ follower.get.get_absolute_uri }}" target="_blank">
+                    {{ follower.getDisplayName() }}
+                  </a>
+                  <small class="small">&middot; @{{ follower.get.username }}</small>
+                </h4>
+                <!-- Location -->
+                <span ng-if="follower.get.location">{{ follower.get.location }} <br></span>
+                <!-- Date joined -->
+                <small class="o-fade">{{ follower.get.date_joined | date }}</small>
               </div>
             </div>
 
