@@ -108,6 +108,10 @@ function API($resource, ENV) {
       name: "SiteUpdate",
       endpoint: "website/site/:siteId/update-settings/" // GET, PUT
     }, {
+      name: "SiteFollowers",
+      endpoint: "website/site/:siteId/subscribers/", // GET
+      isPublic: true
+    }, {
       name: "Navigation",
       endpoint: "website/site/:siteId/navigation/" // GET
     }, {
@@ -162,8 +166,16 @@ function API($resource, ENV) {
   }
 
   function setAPIData() {
+    var api;
+
     for (var i in endpoints) {
-      createResourceObject(endpoints[i].name, BASE_API + endpoints[i].endpoint);
+      if (endpoints[i].isPublic) {
+        api = ENV.publicApiEndpoint;
+      } else {
+        api = BASE_API;
+      }
+
+      createResourceObject(endpoints[i].name, api + endpoints[i].endpoint);
     }
   }
 
