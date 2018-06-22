@@ -2,18 +2,12 @@
 
 import app from "../app";
 
-function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService) {
+function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService,
+                        $translate) {
 
   function constructor() {
     $scope.codekit = Codekit;
     $scope.isPageView = $state.includes("dash.page-list");
-
-    if ($scope.isPageView) {
-      $scope.nothingText = "No pages yet.";
-    } else {
-      $scope.nothingText = "No posts yet.";
-    }
-
     $scope.view = localStorageService.get("entryView") || "list";
     $scope.filters = {
       title: ""
@@ -22,37 +16,49 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
     $scope.search = Search;
     $scope.pageForm = {};
     $scope.entries = [];
-    $scope.actions = [{
-      label: "Draft",
-      icon: "pencil",
-      property: "status",
-      value: 0
-    }, {
-      label: "Published",
-      icon: "globe",
-      property: "status",
-      value: 1,
-    }, {
-      label: "Pin (Featured)",
-      icon: "star",
-      property: "featured",
-      value: true
-    }, {
-      label: "Unpin",
-      icon: "star-o",
-      property: "featured",
-      value: false
-    }, {
-      label: "Enable Comments",
-      icon: "comments",
-      property: "comment_enabled",
-      value: true
-    }, {
-      label: "Disable Comments",
-      icon: "ban",
-      property: "comment_enabled",
-      value: false
-    }];
+
+    $translate([
+      'NO_PAGES', 'NO_POSTS', 'DRAFT', 'PUBLISHED',
+      'PIN', 'UNPIN', "ENABLE_COMMENTS", 'DISABLE_COMMENTS'
+    ]).then(function (translation) {
+      if ($scope.isPageView) {
+        $scope.nothingText = translation.NO_PAGES;
+      } else {
+        $scope.nothingText = translation.NO_POSTS;
+      }
+
+      $scope.actions = [{
+        label: translation.DRAFT,
+        icon: "pencil",
+        property: "status",
+        value: 0
+      }, {
+        label: translation.PUBLISHED,
+        icon: "globe",
+        property: "status",
+        value: 1,
+      }, {
+        label: translation.PIN,
+        icon: "star",
+        property: "featured",
+        value: true
+      }, {
+        label: translation.UNPIN,
+        icon: "star-o",
+        property: "featured",
+        value: false
+      }, {
+        label: translation.ENABLE_COMMENTS,
+        icon: "comments",
+        property: "comment_enabled",
+        value: true
+      }, {
+        label: translation.DISABLE_COMMENTS,
+        icon: "ban",
+        property: "comment_enabled",
+        value: false
+      }];
+    });
 
     var payload = {
       site: AuthService.getCurrentSite(),
@@ -90,7 +96,7 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
    */
   $scope.removeSelected = function() {
 
-    if (confirm("Delete selected posts?\nDeleting posts can not be undone!") === true) {
+    if (confirm($translate.instant('REMOVE_SELECTED_ENTRY_PROMPT')) === true) {
       angular.forEach($scope.entries, function(entry) {
         if (entry.isSelected) {
           entry.remove();
@@ -154,3 +160,15 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
 }
 
 app.controller("EntryController", EntryController);
+EntryController.$inject = [
+  "$scope",
+  "$state",
+  "Entry",
+  "Codekit",
+  "API",
+  "AuthService",
+  "Pagination",
+  "Search",
+  "localStorageService",
+  "$translate"
+];

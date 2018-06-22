@@ -8,14 +8,15 @@
   <div class="col-md-12">
     <!-- Main -->
     <div class="panel panel-default s-box form-inline animated fadeIn" ng-if="initialled">
-      <div class="panel-heading">Navigations</div>
+      <div class="panel-heading" translate>NAVIGATIONS</div>
       <div class="panel-body">
         <!-- Nothing -->
         <!-- TODO: Translate -->
-        <nothing text="It's lonely here... Try adding some navigations." ng-if="!navigations.length && initialled"></nothing>
+        <nothing text="{{ 'NO_NAVIGATIONS' | translate }}" ng-if="!navigations.length && initialled"></nothing>
         <!-- Form -->
         <form name="form" ng-submit="update(form)" sv-root sv-part="navigations">
-          <div class="form-group sz-full s-mar-bottom-list" ng-repeat="nav in navigations" sv-element style="visibility: visible !important; opacity: 1 !important">
+          <div class="form-group sz-full s-mar-bottom-list" ng-repeat="nav in navigations"
+            sv-element style="visibility: visible !important; opacity: 1 !important">
             <!-- Helper -->
             <div sv-helper class="helper-left" style="height: 34px">
             </div>
@@ -27,23 +28,28 @@
             </div>
             <!-- Label -->
             <div class="col-xs-2 s-pad-no">
-              <input type="text" placeholder="Label" ng-model="nav.label" class="form-control br-r-no br-right-no sz-full">
+              <input type="text" placeholder="{{ 'LABEL' | translate }}" ng-model="nav.label"
+                class="form-control br-r-no br-right-no sz-full">
             </div>
             <!-- URL -->
             <div class="col-xs-4 s-pad-no">
-              <input type="text" placeholder="/URL" ng-model="nav.url" class="form-control br-r-no br-right-no sz-full" required />
+              <input type="text" placeholder="/URL" ng-model="nav.url"
+                class="form-control br-r-no br-right-no sz-full" required />
             </div>
             <!-- Tooltip -->
             <div class="col-xs-2 s-pad-no">
-              <input type="text" placeholder="Tooltip" ng-model="nav.tooltip" class="form-control br-r-no br-right-no sz-full">
+              <input type="text" placeholder="{{ 'TOOLTIP' | translate }}" ng-model="nav.tooltip"
+                class="form-control br-r-no br-right-no sz-full">
             </div>
             <!-- Icon -->
             <div class="col-xs-1 s-pad-no">
-              <input type="text" placeholder="Icon class" ng-model="nav.icon" class="form-control br-r-no br-right-no sz-full">
+              <input type="text" placeholder="{{ 'ICON_CLASS' | translate }}" ng-model="nav.icon"
+                class="form-control br-r-no br-right-no sz-full">
             </div>
             <!-- Color -->
             <div class="col-xs-1 s-pad-no">
-              <input type="text" placeholder="Color" ng-model="nav.color" class="form-control br-r-no br-right-no color sz-full">
+              <input type="text" placeholder="{{ 'COLOR' | translate }}" ng-model="nav.color"
+                class="form-control br-r-no br-right-no color sz-full">
             </div>
             <!-- Delete -->
             <div class="col-xs-1 s-pad-no">
@@ -55,7 +61,7 @@
           <!-- Update -->
           <div class="form-group s-mar-top-soft pull-right">
             <button class="btn btn-primary">
-              <i class="fa fa-check fa-fw"></i> Save Changes
+              <i class="fa fa-check fa-fw"></i> {{ 'SAVE_CHANGES' | translate }}
             </button>
           </div>
         </form>

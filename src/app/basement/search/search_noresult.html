@@ -1,4 +1,4 @@
 <!-- No result -->
 <div ng-if="$ctrl.searchForm.noResult" class="animated fadeInUp" ng-class="{'s-mar-x-soft': $ctrl.view}">
-	<p class="alert-danger alert">No results found for <b>{{ $ctrl.searchForm.searchedQuery }}</b></p>
+	<p class="alert-danger alert">{{ 'NO_RESULTS_FOUND' | translate }} <b>{{ $ctrl.searchForm.searchedQuery }}</b></p>
 </div>

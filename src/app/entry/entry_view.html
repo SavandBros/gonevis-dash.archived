@@ -10,7 +10,8 @@
   <no-result search-form="searchForm" view="view"></no-result>
   <!-- Nothing -->
   <!-- TODO: Translate -->
-  <nothing text="nothingText" view="view" ng-if="!entries.length && !searchForm.noResult && initialled"></nothing>
+  <nothing text="{{ nothingText }}" view="view"
+    ng-if="!entries.length && !searchForm.noResult && initialled"></nothing>
   <!-- List -->
   <div ng-if="entries.length">
     <!-- Entry grid -->
@@ -31,18 +32,18 @@
               <ul class="dropdown-menu dropdown-menu-right">
                 <li>
                   <a ng-href="{{ entry.getUrl() }}" target="_blank">
-                    <i class="fa fa-fw fa-external-link"></i> View on site
+                    <i class="fa fa-fw fa-external-link"></i> {{ 'VIEW_ON_SITE' | translate }}
                   </a>
                 </li>
                 <li>
                   <a ng-click="entry.addToNavigation()">
-                    <i class="fa fa-fw fa-bars"></i> Add to navigation
+                    <i class="fa fa-fw fa-bars"></i> {{ 'ADD_TO_NAVIGATION' | translate }}
                   </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                   <a ng-click="entry.remove()">
-                    <i class="fa fa-fw fa-trash text-danger"></i> Delete
+                    <i class="fa fa-fw fa-trash text-danger"></i> {{ 'DELETE' | translate }}
                   </a>
                 </li>
               </ul>
@@ -51,8 +52,8 @@
           <div class="post-body" style="padding: 10px 15px">
             <!-- Status -->
             <p class="post-info o-fade s-mar-no">
-              <span ng-if="entry.get.status === 1">Published &middot; {{ entry.get.published | date }}</span>
-              <span ng-if="entry.get.status !== 1">Draft &middot; {{ entry.get.created | date }}</span>
+              <span ng-if="entry.get.status === 1">{{ 'PUBLISHED' | translate }} &middot; {{ entry.get.published | date }}</span>
+              <span ng-if="entry.get.status !== 1">{{ 'DRAFT' | translate }} &middot; {{ entry.get.created | date }}</span>
             </p>
             <!-- Title -->
             <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
@@ -92,7 +93,7 @@
         <!-- Action dropdown -->
         <div class="dropdown options pull-right" title="options">
           <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
-            Action <i class="fa fa-caret-down"></i>
+            {{ 'ACTION' | translate }} <i class="fa fa-caret-down"></i>
           </button>
           <ul class="dropdown-menu">
             <li ng-repeat="a in actions">
@@ -103,7 +104,7 @@
             <hr>
             <li>
               <a ng-click="removeSelected()">
-                <i class="fa fa-trash text-danger"></i> Remove selected
+                <i class="fa fa-trash text-danger"></i> {{ 'REMOVE_SELECTED' | translate}}
               </a>
             </li>
           </ul>
@@ -124,8 +125,8 @@
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right o-fade s-pad-no">
               <span class="hidden-xs">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
               <span class="visible-xs small">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
-              <small class="dis-b o-fade" ng-if="entry.get.status === 1">Publication</small>
-              <small class="dis-b o-fade" ng-if="entry.get.status === 0">Creation</small>
+              <small class="dis-b o-fade" ng-if="entry.get.status === 1" translate>PUBLICATION</small>
+              <small class="dis-b o-fade" ng-if="entry.get.status === 0" translate>CREATION</small>
             </div>
             <!-- Tools -->
             <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 text-right s-pad-no">
@@ -135,29 +136,29 @@
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-header" ng-if="entry.get.comment_enabled">
-                  <i init class="fa fa-fw fa-comments text-muted"></i> Comments enabled
+                  <i init class="fa fa-fw fa-comments text-muted"></i> {{ 'COMMENTING_ENABLED' | translate }}
                 </li>
                 <li class="dropdown-header" ng-if="entry.get.featured ">
-                  <i init class="fa fa-fw fa-star text-primary"></i> Featured
+                  <i init class="fa fa-fw fa-star text-primary"></i> {{ 'FEATURED' | translate }}
                 </li>
                 <li class="dropdown-header" ng-if="entry.get.password ">
-                  <i init class="fa fa-fw fa-lock text-danger"></i> Passworded
+                  <i init class="fa fa-fw fa-lock text-danger"></i> {{ 'PASSWORD_PROTECTED' | translate }}
                 </li>
                 <li class="divider" ng-show="entry.get.password || entry.get.featured || entry.get.comment_enabled"></li>
                 <li>
                   <a ng-href="{{ entry.getUrl() }}" target="_blank">
-                    <i class="fa fa-fw fa-external-link"></i> View on site
+                    <i class="fa fa-fw fa-external-link"></i> {{ 'VIEW_ON_SITE' | translate }}
                   </a>
                 </li>
                 <li>
                   <a ng-click="entry.addToNavigation()">
-                    <i class="fa fa-fw fa-bars"></i> Add to navigation
+                    <i class="fa fa-fw fa-bars"></i> {{ 'ADD_TO_NAVIGATION' | translate }}
                   </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                   <a ng-click="entry.remove()">
-                    <i class="fa fa-fw fa-trash text-danger"></i> Delete
+                    <i class="fa fa-fw fa-trash text-danger"></i> {{ 'DELETE' | translate }}
                   </a>
                 </li>
               </ul>

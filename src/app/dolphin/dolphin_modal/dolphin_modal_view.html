@@ -12,11 +12,12 @@
           </div>
           <div class="form-group" ng-class="{'has-error': form.errors.meta_data.name}">
             <input class="form-control" type="text" ng-model="form.data.meta_data.name"
-              placeholder="File name" maxlength="100" required>
+              placeholder="{{ 'FILE_NAME' | translate }}" maxlength="100" required>
             <small class="help-block" ng-show="form.errors.file_name">{{ form.errors.meta_data.name[0] }}</small>
           </div>
           <div class="form-group" ng-class="{'has-error': form.errors.meta_data.description}">
-            <textarea class="form-control" type="text" ng-model="form.data.meta_data.description" placeholder="Description">
+            <textarea class="form-control" type="text" ng-model="form.data.meta_data.description"
+              placeholder="{{ 'DESCRIPTION' | translate }}">
             </textarea>
             <small class="help-block" ng-show="form.errors.meta_data.description">
               {{ form.errors.meta_data.name[0] }}
@@ -24,13 +25,13 @@
           </div>
           <div class="btn-group">
             <button type="button" class="btn btn-default" ng-click="dolphin.remove()"
-              title="Delete file" data-dismiss="modal">
+              title="{{ 'DELETE_FILE' | translate }}" data-dismiss="modal">
               <i class="fa fa-trash"></i>
             </button>
-            <button class="btn btn-primary" ng-disabled="form.loading">Update File</button>
+            <button class="btn btn-primary" ng-disabled="form.loading" translate>UPDATE_FILE</button>
           </div>
           <a ng-href="{{ dolphin.get.file }}" class="btn btn-default pull-right" download>
-            <i class="fa fa-download"></i> Download
+            <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
           </a>
           <div class="clearfix"></div>
         </form>

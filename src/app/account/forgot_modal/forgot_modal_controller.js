@@ -3,7 +3,7 @@
 
 import app from "../../app";
 
-function ForgotModalController($scope, toaster, API, ModalsService) {
+function ForgotModalController($scope, toaster, API, ModalsService, $translate) {
 
   /**
    * @desc Sends password link to provided email.
@@ -16,9 +16,9 @@ function ForgotModalController($scope, toaster, API, ModalsService) {
     API.ForgotPassword.save(form.data,
       function() {
         ModalsService.close("forgotPassword");
-        toaster.success(
-          "Sent", "Please check your email, instruction to reset your password sent to " + form.data.email, 10000
-        );
+        $translate(["SENT", "FORGOT_PASSWORD_TOASTER"], {"email": form.data.email}).then(function(translations) {
+          toaster.success(translations.SENT, translations.FORGOT_PASSWORD_TOASTER, 10000);
+        });
       },
       function(data) {
         form.loading = false;

@@ -10,7 +10,7 @@
     <!-- Search noresult -->
     <no-result search-form="searchForm" view="view"></no-result>
     <!-- Nothing -->
-    <nothing text="It's lonely here... Try adding some tags." view="view"
+    <nothing text="{{ 'NO_TAGS' | translate }}" view="view"
       ng-if="!tags.length && !searchForm.noResult && initialled"></nothing>
     <!-- List -->
     <div ng-if="tags.length" class="animated fadeIn">
@@ -68,19 +68,19 @@
                   <i class="fa fa-fw fa-ellipsis-v"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a ng-click="tag.view(true)"><i class="fa fa-eye"></i> View</a></li>
+                  <li><a ng-click="tag.view(true)"><i class="fa fa-eye"></i> {{ 'VIEW' | translate }}</a></li>
                   <li>
                     <a href="{{ tag.get.absolute_uri }}" target="_blank">
-                      <i class="fa fa-fw fa-external-link"></i> View on site
+                      <i class="fa fa-fw fa-external-link"></i> {{ 'VIEW_ON_SITE' | translate }}
                     </a>
                   </li>
                   <li>
                     <a ng-click="tag.addToNavigation()">
-                      <i class="fa fa-fw fa-bars"></i> Add to navigation
+                      <i class="fa fa-fw fa-bars"></i> {{ 'ADD_TO_NAVIGATION' | translate }}
                     </a>
                   </li>
                   <li class="divider"></li>
-                  <li><a ng-click="tag.remove()"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                  <li><a ng-click="tag.remove()"><i class="fa fa-trash text-danger"></i> {{ 'DELETE' | translate }}</a></li>
                 </ul>
               </div>
             </li>

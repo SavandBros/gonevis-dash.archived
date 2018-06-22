@@ -2,7 +2,7 @@
 
 import app from "../../app";
 
-function TeamModalController($scope, toaster, API, team, Codekit, AuthService, ModalsService) {
+function TeamModalController($scope, toaster, API, team, Codekit, AuthService, ModalsService, $translate) {
 
   var site = AuthService.getCurrentSite();
 
@@ -25,7 +25,7 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
       team.title = team.email;
     }
 
-    if (!confirm("Remove from team?\n\nAre you sure you want to remove '" + team.title + "' from team?")) {
+    if (!confirm($translate.instant("REMOVE_TEAM_MEMBER_PROMPT", {"title": team.title}))) {
       return;
     }
 
@@ -47,13 +47,17 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
       function() {
         team.isRemoved = true;
         ModalsService.close("team");
-        toaster.success(
-          "Removed",
-          team.title + " (" + $scope.teamRoles[team.role].label.toLowerCase() + ") from team."
-        );
+        $translate(
+          ["REMOVED", "REMOVED_TEAM_MEMBER"],
+          {"title":team.title, "role": $scope.teamRoles[team.role].label.toLowerCase()}
+        ).then(function(translations) {
+          toaster.success(translations.REMOVED, translations.REMOVED_TEAM_MEMBER);
+        });
       },
       function() {
-        toaster.error("Error", "Something went wrong, couldn't remove team.");
+        $translate(["ERROR", "REMOVE_TEAM_MEMBER_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.REMOVE_TEAM_MEMBER_ERROR);
+        });
       }
     );
   };
@@ -73,12 +77,11 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
     API.TeamPromote.put({
         siteId: site
       }, payload,
-      function(data) {
-        team.role = data.role;
-        toaster.info(
-          "Done",
-          "Changed role to " + role.label
-        );
+      function() {
+        team.role = payload.role;
+        $translate(["DONE", "TEAM_CHANGED_ROLE"], {"role": role.label}).then(function(translations) {
+          toaster.info(translations.DONE, translations.TEAM_CHANGED_ROLE);
+        });
       }
     )
   }
