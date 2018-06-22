@@ -1,0 +1,35 @@
+<div class="modal fade" id="followers">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>
+          {{ 'FOLLOWERS' | translate }} <span class="badge">{{ followers.count }}</span>
+          </a><i class="fa fa-close close pull-right" data-dismiss="modal"></i>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Templates -->
+          <div class="col-md-12">
+            <div class="list-view" ng-repeat="follower in followers">
+              <div class="media">
+                <div class="media-left">
+                  <img class="media-object img-circle" width="48" ng-src="{{ follower.getMedia('small') }}">
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">
+                    <a ng-href="{{ follower.get.get_absolute_uri }}" target="_blank">{{ follower.getDisplayName() }}</a>
+                  </h4>
+                  @{{ follower.get.username }}
+                </div>
+              </div>
+            </div>
+
+            <!-- More -->
+            <pagination page-form="pageForm" ng-if="initialled"></pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
