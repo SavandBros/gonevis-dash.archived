@@ -3,8 +3,8 @@
 import app from "./app";
 
 app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
-                     ENV, AuthService, DolphinService, Codekit, Client, TourService,
-                     editableOptions, localStorageService) {
+  ENV, AuthService, DolphinService, Codekit, Client, TourService,
+  editableOptions, localStorageService, $transitions) {
 
   /**
    * @name cache
@@ -130,19 +130,16 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
   editableOptions.theme = "bs3";
 
   /**
-   * @event $stateChangeStart
+   * @event onStart
    * @desc Starting to change state callback
    *
-   * @param {Event} event
-   * @param {object} toState
-   * @param {object} toParams
-   * @param {object} fromState
+   * @param transition {Event}
    */
-  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
+  $transitions.onStart({}, function (transition) {
 
     // No routing if running tour
-    if (TourService.isTourOn() && fromState.name) {
-      event.preventDefault();
+    if (TourService.isTourOn() && transition.from().name) {
+      transition.abort();
     }
 
     // Close open modals
@@ -169,20 +166,22 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
       }
 
       // Stop the route
-      event.preventDefault();
+      transition.abort();
     }
 
+
     var isAuthenticated = AuthService.isAuthenticated();
-    var toDash = toState.name.indexOf("dash.") !== -1;
+    var toDash = transition.to().name.indexOf("dash.") !== -1;
     var sites = isAuthenticated ? AuthService.getAuthenticatedUser(true).getSites() : [];
+
 
     // If requires unauthenticated access only and user is authenticated or
     // If state requires authenticated access only and user is not authenticated
-    if ((toState.auth === false && isAuthenticated) || (toState.auth === true && !isAuthenticated)) {
+    if ((transition.to().auth === false && isAuthenticated) || (transition.to().auth === true && !isAuthenticated)) {
       // Stop changing state
-      event.preventDefault();
+      transition.abort();
       // If current state is invalid (first page)
-      if (!fromState.name) {
+      if (!transition.from().name) {
         if (isAuthenticated) {
           $state.go("dash.main", {
             s: 0
@@ -198,30 +197,28 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
 
       // If no site
       if (sites.length < 1) {
-        event.preventDefault();
+        transition.abort();
         return $state.go("site-new");
       }
 
       // If has an invalid site index
-      if (sites.length && !sites[toParams.s]) {
+      if (sites.length && !sites[transition.params().s]) {
         // Stop changing state
-        event.preventDefault();
+        transition.abort();
         // Redirect with the same state but first site
-        toParams.s = 0;
-        $state.go(toState.name, toParams);
+        $state.go(
+          transition.to().name, angular.extend({}, transition.params(), { s: 0}));
       }
     }
   });
 
   /**
-   * @event $stateChangeSuccess
+   * @event onSuccess
    * @desc Changed state succesfully
    *
-   * @param event {Event}
-   * @param toState {object}
-   * @param toParams {object}
+   * @param transition {Event}
    */
-  $rootScope.$on("$stateChangeSuccess", function (event, toState, toParams) {
+  $transitions.onSuccess({}, function (transition) {
     // Analytics
     if (ENV.name === "production") {
       $window.ga("send", "pageview", {
@@ -229,11 +226,11 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
       });
     }
 
-    // Update title
-    Codekit.setTitle(toState.title);
+    // // Update title
+    Codekit.setTitle(transition.$to().self.title);
 
     // Switch lights
-    if (toParams.lights !== true) {
+    if (transition.params().lights !== true) {
       $rootScope.set.lights = true;
     }
 
@@ -334,4 +331,3 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
     }
   });
 });
-
