@@ -2,9 +2,10 @@
 
 import app from "../../app";
 
-function SiteFollowersController($scope, API, AuthService, Account, Pagination) {
+function SiteFollowersController($scope, API, AuthService, Account, Pagination, $translate) {
 
   function constructor() {
+    $scope.nothingText = $translate.instant("NO_FOLLOWERS");
     $scope.pageForm = {};
     $scope.followers = [];
 
@@ -16,6 +17,7 @@ function SiteFollowersController($scope, API, AuthService, Account, Pagination) 
         angular.forEach(data.results, function(follower) {
           $scope.followers.push(new Account(follower));
         });
+
         $scope.followers.count = data.count;
         $scope.initialled = true;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
