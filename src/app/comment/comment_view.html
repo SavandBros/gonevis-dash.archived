@@ -5,7 +5,8 @@
     <!-- Search noresult -->
     <no-result search-form="searchForm"></no-result>
     <!-- Nothing -->
-    <nothing text="You have no comments." ng-if="!comments.length && !searchForm.noResult && initialled"></nothing>
+    <nothing text="{{ 'NO_COMMENTS' | translate }}"
+      ng-if="!comments.length && !searchForm.noResult && initialled"></nothing>
     <!-- List -->
     <div class="list-view" ng-if="comments.length">
       <div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
@@ -15,7 +16,7 @@
         <div class="media-body">
           <div class="media-heading s-mar-no">
             <a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">{{ comment.user.getDisplayName() }}</a>
-            <small class="o-fade-soft">responded to</small>
+            <small class="o-fade-soft" translate>WROTE_ON</small>
             <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
               {{ comment.get.commented_object_minimal_data.title }}
             </a>
@@ -25,7 +26,7 @@
                 <i class="fa fa-fw fa-ellipsis-v"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
-                <li class="dropdown-header">Change status</li>
+                <li class="dropdown-header" translate>CHANGE_STATUS</li>
                 <li ng-repeat="status in statuses" ng-class="{'active': comment.getStatus().label == status.label}">
                   <a ng-click="comment.setStatus(status.property, status.value)">
                     <i class="fa fa-{{ status.icon }}"></i> {{ status.label }}
@@ -34,7 +35,7 @@
                 <li class="divider"></li>
                 <li>
                   <a ng-click="comment.remove()">
-                    <i class="fa fa-fw fa-trash text-danger"></i> <span>Delete comment</span>
+                    <i class="fa fa-fw fa-trash text-danger"></i> {{ 'DELETE_COMMENT' | translate }}
                   </a>
                 </li>
               </ul>
@@ -48,7 +49,7 @@
               {{ comment.get.created | date }} &middot;
               <span ng-if="comment.get.status !== 1">{{ comment.getStatus().label }} &middot;</span>
             </span>
-            <a ng-click="comment.view()">Open</a>
+            <a ng-click="comment.view()" translate>OPEN</a>
           </small>
         </div>
       </div>

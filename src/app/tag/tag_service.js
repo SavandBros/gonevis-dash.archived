@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function Tag($rootScope, $state, toaster, API, ModalsService) {
+function Tag($rootScope, $state, toaster, API, ModalsService, $translate) {
   return function(data) {
     /**
      * @desc Super variable for getting this in functions
@@ -41,7 +41,9 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
           self.get = data;
           form.loading = false;
           form.oldSlug = data.slug;
-          toaster.info("Done", "Tag updated");
+          $translate(["DONE", "TAG_UPDATED"]).then(function(translations) {
+            toaster.info(translations.DONE, translations.TAG_UPDATED);
+          });
           $rootScope.$broadcast("gonevisDash.Tag:update", {
             data: data,
             tag: self,
@@ -50,7 +52,9 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
         },
         function(data) {
           form.loading = false;
-          toaster.error("Error", "Something went wrong, we couldn't update tag.");
+          $translate(["ERROR", "TAG_UPDATE_ERROR"]).then(function(translations) {
+            toaster.error(translations.ERROR, translations.TAG_UPDATE_ERROR);
+          });
           $rootScope.$broadcast("gonevisDash.Tag:update", {
             data: data,
             tag: self,
@@ -70,7 +74,9 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
         },
         function(data) {
           self.isDeleted = true;
-          toaster.success("Done", "Tag " + self.get.name + " removed.");
+          $translate(["DONE", "TAG_REMOVED"]).then(function(translations) {
+            toaster.success(translations.DONE, translations.TAG_REMOVED);
+          });
           $rootScope.$broadcast("gonevisDash.Tag:remove", {
             data: data,
             tag: self,
@@ -127,7 +133,9 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
           form.loading = false;
           form.data.tagged_items_count = 0;
           ModalsService.close("tag");
-          toaster.success("Done", "Tag " + data.name + " created.");
+          $translate(["DONE", "TAG_CREATED"]).then(function(translations) {
+            toaster.success(translations.DONE, translations.TAG_CREATED);
+          });
           $rootScope.$broadcast("gonevisDash.Tag:create", {
             success: true,
             data: data
@@ -136,7 +144,9 @@ function Tag($rootScope, $state, toaster, API, ModalsService) {
         function(data) {
           form.loading = false;
           form.errors = data.data;
-          toaster.error("Oops", "Failed to create tag");
+          $translate(["OOPS", "TAG_CREATION_ERROR"]).then(function(translations) {
+            toaster.error(translations.OOPS, translations.TAG_CREATION_ERROR);
+          });
           $rootScope.$broadcast("gonevisDash.Tag:create", {
             success: false,
             data: data

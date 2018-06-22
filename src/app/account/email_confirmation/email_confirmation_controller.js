@@ -2,7 +2,7 @@
 
 import app from "../../app";
 
-function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService, ModalsService) {
+function EmailConfirmationController($scope, $rootScope, $state, toaster, API, AuthService, ModalsService, $translate) {
 
   function constructor() {
     // Verify email with given token
@@ -18,7 +18,9 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
           $rootScope.$broadcast("gonevisDash.AuthService:Authenticated");
 
           $scope.loading = false;
-          toaster.success("Done", "Thanks for verifying your email.");
+          $translate(["DONE", "VERIFICATION_DONE"]).then(function(translations) {
+            toaster.success(translations.DONE, translations.VERIFICATION_DONE);
+          });
         },
         function() {
           $scope.loading = false;
@@ -46,7 +48,9 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
       },
       function() {
         ModalsService.close("forgotPassword");
-        toaster.success("Sent", "Email verification sent to " + form.email);
+        $translate(["SENT", "EMAIL_VERIFICATION_SENT_TO"], {"email": form.email}).then(function(translations) {
+          toaster.success(translations.SENT, translations.EMAIL_VERIFICATION_SENT_TO);
+        });
         $state.go("signin");
       },
       function(data) {

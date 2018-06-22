@@ -24,7 +24,7 @@
     <no-result search-form="searchForm" view="view"></no-result>
 
     <!-- Nothing -->
-    <nothing text="It's lonely here... Go ahead and upload some files." view="view"
+    <nothing text="{{ 'NO_DOLPHINS' | translate }}" view="view"
       ng-if="!dolphins.length && !searchForm.noResult && initialled"></nothing>
 
     <!-- Uploading preview -->
@@ -65,10 +65,18 @@
             <i class="fa fa-ellipsis-v"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-right">
-            <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> <tranlate>View</tranlate> </a></li>
-            <li><a ng-href="{{ dolphin.get.file }}" download><i class="fa fa-download"></i> Download</a></li>
+            <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> {{ 'VIEW' | translate }} </a></li>
+            <li>
+              <a ng-href="{{ dolphin.get.file }}" download>
+                <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
+              </a>
+            </li>
             <li class="divider"></li>
-            <li><a ng-click="dolphin.remove()"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+            <li>
+              <a ng-click="dolphin.remove()">
+                <i class="fa fa-trash text-danger"></i> {{ 'DELETE' | translate }}
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -98,10 +106,18 @@
                   <i class="fa fa-fw fa-ellipsis-v"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> View</a></li>
-                  <li><a ng-href="{{ dolphin.get.file }}" download><i class="fa fa-download"></i> Download</a></li>
+                  <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> {{ 'VIEW' | translate }}</a></li>
+                  <li>
+                    <a ng-href="{{ dolphin.get.file }}" download>
+                      <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
+                    </a>
+                  </li>
                   <li class="divider"></li>
-                  <li><a ng-click="dolphin.remove()"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                  <li>
+                    <a ng-click="dolphin.remove()">
+                      <i class="fa fa-trash text-danger"></i> {{ 'DELETE' | translate }}
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -113,7 +129,7 @@
                 <i class="fa fa-fw fa-file-o s-mar-left-soft"
                   title="Extension"></i> {{ dolphin.extension | lowercase }}
               </span>
-              <a class="s-mar-left-soft" ng-click="dolphin.view()">Open</a>
+              <a class="s-mar-left-soft" ng-click="dolphin.view()">{{ 'OPEN' | translate}}</a>
             </small>
           </div>
         </div>

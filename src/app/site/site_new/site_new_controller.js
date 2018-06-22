@@ -2,7 +2,7 @@
 
 import app from "../../app";
 
-function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthService, toaster) {
+function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthService, toaster, $translate) {
 
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(false);
@@ -33,7 +33,9 @@ function SiteNewController($scope, $rootScope, $state, $stateParams, API, AuthSe
         AuthService.setAuthenticatedUser($scope.user);
         $rootScope.$broadcast("gonevisDash.SiteNewController:Create");
 
-        toaster.success("Awesome", "Created " + data.title + ".");
+        $translate(["AWESOME", "SITE_CREATED"], {"title": data.title}).then(function(translations) {
+          toaster.success(translations.AWESOME, translations.SITE_CREATED);
+        });
         $state.go("dash.main", {
           s: 0
         });
