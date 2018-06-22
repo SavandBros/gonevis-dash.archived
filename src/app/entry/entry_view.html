@@ -59,6 +59,12 @@
             <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
               <p class="s-mar-no t-line">{{ entry.get.title }}</p>
             </a>
+            <!-- Updated by -->
+            <small ng-show="entry.get.updated_by">
+              <span class="o-fade" translate>UPDATED_BY</span>
+              <a ng-href="{{ entry.get.updated_by.get_absolute_uri }}"
+                target="_blank">@{{ entry.get.updated_by.username }}</a>
+            </small>
           </div>
           <!-- Entry Stats -->
           <div class="post-footer">
