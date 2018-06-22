@@ -16,7 +16,8 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
     $scope.Tag = new Tag();
 
     var payload = {
-      site: AuthService.getCurrentSite()
+      site: AuthService.getCurrentSite(),
+      ordering: "-tagged_items_count"
     };
 
     API.Tags.get(payload,
