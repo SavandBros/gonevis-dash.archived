@@ -8,7 +8,7 @@ function SiteFollowersController($scope, API, AuthService, Account, Pagination) 
     $scope.pageForm = {};
     $scope.followers = [];
 
-    var payload = {
+    let payload = {
       siteId: AuthService.getCurrentSite(),
     };
     API.SiteFollowers.get(payload,
