@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body s-pad-no">
         <!-- Nothing -->
-        <nothing text="{{ nothingText }}" ng-if="!followers.count && initialled"></nothing>
+        <nothing text="{{ 'NO_FOLLOWERS' | translate }}" ng-if="!followers.count && initialled"></nothing>
 
         <!-- Followers -->
         <div class="list-group s-mar-bottom-no" ng-if="followers.count">
