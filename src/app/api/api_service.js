@@ -110,7 +110,7 @@ function API($resource, ENV) {
     }, {
       name: "SiteFollowers",
       endpoint: "website/site/:siteId/subscribers/", // GET
-      isPublic: true
+      isZero: true
     }, {
       name: "Navigation",
       endpoint: "website/site/:siteId/navigation/" // GET
@@ -166,11 +166,11 @@ function API($resource, ENV) {
   }
 
   function setAPIData() {
-    var api;
+    let api;
 
-    for (var i in endpoints) {
-      if (endpoints[i].isPublic) {
-        api = ENV.publicApiEndpoint;
+    for (let i in endpoints) {
+      if (endpoints[i].isZero) {
+        api = ENV.zeroAPI;
       } else {
         api = BASE_API;
       }
