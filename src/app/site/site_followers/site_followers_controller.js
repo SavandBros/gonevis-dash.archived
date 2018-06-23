@@ -2,10 +2,9 @@
 
 import app from "../../app";
 
-function SiteFollowersController($scope, API, AuthService, Account, Pagination, $translate) {
+function SiteFollowersController($scope, API, AuthService, Account, Pagination) {
 
   function constructor() {
-    $scope.nothingText = $translate.instant("NO_FOLLOWERS");
     $scope.pageForm = {};
     $scope.followers = [];
 
