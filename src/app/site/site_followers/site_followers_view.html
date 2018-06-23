@@ -7,33 +7,32 @@
           </a><i class="fa fa-close close pull-right" data-dismiss="modal"></i>
         </h3>
       </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12">
-            <!-- Nothing -->
-            <nothing text="{{ nothingText }}" ng-if="!followers.count && initialled"></nothing>
+      <div class="modal-body s-pad-no">
+        <!-- Nothing -->
+        <nothing text="{{ nothingText }}" ng-if="!followers.count && initialled"></nothing>
 
-            <!-- Followers -->
-            <div class="media" ng-repeat="follower in followers" ng-if="followers.count">
+        <!-- Followers -->
+        <div class="list-group s-mar-bottom-no" ng-if="followers.count">
+          <a class="list-group-item b-no" ng-repeat="follower in followers" target="_blank"
+            ng-href="{{ follower.get.get_absolute_uri }}">
+            <div class="media">
               <div class="media-left">
                 <img class="media-object img-circle" width="48" ng-src="{{ follower.getMedia('small') }}">
               </div>
               <div class="media-body">
                 <!-- Display name -->
-                <h4 class="media-heading">
-                  <a ng-href="{{ follower.get.get_absolute_uri }}" target="_blank">
-                    {{ follower.getDisplayName() }}
-                  </a>
-                </h4>
+                <div class="media-heading">
+                  <h4>{{ follower.getDisplayName() }}</h4>
+                </div>
                 <!-- Username -->
                 @{{ follower.get.username }}
               </div>
             </div>
-
-            <!-- More -->
-            <pagination page-form="pageForm" ng-if="initialled"></pagination>
-          </div>
+          </a>
         </div>
+
+        <!-- More -->
+        <pagination page-form="pageForm" ng-if="initialled"></pagination>
       </div>
     </div>
   </div>
