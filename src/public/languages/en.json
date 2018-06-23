@@ -269,6 +269,7 @@
   "ADVANCED": "Advanced",
   "CREATE": "Create",
   "UPDATE": "Update",
+  "UPDATED_BY": "Updated by",
   "SUBMIT": "Submit",
   "SAVE_CHANGES": "Save Changes",
   "REMOVE": "Remove",
