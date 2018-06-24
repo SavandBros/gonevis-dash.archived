@@ -4,10 +4,13 @@ require('medium-editor');
 require('../../basement/medium_editor/medium_editor');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate) {
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval) {
   var payload;
   var tagsToCreate = [];
   var noneTagsCount = 0;
+  let oldData = {};
+  let interval;
+  let autoSave;
 
   function constructor() {
     $scope.tags = [];
@@ -49,14 +52,18 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           entry_id: $scope.form.get.id
         },
         function (data) {
+          // If unsaved changes
+          if (data.entrydraft) {
+            data = data.entrydraft;
+          }
+
           if (data.start_publication) {
             data.start_publication = new Date(data.start_publication);
           }
-          if (data.end_publication) {
-            data.end_publication = new Date(data.end_publication);
-          }
+
           // Get entry data
           $scope.form.get = data;
+          $scope.form.get.id = $stateParams.entryId;
           $scope.form.url = $scope.form.getUrl();
           Codekit.setTitle($scope.form.get.title);
 
@@ -70,6 +77,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
             });
             $scope.tagsToSubmit.push(tag.get);
           });
+
+          // Store old data
+          oldData.form = Object.assign({}, $scope.form.get);
+          oldData.tags = angular.copy($scope.tagsToSubmit);
         },
         function () {
           $state.go("dash.entry-edit", { entryId: null });
@@ -78,6 +89,18 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           });
         }
       );
+
+      // Auto save every 10 seconds
+      interval = $interval(function() {
+        // Check if already updating
+        if (!$scope.form.loading) {
+          // Check if entry has an unsaved changes
+          if (!angular.equals(oldData.form, $scope.form.get)|| !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
+            autoSave = true;
+            $scope.save($scope.form);
+          }
+        }
+      }, 10000);
     } else {
       $scope.editing = false;
       $scope.form = new Entry({
@@ -132,11 +155,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     form.get.site = AuthService.getCurrentSite();
     form.get.user = AuthService.getAuthenticatedUser(false);
 
-    payload = form.get;
+    payload = Object.assign({}, form.get);
 
     payload.tag_ids = [];
     payload.status = status || payload.status;
-
 
     angular.forEach($scope.tagsToSubmit, function (tag) {
       // Check if tags have ids
@@ -176,19 +198,36 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   $scope.updateEntry = function (form) {
+    // If auto-saving mode, remove status property from payload
+    if (autoSave) {
+      delete payload.status;
+    }
+
     API.Entry.put({
         entry_id: payload.id
       }, payload,
       function (data) {
-        form.get = data;
-        form.url = $scope.form.getUrl();
-        Codekit.setTitle(form.get.title);
+        if (!autoSave) {
+          if (data.start_publication) {
+            data.start_publication = new Date(data.start_publication);
+          }
+          form.get = data;
 
-        $translate(["DONE", "ENTRY_UPDATED"], {"title": payload.title}).then(function (translations) {
-          toaster.info(translations.DONE, translations.ENTRY_UPDATED);
-        });
+          $translate(["DONE", "ENTRY_UPDATED"], {"title": payload.title}).then(function (translations) {
+            toaster.info(translations.DONE, translations.ENTRY_UPDATED);
+          });
+        } else {
+          autoSave = false;
+        }
+
         form.loading = false;
         form.errors = null;
+        Codekit.setTitle(form.get.title);
+        form.url = $scope.form.getUrl();
+
+        // Restore old data
+        oldData.form = Object.assign({}, form.get);
+        oldData.tags = angular.copy($scope.tagsToSubmit);
       },
       function (data) {
         $translate(["ERROR", "ENTRY_UPDATE_ERROR"]).then(function (translations) {
@@ -322,6 +361,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
   });
 
+  /**
+   * @desc Cancel interval on state change
+   */
+  $scope.$on("$destroy", function () {
+    $interval.cancel(interval);
+  });
 
   constructor();
 }
