@@ -133,7 +133,9 @@
           <!-- Followers -->
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.subscriber_count}">
             <i class="fa fa-border fa-user-plus"></i> {{ 'FOLLOWERS' | translate }}
-            <b class="pull-right text-primary">{{ Metrics.list.subscriber_count }}</b>
+            <button class="btn btn-primary pull-right btn-sm" ng-click="siteFollowers()">
+              <b>{{ Metrics.list.subscriber_count }}</b>
+            </button>
           </li>
           <!-- Template -->
           <li class="list-group-item" ng-if="siteTemplate">

@@ -123,6 +123,7 @@
   "PENDING": "PENDING",
   "CHANGE_ROLE": "Change role",
   "FOLLOWERS": "Followers",
+  "NO_FOLLOWERS": "No one is following you.",
   "SETTINGS": "Settings",
   "CHECKING": "Checking...",
   "CREATE_SITE": "Create a new site",

@@ -1,5 +1,5 @@
-<div class="load-more col-xs-12">
-  <button class="btn btn-default btn-lg s-pad-x" ng-if="!$ctrl.pageForm.page.noMore"
+<div class="load-more col-xs-12" ng-if="!$ctrl.pageForm.page.noMore">
+  <button class="btn btn-default btn-lg s-pad-x"
     ng-disabled="$ctrl.pageForm.page.loading" ng-click="$ctrl.loadMore($ctrl.pageForm)">
     <!-- Load more -->
     <span ng-if="!$ctrl.pageForm.page.loading" translate>LOAD_MORE</span>
