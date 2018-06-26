@@ -62,8 +62,8 @@
      ng-class="{active: state.includes(nav.sref)}">
     <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
   </a>
-  <br>
   <!-- Lights switch -->
+  <br ng-if="param.lights">
   <a ng-class="{'active-minimal': set.lights}" ng-if="param.lights" ng-click="set.lights = !set.lights">
     <i class="fa fa-fw fa-lightbulb-o"></i> {{ 'LIGHTS' | translate }}
   </a>

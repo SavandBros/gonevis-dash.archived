@@ -45,7 +45,7 @@
                 <i class="fa fa-caret-down o-fade"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
-                <li class="dropdown-header">Change role</li>
+                <li class="dropdown-header" translate>CHANGE_ROLE</li>
                 <li ng-repeat="role in teamRoles" ng-if="$index > 0"
                   ng-class="{active: team.role === $index}">
                   <a ng-click="setRole(team.user.get.email, role)">{{ role.label }}</a>
@@ -59,7 +59,7 @@
         <button class="btn btn-danger stack-element"
           ng-click="remove(team)"
           ng-if="team.user.get.id !== user.get.id || team.isPending">
-          <i class="fa fa-trash"></i> Remove from team
+          <i class="fa fa-trash"></i> {{ 'REMOVE_FROM_TEAM' | translate }}
         </button>
       </div>
     </div>

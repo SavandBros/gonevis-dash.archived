@@ -2,14 +2,19 @@
   <div class="row">
     <!-- Left -->
     <div class="col-md-8">
+      <!-- Alerts -->
+      <div class="alert alert-danger" ng-if="!user.isProfileComplete(true)">
+        <translate>INCOMPLETE_PROFILE</translate>
+        <a class="btn btn-default pull-right" ui-sref="user({s: param.s})" translate>IMPROVE_PROFILE</a>
+      </div>
       <!-- Latest comments -->
       <div class="panel panel-default" ng-if="!Comment.loading">
         <div class="panel-heading">
-          <a ui-sref="dash.comment-list" class="header-link">Comments</a>
+          <a ui-sref="dash.comment-list" class="header-link" translate>COMMENTS</a>
           <span class="panel-label">{{ Metrics.list.comment_count }}</span>
         </div>
         <h4 ng-if="!Comment.list.length" class="text-center s-pad-y o-fade">
-          <em>No comments yet.</em>
+          <em translate>NO_COMMENTS</em>
         </h4>
         <div class="list-group" ng-if="Comment.list.length">
           <!-- Comment -->
@@ -36,12 +41,12 @@
       <div class="panel panel-default" ng-if="!Entry.loading" id="entries">
         <!-- Title -->
         <div class="panel-heading">
-          <a ui-sref="dash.entry-list" class="header-link">Posts</a>
+          <a ui-sref="dash.entry-list" class="header-link" translate>POSTS</a>
           <span class="panel-label">{{ Metrics.list.entry_count }}</span>
         </div>
         <!-- No entries message -->
         <h4 ng-if="!Entry.list.length" class="text-center s-pad-y o-fade">
-          <em>Nothing here yet.</em>
+          <em translate>NOTHING_MESSAGE</em>
         </h4>
         <!-- Entry list -->
         <div class="list-group" ng-if="Entry.list.length">
@@ -56,7 +61,7 @@
               </div>
               <div class="col-md-4 col-xs-4 col-lg-3 col-sm-4">
                 <div class="list-group-label"
-                  ng-if="entry.get.view_count || entry.get.comment_count || entry.get.vote_count"> 
+                  ng-if="entry.get.view_count || entry.get.comment_count || entry.get.vote_count">
                   <!-- Views -->
                   <span ng-if="entry.get.view_count">
                     <i class="fa fa-eye o-fade"></i> {{ entry.get.view_count }}
@@ -82,18 +87,18 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading lower">
-          Publication <div class="panel-label img-circle"><i class="fa fa-list-alt"></i></div>
+          {{ 'PUBLICATION' | translate }} <div class="panel-label img-circle"><i class="fa fa-list-alt"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.entry_count}">
-            Posts <b class="pull-right text-primary">{{ Metrics.list.entry_count }}</b>
+            {{ 'POSTS' | translate }} <b class="pull-right text-primary">{{ Metrics.list.entry_count }}</b>
           </li>
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.published_entry_count}">
-            Published posts <b class="pull-right text-primary">{{ Metrics.list.published_entry_count }}</b>
+              {{ 'PUBLISHED_POSTS' | translate }} <b class="pull-right text-primary">{{ Metrics.list.published_entry_count }}</b>
           </li>
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.draft_entry_count}">
-            Draft posts <b class="pull-right text-primary">{{ Metrics.list.draft_entry_count }}</b>
+            {{ 'DRAFT_POSTS' | translate }} <b class="pull-right text-primary">{{ Metrics.list.draft_entry_count }}</b>
           </li>
         </ul>
       </div>
@@ -101,37 +106,18 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading lower">
-          Comment overview <div class="panel-label img-circle"><i class="fa fa-comment"></i></div>
+          {{ 'COMMENT_OVERVIEW' | translate }} <div class="panel-label img-circle"><i class="fa fa-comment"></i></div>
         </div>
-        <!-- Overview (Chart -->
-        <ul class="panel-body panel-body-chart s-pad-no list-group">
-          <div ng-if="Metrics.list.active_comment_count !== Metrics.list.comment_count">
-            <!-- Chart text -->
-            <h1 class="chart-text chart-text-doughnut">
-              {{ Metrics.list.comment_count }}
-              <small>Comments</small>
-            </h1>
-            <!-- Chart -->
-            <div class="s-pad">
-              <canvas class="chart chart-doughnut"
-                      chart-labels="['Active Comments', 'Pending Comments', 'Hidden Comments']"
-                      chart-data="[
-                        Metrics.list.active_comment_count,
-                        Metrics.list.pending_comment_count,
-                        Metrics.list.hidden_comment_count
-                      ]">
-              </canvas>
-            </div>
-          </div>
-          <li class="list-group-item"
-              ng-if="Metrics.list.comment_count && Metrics.list.active_comment_count == Metrics.list.comment_count">
-            <i class="fa fa-border fa-check"></i> All comments are approved
-            <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
+        <!-- Overview -->
+        <ul class="panel-body s-pad-no list-group">
+          <li class="list-group-item">
+            {{ 'ALL_COMMENTS' | translate }} <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
           </li>
-          <li class="list-group-item"
-              ng-if="!Metrics.list.comment_count" ng-class="{'o-fade': !Metrics.list.comment_count}">
-            Comments
-            <b class="pull-right text-primary">{{ Metrics.list.comment_count }}</b>
+          <li class="list-group-item">
+            {{ 'ACTIVE_COMMENTS' | translate }} <b class="pull-right text-primary">{{ Metrics.list.active_comment_count }}</b>
+          </li>
+          <li class="list-group-item">
+            {{ 'PENDING_COMMENTS' | translate }} <b class="pull-right text-primary">{{ Metrics.list.pending_comment_count }}</b>
           </li>
         </ul>
       </div>
@@ -139,19 +125,21 @@
       <div class="panel panel-default" ng-if="Metrics.list" id="site">
         <!-- Title -->
         <div class="panel-heading lower">
-          <a ui-sref="dash.site" class="header-link">Site overview</a>
+          <a ui-sref="dash.site" class="header-link" translate>SITE_OVERVIEW</a>
           <div class="panel-label img-circle"><i class="fa fa-globe"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
           <!-- Followers -->
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.subscriber_count}">
-            <i class="fa fa-border fa-user-plus"></i> Followers
-            <b class="pull-right text-primary">{{ Metrics.list.subscriber_count }}</b>
+            <i class="fa fa-border fa-user-plus"></i> {{ 'FOLLOWERS' | translate }}
+            <button class="btn btn-primary pull-right btn-sm" ng-click="siteFollowers()">
+              <b>{{ Metrics.list.subscriber_count }}</b>
+            </button>
           </li>
           <!-- Template -->
           <li class="list-group-item" ng-if="siteTemplate">
-            <i class="fa fa-border fa-paint-brush"></i> Theme and Layout
+            <i class="fa fa-border fa-paint-brush"></i> {{ 'THEME_AND_LAYOUT' | translate }}
             <a class="pull-right btn btn-primary btn-sm" ui-sref="dash.site">
               {{ siteTemplate.name | uppercase }}
             </a>
@@ -162,19 +150,19 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading lower">
-          <a ui-sref="dash.dolphin" class="header-link">Storage</a>
+          <a ui-sref="dash.dolphin" class="header-link" translate>STORAGE</a>
           <div class="panel-label img-circle"><i class="fa fa-cubes"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.dolphin.file_count}">
-            Files <b class="pull-right text-primary">{{ Metrics.list.dolphin.file_count }}</b>
+            {{ 'FILES' | translate }} <b class="pull-right text-primary">{{ Metrics.list.dolphin.file_count }}</b>
           </li>
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.dolphin.used_storage}">
-            Used storage <b class="pull-right text-primary">{{ Metrics.list.dolphin.used_storage | bytes }}</b>
+            {{ 'USED_STORAGE' | translate }} <b class="pull-right text-primary">{{ Metrics.list.dolphin.used_storage | bytes }}</b>
           </li>
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.dolphin.available_storage}">
-            Available storage
+            {{ 'AVAILABLE_STORAGE' | translate }}
             <b class="pull-right text-primary">
               {{ Metrics.list.dolphin.available_storage | bytes }}
             </b>
@@ -193,7 +181,7 @@
                 'progress-bar-danger':  dolphinProgress >= 90
               }">
             </div>
-            <span class="sr-only">{{ dolphinProgress }}% Used storage</span>
+            <span class="sr-only">{{ dolphinProgress }}% {{ 'AVAILABLE_STORAGE' | translate }}</span>
           </div>
         </div>
       </div>
@@ -201,16 +189,16 @@
       <div class="panel panel-default" ng-if="Metrics.list">
         <!-- Title -->
         <div class="panel-heading lower">
-          <a ui-sref="dash.team" class="header-link">Team</a>
+          <a ui-sref="dash.team" class="header-link" translate>TEAM</a>
           <div class="panel-label img-circle"><i class="fa fa-users"></i></div>
         </div>
         <!-- Overview -->
         <ul class="panel-body list-group s-pad-no">
           <li class="list-group-item">
-            Team members <b class="pull-right text-primary">{{ Metrics.list.team_member_count }}</b>
+            {{ 'TEAM_MEMBERS' | translate }} <b class="pull-right text-primary">{{ Metrics.list.team_member_count }}</b>
           </li>
           <li class="list-group-item" ng-class="{'o-fade': !Metrics.list.pending_team_member_count}">
-            Pending team members <b class="pull-right text-primary">{{ Metrics.list.pending_team_member_count }}</b>
+              {{ 'PENDING_TEAM_MEMBERS' | translate }} <b class="pull-right text-primary">{{ Metrics.list.pending_team_member_count }}</b>
           </li>
         </ul>
       </div>

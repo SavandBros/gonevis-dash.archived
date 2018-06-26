@@ -122,7 +122,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
         return import(/* webpackChunkName: "main" */ "./main/main_controller")
           .then(mod => {
-            $ocLazyLoad.inject('chart.js');
             $ocLazyLoad.load([mod.MAIN_DASH_MODULE]);
           })
           .catch(err => {

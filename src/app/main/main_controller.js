@@ -1,15 +1,13 @@
 "use strict";
 
-require('chart.js');
-require('angular-chart.js');
-
-function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry) {
+function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry, ModalsService) {
 
   let site = AuthService.getCurrentSite();
 
   function constructor() {
     $scope.state = $state;
     $scope.param = $stateParams;
+    $scope.user = AuthService.getAuthenticatedUser(true);
 
     $scope.Comment.initialize();
     $scope.Entry.initialize();
@@ -112,6 +110,13 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
   };
 
   /**
+   * @desc Open site followers modal
+   */
+  $scope.siteFollowers = function() {
+    ModalsService.open("siteFollowers", "SiteFollowersController");
+  };
+
+  /**
    * @desc Reply comment
    *
    * @param {Event} event
@@ -124,20 +129,5 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
   constructor();
 }
 
-const MAIN_DASH_MODULE = angular.module('gonevisDash')
-  .controller("MainController", MainController)
-  .config(function (ChartJsProvider) {
-    ChartJsProvider.setOptions({
-      chartColors: [
-        "#99FF99",
-        "#FFAA00",
-        "#DDDDDD"
-      ],
-      elements: {
-        arc: {
-          borderWidth: 4
-        }
-      }
-    });
-  });
+const MAIN_DASH_MODULE = angular.module('gonevisDash').controller("MainController", MainController);
 export { MAIN_DASH_MODULE };

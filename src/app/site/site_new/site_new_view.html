@@ -3,12 +3,12 @@
     <div class="panel panel-default s-box">
       <div class="panel-body s-pad">
         <form ng-submit="createSite(form)" name="form">
-          <h3 class="o-fade-soft">Create a new site</h3>
+          <h3 class="o-fade-soft" translate>CREATE_SITE</h3>
           <hr>
           <div class="form-group" ng-class="{'has-error': form.errors.url}">
             <div class="input-group">
               <input id="url" class="form-control input-lg" type="text" ng-model="form.url"
-                placeholder="Subdomain" required aria-describedby="subdomain">
+                placeholder="{{ 'SUBDOMAIN' | translate }}" required aria-describedby="subdomain">
               <span class="input-group-addon" id="subdomain">
                 <span class="text-primary">.gonevis.com</span>
               </span>
@@ -17,11 +17,11 @@
           </div>
           <div class="form-group" ng-class="{'has-error': form.errors.title}">
             <input id="title" class="form-control input-lg" type="text"
-              ng-model="form.title" placeholder="Title" required/>
+              ng-model="form.title" placeholder="{{ 'TITLE' | translate }}" required/>
             <small id="title" class="help-block">{{ form.errors.title[0] }}</small>
           </div>
           <button class="btn btn-success btn-block btn-lg"
-            ng-disabled="form.loading || form.$invalid">Create
+            ng-disabled="form.loading || form.$invalid" translate> CREATE
           </button>
         </form>
       </div>

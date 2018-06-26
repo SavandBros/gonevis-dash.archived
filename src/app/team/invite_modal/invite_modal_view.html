@@ -2,13 +2,14 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <!-- Title -->
-      <h4 class="modal-header">Invite <i class="fa fa-close close pull-right" data-dismiss="modal"></i></h4>
+      <h4 class="modal-header">{{ 'INVITE' | translate }} <i class="fa fa-close close pull-right" data-dismiss="modal"></i></h4>
       <!-- Body -->
       <div class="modal-body">
         <form ng-submit="invite(form)">
           <!-- Email -->
           <div class="form-group" ng-class="{'has-error': form.errors.email}">
-            <input type="email" class="form-control" type="text" ng-model="form.data.email" placeholder="Email" required/>
+            <input type="email" class="form-control" type="text"
+              ng-model="form.data.email" placeholder="{{ 'EMAIL' | translate }}" required/>
             <small class="help-block" ng-show="form.errors.email">{{ form.errors.email[0] }}</small>
           </div>
           <!-- Roles -->
@@ -16,7 +17,7 @@
             <select ng-options="role.id as role.label for role in teamRoles"
 	            ng-model="form.data.role" class="form-control"></select>
           </div>
-          <button class="btn btn-primary btn-block s-bold">Send</button>
+          <button class="btn btn-primary btn-block s-bold" translate>SEND</button>
         </form>
       </div>
     </div>

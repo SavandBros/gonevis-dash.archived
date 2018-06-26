@@ -97,7 +97,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
     // New entry
     var entry = new Entry({
       site: AuthService.getCurrentSite(),
-      format: Codekit.entryFormats[format].id
+      format: Codekit.entryFormats[0][format].id
     });
     // Set image properties
     if (format === "image") {

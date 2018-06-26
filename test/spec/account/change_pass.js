@@ -6,15 +6,17 @@ describe("ChangePassController", function () {
 
   var $controller;
   var $scope;
+  var $translate;
 
-  beforeEach(inject(function (_$controller_, _$rootScope_) {
+  beforeEach(inject(function (_$controller_, _$rootScope_, _$translate_) {
     $controller = _$controller_;
     $scope = _$rootScope_;
+    $translate = _$translate_;
   }));
 
   describe("$scope.changePassword", function () {
     beforeEach(function () {
-      var controller = $controller("ChangePassController", { $scope: $scope });
+      var controller = $controller("ChangePassController", { $scope: $scope, $translate: $translate });
     });
 
     it("error if not a new password", function () {
@@ -23,7 +25,9 @@ describe("ChangePassController", function () {
         password: "oldalireza",
       };
       $scope.changePassword(form);
-      expect(form.errors).toEqual({ non_field_errors: ["Please, choose a new password."] });
+      expect(form.errors).toEqual({
+        non_field_errors: [$translate.instant("CHANGE_PASSWORD_ERROR_SAME")]
+      });
     });
 
     it("error if passwords don't match", function () {
@@ -33,7 +37,9 @@ describe("ChangePassController", function () {
         confirm_password: "newPassword1"
       };
       $scope.changePassword(form);
-      expect(form.errors).toEqual({ non_field_errors: ["Confirm password does not match."] });
+      expect(form.errors).toEqual({
+        non_field_errors: [$translate.instant("CHANGE_PASSWORD_ERROR_MATCH")]
+      });
     });
 
     it("change password successfully", function () {

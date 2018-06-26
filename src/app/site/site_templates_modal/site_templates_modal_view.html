@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>Templates <i class="fa fa-close close pull-right" data-dismiss="modal"></i></h3>
+        <h3>{{ 'TEMPLATES' | translate }} <i class="fa fa-close close pull-right" data-dismiss="modal"></i></h3>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -17,13 +17,13 @@
                 <h3 style="margin-bottom: 10px">{{ template.name }}</h3>
                 <!-- Author -->
                 <span class="text-muted" style="margin-top: 12px">
-                  By <a href="{{ template.config.thumbnail_256x256 }}" target="_blank"> {{ template.config.author }}</a>
+                  {{ 'BY' | translate }} <a href="{{ template.config.thumbnail_256x256 }}" target="_blank"> {{ template.config.author }}</a>
                 </span>
                 <div class="btn-group pull-right" style="margin-top: -12px">
                   <!-- Select(ed) -->
                   <button ng-click="setTemplate(template)" ng-disabled="current.name === template.name"
                     class="btn btn-default" data-dismiss="modal">
-                    {{ current.name === template.name ? "Selected" : "Select" }}
+                    <translate>{{ current.name === template.name ? "SELECTED" : "SELECT" }}</translate>
                   </button>
                   <!-- More -->
                   <div class="btn-group" ng-if="current.name !== template.name">
@@ -34,7 +34,7 @@
                       <!-- Prevew theme -->
                       <li>
                         <a href="{{ site.absolute_uri }}/?preview-template={{ template.name }}" target="_blank">
-                          <i class="fa fa-eye-slash"></i> Prevew
+                          <i class="fa fa-eye-slash"></i> {{ 'PREVIEW' | translate }}
                         </a>
                       </li>
                     </ul>

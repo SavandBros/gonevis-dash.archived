@@ -5,13 +5,19 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="avatar avatar-outside">
-              <span ng-if="!user.hasMedia">{{ user.getDisplayName()[0] }}</span>
+              <span ng-if="!user.hasMedia" class="text-uppercase">{{ user.getDisplayName()[0] }}</span>
               <img ng-if="user.hasMedia" class="img-circle" ng-src="{{ user.getMedia('small') }}" />
               <div class="dropdown">
                 <h3 class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i></h3>
                 <ul class="dropdown-menu">
-                  <li><a ngf-select="uploadFile($file)"><i class="fa fa-upload"></i> Change photo</a></li>
-                  <li><a ng-click="updateProfile('picture', null)"><i class="fa fa-trash text-danger"></i> Remove</a></li>
+                  <li>
+                    <a ngf-select="uploadFile($file)"><i class="fa fa-upload"></i> {{ 'CHANGE_PHOTO' | translate }}</a>
+                  </li>
+                  <li>
+                    <a ng-click="updateProfile('picture', null)">
+                      <i class="fa fa-trash text-danger"></i> {{ 'REMOVE' | translate }}
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -20,7 +26,7 @@
             <br class="hidden visible-xs">
             <h3 class="text-left o-fade-soft" editable-text="user.get.name" onbeforesave="updateProfile('name', $data)">
               <!-- TODO: Translate -->
-              {{ user.get.name || "You have no name :-[" }}
+              {{ user.get.name || 'NO_NAME' | translate }}
             </h3>
           </div>
         </div>
@@ -29,11 +35,11 @@
           <div class="input-panel">
             <div class="row">
               <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-                <small class="o-fade">ABOUT</small>
+                <small class="o-fade t-upp" translate>ABOUT</small>
               </div>
               <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
                 <span editable-textarea="user.get.about" onbeforesave="updateProfile('about', $data)">
-                  {{ user.get.about || "Nothing here..." }}
+                  {{ user.get.about || 'NOTHING_HERE' | translate }}
                 </span>
               </div>
             </div>
@@ -42,11 +48,11 @@
           <div class="input-panel">
             <div class="row">
               <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-                <small class="o-fade">LOCATION</small>
+                <small class="o-fade t-upp" translate>LOCATION</small>
               </div>
               <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
                 <span editable-text="user.get.location" onbeforesave="updateProfile('location', $data)">
-                  {{ user.get.location || "Nothing here..." }}
+                  {{ user.get.location || 'NOTHING_HERE' | translate }}
                 </span>
               </div>
             </div>
@@ -56,14 +62,14 @@
             <div class="checkbox checkbox-primary">
               <input id="receive_email_notification" type="checkbox" ng-model="user.get.receive_email_notification"
                 ng-change="updateProfile('receive_email_notification', user.get.receive_email_notification)">
-              <label for="receive_email_notification">Receive email notification</label>
+              <label for="receive_email_notification" translate>RECEIVE_EMAIL_NOTIFICATION</label>
             </div>
           </div>
         </div>
       </div>
       <div class="panel-footer">
         <a ui-sref="change-password({s: param.s})" class="btn btn-danger btn-sm">
-          <i class="fa fa-lock fa-fw"></i> Change Password
+          <i class="fa fa-lock fa-fw"></i> {{ 'CHANGE_PASSWORD' | translate }}
         </a>
         <div ng-show="errors">
           <small class="help-block">{{ errors.picture[0] }}</small>

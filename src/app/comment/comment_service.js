@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
+function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $translate) {
   return function(data) {
 
     /**
@@ -49,7 +49,9 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
           comment_id: this.get.id
         },
         function(data) {
-          toaster.success("Done", "Comment deleted");
+          $translate(["DONE", "COMMENT_DELETED"]).then(function(translations) {
+            toaster.success(translations.DONE, translations.COMMENT_DELETED);
+          });
           self.isDeleted = true;
 
           $rootScope.$broadcast("gonevisDash.Comment:remove", {
@@ -59,7 +61,9 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
           });
         },
         function(data) {
-          toaster.error("Error", "Deleting comment failed");
+          $translate(["ERROR", "COMMENT_DELETE_ERROR"]).then(function(translations) {
+            toaster.error(translations.ERROR, translations.COMMENT_DELETE_ERROR);
+          });
 
           $rootScope.$broadcast("gonevisDash.Comment:remove", {
             data: data,
@@ -99,7 +103,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account) {
 
     /**
      * @desc Change comment status
-     * 
+     *
      * @param {string} key
      * @param {number} value
      */

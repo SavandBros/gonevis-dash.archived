@@ -3,11 +3,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <i class="fa fa-hashtag text-primary"></i>
-        {{ editing ? form.data.name : "Create Tag" }}
+        <span ng-if="editing">{{ form.data.name }}</span>
+        <span ng-if="!editing" translate>CREATE_TAG</span>
         <i class="fa fa-close close pull-right" data-dismiss="modal"></i>
         <button class="btn btn-default btn-xs pull-right" ng-click="dolphinService.viewSelection('tagCover')"
-          title="Set or Change cover image of site.">
-          Cover Image
+          title="{{ 'TAG_COVER_TITLE' | translate }}" translate>
+          COVER_IMAGE
         </button>
       </div>
       <div class="modal-body">
@@ -15,18 +16,18 @@
           <!-- Name -->
           <div class="form-group" ng-class="{'has-error': form.errors.name}">
             <input id="name" class="form-control name" type="text" ng-model="form.data.name"
-          		placeholder="Name" ng-change="updateSlug()" required/>
+          		placeholder="{{ 'NAME' | translate }}" ng-change="updateSlug()" required/>
             <span id="name" class="help-block" ng-show="form.errors.name">{{ form.errors.name[0] }}</span>
           </div>
           <!-- Slug -->
           <div class="form-group" ng-class="{'has-error': form.errors.slug}">
-            <input id="slug" class="form-control" type="text" ng-model="form.data.slug" placeholder="Tag">
+            <input id="slug" class="form-control" type="text" ng-model="form.data.slug" placeholder="{{ 'TAG' | translate }}">
             <span id="slug" class="help-block" ng-show="form.errors.slug">{{ form.errors.slug[0] }}</span>
           </div>
-          <!-- Descroption -->
+          <!-- Description -->
           <div class="form-group" ng-class="{'has-error': form.errors.description}">
             <textarea id="description" class="form-control" type="text" ng-model="form.data.description"
-          		placeholder="Descroption"></textarea>
+          		placeholder="{{ 'DESCRIPTION' | translate}}"></textarea>
             <span id="description" class="help-block" ng-show="form.errors.description">{{ form.errors.slug[0] }}</span>
           </div>
           <!-- Advanced Options and View on site -->
@@ -35,30 +36,30 @@
                class="btn btn-default btn-sm btn-block"
                target="_blank"
                ng-if="editing">
-              <i class="fa fa-external-link"></i> View on site
+              <i class="fa fa-external-link"></i> {{ 'VIEW_ON_SITE' | translate}}
             </a>
             <button class="btn btn-default btn-sm btn-block"
               type="button" ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
               <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
-              Advanced Options
+              {{ 'ADVANCED_OPTIONS' | translate }}
             </button>
           </div>
           <!-- Meta Title and Meta Desc -->
           <div uib-collapse="advanced">
             <div class="form-group">
-              <input ng-model="form.data.meta_description" placeholder="Meta description" class="form-control">
+              <input ng-model="form.data.meta_description" placeholder="{{ 'META_DESCRIPTION' | translate }}" class="form-control">
             </div>
           </div>
           <!-- Update -->
           <div class="btn-group stack" ng-if="editing">
-            <button class="btn btn-primary" ng-disabled="form.loading">Update</button>
+            <button class="btn btn-primary" ng-disabled="form.loading" translate>UPDATE</button>
             <button class="btn btn-default" ng-disabled="form.loading" type="button"
-              title="Delete" type="button" ng-click="tag.remove()">
+              title="{{ 'DELETE' | translate }}" type="button" ng-click="tag.remove()">
               <i class="fa fa-trash"></i>
             </button>
           </div>
           <!-- Create -->
-          <button class="btn btn-success btn-block" ng-disabled="form.loading" ng-if="!editing">Create</button>
+          <button class="btn btn-success btn-block" ng-disabled="form.loading" ng-if="!editing" translate>CREATE</button>
         </form>
       </div>
     </div>
