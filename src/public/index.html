@@ -23,19 +23,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 </head>
 
-<body ng-app="gonevisDash" class="lights" ng-class="{off: !set.lights, full: !set.sidebar}"
-  ng-disabled="{{ disableDragging }}" ngf-drop="fileDropped($files, $invalidFiles)" ngf-drag-over-class="''"
-  ngf-multiple="true" ngf-drag="drag($isDragging, $class, $event)" ngf-allow-dir="false" ngf-pattern="upload.accept"
-  ngf-max-size="100MB">
-
-  <!-- Drag/Drop -->
-  <div class="body-drop">
-    <div class="content">
-      <i class="fa fa-cloud-upload fa-5x"></i>
-      <h1 translate>DROP_UPLOAD</h1>
-      <div ngf-no-file-drop translate>DRAG_DROP_SUPPORT_ERROR</div>
-    </div>
-  </div>
+<body ng-app="gonevisDash" class="lights" ng-class="{off: !set.lights, full: !set.sidebar}">
   <header ng-class="{'no-sidebar': !auth.isAuthenticated()}"></header>
 
   <!-- Content -->
