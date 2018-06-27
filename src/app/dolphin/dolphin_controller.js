@@ -35,7 +35,7 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
       }
     );
 
-    $scope.upload = {
+    $rootScope.upload = {
       files: [],
       accept: "",
       acceptList: [
@@ -80,7 +80,7 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
         "video/3gpp2",
       ]
     };
-    $scope.upload.accept = $scope.upload.acceptList.join(",");
+    $rootScope.upload.accept = $rootScope.upload.acceptList.join(",");
   }
 
 
