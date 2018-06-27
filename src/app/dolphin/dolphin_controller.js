@@ -183,34 +183,6 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
   };
 
   /**
-   * @desc On file drag
-   *
-   * @param {boolean} isDragging
-   * @param {string} dragClass
-   * @param {Event} event
-   */
-  $rootScope.drag = function (isDragging, dragClass, event) {
-    let condition = 'removeClass';
-    // Check if dragging over page
-    if (event.pageX !== 0 || event.pageY !== 0) {
-      // Check dragging type
-      if (event.dataTransfer.items[0].kind === "string") {
-        $rootScope.disableDragging = true;
-        return;
-      } else {
-        $rootScope.disableDragging = false;
-      }
-
-      // Check current state
-      if ($state.includes("dash.dolphin")) {
-        condition = 'addClass';
-      }
-    }
-
-    angular.element('body')[condition]("drag-over");
-  };
-
-  /**
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
