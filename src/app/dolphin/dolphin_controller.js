@@ -223,7 +223,7 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
   // If current state is dolphin view
   if ($state.includes("dash.dolphin")) {
     let counter = 0;
-    let dropElement = angular.element('.dolphin-drop');
+    let dropElement = angular.element(".dolphin-drop");
 
     angular.element(window.document).bind({
       // When file enters the drag area
