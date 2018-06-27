@@ -94,9 +94,9 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
     if (errorFiles.length) {
       angular.forEach(errorFiles, function(file) {
         return $translate(
-          ["ERROR", "DOLPHIN_UPLOAD_TYPE_ERROR"], {"type": file.name.slice(file.name.lastIndexOf("."))}
+          ["ERROR", "FILE_UPLOAD_TYPE_ERROR"], {"type": file.name.slice(file.name.lastIndexOf("."))}
         ).then(function(translations) {
-          toaster.error(translations.ERROR, translations.DOLPHIN_UPLOAD_TYPE_ERROR);
+          toaster.error(translations.ERROR, translations.FILE_UPLOAD_TYPE_ERROR);
         });
       });
     }
