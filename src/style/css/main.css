@@ -1967,10 +1967,12 @@ img.cache {
     color: #d17100;
 }
 
-.body-drop {
+.dolphin-drop {
     position: fixed;
-    width: 100%;
-    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     z-index: 10000;
     text-align: center;
     color: #fff;
@@ -1980,12 +1982,12 @@ img.cache {
     opacity: 0;
 }
 
-.body-drop>div.content {
+.dolphin-drop>div.content {
     position: relative;
     top: calc(50% - 100px);
 }
 
-body.drag-over .body-drop {
+.dolphin-drop.drag-over {
     visibility: visible;
     opacity: 1;
 }
