@@ -6,9 +6,6 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
   ENV, AuthService, DolphinService, Codekit, Client, TourService,
   editableOptions, localStorageService, $transitions) {
 
-  // Set body height to device's height
-  angular.element('body')[0].style.height = angular.element(window.document).height() + "px";
-
   /**
    * @name cache
    * @desc Predefined rootscope variable
@@ -131,11 +128,6 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
 
   // Editable texts config
   editableOptions.theme = "bs3";
-
-  $rootScope.fileDropped = function (files, invalidFiles) {
-    angular.element('body').removeClass("drag-over");
-    $rootScope.$broadcast("gonevisDash.AppRun:fileDropped", {files: files, invalidFiles: invalidFiles});
-  };
 
   /**
    * @event onStart
