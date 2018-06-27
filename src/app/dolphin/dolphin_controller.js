@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthService,
+function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthService, $state,
                           Upload, Pagination, Search, toaster, source, localStorageService, $translate) {
 
   var site = AuthService.getCurrentSite();
@@ -250,6 +250,14 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
     }
   });
 
+  /**
+   * @desc Search callback
+   */
+  if ($state.includes("dash.dolphin")) {
+    $scope.$on("gonevisDash.AppRun:fileDropped", function(event, data) {
+      $scope.uploadFile(data.files, data.invalidFiles);
+    });
+  }
   constructor();
 }
 
