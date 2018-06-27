@@ -61,14 +61,14 @@
           </div>
           <div class="s-pad-hard">
             <i class="fa fa-cloud-upload fa-4x"></i>
-            <h3 translate>DRAG_DROP_UPLOAD</h3>
+            <h3 translate>DRAG_DROP_FILES</h3>
             <span class="s-mar-y-soft o-fade-soft dis-b" translate>OR</span>
             <!-- Select -->
             <button type="file" class="btn btn-primary animated fadeIn" ngf-select="uploadFile($files, $invalidFiles)"
               ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
               <i class="fa fa-fw fa-plus"></i> {{ 'SELECT_FILE' | translate }}
             </button>
-            <div ngf-no-file-drop translate>DRAG_DROP_SUPPORT_ERROR</div>
+            <div ngf-no-file-drop translate>DRAG_DROP_NOT_SUPPORTED</div>
             <!-- Progress Bars -->
             <div class="row">
               <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
