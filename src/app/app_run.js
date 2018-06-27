@@ -6,6 +6,9 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
   ENV, AuthService, DolphinService, Codekit, Client, TourService,
   editableOptions, localStorageService, $transitions) {
 
+  // Set body height to device's height
+  angular.element('body')[0].style.height = angular.element(window.document).height() + "px";
+
   /**
    * @name cache
    * @desc Predefined rootscope variable
@@ -129,6 +132,11 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
   // Editable texts config
   editableOptions.theme = "bs3";
 
+  $rootScope.fileDropped = function (files, invalidFiles) {
+    angular.element('body').removeClass("drag-over");
+    $rootScope.$broadcast("gonevisDash.AppRun:fileDropped", {files: files, invalidFiles: invalidFiles});
+  };
+
   /**
    * @event onStart
    * @desc Starting to change state callback
@@ -207,7 +215,7 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
         transition.abort();
         // Redirect with the same state but first site
         $state.go(
-          transition.to().name, angular.extend({}, transition.params(), { s: 0}));
+          transition.to().name, angular.extend({}, transition.params(), { s: 0 }));
       }
     }
   });
