@@ -35,7 +35,7 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
       }
     );
 
-    $rootScope.upload = {
+    $scope.upload = {
       files: [],
       accept: "",
       acceptList: [
@@ -80,10 +80,8 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
         "video/3gpp2",
       ]
     };
-    $rootScope.upload.accept = $rootScope.upload.acceptList.join(",");
+    $scope.upload.accept = $scope.upload.acceptList.join(",");
   }
-
-
 
   /**
    * @desc Handle for file uploads
@@ -102,10 +100,10 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
         });
       });
     }
-    $rootScope.upload.files = files;
+    $scope.upload.files = files;
     $scope.errorFiles = errorFiles;
 
-    angular.forEach($rootScope.upload.files,
+    angular.forEach($scope.upload.files,
       function(file) {
         // UploadUrl payload
         var payload = {
