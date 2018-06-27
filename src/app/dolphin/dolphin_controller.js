@@ -222,35 +222,24 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
 
   // If current state is dolphin view
   if ($state.includes("dash.dolphin")) {
-    let counter = 0;
     let dropElement = angular.element(".dolphin-drop");
 
     angular.element(window.document).bind({
       // When file enters the drag area
-      dragenter: function(event) {
+      dragover: (event) => {
         // Check if the thing is being dragged is a string
         if (event.originalEvent.dataTransfer.items[0].kind === "string") {
-          counter = 2;
           return;
         }
-        counter++;
+
         dropElement.addClass("drag-over");
         event.preventDefault();
       },
 
       // When file leaves the drag area
-      dragleave: function() {
-        counter--;
-        if (counter === 0) {
-          dropElement.removeClass("drag-over");
-        }
-      },
-
+      dragleave: () => dropElement.removeClass("drag-over"),
       // When file is dropped
-      drop: function() {
-        counter--;
-        dropElement.removeClass("drag-over");
-      }
+      drop: () => dropElement.removeClass("drag-over")
     });
   }
 
