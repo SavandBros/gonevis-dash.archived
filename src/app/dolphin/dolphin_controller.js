@@ -92,10 +92,20 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
    * @param {array} errorFiles
    */
   $scope.uploadFile = function(files, errorFiles) {
-    $scope.upload.files = files;
+    // If there was error, show toaster
+    if (errorFiles.length) {
+      angular.forEach(errorFiles, function(file) {
+        return $translate(
+          ["ERROR", "DOLPHIN_UPLOAD_TYPE_ERROR"], {"type": file.name.slice(file.name.lastIndexOf("."))}
+        ).then(function(translations) {
+          toaster.error(translations.ERROR, translations.DOLPHIN_UPLOAD_TYPE_ERROR);
+        });
+      });
+    }
+    $rootScope.upload.files = files;
     $scope.errorFiles = errorFiles;
 
-    angular.forEach($scope.upload.files,
+    angular.forEach($rootScope.upload.files,
       function(file) {
         // UploadUrl payload
         var payload = {
