@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthService,
+function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthService, $state,
                           Upload, Pagination, Search, toaster, source, localStorageService, $translate) {
 
   var site = AuthService.getCurrentSite();
@@ -83,8 +83,6 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
     $scope.upload.accept = $scope.upload.acceptList.join(",");
   }
 
-
-
   /**
    * @desc Handle for file uploads
    *
@@ -92,6 +90,16 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
    * @param {array} errorFiles
    */
   $scope.uploadFile = function(files, errorFiles) {
+    // If there was error, show toaster
+    if (errorFiles.length) {
+      angular.forEach(errorFiles, function(file) {
+        return $translate(
+          ["ERROR", "FILE_UPLOAD_TYPE_ERROR"], {"type": file.name.slice(file.name.lastIndexOf("."))}
+        ).then(function(translations) {
+          toaster.error(translations.ERROR, translations.FILE_UPLOAD_TYPE_ERROR);
+        });
+      });
+    }
     $scope.upload.files = files;
     $scope.errorFiles = errorFiles;
 
@@ -211,6 +219,29 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
       $scope.searchForm = data.form;
     }
   });
+
+  // If current state is dolphin view
+  if ($state.includes("dash.dolphin")) {
+    let dropElement = angular.element(".dolphin-drop");
+
+    angular.element(window.document).bind({
+      // When file enters the drag area
+      dragover: (event) => {
+        // Check if the thing is being dragged is a string
+        if (event.originalEvent.dataTransfer.items[0].kind === "string") {
+          return;
+        }
+
+        dropElement.addClass("drag-over");
+        event.preventDefault();
+      },
+
+      // When file leaves the drag area
+      dragleave: () => dropElement.removeClass("drag-over"),
+      // When file is dropped
+      drop: () => dropElement.removeClass("drag-over")
+    });
+  }
 
   constructor();
 }

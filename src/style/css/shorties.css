@@ -4,6 +4,10 @@
     padding: 30px;
 }
 
+.s-pad-hard {
+    padding: 50px;
+}
+
 .s-pad-soft {
     padding: 5px;
 }
@@ -208,6 +212,10 @@
 .b-color-2,
 .b-color-success {
     border-color: limegreen;
+}
+
+.b-primary {
+    border-color: #d17100;
 }
 
 

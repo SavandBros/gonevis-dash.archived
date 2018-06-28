@@ -54,22 +54,29 @@
         </div>
 
         <!-- Upload -->
-        <div class="text-center" ng-show="currentTab == 'upload'">
-          <!-- Select -->
-          <button type="file" class="btn btn-primary btn-lg animated fadeIn"
-            ngf-select="uploadFile($files, $invalidFiles)"
-            ngf-accept="upload.accept"
-            ngf-max-size="25MB"
-            ngf-multiple="true">
-            <i class="fa fa-fw fa-plus"></i> {{ 'SELECT_FILE' | translate }}
-          </button>
-          <!-- Progress Bars -->
-          <div class="row">
-            <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
-              <div class="progress s-mar-top-soft s-mar-no" ng-class="{active: file.progress != 100}">
-                <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
-                  <!-- TODO: Translate -->
-                  <span translate>{{ file.progress == 100 ? "DONE" : file.progress + "%" }}</span>
+        <div class="text-center" ng-show="currentTab == 'upload'" style="position: relative;">
+          <div class="file-drop-zone" ngf-drop="uploadFile($files, $invalidFiles)"
+            ngf-drag="drag($isDragging, $class, $event)" ngf-pattern="upload.accept"
+            ngf-max-size="25MB" ngf-multiple="true" ngf-drag-over-class="'drag-over'" ng-class="{'b-primary': isDragging}">
+          </div>
+          <div class="s-pad-hard">
+            <i class="fa fa-cloud-upload fa-4x"></i>
+            <h3 translate>DRAG_DROP_FILES</h3>
+            <span class="s-mar-y-soft o-fade-soft dis-b" translate>OR</span>
+            <!-- Select -->
+            <button type="file" class="btn btn-primary animated fadeIn" ngf-select="uploadFile($files, $invalidFiles)"
+              ngf-accept="upload.accept" ngf-max-size="25MB" ngf-multiple="true">
+              <i class="fa fa-fw fa-plus"></i> {{ 'SELECT_FILE' | translate }}
+            </button>
+            <div ngf-no-file-drop translate>DRAG_DROP_NOT_SUPPORTED</div>
+            <!-- Progress Bars -->
+            <div class="row">
+              <div class="col-md-4 col-sm-6 a-fade" ng-repeat="file in upload.files" ng-hide="file.dismiss">
+                <div class="progress s-mar-top-soft s-mar-no" ng-class="{active: file.progress != 100}">
+                  <div class="progress-bar progress-bar-striped" style="width: {{ file.progress }}%">
+                    <!-- TODO: Translate -->
+                    <span translate>{{ file.progress == 100 ? "DONE" : file.progress + "%" }}</span>
+                  </div>
                 </div>
               </div>
             </div>
