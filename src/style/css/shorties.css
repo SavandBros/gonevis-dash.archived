@@ -72,6 +72,10 @@
     margin-bottom: 15px;
 }
 
+.s-mar-bottom-no {
+    margin-bottom: 0;
+}
+
 .s-child-mar-bottom-soft>* {
     margin-bottom: 15px;
 }

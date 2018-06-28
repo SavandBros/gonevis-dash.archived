@@ -1,6 +1,6 @@
 "use strict";
 
-function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry) {
+function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry, ModalsService) {
 
   let site = AuthService.getCurrentSite();
 
@@ -107,6 +107,13 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
         }
       );
     }
+  };
+
+  /**
+   * @desc Open site followers modal
+   */
+  $scope.siteFollowers = function() {
+    ModalsService.open("siteFollowers", "SiteFollowersController");
   };
 
   /**

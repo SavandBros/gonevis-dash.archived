@@ -1,3 +1,9 @@
+2018.7.2
+========
+
+- Resolved #727: Add skip button to tour.
+- Resolved #851: Add Auto-Save mode for posts.
+
 2018.6.25
 =========
 
@@ -5,4 +11,4 @@
 - Resolved #893: Add translation to all parts of the project.
 - Resolved #242: Add a filter to order tags based on how many times they have been used.
 - Resolved #787: Display updated by 'user' at Entry grid view.
-- Resolved #851: Add Auto-Save mode for posts.S
+- Resolved #886: Display blog followers in the main view.
