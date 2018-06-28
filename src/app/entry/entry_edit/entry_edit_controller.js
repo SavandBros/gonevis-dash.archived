@@ -79,7 +79,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           });
 
           // Store old data
-          oldData.form = Object.assign({}, $scope.form.get);
+          oldData.form = angular.copy($scope.form.get);
           oldData.tags = angular.copy($scope.tagsToSubmit);
         },
         function () {
@@ -155,7 +155,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     form.get.site = AuthService.getCurrentSite();
     form.get.user = AuthService.getAuthenticatedUser(false);
 
-    payload = Object.assign({}, form.get);
+    payload = angular.copy(form.get);
 
     payload.tag_ids = [];
     payload.status = status || payload.status;
@@ -226,7 +226,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         form.url = $scope.form.getUrl();
 
         // Restore old data
-        oldData.form = Object.assign({}, form.get);
+        oldData.form = angular.copy(form.get);
         oldData.tags = angular.copy($scope.tagsToSubmit);
       },
       function (data) {
