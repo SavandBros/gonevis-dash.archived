@@ -1,3 +1,8 @@
+2018.7.2
+========
+
+- Resolved #727: Add skip button to tour.
+
 2018.6.25
 =========
 
