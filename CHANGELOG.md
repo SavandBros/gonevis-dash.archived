@@ -2,6 +2,7 @@
 ========
 
 - Resolved #727: Add skip button to tour.
+- Resolved #742: Add Drag/Drop feature for uploading files.
 
 2018.6.25
 =========
