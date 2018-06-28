@@ -1,5 +1,6 @@
 2018.7.2
 =========
+
 - Resolved #727: Add skip button to tour.
 - Resolved #742: Add Drag/Drop feature for uploading files.
 
@@ -11,4 +12,3 @@
 - Resolved #242: Add a filter to order tags based on how many times they have been used.
 - Resolved #787: Display updated by 'user' at Entry grid view.
 - Resolved #886: Display blog followers in the main view.
-- Resolved #742: Add Drag/Drop feature for uploading files.
