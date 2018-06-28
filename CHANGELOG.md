@@ -1,8 +1,9 @@
 2018.7.2
-========
+=========
 
 - Resolved #727: Add skip button to tour.
 - Resolved #851: Add Auto-Save mode for posts.
+- Resolved #742: Add Drag/Drop feature for uploading files.
 
 2018.6.25
 =========
