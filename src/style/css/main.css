@@ -1747,29 +1747,31 @@ img.tag {
     z-index: 10000;
 }
 
-.popover button {
-    border-radius: 100%;
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    margin-left: 250px;
-    margin-top: 12px;
-    line-height: 30px;
-}
-
 .popover-title {
     padding: 20px;
     border-radius: 2px 2px 0 0;
     font-size: large;
     background: #eee;
+    text-align: center;
 }
 
-.popover-content {
+.popover-content,
+.popover-footer {
     padding: 20px;
 }
 
+.popover-footer {
+    text-align: right;
+    padding: 10px 15px;
+    border-top: 1px solid #ddd;
+}
+
 .popover.top .arrow {
-    border-top-color: #ccc;
+    border-top-color: #eee;
+}
+
+.popover.bottom>.arrow:after {
+    border-bottom-color: #eee;
 }
 
 

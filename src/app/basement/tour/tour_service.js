@@ -58,6 +58,16 @@ function Tour($timeout, TourStep, AuthService) {
     };
 
     /**
+     * @type {function}
+     */
+    this.skip = function () {
+      // Hide old step
+      self.getStep().hide();
+      // Done with tour
+      AuthService.setTourStatus(self.name, true);
+    };
+
+    /**
      * @private
      * @type {function}
      */
