@@ -1,3 +1,8 @@
+2018.7.2
+=========
+
+- Resolved #742: Add Drag/Drop feature for uploading files.
+
 2018.6.25
 =========
 
