@@ -106,11 +106,14 @@
 <!-- Popover -->
 <div class="popover tour animated">
   <div class="arrow"></div>
-  <button class="btn btn-success" ng-click="tour.nextStep()">
-    <i class="fa fa-check"></i>
-  </button>
   <div class="popover-title"></div>
   <div class="popover-content"></div>
+  <div class="popover-footer">
+    <button class="btn btn-default" ng-click="tour.skip()">Skip</button>
+    <button class="btn btn-success" ng-click="tour.nextStep()">
+      <i class="fa fa-check"></i> Next
+    </button>
+  </div>
 </div>
 
 <!-- Popover hideout -->
