@@ -6,3 +6,8 @@
 - Resolved #242: Add a filter to order tags based on how many times they have been used.
 - Resolved #787: Display updated by 'user' at Entry grid view.
 - Resolved #886: Display blog followers in the main view.
+
+2018.7.2
+========
+
+- Resolved #727: Add skip button to tour.
