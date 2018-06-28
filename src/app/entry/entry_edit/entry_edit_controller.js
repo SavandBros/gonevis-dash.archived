@@ -77,10 +77,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
             });
             $scope.tagsToSubmit.push(tag.get);
           });
-
-          // Store old data
-          oldData.form = angular.copy($scope.form.get);
-          oldData.tags = angular.copy($scope.tagsToSubmit);
         },
         function () {
           $state.go("dash.entry-edit", { entryId: null });
@@ -89,18 +85,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           });
         }
       );
-
-      // Auto save every 10 seconds
-      interval = $interval(function() {
-        // Check if already updating
-        if (!$scope.form.loading) {
-          // Check if entry has an unsaved changes
-          if (!angular.equals(oldData.form, $scope.form.get)|| !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
-            autoSave = true;
-            $scope.save($scope.form);
-          }
-        }
-      }, 10000);
     } else {
       $scope.editing = false;
       $scope.form = new Entry({
@@ -110,6 +94,23 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       });
       $scope.form.get.is_page = $stateParams.isPage;
     }
+
+    // Store old data
+    oldData.form = angular.copy($scope.form.get);
+    oldData.tags = angular.copy($scope.tagsToSubmit);
+
+
+    // Auto save every 10 seconds
+    interval = $interval(() => {
+      // Check if already updating
+      if (!$scope.form.loading) {
+        // Check if entry has an unsaved changes
+        if (!angular.equals(oldData.form, $scope.form.get)|| !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
+          autoSave = true;
+          $scope.save($scope.form);
+        }
+      }
+    }, 10000);
 
     // Add space from top for toolbar
     if (Codekit.isMobile()) {
@@ -240,6 +241,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   $scope.addEntry = function (form) {
+    // If auto-saving mode, set status to draft
+    if (autoSave)  {
+      payload.status = 0;
+    }
+
     API.EntryAdd.save(payload,
       function (data) {
         $scope.form.cache(true);
