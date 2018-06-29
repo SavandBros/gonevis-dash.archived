@@ -102,4 +102,4 @@ function TagController($scope, Tag, API, AuthService, Pagination, Search, localS
   constructor();
 }
 
-app.controller("TagController", TagController)
+app.controller("TagController", TagController);

@@ -62,4 +62,4 @@ function EmailConfirmationController($scope, $rootScope, $state, toaster, API, A
   constructor();
 }
 
-app.controller("EmailConfirmationController", EmailConfirmationController)
+app.controller("EmailConfirmationController", EmailConfirmationController);

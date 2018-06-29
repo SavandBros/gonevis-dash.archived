@@ -33,7 +33,11 @@ function TagModalController($scope, Tag, paramTag, Slug, DolphinService, AuthSer
    * @param {object} form Form data to submit
    */
   $scope.save = function (form) {
-    $scope.editing ? $scope.tag.update(form) : $scope.tag.create(form);
+    if ($scope.editing) {
+      $scope.tag.update(form);
+    } else {
+      $scope.tag.create(form);
+    }
   };
 
   /**

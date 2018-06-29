@@ -83,8 +83,8 @@ function TeamModalController($scope, toaster, API, team, Codekit, AuthService, M
           toaster.info(translations.DONE, translations.TEAM_CHANGED_ROLE);
         });
       }
-    )
-  }
+    );
+  };
 
   constructor();
 }
