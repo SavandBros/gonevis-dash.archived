@@ -6,9 +6,6 @@ jobs:
       - image: circleci/node:8.11.3
     steps:
       - checkout
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest codecov'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
@@ -18,6 +15,17 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+  jshint:
+    working_directory: ~/gonevis-dash
+    docker:
+    - image: circleci/node:8.11.3
+    steps:
+    - checkout
+    - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+    - run:
+        name: code quality
+        command: npm run code-quality
   test:
     working_directory: ~/gonevis-dash
     docker:
@@ -31,7 +39,7 @@ jobs:
           command: npm test
       - run:
           name: code-coverage
-          command: 'codecov'
+          command: 'npm run report-coverage'
       - store_artifacts:
           path: test-results.xml
           prefix: tests
@@ -56,6 +64,9 @@ workflows:
       - test:
           requires:
             - build
+      - jshint:
+          requires:
+            - test
 #    filters:
 #      branches:
 #        ignore: production
