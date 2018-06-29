@@ -1,9 +1,12 @@
+defaults: &defaults
+  working_directory: ~/gonevis-dash
+    docker:
+    - image: circleci/node:8.11.3
+
 version: 2
 jobs:
   build:
-    working_directory: ~/gonevis-dash
-    docker:
-      - image: circleci/node:8.11.3
+    <<: *defaults
     steps:
       - checkout
       - run:
@@ -17,7 +20,10 @@ jobs:
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
-          - ./node_modules
+            - ./node_modules
+  test:
+    <<: *defaults
+    steps:
       - run:
           name: test
           command: npm test
@@ -45,6 +51,9 @@ workflows:
   test:
     jobs:
       - build
+      - test:
+          requires:
+            - build
 #    filters:
 #      branches:
 #        ignore: production
