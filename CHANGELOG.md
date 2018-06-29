@@ -3,6 +3,9 @@
 
 - Resolved #727: Add skip button to tour.
 - Resolved #742: Add Drag/Drop feature for uploading files.
+- Resolved #714: Upgrade CircleCI to use version 2.
+- Resolved #879: Linting and Code Quality.
+
 
 2018.6.25
 =========
