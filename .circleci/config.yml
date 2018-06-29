@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/gonevis-dash
     docker:
-    - image: circleci/node:8.11.3
+      - image: circleci/node:8.11.3
 
 version: 2
 jobs:
