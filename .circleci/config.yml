@@ -51,9 +51,9 @@ workflows:
   build-test-deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
-        filters:
-          branches:
-            only: production
+    - deploy:
+        requires:
+          - build
+      filters:
+        branches:
+          only: production
