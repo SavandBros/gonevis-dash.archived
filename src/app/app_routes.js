@@ -1,12 +1,10 @@
 "use strict";
 
-import app from "./app";
-
 /**
  * @desc Every child of dash state follows site id that user is into.
  *       States with s param don't require site index, so it is given to it for later navigation.
  */
-app.config(function($stateProvider, $urlRouterProvider) {
+angular.module("gonevisDash").config(function($stateProvider, $urlRouterProvider) {
   // Other states that are not a child of dash state
   $stateProvider
     .state("start", {
@@ -227,8 +225,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 
   $urlRouterProvider.otherwise(function($injector) {
-    var state = $injector.get("$state");
-    var AuthService = $injector.get("AuthService");
+    const state = $injector.get("$state");
+    const AuthService = $injector.get("AuthService");
 
     if (AuthService.isAuthenticated()) {
       state.go("dash.main", {
