@@ -67,9 +67,10 @@ workflows:
       - jshint:
           requires:
             - test
-#    filters:
-#      branches:
-#        ignore: production
+    filters:
+      branches:
+        ignore:
+          - production
 #  build_test_deploy:
 #    jobs:
 #      - build
