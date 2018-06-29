@@ -48,12 +48,12 @@ workflows:
     filters:
       branches:
         ignore: production
-  build-test-deploy:
-    jobs:
-      - build
-    - deploy:
-        requires:
-          - build
-      filters:
-        branches:
-          only: production
+#  build_test_deploy:
+#    jobs:
+#      - build
+#    - deploy:
+#        requires:
+#          - build
+#      filters:
+#        branches:
+#          only: production
