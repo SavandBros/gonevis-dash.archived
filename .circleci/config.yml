@@ -52,6 +52,9 @@ jobs:
     machine:
       enabled: true
     steps:
+    - checkout
+    - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
     - run:
         name: Deploying to Production
         command: './scripts/deploy.sh'
