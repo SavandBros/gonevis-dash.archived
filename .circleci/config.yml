@@ -58,7 +58,7 @@ jobs:
 
 workflows:
   version: 2
-  test:
+  build-test-deploy:
     jobs:
       - build
       - test:
@@ -67,16 +67,9 @@ workflows:
       - jshint:
           requires:
             - test
-    filters:
-      branches:
-        ignore:
-          - production
-#  build_test_deploy:
-#    jobs:
-#      - build
-#    - deploy:
-#        requires:
-#          - build
-#      filters:
-#        branches:
-#          only: production
+      - deploy:
+        requires:
+          - build
+        filters:
+          branches:
+            only: production
