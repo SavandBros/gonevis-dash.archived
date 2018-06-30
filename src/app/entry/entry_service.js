@@ -2,6 +2,13 @@
 
 import app from "../app";
 
+export default class EntryStatus {
+  constructor() {
+    this.DRAFT = 0;
+    this.PUBLISH = 1;
+  }
+}
+
 function Entry($rootScope, $state, API, Codekit, toaster, $translate) {
   return function(data) {
 
