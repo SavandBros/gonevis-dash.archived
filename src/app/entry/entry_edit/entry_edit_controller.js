@@ -1,5 +1,7 @@
 "use strict";
 
+import EntryStatus from "../entry_service";
+
 require('medium-editor');
 require('../../basement/medium_editor/medium_editor');
 
@@ -13,6 +15,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   let autoSave;
 
   function constructor() {
+    $scope.entryStatus = new EntryStatus();
     $scope.tags = [];
     $scope.dolphinService = DolphinService;
     $scope.tagsToSubmit = [];
@@ -243,7 +246,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   $scope.addEntry = function (form) {
     // If auto-saving mode, set status to draft
     if (autoSave)  {
-      payload.status = 0;
+      payload.status = $scope.entryStatus.DRAFT;
     }
 
     API.EntryAdd.save(payload,
