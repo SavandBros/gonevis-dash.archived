@@ -1361,7 +1361,7 @@ img.modal-image {
     text-align: center;
 }
 
-.load-more .btn {
+.load-more:not(.minimal) .btn {
     transition: all 0.2s ease-in-out;
     margin-bottom: 15px;
     padding: 0;
@@ -1375,9 +1375,9 @@ img.modal-image {
     opacity: 1 !important;
 }
 
-.load-more .btn:hover,
-.load-more .btn:active,
-.load-more .btn:focus {
+.load-more:not(.minimal) .btn:hover,
+.load-more:not(.minimal) .btn:active,
+.load-more:not(.minimal) .btn:focus {
     border-color: #d17100 !important;
 }
 

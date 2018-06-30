@@ -58,6 +58,7 @@ app.component("pagination", {
   template: paginationTemplate,
   controller: Pagination,
   bindings: {
-    pageForm: "<"
+    pageForm: "<",
+    minimal: "<"
   }
 });
