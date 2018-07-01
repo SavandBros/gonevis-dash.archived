@@ -241,6 +241,8 @@
   "SELECTED": "Selected",
   "SELECT_FILE": "Select File",
   "SELECT_IMAGE" : "Select an image",
+  "SIZE": "Size",
+  "EXTENSION": "Extension",
   "IMAGE": "Image",
   "VIDEO": "Video",
   "AUDIO": "Audio",

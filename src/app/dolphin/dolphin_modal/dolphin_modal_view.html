@@ -1,40 +1,72 @@
 <div class="modal fade" id="dolphin">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h3>{{ form.data.meta_data.name }} <i class="fa fa-close close pull-right" data-dismiss="modal"></i></h3>
+      <div class="modal-body s-pad-no" style="background: #333" ng-class="{'non-image': !form.data.is_image}">
+        <div class="file-wrapper">
+          <div class="file-inner">
+            <!-- Image -->
+            <img ng-src="{{ form.data.file }}" alt="form.data.meta_data.name" ng-if="form.data.is_image">
+            <!-- File -->
+            <i class="fa fa-5x s-pad-hard" ng-class="{
+              'fa-file-archive-o': dolphin.extension == 'ZIP',
+              'fa-file-pdf-o': dolphin.extension == 'PDF'
+              }" ng-if="!form.data.is_image"></i>
+          </div>
+        </div>
+
+        <div class="file-overlay" ng-class="{'image': form.data.is_image}">
+          <!-- Name -->
+          <div class="wrapper">
+            <h3>
+              {{ form.data.meta_data.name }}
+              <a class="btn btn-default btn-sm pull-right" data-dismiss="modal">
+                <i class="fa fa-close"></i>
+              </a>
+            </h3>
+            <!-- Info -->
+            <span class="label label-default s-mar-right-soft" title="{{ 'SIZE' | translate }}">
+              <i class="fa fa-fw fa-hdd-o"></i> {{ dolphin.get.size_human }}
+            </span>
+            <span class="label label-default" title="{{ 'EXTENSION' | translate }}">
+              <i class="fa fa-fw fa-file-o"></i> {{ dolphin.extension | lowercase }}
+            </span>
+          </div>
+
+          <div class="bottom wrapper">
+            <button class="btn btn-default btn-sm" title="{{ 'ADVANCED_OPTIONS' | translate }}"
+              type="button" ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
+              <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
+            </button>
+            <a ng-href="{{ dolphin.get.file }}" class="btn btn-default btn-sm" download>
+              <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <!-- Form -->
-        <form ng-submit="update(form)" name="form">
-          <div class="thumbnail" ng-if="form.data.is_image">
-            <img ng-src="{{ form.data.file }}" alt="form.data.meta_data.name">
-          </div>
-          <div class="form-group" ng-class="{'has-error': form.errors.meta_data.name}">
-            <input class="form-control" type="text" ng-model="form.data.meta_data.name"
-              placeholder="{{ 'FILE_NAME' | translate }}" maxlength="100" required>
-            <small class="help-block" ng-show="form.errors.file_name">{{ form.errors.meta_data.name[0] }}</small>
-          </div>
-          <div class="form-group" ng-class="{'has-error': form.errors.meta_data.description}">
-            <textarea class="form-control" type="text" ng-model="form.data.meta_data.description"
-              placeholder="{{ 'DESCRIPTION' | translate }}">
-            </textarea>
-            <small class="help-block" ng-show="form.errors.meta_data.description">
-              {{ form.errors.meta_data.name[0] }}
-            </small>
-          </div>
-          <div class="btn-group">
+      <div uib-collapse="advanced">
+        <div class="modal-footer b-no" style="text-align: unset">
+          <!-- Form -->
+          <form ng-submit="update(form)" name="form">
+            <div class="form-group" ng-class="{'has-error': form.errors.meta_data.name}">
+              <input class="form-control" type="text" ng-model="form.data.meta_data.name"
+                placeholder="{{ 'FILE_NAME' | translate }}" maxlength="100" required>
+              <small class="help-block" ng-show="form.errors.file_name">{{ form.errors.meta_data.name[0] }}</small>
+            </div>
+            <div class="form-group" ng-class="{'has-error': form.errors.meta_data.description}">
+              <textarea class="form-control" type="text" ng-model="form.data.meta_data.description"
+                placeholder="{{ 'DESCRIPTION' | translate }}">
+              </textarea>
+              <small class="help-block" ng-show="form.errors.meta_data.description">
+                {{ form.errors.meta_data.name[0] }}
+              </small>
+            </div>
+            <button class="btn btn-primary" ng-disabled="form.loading" translate>UPDATE_FILE</button>
             <button type="button" class="btn btn-default" ng-click="dolphin.remove()"
               title="{{ 'DELETE_FILE' | translate }}" data-dismiss="modal">
               <i class="fa fa-trash"></i>
             </button>
-            <button class="btn btn-primary" ng-disabled="form.loading" translate>UPDATE_FILE</button>
-          </div>
-          <a ng-href="{{ dolphin.get.file }}" class="btn btn-default pull-right" download>
-            <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
-          </a>
-          <div class="clearfix"></div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
