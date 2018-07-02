@@ -179,8 +179,12 @@
                 ng-if="!editing"
                 ng-disabled="form.loading || form.$invalid" translate>SUBMIT</button>
               <!-- Editing buttons -->
+              <button type="button" ng-click="discardChanges()" ng-if="postChanged"
+                class="btn btn-danger btn-block s-mar-bottom-soft" ng-disabled="form.loading" translate>
+                DISCARD_CHANGES
+              </button>
               <div class="btn-group stack" ng-if="editing">
-                <button class="btn btn-primary" ng-disabled="form.loading || form.$invalid">UPDATE</button>
+                <button class="btn btn-primary t-upp" ng-disabled="form.loading || form.$invalid" translate>UPDATE</button>
                 <button class="btn btn-default" ng-disabled="form.loading || form.$invalid"
                   title="{{ 'DELETE' | translate }}" type="button" ng-click="form.remove()">
                   <i class="fa fa-trash"></i>
