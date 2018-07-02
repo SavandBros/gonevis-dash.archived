@@ -1,6 +1,6 @@
 "use strict";
 
-import EntryStatus from "../entry_service";
+import EntryStatus from "../status";
 
 require('medium-editor');
 require('../../basement/medium_editor/medium_editor');
@@ -55,9 +55,16 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           entry_id: $scope.form.get.id
         },
         function (data) {
+          // Store original data
+          oldData.originalPost = angular.copy(data);
           // If unsaved changes
           if (data.entrydraft) {
+            $scope.postChanged = true;
             data = data.entrydraft;
+
+            $translate(["LOADING_DRAFT", "UNPUBLISHED_CHANGES"]).then(function(translations) {
+              toaster.warning(translations.LOADING_DRAFT, translations.UNPUBLISHED_CHANGES, 10000);
+            });
           }
 
           if (data.start_publication) {
@@ -80,6 +87,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
             });
             $scope.tagsToSubmit.push(tag.get);
           });
+
+          // Initial auto-save
+          initAutoSave();
         },
         function () {
           $state.go("dash.entry-edit", { entryId: null });
@@ -96,12 +106,28 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         format: Codekit.entryFormats[0].text.id
       });
       $scope.form.get.is_page = $stateParams.isPage;
+
+      // Initial auto-save
+      initAutoSave();
     }
 
+    // Add space from top for toolbar
+    if (Codekit.isMobile()) {
+      $timeout(function () {
+        angular.element(".editor").css(
+          'margin-top', angular.element(".ta-toolbar").height()
+        );
+      }, 1000);
+    }
+  }
+
+  /**
+   * @desc Auto-Save
+   */
+  function initAutoSave() {
     // Store old data
     oldData.form = angular.copy($scope.form.get);
     oldData.tags = angular.copy($scope.tagsToSubmit);
-
 
     // Auto save every 10 seconds
     interval = $interval(() => {
@@ -114,15 +140,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         }
       }
     }, 10000);
-
-    // Add space from top for toolbar
-    if (Codekit.isMobile()) {
-      $timeout(function () {
-        angular.element(".editor").css(
-          'margin-top', angular.element(".ta-toolbar").height()
-        );
-      }, 1000);
-    }
   }
 
   /**
@@ -212,6 +229,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       }, payload,
       function (data) {
         if (!autoSave) {
+          $scope.postChanged = false;
           if (data.start_publication) {
             data.start_publication = new Date(data.start_publication);
           }
@@ -220,8 +238,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           $translate(["DONE", "ENTRY_UPDATED"], {"title": payload.title}).then(function (translations) {
             toaster.info(translations.DONE, translations.ENTRY_UPDATED);
           });
+
+          oldData.originalPost = angular.copy(data);
         } else {
           autoSave = false;
+          $scope.postChanged = true;
         }
 
         form.loading = false;
@@ -267,6 +288,29 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         form.errors = data.data;
       }
     );
+  };
+
+  $scope.discardChanges = function() {
+    if (confirm($translate.instant('DISCARD_CHANGES_PROMPT')) === false) {
+      return;
+    }
+
+    let tags = [];
+    // Get published post tags
+    angular.forEach(oldData.originalPost.tags, function (data) {
+      var tag = new Tag({
+        slug: data.slug,
+        id: data.id,
+        name: data.name,
+        count: data.tagged_items_count
+      });
+      tags.push(tag.get);
+    });
+
+    $scope.tagsToSubmit = tags;
+    $scope.form.get = oldData.originalPost;
+    $scope.form.get.entrydraft = null;
+    $scope.save($scope.form);
   };
 
   /**
