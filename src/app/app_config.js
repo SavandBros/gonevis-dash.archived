@@ -1,9 +1,7 @@
 "use strict";
 
-import app from "./app";
 import AuthInterceptorService from "./account/auth/auth_interceptor_service";
-
-const Raven = require('raven-js');
+import Raven from "raven-js";
 
 
 const Config = function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
@@ -57,7 +55,7 @@ const Config = function($httpProvider, $resourceProvider, $cookiesProvider, $qPr
   });
 };
 
-app.config(Config);
+angular.module("gonevisDash").config(Config);
 Config.$inject = [
   "$httpProvider",
   "$resourceProvider",

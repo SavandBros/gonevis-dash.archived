@@ -1,8 +1,6 @@
 "use strict";
 
-import app from "./app";
-
-app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
+angular.module("gonevisDash").run(function ($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
   ENV, AuthService, DolphinService, Codekit, Client, TourService,
   editableOptions, localStorageService, $transitions) {
 

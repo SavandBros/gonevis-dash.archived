@@ -206,14 +206,18 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
     // Check if there are tags that doesn't exit
     if (noneTagsCount) {
-      var tagInstance = new Tag({ site: AuthService.getCurrentSite() });
+      const tagInstance = new Tag({ site: AuthService.getCurrentSite() });
 
       // Create each tag
       angular.forEach(tagsToCreate, function (tag) {
         tagInstance.create(tag);
       });
     } else {
-      $scope.editing ? $scope.updateEntry(form) : $scope.addEntry(form);
+      if ($scope.editing) {
+        $scope.updateEntry(form);
+      } else {
+        $scope.addEntry(form);
+      }
     }
 
   };
@@ -322,8 +326,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    */
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     // Cover image
-    if (source === "entryCover") {
-      // Store ID to uploda
+    if (source ===/** @type {string} */ "entryCover") {
+      // Store ID to uplodad
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
       // If selected a file
       if (dolphin) {
@@ -397,7 +401,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
     // If all APIs were called, proceed to update/add entry.
     if (noneTagsCount === 0) {
-      $scope.editing ? $scope.updateEntry($scope.form) : $scope.addEntry($scope.form);
+      if ($scope.editing) {
+        $scope.updateEntry($scope.form);
+      } else {
+        $scope.addEntry($scope.form);
+      }
       tagsToCreate = [];
     }
   });

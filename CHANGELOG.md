@@ -4,6 +4,11 @@
 - Resolved #727: Add skip button to tour.
 - Resolved #851: Add Auto-Save mode for posts.
 - Resolved #742: Add Drag/Drop feature for uploading files.
+- Resolved #714: Upgrade CircleCI to use version 2.
+- Resolved #879: Linting and Code Quality.
+- Resolved #906: Improve followers layout.
+- Resolved #442: Improve file manager layout.
+
 
 2018.6.25
 =========

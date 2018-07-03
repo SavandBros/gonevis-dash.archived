@@ -1,5 +1,5 @@
 "use strict";
-import avatar from "../../public/img/avatar.png"
+import avatar from "../../public/img/avatar.png";
 import app from "../app";
 
 /**
@@ -128,7 +128,7 @@ function Account() {
       }
       // Missing info
       return false;
-    }
+    };
   };
 }
 
