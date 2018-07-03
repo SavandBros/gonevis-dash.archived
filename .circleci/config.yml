@@ -52,8 +52,6 @@ jobs:
     working_directory: ~/gonevis-dash
     docker:
       - image: circleci/node:8.11.3
-    machine:
-      enabled: true
     steps:
     - checkout
     - restore_cache:
