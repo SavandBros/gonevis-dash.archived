@@ -11,9 +11,10 @@
   "undef": true,
   "unused": true,
   "loopfunc": true,
+  "-W058": true,
   "globals": {
     "angular": false,
-    "app": false,
+    "app": true,
     "Raven": false,
     "confirm": false,
     "GoNevisEnv": false

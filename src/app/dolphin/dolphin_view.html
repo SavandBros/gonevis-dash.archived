@@ -1,4 +1,14 @@
 <div class="container container-light pad-top" id="dolphin">
+  <div class="dolphin-drop" ngf-drop="uploadFile($files, $invalidFiles)"
+    ngf-drag-over-class="''" ngf-multiple="true" ngf-allow-dir="false"
+    ngf-pattern="upload.accept" ngf-max-size="100MB">
+
+    <div class="content">
+      <i class="fa fa-cloud-upload fa-5x"></i>
+      <h1 translate>DROP_FILE</h1>
+      <div ngf-no-file-drop translate>DRAG_DROP_NOT_SUPPORTED</div>
+    </div>
+  </div>
   <div class="row">
     <!-- Top bar -->
     <div class="row animated fadeIn s-mar-no popover-relative" ng-show="initialled">
@@ -46,38 +56,40 @@
       <!-- Grid view -->
       <div class="col-md-3 col-sm-3 col-xs-6 text-center" ng-repeat="dolphin in dolphins"
         ng-show="!dolphin.isDeleted" ng-class="{'animated zoomOut': dolphin.isDeleted}" ng-if="view == 'grid'">
-        <!-- Link -->
-        <a ng-click="action(dolphin)" class="dolphin" style="background-image: url({{ dolphin.get.thumbnail_256x256 }})"
-          ng-class="{'not-image': !dolphin.get.is_image}">
-          <!-- Icon -->
-          <i class="fa fa-5x" ng-class="{
-            'fa-file-archive-o': dolphin.extension == 'ZIP',
-            'fa-file-pdf-o': dolphin.extension == 'PDF'
-            }" ng-if="!dolphin.get.is_image">
-          </i>
-          <!-- Caption -->
-          <p class="caption">{{ dolphin.get.meta_data.name }}</p>
-        </a>
-        <!-- Options -->
-        <div class="dropdown options" title="options">
-          <button class="btn btn-default dropdown-toggle o-fade-hard o-fade-hover-full bg-no c-white b-no"
-            id="options{{ $index }}" data-toggle="dropdown">
-            <i class="fa fa-ellipsis-v"></i>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> {{ 'VIEW' | translate }} </a></li>
-            <li>
-              <a ng-href="{{ dolphin.get.file }}" download>
-                <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
-              </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a ng-click="dolphin.remove()">
-                <i class="fa fa-trash text-danger"></i> {{ 'DELETE' | translate }}
-              </a>
-            </li>
-          </ul>
+        <div class="dolphin-wrapper">
+          <!-- Link -->
+          <a ng-click="action(dolphin)" class="dolphin" style="background-image: url({{ dolphin.get.thumbnail_256x256 }})"
+            ng-class="{'not-image': !dolphin.get.is_image}">
+            <!-- Icon -->
+            <i class="fa fa-5x" ng-class="{
+              'fa-file-archive-o': dolphin.extension == 'ZIP',
+              'fa-file-pdf-o': dolphin.extension == 'PDF'
+              }" ng-if="!dolphin.get.is_image">
+            </i>
+            <!-- Caption -->
+            <p class="caption t-line">{{ dolphin.get.meta_data.name }}</p>
+          </a>
+          <!-- Options -->
+          <div class="dropdown options" title="options">
+            <button class="btn btn-default btn-sm dropdown-toggle b-no"
+              id="options{{ $index }}" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v fa-fw"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> {{ 'VIEW' | translate }} </a></li>
+              <li>
+                <a ng-href="{{ dolphin.get.file }}" download>
+                  <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a ng-click="dolphin.remove()">
+                  <i class="fa fa-trash text-danger"></i> {{ 'DELETE' | translate }}
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -88,7 +100,7 @@
           <!-- Image -->
           <div class="media-left">
             <!-- Img -->
-            <img class="media-object" style="max-width: 48px"
+            <img class="media-object" width="48"
               ng-src="{{ dolphin.get.thumbnail_48x48 }}" ng-if="dolphin.get.is_image">
             <!-- Icon -->
             <i class="fa fa-2x o-fade media-object" style="background: #eee;padding: 10px 12px;" ng-class="{

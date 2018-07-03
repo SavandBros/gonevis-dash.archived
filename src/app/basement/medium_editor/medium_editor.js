@@ -1,3 +1,5 @@
+"use strict";
+
 import MediumEditor from 'medium-editor';
 
 class MediumEditorDirective {
@@ -23,7 +25,7 @@ class MediumEditorDirective {
 
     ngModel.$isEmpty = function(value) {
       if (/[<>]/.test(value)) {
-        return MediumEditorDirective.toInnerText(value).length === 0
+        return MediumEditorDirective.toInnerText(value).length === 0;
       } else if (value) {
         return value.length === 0;
       } else {

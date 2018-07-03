@@ -5,16 +5,18 @@ import app from '../../app';
 
 /**
  * @desc Calculate time since from given date object.
- *       3 days, 1 month, one year...
+ * 3 days, 1 month, one year...
  */
 function TimeSinceFilter() {
-  return function(date, reversed) {
+  return function (date, reversed) {
     reversed = reversed || false;
 
-    if (typeof date == "string") date = new Date(date);
+    if (typeof date === "string") {
+      date = new Date(date);
+    }
 
-    var seconds = reversed ? Math.floor((date - new Date()) / 1000) : Math.floor((new Date() - date) / 1000);
-    var INTERVALS = {
+    let seconds = reversed ? Math.floor((date - new Date()) / 1000) : Math.floor((new Date() - date) / 1000);
+    const INTERVALS = {
       YEAR: {
         seconds: 31536000,
         tense: "year",
@@ -42,12 +44,14 @@ function TimeSinceFilter() {
       }
     };
 
-    for (var k in INTERVALS) {
-      if (!INTERVALS.hasOwnProperty(k)) continue;
+    for (let k in INTERVALS) {
+      if (!INTERVALS.hasOwnProperty(k)) {
+        continue;
+      }
 
-      var secondsDifference = Math.floor(seconds / INTERVALS[k].seconds);
-      var tense = INTERVALS[k].tense;
-      var tensePrefix;
+      const secondsDifference = Math.floor(seconds / INTERVALS[k].seconds);
+      let tense = INTERVALS[k].tense;
+      let tensePrefix;
 
       if (secondsDifference < 1 && secondsDifference > 0) {
         tensePrefix = "less than a";
@@ -64,7 +68,7 @@ function TimeSinceFilter() {
         return "tensePrefix tense".replace("tensePrefix", tensePrefix).replace("tense", tense);
       }
     }
-  }
+  };
 }
 
 app.filter("timesince", TimeSinceFilter);

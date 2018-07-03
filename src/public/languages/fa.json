@@ -26,5 +26,8 @@
   "LOGGED_OUT": "حارج شده",
   "SESSION_EXPIRED": "بنظر میرسد جلسه شما منقضی شده، لطفا دوباره وارد شوید.",
   "INCOMPLETE_PROFILE": "پروفایل شما ناقص است!",
-  "IMPROVE_PROFILE": "بهبود پروفایل"
+  "IMPROVE_PROFILE": "بهبود پروفایل",
+  "NEXT": "بعدی",
+  "SKIP": "رد کردن",
+  "CONTINUE": "ادامه دادن",
 }

@@ -20,7 +20,10 @@ function Pagination($resource, $rootScope) {
       loading: false,
       noMore: true,
     };
-    if (data.next) form.page.noMore = false;
+    if (data.next) {
+      form.page.noMore = false;
+    }
+
     return form;
   }
 
@@ -55,6 +58,7 @@ app.component("pagination", {
   template: paginationTemplate,
   controller: Pagination,
   bindings: {
-    pageForm: "<"
+    pageForm: "<",
+    minimal: "<"
   }
 });

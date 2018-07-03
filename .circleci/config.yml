@@ -1,0 +1,79 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/gonevis-dash
+    docker:
+      - image: circleci/node:8.11.3
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+  jshint:
+    working_directory: ~/gonevis-dash
+    docker:
+    - image: circleci/node:8.11.3
+    steps:
+    - checkout
+    - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+    - run:
+        name: code quality
+        command: npm run code-quality
+  test:
+    working_directory: ~/gonevis-dash
+    docker:
+      - image: circleci/node:8.11.3
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: test
+          command: npm test
+      - run:
+          name: code-coverage
+          command: 'npm run report-coverage'
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: test-results.xml
+  deploy:
+    machine:
+      enabled: true
+    steps:
+    - checkout
+    - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+    - run:
+        name: Deploying to Production
+        command: './scripts/deploy.sh'
+
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - jshint:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: production

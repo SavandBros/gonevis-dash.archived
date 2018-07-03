@@ -1,8 +1,6 @@
 "use strict";
 
-import app from "./app";
-
-app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
+angular.module("gonevisDash").run(function ($rootScope, $window, $location, $cookies, $state, $timeout, toaster,
   ENV, AuthService, DolphinService, Codekit, Client, TourService,
   editableOptions, localStorageService, $transitions) {
 
@@ -207,7 +205,7 @@ app.run(function ($rootScope, $window, $location, $cookies, $state, $timeout, to
         transition.abort();
         // Redirect with the same state but first site
         $state.go(
-          transition.to().name, angular.extend({}, transition.params(), { s: 0}));
+          transition.to().name, angular.extend({}, transition.params(), { s: 0 }));
       }
     }
   });
