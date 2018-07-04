@@ -229,9 +229,7 @@ angular.module("gonevisDash").config(function($stateProvider, $urlRouterProvider
     const AuthService = $injector.get("AuthService");
 
     if (AuthService.isAuthenticated()) {
-      state.go("dash.main", {
-        s: 0
-      });
+      $state.go("dash.main", { s: $rootScope.set.lastSite });
     } else {
       state.go("start");
     }
