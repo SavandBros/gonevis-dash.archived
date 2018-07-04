@@ -142,6 +142,14 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   };
 
   /**
+   * Change current site and save to lastSite
+   * @param {number} index
+   */
+  $scope.setSite = function (index) {
+    $rootScope.set.lastSite = index;
+  };
+
+  /**
    * @desc Dolphin selection used for quick nevis
    *
    * @param {Event} event
