@@ -4,7 +4,7 @@ import headerTemplate from "./header_view.html";
 import app from "../app";
 
 function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, AuthService, DolphinService, Codekit,
-                          Entry, API, ModalsService, TourService, toaster, $translate) {
+  Entry, API, ModalsService, TourService, toaster, $translate) {
 
   function constructor() {
 
@@ -25,7 +25,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
     $translate([
       "DASHBOARD", "WRITE", "POSTS", "PAGES", "TAGS",
       "COMMENTS", "FILES", "NAVIGATIONS", "TEAM", "SETTINGS"
-    ]).then(function(translations) {
+    ]).then(function (translations) {
       // Navs
       $scope.mainNavs = [{
         label: translations.DASHBOARD,
@@ -80,7 +80,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
       API.AccountRefresh.save({
           token: AuthService.getToken()
         },
-        function(data) {
+        function (data) {
           $scope.user = AuthService.setAuthenticatedUser(data.user);
         }
       );
@@ -107,10 +107,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
     }
     // Entry submission
     entry.create(
-      function(data) {
+      function (data) {
         // Prevent older cache
         entry.cache(true);
-        $translate(["DONE", "ENTRY_CREATED"]).then(function(translations) {
+        $translate(["DONE", "ENTRY_CREATED"]).then(function (translations) {
           toaster.success(translations.DONE, translations.ENTRY_CREATED);
         });
         // Go for edit
@@ -119,8 +119,8 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
           entryId: data.id
         });
       },
-      function() {
-        $translate(["ERROR", "WRONG_POST_CREATION_FAILED"]).then(function(translations) {
+      function () {
+        $translate(["ERROR", "WRONG_POST_CREATION_FAILED"]).then(function (translations) {
           toaster.success(translations.ERROR, translations.WRONG_POST_CREATION_FAILED);
         });
       }
@@ -134,7 +134,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
    *
    * @param {string} format
    */
-  $scope.nevis = function(format) {
+  $scope.nevis = function (format) {
     $scope.nevisFormat = format;
     if (format === "image") {
       DolphinService.viewSelection("headerNevis");
@@ -156,7 +156,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
    * @param {Dolphin} dolphin
    * @param {string} source
    */
-  $scope.$on("gonevisDash.Dolphin:select", function(event, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     // If we're dealing with quick nevis
     if (source === "headerNevis") {
       handleNevis($scope.nevisFormat, dolphin);
@@ -166,7 +166,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   /**
    * @desc Authentication loads
    */
-  $scope.$on("gonevisDash.AuthService:Authenticated", function() {
+  $scope.$on("gonevisDash.AuthService:Authenticated", function () {
     constructor();
     // Go to main or new site page if has no other sites
     if ($scope.user.getSites().length > 0) {
@@ -184,11 +184,11 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
    * @param {Event} event
    * @param {boolean} sessionExpired
    */
-  $scope.$on("gonevisDash.AuthService:SignedOut", function(event, sessionExpired) {
+  $scope.$on("gonevisDash.AuthService:SignedOut", function (event, sessionExpired) {
     // Session expired message
     if (sessionExpired) {
       toaster.clear($scope.signOutToast);
-      $translate(["LOGGED_OUT", "SESSION_EXPIRED"]).then(function(translations) {
+      $translate(["LOGGED_OUT", "SESSION_EXPIRED"]).then(function (translations) {
         $scope.signOutToast = toaster.info(translations.LOGGED_OUT, translations.SESSION_EXPIRED);
       });
     }
@@ -200,7 +200,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   /**
    * @desc Email is not confirmed for an action
    */
-  $scope.$on("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess", function() {
+  $scope.$on("gonevisDash.AuthInterceptor.UnconfirmedEmailAccess", function () {
     ModalsService.open("emailConfirmation", "EmailConfirmationController");
   });
 
@@ -230,9 +230,9 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
    * @param {Event} event
    * @param {string} tourName
    */
-  $scope.$on("gonevisDash.Tour.readyToCheck", function(event, tourName) {
+  $scope.$on("gonevisDash.Tour.readyToCheck", function (event, tourName) {
     // Wait for DOM to finish rendering
-    $timeout(function() {
+    $timeout(function () {
       $scope.tour = TourService.checkForView(tourName);
     });
   });
