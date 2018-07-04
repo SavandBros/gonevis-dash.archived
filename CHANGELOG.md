@@ -1,3 +1,9 @@
+2018.7.9
+========
+
+- Resolved #910: Remember last site user visited.
+
+
 2018.7.2
 =========
 
