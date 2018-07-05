@@ -19,7 +19,8 @@ const deps = [
   'angular-loading-bar',
   'toaster',
   'LocalStorageModule',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+  'ngQuill'
 ];
 
 const MODULE_NAME = 'gonevisDash';
