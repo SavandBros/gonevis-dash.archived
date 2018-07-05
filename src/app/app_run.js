@@ -36,7 +36,13 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
        * @desc Sidebar status
        * @type {boolean}
        */
-      sidebar: true
+      sidebar: true,
+
+      /**
+       * Last selected site
+       * @type {number}
+       */
+      lastSite: 0
     };
   }
 

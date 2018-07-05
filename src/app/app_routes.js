@@ -4,7 +4,7 @@
  * @desc Every child of dash state follows site id that user is into.
  *       States with s param don't require site index, so it is given to it for later navigation.
  */
-angular.module("gonevisDash").config(function($stateProvider, $urlRouterProvider) {
+angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvider) {
   // Other states that are not a child of dash state
   $stateProvider
     .state("start", {
@@ -118,7 +118,7 @@ angular.module("gonevisDash").config(function($stateProvider, $urlRouterProvider
       lazyLoad: ($transition$) => {
         const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
 
-        return import(/* webpackChunkName: "main" */ "./main/main_controller")
+        return import ( /* webpackChunkName: "main" */ "./main/main_controller")
           .then(mod => {
             $ocLazyLoad.load([mod.MAIN_DASH_MODULE]);
           })
@@ -145,7 +145,7 @@ angular.module("gonevisDash").config(function($stateProvider, $urlRouterProvider
       title: "Dolphin",
       resolve: {
         // Used to determine source of selection
-        source: function() {
+        source: function () {
           return null;
         }
       }
@@ -173,7 +173,7 @@ angular.module("gonevisDash").config(function($stateProvider, $urlRouterProvider
       lazyLoad: ($transition$) => {
         const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
 
-        return import(/* webpackChunkName: "entry-edit" */ "./entry/entry_edit/entry_edit_controller")
+        return import ( /* webpackChunkName: "entry-edit" */ "./entry/entry_edit/entry_edit_controller")
           .then(mod => $ocLazyLoad.load(mod.EDIT_ENTRY_MODULE))
           .catch(err => {
             throw new Error("Ooops, something went wrong, " + err);
@@ -224,16 +224,15 @@ angular.module("gonevisDash").config(function($stateProvider, $urlRouterProvider
       title: "Team"
     });
 
-  $urlRouterProvider.otherwise(function($injector) {
-    const state = $injector.get("$state");
+  $urlRouterProvider.otherwise(function ($injector) {
+    const $rootScope = $injector.get("$rootScope");
+    const $state = $injector.get("$state");
     const AuthService = $injector.get("AuthService");
 
     if (AuthService.isAuthenticated()) {
-      state.go("dash.main", {
-        s: 0
-      });
+      $state.go("dash.main", { s: $rootScope.set.lastSite });
     } else {
-      state.go("start");
+      $state.go("start");
     }
   });
 });
