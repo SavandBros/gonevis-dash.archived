@@ -25,7 +25,6 @@ require('angular-translate-loader-url');
 require('angular-translate-loader-static-files');
 require('angular-translate-storage-local');
 require('angular-translate-storage-cookie');
-require('ng-quill');
 
 // Styles!
 require('angular-loading-bar/build/loading-bar.css');
@@ -35,4 +34,3 @@ require('angular-xeditable/dist/css/xeditable.css');
 require('ng-tags-input/build/ng-tags-input.css');
 require('animate.css/animate.css');
 require('angularjs-toaster/toaster.css');
-require('quill/dist/quill.snow.css');
