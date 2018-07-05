@@ -1,8 +1,5 @@
 "use strict";
 
-require('medium-editor');
-require('../../basement/medium_editor/medium_editor');
-
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate) {
   var payload;
@@ -73,7 +70,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         },
         function () {
           $state.go("dash.entry-edit", { entryId: null });
-          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function(translations) {
+          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function (translations) {
             toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
           });
         }
@@ -96,6 +93,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         );
       }, 1000);
     }
+
+    // $scope.options = {
+    //   toolbar: [
+    //     ['bold', 'italic', 'underline', 'strike'],
+    //     ['link', 'blockquote', 'code-block', { 'list': 'bullet' }],
+    //     [{ 'header': [1, 2, 3, 4, 5, 6, "false"] }],
+    //     [{ 'direction': 'rtl' }, { 'align': [] }]
+    //   ]
+    // };
   }
 
   /**
@@ -188,7 +194,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         form.url = $scope.form.getUrl();
         Codekit.setTitle(form.get.title);
 
-        $translate(["DONE", "ENTRY_UPDATED"], {"title": payload.title}).then(function (translations) {
+        $translate(["DONE", "ENTRY_UPDATED"], { "title": payload.title }).then(function (translations) {
           toaster.info(translations.DONE, translations.ENTRY_UPDATED);
         });
         form.loading = false;
@@ -208,7 +214,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     API.EntryAdd.save(payload,
       function (data) {
         $scope.form.cache(true);
-        $translate(["DONE", "ENTRY_CREATED_API"], {"title": payload.title}).then(function (translations) {
+        $translate(["DONE", "ENTRY_CREATED_API"], { "title": payload.title }).then(function (translations) {
           toaster.success(translations.DONE, translations.ENTRY_CREATED_API);
         });
         $state.go("dash.entry-edit", {
@@ -234,7 +240,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    */
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     // Cover image
-    if (source ===/** @type {string} */ "entryCover") {
+    if (source === /** @type {string} */ "entryCover") {
       // Store ID to uplodad
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
       // If selected a file
