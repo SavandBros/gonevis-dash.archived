@@ -261,8 +261,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
     // Inserting an image to editor
     else if (source === "editorAddImage") {
-      // Get the modified content (inserted image)
-      $scope.form.get.content = angular.element("[medium-editor][name=editor]").html();
       // If has no cover image, set this image as cover image
       if (!$scope.form.hasCoverImage()) {
         // Store to upload
