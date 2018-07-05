@@ -14,6 +14,30 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   let interval;
   let autoSave;
 
+  /**
+   * @desc Auto-Save
+   */
+  function initAutoSave() {
+    // Store old data
+    oldData.form = angular.copy($scope.form.get);
+    oldData.tags = angular.copy($scope.tagsToSubmit);
+
+    // Auto save every 10 seconds
+    interval = $interval(() => {
+      // Check if already updating
+      if (!$scope.form.loading) {
+        // Check if post has title
+        if ($scope.form.get.title) {
+          // Check if entry has an unsaved changes
+          if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
+            autoSave = true;
+            $scope.save($scope.form);
+          }
+        }
+      }
+    }, 10000);
+  }
+
   function constructor() {
     $scope.entryStatus = new EntryStatus();
     $scope.tags = [];
@@ -62,7 +86,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
             $scope.postChanged = true;
             data = data.entrydraft;
 
-            $translate(["LOADING_DRAFT", "UNPUBLISHED_CHANGES"]).then(function(translations) {
+            $translate(["LOADING_DRAFT", "UNPUBLISHED_CHANGES"]).then(function (translations) {
               toaster.warning(translations.LOADING_DRAFT, translations.UNPUBLISHED_CHANGES, 10000);
             });
           }
@@ -93,7 +117,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         },
         function () {
           $state.go("dash.entry-edit", { entryId: null });
-          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function(translations) {
+          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function (translations) {
             toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
           });
         }
@@ -119,27 +143,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         );
       }, 1000);
     }
-  }
-
-  /**
-   * @desc Auto-Save
-   */
-  function initAutoSave() {
-    // Store old data
-    oldData.form = angular.copy($scope.form.get);
-    oldData.tags = angular.copy($scope.tagsToSubmit);
-
-    // Auto save every 10 seconds
-    interval = $interval(() => {
-      // Check if already updating
-      if (!$scope.form.loading) {
-        // Check if entry has an unsaved changes
-        if (!angular.equals(oldData.form, $scope.form.get)|| !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
-          autoSave = true;
-          $scope.save($scope.form);
-        }
-      }
-    }, 10000);
   }
 
   /**
@@ -239,7 +242,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           }
           form.get = data;
 
-          $translate(["DONE", "ENTRY_UPDATED"], {"title": payload.title}).then(function (translations) {
+          $translate(["DONE", "ENTRY_UPDATED"], { "title": payload.title }).then(function (translations) {
             toaster.info(translations.DONE, translations.ENTRY_UPDATED);
           });
 
@@ -270,14 +273,14 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
   $scope.addEntry = function (form) {
     // If auto-saving mode, set status to draft
-    if (autoSave)  {
+    if (autoSave) {
       payload.status = $scope.entryStatus.DRAFT;
     }
 
     API.EntryAdd.save(payload,
       function (data) {
         $scope.form.cache(true);
-        $translate(["DONE", "ENTRY_CREATED_API"], {"title": payload.title}).then(function (translations) {
+        $translate(["DONE", "ENTRY_CREATED_API"], { "title": payload.title }).then(function (translations) {
           toaster.success(translations.DONE, translations.ENTRY_CREATED_API);
         });
         $state.go("dash.entry-edit", {
@@ -294,7 +297,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     );
   };
 
-  $scope.discardChanges = function() {
+  $scope.discardChanges = function () {
     if (confirm($translate.instant('DISCARD_CHANGES_PROMPT')) === false) {
       return;
     }
@@ -326,7 +329,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    */
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     // Cover image
-    if (source ===/** @type {string} */ "entryCover") {
+    if (source === /** @type {string} */ "entryCover") {
       // Store ID to uplodad
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
       // If selected a file
