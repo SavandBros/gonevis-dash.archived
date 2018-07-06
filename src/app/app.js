@@ -20,7 +20,6 @@ const deps = [
   'toaster',
   'LocalStorageModule',
   'pascalprecht.translate',
-  'ngQuill'
 ];
 
 const MODULE_NAME = 'gonevisDash';

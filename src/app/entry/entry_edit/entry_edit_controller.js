@@ -1,6 +1,9 @@
 "use strict";
 import EntryStatus from "../status";
 
+require('ng-quill');
+require('quill/dist/quill.snow.css');
+
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval) {
   var payload;

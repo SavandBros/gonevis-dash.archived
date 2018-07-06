@@ -174,7 +174,7 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
         const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
 
         return import ( /* webpackChunkName: "entry-edit" */ "./entry/entry_edit/entry_edit_controller")
-          .then(mod => $ocLazyLoad.load(mod.EDIT_ENTRY_MODULE))
+          .then(mod => $ocLazyLoad.load(["ngQuill", mod.EDIT_ENTRY_MODULE]))
           .catch(err => {
             throw new Error("Ooops, something went wrong, " + err);
           });
