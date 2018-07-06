@@ -6,13 +6,14 @@
 
         <!-- Publish -->
         <button type="button" class="btn btn-default btn-primary" translate
-          ng-disabled="form.loading || form.$invalid" ng-if="!editing || form.get.status != 1" ng-click="save(form, 1)">
+          ng-disabled="form.loading || form.$invalid" ng-if="!editing || form.get.status === entryStatus.DRAFT"
+          ng-click="save(form, entryStatus.PUBLISH)">
           PUBLISH
         </button>
 
         <!-- Update -->
         <button class="btn btn-default btn-info" translate
-          ng-disabled="form.loading || form.$invalid" ng-if="editing && form.get.status == 1">
+          ng-disabled="form.loading || form.$invalid" ng-if="editing && form.get.status === entryStatus.PUBLISH">
           UPDATE
         </button>
 
@@ -30,12 +31,15 @@
       </div>
 
       <!-- Draft mode -->
-      <div ng-show="form.get.status === 0"
+      <div ng-show="form.get.status === entryStatus.DRAFT"
         class="editor-draft-mode animated"
         uib-tooltip="{{ 'DRAFT_MODE_TOOLTIP' | translate }}"
         tooltip-placement="top"
         ng-click="sidebar = true"
-        ng-class="{'fadeInUp': form.get.status === 0, 'fadeOutDown': form.get.status === 1}">
+        ng-class="{
+          'fadeInUp': form.get.status === entryStatus.DRAFT,
+          'fadeOutDown': form.get.status === entryStatus.PUBLISH
+        }">
         <i class="fa fa-pencil fa-fw"></i> {{ 'DRAFT_MODE' | translate }}
       </div>
 
@@ -175,8 +179,12 @@
                 ng-if="!editing"
                 ng-disabled="form.loading || form.$invalid" translate>SUBMIT</button>
               <!-- Editing buttons -->
+              <button type="button" ng-click="discardChanges()" ng-if="postChanged"
+                class="btn btn-danger btn-block s-mar-bottom-soft" ng-disabled="form.loading" translate>
+                DISCARD_CHANGES
+              </button>
               <div class="btn-group stack" ng-if="editing">
-                <button class="btn btn-primary" ng-disabled="form.loading || form.$invalid">UPDATE</button>
+                <button class="btn btn-primary t-upp" ng-disabled="form.loading || form.$invalid" translate>UPDATE</button>
                 <button class="btn btn-default" ng-disabled="form.loading || form.$invalid"
                   title="{{ 'DELETE' | translate }}" type="button" ng-click="form.remove()">
                   <i class="fa fa-trash"></i>
