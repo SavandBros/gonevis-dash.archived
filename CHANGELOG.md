@@ -2,6 +2,7 @@
 ========
 
 - Resolved #910: Remember last site user visited.
+- Resolved #851: Add Auto-Save mode for posts.
 
 
 2018.7.2
