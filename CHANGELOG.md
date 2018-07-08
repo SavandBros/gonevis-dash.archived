@@ -3,6 +3,7 @@
 
 - Resolved #910: Remember last site user visited.
 - Resolved #851: Add Auto-Save mode for posts.
+- Resolved #918: Set commenting enabled by default when creating new post.
 
 
 2018.7.2
