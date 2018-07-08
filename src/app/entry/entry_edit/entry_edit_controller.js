@@ -143,14 +143,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       }, 1000);
     }
 
-    // $scope.options = {
-    //   toolbar: [
-    //     ['bold', 'italic', 'underline', 'strike'],
-    //     ['link', 'blockquote', 'code-block', { 'list': 'bullet' }],
-    //     [{ 'header': [1, 2, 3, 4, 5, 6, "false"] }],
-    //     [{ 'direction': 'rtl' }, { 'align': [] }]
-    //   ]
-    // };
+    $scope.options = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['link', 'blockquote', 'code-block', { 'list': 'bullet' }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'direction': 'rtl' }, { 'align': [] }],
+        ['clean'],
+      ]
+    };
   }
 
   /**
