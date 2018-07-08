@@ -25,7 +25,7 @@
         <h3 ng-bind-html="comment.get.comment"></h3>
         <div class="c-grey small s-mar-top-soft">
           <span translate>TO</span>
-          <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })" data-dismiss="modal">
+          <a ui-sref="dash.entry-edit({ entryId: comment.get.commented_object_minimal_data.id })">
             {{ comment.get.commented_object_minimal_data.title }}
           </a>
         </div>
@@ -47,7 +47,7 @@
       <div class="modal-footer">
         <!-- Comment status -->
         <button class="btn btn-sm btn-primary pull-left s-mar-right-soft"
-          ng-click="comment.reply(form.comment)" ng-disabled="comment.isReplying || form.$invalid">
+          ng-click="comment.reply(form.comment)" ng-disabled="comment.isLoading || form.$invalid">
           {{ 'REPLY' | translate }}
         </button>
         <div class="dropdown options s-pad-no pull-left">
@@ -64,7 +64,7 @@
           </ul>
         </div>
         <!-- Delete comment -->
-        <button class="btn btn-sm btn-danger pull-right" ng-click="comment.remove()" data-dismiss="modal">
+        <button class="btn btn-sm btn-danger pull-right" ng-click="comment.remove()" ng-disabled="comment.isLoading">
           <i class="fa fa-trash"></i>
         </button>
       </div>
