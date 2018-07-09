@@ -3,6 +3,7 @@
 
 - Resolved #910: Remember last site user visited.
 - Resolved #851: Add Auto-Save mode for posts.
+- Resolved #924: Close comment modal after reply.
 
 
 2018.7.2
