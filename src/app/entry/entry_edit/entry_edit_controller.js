@@ -125,8 +125,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       $scope.editing = false;
       $scope.form = new Entry({
         content: "<p><br></p>", // Start with an empty paragraph (for editor)
-        status: $scope.statuses[0].id,
-        format: Codekit.entryFormats[0].text.id
+        status: $scope.entryStatus.DRAFT, // Post is set to draft by default
+        format: Codekit.entryFormats[0].text.id,
+        comment_enabled: true // Commenting is enabled by default
       });
       $scope.form.get.is_page = $stateParams.isPage;
 
