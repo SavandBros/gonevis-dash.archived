@@ -1,3 +1,8 @@
+2018.7.16
+========
+
+- Fixes #399: Filter image selection for images only via backend.
+
 2018.7.9
 ========
 
