@@ -88,7 +88,6 @@ function DolphinService($rootScope, ModalsService) {
    * @param {string} source Source of use (to check later)
    */
   function viewSelection(source) {
-    $rootScope.selectionMode = true;
     ModalsService.open("dolphinSelection", "DolphinController", {
       source: source
     });
