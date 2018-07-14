@@ -161,7 +161,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
     let toolbar = editor.getModule('toolbar');
     toolbar.addHandler('image', () => {
-      let range = editor.getSelection();
+      const range = editor.getSelection();
 
       // If user is in the editor
       if (range) {
