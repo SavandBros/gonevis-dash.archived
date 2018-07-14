@@ -125,7 +125,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     } else {
       $scope.editing = false;
       $scope.form = new Entry({
-        content: "<p><br></p>", // Start with an empty paragraph (for editor)
+        content: "",
         status: $scope.entryStatus.DRAFT, // Post is set to draft by default
         format: Codekit.entryFormats[0].text.id,
         comment_enabled: true // Commenting is enabled by default
