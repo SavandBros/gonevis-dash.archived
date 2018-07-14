@@ -8,18 +8,19 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
   var site = AuthService.getCurrentSite();
 
   function constructor() {
+    $scope.fileSelection = !$state.includes("dash.dolphin");
     $scope.view = localStorageService.get("dolphinView") || "list";
     $scope.dolphins = [];
     $scope.dolphinForm = {};
     $scope.search = Search;
-
-    if ($rootScope.selectionMode) {
-      $scope.currentTab = "dolphin";
-    }
-
     var payload = {
       site: site
     };
+
+    if ($scope.fileSelection) {
+      $scope.currentTab = "dolphin";
+      payload.ext = "image";
+    }
     API.Dolphins.get(payload,
       function(data) {
         angular.forEach(data.results, function(data) {
@@ -172,10 +173,8 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
    * @param {Dolphin} dolphin
    */
   $scope.action = function(dolphin) {
-    if ($rootScope.selectionMode) {
-      $rootScope.$broadcast("gonevisDash.Dolphin:select", dolphin, source);
-      $rootScope.selectionMode = false;
-      return;
+    if ($scope.fileSelection) {
+      return $rootScope.$broadcast("gonevisDash.Dolphin:select", dolphin, source);
     }
     dolphin.view();
   };
@@ -221,7 +220,7 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
   });
 
   // If current state is dolphin view
-  if ($state.includes("dash.dolphin")) {
+  if (!$scope.fileSelection) {
     let dropElement = angular.element(".dolphin-drop");
 
     angular.element(window.document).bind({

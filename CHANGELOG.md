@@ -3,6 +3,7 @@
 
 - Resolved #922: Change to a new editor.
 - Fixed #877: Fix uploading images in editor via Firefox.
+- Fixes #399: Filter image selection for images only via backend.
 
 
 2018.7.9
