@@ -147,13 +147,31 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     $scope.options = {
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'],
-        ['link', 'blockquote', 'code-block', { 'list': 'bullet' }],
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
+        [{ 'header': [1, 2, 3, false] }],
         [{ 'direction': 'rtl' }, { 'align': [] }],
-        ['clean'],
+        ['clean']
       ]
     };
   }
+
+  $scope.onEditorInit = function(editor) {
+    $scope.editor = editor;
+    $scope.cursorIndex = 0;
+
+    let toolbar = editor.getModule('toolbar');
+    toolbar.addHandler('image', () => {
+      let range = editor.getSelection();
+
+      // If user is in the editor
+      if (range) {
+        $scope.cursorIndex = range.index + range.length;
+      } else {
+        $scope.cursorIndex = 0;
+      }
+      $scope.dolphinService.viewSelection('editorAddImage');
+    });
+  };
 
   /**
    * @desc query tags
@@ -211,11 +229,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         payload.tag_ids.push(tag.id);
       }
     });
-
-    // Remove image placeholder
-    payload.content = payload.content
-      .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
-      .replace(/<p><\/p>/g, "");
 
     // Check if there are tags that doesn't exit
     if (noneTagsCount) {
@@ -360,6 +373,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
     // Inserting an image to editor
     else if (source === "editorAddImage") {
+      $scope.editor.insertEmbed($scope.cursorIndex, 'image', dolphin.get.file);
       // If has no cover image, set this image as cover image
       if (!$scope.form.hasCoverImage()) {
         // Store to upload
