@@ -2,6 +2,7 @@
 ========
 
 - Fixes #399: Filter image selection for images only via backend.
+- Resolved #919: Add color picker for navigation color field.
 
 2018.7.9
 ========
