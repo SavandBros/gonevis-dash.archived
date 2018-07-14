@@ -34,7 +34,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
     /**
      * @type {boolean}
      */
-    this.isReplying = false;
+    this.isLoading = false;
 
     /**
      * @type {number}
@@ -45,10 +45,14 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
      * @desc Delete comment, notify and broadcast for controllers to use.
      */
     this.remove = function() {
+      this.isLoading = true;
+
       API.Comment.delete({
           comment_id: this.get.id
         },
         function(data) {
+          ModalsService.close("comment");
+          self.isLoading = false;
           $translate(["DONE", "COMMENT_DELETED"]).then(function(translations) {
             toaster.success(translations.DONE, translations.COMMENT_DELETED);
           });
@@ -61,6 +65,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
           });
         },
         function(data) {
+          self.isLoading = false;
           $translate(["ERROR", "COMMENT_DELETE_ERROR"]).then(function(translations) {
             toaster.error(translations.ERROR, translations.COMMENT_DELETE_ERROR);
           });
@@ -79,7 +84,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
      */
     this.reply = function(comment) {
 
-      this.isReplying = true;
+      this.isLoading = true;
 
       var payload = {
         object_type: this.objectType,
@@ -88,8 +93,9 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
       };
       API.Comments.save(payload,
         function(data) {
-          self.isReplying = false;
+          self.isLoading = false;
           $rootScope.$broadcast("gonevisDash.Comment:reply", data);
+          ModalsService.close("comment");
         }
       );
     };
@@ -126,7 +132,7 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
      */
     this.view = function() {
       ModalsService.open("comment", "CommentModalController", {
-        comment: this
+        comment: self
       });
     };
 

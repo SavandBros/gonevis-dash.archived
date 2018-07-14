@@ -555,11 +555,10 @@ md-toast {
 
 .dolphin .fa {
     opacity: 0.6;
-    padding: 72px 0;
+    padding: 85px 0;
     font-size: 6em;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
-
 
 .dolphin-wrapper:hover .caption,
 .dolphin-wrapper:hover .options {
@@ -645,7 +644,7 @@ md-toast {
 }
 
 .file-overlay.image .wrapper {
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content:hover .file-overlay.image {
@@ -675,157 +674,12 @@ md-toast {
 }
 
 
-/* Medium editor */
-
-[medium-editor] {
-    min-height: 500px !important;
-    padding: 10px;
-    padding-bottom: 50px;
-}
-
-[medium-editor]>*:first-of-type {
-    margin-top: 0;
-}
-
-
-/* Medium editor placeholder */
-
-.medium-editor-placeholder:after {
-    font-style: normal;
-}
-
-
-/* Medium editor toolbar */
-
-.medium-editor-toolbar {
-    visibility: visible;
-    box-shadow: none;
-    background: #fff;
-    border: none;
-    border-bottom: 1px solid #e7e7e7;
-    border-radius: 0;
-    position: fixed;
-    z-index: 9;
-    margin: 0 !important;
-    padding: 0 !important;
-    top: 0 !important;
-    left: 60px !important;
-    width: calc(100% - 60px);
-    transition: all 0.2s ease-in-out;
-}
-
-#content:not(.full-content)~.medium-editor-toolbar {
-    left: 250px !important;
-    width: calc(100% - 250px) !important;
-}
-
-.medium-editor-toolbar-actions {
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    position: initial;
-    width: 1170px;
-    padding: 0;
-    display: block !important;
-}
-
-@media (min-width: 768px) {
-    .medium-editor-toolbar-actions {
-        width: 750px;
-    }
-}
-
-@media (min-width: 992px) {
-    .medium-editor-toolbar-actions {
-        width: 970px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .medium-editor-toolbar-actions {
-        width: 1170px;
-    }
-}
-
-.medium-editor-toolbar li {
-    width: initial;
-}
-
-.medium-editor-action {
-    background: none !important;
-    color: #777 !important;
-    border-radius: 0 !important;
-    border: none !important;
-    border-bottom: 2px solid transparent !important;
-    box-shadow: none !important;
-    height: 62px !important;
-    min-width: initial !important;
-    padding-bottom: 10px !important;
-    margin-bottom: -1px !important;
-    font-weight: bold;
-    padding: 0 12px !important;
-    line-height: 64px !important;
-}
-
-.medium-editor-toolbar-active .medium-editor-action {
-    opacity: 1;
-}
-
-.medium-editor-toolbar-active .medium-editor-action:hover,
-.medium-editor-toolbar-active .medium-editor-action.active {
-    background: rgba(0, 0, 0, 0.05) !important;
-}
-
-.medium-editor-toolbar-active .medium-editor-action.active {
-    color: #222 !important;
-    border-color: #d17100 !important;
-}
-
-.medium-editor-action-bold,
-.medium-editor-action-anchor,
-.medium-editor-action-justifyLeft,
-.medium-editor-button-last {
-    margin-left: 25px !important;
-}
-
-.medium-editor-toolbar li .medium-editor-action-pre {
-    font-size: 14px !important;
-}
-
-.medium-editor-toolbar-form {
-    position: fixed;
-    top: 20%;
-    left: calc(50% - 194px);
-    overflow: hidden;
-    background: #e7e7e7;
-    border: 2px solid #e7e7e7;
-    width: 388px;
-    border-radius: 0;
-    box-shadow: 0 0 0 100000px rgba(0, 0, 0, 0.5);
-}
-
-.medium-editor-toolbar-form .medium-editor-toolbar-input {
-    background: #fff !important;
-    padding: 10px 15px;
-    height: initial;
-    color: #333;
-    width: 310px;
-}
-
-.medium-editor-toolbar-form a {
-    position: relative;
-    top: 4px;
-    color: #666;
-}
-
-
 /* Editor */
 
 .editor {
     font-size: 1.4em;
     position: relative;
-    z-index: 9;
+    z-index: 1;
 }
 
 .editor #title {
@@ -1170,7 +1024,7 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     }
 }
 
-.lights.off .modal-header-clickable {
+.lights.off .modal:not(#dolphinSelection) .modal-header-clickable {
     background: #1f1f1f;
     border-bottom: 1px solid #070707;
     color: #ddd;
@@ -1181,16 +1035,16 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
     cursor: pointer;
 }
 
-.lights.off .modal-header-clickable:hover {
+.lights.off .modal:not(#dolphinSelection) .modal-header-clickable:hover {
     background: #111;
     color: #fff;
 }
 
-.lights.off .modal-content {
+.lights.off .modal:not(#dolphinSelection) .modal-content {
     background: #1f1f1f;
 }
 
-.lights.off .modal-content hr {
+.lights.off .modal:not(#dolphinSelection) .modal-content hr {
     border-color: rgba(255, 255, 255, 0.1);
 }
 

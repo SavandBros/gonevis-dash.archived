@@ -47,7 +47,7 @@
     <ul class="dropdown-menu">
       <!-- Sites -->
       <li ng-repeat="site in user.getSites()" ng-class="{active: param.s == $index}">
-        <a ui-sref="dash.main({s: $index})">{{ site.title }}</a>
+        <a ui-sref="dash.main({s: $index})" ng-click="setSite($index)">{{ site.title }}</a>
       </li>
       <li class="divider"></li>
       <!-- New blog -->

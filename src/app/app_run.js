@@ -36,90 +36,17 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
        * @desc Sidebar status
        * @type {boolean}
        */
-      sidebar: true
+      sidebar: true,
+
+      /**
+       * Last selected site
+       * @type {number}
+       */
+      lastSite: 0
     };
   }
 
   $rootScope.auth = AuthService;
-
-  /**
-   * @desc Medium editor options
-   * @type {object}
-   */
-  $rootScope.editorOptions = {
-    activeButtonClass: "active",
-    toolbar: {
-      static: true,
-      sticky: true,
-      buttonLabels: "fontawesome",
-      updateOnEmptySelection: true,
-      buttons: [{
-        name: "h1",
-        aria: "Heading 1",
-        contentDefault: "H1"
-      }, {
-        name: "h2",
-        aria: "Heading 2",
-        contentDefault: "H2"
-      }, {
-        name: "h3",
-        aria: "Heading 3",
-        contentDefault: "H3"
-      }, {
-        name: "bold",
-        aria: "Bold",
-        contentDefault: "B"
-      }, {
-        name: "italic",
-        aria: "Italic",
-        contentDefault: "<em>I</em>"
-      }, {
-        name: "underline",
-        aria: "Underline",
-        contentDefault: "<u>U</u>"
-      }, {
-        name: "strikethrough",
-        aria: "Strikethrough",
-        contentDefault: "<s>S</s>"
-      }, {
-        name: "anchor",
-        aria: "Link",
-        contentDefault: "<i class='fa fa-link'></i>"
-      }, {
-        name: "image",
-        aria: "Insert image",
-        contentDefault: "<i class='fa fa-image'></i>"
-      }, {
-        name: "quote",
-        aria: "Block quote",
-        contentDefault: "<i class='fa fa-quote-left'></i>"
-      }, {
-        name: "pre",
-        aria: "Preformatted text",
-        contentDefault: "<i class='fa fa-code'></i>"
-      }, {
-        name: "unorderedlist",
-        aria: "List (unordered)",
-        contentDefault: "<i class='fa fa-list-ul'></i>"
-      }, {
-        name: "justifyLeft",
-        aria: "Left align",
-        contentDefault: "<i class='fa fa-align-left'></i>"
-      }, {
-        name: "justifyCenter",
-        aria: "Center align",
-        contentDefault: "<i class='fa fa-align-center'></i>"
-      }, {
-        name: "justifyRight",
-        aria: "Right align",
-        contentDefault: "<i class='fa fa-align-right'></i>"
-      }, {
-        name: "removeFormat",
-        aria: "Clear formatting",
-        contentDefault: "<i class='fa fa-ban'><i>",
-      }]
-    }
-  };
 
   // Set user tracking info
   AuthService.setTrackingInfo();
@@ -239,42 +166,6 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
   });
 
   /**
-   * @event gonevisDash.Dolphin:select
-   * @desc Dolphin selection callback, depends on state @editor
-   *
-   * @param {Event} event
-   * @param {Dolphin} dolphin
-   * @param {string} source
-   */
-  $rootScope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
-    if ($state.current.editor && source === "editorAddImage") {
-      var img = angular.element("img[data-selection=true]");
-      img.attr("src", dolphin.get.file);
-      img.attr("alt", dolphin.get.meta_data.name);
-      img.removeAttr("data-selection");
-    }
-  });
-
-  /**
-   * @event goNevis.ModalsService.close
-   * @desc On modal close
-   *
-   * @param {Event} event
-   * @param {string} template
-   */
-  $rootScope.$on("goNevis.ModalsService.close", function (event, template) {
-    if (template === "dolphinSelection") {
-      // Check editor for images without source and remove them
-      angular.forEach(angular.element("[medium-editor] img"), function (element) {
-        var img = angular.element(element);
-        if (typeof img.attr("src") === "undefined") {
-          img.remove();
-        }
-      });
-    }
-  });
-
-  /**
    * @event $rootScope.set
    * @desc Update settings to local storage
    */
@@ -296,35 +187,6 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
       // Sidebar handler
       if (el.hasClass("preIn")) {
         angular.element("[ng-click='sidebar = false']").trigger("click");
-      }
-    }
-  });
-
-  /**
-   * @desc Change callback
-   *
-   * @param {Event} event
-   */
-  angular.element("*").on("DOMSubtreeModified", function (event) {
-    if ($state.current.editor) {
-      var el = angular.element(event.target);
-
-      // Editor handler
-      if (el.parents("[medium-editor]").length) {
-        var isInChild = el.children("img").length;
-        // Image upload handler
-        if (el.prop("tagName") === "IMG" || isInChild) {
-          // Get the img
-          var img = isInChild ? el.children("img") : el;
-          // Already handling or handled
-          if (img.attr("data-selection") === "true" || typeof img.attr("alt") !== "undefined") {
-            return;
-          }
-          // Show file selection modal
-          DolphinService.viewSelection("editorAddImage");
-          // Set to uploading
-          img.attr("data-selection", "true");
-        }
       }
     }
   });

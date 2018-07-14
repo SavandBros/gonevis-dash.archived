@@ -1,3 +1,21 @@
+2018.7.16
+========
+
+- Resolved #922: Change to a new editor.
+- Fixed #877: Fix uploading images in editor via Firefox.
+- Fixes #399: Filter image selection for images only via backend.
+
+
+2018.7.9
+========
+
+- Resolved #910: Remember last site user visited.
+- Resolved #851: Add Auto-Save mode for posts.
+- Fixed #918: Fix commenting enabled checkbox default state.
+- Resolved #924: Close comment modal after reply
+- Resolved #928: Fix loadmore button for file selection modal.
+
+
 2018.7.2
 =========
 

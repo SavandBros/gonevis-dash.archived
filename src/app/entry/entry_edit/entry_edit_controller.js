@@ -1,15 +1,45 @@
 "use strict";
+import EntryStatus from "../status";
 
-require('medium-editor');
-require('../../basement/medium_editor/medium_editor');
+require('ng-quill');
+require('quill/dist/quill.snow.css');
+require('./editor.css');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate) {
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval) {
   var payload;
   var tagsToCreate = [];
   var noneTagsCount = 0;
+  let oldData = {};
+  let interval;
+  let autoSave;
+
+  /**
+   * @desc Auto-Save
+   */
+  function initAutoSave() {
+    // Store old data
+    oldData.form = angular.copy($scope.form.get);
+    oldData.tags = angular.copy($scope.tagsToSubmit);
+
+    // Auto save every 10 seconds
+    interval = $interval(() => {
+      // Check if already updating
+      if (!$scope.form.loading) {
+        // Check if post has title
+        if ($scope.form.get.title) {
+          // Check if entry has an unsaved changes
+          if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
+            autoSave = true;
+            $scope.save($scope.form);
+          }
+        }
+      }
+    }, 10000);
+  }
 
   function constructor() {
+    $scope.entryStatus = new EntryStatus();
     $scope.tags = [];
     $scope.dolphinService = DolphinService;
     $scope.tagsToSubmit = [];
@@ -49,14 +79,25 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           entry_id: $scope.form.get.id
         },
         function (data) {
+          // Store original data
+          oldData.originalPost = angular.copy(data);
+          // If unsaved changes
+          if (data.entrydraft) {
+            $scope.postChanged = true;
+            data = data.entrydraft;
+
+            $translate(["LOADING_DRAFT", "UNPUBLISHED_CHANGES"]).then(function (translations) {
+              toaster.warning(translations.LOADING_DRAFT, translations.UNPUBLISHED_CHANGES, 10000);
+            });
+          }
+
           if (data.start_publication) {
             data.start_publication = new Date(data.start_publication);
           }
-          if (data.end_publication) {
-            data.end_publication = new Date(data.end_publication);
-          }
+
           // Get entry data
           $scope.form.get = data;
+          $scope.form.get.id = $stateParams.entryId;
           $scope.form.url = $scope.form.getUrl();
           Codekit.setTitle($scope.form.get.title);
 
@@ -70,10 +111,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
             });
             $scope.tagsToSubmit.push(tag.get);
           });
+
+          // Initial auto-save
+          initAutoSave();
         },
         function () {
           $state.go("dash.entry-edit", { entryId: null });
-          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function(translations) {
+          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function (translations) {
             toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
           });
         }
@@ -81,11 +125,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     } else {
       $scope.editing = false;
       $scope.form = new Entry({
-        content: "<p><br></p>", // Start with an empty paragraph (for editor)
-        status: $scope.statuses[0].id,
-        format: Codekit.entryFormats[0].text.id
+        content: "",
+        status: $scope.entryStatus.DRAFT, // Post is set to draft by default
+        format: Codekit.entryFormats[0].text.id,
+        comment_enabled: true // Commenting is enabled by default
       });
       $scope.form.get.is_page = $stateParams.isPage;
+
+      // Initial auto-save
+      initAutoSave();
     }
 
     // Add space from top for toolbar
@@ -96,7 +144,35 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         );
       }, 1000);
     }
+
+    $scope.options = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
+        [{ 'header': [1, 2, 3, false] }],
+        [{ 'direction': 'rtl' }, { 'align': [] }],
+        ['clean']
+      ]
+    };
   }
+
+  $scope.onEditorInit = function(editor) {
+    $scope.editor = editor;
+    $scope.cursorIndex = 0;
+
+    let toolbar = editor.getModule('toolbar');
+    toolbar.addHandler('image', () => {
+      const range = editor.getSelection();
+
+      // If user is in the editor
+      if (range) {
+        $scope.cursorIndex = range.index + range.length;
+      } else {
+        $scope.cursorIndex = 0;
+      }
+      $scope.dolphinService.viewSelection('editorAddImage');
+    });
+  };
 
   /**
    * @desc query tags
@@ -132,11 +208,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     form.get.site = AuthService.getCurrentSite();
     form.get.user = AuthService.getAuthenticatedUser(false);
 
-    payload = form.get;
+    payload = angular.copy(form.get);
 
     payload.tag_ids = [];
     payload.status = status || payload.status;
-
 
     angular.forEach($scope.tagsToSubmit, function (tag) {
       // Check if tags have ids
@@ -155,11 +230,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         payload.tag_ids.push(tag.id);
       }
     });
-
-    // Remove image placeholder
-    payload.content = payload.content
-      .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
-      .replace(/<p><\/p>/g, "");
 
     // Check if there are tags that doesn't exit
     if (noneTagsCount) {
@@ -180,19 +250,40 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   $scope.updateEntry = function (form) {
+    // If auto-saving mode, remove status property from payload
+    if (autoSave) {
+      delete payload.status;
+    }
+
     API.Entry.put({
         entry_id: payload.id
       }, payload,
       function (data) {
-        form.get = data;
-        form.url = $scope.form.getUrl();
-        Codekit.setTitle(form.get.title);
+        if (!autoSave) {
+          $scope.postChanged = false;
+          if (data.start_publication) {
+            data.start_publication = new Date(data.start_publication);
+          }
+          form.get = data;
 
-        $translate(["DONE", "ENTRY_UPDATED"], {"title": payload.title}).then(function (translations) {
-          toaster.info(translations.DONE, translations.ENTRY_UPDATED);
-        });
+          $translate(["DONE", "ENTRY_UPDATED"], { "title": payload.title }).then(function (translations) {
+            toaster.info(translations.DONE, translations.ENTRY_UPDATED);
+          });
+
+          oldData.originalPost = angular.copy(data);
+        } else {
+          autoSave = false;
+          $scope.postChanged = true;
+        }
+
         form.loading = false;
         form.errors = null;
+        Codekit.setTitle(form.get.title);
+        form.url = $scope.form.getUrl();
+
+        // Restore old data
+        oldData.form = angular.copy(form.get);
+        oldData.tags = angular.copy($scope.tagsToSubmit);
       },
       function (data) {
         $translate(["ERROR", "ENTRY_UPDATE_ERROR"]).then(function (translations) {
@@ -205,10 +296,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   $scope.addEntry = function (form) {
+    // If auto-saving mode, set status to draft
+    if (autoSave) {
+      payload.status = $scope.entryStatus.DRAFT;
+    }
+
     API.EntryAdd.save(payload,
       function (data) {
         $scope.form.cache(true);
-        $translate(["DONE", "ENTRY_CREATED_API"], {"title": payload.title}).then(function (translations) {
+        $translate(["DONE", "ENTRY_CREATED_API"], { "title": payload.title }).then(function (translations) {
           toaster.success(translations.DONE, translations.ENTRY_CREATED_API);
         });
         $state.go("dash.entry-edit", {
@@ -225,6 +321,29 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     );
   };
 
+  $scope.discardChanges = function () {
+    if (confirm($translate.instant('DISCARD_CHANGES_PROMPT')) === false) {
+      return;
+    }
+
+    let tags = [];
+    // Get published post tags
+    angular.forEach(oldData.originalPost.tags, function (data) {
+      var tag = new Tag({
+        slug: data.slug,
+        id: data.id,
+        name: data.name,
+        count: data.tagged_items_count
+      });
+      tags.push(tag.get);
+    });
+
+    $scope.tagsToSubmit = tags;
+    $scope.form.get = oldData.originalPost;
+    $scope.form.get.entrydraft = null;
+    $scope.save($scope.form);
+  };
+
   /**
    * @desc Image selection callback
    *
@@ -234,7 +353,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    */
   $scope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
     // Cover image
-    if (source ===/** @type {string} */ "entryCover") {
+    if (source === /** @type {string} */ "entryCover") {
       // Store ID to uplodad
       $scope.form.get.cover_image = dolphin ? dolphin.get.id : null;
       // If selected a file
@@ -255,8 +374,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
     // Inserting an image to editor
     else if (source === "editorAddImage") {
-      // Get the modified content (inserted image)
-      $scope.form.get.content = angular.element("[medium-editor][name=editor]").html();
+      $scope.editor.insertEmbed($scope.cursorIndex, 'image', dolphin.get.file);
       // If has no cover image, set this image as cover image
       if (!$scope.form.hasCoverImage()) {
         // Store to upload
@@ -330,6 +448,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
   });
 
+  /**
+   * @desc Cancel interval on state change
+   */
+  $scope.$on("$destroy", function () {
+    $interval.cancel(interval);
+  });
 
   constructor();
 }

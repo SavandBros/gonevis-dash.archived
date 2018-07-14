@@ -19,12 +19,12 @@ const deps = [
   'angular-loading-bar',
   'toaster',
   'LocalStorageModule',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
 ];
 
 const MODULE_NAME = 'gonevisDash';
 const app = angular.module(MODULE_NAME, deps)
-  .constant('Client', {version: 4})
+  .constant('Client', { version: 5 })
   .constant('Utils', {
     texts: {
       noPermission: 'You do not have permission to perform this action.',
