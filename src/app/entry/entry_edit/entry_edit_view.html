@@ -54,8 +54,9 @@
           <small class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
           <br>
           <!-- Editor (description) -->
-          <div medium-editor ng-model="form.get.content"
-            data-placeholder="{{ 'CONTENT' | translate }}" name="editor" bind-options="editorOptions"></div>
+          <ng-quill-editor theme="snow" modules="options" bounds="'self'" ng-model="form.get.content"
+            placeholder="{{ 'CONTENT' | translate }}" on-editor-created="onEditorInit(editor)">
+          </ng-quill-editor>
           <!-- Entry formats -->
           <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
             <!-- Image -->

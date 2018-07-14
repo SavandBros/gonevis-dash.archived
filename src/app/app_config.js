@@ -5,7 +5,7 @@ import Raven from "raven-js";
 
 
 const Config = function($httpProvider, $resourceProvider, $cookiesProvider, $qProvider, $provide,
-  cfpLoadingBarProvider, ENV, $translateProvider) {
+  cfpLoadingBarProvider, ENV, $translateProvider, $ocLazyLoadProvider) {
 
   // Http
   $httpProvider.interceptors.push(AuthInterceptorService);
@@ -53,6 +53,12 @@ const Config = function($httpProvider, $resourceProvider, $cookiesProvider, $qPr
     prefix: "/languages/",
     suffix: ".json"
   });
+
+  $ocLazyLoadProvider.config({
+    modules: [{
+      name: "ngQuill",
+    }]
+  });
 };
 
 angular.module("gonevisDash").config(Config);
@@ -64,5 +70,6 @@ Config.$inject = [
   "$provide",
   "cfpLoadingBarProvider",
   "ENV",
-  "$translateProvider"
+  "$translateProvider",
+  "$ocLazyLoadProvider",
 ];

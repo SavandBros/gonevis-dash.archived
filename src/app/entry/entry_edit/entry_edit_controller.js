@@ -1,9 +1,9 @@
 "use strict";
-
 import EntryStatus from "../status";
 
-require('medium-editor');
-require('../../basement/medium_editor/medium_editor');
+require('ng-quill');
+require('quill/dist/quill.snow.css');
+require('./editor.css');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval) {
@@ -125,7 +125,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     } else {
       $scope.editing = false;
       $scope.form = new Entry({
-        content: "<p><br></p>", // Start with an empty paragraph (for editor)
+        content: "",
         status: $scope.entryStatus.DRAFT, // Post is set to draft by default
         format: Codekit.entryFormats[0].text.id,
         comment_enabled: true // Commenting is enabled by default
@@ -144,7 +144,35 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         );
       }, 1000);
     }
+
+    $scope.options = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
+        [{ 'header': [1, 2, 3, false] }],
+        [{ 'direction': 'rtl' }, { 'align': [] }],
+        ['clean']
+      ]
+    };
   }
+
+  $scope.onEditorInit = function(editor) {
+    $scope.editor = editor;
+    $scope.cursorIndex = 0;
+
+    let toolbar = editor.getModule('toolbar');
+    toolbar.addHandler('image', () => {
+      const range = editor.getSelection();
+
+      // If user is in the editor
+      if (range) {
+        $scope.cursorIndex = range.index + range.length;
+      } else {
+        $scope.cursorIndex = 0;
+      }
+      $scope.dolphinService.viewSelection('editorAddImage');
+    });
+  };
 
   /**
    * @desc query tags
@@ -202,11 +230,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         payload.tag_ids.push(tag.id);
       }
     });
-
-    // Remove image placeholder
-    payload.content = payload.content
-      .replace(/<p><img src="assets\/img\/avatar.png"><\/p>/g, "")
-      .replace(/<p><\/p>/g, "");
 
     // Check if there are tags that doesn't exit
     if (noneTagsCount) {
@@ -351,8 +374,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
     // Inserting an image to editor
     else if (source === "editorAddImage") {
-      // Get the modified content (inserted image)
-      $scope.form.get.content = angular.element("[medium-editor][name=editor]").html();
+      $scope.editor.insertEmbed($scope.cursorIndex, 'image', dolphin.get.file);
       // If has no cover image, set this image as cover image
       if (!$scope.form.hasCoverImage()) {
         // Store to upload
