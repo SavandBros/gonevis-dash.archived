@@ -34,5 +34,3 @@ require('angular-xeditable/dist/css/xeditable.css');
 require('ng-tags-input/build/ng-tags-input.css');
 require('animate.css/animate.css');
 require('angularjs-toaster/toaster.css');
-require('medium-editor/dist/css/medium-editor.css');
-require('medium-editor/dist/css/themes/default.css');
