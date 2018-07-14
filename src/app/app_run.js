@@ -166,23 +166,6 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
   });
 
   /**
-   * @event gonevisDash.Dolphin:select
-   * @desc Dolphin selection callback, depends on state @editor
-   *
-   * @param {Event} event
-   * @param {Dolphin} dolphin
-   * @param {string} source
-   */
-  $rootScope.$on("gonevisDash.Dolphin:select", function (event, dolphin, source) {
-    if ($state.current.editor && source === "editorAddImage") {
-      var img = angular.element("img[data-selection=true]");
-      img.attr("src", dolphin.get.file);
-      img.attr("alt", dolphin.get.meta_data.name);
-      img.removeAttr("data-selection");
-    }
-  });
-
-  /**
    * @event $rootScope.set
    * @desc Update settings to local storage
    */
