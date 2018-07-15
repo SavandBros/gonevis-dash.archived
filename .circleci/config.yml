@@ -58,7 +58,9 @@ jobs:
         key: dependency-cache-{{ checksum "package.json" }}
     - run:
         name: Deploying to Production
-        command: './scripts/deploy.sh'
+        command: |
+          sudo apt -y install rsync
+          ./scripts/deploy.sh
 
 workflows:
   version: 2
