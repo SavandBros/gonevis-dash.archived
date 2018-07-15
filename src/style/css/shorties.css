@@ -138,6 +138,10 @@
     padding-left: 0;
 }
 
+.s-pad-right-no {
+    padding-right: 0;
+}
+
 .s-pad-left-soft {
     padding-left: 15px;
 }
