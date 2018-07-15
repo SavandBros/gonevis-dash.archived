@@ -1,9 +1,11 @@
-2018.7.16
+2018.8.1
 ========
 
 - Resolved #922: Change to a new editor.
 - Fixed #877: Fix uploading images in editor via Firefox.
-- Fixes #399: Filter image selection for images only via backend.
+- Fixed #399: Filter image selection for images only via backend.
+- Resolved #919: Add color picker for navigation color field.
+- Fixed #934: Install `rsync` and check for its binary in CI. 
 
 
 2018.7.9
