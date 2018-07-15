@@ -969,6 +969,14 @@ pre {
     width: 35px;
 }
 
+.default-color {
+    border-radius: 0 !important;
+    width: 100%;
+    line-height: 20px;
+    border-right: 0;
+    border-left: 0;
+}
+
 
 /* White Spaces */
 
