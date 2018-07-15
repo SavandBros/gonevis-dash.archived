@@ -1,4 +1,4 @@
-2018.7.16
+2018.8.1
 ========
 
 - Resolved #922: Change to a new editor.
