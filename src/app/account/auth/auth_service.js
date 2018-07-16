@@ -12,9 +12,9 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   var self = this;
 
   /**
-   * @private
+   * @const
    */
-  let userSiteRole = new UserSiteRole();
+  const userSiteRole = new UserSiteRole();
 
   /**
    * @desc Return the currently authenticated user
