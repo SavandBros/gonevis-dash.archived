@@ -1,10 +1,13 @@
 <!-- Add button -->
-<button type="button" class="btn btn-primary btn-corner" ng-click="create()">
+<button type="button" class="btn btn-primary btn-corner" ng-click="create()" ng-if="!isRestrict">
   <i class="fa fa-plus"></i>
 </button>
 
+<!-- Restricted page -->
+<restricted-page ng-if="isRestrict"></restricted-page>
+
 <!-- Content -->
-<div class="container container-light pad-top">
+<div class="container container-light pad-top" ng-if="!isRestrict">
   <div class="col-md-12">
     <!-- Main -->
     <div class="panel panel-default s-box form-inline animated fadeIn" ng-if="initialled">
