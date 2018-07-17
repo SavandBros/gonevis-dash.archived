@@ -212,3 +212,51 @@
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
     color: #d17100 !important;
 }
+
+.editor {
+    font-size: 1.4em;
+    position: relative;
+    z-index: 1;
+}
+
+.editor #title {
+    box-shadow: none !important;
+    background: transparent !important;
+    border: none;
+    font-size: 1.5em;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+.ql-editor.ql-blank::before {
+    color: #888888;
+}
+
+.ql-editor {
+    font-size: 1.4em;
+}
+
+.ql-editor p {
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.ql-editor img {
+    max-width: 100%;
+    background: #eee;
+}
+
+.lights.off .ql-editor img {
+    background: #222;
+}
+
+.ql-editor li+li {
+    margin-top: 0.25em;
+}

@@ -27,7 +27,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       // Check if already updating
       if (!$scope.form.loading) {
         // Check if post has title
-        if ($scope.form.get.title) {
+        if ($scope.form.get.title && $scope.form.get.content) {
           // Check if entry has an unsaved changes
           if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
             autoSave = true;
@@ -158,6 +158,14 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
   $scope.onEditorInit = function(editor) {
     $scope.editor = editor;
+    editor.clipboard.addMatcher(Node.ELEMENT_NODE, function (node, delta) {
+      delta.ops = delta.ops.map(op => {
+        return {
+          insert: op.insert
+        };
+      });
+      return delta;
+    });
     $scope.cursorIndex = 0;
 
     let toolbar = editor.getModule('toolbar');
@@ -286,9 +294,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         oldData.tags = angular.copy($scope.tagsToSubmit);
       },
       function (data) {
-        $translate(["ERROR", "ENTRY_UPDATE_ERROR"]).then(function (translations) {
-          toaster.error(translations.ERROR, translations.ENTRY_UPDATE_ERROR);
-        });
+        if (!autoSave) {
+          $translate(["ERROR", "ENTRY_UPDATE_ERROR"]).then(function (translations) {
+            toaster.error(translations.ERROR, translations.ENTRY_UPDATE_ERROR);
+          });
+        } else {
+          autoSave = false;
+        }
         form.loading = false;
         form.errors = data.data;
       }

@@ -674,53 +674,6 @@ md-toast {
 }
 
 
-/* Editor */
-
-.editor {
-    font-size: 1.4em;
-    position: relative;
-    z-index: 1;
-}
-
-.editor #title {
-    box-shadow: none !important;
-    background: transparent !important;
-    border: none;
-    font-size: 1.5em;
-    padding: 10px;
-    margin-top: 40px;
-}
-
-.editor p {
-    line-height: 24px;
-    margin-bottom: 16px;
-}
-
-.editor h1,
-.editor h2,
-.editor h3 {
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-
-.editor img {
-    max-width: 100%;
-    background: #eee;
-}
-
-.lights.off .editor img {
-    background: #222;
-}
-
-.editor img[src="assets/img/avatar.png"] {
-    display: none;
-}
-
-.editor li+li {
-    margin-top: 0.25em;
-}
-
-
 /* Editor mode */
 
 .editor-draft-mode {

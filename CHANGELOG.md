@@ -6,6 +6,7 @@
 - Fixed #399: Filter image selection for images only via backend.
 - Resolved #919: Add color picker for navigation color field.
 - Fixed #934: Install `rsync` and check for its binary in CI. 
+- Fixed #937: Bigger editor font size.
 
 
 2018.7.9
