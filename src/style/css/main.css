@@ -1886,3 +1886,46 @@ img.cache {
     visibility: visible;
     opacity: 1;
 }
+
+
+.restricted-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 60px;
+    width: calc(100% - 60px);
+    bottom: 0;
+    transition: ease-in-out all 0.2s;
+}
+
+.restricted-wrapper .restricted-content {
+    position: relative;
+    text-shadow: 0 2px 0px rgba(0,0,0,0.1);
+    top: calc(50% - 70px);
+}
+
+@keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(209, 113, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(209, 113, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(209, 113, 0, 0);
+    }
+}
+
+.restricted-wrapper .restricted-content .fa {
+    font-size: 3em;
+    padding: 15px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    margin-bottom: 5px;
+}
+
+
+#content:not(.full-content) ui-view .restricted-wrapper {
+    left: 250px !important;
+    width: calc(100% - 250px) !important;
+}

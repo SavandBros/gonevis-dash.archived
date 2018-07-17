@@ -301,5 +301,6 @@
   "PROFILE_UPDATED": "Profile {{ profileKey }} updated",
   "PROFILE_UPDATE_ERROR": "An error has occurred while updating profile, try again.",
   "PROFILE_PICTURE_UPDATED": "Profile picture updated",
-  "PROFILE_PICTURE_UPDATE_ERROR": "An error has occured while uploading profile picture, try again."
+  "PROFILE_PICTURE_UPDATE_ERROR": "An error has occured while uploading profile picture, try again.",
+  "RESTRICTED_PAGE": "You don't have permission to visit this page."
 }

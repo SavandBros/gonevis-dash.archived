@@ -2,6 +2,7 @@ require('./codekit/codekit_service');
 require('./pagination/pagination_service');
 require('./search/search_service');
 require('./password/password_service');
+require('./restricted_page/restricted_page');
 require('./tour/tour_service');
 require('./tour/tour_step_service');
 require('./directives/keystroke_directive');
