@@ -286,9 +286,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         oldData.tags = angular.copy($scope.tagsToSubmit);
       },
       function (data) {
-        $translate(["ERROR", "ENTRY_UPDATE_ERROR"]).then(function (translations) {
-          toaster.error(translations.ERROR, translations.ENTRY_UPDATE_ERROR);
-        });
+        if (!autoSave) {
+          $translate(["ERROR", "ENTRY_UPDATE_ERROR"]).then(function (translations) {
+            toaster.error(translations.ERROR, translations.ENTRY_UPDATE_ERROR);
+          });
+        } else {
+          autoSave = false;
+        }
         form.loading = false;
         form.errors = data.data;
       }
