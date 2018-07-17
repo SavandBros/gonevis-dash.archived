@@ -158,6 +158,14 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
   $scope.onEditorInit = function(editor) {
     $scope.editor = editor;
+    editor.clipboard.addMatcher(Node.ELEMENT_NODE, function (node, delta) {
+      delta.ops = delta.ops.map(op => {
+        return {
+          insert: op.insert
+        };
+      });
+      return delta;
+    });
     $scope.cursorIndex = 0;
 
     let toolbar = editor.getModule('toolbar');
