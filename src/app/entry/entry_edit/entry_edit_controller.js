@@ -27,7 +27,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       // Check if already updating
       if (!$scope.form.loading) {
         // Check if post has title
-        if ($scope.form.get.title) {
+        if ($scope.form.get.title && $scope.form.get.content) {
           // Check if entry has an unsaved changes
           if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
             autoSave = true;
