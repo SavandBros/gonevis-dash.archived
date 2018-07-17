@@ -4,8 +4,11 @@
   <p><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
 </div>
 
+<!-- Restricted page -->
+<restricted-page ng-if="isRestrict"></restricted-page>
+
 <!-- Main -->
-<div class="container container-light animated fadeIn">
+<div class="container container-light animated fadeIn" ng-if="!isRestrict">
 
   <!-- Left panels -->
   <div class="col-md-8">

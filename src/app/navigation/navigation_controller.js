@@ -2,11 +2,15 @@
 
 import app from "../app";
 
-function NavigationController($scope, toaster, $stateParams, API, AuthService, $translate) {
+function NavigationController($scope, $rootScope, toaster, $stateParams, API, AuthService, $translate) {
 
   var site = AuthService.getCurrentSite();
 
   function constructor() {
+    // Check permission
+    if ($rootScope.isRestrict) {
+      return false;
+    }
     $scope.navigations = [];
 
     API.Navigation.get({

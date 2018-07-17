@@ -2,14 +2,21 @@
 
 import app from "../app";
 
-function TeamController($scope, API, AuthService, Codekit, ModalsService, Account) {
+function TeamController($scope, $rootScope, API, AuthService, Codekit, ModalsService, Account) {
+
+  let site = AuthService.getCurrentSite();
 
   function constructor() {
+    // Check permission
+    if ($rootScope.isRestrict) {
+      return false;
+    }
+
     $scope.codekit = Codekit;
     $scope.teamRoles = Codekit.teamRoles;
 
     API.Team.get({
-        siteId: AuthService.getCurrentSite()
+        siteId: site
       },
       function(data) {
         $scope.initialled = true;

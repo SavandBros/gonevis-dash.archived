@@ -2,6 +2,7 @@
 
 import app from "../../app";
 import Raven from "raven-js";
+import UserSiteRole from "../user/user_site_role";
 
 function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, Account) {
 
@@ -9,6 +10,11 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @private
    */
   var self = this;
+
+  /**
+   * @const
+   */
+  const userSiteRole = new UserSiteRole();
 
   /**
    * @desc Return the currently authenticated user
@@ -177,6 +183,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
   this.getCurrentSite = function() {
     var sites = self.getAuthenticatedUser().sites;
     var siteIndex = $stateParams.s || 0;
+    $rootScope.isRestrict = userSiteRole.restrict(sites[siteIndex]);
 
     return sites[siteIndex] ? sites[siteIndex].id : false;
   };

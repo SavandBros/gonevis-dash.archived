@@ -13,12 +13,15 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
     $scope.Entry.initialize();
     $scope.Metrics.initialize();
 
-    // Get site template
-    API.SiteTemplateConfig.get({
-      siteId: site
-    }, function(data) {
-      $scope.siteTemplate = data.template_config;
-    });
+    // Check permission
+    if (!$rootScope.isRestrict) {
+      // Get site template
+      API.SiteTemplateConfig.get({
+        siteId: site
+      }, function(data) {
+        $scope.siteTemplate = data.template_config;
+      });
+    }
   }
 
   /**

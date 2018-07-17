@@ -16,6 +16,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   }
 
   function constructor() {
+    // Check permission
+    if ($rootScope.isRestrict) {
+      return false;
+    }
     $scope.user = AuthService.getAuthenticatedUser(false);
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
