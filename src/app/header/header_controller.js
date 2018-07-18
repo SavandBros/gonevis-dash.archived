@@ -194,7 +194,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
     }
     // Sign out completely
     AuthService.unAuthenticate();
-    $state.go("start");
+
+    $timeout(() => {
+      $state.go("start", {}, {reload: true});
+    });
   });
 
   /**
