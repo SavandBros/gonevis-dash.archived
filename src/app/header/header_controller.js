@@ -230,15 +230,17 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   /**
    * @desc Check for tours
    *
+   * @todo Fix me
+   *
    * @param {Event} event
    * @param {string} tourName
    */
-  $scope.$on("gonevisDash.Tour.readyToCheck", function (event, tourName) {
-    // Wait for DOM to finish rendering
-    $timeout(function () {
-      $scope.tour = TourService.checkForView(tourName);
-    });
-  });
+  // $scope.$on("gonevisDash.Tour.readyToCheck", function (event, tourName) {
+  //   // Wait for DOM to finish rendering
+  //   $timeout(function () {
+  //     $scope.tour = TourService.checkForView(tourName);
+  //   });
+  // });
 
   constructor();
   retrieveUser();
