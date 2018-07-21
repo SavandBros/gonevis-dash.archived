@@ -8,6 +8,7 @@
 - Fixed #934: Install `rsync` and check for its binary in CI.
 - Fixed #907: Handle user role permission.
 - Fixed #937: Bigger editor font size.
+- Fixed #915: Add a method to preview post/page on editor.
 
 
 2018.7.9
