@@ -7,13 +7,12 @@
           ng-class="{'active': currentClass === mode.class}" ng-click="changeMode(mode.class)">
           <i class="fa fa-fw fa-{{ mode.icon }}"></i>
         </button>
-
         <!-- Close -->
         <button class="btn pull-right bg-no" data-dismiss="modal">
           <i class="fa fa-close"></i>
         </button>
       </div>
-      <!-- iFrame -->
+      <!-- Preview iframe -->
       <div class="modal-body text-center s-pad-no">
         <iframe ng-src="{{ url }}"></iframe>
       </div>
