@@ -6,7 +6,7 @@ require('quill/dist/quill.snow.css');
 require('./editor.css');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval) {
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService) {
   var payload;
   var tagsToCreate = [];
   var noneTagsCount = 0;
@@ -63,6 +63,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
     if ($stateParams.entryId) {
       $scope.editing = true;
+      $scope.postInitial = false;
       // Load from cache if available
       if ($rootScope.cache.entry && $rootScope.cache.entry.get.id === $stateParams.entryId) {
         $scope.form = $rootScope.cache.entry;
@@ -79,6 +80,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           entry_id: $scope.form.get.id
         },
         function (data) {
+          $scope.postInitial = true;
           // Store original data
           oldData.originalPost = angular.copy(data);
           // If unsaved changes
@@ -116,6 +118,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           initAutoSave();
         },
         function () {
+          $scope.postInitial = false;
           $state.go("dash.entry-edit", { entryId: null });
           $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function (translations) {
             toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
@@ -447,6 +450,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       tagsToCreate = [];
     }
   });
+
+  /**
+   * @desc Open preview modal
+   */
+  $scope.preview = () => {
+    ModalsService.open("postPreview", "PreviewModalController", { URL: $scope.form.get.absolute_uri });
+  };
 
   /**
    * @desc Go to entries on entry removal
