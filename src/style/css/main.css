@@ -1929,3 +1929,22 @@ img.cache {
     left: 250px !important;
     width: calc(100% - 250px) !important;
 }
+
+
+/* iframe */
+
+iframe {
+    border: none;
+    width: 100%;
+    height: 450px;
+    margin-bottom: -5px;
+}
+
+.modal#preview .modal-dialog {
+    min-width: 400px;
+    transition: cubic-bezier(0.99,-0.46, 0, 0.97) all 0.5s !important;
+}
+
+.modal#preview .modal-header {
+    padding: 20px;
+}
