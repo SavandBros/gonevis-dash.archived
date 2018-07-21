@@ -18,8 +18,8 @@
         </button>
 
         <!-- Preview -->
-        <a class="btn btn-default" title="{{ 'VIEW_ON_SITE' | translate }}" target="_blank"
-          ng-href="{{ form.url }}" ng-if="editing">
+        <a ng-if="postInitial && editing" class="btn btn-default" title="{{ 'VIEW_ON_SITE' | translate }}"
+          ng-click="preview()">
           <i class="fa fa-fw fa-eye"></i>
         </a>
 
