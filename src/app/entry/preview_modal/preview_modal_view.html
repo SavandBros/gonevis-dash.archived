@@ -1,0 +1,22 @@
+<div class="modal fade" id="preview">
+  <div class="modal-dialog {{ currentClass }}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- Modes -->
+        <button class="btn btn-default s-mar-right-soft" ng-repeat="mode in modes"
+          ng-class="{'active': currentClass === mode.class}" ng-click="changeMode(mode.class)">
+          <i class="fa fa-fw fa-{{ mode.icon }}"></i>
+        </button>
+
+        <!-- Close -->
+        <button class="btn pull-right bg-no" data-dismiss="modal">
+          <i class="fa fa-close"></i>
+        </button>
+      </div>
+      <!-- iFrame -->
+      <div class="modal-body text-center s-pad-no">
+        <iframe ng-src="{{ url }}"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
