@@ -119,11 +119,22 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
           function(data) {
             data.post_data.fields.file = file;
 
-            // Upload the file
-            file.upload = Upload.upload({
+            let uploadPayload = {
               url: data.post_data.url,
-              data: data.post_data.fields,
-            });
+              data: data.post_data.fields
+            };
+
+            // If `site` is in the data of the backend for UploadURL
+            // Than means we are dealing with LocalFileSystem uploads and the file
+            // object should be send to the backend as well.
+            // As usual, backend needs the `site` in post data.
+            // In this case we add the `site` to the POST data alongside file blog.
+            if ('site' in data.post_data) {
+              uploadPayload.data.site = data.post_data.site;
+            }
+
+            // Upload the file
+            file.upload = Upload.upload(uploadPayload);
 
             // Store data
             file.isImage = file.type.indexOf("image") === 0;
@@ -136,6 +147,9 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
 
             file.upload.then(
               function() {
+                // TODO: If local file system upload is being used, therefore the file has
+                // been already uploaded to the server and uploading it via `API.Dolphins.post` would either
+                // duplicate the file or raise an unexpected error from API.
                 API.Dolphins.post(payload,
                   function(data) {
                     file.done = true;
