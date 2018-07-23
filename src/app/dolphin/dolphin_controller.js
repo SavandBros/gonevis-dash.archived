@@ -6,7 +6,7 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
                           Upload, Pagination, Search, toaster, source, localStorageService, $translate, ENV) {
 
   var site = AuthService.getCurrentSite();
-  let isDev = ENV.name === 'development' ? true : false;
+  var isDev = ENV.name === "development";
 
   function constructor() {
     $scope.fileSelection = !$state.includes("dash.dolphin");
