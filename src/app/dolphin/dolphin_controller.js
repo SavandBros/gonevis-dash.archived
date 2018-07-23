@@ -3,9 +3,10 @@
 import app from "../app";
 
 function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthService, $state,
-                          Upload, Pagination, Search, toaster, source, localStorageService, $translate) {
+                          Upload, Pagination, Search, toaster, source, localStorageService, $translate, ENV) {
 
   var site = AuthService.getCurrentSite();
+  let isDev = ENV.name === 'development' ? true : false;
 
   function constructor() {
     $scope.fileSelection = !$state.includes("dash.dolphin");
