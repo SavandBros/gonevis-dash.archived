@@ -1933,7 +1933,7 @@ img.cache {
 
 /* iframe */
 
-iframe {
+iframe.post-preview {
     border: none;
     width: 100%;
     height: 450px;
