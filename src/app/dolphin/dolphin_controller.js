@@ -152,26 +152,28 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
 
             // Store data
             file.isImage = file.type.indexOf("image") === 0;
-            file.key = data.post_data.fields.key;
 
-            payload = {
-              file_key: file.key,
-              site: site
-            };
+            // If current environment is not 'development' then fill payload with needed data.
+            if (isDev === false) {
+              file.key = data.post_data.fields.key;
 
+              payload = {
+                file_key: file.key,
+                site: site
+              };
+            }
             file.upload.then(
-              function() {
-                // TODO: If local file system upload is being used, therefore the file has
-                // been already uploaded to the server and uploading it via `API.Dolphins.post` would either
-                // duplicate the file or raise an unexpected error from API.
-                API.Dolphins.post(payload,
-                  function(data) {
-                    file.done = true;
-                    toaster.success($translate.instant('UPLOAD_COMPLETED'), file.name);
-                    $scope.dolphins.unshift(new Dolphin(data));
-                    $scope.currentTab = "dolphin";
-                  }
-                );
+              function(data) {
+                // If current environment is 'development' then don't call the API.
+                if (isDev) {
+                  appendFile(data.data, file);
+                } else {
+                  API.Dolphins.post(payload,
+                    function(data) {
+                      appendFile(data, file);
+                    }
+                  );
+                }
               },
               function() {
                 $translate(["ERROR", "UPLOAD_ERROR"]).then(function(translations) {
