@@ -2,6 +2,14 @@
 
 import app from "../../app";
 
+/**
+ * @name PreviewModalController
+ *
+ * @description
+ *
+ * ## Purpose
+ * - It's purpose is to show a preview of a post/page by the given URL.
+ */
 function PreviewModalController($scope, URL, $sce) {
 
   function constructor(){
