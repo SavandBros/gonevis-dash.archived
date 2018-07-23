@@ -8,11 +8,19 @@ import app from "../../app";
  * @description
  *
  * ## Purpose
- * - It's purpose is to show a preview of a post/page by the given URL.
+ * It's purpose is to show a preview of a post/page by the given URL.
+ *
+ * ## Abilities
+ * This controller can show the preview in three diffrent screen sizes:
+ * - Desktop (large)
+ * - Tablet (medium)
+ * - Mobile (small)
+ *
+ * @param {string} URL link of post/page on GoNevis.
  */
 function PreviewModalController($scope, URL, $sce) {
 
-  function constructor(){
+  function constructor() {
     $scope.url = $sce.trustAsResourceUrl(URL);
     $scope.currentClass = "modal-lg";
 
