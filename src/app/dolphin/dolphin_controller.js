@@ -86,6 +86,19 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
   }
 
   /**
+   * @desc Append file to list
+   *
+   * @param {object} dolphin
+   * @param {object} file
+   */
+  function appendFile(dolphin, file) {
+    file.done = true;
+    toaster.success($translate.instant('UPLOAD_COMPLETED'), file.name);
+    $scope.dolphins.unshift(new Dolphin(dolphin));
+    $scope.currentTab = "dolphin";
+  }
+
+  /**
    * @desc Handle for file uploads
    *
    * @param {array} files
