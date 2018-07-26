@@ -5,10 +5,12 @@ const Clipboard = Quill.import('modules/clipboard');
 
 class CustomClipboard extends Clipboard {
   onPaste(e) {
-    if (e.defaultPrevented || !this.quill.isEnabled()) return;
+    if (e.defaultPrevented || !this.quill.isEnabled()) {
+      return;
+    }
     let range = this.quill.getSelection();
     let delta = new Delta().retain(range.index);
-    this.container.style.top = (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0).toString() + 'px'
+    this.container.style.top = (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0).toString() + 'px';
     this.container.focus();
     setTimeout(() => {
       this.quill.selection.update(Quill.sources.SILENT);
