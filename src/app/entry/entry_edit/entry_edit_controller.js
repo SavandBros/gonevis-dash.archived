@@ -4,6 +4,7 @@ import EntryStatus from "../status";
 require('ng-quill');
 require('quill/dist/quill.snow.css');
 require('./editor.css');
+require('./editor');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval) {
@@ -156,14 +157,56 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     };
   }
 
+  /**
+   * @desc On editor creation callback
+   *
+   * @param {Quill} editor
+   */
   $scope.onEditorInit = function(editor) {
+    // Editor instance
     $scope.editor = editor;
+
+    /**
+     * @desc Editor clipboard whitelist
+     */
+    const whitelist = [
+      'bold',
+      'italic',
+      'underline',
+      'strike',
+      'link',
+      'blockquote',
+      'code-block',
+      'code',
+      'list',
+      'header',
+      'direction',
+      'align'
+    ];
+
+    /**
+     * @desc On clipboard paste
+     */
     editor.clipboard.addMatcher(Node.ELEMENT_NODE, function (node, delta) {
-      delta.ops = delta.ops.map(op => {
-        return {
-          insert: op.insert
-        };
+      let ops = [];
+      delta.ops.forEach(op => {
+        // Check attributes whitelist
+        if (op.attributes) {
+          angular.forEach(op.attributes, (attr, key) => {
+            if (whitelist.indexOf(key) === -1) {
+              delete op.attributes[key];
+            }
+          });
+        }
+        // Check insert whitelist
+        if (op.insert && typeof op.insert === 'string' || op.insert.image) {
+          ops.push({
+            attributes: op.attributes,
+            insert: op.insert
+          });
+        }
       });
+      delta.ops = ops;
       return delta;
     });
     $scope.cursorIndex = 0;
