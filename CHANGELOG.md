@@ -8,6 +8,7 @@
 - Fixed #934: Install `rsync` and check for its binary in CI.
 - Fixed #907: Handle user role permission.
 - Fixed #937: Bigger editor font size.
+- Fixed #915: Add live post preview from dashboard editor.
 - Fixed #953: Fix when pasting content to editor the page scrolls to the top.
 
 

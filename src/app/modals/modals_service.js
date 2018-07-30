@@ -11,6 +11,7 @@ import SiteFollowersModalView from "../site/site_followers/site_followers_view.h
 import SiteTemplatesModalView from "../site/site_templates_modal/site_templates_modal_view.html";
 import TeamModalView from "../team/team_modal/team_modal_view.html";
 import EmailConfirmationModalView from "../account/email_confirmation/email_confirmation_modal.html";
+import PostPreview from "../entry/preview_modal/preview_modal_view.html";
 
 
 /**
@@ -34,7 +35,8 @@ function ModalsService($rootScope, ModalService) {
     siteFollowers: SiteFollowersModalView,
     siteTemplates: SiteTemplatesModalView,
     team: TeamModalView,
-    emailConfirmation: EmailConfirmationModalView
+    emailConfirmation: EmailConfirmationModalView,
+    postPreview: PostPreview
   };
 
   /**
