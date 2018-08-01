@@ -2,7 +2,7 @@
 ========
 
 **Bug Fixes:**
-- Fixed #958: Do not autosave page/post when title is being written.
+- Fixed #958: Do not autosave page/post when its title is being written in the editor.
 
 
 2018.8.1
