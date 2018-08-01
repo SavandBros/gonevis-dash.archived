@@ -1,3 +1,10 @@
+2018.9.1
+========
+
+**Bug Fixes:**
+- Fixed #958: Do not autosave page/post when title is being written.
+
+
 2018.8.1
 ========
 
