@@ -49,7 +49,8 @@
         <div class="form-group editor" ng-class="{'editingContent': editingContent}">
           <!-- Title -->
           <input id="title" class="form-control" type="text"
-            ng-model="form.get.title" placeholder="{{ 'C_TITLE' | translate }}" autocomplete="off">
+            ng-model="form.get.title" ng-focus="updatingTitle=true" ng-blur="updatingTitle=false"
+            placeholder="{{ 'C_TITLE' | translate }}" autocomplete="off">
           <!-- Title error -->
           <small class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
           <br>
