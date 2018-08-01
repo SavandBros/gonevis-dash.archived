@@ -3,9 +3,10 @@
 import app from "../app";
 
 function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthService, $state,
-                          Upload, Pagination, Search, toaster, source, localStorageService, $translate) {
+                          Upload, Pagination, Search, toaster, source, localStorageService, $translate, ENV) {
 
   var site = AuthService.getCurrentSite();
+  var isLocalServer = ENV.name === "development";
 
   function constructor() {
     $scope.fileSelection = !$state.includes("dash.dolphin");
@@ -85,12 +86,26 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
   }
 
   /**
+   * @desc Append file to list
+   *
+   * @param {object} dolphin
+   * @param {object} file
+   */
+  function appendFile(dolphin, file) {
+    file.done = true;
+    toaster.success($translate.instant("UPLOAD_COMPLETED"), file.name);
+    $scope.dolphins.unshift(new Dolphin(dolphin));
+    $scope.currentTab = "dolphin";
+  }
+
+  /**
    * @desc Handle for file uploads
    *
    * @param {array} files
    * @param {array} errorFiles
    */
   $scope.uploadFile = function(files, errorFiles) {
+
     // If there was error, show toaster
     if (errorFiles.length) {
       angular.forEach(errorFiles, function(file) {
@@ -101,49 +116,69 @@ function DolphinController($scope, $rootScope, Dolphin, Codekit, API, AuthServic
         });
       });
     }
+
     $scope.upload.files = files;
     $scope.errorFiles = errorFiles;
 
     angular.forEach($scope.upload.files,
       function(file) {
+
         // UploadUrl payload
         var payload = {
           file_name: file.name,
           file_size: file.size,
           mime_type: file.type
         };
+
         // Get data from UploadUrl
-        API.UploadUrl.post({
-            siteId: site
-          }, payload,
+        API.UploadUrl.post({ siteId: site }, payload,
           function(data) {
             data.post_data.fields.file = file;
 
-            // Upload the file
-            file.upload = Upload.upload({
+            let uploadPayload = {
               url: data.post_data.url,
-              data: data.post_data.fields,
-            });
+              data: data.post_data.fields
+            };
+
+            /**
+             * If `site` is in the data of the backend for UploadURL
+             * Than means we are dealing with LocalFileSystem uploads and the file
+             * object should be send to the backend as well.
+             * As usual, backend needs the `site` in post data.
+             * In this case we add the `site` to the POST data alongside file blog.
+             */
+            if ("site" in data.post_data) {
+              uploadPayload.data.site = data.post_data.site;
+            }
+
+            // Upload the file
+            file.upload = Upload.upload(uploadPayload);
 
             // Store data
             file.isImage = file.type.indexOf("image") === 0;
-            file.key = data.post_data.fields.key;
 
-            payload = {
-              file_key: file.key,
-              site: site
-            };
-
+            // Not local server, add staging/production required data
+            if (!isLocalServer) {
+              file.key = data.post_data.fields.key;
+              payload = {
+                file_key: file.key,
+                site: site
+              };
+            }
             file.upload.then(
-              function() {
-                API.Dolphins.post(payload,
-                  function(data) {
-                    file.done = true;
-                    toaster.success($translate.instant('UPLOAD_COMPLETED'), file.name);
-                    $scope.dolphins.unshift(new Dolphin(data));
-                    $scope.currentTab = "dolphin";
-                  }
-                );
+              function(data) {
+                // Local server, add to files
+                if (isLocalServer) {
+                  appendFile(data.data, file);
+                }
+                // Not local server, make API call then add to files
+                else {
+                  API.Dolphins.post(payload,
+                    function(data) {
+                      appendFile(data, file);
+                    }
+                  );
+                }
               },
               function() {
                 $translate(["ERROR", "UPLOAD_ERROR"]).then(function(translations) {

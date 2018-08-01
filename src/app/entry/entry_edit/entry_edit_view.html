@@ -18,8 +18,8 @@
         </button>
 
         <!-- Preview -->
-        <a class="btn btn-default" title="{{ 'VIEW_ON_SITE' | translate }}" target="_blank"
-          ng-href="{{ form.url }}" ng-if="editing">
+        <a ng-if="postInitial && editing" class="btn btn-default" title="{{ 'PREVIEW' | translate }}"
+          ng-click="preview()">
           <i class="fa fa-fw fa-eye"></i>
         </a>
 
@@ -54,8 +54,8 @@
           <small class="help-block" ng-show="form.errors.title">{{ form.errors.title[0] }}</small>
           <br>
           <!-- Editor (description) -->
-          <ng-quill-editor theme="snow" modules="options" bounds="'self'" ng-model="form.get.content"
-            placeholder="{{ 'CONTENT' | translate }}" on-editor-created="onEditorInit(editor)">
+          <ng-quill-editor theme="snow" modules="options" bounds="'self'" scrolling-container="'html, body'"
+            ng-model="form.get.content" placeholder="{{ 'CONTENT' | translate }}" on-editor-created="onEditorInit(editor)">
           </ng-quill-editor>
           <!-- Entry formats -->
           <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
