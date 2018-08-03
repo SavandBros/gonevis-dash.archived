@@ -187,6 +187,13 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       auth: true,
       title: "Posts"
     })
+    .state("dash.reader", {
+      url: "/reader",
+      controller: "ReaderController",
+      template: require("./reader/reader_view.html"),
+      auth: true,
+      title: "Reader"
+    })
     .state("dash.page-list", {
       url: "/pages",
       controller: "EntryController",
