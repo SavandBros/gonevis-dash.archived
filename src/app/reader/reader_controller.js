@@ -40,19 +40,24 @@ function ReaderController($scope, API, Pagination, Codekit, $translate) {
     $scope.loading = true;
     let isFeed = tab.class !== "first";
 
-    $scope.onTabChanged(isFeed);
+    $scope.onTabChanged(isFeed, tab);
   };
 
   /**
    * @desc Call API when tab changed.
    *
    * @param {boolean} isFeed
+   * @param {object} tab
    */
-  $scope.onTabChanged = (isFeed) => {
+  $scope.onTabChanged = (isFeed, tab) => {
     let currentView = isFeed ? "Feed" : "Explore";
 
     API[currentView].get({},
       function (data) {
+        // Check current tab before storing data.
+        if ($scope.currentTab !== tab) {
+          return;
+        }
         $scope.explore = data.results;
         $scope.loading = false;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, {});
