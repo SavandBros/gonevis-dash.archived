@@ -1961,10 +1961,6 @@ img.cache {
     box-shadow: 0 -15px 30px #fff;
 }
 
-.explore-wrapper-bottom img {
-    animation: pulse 2s infinite;
-}
-
 .explore-wrapper h3,
 .explore-wrapper p,
 .explore-wrapper .cover {
