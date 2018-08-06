@@ -499,7 +499,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    */
   $scope.preview = () => {
     ModalsService.open("postPreview", "PreviewModalController", {
-      URL: $scope.form.getUrl()
+      preview: $scope.form.getUrl(true),
+      site: $scope.form.getUrl(false)
     });
   };
 
