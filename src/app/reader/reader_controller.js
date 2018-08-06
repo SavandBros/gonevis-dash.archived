@@ -13,11 +13,9 @@ function ReaderController($scope, API, Pagination, Codekit, $translate, $window,
       // List of tabs
       $scope.tabs = [{
         class: "first",
-        icon: "search",
         label: translations.EXPLORE
       }, {
         class: "second",
-        icon: "smile-o",
         label: translations.FEED
       }];
 

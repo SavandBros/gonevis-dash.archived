@@ -8,7 +8,7 @@
           <div class="tab {{ tab.class }}" ng-repeat="tab in tabs"
             ng-class="{'is-active': currentTab == tab}"
             ng-click="setCurrentTab(tab)">
-            <h3><i class="fa fa-{{ tab.icon }}"></i> {{ tab.label }}</h3>
+            <h3>{{ tab.label }}</h3>
           </div>
         </div>
         <div class="col-md-4 animated fadeIn" ng-if="!loading" ng-repeat="post in explore">
