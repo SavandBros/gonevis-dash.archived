@@ -104,10 +104,19 @@ function Entry($rootScope, $state, API, Codekit, toaster, $translate) {
 
     /**
      * @desc Add preview parameters
+     *
+     * @param {boolean} iframe
+     *
      * @returns {string}
      */
-    this.getUrl = function() {
-      return this.get.absolute_uri + "?view=preview";
+    this.getUrl = function(iframe) {
+      var params = "";
+
+      if (this.get.status === Codekit.entryStatuses[0].id || iframe) {
+        params = "?view=preview";
+      }
+
+      return this.get.absolute_uri + params;
     };
 
     /**
