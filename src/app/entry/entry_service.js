@@ -103,17 +103,11 @@ function Entry($rootScope, $state, API, Codekit, toaster, $translate) {
     };
 
     /**
-     * @desc Add draft parameters if entry is draft
+     * @desc Add preview parameters
      * @returns {string}
      */
     this.getUrl = function() {
-      var params = "";
-
-      if (this.get.status === Codekit.entryStatuses[0].id) {
-        params = "?view=preview";
-      }
-
-      return this.get.absolute_uri + params;
+      return this.get.absolute_uri + "?view=preview";
     };
 
     /**
