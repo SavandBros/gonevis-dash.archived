@@ -16,12 +16,14 @@ import app from "../../app";
  * - Tablet (medium)
  * - Mobile (small)
  *
- * @param {string} URL link of post/page on GoNevis.
+ * @param {string} site link of post/page on GoNevis.
+ * @param {string} preview link of post/page for iframe.
  */
-function PreviewModalController($scope, URL, $sce) {
+function PreviewModalController($scope, site, preview, $sce) {
 
   function constructor() {
-    $scope.url = $sce.trustAsResourceUrl(URL);
+    $scope.preview = $sce.trustAsResourceUrl(preview);
+    $scope.site = $sce.trustAsResourceUrl(site);
     $scope.currentClass = "modal-lg";
 
     /**
