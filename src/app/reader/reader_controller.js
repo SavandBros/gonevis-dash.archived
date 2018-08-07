@@ -108,8 +108,10 @@ function ReaderController($scope, API, Pagination, Codekit, $translate, $window,
     }
   });
 
-  // Infinite scroll
-  angular.element($window).bind("scroll", () => {
+  /**
+   * @desc Infinite scroll
+   */
+  function infiniteScroll() {
     if ($window.scrollY >= (bodyHeight - 2000)) {
       // Check if page is requesting for API
       // Check if there is a next URL
@@ -118,6 +120,16 @@ function ReaderController($scope, API, Pagination, Codekit, $translate, $window,
         Pagination.loadMore($scope.pageForm);
       }
     }
+  }
+
+  // Scroll event
+  angular.element($window).bind("scroll", infiniteScroll);
+
+  /**
+   * @desc Stop infinite scroll event on controller destroy.
+   */
+  $scope.$on('$destroy', function () {
+    angular.element($window).off('scroll', infiniteScroll);
   });
 
   constructor();
