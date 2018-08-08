@@ -7,13 +7,14 @@ require('./editor.css');
 require('./editor');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService) {
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window) {
   var payload;
   var tagsToCreate = [];
   var noneTagsCount = 0;
   let oldData = {};
   let interval;
   let autoSave;
+  let lastScroll;
 
   /**
    * @desc Auto-Save
@@ -40,6 +41,10 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   function constructor() {
+    lastScroll = 0;
+    $scope.currentSite = AuthService.getAuthenticatedUser(true).getSites()[$stateParams.s];
+    $scope.currentRole = Codekit.teamRoles[$scope.currentSite.role];
+    $scope.codekit = Codekit;
     $scope.entryStatus = new EntryStatus();
     $scope.tags = [];
     $scope.dolphinService = DolphinService;
@@ -150,13 +155,21 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
 
     $scope.options = {
-      toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],
-        ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
-        [{ 'header': [1, 2, 3, false] }],
-        [{ 'direction': 'rtl' }, { 'align': [] }],
-        ['clean']
-      ]
+      toolbar: {
+        container: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
+          [{ 'header': [1, 2, 3, false] }],
+          [{ 'direction': 'rtl' }, { 'align': [] }],
+          ['clean'],
+          ['light']
+        ],
+        handlers: {
+          'light': () => {
+            $rootScope.set.lights = !$rootScope.set.lights;
+          }
+        }
+      }
     };
   }
 
@@ -502,6 +515,24 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
+   * @desc Go to post/page list
+   */
+  $scope.goBack = function() {
+    let state = "dash.entry-list";
+
+    // Check if entry has an unsaved changes
+    if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
+      autoSave = true;
+      $scope.save($scope.form);
+    }
+    // Check if entry is a page
+    if ($stateParams.isPage) {
+      state = "dash.page-list";
+    }
+    $state.go(state);
+  };
+
+  /**
    * @desc Go to entries on entry removal
    *
    * @param {Event} event
@@ -514,10 +545,35 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   });
 
   /**
+   * @desc Hide toolbar
+   */
+  function hideToolbar() {
+    let condition= "removeClass";
+
+    $timeout(() => {
+      let currentScroll = $window.pageYOffset;
+
+      if (lastScroll > currentScroll || currentScroll === 0) {
+        $scope.hideToolbar = false;
+      } else {
+        $scope.hideToolbar = true;
+        condition = "addClass";
+      }
+
+      angular.element("div.ql-toolbar.ql-snow")[condition]("push-out");
+      lastScroll = currentScroll;
+    });
+  }
+
+  // Scroll event
+  angular.element($window).bind("scroll", hideToolbar);
+
+  /**
    * @desc Cancel interval on state change
    */
   $scope.$on("$destroy", function () {
     $interval.cancel(interval);
+    angular.element($window).off('scroll', hideToolbar);
   });
 
   constructor();
