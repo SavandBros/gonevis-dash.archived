@@ -22,10 +22,16 @@ body {
     background-color: #EAEDF1;
     font-family: "Lato", Helvetica, sans-serif;
     color: #6F7A8B;
+    overflow-y: overlay;
 }
 
 ::-webkit-scrollbar-track,
 ::-webkit-scrollbar {
+    background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-track,
+.sidebar-content::-webkit-scrollbar {
     background: #EAEDF1;
 }
 
@@ -99,10 +105,10 @@ body {
     height: 500px;
     color: #fff;
     position: fixed;
-    height: 100%;
+    height: calc(100% - 45px);
     width: 250px;
     left: 0;
-    top: 0;
+    top: 45px;
     overflow: hidden;
     overflow-y: auto;
     transition: all 0.2s ease-in-out;
@@ -205,7 +211,7 @@ body {
     height: 32px;
 }
 
-@media (max-height: 680px) {
+@media (max-height: 650px) {
     .sidebar-content a:not(.main) {
         padding: 8px 20px !important;
     }
