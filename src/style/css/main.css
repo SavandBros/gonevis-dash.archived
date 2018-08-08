@@ -79,18 +79,14 @@ hr[soft] {
 
 .no-sidebar .sidebar-content {
     opacity: 0;
+    display: none;
 }
-
-.no-sidebar .navbar-static-top {
-    opacity: 1;
-}
-
-.navbar-static-top {
-    opacity: 0;
-}
-
 
 /* Content */
+
+#content div.container {
+    margin-top: 60px;
+}
 
 header:not(.no-sidebar)~#content .container,
 header:not(.no-sidebar)~#content .container-fluid {
@@ -147,13 +143,9 @@ header:not(.no-sidebar)~#content .container-fluid {
 
 /* Navbar */
 
-.navbar {
-    z-index: 10;
-}
-
 .navbar,
 .navbar li {
-    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, opacity 0.3s ease-in-out, top cubic-bezier(1, 0.02, 0, 0.99) 0.4s;
 }
 
 .navbar-brand {
@@ -165,18 +157,20 @@ header:not(.no-sidebar)~#content .container-fluid {
 }
 
 .navbar .dropdown img {
-    width: 48px;
+    width: 36px;
     border-radius: 100%;
 }
 
 @media(min-width: 992px) {
     .navbar {
-        min-height: 60px;
+        min-height: 45px;
     }
     .navbar-nav a,
     .navbar-brand {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        line-height: 24px !important;
+        height: 44px;
     }
     .navbar a .fa.nav-icon {
         font-size: 24px;
@@ -659,14 +653,6 @@ md-toast {
 
 /* Editor */
 
-[medium-editor],
-.medium-editor-toolbar,
-.medium-editor-action,
-.editor-container {
-    transition: 0.3s ease-in-out;
-    transition-property: background, border;
-}
-
 .editor-container {
     background: #fff;
     padding-left: 0 !important;
@@ -888,7 +874,7 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 
 .entry-form-corner {
     position: fixed;
-    top: 0;
+    top: 60px;
     right: 15px;
     height: 62px;
     width: 220px;
