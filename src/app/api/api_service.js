@@ -69,6 +69,12 @@ function API($resource, ENV) {
     }, {
       name: "Comments",
       endpoint: "sushial/comment/" // GET
+    }, {
+      name: "Explore",
+      endpoint: "sushial/explore/" // GET
+    }, {
+      name: "Feed",
+      endpoint: "sushial/subscribed-entries/" // GET
     },
     // Site
     {

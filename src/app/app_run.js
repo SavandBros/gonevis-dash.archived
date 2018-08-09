@@ -61,6 +61,11 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
    * @param transition {Event}
    */
   $transitions.onStart({}, function (transition) {
+    if (transition.to().url === "/reader" || transition.to().name.indexOf("dash.entry-edit") !== -1) {
+      $rootScope.hideSidebar = true;
+    } else {
+      $rootScope.hideSidebar = false;
+    }
 
     // No routing if running tour
     if (TourService.isTourOn() && transition.from().name) {

@@ -24,6 +24,13 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
         s: 0
       }
     })
+    .state("reader", {
+      url: "/reader",
+      controller: "ReaderController",
+      template: require("./reader/reader_view.html"),
+      auth: true,
+      title: "Reader"
+    })
     .state("user", {
       url: "/user",
       controller: "UserController",

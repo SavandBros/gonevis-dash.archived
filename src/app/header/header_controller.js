@@ -23,7 +23,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
     $scope.entryFormats = Codekit.entryFormats;
 
     $translate([
-      "DASHBOARD", "WRITE", "POSTS", "PAGES", "TAGS",
+      "DASHBOARD", "WRITE", "POSTS", "PAGES", "READER", "TAGS",
       "COMMENTS", "FILES", "NAVIGATIONS", "TEAM", "SETTINGS"
     ]).then(function (translations) {
       // Navs
@@ -43,6 +43,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         label: translations.PAGES,
         sref: "dash.page-list",
         icon: "fa-book"
+      }, {
+        label: translations.READER,
+        sref: "dash.reader",
+        icon: "fa-newspaper-o"
       }, {
         label: translations.TAGS,
         sref: "dash.tag-list",
