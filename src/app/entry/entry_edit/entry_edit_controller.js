@@ -14,7 +14,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   let oldData = {};
   let interval;
   let autoSave;
-  let lastScroll;
+
+  let didScroll;
+  let lastScrollTop = 0;
+  let delta = 5;
+  let toolbarHeight = angular.element(".entry-toolbar").outerHeight();
+  let editorToolbar = angular.element("div.ql-toolbar.ql-snow");
+  let onScroll;
 
   /**
    * @desc Auto-Save
@@ -41,7 +47,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   function constructor() {
-    lastScroll = 0;
     $scope.currentSite = AuthService.getAuthenticatedUser(true).getSites()[$stateParams.s];
     $scope.currentRole = Codekit.teamRoles[$scope.currentSite.role];
     $scope.codekit = Codekit;
@@ -545,35 +550,62 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   });
 
   /**
-   * @desc Hide toolbar
+   * @desc Check if page has been scrolled.
    */
-  function hideToolbar() {
-    let condition= "removeClass";
-
-    $timeout(() => {
-      let currentScroll = $window.pageYOffset;
-
-      if (lastScroll > currentScroll || currentScroll === 0) {
-        $scope.hideToolbar = false;
-      } else {
-        $scope.hideToolbar = true;
-        condition = "addClass";
-      }
-
-      angular.element("div.ql-toolbar.ql-snow")[condition]("push-out");
-      lastScroll = currentScroll;
-    });
+  function checkScroll() {
+    didScroll = true;
   }
 
+  /**
+   * @desc Hide/show toolbar when scrolled.
+   */
+  function hasScrolled() {
+    let condition = "removeClass";
+    let st = angular.element($window).scrollTop();
+
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta) {
+      return;
+    }
+
+    // When scrolling down
+    if (st > lastScrollTop && st > toolbarHeight){
+        $scope.hideToolbar = true;
+    } else {
+      // When scrolling top
+      if(st + angular.element($window).height() < angular.element(document).height()) {
+        $scope.hideToolbar = false;
+      }
+    }
+
+    // Auto hide when true
+    if ($scope.hideToolbar) {
+      condition = "addClass";
+    }
+
+    angular.element("div.ql-toolbar.ql-snow")[condition]("push-out");
+    lastScrollTop = st;
+  }
+
+  // On scroll call function
+  onScroll = $interval(() => {
+    if (didScroll) {
+      hasScrolled();
+      didScroll = false;
+    }
+  }, 250);
+
+
   // Scroll event
-  angular.element($window).bind("scroll", hideToolbar);
+  angular.element($window).bind("scroll", checkScroll);
 
   /**
-   * @desc Cancel interval on state change
+   * @desc Cancel events on state change
    */
   $scope.$on("$destroy", function () {
     $interval.cancel(interval);
-    angular.element($window).off('scroll', hideToolbar);
+    $interval.cancel(onScroll);
+    angular.element($window).off('scroll', checkScroll);
   });
 
   constructor();
