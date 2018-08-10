@@ -163,8 +163,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       toolbar: {
         container: [
           ['bold', 'italic', 'underline', 'strike'],
-          ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
+          ['link', 'blockquote', 'code-block', { 'list': 'bullet' }],
           [{ 'header': [1, 2, 3, false] }],
+          ['image', 'video'],
           [{ 'direction': 'rtl' }, { 'align': [] }],
           ['clean'],
           ['light']
@@ -202,7 +203,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       'list',
       'header',
       'direction',
-      'align'
+      'align',
+      'height',
+      'width',
+      "allow",
+      "allowfullscreen"
     ];
 
     /**
@@ -220,7 +225,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           });
         }
         // Check insert whitelist
-        if (op.insert && typeof op.insert === 'string' || op.insert.image) {
+        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
@@ -228,6 +233,24 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         }
       });
       delta.ops = ops;
+      return delta;
+    });
+
+    editor.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
+      let regex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+      let match = node.data.match(regex);
+      if (match && match[2].length === 11) {
+        delta.ops = [{
+          attributes: {
+            allow: "encrypted-media",
+            allowfullscreen: "true",
+            frameborder: 0
+          },
+          insert: {
+            video: 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0'
+          }
+        }];
+      }
       return delta;
     });
     $scope.cursorIndex = 0;
