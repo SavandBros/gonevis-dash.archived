@@ -171,18 +171,24 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
               return;
             }
 
-            $scope.save($scope.form, $scope.entryStatus.PUBLISH)
+            $scope.save($scope.form, $scope.entryStatus.PUBLISH);
           },
           'update': () => {
             if ($scope.form.loading || $scope.form.$invalid) {
               return;
             }
 
-            $scope.save($scope.form)
+            $scope.save($scope.form);
           },
           'preview': () => $scope.preview(),
-          'settings': () => $scope.sidebar = true,
-          'light': () => $rootScope.set.lights = !$rootScope.set.lights,
+          'settings': () => {
+            $scope.sidebar = true;
+            $scope.$apply();
+          },
+          'light': () => {
+            $rootScope.set.lights = !$rootScope.set.lights;
+            $scope.$apply();
+          },
         }
       }
     };
