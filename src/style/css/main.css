@@ -682,58 +682,6 @@ md-toast {
 }
 
 
-/* Lights */
-
-.lights.off .container-fluid {
-    box-shadow: 0 0 0 10000px #333;
-}
-
-.lights.off .container-fluid,
-.lights.off .editor-container,
-.lights.off .editor .form-control,
-.lights.off #content~.medium-editor-toolbar {
-    background: #333 !important;
-    border-color: #222 !important;
-    color: #fff;
-}
-
-.lights.off .editor-draft-mode,
-.lights.off #content~.medium-editor-toolbar .medium-editor-action {
-    color: #ddd !important;
-    border-color: #222;
-}
-
-.lights.off #content~.medium-editor-toolbar-active .medium-editor-action.active {
-    background: #222 !important;
-}
-
-.lights.off code {
-    color: #faa;
-    background: #222;
-}
-
-.lights.off pre {
-    background: #222;
-    color: #ddd;
-    border-color: #333;
-}
-
-.editor-draft-mode:hover {
-    opacity: 1;
-}
-
-.editor,
-.form-control,
-.editor-draft-mode,
-.navbar .active a,
-code,
-pre {
-    transition-duration: 0.3s;
-    transition-property: background, box-shadow, color, border;
-    transition-timing-function: ease-in-out;
-}
-
-
 /* Navigation */
 
 .navigation {
