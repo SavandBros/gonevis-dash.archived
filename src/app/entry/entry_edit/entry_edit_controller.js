@@ -162,18 +162,22 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     $scope.options = {
       toolbar: {
         container: [
+          ['back'],
           ['bold', 'italic', 'underline', 'strike'],
           ['link', 'blockquote', 'code-block', { 'list': 'bullet' }],
           [{ 'header': [1, 2, 3, false] }],
           ['image', 'video'],
           [{ 'direction': 'rtl' }, { 'align': [] }],
           ['clean'],
-          ['light']
+          ['publish', 'update', 'preview', 'settings', 'light']
         ],
         handlers: {
-          'light': () => {
-            $rootScope.set.lights = !$rootScope.set.lights;
-          }
+          'back': () => $scope.goBack(),
+          'publish': () => $scope.save($scope.form, $scope.entryStatus.PUBLISH),
+          'update': () => $scope.save($scope.form),
+          'preview': () => $scope.preview(),
+          'settings': () => $scope.sidebar = true,
+          'light': () => $rootScope.set.lights = !$rootScope.set.lights,
         }
       }
     };
