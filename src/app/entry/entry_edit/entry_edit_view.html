@@ -1,4 +1,4 @@
-<div class="entry-toolbar" ng-class="{'push-out': hideToolbar}">
+<div class="entry-toolbar hide" ng-class="{'push-out': hideToolbar}">
   <ul class="container">
     <!-- Left list -->
     <div class="pull-left">
@@ -75,7 +75,8 @@
           <br>
           <!-- Editor (description) -->
           <ng-quill-editor theme="snow" modules="options" bounds="'self'" scrolling-container="'html, body'"
-            ng-model="form.get.content" placeholder="{{ 'CONTENT' | translate }}" on-editor-created="onEditorInit(editor)">
+            ng-model="form.get.content" placeholder="{{ 'CONTENT' | translate }}"
+            on-editor-created="onEditorInit(editor)" ng-class="{'publishing': !editing || form.get.status === entryStatus.DRAFT}">
           </ng-quill-editor>
           <!-- Entry formats -->
           <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
