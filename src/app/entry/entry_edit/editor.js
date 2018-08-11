@@ -1,7 +1,61 @@
+"use strict";
+
 import Quill from 'quill';
 import Delta from 'quill-delta';
 
 const Clipboard = Quill.import('modules/clipboard');
+const icons = Quill.import('ui/icons');
+const customIcons = [{
+  icon: "bold",
+  replace: "bold",
+}, {
+  icon: "italic",
+  replace: "italic"
+}, {
+  icon: "underline",
+  replace: "underline"
+}, {
+  icon: "strike",
+  replace: "strikethrough"
+}, {
+  icon: "blockquote",
+  replace: "quote-right"
+}, {
+  icon: "link",
+  replace: "link"
+}, {
+  icon: "code-block",
+  replace: "code"
+}, {
+  icon: "image",
+  replace: "picture-o"
+}, {
+  icon: "video",
+  replace: "youtube-play"
+}, {
+  icon: "clean",
+  replace: "ban"
+}, {
+  icon: "publish",
+  replace: "globe",
+  text: "Publish"
+}, {
+  icon: "update",
+  replace: "refresh",
+  text: "Update"
+}, {
+  icon: "preview",
+  replace: "eye"
+}, {
+  icon: "settings",
+  replace: "cog"
+}, {
+  icon: "light",
+  replace: "lightbulb-o"
+}, {
+  icon: "back",
+  replace: "arrow-left"
+}];
 
 class CustomClipboard extends Clipboard {
   onPaste(e) {
@@ -23,9 +77,28 @@ class CustomClipboard extends Clipboard {
   }
 }
 
-// Custom icons
-let icons = Quill.import('ui/icons');
-icons.light = '<i class="fa fa-lightbulb-o"></i>';
+/**
+ * @desc Get icon
+ *
+ * @param {string} icon
+ */
+function getIcon(icon, text) {
+  return `<i class="fa fa-${icon} fa-fw"></i> ${text ? text : ''}`;
+}
+
+angular.forEach(customIcons, (icon) => {
+  icons[icon.icon] = getIcon(icon.replace, icon.text);
+});
+
+
+// Built-in icons
+icons.list.bullet = getIcon('list-ul');
+icons.direction[''] = getIcon('paragraph');
+icons.direction.rtl = getIcon('paragraph fa-flip-horizontal');
+icons.align[''] = getIcon('align-left');
+icons.align.center = getIcon('align-center');
+icons.align.right = getIcon('align-right');
+icons.align.justify = getIcon('align-justify');
 
 Quill.register('modules/clipboard', CustomClipboard, true);
 Quill.register(icons, true);
