@@ -76,7 +76,11 @@
           <!-- Editor (description) -->
           <ng-quill-editor theme="snow" modules="options" bounds="'self'" scrolling-container="'html, body'"
             ng-model="form.get.content" placeholder="{{ 'CONTENT' | translate }}"
-            on-editor-created="onEditorInit(editor)" ng-class="{'publishing': !editing || form.get.status === entryStatus.DRAFT}">
+            on-editor-created="onEditorInit(editor)"
+            ng-class="{
+              'publishing': !editing || form.get.status === entryStatus.DRAFT,
+              'form-loading': form.loading || form.$invalid
+            }">
           </ng-quill-editor>
           <!-- Entry formats -->
           <div class="entry-formats" ng-if="form.get.format !== formats.text.id">
