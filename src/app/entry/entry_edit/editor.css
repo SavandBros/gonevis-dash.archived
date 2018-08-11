@@ -248,6 +248,12 @@
     display: none;
 }
 
+ng-quill-editor.form-loading .ql-snow.ql-toolbar button.ql-publish,
+ng-quill-editor.form-loading .ql-snow.ql-toolbar button.ql-update {
+    cursor: not-allowed;
+    color: #aaa !important;
+}
+
 ng-quill-editor.publishing .ql-snow.ql-toolbar button.ql-publish {
     display: block !important;
 }
