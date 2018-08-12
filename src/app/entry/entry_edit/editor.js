@@ -1,10 +1,11 @@
 "use strict";
 
-import Quill from 'quill';
-import Delta from 'quill-delta';
+import Quill from "quill";
+import Delta from "quill-delta";
 
-const Clipboard = Quill.import('modules/clipboard');
-const icons = Quill.import('ui/icons');
+const Clipboard = Quill.import("modules/clipboard");
+const icons = Quill.import("ui/icons");
+const BlockEmbed = Quill.import("blots/block/embed");
 const customIcons = [{
   icon: "bold",
   replace: "bold",
@@ -26,6 +27,9 @@ const customIcons = [{
 }, {
   icon: "code-block",
   replace: "code"
+}, {
+  icon: "divider",
+  replace: "minus"
 }, {
   icon: "image",
   replace: "picture-o"
@@ -77,6 +81,11 @@ class CustomClipboard extends Clipboard {
   }
 }
 
+class DividerBlot extends BlockEmbed { }
+DividerBlot.blotName = 'divider';
+DividerBlot.className = 'divider';
+DividerBlot.tagName = 'hr';
+
 /**
  * @desc Get icon
  *
@@ -102,3 +111,4 @@ icons.align.justify = getIcon('align-justify');
 
 Quill.register('modules/clipboard', CustomClipboard, true);
 Quill.register(icons, true);
+Quill.register(DividerBlot);
