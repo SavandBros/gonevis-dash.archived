@@ -88,6 +88,8 @@
 .lights.off .ql-toolbar.ql-snow .ql-formats button {
     border-color: #222 !important;
     color: #fff;
+    line-height: 0;
+    padding: 0;
 }
 
 .lights.off .ql-toolbar.ql-snow .ql-picker-options .ql-picker-item:hover,
@@ -260,6 +262,24 @@ ng-quill-editor.publishing .ql-snow.ql-toolbar button.ql-publish {
 
 ng-quill-editor:not(.publishing) button.ql-update {
     display: block !important;
+}
+
+.divider {
+    border: none;
+    color: #222;
+    letter-spacing: 1em;
+    text-align: center;
+    line-height: 5px;
+    height: 20px;
+    font-size: 1.2em
+}
+
+.lights.off .divider {
+    color: #fff;
+}
+
+.divider:before {
+    content: '...';
 }
 
 
