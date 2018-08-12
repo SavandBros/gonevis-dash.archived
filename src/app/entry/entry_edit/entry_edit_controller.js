@@ -153,6 +153,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
 
     $scope.options = {
+      clipboard: {
+        matchVisual: false
+      },
       toolbar: {
         container: [
           ['back'],
