@@ -157,7 +157,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         container: [
           ['back'],
           ['bold', 'italic', 'underline', 'strike'],
-          ['link', 'blockquote', 'code-block', { 'list': 'bullet' }],
+          ['link', 'blockquote', 'code-block', { 'list': 'bullet' }, 'divider'],
           [{ 'header': [1, 2, 3, false] }],
           ['image', 'video'],
           [{ 'direction': 'rtl' }, { 'align': [] }],
@@ -166,6 +166,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         ],
         handlers: {
           'back': () => $scope.goBack(),
+          'divider': () => {
+            let range = $scope.editor.getSelection(true);
+            // Insert an empty line
+            $scope.editor.insertText(range.index, '\n');
+            // Insert divider
+            $scope.editor.insertEmbed(range.index + 1, 'divider', true);
+            // Set cursor selection
+            $scope.editor.setSelection(range.index + 2);
+          },
           'publish': () => {
             if ($scope.form.loading || $scope.form.$invalid) {
               return;
@@ -240,7 +249,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           });
         }
         // Check insert whitelist
-        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video) {
+        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
