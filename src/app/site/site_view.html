@@ -239,28 +239,31 @@
           </button>
         </div>
         <!-- Theme options -->
-        <p class="s-mar-y"><i class="fa fa-cog"></i> <b translate>THEME_OPTIONS</b></p>
-        <!-- Template fields -->
-        <div class="form-group" ng-repeat="(key, field) in siteTemplate.fields"
-          ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
-          <hr ng-if="!$first">
-          <!-- Char and boolean field -->
-          <input id="{{ key }}" name="{{ key }}" type="{{ field.type === 'char' ? 'text' : 'checkbox' }}"
-            class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
-            ng-model="siteTemplate.fields[key].value">
-          <!-- Field label -->
-          <label for="{{ key }}"><b>{{ field.verbose_name }}</b></label>
-          <!-- Text field -->
-          <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
-            placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
-          </textarea>
-          <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
-        </div>
-        <br>
-        <!-- Update button -->
-        <button class="btn btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
-          <i class="fa fa-fw fa-check text-primary"></i> {{ 'SAVE_CHANGES' | translate }}
-        </button>
+        <span ng-if="siteTemplate.hasFields">
+          <!-- Label -->
+          <p class="s-mar-y"><i class="fa fa-cog"></i> <b translate>THEME_OPTIONS</b></p>
+          <!-- Template fields -->
+          <div class="form-group" ng-repeat="(key, field) in siteTemplate.fields"
+            ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
+            <hr ng-if="!$first">
+            <!-- Char and boolean field -->
+            <input id="{{ key }}" name="{{ key }}" type="{{ field.type === 'char' ? 'text' : 'checkbox' }}"
+              class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
+              ng-model="siteTemplate.fields[key].value">
+            <!-- Field label -->
+            <label for="{{ key }}"><b>{{ field.verbose_name }}</b></label>
+            <!-- Text field -->
+            <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
+              placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
+            </textarea>
+            <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
+          </div>
+          <br>
+          <!-- Update button -->
+          <button class="btn btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
+            <i class="fa fa-fw fa-check text-primary"></i> {{ 'SAVE_CHANGES' | translate }}
+          </button>
+        </span>
       </div>
     </form>
   </div>
