@@ -4,7 +4,7 @@
 **Bug Fixes:**
 - Fixed #958: Do not autosave page/post when its title is being written in the editor.
 - Fixed #962: Use preview parameters when previewing posts at editor.
-
+- Fixed #969: Rename the word "site" to "blog".
 
 2018.8.1
 ========
