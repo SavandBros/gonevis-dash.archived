@@ -224,6 +224,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   };
 
   /**
+   * Debug
+   */
+  $scope.subscribe = function() {
+    API.SubscribePlan.put({ siteId: site }, function(data) {
+      console.log(data);
+    });
+  }
+
+  /**
    * @desc Image selection callback
    *
    * @param {Event} event

@@ -132,6 +132,9 @@ function API($resource, ENV) {
     }, {
       name: "DomainCheck",
       endpoint: "website/domain-check/" // POST
+    }, {
+      name: "SubscribePlan",
+      endpoint: "website/site/:siteId/subscribe-plan/" // POST
     },
     // Tagool
     {
