@@ -227,7 +227,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * Debug
    */
   $scope.subscribe = function() {
-    API.SubscribePlan.put({ siteId: site }, function(data) {
+    API.SubscribePlan.post({ siteId: site }, function(data) {
       console.log(data);
     });
   }
