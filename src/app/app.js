@@ -20,6 +20,7 @@ const deps = [
   'toaster',
   'LocalStorageModule',
   'pascalprecht.translate',
+  'paypal-button',
 ];
 
 const MODULE_NAME = 'gonevisDash';
