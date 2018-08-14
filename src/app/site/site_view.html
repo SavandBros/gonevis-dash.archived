@@ -271,6 +271,13 @@
     <div class="panel panel-danger">
       <div class="panel-body">
         <button class="btn btn-danger btn-block" ng-click="subscribe()">Subscribe</button>
+        <br>
+        <paypal-button
+          client="client"
+          payment="payment"
+          commit="true"
+          on-authorize="onAuthorize">
+        </paypal-button>
       </div>
     </div>
   </div>
