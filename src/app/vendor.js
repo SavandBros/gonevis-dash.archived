@@ -8,6 +8,7 @@ require("angular-sanitize");
 require('@uirouter/angularjs');
 require("oclazyload");
 require('bootstrap');
+require('paypal-checkout');
 
 // Third party
 require("ng-tags-input");
@@ -34,5 +35,3 @@ require('angular-xeditable/dist/css/xeditable.css');
 require('ng-tags-input/build/ng-tags-input.css');
 require('animate.css/animate.css');
 require('angularjs-toaster/toaster.css');
-
-require('paypal-checkout');
