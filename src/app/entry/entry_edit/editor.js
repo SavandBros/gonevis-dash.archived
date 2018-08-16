@@ -3,9 +3,9 @@
 import Quill from "quill";
 import Delta from "quill-delta";
 
+const BlockEmbed = Quill.import("blots/block/embed");
 const Clipboard = Quill.import("modules/clipboard");
 const icons = Quill.import("ui/icons");
-const BlockEmbed = Quill.import("blots/block/embed");
 const customIcons = [{
   icon: "bold",
   replace: "bold",
@@ -81,7 +81,29 @@ class CustomClipboard extends Clipboard {
   }
 }
 
-class DividerBlot extends BlockEmbed { }
+class VideoBlot extends BlockEmbed {
+  static create(url) {
+    let node = super.create(url);
+    let iframe = document.createElement('iframe');
+    // Set styles for wrapper
+    node.setAttribute('class', 'embed-responsive embed-responsive-16by9');
+    // Set styles for iframe
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allowfullscreen', true);
+    iframe.setAttribute('src', url);
+    // Append iframe as child to wrapper
+    node.appendChild(iframe);
+    return node;
+  }
+
+  static value(domNode) {
+    return domNode.firstChild.getAttribute('src');
+  }
+}
+VideoBlot.blotName = 'video';
+VideoBlot.tagName = 'div';
+
+class DividerBlot extends BlockEmbed {}
 DividerBlot.blotName = 'divider';
 DividerBlot.className = 'divider';
 DividerBlot.tagName = 'hr';
@@ -99,7 +121,6 @@ angular.forEach(customIcons, (icon) => {
   icons[icon.icon] = getIcon(icon.replace, icon.text);
 });
 
-
 // Built-in icons
 icons.list.bullet = getIcon('list-ul');
 icons.direction[''] = getIcon('paragraph');
@@ -112,3 +133,4 @@ icons.align.justify = getIcon('align-justify');
 Quill.register('modules/clipboard', CustomClipboard, true);
 Quill.register(icons, true);
 Quill.register(DividerBlot);
+Quill.register(VideoBlot, true);
