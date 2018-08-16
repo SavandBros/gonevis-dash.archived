@@ -231,8 +231,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       'header',
       'direction',
       'align',
-      'height',
-      'width',
       "allow",
       "allowfullscreen"
     ];
