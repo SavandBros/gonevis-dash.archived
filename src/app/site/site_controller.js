@@ -239,6 +239,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     });
   };
 
+  $scope.paypalStyle = {
+    label: 'paypal',
+    size:  'responsive',    // small | medium | large | responsive
+    shape: 'rect',     // pill | rect
+    color: 'black',     // gold | blue | silver | black
+    tagline: false
+};
+
   $scope.paypalonAuthorize = (data, actions) => {
     // Set up a url on your server to execute the payment
     const EXECUTE_URL = '/demo/checkout/api/paypal/payment/execute/';
