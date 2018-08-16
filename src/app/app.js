@@ -1,6 +1,5 @@
 /*global GoNevisEnv*/
 
-
 const deps = [
   'ngAnimate',
   'ngMessages',
@@ -19,8 +18,7 @@ const deps = [
   'angular-loading-bar',
   'toaster',
   'LocalStorageModule',
-  'pascalprecht.translate',
-  'paypal-checkout',
+  'pascalprecht.translate'
 ];
 
 const MODULE_NAME = 'gonevisDash';

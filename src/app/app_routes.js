@@ -198,7 +198,16 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       url: "/site",
       controller: "SiteController",
       template: require("./site/site_view.html"),
-      auth: true
+      auth: true,
+      lazyLoad: ($transition$) => {
+        const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
+
+        return import ( /* webpackChunkName: "site" */ "./site/site_controller")
+          .then(mod => $ocLazyLoad.inject(["paypal-button", mod.SITE_CONTROLLER_MODULE]))
+          .catch(err => {
+            throw new Error("Ooops, something went wrong, " + err);
+          });
+      }
     })
     // .state("dash.tag-edit", {
     //   url: "/tag-list/:tagId",

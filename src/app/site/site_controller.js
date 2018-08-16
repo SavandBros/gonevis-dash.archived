@@ -1,6 +1,7 @@
 "use strict";
 
-import app from "../app";
+import paypal from "paypal-checkout";
+paypal.Button.driver('angular', window.angular);
 
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
                         API, ModalsService, AuthService, DolphinService, Codekit, $translate) {
@@ -230,6 +231,29 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     API.SubscribePlan.post({ siteId: site }, function(data) {
       console.log(data);
     });
+  };
+
+  $scope.paypalPayment = () => {
+    API.SubscribePlan.post({ siteId: site }, function(data) {
+      return data.payment_token;
+    });
+  };
+
+  $scope.paypalonAuthorize = (data, actions) => {
+    // Set up a url on your server to execute the payment
+    const EXECUTE_URL = '/demo/checkout/api/paypal/payment/execute/';
+
+    // Set up the data you need to pass to your server
+    data = {
+        paymentID: data.paymentID,
+        payerID: data.payerID
+    };
+
+    // Make a call to your server to execute the payment
+    return paypal.request.post(EXECUTE_URL, data)
+        .then(function (res) {
+            window.alert('Payment Complete!');
+        });
   }
 
   /**
@@ -282,4 +306,5 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   constructor();
 }
 
-app.controller("SiteController", SiteController);
+const SITE_CONTROLLER_MODULE = angular.module('gonevisDash').controller("SiteController", SiteController);
+export { SITE_CONTROLLER_MODULE };

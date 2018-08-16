@@ -8,7 +8,6 @@ require("angular-sanitize");
 require('@uirouter/angularjs');
 require("oclazyload");
 require('bootstrap');
-require('paypal-checkout');
 
 // Third party
 require("ng-tags-input");
