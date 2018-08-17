@@ -36,6 +36,17 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       $scope.siteTemplate = data.template_config;
       $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
     });
+
+    $scope.PayPalEnv = {
+      env: "sandbox",
+      style: {
+        label: 'paypal',
+        size:  'responsive',    // small | medium | large | responsive
+        shape: 'rect',     // pill | rect
+        color: 'black',     // gold | blue | silver | black
+        tagline: false
+      },
+    };
   }
 
   /**
@@ -234,34 +245,25 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   };
 
   $scope.paypalPayment = () => {
-    API.SubscribePlan.post({ siteId: site }, {}, function(data) {
-      return data.payment_token;
+    return new paypal.Promise(function(resolve, reject) {
+      API.SubscribePlan.post({ siteId: site }, {plan_id: 2}, function(data) {
+        console.log("Making PayPal payment!");
+        console.log(data);
+        return resolve(data.payment_token);
+      });
     });
   };
 
-  $scope.paypalStyle = {
-    label: 'paypal',
-    size:  'responsive',    // small | medium | large | responsive
-    shape: 'rect',     // pill | rect
-    color: 'black',     // gold | blue | silver | black
-    tagline: false
-};
-
   $scope.paypalonAuthorize = (data, actions) => {
     // Set up a url on your server to execute the payment
-    const EXECUTE_URL = '/demo/checkout/api/paypal/payment/execute/';
+    console.log(`PayPal onAuthorize `)
+    console.log(data);
+    console.log(actions);
 
-    // Set up the data you need to pass to your server
-    data = {
-        paymentID: data.paymentID,
-        payerID: data.payerID
-    };
-
-    // Make a call to your server to execute the payment
-    return paypal.request.post(EXECUTE_URL, data)
-        .then(function (res) {
-            window.alert('Payment Complete!');
-        });
+    API.SubscribePlan.post({ siteId: site }, {plan_id: 2, payment_token: data.paymentToken}, function(data) {
+      console.log("Executed the Payment!");
+      console.log(data);
+    });
   }
 
   /**
