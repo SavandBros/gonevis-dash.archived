@@ -228,13 +228,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * Debug
    */
   $scope.subscribe = function() {
-    API.SubscribePlan.post({ siteId: site }, function(data) {
+    API.SubscribePlan.post({ siteId: site }, {}, function(data) {
       console.log(data);
     });
   };
 
   $scope.paypalPayment = () => {
-    API.SubscribePlan.post({ siteId: site }, function(data) {
+    API.SubscribePlan.post({ siteId: site }, {}, function(data) {
       return data.payment_token;
     });
   };
