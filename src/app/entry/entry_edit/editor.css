@@ -1,6 +1,7 @@
 /* Editor */
 
 .editor-container {
+    margin-top: 30px !important;
     transition: ease-in-out all 0.3s;
 }
 
@@ -44,6 +45,7 @@
     left: 0;
     right: 0;
     top: 0;
+    height: 50px;
     background: #fff;
     z-index: 9;
     border: none !important;
@@ -103,7 +105,7 @@
 
 .ql-snow.ql-toolbar button {
     width: 40px !important;
-    height: 60px !important;
+    height: 50px !important;
     font-size: 0.7em;
     color: #444;
 }
@@ -124,7 +126,7 @@
 }
 
 .ql-picker {
-    height: 60px !important;
+    height: 50px !important;
 }
 
 .ql-snow .ql-picker-label {
@@ -138,11 +140,11 @@
 }
 
 .ql-snow span.ql-header .ql-picker-label {
-    line-height: 63px;
+    line-height: 53px;
 }
 
 .ql-snow span.ql-icon-picker .ql-picker-label {
-    line-height: 60px;
+    line-height: 50px;
 }
 
 .ql-snow .ql-picker-options {
@@ -199,6 +201,7 @@
     font-size: 1.5em;
     padding: 10px;
     margin-top: 60px;
+    color: #222;
 }
 
 .ql-editor.ql-blank::before {
@@ -350,5 +353,5 @@ pre {
 }
 
 .navbar-fixed-top.push-out {
-    top: -50px;
+    top: -51px;
 }
