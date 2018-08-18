@@ -61,7 +61,7 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
    * @param transition {Event}
    */
   $transitions.onStart({}, function (transition) {
-    if (transition.to().url === "/reader" || transition.to().name.indexOf("dash.entry-edit") !== -1) {
+    if (transition.to().name.indexOf("reader") !== -1 || transition.to().name.indexOf("dash.entry-edit") !== -1) {
       $rootScope.hideSidebar = true;
     } else {
       $rootScope.hideSidebar = false;
