@@ -17,7 +17,7 @@
           <a ui-sref="dash.main({s: set.lastSite})" translate>DASHBOARD</a>
         </li>
         <li ng-class="{active: state.includes('reader')}">
-          <a ui-sref="reader" translate>READER</a>
+          <a ui-sref="reader.explore-feed({view: 'feed'})" translate ng-click="set.sidebar = false">READER</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -64,7 +64,7 @@
 </nav>
 
 <!-- Sidebar content -->
-<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar, 'dis-none': hideSidebar}"
+<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar}"
   ng-if="auth.isAuthenticated()">
   <!-- Sites dropdown -->
   <div class="dropdown dis-g">
