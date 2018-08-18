@@ -77,9 +77,14 @@ hr[soft] {
 
 /* No sidebar */
 
-.no-sidebar .sidebar-content {
+/* .no-sidebar .sidebar-content {
     opacity: 0;
     display: none;
+} */
+
+.no-sidebar .sidebar-content,
+.no-sidebar .sidebar-content .btn {
+    left: -60px !important;
 }
 
 /* Content */
@@ -145,7 +150,7 @@ header:not(.no-sidebar)~#content .container-fluid {
 
 .navbar,
 .navbar li {
-    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, opacity 0.3s ease-in-out, top cubic-bezier(1, 0.02, 0, 0.99) 0.4s;
+    transition: all 0.2s ease-in-out;
 }
 
 .navbar-brand {
@@ -2010,11 +2015,11 @@ img.cache {
     text-transform: uppercase;
 }
 
-.tab.first {
+.tab.feed {
     clip-path: polygon(calc(100% - 20px) 0, 100% 100%, 0px 100%, 0 0);
 }
 
-.tab.second {
+.tab.explore {
     clip-path: polygon(100% 0px, 100% 100%, 20px 100%, 0px 0px);
 }
 
