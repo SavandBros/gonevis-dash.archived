@@ -305,5 +305,7 @@
   "RESTRICTED_PAGE": "You don't have permission to visit this page.",
   "READER": "Reader",
   "EXPLORE": "Explore",
-  "FEED": "Feed"
+  "FEED": "Feed",
+  "NO_FEED": "Your followings will appear here.",
+  "COLLAPSE": "Collapse"
 }
