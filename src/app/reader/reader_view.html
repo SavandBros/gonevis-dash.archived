@@ -12,7 +12,10 @@
             <h3>{{ tab.label }}</h3>
           </div>
         </div>
-        <div class="col-md-4 animated fadeIn" ng-if="!loading" ng-repeat="post in explore">
+        <!-- Nothing text -->
+        <nothing text="{{ nothingText }}" view="true" ng-if="!explore.length && !loading"></nothing>
+        <!-- Reader -->
+        <div class="col-md-4 animated fadeIn" ng-if="!loading" ng-repeat="post in explore" ng-if="explore.length">
           <div class="explore-wrapper">
             <a ng-href="{{ post.absolute_uri }}">
               <div class="main">
