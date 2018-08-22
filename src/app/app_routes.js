@@ -19,10 +19,7 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       controller: "SiteNewController",
       template: require("./site/site_new/site_new_view.html"),
       auth: true,
-      title: "New Site",
-      params: {
-        s: 0
-      }
+      title: "New Site"
     })
     .state("reader", {
       url: "/reader",
