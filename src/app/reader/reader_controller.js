@@ -15,7 +15,7 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
 
     $scope.pageForm = {};
 
-    $translate(["EXPLORE", "FEED"]).then(function (translations) {
+    $translate(["EXPLORE", "FEED", "NO_FEED"]).then(function (translations) {
       // List of tabs
       $scope.tabs = [{
         class: "feed",
@@ -31,6 +31,8 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
           $scope.setCurrentTab($scope.tabs[index]);
         }
       });
+
+      $scope.nothingText = translations.NO_FEED;
     });
   }
 
