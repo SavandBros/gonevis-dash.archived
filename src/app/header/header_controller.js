@@ -235,7 +235,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   /**
    * @desc Site update
    */
-  $scope.$on("gonevisDash.SiteController:update", constructor);
+  $scope.$on("gonevisDash.SiteController:update", () => {
+    constructor();
+    $scope.currentSite = $scope.user.getSites()[$scope.param.s];
+  });
 
   /**
    * @desc User update
