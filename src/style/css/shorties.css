@@ -209,6 +209,10 @@
     border-left: none;
 }
 
+.b-right-no {
+    border-right: none !important;
+}
+
 .b-color-0 {
     border-color: orange;
 }

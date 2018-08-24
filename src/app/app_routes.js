@@ -19,9 +19,25 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       controller: "SiteNewController",
       template: require("./site/site_new/site_new_view.html"),
       auth: true,
-      title: "New Site",
+      title: "New Site"
+    })
+    .state("reader", {
+      url: "/reader",
+      abstract: true,
+      template: "<ui-view/>",
+      auth: true
+    })
+    .state("reader.explore-feed", {
+      url: "/:view",
+      controller: "ReaderController",
+      template: require("./reader/reader_view.html"),
+      auth: true,
+      title: "Reader",
       params: {
-        s: 0
+        view: {
+          name: null,
+          dynamic: true
+        }
       }
     })
     .state("user", {

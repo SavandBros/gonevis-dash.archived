@@ -1,0 +1,53 @@
+<!-- Main -->
+<div class="container container-light pad-top">
+  <!-- Entry grid -->
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Reader tabs -->
+        <div class="reader-tabs text-center">
+          <div class="tab {{ tab.class }}" ng-repeat="tab in tabs"
+            ng-class="{'is-active': currentTab == tab}"
+            ng-click="setCurrentTab(tab)">
+            <h3>{{ tab.label }}</h3>
+          </div>
+        </div>
+        <!-- Nothing text -->
+        <nothing text="{{ nothingText }}" view="true" ng-if="!explore.length && !loading"></nothing>
+        <!-- Reader -->
+        <div class="col-md-4 animated fadeIn" ng-if="!loading" ng-repeat="post in explore" ng-if="explore.length">
+          <div class="explore-wrapper">
+            <a ng-href="{{ post.absolute_uri }}">
+              <div class="main">
+                <div class="cover" ng-if="post.media.cover_image"
+                  ng-style="{'background-image':'url({{ post.media.cover_image.thumbnail_256x256  }})'}"></div>
+                <div class="body">
+                  <p class="o-fade small s-mar-no">
+                    {{ 'PUBLISHED' | translate }} &middot; {{ post.published | date }}
+                  </p>
+                  <h3 ng-class="{'no-cover': !post.media.cover_image}">{{ post.title }}</h3>
+                  <p class="s-mar-top-soft">{{ post.content }}</p>
+                </div>
+              </div>
+            </a>
+            <div class="explore-wrapper-bottom">
+              <img class="pull-left s-mar-right-soft img-circle" width="40"
+                ng-src="{{ bottomImage(post) }}">
+              <small>
+                <a ng-href="{{ post.site.absolute_uri }}"
+                  title="{{ post.site.title }}" target="_blank">{{ post.site.title }}
+                </a>
+                <br>
+                <span class="o-fade-soft">by</span>
+                <a ng-href="{{ post.user.absolute_uri }}"
+                  title="{{ post.user.username }}" target="_blank">
+                  {{ post.user.username }}
+                </a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
