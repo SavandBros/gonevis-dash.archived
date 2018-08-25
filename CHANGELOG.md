@@ -6,6 +6,7 @@
 - Fixed #962: Use preview parameters when previewing posts at editor.
 - Fixed #968: Fix long file labels visibility.
 - Fixed #970: Remove theme config section when no configs.
+- Fixed #455: Add feedback form.
 
 
 2018.8.1
