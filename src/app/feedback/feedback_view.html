@@ -1,0 +1,30 @@
+<div class="modal fade" id="feedback">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h3>
+          {{ "FEEDBACK" | translate }}
+          <!-- Close -->
+          <i class="fa fa-close o-fade pull-right c-p" data-dismiss="modal"></i>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <!-- Form -->
+        <form ng-submit="send(form)" name="feedbackForm">
+          <!-- Input -->
+          <textarea class="form-control" type="text" ng-model="form.data.message"
+            style="min-width: 100%; min-height: 200px;" placeholder="{{ 'FEEDBACK' | translate }}" required>
+          </textarea>
+          <br>
+          <!-- Cancel -->
+          <button class="btn btn-default" type="button" data-dismiss="modal" translate>CANCEL</button>
+          <!-- Send -->
+          <button class="btn btn-primary pull-right" type="submit" ng-disabled="form.sending || feedbackForm.$invalid">
+            <i class="fa fa-paper-plane-o fa-fw"></i> {{ "SEND" | translate }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
