@@ -1,3 +1,10 @@
+2018.9.4
+========
+
+**Bug Fixes:**
+- Fixed #973: Remove "lead" from editor for both pages and posts.
+
+
 2018.9.1
 ========
 
