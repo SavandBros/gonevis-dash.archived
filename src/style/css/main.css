@@ -536,6 +536,7 @@ md-toast {
     background: #fff;
     border: 1px solid #eee;
     border-radius: 6px;
+    max-width: calc(100% - 20px);
 }
 
 .dolphin .caption,
