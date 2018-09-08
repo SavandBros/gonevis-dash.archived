@@ -15,11 +15,11 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       title: "Get Started"
     })
     .state("site-new", {
-      url: "/new-site?site",
+      url: "/new-blog?site",
       controller: "SiteNewController",
       template: require("./site/site_new/site_new_view.html"),
       auth: true,
-      title: "New Site",
+      title: "New Blog",
       params: {
         s: 0
       }
@@ -195,7 +195,7 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       title: "Pages"
     })
     .state("dash.site", {
-      url: "/site",
+      url: "/blog",
       controller: "SiteController",
       template: require("./site/site_view.html"),
       auth: true

@@ -30,7 +30,7 @@
 
 <!-- Sidebar content -->
 <div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar}" ng-if="auth.isAuthenticated()">
-  <!-- Sites dropdown -->
+  <!-- Blogs dropdown -->
   <div class="dropdown dis-g">
     <!-- Header -->
     <a class="main dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
@@ -45,7 +45,7 @@
     </a>
     <!-- Header dropdown -->
     <ul class="dropdown-menu">
-      <!-- Sites -->
+      <!-- Blogs -->
       <li ng-repeat="site in user.getSites()" ng-class="{active: param.s == $index}">
         <a ui-sref="dash.main({s: $index})" ng-click="setSite($index)">{{ site.title }}</a>
       </li>
