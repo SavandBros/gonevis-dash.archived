@@ -11,13 +11,13 @@
         ng-if="steps[step] === 'domain'">
 
         <!-- Title -->
-        <h2 class="text-center" translate>LETS_CREATE_SITE</h2>
+        <h2 class="text-center" translate>LETS_CREATE_BLOG</h2>
 
         <!-- Domain form -->
         <div class="form-group s-mar-y">
           <div class="input-group">
             <input type="text" name="siteName" ng-model="domainForm.name" ng-change="checkDomain(domainForm)"
-              class="form-control input-xlg primary" placeholder="{{ 'ENTER_SITE_ADDRESS' | translate }}"
+              class="form-control input-xlg primary" placeholder="{{ 'ENTER_BLOG_ADDRESS' | translate }}"
               ng-model-options='{ debounce: 500 }' ng-minlength="3">
             <span class="input-group-addon" id="subdomain">
               <span class="text-primary">.gonevis.com</span>
