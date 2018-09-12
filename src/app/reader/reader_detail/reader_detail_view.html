@@ -1,0 +1,39 @@
+<div class="container-fluid reader-cover s-pad-no text-center" ng-if="post.media.cover_image"
+	ng-style="{'background-image': 'url({{ post.media.cover_image.file }})'}">
+	<div class="container">
+		<h1>{{ post.title }}</h1>
+	</div>
+</div>
+<div class="container">
+	<div>
+		<div class="reader-info">
+			<a ng-href=""><i class="fa fa-arrow-left fa-fw"></i> Back</a>
+			<a href=""><i class="fa fa-comments fa-fw"></i> 34</a>
+			<a href=""><i class="fa fa-thumbs-up fa-fw"></i> 87</a>
+		</div>
+	</div>
+	<nothing text="{{ 'ENTRY_GET_ERROR' | translate }}" ng-if="error"></nothing>
+
+	<div class="reader-content" ng-if="!error && !loading">
+		<h1 ng-if="!post.media.cover_image" class="text-center s-mar-bottom">{{ post.title }}</h1>
+		<div class="ql-editor" ng-bind-html="trustedContent"></div>
+	</div>
+</div>
+
+<!-- Bottom bar -->
+<div class="bottom-bar hidden-xs">
+	<div class="container">
+		<div class="flex-container">
+			<img class="img-circle s-mar-right-soft" ng-src="{{ authorPicture }}">
+			<div class="s-mar-right">
+				From <a href="">Where Man Writes</a> &middot; Followed by <strong>532</strong> people.
+				<br>
+				by <a ng-href="{{ post.updated_by.get_absolute_uri }}" target="_blank">{{ post.updated_by.name }}</a>
+				&middot; {{ post.published | date }}
+			</div>
+			<div class="s-mar-left">
+				<button class="btn btn-primary">Follow for more</button>
+			</div>
+		</div>
+	</div>
+</div>

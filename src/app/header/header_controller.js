@@ -4,9 +4,10 @@ import headerTemplate from "./header_view.html";
 import app from "../app";
 
 function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, AuthService, DolphinService, Codekit,
-  Entry, API, ModalsService, TourService, toaster, $translate) {
+  Entry, API, ModalsService, TourService, toaster, $translate, $transitions) {
 
   function constructor() {
+    $scope.codekit = Codekit;
 
     // Settings
     $scope.set = $rootScope.set;
@@ -17,7 +18,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
 
     // State
     $scope.state = $state;
-    $scope.param = $stateParams;
 
     // Entry formats
     $scope.entryFormats = Codekit.entryFormats;
@@ -43,10 +43,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         label: translations.PAGES,
         sref: "dash.page-list",
         icon: "fa-book"
-      }, {
-        label: translations.READER,
-        sref: "dash.reader",
-        icon: "fa-newspaper-o"
       }, {
         label: translations.TAGS,
         sref: "dash.tag-list",
@@ -151,6 +147,21 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
    */
   $scope.setSite = function (index) {
     $rootScope.set.lastSite = index;
+    $scope.currentSite = $scope.user.getSites()[index];
+  };
+
+  /**
+   * Get current site's logo
+   * @param {object} site
+   *
+   * @returns {string}
+   */
+  $scope.currentSiteLogo = (site) => {
+    if (site && site.media.logo) {
+      return site.media.logo.thumbnail_48x48;
+    }
+
+    return Codekit.getDefaultImage('tiny');
   };
 
   /**
@@ -224,12 +235,40 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   /**
    * @desc Site update
    */
-  $scope.$on("gonevisDash.SiteController:update", constructor);
+  $scope.$on("gonevisDash.SiteController:update", () => {
+    constructor();
+    $scope.currentSite = $scope.user.getSites()[$scope.param.s];
+  });
 
   /**
    * @desc User update
    */
   $scope.$on("gonevisDash.UserController:update", constructor);
+
+  /**
+   * @event onBefore
+   * @desc Before starting to change state callback
+   *
+   * @param transition {Event}
+   */
+  $transitions.onBefore({}, function(transition) {
+    $scope.param = transition.params();
+
+    if (AuthService.isAuthenticated()) {
+      if (transition.to().name.indexOf("site-new") !== -1) {
+        $rootScope.set.sidebar = false;
+      }
+      let index = $rootScope.set.lastSite;
+
+      // Check if current state is includes dash in it's name.
+      if (transition.to().name.indexOf("dash") !== -1) {
+        index = $scope.param.s;
+        $rootScope.set.lastSite = index;
+      }
+
+      $scope.currentSite = $scope.user.getSites()[index];
+    }
+  });
 
   /**
    * @desc Check for tours
@@ -268,5 +307,6 @@ HeaderController.$inject = [
   "ModalsService",
   "TourService",
   "toaster",
-  "$translate"
+  "$translate",
+  "$transitions"
 ];

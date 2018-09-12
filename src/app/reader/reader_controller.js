@@ -2,25 +2,37 @@
 
 import app from "../app";
 
-function ReaderController($scope, API, Pagination, Codekit, $translate, $window, $timeout) {
+function ReaderController($scope, API, $state, Pagination, Codekit, $translate, $window, $timeout, $stateParams) {
 
   let bodyHeight;
+  let currentView;
 
   function constructor() {
+    currentView = "feed";
+    if ($stateParams.view === "explore") {
+      currentView = "explore";
+    }
+
     $scope.pageForm = {};
 
-    $translate(["EXPLORE", "FEED"]).then(function (translations) {
+    $translate(["EXPLORE", "FEED", "NO_FEED"]).then(function (translations) {
       // List of tabs
       $scope.tabs = [{
-        class: "first",
-        label: translations.EXPLORE
-      }, {
-        class: "second",
+        class: "feed",
         label: translations.FEED
+      }, {
+        class: "explore",
+        label: translations.EXPLORE
       }];
 
       // Set current tab
-      $scope.setCurrentTab($scope.tabs[0]);
+      angular.forEach($scope.tabs, (tab, index) => {
+        if (tab.class === currentView) {
+          $scope.setCurrentTab($scope.tabs[index]);
+        }
+      });
+
+      $scope.nothingText = translations.NO_FEED;
     });
   }
 
@@ -35,12 +47,15 @@ function ReaderController($scope, API, Pagination, Codekit, $translate, $window,
       return;
     }
 
+    // Change URL
+    $state.go('reader.explore-feed', { view: tab.class });
+
     // Set current tab
     $scope.currentTab = tab;
     $scope.loading = true;
-    let isFeed = tab.class !== "first";
+    currentView = tab.class;
 
-    $scope.onTabChanged(isFeed, tab);
+    $scope.onTabChanged(tab);
   };
 
   /**
@@ -49,10 +64,10 @@ function ReaderController($scope, API, Pagination, Codekit, $translate, $window,
    * @param {boolean} isFeed
    * @param {object} tab
    */
-  $scope.onTabChanged = (isFeed, tab) => {
-    let currentView = isFeed ? "Feed" : "Explore";
+  $scope.onTabChanged = (tab) => {
+    let api = currentView.charAt(0).toUpperCase() + currentView.substr(1).toLowerCase();
 
-    API[currentView].get({},
+    API[api].get({},
       function (data) {
         // Check current tab before storing data.
         if ($scope.currentTab !== tab) {

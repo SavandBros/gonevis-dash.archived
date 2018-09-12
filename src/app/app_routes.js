@@ -15,21 +15,40 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       title: "Get Started"
     })
     .state("site-new", {
-      url: "/new-site?site",
+      url: "/new-blog?site",
       controller: "SiteNewController",
       template: require("./site/site_new/site_new_view.html"),
       auth: true,
-      title: "New Site",
-      params: {
-        s: 0
-      }
+      title: "New Blog"
     })
     .state("reader", {
       url: "/reader",
+      abstract: true,
+      template: "<ui-view/>",
+      auth: true
+    })
+    .state("reader.explore-feed", {
+      url: "/:view",
       controller: "ReaderController",
       template: require("./reader/reader_view.html"),
       auth: true,
-      title: "Reader"
+      title: "Reader",
+      params: {
+        view: {
+          name: null,
+          dynamic: true
+        }
+      }
+    })
+    .state("reader.detail", {
+      url: "/post/:entryId",
+      controller: "ReaderDetailController",
+      template: require("./reader/reader_detail/reader_detail_view.html"),
+      auth: true,
+      title: "Reader",
+      params: {
+        entryId: null
+      }
     })
     .state("user", {
       url: "/user",
@@ -202,7 +221,7 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       title: "Pages"
     })
     .state("dash.site", {
-      url: "/site",
+      url: "/blog",
       controller: "SiteController",
       template: require("./site/site_view.html"),
       auth: true

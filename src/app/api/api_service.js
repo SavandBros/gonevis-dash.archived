@@ -61,6 +61,10 @@ function API($resource, ENV) {
     }, {
       name: "UploadUrl",
       endpoint: "website/site/:siteId/upload-url/" // POST
+    }, {
+      name: "ReaderDetail",
+      endpoint: "website/entry/:entryId/", // GET
+      isZero: true
     },
     // Sushial
     {

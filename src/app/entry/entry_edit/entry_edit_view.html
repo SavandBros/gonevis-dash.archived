@@ -140,13 +140,6 @@
               </div>
               <!-- Meta Title and Meta Desc -->
               <div uib-collapse="advanced">
-                <!-- Lead -->
-                <div class="form-group" ng-class="{'has-error': form.errors.lead}">
-                  <textarea id="lead" class="form-control" type="text"
-                    ng-model="form.get.lead" placeholder="{{ 'LEAD_PARAGRAPH' | translate }}" rows="5">
-                  </textarea>
-                  <small id="lead" class="help-block" ng-show="form.errors.lead">{{ form.errors.lead[0] }}</small>
-                </div>
                 <!-- Slug -->
                 <div class="form-group" ng-class="{'has-error': form.errors.slug}">
                   <input id="slug" class="form-control" type="text" ng-model="form.get.slug"

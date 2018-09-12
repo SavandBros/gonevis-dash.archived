@@ -45,7 +45,9 @@ function UserController($scope, $rootScope, $stateParams,
         } else {
           $scope.user[key] = data[key];
         }
-        $scope.user = AuthService.setAuthenticatedUser($scope.user.get, true);
+
+        $scope.user = new Account(data);
+        $scope.user = AuthService.setAuthenticatedUser(data, true);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
         toaster.clear(toasters[key]);

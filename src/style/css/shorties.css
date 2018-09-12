@@ -227,6 +227,13 @@
 }
 
 
+/* Background colors */
+
+.bg-white {
+    background-color: #fff;
+}
+
+
 /* Displays */
 
 .dis-b {

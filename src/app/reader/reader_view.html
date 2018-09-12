@@ -4,6 +4,7 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-12">
+        <!-- Reader tabs -->
         <div class="reader-tabs text-center">
           <div class="tab {{ tab.class }}" ng-repeat="tab in tabs"
             ng-class="{'is-active': currentTab == tab}"
@@ -11,9 +12,12 @@
             <h3>{{ tab.label }}</h3>
           </div>
         </div>
-        <div class="col-md-4 animated fadeIn" ng-if="!loading" ng-repeat="post in explore">
+        <!-- Nothing text -->
+        <nothing text="{{ nothingText }}" view="true" ng-if="!explore.length && !loading"></nothing>
+        <!-- Reader -->
+        <div class="col-md-4 animated fadeIn" ng-if="!loading" ng-repeat="post in explore" ng-if="explore.length">
           <div class="explore-wrapper">
-            <a ng-href="{{ post.absolute_uri }}">
+            <a ui-sref="reader.detail({ entryId: post.id })">
               <div class="main">
                 <div class="cover" ng-if="post.media.cover_image"
                   ng-style="{'background-image':'url({{ post.media.cover_image.thumbnail_256x256  }})'}"></div>

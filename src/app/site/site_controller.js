@@ -55,8 +55,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       return;
     }
 
-    $translate('UPDATING_SITE').then(function (updatingSite) {
-      toasters[key] = toaster.info(updatingSite);
+    $translate('UPDATING_BLOG').then(function (updatingBlog) {
+      toasters[key] = toaster.info(updatingBlog);
     });
     payload[key] = value;
 
@@ -66,23 +66,24 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       function(data) {
         if (key === "cover_image" || key === "logo") {
           $scope.site.media[key] = data.media[key];
+          $scope.user.sites[$stateParams.s].media[key] = data.media[key];
         } else {
           $scope.site[key] = data[key];
+          $scope.user.sites[$stateParams.s][key] = data[key];
         }
 
-        $scope.user.sites[$stateParams.s][key] = data[key];
         AuthService.setAuthenticatedUser($scope.user);
 
         $rootScope.$broadcast("gonevisDash.SiteController:update");
 
         toaster.clear(toasters[key]);
-        $translate(["DONE", "SITE_UPDATED"]).then(function(translations) {
-          toaster.info(translations.DONE, translations.SITE_UPDATED);
+        $translate(["DONE", "BLOG_UPDATED"]).then(function(translations) {
+          toaster.info(translations.DONE, translations.BLOG_UPDATED);
         });
       },
       function() {
-        $translate(["ERROR", "SITE_UPDATE_ERROR"]).then(function(translations) {
-          toaster.error(translations.ERROR, translations.SITE_UPDATE_ERROR);
+        $translate(["ERROR", "BLOG_UPDATE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.BLOG_UPDATE_ERROR);
         });
       }
     );
@@ -93,7 +94,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    */
   $scope.deleteSite = function() {
     // How sure? Like confirm-a-confirm sure?
-    const text = $translate.instant("DELETE_SITE_PROMPT");
+    const text = $translate.instant("DELETE_BLOG_PROMPT");
     if ($window.prompt(text) !== $scope.site.title) {
       return;
     }
@@ -106,15 +107,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         AuthService.setAuthenticatedUser($scope.user);
         // Announce site removal
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
-        $translate(["DONE", "SITE_DELETED"]).then(function(translations) {
-          toaster.success(translations.DONE, translations.SITE_DELETED);
+        $translate(["DONE", "BLOG_DELETED"]).then(function(translations) {
+          toaster.success(translations.DONE, translations.BLOG_DELETED);
         });
         // Go to main or new site page if has no other sites
         $state.go($scope.user.sites.length > 0 ? "dash.main" : "site-new");
       },
       function() {
-        $translate(["ERROR", "SITE_DELETE_ERROR"]).then(function(translations) {
-          toaster.error(translations.ERROR, translations.SITE_DELETE_ERROR);
+        $translate(["ERROR", "BLOG_DELETE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.BLOG_DELETE_ERROR);
         });
       }
     );
@@ -143,14 +144,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       },
       function() {
         $scope.loadingTemplate = false;
-        $translate(["DONE", "SITE_TEMPLATE_UPDATED"]).then(function(translations) {
-          toaster.info(translations.DONE, translations.SITE_TEMPLATE_UPDATED);
+        $translate(["DONE", "BLOG_TEMPLATE_UPDATED"]).then(function(translations) {
+          toaster.info(translations.DONE, translations.BLOG_TEMPLATE_UPDATED);
         });
       },
       function(data) {
         $scope.loadingTemplate = false;
-        $translate(["ERROR", "SITE_TEMPLATE_UPDATE_ERROR"]).then(function(translations) {
-          toaster.error(translations.ERROR, data.detail ? data.detail : translations.SITE_TEMPLATE_UPDATE_ERROR);
+        $translate(["ERROR", "BLOG_TEMPLATE_UPDATE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, data.detail ? data.detail : translations.BLOG_TEMPLATE_UPDATE_ERROR);
         });
       }
     );
@@ -258,13 +259,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           $scope.siteTemplate.fields
         );
 
-        $translate(["DONE", "SITE_TEMPLATE_UPDATED"]).then(function(translations) {
-          toaster.info(translations.DONE, translations.SITE_TEMPLATE_UPDATED);
+        $translate(["DONE", "BLOG_TEMPLATE_UPDATED"]).then(function(translations) {
+          toaster.info(translations.DONE, translations.BLOG_TEMPLATE_UPDATED);
         });
       },
       function() {
-        $translate(["ERROR", "SITE_TEMPLATE_UPDATE_ERROR"]).then(function(translations) {
-          toaster.error(translations.ERROR, translations.SITE_TEMPLATE_UPDATE_ERROR);
+        $translate(["ERROR", "BLOG_TEMPLATE_UPDATE_ERROR"]).then(function(translations) {
+          toaster.error(translations.ERROR, translations.BLOG_TEMPLATE_UPDATE_ERROR);
         });
       }
     );
