@@ -303,6 +303,7 @@
   "PROFILE_PICTURE_UPDATE_ERROR": "An error has occured while uploading profile picture, try again.",
   "RESTRICTED_PAGE": "You don't have permission to visit this page.",
   "READER": "Reader",
+  "READER_DETAIL_INFO": "From <a ng-href='{{ site.link }}'>{{ site.title }}</a> &middot; Followed by <strong>{{ site.subscribers }}</strong> people. <br> By <a ng-href='{{ author.link }}'>{{ author.name }}</a>",
   "EXPLORE": "Explore",
   "FEED": "Feed",
   "NO_FEED": "Your followings will appear here.",
