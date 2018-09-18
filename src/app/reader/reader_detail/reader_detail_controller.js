@@ -5,69 +5,93 @@ require('quill/dist/quill.snow.css');
 require('../../entry/entry_edit/editor.css');
 
 function ReaderDetailController($scope, $state, $sce, $stateParams, $timeout, $translate, $transitions, API, Codekit, $window) {
-	let lastScroll;
-	let header;
-	let headerTopOffset;
+  let lastScroll;
 
-	function constructor() {
-		lastScroll = $window.pageYOffset;
-		let postId = $stateParams.entryId;
+  function constructor() {
+    lastScroll = $window.pageYOffset;
+    let postId = $stateParams.entryId;
 
-		// Check param
-		if (!postId) {
-			return $state.go("reader.explore-feed", {view: "feed"});
-		}
+    // Check param
+    if (!postId) {
+      return $state.go("reader.explore-feed", { view: "feed" });
+    }
 
-		// Check post's id length
-		if (postId.length !== 36) return $scope.error = true;
+    // Check post's id length
+    if (postId.length !== 36) return $scope.error = true;
 
-		$scope.loading = true;
+    $scope.loading = true;
 
-		console.log(postId)
-
-		// API call
-		API.ReaderDetail.get({ entryId: postId},
-			function (data) {
+    // API call
+    API.ReaderDetail.get({ entryId: postId },
+      function (data) {
+				$scope.loading = false;
+				// Post data
 				$scope.post = data;
-				$scope.authorPicture = data.updated_by.media.picture ? data.updated_by.media.thumbnail_48x48 : Codekit.getDefaultImage('avatar')
+				// Post logo
+				$scope.siteLogo = data.site.media.logo ? data.site.media.logo.thumbnail_48x48 : Codekit.getDefaultImage('tiny');
+				// Trust post content as HTML
 				$scope.trustedContent = $sce.trustAsHtml(data.content);
-				$scope.loading = false;
+				// Translation
+        $translate(
+          ["READER_DETAIL_INFO"], {
+            site: { title: data.site.title, link: data.site.absolute_uri, subscribers: data.site.followers_count },
+            author: { name: data.user.name, link: data.user.get_absolute_uri }
+          }
+        ).then(function (translations) {
+          $scope.bottomInfo = translations.READER_DETAIL_INFO;
+        });
 
-				$timeout(() => {
-					header = angular.element(".reader-info");
-					headerTopOffset = header[0].offsetTop;
-				})
-			},
-			function () {
-				$scope.error = true;
-				$scope.loading = false;
-			}
-		);
-	}
+        // Scroll event
+        angular.element($window).bind("scroll", onScroll);
+      },
+      function () {
+        $scope.error = true;
+        $scope.loading = false;
+      }
+    );
+  }
 
-  angular.element($window).scroll(() => {
+  // $scope.subscribe = function (siteId) {
+  // 	console.log(siteId)
+
+  //   API.Subscribe.save({ siteId: siteId },
+  //     function (data) {
+  // 			console.log(data);
+  // 		}
+  //   );
+  // };
+
+  /**
+   * @desc Auto hide bottom bar when scrolling.
+   *
+   * @returns {void}
+   */
+  function onScroll() {
+    let scrollLimit = $scope.post.media.cover_image ? 400 : 0;
     let bottom = "-70px";
 
     // If user scrolled 400 pixles down.
-    if ($window.scrollY >= 400) {
+    if ($window.scrollY >= scrollLimit) {
       let currentScroll = $window.scrollY;
 
       if (lastScroll > currentScroll) bottom = "0";
 
-      angular.element(".bottom-bar").css({'bottom': bottom});
+      angular.element(".bottom-bar").css({ 'bottom': bottom });
       lastScroll = currentScroll;
     }
 
-    if (($window.pageYOffset + 60) > headerTopOffset) {
-      header.addClass("sticky");
-    } else {
-      header.removeClass("sticky");
-    }
+    angular.element(".reader-cover")
+      .css({ 'background-position': 'center calc(50% + ' + (0 - $window.scrollY / 2) + 'px)' });
+  }
 
-    angular.element(".reader-cover").css({'background-position': 'center calc(50% + ' + (0 - $window.scrollY / 2) + 'px)'});
+  /**
+   * @desc Cancel events on state change
+   */
+  $scope.$on("$destroy", function () {
+    angular.element($window).off('scroll', onScroll);
   });
 
-	constructor();
+  constructor();
 }
 
 app.controller("ReaderDetailController", ReaderDetailController);
