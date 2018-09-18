@@ -2045,14 +2045,15 @@ img.cache {
     background-attachment: fixed;
     min-height: 500px;
     margin-top: 45px !important;
-    box-shadow: inset 0 10000px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 10000px rgba(209, 113, 0, 0.6);
     color: #fff;
     padding-top: 150px;
 }
 
 .container-fluid.reader-cover h1 {
     font-weight: 700;
-    text-shadow: 0px 2px 3px #000;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    font-size: 42px;
 }
 
 .reader-detail {
@@ -2075,32 +2076,7 @@ img.cache {
 
 .reader-content p {
     color: #555;
-}
-
-
-/* Reader detail - top bar */
-
-.reader-info {
-    transition: ease-in-out all 0.2s;
-    position: absolute;
-    left: 300px;
-}
-
-.reader-info.sticky {
-    position: fixed;
-    top: 60px;
-    left: 15px;
-}
-
-.reader-info a {
-    transition: ease-in-out all .2s;
-    padding: 10px 15px;
-    margin-right: 5px;
-    color: #555;
-}
-
-.reader-info a:hover {
-    color: #222;
+    line-height: 30px !important;
 }
 
 
