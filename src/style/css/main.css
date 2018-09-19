@@ -1761,6 +1761,12 @@ img.cache {
     .team-role {
         padding: 10px 0 0 35px;
     }
+    .container-fluid.reader-cover {
+        padding: 110px 30px !important;
+    }
+    .reader-content {
+        padding: 10px !important;
+    }
 }
 
 
@@ -2047,7 +2053,13 @@ img.cache {
     margin-top: 45px !important;
     box-shadow: inset 0 10000px rgba(209, 113, 0, 0.6);
     color: #fff;
-    padding-top: 150px;
+    padding: 110px 90px;
+    margin-bottom: -170px;
+}
+
+.container-fluid.reader-cover .container {
+    margin-top: 0;
+    display: initial;
 }
 
 .container-fluid.reader-cover h1 {
@@ -2067,9 +2079,31 @@ img.cache {
     word-break: break-word;
     color: #333;
     background: #fff;
-    padding: 50px !important;
+    padding: 50px;
     margin-bottom: 50px;
+    transition: ease-in-out all 0.1s;
 }
+
+.lights.off .reader-content {
+    color: #fff;
+    background-color: #111;
+}
+
+.lights.off .container-fluid.reader-cover,
+.lights.off .reader-wrapper {
+    background-color: #111 !important;
+}
+
+.lights.off .bottom-bar {
+    bottom: 0px;
+    background: rgb(0, 0, 0);
+    color: #ccc;
+}
+
+.lights.off .bottom-bar a {
+    color: #fff;
+}
+
 .reader-content strong {
     color: #333;
 }
@@ -2077,6 +2111,76 @@ img.cache {
 .reader-content p {
     color: #555;
     line-height: 30px !important;
+}
+
+.lights.off .reader-content p,
+.lights.off .reader-content strong {
+    color: #fff;
+}
+
+.full-screen {
+    position: absolute;
+    top: 0;
+    padding: 0;
+    width: 100% !important;
+    height: 100%;
+    margin: 0 !important;
+    z-index: 10000;
+    background: #fff;
+    display: table;
+}
+
+.lights.off .full-screen {
+    background: #111;
+}
+
+.full-screen .reader-content {
+    padding: 0 !important;
+}
+
+.full-screen + .bottom-bar {
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.full-screen-buttons i {
+    position: fixed;
+    bottom: 30px;
+    left: 50px;
+    line-height: 2em;
+    font-size: 1.5em;
+    z-index: 10000;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    visibility: hidden;
+    opacity: 0;
+    transition: ease-in-out all 0.1s;
+}
+
+.full-screen ~ .full-screen-buttons i {
+    opacity: 0.6;
+    visibility: visible;
+}
+
+.full-screen-buttons i:hover {
+    background: #eee;
+    opacity: 1;
+    color: #000;
+    transform: scale(1.2);
+}
+
+.full-screen-buttons i.fa-compress {
+    right: 50px;
+    left: unset;
+}
+
+.full-screen-buttons .tooltip {
+    z-index: 10000;
+    position: fixed;
+    bottom: 80px !important;
+    top: unset !important;
 }
 
 
@@ -2115,7 +2219,20 @@ img.cache {
 .bottom-bar .flex-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+}
+
+.bottom-bar .flex-container .flex-auto {
+    flex: auto;
+}
+
+.bottom-bar .flex-container i {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    opacity: 0.5;
+}
+
+.bottom-bar .flex-container i:hover {
+    opacity: 1;
 }
 
 .bottom-bar .flex-container button {
