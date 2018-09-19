@@ -1,6 +1,7 @@
 "use strict";
 
 import app from "../../app";
+require('./../reader.css');
 require('quill/dist/quill.snow.css');
 require('../../entry/entry_edit/editor.css');
 
