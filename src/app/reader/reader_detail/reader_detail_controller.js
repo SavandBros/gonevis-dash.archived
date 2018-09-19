@@ -24,14 +24,14 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $timeout, $t
     // API call
     API.ReaderDetail.get({ entryId: postId },
       function (data) {
-				$scope.loading = false;
-				// Post data
-				$scope.post = data;
-				// Post logo
-				$scope.siteLogo = data.site.media.logo ? data.site.media.logo.thumbnail_48x48 : Codekit.getDefaultImage('tiny');
-				// Trust post content as HTML
-				$scope.trustedContent = $sce.trustAsHtml(data.content);
-				// Translation
+        $scope.loading = false;
+        // Post data
+        $scope.post = data;
+        // Post logo
+        $scope.siteLogo = data.site.media.logo ? data.site.media.logo.thumbnail_48x48 : Codekit.getDefaultImage('tiny');
+        // Trust post content as HTML
+        $scope.trustedContent = $sce.trustAsHtml(data.content);
+        // Translation
         $translate(
           ["READER_DETAIL_INFO"], {
             site: { title: data.site.title, link: data.site.absolute_uri, subscribers: data.site.followers_count },
@@ -39,6 +39,19 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $timeout, $t
           }
         ).then(function (translations) {
           $scope.bottomInfo = translations.READER_DETAIL_INFO;
+        });
+
+        $translate(["DARK_MODE", "BRIGHT_MODE", "FULL_SCREEN", "EXIT_FULL_SCREEN"]).then(function (translations) {
+          $scope.tooltips = {
+            theme: {
+              dark: translations.DARK_MODE,
+              bright: translations.BRIGHT_MODE,
+            },
+            size: {
+              full: translations.FULL_SCREEN,
+              normal: translations.EXIT_FULL_SCREEN
+            }
+          };
         });
 
         // Scroll event
@@ -49,6 +62,10 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $timeout, $t
         $scope.loading = false;
       }
     );
+  }
+
+  $scope.fullScreen = () => {
+    $scope.full = !$scope.full;
   }
 
   // $scope.subscribe = function (siteId) {
@@ -71,13 +88,15 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $timeout, $t
     let bottom = "-70px";
 
     // If user scrolled 400 pixles down.
-    if ($window.scrollY >= scrollLimit) {
-      let currentScroll = $window.scrollY;
+    if (!$scope.full) {
+      if ($window.scrollY >= scrollLimit) {
+        let currentScroll = $window.scrollY;
 
-      if (lastScroll > currentScroll) bottom = "0";
+        if (lastScroll > currentScroll) bottom = "0";
 
-      angular.element(".bottom-bar").css({ 'bottom': bottom });
-      lastScroll = currentScroll;
+        angular.element(".bottom-bar").css({ 'bottom': bottom });
+        lastScroll = currentScroll;
+      }
     }
 
     angular.element(".reader-cover")
