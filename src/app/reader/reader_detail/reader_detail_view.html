@@ -1,4 +1,4 @@
-<div class="container-fluid reader-cover s-pad-no text-center" ng-if="post.media.cover_image"
+<div ng-hide="full" class="container-fluid reader-cover s-pad-no text-center" ng-if="post.media.cover_image"
 	ng-style="{'background-image': 'url({{ post.media.cover_image.file }})'}">
 	<div class="container">
 		<div class="row">
@@ -8,12 +8,17 @@
 		</div>
 	</div>
 </div>
-<div class="container">
-	<nothing text="{{ 'ENTRY_GET_ERROR' | translate }}" ng-if="error"></nothing>
-
-	<div class="reader-content" ng-if="!error && !loading">
-		<h1 ng-if="!post.media.cover_image" class="text-center s-mar-bottom">{{ post.title }}</h1>
-		<div class="ql-editor" ng-bind-html="trustedContent"></div>
+<div class="reader-wrapper" ng-class="{'full-screen': full}">
+	<div class="container">
+		<nothing text="{{ 'ENTRY_GET_ERROR' | translate }}" ng-if="error"></nothing>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="reader-content" ng-if="!error && !loading">
+					<h1 ng-if="!post.media.cover_image" class="text-center s-mar-bottom">{{ post.title }}</h1>
+					<div class="ql-editor" ng-bind-html="trustedContent"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -21,11 +26,35 @@
 <div class="bottom-bar hidden-xs" ng-if="post">
 	<div class="container">
 		<div class="flex-container">
+			<!-- Theme -->
+			<div class="flex-auto">
+				<i class="fa fa-fw" ng-class="{'fa-sun-o': !set.lights, 'fa-moon-o': set.lights}"
+					ng-click="set.lights = !set.lights"
+					uib-tooltip="{{ set.lights ? tooltips.theme.dark : tooltips.theme.bright }}"
+					tooltip-trigger="'mouseenter'"
+					tooltip-class="init"></i>
+			</div>
+			<!-- Content information -->
 			<img class="img-circle s-mar-right-soft" ng-src="{{ siteLogo }}">
 			<div class="s-mar-right" translate translate-compile>{{ bottomInfo }}</div>
 			<div class="s-mar-left">
-				<button class="btn btn-primary" ng-click="subscribe(post.site.id)">Follow for more</button>
+				<button class="btn btn-primary" ng-click="full=!full" translate>FOLLOW_FOR_MORE</button>
+			</div>
+			<!-- Full screen -->
+			<div class="flex-auto text-right">
+				<i class="fa fa-expand fa-fw" ng-click="fullScreen()" uib-tooltip="{{ tooltips.size.full }}"
+					tooltip-trigger="'mouseenter'" tooltip-class="init"></i>
 			</div>
 		</div>
 	</div>
+</div>
+
+<!-- Full screen buttons -->
+<div class="full-screen-buttons">
+	<!-- Theme -->
+	<i class="fa fa-fw" ng-class="{'fa-sun-o': !set.lights, 'fa-moon-o': set.lights}" ng-click="set.lights = !set.lights"
+		uib-tooltip="{{ set.lights ? tooltips.theme.dark : tooltips.theme.bright }}" tooltip-trigger="'mouseenter'" tooltip-class="init"></i>
+	<!-- Exit full screen -->
+	<i class="fa fa-compress fa-fw" ng-click="fullScreen()" uib-tooltip="{{ tooltips.size.normal }}"
+		tooltip-trigger="'mouseenter'" tooltip-class="init"></i>
 </div>
