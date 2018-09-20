@@ -77,20 +77,22 @@ hr[soft] {
 
 /* No sidebar */
 
-.no-sidebar .sidebar-content {
+/* .no-sidebar .sidebar-content {
     opacity: 0;
-}
+    display: none;
+} */
 
-.no-sidebar .navbar-static-top {
-    opacity: 1;
+.no-sidebar .sidebar-content,
+.no-sidebar .sidebar-content .btn {
+    left: -60px !important;
 }
-
-.navbar-static-top {
-    opacity: 0;
-}
-
 
 /* Content */
+
+#content div.container,
+#content div.container-fluid {
+    margin-top: 60px;
+}
 
 header:not(.no-sidebar)~#content .container,
 header:not(.no-sidebar)~#content .container-fluid {
@@ -147,13 +149,9 @@ header:not(.no-sidebar)~#content .container-fluid {
 
 /* Navbar */
 
-.navbar {
-    z-index: 10;
-}
-
 .navbar,
 .navbar li {
-    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .navbar-brand {
@@ -165,18 +163,20 @@ header:not(.no-sidebar)~#content .container-fluid {
 }
 
 .navbar .dropdown img {
-    width: 48px;
+    width: 36px;
     border-radius: 100%;
 }
 
 @media(min-width: 992px) {
     .navbar {
-        min-height: 60px;
+        min-height: 45px;
     }
-    .navbar-nav a,
+    .navbar-nav>li>a,
     .navbar-brand {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        line-height: 24px !important;
+        height: 44px;
     }
     .navbar a .fa.nav-icon {
         font-size: 24px;
@@ -660,14 +660,6 @@ md-toast {
 
 /* Editor */
 
-[medium-editor],
-.medium-editor-toolbar,
-.medium-editor-action,
-.editor-container {
-    transition: 0.3s ease-in-out;
-    transition-property: background, border;
-}
-
 .editor-container {
     background: #fff;
     padding-left: 0 !important;
@@ -889,7 +881,7 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 
 .entry-form-corner {
     position: fixed;
-    top: 0;
+    top: 60px;
     right: 15px;
     height: 62px;
     width: 220px;
@@ -1769,6 +1761,12 @@ img.cache {
     .team-role {
         padding: 10px 0 0 35px;
     }
+    .container-fluid.reader-cover {
+        padding: 110px 30px !important;
+    }
+    .reader-content {
+        padding: 10px !important;
+    }
 }
 
 
@@ -1930,3 +1928,4 @@ img.cache {
     left: 250px !important;
     width: calc(100% - 250px) !important;
 }
+

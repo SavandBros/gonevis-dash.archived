@@ -7,13 +7,20 @@ require('./editor.css');
 require('./editor');
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService) {
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window) {
   var payload;
   var tagsToCreate = [];
   var noneTagsCount = 0;
   let oldData = {};
   let interval;
   let autoSave;
+
+  let didScroll;
+  let lastScrollTop = 0;
+  let delta = 5;
+  let toolbarHeight = angular.element(".entry-toolbar").outerHeight();
+  let editorToolbar = angular.element("div.ql-toolbar.ql-snow");
+  let onScroll;
 
   /**
    * @desc Auto-Save
@@ -40,6 +47,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   function constructor() {
+    $scope.currentSite = AuthService.getAuthenticatedUser(true).getSites()[$stateParams.s];
+    $scope.currentRole = Codekit.teamRoles[$scope.currentSite.role];
+    $scope.codekit = Codekit;
     $scope.entryStatus = new EntryStatus();
     $scope.tags = [];
     $scope.dolphinService = DolphinService;
@@ -150,13 +160,21 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
 
     $scope.options = {
-      toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],
-        ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
-        [{ 'header': [1, 2, 3, false] }],
-        [{ 'direction': 'rtl' }, { 'align': [] }],
-        ['clean']
-      ]
+      toolbar: {
+        container: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
+          [{ 'header': [1, 2, 3, false] }],
+          [{ 'direction': 'rtl' }, { 'align': [] }],
+          ['clean'],
+          ['light']
+        ],
+        handlers: {
+          'light': () => {
+            $rootScope.set.lights = !$rootScope.set.lights;
+          }
+        }
+      }
     };
   }
 
@@ -505,6 +523,24 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
+   * @desc Go to post/page list
+   */
+  $scope.goBack = function() {
+    let state = "dash.entry-list";
+
+    // Check if entry has an unsaved changes
+    if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
+      autoSave = true;
+      $scope.save($scope.form);
+    }
+    // Check if entry is a page
+    if ($stateParams.isPage) {
+      state = "dash.page-list";
+    }
+    $state.go(state);
+  };
+
+  /**
    * @desc Go to entries on entry removal
    *
    * @param {Event} event
@@ -517,10 +553,62 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   });
 
   /**
-   * @desc Cancel interval on state change
+   * @desc Check if page has been scrolled.
+   */
+  function checkScroll() {
+    didScroll = true;
+  }
+
+  /**
+   * @desc Hide/show toolbar when scrolled.
+   */
+  function hasScrolled() {
+    let condition = "removeClass";
+    let st = angular.element($window).scrollTop();
+
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta) {
+      return;
+    }
+
+    // When scrolling down
+    if (st > lastScrollTop && st > toolbarHeight){
+        $scope.hideToolbar = true;
+    } else {
+      // When scrolling top
+      if(st + angular.element($window).height() < angular.element(document).height()) {
+        $scope.hideToolbar = false;
+      }
+    }
+
+    // Auto hide when true
+    if ($scope.hideToolbar) {
+      condition = "addClass";
+    }
+
+    angular.element("div.ql-toolbar.ql-snow")[condition]("push-out");
+    lastScrollTop = st;
+  }
+
+  // On scroll call function
+  onScroll = $interval(() => {
+    if (didScroll) {
+      hasScrolled();
+      didScroll = false;
+    }
+  }, 250);
+
+
+  // Scroll event
+  angular.element($window).bind("scroll", checkScroll);
+
+  /**
+   * @desc Cancel events on state change
    */
   $scope.$on("$destroy", function () {
     $interval.cancel(interval);
+    $interval.cancel(onScroll);
+    angular.element($window).off('scroll', checkScroll);
   });
 
   constructor();

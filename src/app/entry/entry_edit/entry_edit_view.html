@@ -1,34 +1,53 @@
+<div class="entry-toolbar" ng-class="{'push-out': hideToolbar}">
+  <ul class="container">
+    <!-- Left list -->
+    <div class="pull-left">
+      <!-- Back button -->
+      <li>
+        <a ng-click="goBack()"><i class="fa fa-arrow-left fa-fw"></i> Go Back</a>
+      </li>
+      <!-- Site info -->
+      <li class="site b-right-no">
+        <img ng-src="{{
+            currentSite.media.logo ? currentSite.media.logo.thumbnail_48x48 : codekit.getDefaultImage('tiny')
+          }}" alt="">
+        <div class="pull-right">
+          {{ currentSite.title }}
+          <br>
+          <span class="o-fade-soft">You are the</span>
+          <span class="{{ currentRole.color }}">{{ currentRole.label }}</span>
+        </div>
+      </li>
+    </div>
+    <!-- Right list -->
+    <div class="pull-right">
+      <!-- Update/Publish -->
+      <li ng-disabled="form.loading || form.$invalid">
+        <a ng-click="save(form, entryStatus.PUBLISH)" ng-if="!editing || form.get.status === entryStatus.DRAFT">
+          <i class="fa fa-globe fa-fw"></i> {{ 'PUBLISH' | translate }}
+        </a>
+        <a ng-click="save(form)" ng-if="editing && form.get.status === entryStatus.PUBLISH">
+          <i class="fa fa-fw fa-refresh"></i> {{ 'UPDATE' | translate }}
+        </a>
+      </li>
+      <!-- Preview -->
+      <li>
+        <a ng-if="postInitial && editing" title="{{ 'PREVIEW' | translate }}" ng-click="preview()">
+          <i class="fa fa-fw fa-eye"></i>
+        </a>
+      </li>
+      <!-- Sidebar -->
+      <li>
+        <a title="{{ 'OPEN_SETTINGS_SIDEBAR' | translate }}" ng-click="sidebar = true" ng-init="sidebar = false">
+          <i class="fa fa-cog fa-fw"></i>
+        </a>
+      </li>
+    </div>
+  </ul>
+</div>
 <div class="container-fluid">
   <div class="container editor-container">
     <form ng-submit="save(form)" class="s-mar-top-soft">
-     <!-- Corner -->
-      <div class="entry-form-corner">
-
-        <!-- Publish -->
-        <button type="button" class="btn btn-default btn-primary" translate
-          ng-disabled="form.loading || form.$invalid" ng-if="!editing || form.get.status === entryStatus.DRAFT"
-          ng-click="save(form, entryStatus.PUBLISH)">
-          PUBLISH
-        </button>
-
-        <!-- Update -->
-        <button class="btn btn-default btn-info" translate
-          ng-disabled="form.loading || form.$invalid" ng-if="editing && form.get.status === entryStatus.PUBLISH">
-          UPDATE
-        </button>
-
-        <!-- Preview -->
-        <a ng-if="postInitial && editing" class="btn btn-default" title="{{ 'PREVIEW' | translate }}"
-          ng-click="preview()">
-          <i class="fa fa-fw fa-eye"></i>
-        </a>
-
-        <!-- Sidebar -->
-        <button type="button" class="btn btn-default" title="{{ 'OPEN_SETTINGS_SIDEBAR' | translate }}"
-          ng-click="sidebar = true" ng-init="sidebar = false">
-          <i class="fa fa-fw fa-cog"></i>
-        </button>
-      </div>
 
       <!-- Draft mode -->
       <div ng-show="form.get.status === entryStatus.DRAFT"

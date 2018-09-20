@@ -23,4 +23,9 @@ class CustomClipboard extends Clipboard {
   }
 }
 
+// Custom icons
+let icons = Quill.import('ui/icons');
+icons.light = '<i class="fa fa-lightbulb-o"></i>';
+
 Quill.register('modules/clipboard', CustomClipboard, true);
+Quill.register(icons, true);
