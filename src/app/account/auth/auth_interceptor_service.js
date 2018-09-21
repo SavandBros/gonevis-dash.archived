@@ -13,7 +13,7 @@ const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils) {
   function request(config) {
     var token = $cookies.get("JWT");
 
-    if (config.url.indexOf(ENV.apiEndpoint) === 0 && token) {
+    if (token && (config.url.indexOf(ENV.apiEndpoint) === 0 || config.url.indexOf(ENV.zeroAPI) === 0)) {
       config.headers.Authorization = "JWT " + token;
     }
 

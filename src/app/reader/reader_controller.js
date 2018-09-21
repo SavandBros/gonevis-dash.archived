@@ -1,6 +1,7 @@
 "use strict";
 
 import app from "../app";
+require('./reader.css');
 
 function ReaderController($scope, API, $state, Pagination, Codekit, $translate, $window, $timeout, $stateParams) {
 

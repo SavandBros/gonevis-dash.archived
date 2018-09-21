@@ -52,6 +52,9 @@ body {
     background: #111;
 }
 
+body.lights.off {
+    background-color: #111;
+}
 
 /* Panel */
 
