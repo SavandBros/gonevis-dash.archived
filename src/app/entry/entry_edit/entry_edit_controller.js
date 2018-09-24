@@ -225,9 +225,43 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    *
    * @param {Quill} editor
    */
-  $scope.onEditorInit = function(editor) {
+  $scope.onEditorInit = function (editor) {
+
     // Editor instance
     $scope.editor = editor;
+
+    angular.element(".ql-picker").each(function (index, element) {
+      let parent = angular.element(element);
+
+      parent.click(function (event) {
+        $scope.isOpen = !$scope.isOpen;
+
+        let lastChild = angular.element(event.currentTarget.lastChild);
+
+        if ($scope.isOpen) {
+          lastChild.css({
+            position: "fixed",
+            top: "55px",
+            left: event.currentTarget.getBoundingClientRect().left + "px",
+            minWidth: "auto"
+          })
+
+          let width = lastChild[0].offsetWidth;
+          let rect = lastChild[0].getBoundingClientRect();
+
+          if (rect.x < 0 || (rect.x + width) > $window.innerWidth) {
+            if ((rect.x + width) > $window.innerWidth) {
+              lastChild.css("left", $window.innerWidth - width)
+            } else {
+              lastChild.css("left", 0)
+            }
+          }
+        } else {
+          lastChild.css("position", "unset")
+        }
+
+      })
+    })
 
     /**
      * @desc Editor clipboard whitelist
