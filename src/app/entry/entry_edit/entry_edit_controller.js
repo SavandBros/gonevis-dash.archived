@@ -40,8 +40,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   function constructor() {
-    $scope.currentSite = AuthService.getAuthenticatedUser(true).getSites()[$stateParams.s];
-    $scope.currentRole = Codekit.teamRoles[$scope.currentSite.role];
     $scope.codekit = Codekit;
     $scope.entryStatus = new EntryStatus();
     $scope.tags = [];
@@ -106,6 +104,13 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           $scope.form.get.id = $stateParams.entryId;
           $scope.form.url = $scope.form.getUrl();
           Codekit.setTitle($scope.form.get.title);
+          $scope.currentStatus = Codekit.entryStatuses[data.status];
+
+          $scope.$watch("form.get.status", function(newValue, oldValue) {
+            if (newValue === oldValue) return;
+
+            $scope.currentStatus = Codekit.entryStatuses[newValue];
+          });
 
           // Get entry tags
           angular.forEach($scope.form.get.tags, function (data) {
@@ -138,6 +143,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         comment_enabled: true // Commenting is enabled by default
       });
       $scope.form.get.is_page = $stateParams.isPage;
+      $scope.currentStatus = Codekit.entryStatuses[$scope.form.get.status];
 
       // Initial auto-save
       initAutoSave();
