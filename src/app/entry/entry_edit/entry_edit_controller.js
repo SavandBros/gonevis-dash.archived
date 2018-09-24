@@ -601,6 +601,23 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
+   * @desc Focus on editor when key "TAB" || "ENTER" is pressed.
+   *
+   * @param {Event} event
+   */
+  angular.element("textarea").keydown((event) => {
+    let code = event.keyCode || event.which;
+
+    // Check if key "TAB" || "ENTER" is pressed.
+    if (code == '9' || code == "13") {
+      $scope.editor.focus();
+      $scope.editor.setSelection(0, 0);
+
+      return false;
+    }
+  });
+
+  /**
    * @desc Go to entries on entry removal
    *
    * @param {Event} event
