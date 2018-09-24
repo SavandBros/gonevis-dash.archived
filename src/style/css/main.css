@@ -658,15 +658,6 @@ md-toast {
 }
 
 
-/* Editor */
-
-.editor-container {
-    background: #fff;
-    padding-left: 0 !important;
-    border: 1px solid #e7e7e7;
-}
-
-
 /* Editor mode */
 
 .editor-draft-mode {
