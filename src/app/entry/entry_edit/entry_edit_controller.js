@@ -626,13 +626,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   /**
    * @desc Go to post/page list
    */
-  $scope.goBack = function() {
+  $scope.goBack = function () {
     let state = "dash.entry-list";
 
     // Check if entry has an unsaved changes
-    if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
-      autoSave = true;
-      $scope.save($scope.form);
+    if ($scope.form.get.title) {
+      if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
+        autoSave = true;
+        $scope.save($scope.form);
+      }
     }
     // Check if entry is a page
     if ($stateParams.isPage) {
