@@ -275,10 +275,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       return delta;
     });
 
-    editor.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
-      let regex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-      let match = node.data.match(regex);
-      if (match && match[2].length === 11) {
+    editor.clipboard.addMatcher(Node.TEXT_NODE, function (node, delta) {
+      if (vm.validateYouTubeUrl(node.data)) {
         delta.ops = [{
           attributes: {
             allow: "encrypted-media",
@@ -286,7 +284,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
             frameborder: 0
           },
           insert: {
-            video: 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0'
+            video: 'https://www.youtube.com/embed/' + getYoutubeUrl + '?autoplay=0'
           }
         }];
       }
