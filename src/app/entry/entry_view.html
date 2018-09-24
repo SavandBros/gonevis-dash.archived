@@ -56,7 +56,7 @@
               <span ng-if="entry.get.status !== 1">{{ 'DRAFT' | translate }} &middot; {{ entry.get.created | date }}</span>
             </p>
             <!-- Title -->
-            <a ui-sref="dash.entry-edit({ entryId: entry.get.id })" ng-click="entry.cache()">
+            <a ui-sref="dash.entry-edit({ entryId: entry.get.id, isPage: isPageView })" ng-click="entry.cache()">
               <p class="s-mar-no t-line">{{ entry.get.title }}</p>
             </a>
             <!-- Updated by -->
@@ -124,7 +124,7 @@
             <!--Title and slug-->
             <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9 t-line">
               <input type="checkbox" ng-model="entry.isSelected" ng-change="countSelected(entry)">
-              <a ui-sref="dash.entry-edit({entryId: entry.get.id})" ng-click="entry.cache()">{{ entry.get.title }}</a>
+              <a ui-sref="dash.entry-edit({entryId: entry.get.id, isPage: isPageView})" ng-click="entry.cache()">{{ entry.get.title }}</a>
               <small class="dis-b o-fade">/{{ entry.get.slug }}</small>
             </div>
             <!-- Date -->
