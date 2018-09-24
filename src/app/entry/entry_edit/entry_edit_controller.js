@@ -15,6 +15,8 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   let oldData = {};
   let interval;
   let autoSave;
+  let getYoutubeUrl;
+  let vm = this;
 
   /**
    * @desc Auto-Save
@@ -563,6 +565,26 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       }
     }
   });
+
+  /**
+   * @desc Show prompt on entry deletion
+   *
+   * @param {string} id
+   */
+  $scope.removePost = (id) => {
+    let state = "dash.post-list";
+
+    // Check if last state was page list
+    if ($stateParams.isPage) {
+      state = "dash.page-list";
+    }
+
+    if (confirm($translate.instant('REMOVE_ENTRY_PROMPT')) === true) {
+      $state.go(state, { deletedEntry: id });
+    } else {
+      return;
+    }
+  }
 
   /**
    * @desc Go to entries on entry removal
