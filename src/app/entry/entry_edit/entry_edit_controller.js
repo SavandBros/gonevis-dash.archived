@@ -207,6 +207,20 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   /**
+   * @desc Validate YouTube url.
+   *
+   * @param {string} clipboard
+   */
+  vm.validateYouTubeUrl = function(clipboard) {
+    let regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (clipboard.match(regex)) {
+      return getYoutubeUrl = RegExp.$1;;
+    }
+
+    return false;
+  }
+
+  /**
    * @desc On editor creation callback
    *
    * @param {Quill} editor
