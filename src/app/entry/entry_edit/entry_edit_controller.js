@@ -1,6 +1,7 @@
 "use strict";
 import EntryStatus from "../status";
 
+require('../../basement/directives/auto_resize_directive');
 require('ng-quill');
 require('quill/dist/quill.snow.css');
 require('./editor.css');
