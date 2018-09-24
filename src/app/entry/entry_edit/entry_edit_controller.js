@@ -200,7 +200,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           },
           'preview': () => $scope.preview(),
           'settings': () => {
-            $scope.sidebar = true;
+            $scope.sidebar = !$scope.sidebar;
             $scope.$apply();
           },
           'light': () => {
