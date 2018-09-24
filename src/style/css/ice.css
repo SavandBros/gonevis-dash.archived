@@ -23,6 +23,7 @@ body {
     font-family: "Lato", Helvetica, sans-serif;
     color: #6F7A8B;
     overflow-y: overlay;
+    transition: ease-in-out background-color 0.2s
 }
 
 ::-webkit-scrollbar-track,
