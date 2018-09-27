@@ -119,7 +119,7 @@
     background-attachment: fixed;
     min-height: 500px;
     margin-top: 45px !important;
-    box-shadow: inset 0 10000px rgba(209, 113, 0, 0.6);
+    box-shadow: inset 0 10000px rgba(0, 0, 0, 0.2);
     color: #fff;
     padding: 110px 90px;
     margin-bottom: -170px;
@@ -309,7 +309,9 @@
     transition: ease-in-out all 0.1s;
 }
 
-.bottom-bar .flex-container button:hover {
+.bottom-bar .flex-container button:hover,
+.bottom-bar .flex-container button.active {
     background: #d17100;
     color: #fff;
+    box-shadow: none;
 }
