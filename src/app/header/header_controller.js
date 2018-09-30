@@ -275,7 +275,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         if (stateName.indexOf("dash") !== -1) {
           $timeout(() => {
             let activeNav = angular.element(`a[name="${stateName}"]`)[0];
-            angular.element(".indic").css({
+            angular.element(".indicator").css({
               "top": activeNav.offsetTop,
               "height": activeNav.offsetHeight
             })
