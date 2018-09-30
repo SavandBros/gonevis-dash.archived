@@ -42,7 +42,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
       }, {
         label: translations.PAGES,
         sref: "dash.page-list",
-        icon: "fa-book"
+        icon: "fa-newspaper-o"
       }, {
         label: translations.TAGS,
         sref: "dash.tag-list",
