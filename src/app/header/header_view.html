@@ -50,7 +50,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- Account dropdown -->
-        <li class="dropdown" ng-class="{active: state.includes('signin')}">
+        <li class="dropdown" ng-class="{active: state.includes('user')}">
           <!-- Header -->
           <a class="main main-light dropdown-toggle t-line" data-toggle="dropdown">
             <!-- Profile picture -->
@@ -95,11 +95,19 @@
 <div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar || state.includes('dash.entry-edit')}"
   ng-if="auth.isAuthenticated()">
   <!-- Main navs -->
-  <a ng-href="{{ state.href(nav.sref, {s: param.s ? param.s : set.lastSite}) }}" ng-repeat="nav in mainNavs"
-     ng-class="{active: state.includes(nav.sref)}">
-    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
-  </a>
-  <br>
+  <div class="navigations">
+    <!-- Indicator -->
+    <div class="indicator"></div>
+    <!-- Navigations -->
+    <a ng-href="{{ state.href(nav.sref, {s: param.s ? param.s : set.lastSite}) }}" ng-repeat="nav in mainNavs"
+      ng-class="{active: state.includes(nav.sref)}" name="{{ nav.sref }}">
+      <!-- More -->
+      <div class="more">{{ nav.label }}</div>
+      <i class="fa fa-fw {{ nav.icon }}"></i>
+      <span>{{ nav.label }}</span>
+      <!-- <span class="arrow"></span> -->
+    </a>
+  </div>
   <!-- Toggle view -->
   <a class="sidebar-collapse" ng-click="set.sidebar = !set.sidebar">
     <i class="fa fa-fw" ng-class="{'fa-chevron-circle-right': !set.sidebar, 'fa-chevron-circle-left': set.sidebar}"></i>
