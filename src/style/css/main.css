@@ -173,6 +173,17 @@ header:not(.no-sidebar)~#content .container-fluid {
 
 .navbar-brand {
     margin-right: 30px;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar,
+.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #000;
 }
 
 .navbar-brand:hover {
