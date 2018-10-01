@@ -232,7 +232,7 @@ body.lights.off {
 
 @media (max-height: 650px) {
     .sidebar-content a:not(.main) {
-        padding: 8px 17px !important;
+        padding: 8px 20px !important;
     }
     .sidebar-content .navigations a:first-of-type {
         margin-top: -36px;
@@ -242,6 +242,11 @@ body.lights.off {
     }
 }
 
+@media (max-width: 768px) {
+    .sidebar-content .navigations a .more {
+        display: none;
+    }
+}
 
 /* Sidebar button */
 
