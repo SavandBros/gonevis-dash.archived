@@ -42,7 +42,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
       }, {
         label: translations.PAGES,
         sref: "dash.page-list",
-        icon: "fa-book"
+        icon: "fa-newspaper-o"
       }, {
         label: translations.TAGS,
         sref: "dash.tag-list",
@@ -253,20 +253,35 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
    */
   $transitions.onBefore({}, function(transition) {
     $scope.param = transition.params();
+    let stateName = transition.to().name;
 
     if (AuthService.isAuthenticated()) {
-      if (transition.to().name.indexOf("site-new") !== -1) {
+      if (stateName.indexOf("site-new") !== -1) {
         $rootScope.set.sidebar = false;
       }
       let index = $rootScope.set.lastSite;
 
       // Check if current state is includes dash in it's name.
-      if (transition.to().name.indexOf("dash") !== -1) {
+      if (stateName.indexOf("dash") !== -1) {
         index = $scope.param.s;
         $rootScope.set.lastSite = index;
       }
 
       $scope.currentSite = $scope.user.getSites()[index];
+
+      // Sidebar indicator
+      $scope.$watch("mainNavs", function(oldValue) {
+        if (!oldValue) return;
+        if (stateName.indexOf("dash") !== -1) {
+          $timeout(() => {
+            let activeNav = angular.element(`a[name="${stateName}"]`)[0];
+            angular.element(".indicator").css({
+              "top": activeNav.offsetTop,
+              "height": activeNav.offsetHeight
+            })
+          })
+        }
+      })
     }
   });
 

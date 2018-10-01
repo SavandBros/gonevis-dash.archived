@@ -1,11 +1,12 @@
 "use strict";
 
 import app from "../../app";
+import UserSiteRole from "../../account/user/user_site_role";
 require('./../reader.css');
 require('quill/dist/quill.snow.css');
 require('../../entry/entry_edit/editor.css');
 
-function ReaderDetailController($scope, $state, $sce, $stateParams, $timeout, $translate, $transitions, API, Codekit, $window) {
+function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window) {
   let lastScroll;
 
   function constructor() {
@@ -20,16 +21,26 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $timeout, $t
     // Check post's id length
     if (postId.length !== 36) return $scope.error = true;
 
+    // Get user
+    let userSiteRole = new UserSiteRole();
+    let user = AuthService.getAuthenticatedUser(true);
     $scope.loading = true;
 
     // API call
     API.ReaderDetail.get({ entryId: postId },
       function (data) {
+        // Check if owner
+        angular.forEach(user.getSites(), (site) => {
+          if (data.site.id === site.id && site.role === userSiteRole.OWNER) {
+            $scope.isOwner = true;
+          }
+        })
         $scope.loading = false;
         // Post data
         $scope.post = data;
         // Post logo
         $scope.siteLogo = data.site.media.logo ? data.site.media.logo.thumbnail_48x48 : Codekit.getDefaultImage('tiny');
+        $scope.isFollowing = data.site.is_following;
         // Trust post content as HTML
         $scope.trustedContent = $sce.trustAsHtml(data.content);
         // Translation
@@ -65,19 +76,30 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $timeout, $t
     );
   }
 
+  /**
+   * @desc Toggle fullscreen mode
+   *
+   * @returns {void}
+   */
   $scope.fullScreen = () => {
     $scope.full = !$scope.full;
   }
 
-  // $scope.subscribe = function (siteId) {
-  // 	console.log(siteId)
+  /**
+   * @desc Subscribe to site.
+   *
+   * @param {string} siteId
+   * @returns {void}
+   */
+  $scope.subscribe = function (siteId) {
+    $scope.isFollowing = !$scope.isFollowing;
 
-  //   API.Subscribe.save({ siteId: siteId },
-  //     function (data) {
-  // 			console.log(data);
-  // 		}
-  //   );
-  // };
+    API.Subscribe.save({ siteId: siteId }, {},
+      function (data) {
+        $scope.isFollowing = data.subscribed;
+  		}
+    );
+  };
 
   /**
    * @desc Auto hide bottom bar when scrolling.

@@ -37,8 +37,10 @@
 			<!-- Content information -->
 			<img class="img-circle s-mar-right-soft" ng-src="{{ siteLogo }}">
 			<div class="s-mar-right" translate translate-compile>{{ bottomInfo }}</div>
-			<div class="s-mar-left">
-				<button class="btn btn-primary" ng-click="full=!full" translate>FOLLOW_FOR_MORE</button>
+			<div class="s-mar-left" ng-if="!isOwner">
+				<button class="btn btn-primary" ng-click="subscribe(post.site.id)" ng-class="{active: isFollowing}">
+					{{ isFollowing ? "UNFOLLOW" : "FOLLOW_FOR_MORE" | translate }}
+				</button>
 			</div>
 			<!-- Full screen -->
 			<div class="flex-auto text-right">

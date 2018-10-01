@@ -149,6 +149,23 @@ header:not(.no-sidebar)~#content .container-fluid {
 
 /* Navbar */
 
+.navbar {
+    background-color: rgb(2, 136, 209);
+}
+
+.navbar .navbar-nav > li > a {
+    color: #fff;
+    transition: ease-in-out all 0.15s;
+}
+
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li.active > a,
+.navbar .navbar-nav > li > a:focus,
+.navbar .navbar-nav > li.open > a {
+    color: #fff !important;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+
 .navbar,
 .navbar li {
     transition: all 0.2s ease-in-out;
@@ -156,6 +173,17 @@ header:not(.no-sidebar)~#content .container-fluid {
 
 .navbar-brand {
     margin-right: 30px;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar,
+.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #000;
 }
 
 .navbar-brand:hover {
