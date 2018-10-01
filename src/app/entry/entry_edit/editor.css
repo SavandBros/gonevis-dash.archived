@@ -572,15 +572,6 @@ pre {
         white-space: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
-        height: 55px;
-    }
-    .ql-toolbar.ql-snow::-webkit-scrollbar-track,
-    .ql-toolbar.ql-snow::-webkit-scrollbar {
-        background: #EAEDF1;
-    }
-
-    .ql-toolbar.ql-snow::-webkit-scrollbar {
-        height: 5px;
     }
     .ql-snow span.ql-formats:last-child {
         float: unset;
@@ -589,9 +580,6 @@ pre {
     .ql-snow.ql-toolbar button.ql-active,
     .lights.off .ql-snow button.ql-light {
         box-shadow: inset 0 -3px;
-    }
-    .editor-sidebar {
-        top: 55px;
     }
     .editor-sidebar.on + .wrapper {
         width: 100% !important;
