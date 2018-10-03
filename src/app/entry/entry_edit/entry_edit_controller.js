@@ -587,7 +587,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    * @param {string} id
    */
   $scope.removePost = (id) => {
-    let state = "dash.post-list";
+    let state = "dash.entry-list";
 
     // Check if last state was page list
     if ($stateParams.isPage) {
