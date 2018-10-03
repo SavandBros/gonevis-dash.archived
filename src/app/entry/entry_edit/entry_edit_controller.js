@@ -426,6 +426,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
   };
 
+  /**
+   * @desc Update entry
+   *
+   * @param {object} form Form data to submit
+   */
   $scope.updateEntry = function (form) {
     // If auto-saving mode, remove status property from payload
     if (autoSave) {
@@ -476,6 +481,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     );
   };
 
+  /**
+   * @desc Create a new entry.
+   *
+   * @param {object} form Form data to submit
+   */
   $scope.addEntry = function (form) {
     // If auto-saving mode, set status to draft
     if (autoSave) {
@@ -502,6 +512,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     );
   };
 
+  /**
+   * @desc Discard draft changes.
+   */
   $scope.discardChanges = function () {
     if (confirm($translate.instant('DISCARD_CHANGES_PROMPT')) === false) {
       return;
