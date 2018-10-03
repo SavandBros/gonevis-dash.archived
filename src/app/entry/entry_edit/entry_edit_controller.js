@@ -601,17 +601,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
   }
 
-  /**
-   * @desc Go to entries on entry removal
-   *
-   * @param {Event} event
-   * @param {object} data
-   */
-  $scope.$on("gonevisDash.Entry:remove", function (event, data) {
-    if (data.success) {
-      $state.go("dash.entry-list");
-    }
-  });
 
   /**
    * @desc Tag create callback
