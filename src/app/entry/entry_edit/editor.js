@@ -6,7 +6,7 @@ import Delta from "quill-delta";
 const BlockEmbed = Quill.import("blots/block/embed");
 const Clipboard = Quill.import("modules/clipboard");
 const icons = Quill.import("ui/icons");
-const customIcons = [{
+const newIcons = [{
   icon: "bold",
   replace: "bold",
 }, {
@@ -39,14 +39,6 @@ const customIcons = [{
 }, {
   icon: "clean",
   replace: "ban"
-}, {
-  icon: "publish",
-  replace: "globe",
-  text: "Publish"
-}, {
-  icon: "update",
-  replace: "refresh",
-  text: "Update"
 }, {
   icon: "preview",
   replace: "eye"
@@ -108,27 +100,42 @@ DividerBlot.blotName = 'divider';
 DividerBlot.className = 'divider';
 DividerBlot.tagName = 'hr';
 
-/**
- * @desc Get icon
- *
- * @param {string} icon
- */
-function getIcon(icon, text) {
-  return `<i class="fa fa-${icon} fa-fw"></i> ${text ? text : ''}`;
+export default class CustomIcons {
+  constructor($translate) {
+    newIcons.push({
+      icon: "publish",
+      replace: "globe",
+      text: $translate.instant("PUBLISH")
+    }, {
+      icon: "update",
+      replace: "refresh",
+      text: $translate.instant("UPDATE")
+    })
+
+    // Built-in icons
+    icons.list.bullet = this.getIcon('list-ul');
+    icons.direction[''] = this.getIcon('paragraph');
+    icons.direction.rtl = this.getIcon('paragraph fa-flip-horizontal');
+    icons.align[''] = this.getIcon('align-left');
+    icons.align.center = this.getIcon('align-center');
+    icons.align.right = this.getIcon('align-right');
+    icons.align.justify = this.getIcon('align-justify');
+
+    angular.forEach(newIcons, (icon) => {
+      icons[icon.icon] = this.getIcon(icon.replace, icon.text);
+    });
+  }
+
+  /**
+   * @desc Get icon
+   *
+   * @param {string} icon
+   * @param {string} text
+   */
+  getIcon(icon, text) {
+    return `<i class="fa fa-${icon} fa-fw"></i> ${text ? text : ''}`;
+  }
 }
-
-angular.forEach(customIcons, (icon) => {
-  icons[icon.icon] = getIcon(icon.replace, icon.text);
-});
-
-// Built-in icons
-icons.list.bullet = getIcon('list-ul');
-icons.direction[''] = getIcon('paragraph');
-icons.direction.rtl = getIcon('paragraph fa-flip-horizontal');
-icons.align[''] = getIcon('align-left');
-icons.align.center = getIcon('align-center');
-icons.align.right = getIcon('align-right');
-icons.align.justify = getIcon('align-justify');
 
 Quill.register('modules/clipboard', CustomClipboard, true);
 Quill.register(icons, true);
