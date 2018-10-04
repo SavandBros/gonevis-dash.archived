@@ -251,18 +251,17 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     // Editor instance
     $scope.editor = editor;
 
-    angular.element(".ql-picker").each(function (index, element) {
-      let parent = angular.element(element);
+    // Fix editor dropdowns on small screens
+    if (angular.element($window).width() < 992) {
+      angular.element(".ql-picker").each(function (index, element) {
+        let parent = angular.element(element);
 
-      parent.click(function (event) {
-        $scope.isOpen = !$scope.isOpen;
+        parent.click(function (event) {
+          let lastChild = angular.element(event.currentTarget.lastChild);
 
-        let lastChild = angular.element(event.currentTarget.lastChild);
-
-        if ($scope.isOpen) {
           lastChild.css({
             position: "fixed",
-            top: "55px",
+            top: "50px",
             left: event.currentTarget.getBoundingClientRect().left + "px",
             minWidth: "auto"
           })
@@ -277,12 +276,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
               lastChild.css("left", 0)
             }
           }
-        } else {
-          lastChild.css("position", "unset")
-        }
-
+        })
       })
-    })
+    }
 
     /**
      * @desc Editor clipboard whitelist
