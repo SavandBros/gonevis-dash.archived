@@ -39,6 +39,12 @@
         <p class="small" translate>START_PUBLICATION</p>
         <input id="startDate" ng-model="form.get.start_publication" type="datetime-local" class="form-control">
       </div>
+      <div class="form-group">
+        <button type="button" ng-click="discardChanges()" ng-if="postChanged"
+          class="btn btn-default btn-block btn-sm text-danger revert" ng-disabled="form.loading">
+          <i class="fa fa-undo fa-fw"></i> {{ 'DISCARD_CHANGES' | translate }}
+        </button>
+      </div>
     </div>
   </div>
   <!-- Tags -->
