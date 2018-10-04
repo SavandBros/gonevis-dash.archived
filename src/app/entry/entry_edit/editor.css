@@ -154,7 +154,7 @@
 
 .ql-snow .ql-picker-options {
     padding: 0 !important;
-    margin-top: 1px !important;
+    margin-top: 0 !important;
     border-top: none !important;
     box-shadow: none !important;
 }
@@ -369,7 +369,7 @@ pre {
 
 .wrapper {
     position: relative;
-    right: 0;
+    width: 100%;
 }
 
 .editor-sidebar {
@@ -564,6 +564,19 @@ pre {
     color: red;
 }
 
+.revert {
+    color: #a94442;
+    border-color: #a94442;
+}
+
+.revert:hover,
+.revert:focus,
+.revert:active {
+    color: #fff !important;
+    border-color: #a94442 !important;
+    background-color: #a94442 !important;
+}
+
 
 /* Media */
 
@@ -589,6 +602,17 @@ pre {
 @media (max-width: 576px) {
     .editor-sidebar.on {
         width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal#preview .modal-dialog {
+        position: absolute;
+        min-width: 100%;
+        margin: 0;
+    }
+    .modal#preview .modal-header {
+        padding: 10px;
     }
 }
 
