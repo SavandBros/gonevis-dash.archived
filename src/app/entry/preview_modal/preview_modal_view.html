@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <!-- Modes -->
-        <button class="btn btn-default s-mar-right-soft" ng-repeat="mode in modes"
+        <button class="btn btn-default s-mar-right-soft hidden-xs" ng-repeat="mode in modes"
           ng-class="{'active': currentClass === mode.class}" ng-click="changeMode(mode.class)">
           <i class="fa fa-fw fa-{{ mode.icon }}"></i>
         </button>
