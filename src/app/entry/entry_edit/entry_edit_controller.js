@@ -10,6 +10,16 @@ import CustomIcons from "./editor";
 
 function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window) {
+  let editorButtons = [
+    ['back'],
+    ['bold', 'italic', 'underline', 'strike'],
+    ['link', 'blockquote', 'code-block', { 'list': 'bullet' }, 'divider'],
+    [{ 'header': [1, 2, 3, false] }],
+    ['image', 'video'],
+    [{ 'direction': 'rtl' }, { 'align': [] }],
+    ['clean'],
+    ['publish', 'update', 'preview', 'settings', 'light']
+  ];
   var payload;
   var tagsToCreate = [];
   var noneTagsCount = 0;
@@ -18,6 +28,14 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   let autoSave;
   let getYoutubeUrl;
   let vm = this;
+
+  /**
+   * @desc Remove preview button when writing new post/page.
+   */
+  function hidePreview() {
+    let index = editorButtons.length - 1;
+    return editorButtons[index] = editorButtons[index].filter(e => e !== "preview");
+  }
 
   /**
    * @desc Auto-Save
@@ -140,6 +158,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         }
       );
     } else {
+      hidePreview();
       $scope.editing = false;
       $scope.form = new Entry({
         content: "",
@@ -168,16 +187,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         matchVisual: false
       },
       toolbar: {
-        container: [
-          ['back'],
-          ['bold', 'italic', 'underline', 'strike'],
-          ['link', 'blockquote', 'code-block', { 'list': 'bullet' }, 'divider'],
-          [{ 'header': [1, 2, 3, false] }],
-          ['image', 'video'],
-          [{ 'direction': 'rtl' }, { 'align': [] }],
-          ['clean'],
-          ['publish', 'update', 'preview', 'settings', 'light']
-        ],
+        container: editorButtons,
         handlers: {
           'back': () => $scope.goBack(),
           'divider': () => {
