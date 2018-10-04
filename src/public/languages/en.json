@@ -285,7 +285,7 @@
   "LOADING_DRAFT": "Loading draft",
   "UNPUBLISHED_CHANGES": "You have unpublished changes",
   "DISCARD_CHANGES": "Discard changes",
-  "DISCARD_CHANGES_PROMPT": "Are you sure you want discard changes?",
+  "DISCARD_CHANGES_PROMPT": "All the changes you have not published will be lost, are you sure",
   "UPDATED_BY": "Updated by",
   "SUBMIT": "Submit",
   "SAVE_CHANGES": "Save Changes",
