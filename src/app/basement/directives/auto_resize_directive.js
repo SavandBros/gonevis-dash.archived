@@ -7,7 +7,7 @@ import app from '../../app';
  *
  * @returns {function}
  */
-function autoResize() {
+function autoResize($window) {
   return {
     restrict: "A",
     link: (scope, element, attrs) => {
@@ -23,7 +23,11 @@ function autoResize() {
 			// When typing
 			element.on('input', autoResize);
 			// For initialization
-			scope.$watch(attrs.ngModel, autoResize);
+      scope.$watch(attrs.ngModel, autoResize);
+      // Auto resize textarea when resizing screen.
+      angular.element($window).resize(() => {
+        autoResize();
+      });
     }
   };
 }
