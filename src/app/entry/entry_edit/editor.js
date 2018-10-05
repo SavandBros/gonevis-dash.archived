@@ -110,7 +110,7 @@ export default class CustomIcons {
       icon: "update",
       replace: "refresh",
       text: $translate.instant("UPDATE")
-    })
+    });
 
     // Built-in icons
     icons.list.bullet = this.getIcon('list-ul');

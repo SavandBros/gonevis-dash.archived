@@ -34,7 +34,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
    */
   function hidePreview() {
     let index = editorButtons.length - 1;
-    return editorButtons[index] = editorButtons[index].filter(e => e !== "preview");
+    editorButtons[index] = editorButtons[index].filter(e => e !== "preview");
   }
 
   /**
@@ -130,7 +130,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           $scope.currentStatus = Codekit.entryStatuses[data.status];
 
           $scope.$watch("form.get.status", function(newValue, oldValue) {
-            if (newValue === oldValue) return;
+            if (newValue === oldValue) {
+              return;
+            }
 
             $scope.currentStatus = Codekit.entryStatuses[newValue];
           });
@@ -235,11 +237,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   vm.validateYouTubeUrl = function(clipboard) {
     let regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
     if (clipboard.match(regex)) {
-      return getYoutubeUrl = RegExp.$1;;
+      getYoutubeUrl = RegExp.$1;
+      return getYoutubeUrl;
     }
 
     return false;
-  }
+  };
 
   /**
    * @desc On editor creation callback
@@ -264,20 +267,20 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
             top: "50px",
             left: event.currentTarget.getBoundingClientRect().left + "px",
             minWidth: "auto"
-          })
+          });
 
           let width = lastChild[0].offsetWidth;
           let rect = lastChild[0].getBoundingClientRect();
 
           if (rect.x < 0 || (rect.x + width) > $window.innerWidth) {
             if ((rect.x + width) > $window.innerWidth) {
-              lastChild.css("left", $window.innerWidth - width)
+              lastChild.css("left", $window.innerWidth - width);
             } else {
-              lastChild.css("left", 0)
+              lastChild.css("left", 0);
             }
           }
-        })
-      })
+        });
+      });
     }
 
     /**
@@ -605,7 +608,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     } else {
       return;
     }
-  }
+  };
 
 
   /**
@@ -684,7 +687,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     let code = event.keyCode || event.which;
 
     // Check if key "TAB" || "ENTER" is pressed.
-    if (code == '9' || code == "13") {
+    if (code === 9 || code === 13) {
       $scope.editor.focus();
       $scope.editor.setSelection(0, 0);
 
