@@ -271,17 +271,19 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
 
       // Sidebar indicator
       $scope.$watch("mainNavs", function(oldValue) {
-        if (!oldValue) return;
+        if (!oldValue) {
+          return;
+        }
         if (stateName.indexOf("dash") !== -1) {
           $timeout(() => {
             let activeNav = angular.element(`a[name="${stateName}"]`)[0];
             angular.element(".indicator").css({
               "top": activeNav.offsetTop,
               "height": activeNav.offsetHeight
-            })
-          })
+            });
+          });
         }
-      })
+      });
     }
   });
 
