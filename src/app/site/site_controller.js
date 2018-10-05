@@ -38,6 +38,31 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   }
 
   /**
+   * @desc Payment
+   */
+  $scope.pay = function () {
+    var payments = new cp.CloudPayments({ language: "en-US" });
+    payments.charge({ // options
+        publicId: 'test_api_00000000000000000000001',
+        description: 'Demo purchase (you will not be charged)',
+        amount: 10,
+        currency: 'USD',
+        invoiceId: '1234567',
+        accountId: 'user@example.com',
+        data: {
+          site_id: site,
+          user_id: $scope.user.id
+        }
+      },
+      function (options) { // success
+        $('#checkout-result').text('Payment was successful');
+      },
+      function (reason, options) { // fail
+        $('#checkout-result').text('Payment failed');
+      });
+  };
+
+  /**
    * @desc update site via api call
    *
    * @param {string} key
