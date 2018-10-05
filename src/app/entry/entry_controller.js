@@ -152,8 +152,8 @@ function EntryController($scope, $rootScope, $state, $stateParams, Entry, Codeki
     // If an entry was provided, then hide it temporary.
     if (entry) {
       entry.isSelected = false;
-      entry.isDeleted = true
-    };
+      entry.isDeleted = true;
+    }
 
     // Clear undo toaster
     toaster.clear(undoToaster);
@@ -194,7 +194,7 @@ function EntryController($scope, $rootScope, $state, $stateParams, Entry, Codeki
         handleEntryDeleteFinish(true, true);
       }
     }, 5500);
-  }
+  };
 
   /**
    * @desc Load more function for controller
