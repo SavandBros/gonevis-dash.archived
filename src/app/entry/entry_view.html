@@ -163,7 +163,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <a ng-click="onDeletedEntry(entry)">
+                  <a ng-click="undoService.remove(entry)">
                     <i class="fa fa-fw fa-trash text-danger"></i> {{ 'DELETE' | translate }}
                   </a>
                 </li>
