@@ -49,6 +49,22 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
   }
 
   /**
+   * @desc Watch entry status changes.
+   *
+   * @param {number} status
+   */
+  function onStatusChange(status) {
+    $scope.currentStatus = Codekit.entryStatuses[status];
+    $scope.$watch("form.get.status", function(newValue, oldValue) {
+      if (newValue === oldValue) {
+        return;
+      }
+
+      $scope.currentStatus = Codekit.entryStatuses[newValue];
+    });
+  }
+
+  /**
    * @desc Auto-Save
    */
   function initAutoSave() {
@@ -143,15 +159,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           $scope.form.get.id = $stateParams.entryId;
           $scope.form.url = $scope.form.getUrl();
           Codekit.setTitle($scope.form.get.title);
-          $scope.currentStatus = Codekit.entryStatuses[data.status];
-
-          $scope.$watch("form.get.status", function(newValue, oldValue) {
-            if (newValue === oldValue) {
-              return;
-            }
-
-            $scope.currentStatus = Codekit.entryStatuses[newValue];
-          });
+          onStatusChange(data.status);
 
           // Get entry tags
           angular.forEach($scope.form.get.tags, function (data) {
@@ -181,7 +189,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
         comment_enabled: true // Commenting is enabled by default
       });
       $scope.form.get.is_page = $stateParams.isPage;
-      $scope.currentStatus = Codekit.entryStatuses[$scope.form.get.status];
+      onStatusChange($scope.form.get.status);
 
       // Initial auto-save
       initAutoSave();
