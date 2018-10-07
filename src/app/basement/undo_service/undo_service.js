@@ -61,7 +61,7 @@ function UndoService($timeout, $translate, $state, toaster) {
 
     // If item already has a timeout, then cancel it.
     if (item.timeout) {
-      $timeout.cancel(item.timeout)
+      $timeout.cancel(item.timeout);
     }
     // Proceed to deletion After 5 seconds.
     item.timeout = $timeout(() => {
@@ -75,7 +75,7 @@ function UndoService($timeout, $translate, $state, toaster) {
         return item.remove(true);
       }
     }, 5500);
-  };
+  }
 
   /**
    * @desc Handle deletion prompt.
@@ -95,7 +95,7 @@ function UndoService($timeout, $translate, $state, toaster) {
     } else {
       return;
     }
-  };
+  }
 
   /**
    * @desc Handle param.
@@ -107,8 +107,8 @@ function UndoService($timeout, $translate, $state, toaster) {
       if (paramItem && item.get.id === paramItem.get.id || inProgressItems.includes(item.get.id)) {
         master[index] = paramItem;
       }
-    })
-  };
+    });
+  }
 
   return {
     validateParam: validateParam,
