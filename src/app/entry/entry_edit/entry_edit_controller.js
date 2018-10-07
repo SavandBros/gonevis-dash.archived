@@ -8,7 +8,7 @@ require('./editor.css');
 require('./editor');
 import CustomIcons from "./editor";
 
-function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
+function EntryEditController($scope, $rootScope, UndoService, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window) {
   let editorButtons = [
     ['back'],
@@ -28,6 +28,17 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   let autoSave;
   let getYoutubeUrl;
   let vm = this;
+
+  /**
+   * @desc Handle entry existion error.
+   */
+  function existionError() {
+    $scope.postInitial = false;
+    $state.go("dash.entry-edit", { entryId: null });
+    $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function (translations) {
+      toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
+    });
+  }
 
   /**
    * @desc Remove preview button when writing new post/page.
@@ -62,7 +73,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   function constructor() {
+    if(UndoService.validateParam($stateParams.entryId)) {
+      existionError();
+    }
+    $scope.fromState = $stateParams.isPage ? "dash.page-list" : "dash.entry-list";
     new CustomIcons($translate);
+    $scope.undoService = UndoService;
     $scope.codekit = Codekit;
     $scope.entryStatus = new EntryStatus();
     $scope.tags = [];
@@ -152,11 +168,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           initAutoSave();
         },
         function () {
-          $scope.postInitial = false;
-          $state.go("dash.entry-edit", { entryId: null });
-          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function (translations) {
-            toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
-          });
+          existionError();
         }
       );
     } else {
@@ -591,27 +603,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   });
 
   /**
-   * @desc Show prompt on entry deletion
-   *
-   * @param {string} id
-   */
-  $scope.removePost = (id) => {
-    let state = "dash.entry-list";
-
-    // Check if last state was page list
-    if ($stateParams.isPage) {
-      state = "dash.page-list";
-    }
-
-    if (confirm($translate.instant('REMOVE_ENTRY_PROMPT')) === true) {
-      $state.go(state, { deletedEntry: id });
-    } else {
-      return;
-    }
-  };
-
-
-  /**
    * @desc Tag create callback
    *
    * @param {Event} event
@@ -692,18 +683,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       $scope.editor.setSelection(0, 0);
 
       return false;
-    }
-  });
-
-  /**
-   * @desc Go to entries on entry removal
-   *
-   * @param {Event} event
-   * @param {object} data
-   */
-  $scope.$on("gonevisDash.Entry:remove", function (event, data) {
-    if (data.success) {
-      $state.go("dash.entry-list");
     }
   });
 
