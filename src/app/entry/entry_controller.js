@@ -2,29 +2,11 @@
 
 import app from "../app";
 
-function EntryController($scope, $rootScope, $state, $stateParams, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService,
-                        $translate, toaster, $timeout) {
-
-  let deletedEntry = $stateParams.deletedEntry;
-  let undoToaster;
-  let undoTimeout;
-
-  function handleEntryDeleteFinish(remove, permanent) {
-    angular.forEach($scope.entries, function(entry) {
-      if (entry.get.id === $stateParams.deletedEntry) {
-        if (permanent && deletedEntry) {
-          return entry.remove(true);
-        }
-
-        entry.isDeleted = remove;
-      }
-    });
-  }
+function EntryController($scope, $state, $stateParams, Entry, UndoService, Codekit, API, AuthService, Pagination, Search, localStorageService,
+                        $translate) {
 
   function constructor() {
-    if (deletedEntry) {
-      $scope.onDeletedEntry();
-    }
+    $scope.undoService = UndoService;
     $scope.codekit = Codekit;
     $scope.isPageView = $state.includes("dash.page-list");
     $scope.view = localStorageService.get("entryView") || "list";
@@ -92,10 +74,7 @@ function EntryController($scope, $rootScope, $state, $stateParams, Entry, Codeki
         $scope.initialled = true;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Entries.get, data, payload);
-
-        if (deletedEntry) {
-          handleEntryDeleteFinish(true);
-        }
+        UndoService.onParamProvided($scope.entries);
       }
     );
   }
@@ -142,60 +121,6 @@ function EntryController($scope, $rootScope, $state, $stateParams, Entry, Codeki
     });
   };
 
-
-  /**
-   * @desc Handle entry deletion.
-   *
-   * @param {object} entry
-   */
-  $scope.onDeletedEntry = (entry) => {
-    // If an entry was provided, then hide it temporary.
-    if (entry) {
-      entry.isSelected = false;
-      entry.isDeleted = true;
-    }
-
-    // Clear undo toaster
-    toaster.clear(undoToaster);
-    $translate(['UNDO_DELETE', 'UNDO_DELETE_MESSAGE']).then(function (translation) {
-      undoToaster = toaster.pop(
-        "success",
-        translation.UNDO_DELETE,
-        translation.UNDO_DELETE_MESSAGE, 5000,
-        'trustedHtml',
-        function() {
-          deletedEntry = null;
-
-          // If an entry was provided, then hide it temporary.
-          if (entry) {
-            entry.isDeleted = false;
-            return true;
-          }
-
-          handleEntryDeleteFinish(false, false);
-          return true;
-        }
-      );
-    });
-
-    // Cancel last "undoTimeout" timeouts.
-    $timeout.cancel(undoTimeout);
-    // Proceed to deletion After 5 seconds.
-    undoTimeout = $timeout(() => {
-      // Clear undo toaster
-      toaster.clear(undoToaster);
-      // If an entry was provided, then delete.
-      if (entry && entry.isDeleted === true) {
-        return entry.remove(true);
-      }
-
-      // If param "deletedEntry" has value, then delete.
-      if (deletedEntry) {
-        handleEntryDeleteFinish(true, true);
-      }
-    }, 5500);
-  };
-
   /**
    * @desc Load more function for controller
    */
@@ -230,6 +155,7 @@ function EntryController($scope, $rootScope, $state, $stateParams, Entry, Codeki
         $scope.entries.push(new Entry(data));
       });
       $scope.searchForm = data.form;
+      UndoService.onParamProvided($scope.entries);
     }
   });
 
@@ -239,17 +165,15 @@ function EntryController($scope, $rootScope, $state, $stateParams, Entry, Codeki
 app.controller("EntryController", EntryController);
 EntryController.$inject = [
   "$scope",
-  "$rootScope",
   "$state",
   "$stateParams",
   "Entry",
+  "UndoService",
   "Codekit",
   "API",
   "AuthService",
   "Pagination",
   "Search",
   "localStorageService",
-  "$translate",
-  "toaster",
-  "$timeout"
+  "$translate"
 ];
