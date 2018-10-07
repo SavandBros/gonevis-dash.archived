@@ -140,7 +140,9 @@
     </div>
   </div>
   <div class="remove" ng-if="editing">
-    <a ng-click="removePost(form.get.id)"><i class="fa fa-trash fa-fw"></i> {{ 'DELETE_POST' | translate }}</a>
+    <a ng-click="undoService.prompt('REMOVE_ENTRY_PROMPT', fromState, 'deletedEntry', form)">
+      <i class="fa fa-trash fa-fw"></i> {{ 'DELETE_POST' | translate }}
+    </a>
   </div>
 </div>
 
