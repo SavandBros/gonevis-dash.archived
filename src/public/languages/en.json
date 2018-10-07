@@ -200,7 +200,7 @@
   "DELETE_POST": "Delete post",
   "ENTRY_DELETED": "Entry deleted!",
   "UNDO_DELETE": "Undo delete!",
-  "UNDO_DELETE_MESSAGE": "Post deleted, click here to undo.",
+  "UNDO_DELETE_MESSAGE": "Deleted, click here to undo.",
   "REMOVE_SELECTED_ENTRY_PROMPT": "Delete selected posts?\nDeleting posts can not be undone!",
   "REMOVE_ENTRY_PROMPT": "Are you sure you want to delete this post?",
   "OPEN_SETTINGS_SIDEBAR": "Open Settings Sidebar",
