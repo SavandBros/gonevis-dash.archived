@@ -1,0 +1,1 @@
+require("./plans_controller");

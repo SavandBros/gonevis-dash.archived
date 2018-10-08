@@ -24,4 +24,5 @@ require('./dolphin');
 require('./start');
 require('./header');
 require('./navigation');
+require('./plans');
 require('./reader');
