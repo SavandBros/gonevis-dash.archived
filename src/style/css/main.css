@@ -77,20 +77,22 @@ hr[soft] {
 
 /* No sidebar */
 
-.no-sidebar .sidebar-content {
+/* .no-sidebar .sidebar-content {
     opacity: 0;
-}
+    display: none;
+} */
 
-.no-sidebar .navbar-static-top {
-    opacity: 1;
+.no-sidebar .sidebar-content,
+.no-sidebar .sidebar-content .btn {
+    left: -60px !important;
 }
-
-.navbar-static-top {
-    opacity: 0;
-}
-
 
 /* Content */
+
+#content div.container,
+#content div.container-fluid {
+    margin-top: 60px;
+}
 
 header:not(.no-sidebar)~#content .container,
 header:not(.no-sidebar)~#content .container-fluid {
@@ -148,16 +150,40 @@ header:not(.no-sidebar)~#content .container-fluid {
 /* Navbar */
 
 .navbar {
-    z-index: 10;
+    background-color: rgb(2, 136, 209);
+}
+
+.navbar .navbar-nav > li > a {
+    color: #fff;
+    transition: ease-in-out all 0.15s;
+}
+
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li.active > a,
+.navbar .navbar-nav > li > a:focus,
+.navbar .navbar-nav > li.open > a {
+    color: #fff !important;
+    background-color: rgba(0,0,0,0.5) !important;
 }
 
 .navbar,
 .navbar li {
-    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .navbar-brand {
     margin-right: 30px;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar,
+.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #000;
 }
 
 .navbar-brand:hover {
@@ -165,18 +191,20 @@ header:not(.no-sidebar)~#content .container-fluid {
 }
 
 .navbar .dropdown img {
-    width: 48px;
+    width: 36px;
     border-radius: 100%;
 }
 
 @media(min-width: 992px) {
     .navbar {
-        min-height: 60px;
+        min-height: 45px;
     }
-    .navbar-nav a,
+    .navbar-nav>li>a,
     .navbar-brand {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        line-height: 24px !important;
+        height: 44px;
     }
     .navbar a .fa.nav-icon {
         font-size: 24px;
@@ -658,23 +686,6 @@ md-toast {
 }
 
 
-/* Editor */
-
-[medium-editor],
-.medium-editor-toolbar,
-.medium-editor-action,
-.editor-container {
-    transition: 0.3s ease-in-out;
-    transition-property: background, border;
-}
-
-.editor-container {
-    background: #fff;
-    padding-left: 0 !important;
-    border: 1px solid #e7e7e7;
-}
-
-
 /* Editor mode */
 
 .editor-draft-mode {
@@ -694,58 +705,6 @@ md-toast {
 
 .editor-draft-mode:hover {
     opacity: 1;
-}
-
-
-/* Lights */
-
-.lights.off .container-fluid {
-    box-shadow: 0 0 0 10000px #333;
-}
-
-.lights.off .container-fluid,
-.lights.off .editor-container,
-.lights.off .editor .form-control,
-.lights.off #content~.medium-editor-toolbar {
-    background: #333 !important;
-    border-color: #222 !important;
-    color: #fff;
-}
-
-.lights.off .editor-draft-mode,
-.lights.off #content~.medium-editor-toolbar .medium-editor-action {
-    color: #ddd !important;
-    border-color: #222;
-}
-
-.lights.off #content~.medium-editor-toolbar-active .medium-editor-action.active {
-    background: #222 !important;
-}
-
-.lights.off code {
-    color: #faa;
-    background: #222;
-}
-
-.lights.off pre {
-    background: #222;
-    color: #ddd;
-    border-color: #333;
-}
-
-.editor-draft-mode:hover {
-    opacity: 1;
-}
-
-.editor,
-.form-control,
-.editor-draft-mode,
-.navbar .active a,
-code,
-pre {
-    transition-duration: 0.3s;
-    transition-property: background, box-shadow, color, border;
-    transition-timing-function: ease-in-out;
 }
 
 
@@ -889,7 +848,7 @@ tags-input .autocomplete .suggestion-item.selected span:last-child {
 
 .entry-form-corner {
     position: fixed;
-    top: 0;
+    top: 60px;
     right: 15px;
     height: 62px;
     width: 220px;
@@ -1769,6 +1728,12 @@ img.cache {
     .team-role {
         padding: 10px 0 0 35px;
     }
+    .container-fluid.reader-cover {
+        padding: 110px 30px !important;
+    }
+    .reader-content {
+        padding: 10px !important;
+    }
 }
 
 
@@ -1930,3 +1895,4 @@ img.cache {
     left: 250px !important;
     width: calc(100% - 250px) !important;
 }
+

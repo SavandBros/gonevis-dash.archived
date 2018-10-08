@@ -19,9 +19,35 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       controller: "SiteNewController",
       template: require("./site/site_new/site_new_view.html"),
       auth: true,
-      title: "New Blog",
+      title: "New Blog"
+    })
+    .state("reader", {
+      url: "/reader",
+      abstract: true,
+      template: "<ui-view/>",
+      auth: true
+    })
+    .state("reader.explore-feed", {
+      url: "/:view",
+      controller: "ReaderController",
+      template: require("./reader/reader_view.html"),
+      auth: true,
+      title: "Reader",
       params: {
-        s: 0
+        view: {
+          name: null,
+          dynamic: true
+        }
+      }
+    })
+    .state("reader.detail", {
+      url: "/post/:entryId",
+      controller: "ReaderDetailController",
+      template: require("./reader/reader_detail/reader_detail_view.html"),
+      auth: true,
+      title: "Reader",
+      params: {
+        entryId: null
       }
     })
     .state("user", {
@@ -185,6 +211,9 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       controller: "EntryController",
       template: require("./entry/entry_view.html"),
       auth: true,
+      params: {
+        deletedEntry: null
+      },
       title: "Posts"
     })
     .state("dash.page-list", {
@@ -192,6 +221,9 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       controller: "EntryController",
       template: require("./entry/entry_view.html"),
       auth: true,
+      params: {
+        deletedEntry: null
+      },
       title: "Pages"
     })
     .state("dash.site", {

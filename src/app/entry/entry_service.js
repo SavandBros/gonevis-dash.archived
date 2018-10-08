@@ -84,16 +84,18 @@ function Entry($rootScope, $state, API, Codekit, toaster, $translate) {
     /**
      * @desc Delete entries via API call
      */
-    this.remove = function() {
+    this.remove = function(undoPassed) {
       API.Entry.delete({
           entry_id: this.get.id
         },
         function() {
           self.isDeleted = true;
           self.isSelected = false;
-          $translate(["DONE", "ENTRY_DELETED"]).then(function(translations) {
-            toaster.success(translations.DONE, translations.ENTRY_DELETED);
-          });
+          if (!undoPassed) {
+            $translate(["DONE", "ENTRY_DELETED"]).then(function(translations) {
+              toaster.success(translations.DONE, translations.ENTRY_DELETED);
+            });
+          }
           $rootScope.$broadcast("gonevisDash.Entry:remove", {
             entry: self,
             success: true,

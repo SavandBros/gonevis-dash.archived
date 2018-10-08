@@ -209,6 +209,10 @@
     border-left: none;
 }
 
+.b-right-no {
+    border-right: none !important;
+}
+
 .b-color-0 {
     border-color: orange;
 }
@@ -220,6 +224,13 @@
 
 .b-primary {
     border-color: #d17100;
+}
+
+
+/* Background colors */
+
+.bg-white {
+    background-color: #fff;
 }
 
 
