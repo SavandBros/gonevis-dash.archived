@@ -1,0 +1,6 @@
+<!-- Plans -->
+<div class="container text-center container-light pad-top" ng-if="!isRestrict">
+  <div class="col-md-6" ng-repeat="plan in plans">
+    <button class="btn btn-success" ng-click="pay(plan)">Upgrade</button>
+  </div>
+</div>
