@@ -24,7 +24,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
 
     $translate([
       "DASHBOARD", "WRITE", "POSTS", "PAGES", "READER", "TAGS",
-      "COMMENTS", "FILES", "NAVIGATIONS", "TEAM", "SETTINGS"
+      "COMMENTS", "FILES", "NAVIGATIONS", "TEAM", "SETTINGS", "PLANS"
     ]).then(function (translations) {
       // Navs
       $scope.mainNavs = [{
@@ -67,6 +67,10 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         label: translations.SETTINGS,
         sref: "dash.site",
         icon: "fa-cog"
+      }, {
+        label: translations.PLANS,
+        sref: "dash.plans",
+        icon: "fa-bar-chart"
       }];
     });
   }
