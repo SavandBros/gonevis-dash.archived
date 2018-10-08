@@ -23,6 +23,7 @@ body {
     font-family: "Lato", Helvetica, sans-serif;
     color: #6F7A8B;
     overflow-y: scroll;
+    transition: ease-in-out background-color 0.2s
 }
 
 body.lights.off {
@@ -231,7 +232,7 @@ body.lights.off {
 
 @media (max-height: 650px) {
     .sidebar-content a:not(.main) {
-        padding: 8px 17px !important;
+        padding: 8px 20px !important;
     }
     .sidebar-content .navigations a:first-of-type {
         margin-top: -36px;
@@ -241,6 +242,11 @@ body.lights.off {
     }
 }
 
+@media (max-width: 768px) {
+    .sidebar-content .navigations a .more {
+        display: none;
+    }
+}
 
 /* Sidebar button */
 

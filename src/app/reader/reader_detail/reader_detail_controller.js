@@ -9,6 +9,33 @@ require('../../entry/entry_edit/editor.css');
 function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window) {
   let lastScroll;
 
+  /**
+   * @desc Auto hide bottom bar when scrolling.
+   *
+   * @returns {void}
+   */
+  function onScroll() {
+    let scrollLimit = $scope.post.media.cover_image ? 400 : 0;
+    let bottom = "-70px";
+
+    // If user scrolled 400 pixles down.
+    if (!$scope.full) {
+      if ($window.scrollY >= scrollLimit) {
+        let currentScroll = $window.scrollY;
+
+        if (lastScroll > currentScroll) {
+          bottom = "0";
+        }
+
+        angular.element(".bottom-bar").css({ 'bottom': bottom });
+        lastScroll = currentScroll;
+      }
+    }
+
+    angular.element(".reader-cover")
+      .css({ 'background-position': 'center calc(50% + ' + (0 - $window.scrollY / 2) + 'px)' });
+  }
+
   function constructor() {
     lastScroll = $window.pageYOffset;
     let postId = $stateParams.entryId;
@@ -19,7 +46,10 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
     }
 
     // Check post's id length
-    if (postId.length !== 36) return $scope.error = true;
+    if (postId.length !== 36) {
+      $scope.error = true;
+      return;
+    }
 
     // Get user
     let userSiteRole = new UserSiteRole();
@@ -34,7 +64,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
           if (data.site.id === site.id && site.role === userSiteRole.OWNER) {
             $scope.isOwner = true;
           }
-        })
+        });
         $scope.loading = false;
         // Post data
         $scope.post = data;
@@ -83,7 +113,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
    */
   $scope.fullScreen = () => {
     $scope.full = !$scope.full;
-  }
+  };
 
   /**
    * @desc Subscribe to site.
@@ -100,31 +130,6 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   		}
     );
   };
-
-  /**
-   * @desc Auto hide bottom bar when scrolling.
-   *
-   * @returns {void}
-   */
-  function onScroll() {
-    let scrollLimit = $scope.post.media.cover_image ? 400 : 0;
-    let bottom = "-70px";
-
-    // If user scrolled 400 pixles down.
-    if (!$scope.full) {
-      if ($window.scrollY >= scrollLimit) {
-        let currentScroll = $window.scrollY;
-
-        if (lastScroll > currentScroll) bottom = "0";
-
-        angular.element(".bottom-bar").css({ 'bottom': bottom });
-        lastScroll = currentScroll;
-      }
-    }
-
-    angular.element(".reader-cover")
-      .css({ 'background-position': 'center calc(50% + ' + (0 - $window.scrollY / 2) + 'px)' });
-  }
 
   /**
    * @desc Cancel events on state change

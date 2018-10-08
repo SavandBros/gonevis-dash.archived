@@ -105,6 +105,8 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
       $rootScope.hideSidebar = false;
     }
 
+    $rootScope.insideEditor = stateName.indexOf("dash.entry-edit") !== -1;
+
     // If requires unauthenticated access only and user is authenticated or
     // If state requires authenticated access only and user is not authenticated
     if ((transition.to().auth === false && isAuthenticated) || (transition.to().auth === true && !isAuthenticated)) {
