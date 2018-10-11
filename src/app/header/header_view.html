@@ -92,8 +92,34 @@
 </nav>
 
 <!-- Sidebar content -->
-<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar || state.includes('dash.entry-edit')}"
-  ng-if="auth.isAuthenticated()">
+<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar}" ng-if="auth.isAuthenticated()">
+  <!-- Blogs dropdown -->
+  <div class="dropdown dis-g">
+    <!-- Header -->
+    <a class="main dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
+      <!-- Logo -->
+      <img ng-src="{{ user.getSites()[param.s].media.logo.thumbnail_48x48 }}"
+           ng-if="user.getSites()[param.s].media.logo.thumbnail_48x48">
+      <!-- Title -->
+      <span ng-if="!set.sidebar">{{ user.getSites()[param.s].title[0] || "DASHBOARD_SHORT" | translate }}</span>
+      <span ng-if="set.sidebar">{{ user.getSites()[param.s].title || "DASHBOARD" | translate }}</span>
+      <!-- Caret -->
+      <i class="fa fa-caret-down o-fade" ng-if="set.sidebar"></i>
+    </a>
+    <!-- Header dropdown -->
+    <ul class="dropdown-menu">
+      <!-- Blogs -->
+      <li ng-repeat="site in user.getSites()" ng-class="{active: param.s == $index}">
+        <a ui-sref="dash.main({s: $index})" ng-click="setSite($index)">{{ site.title }}</a>
+      </li>
+      <li class="divider"></li>
+      <!-- New blog -->
+      <li><a ui-sref="site-new({s: param.s})">
+        <small translate>START_A_BLOG</small>
+      </a></li>
+    </ul>
+  </div>
+  <br>
   <!-- Main navs -->
   <a ng-href="{{ state.href(nav.sref, {s: param.s ? param.s : set.lastSite}) }}" ng-repeat="nav in mainNavs"
      ng-class="{active: state.includes(nav.sref)}">
