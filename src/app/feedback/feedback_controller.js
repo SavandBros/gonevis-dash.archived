@@ -25,7 +25,7 @@ function FeedbackController($scope, toaster, API, ModalsService, $translate) {
       },
       sending: false,
       error: null
-    }
+    };
   }
 
   /**
@@ -39,7 +39,7 @@ function FeedbackController($scope, toaster, API, ModalsService, $translate) {
     });
 
     $scope.form.sending = false;
-  }
+  };
 
   /**
    * @desc Send feedback.
