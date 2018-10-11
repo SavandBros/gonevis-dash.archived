@@ -18,7 +18,7 @@ describe("FeedbackController", function () {
   describe("$scope.send", function () {
     beforeEach(function () {
       controller = $controller("FeedbackController", { $scope: $scope, $translate: $translate });
-      spyOn(controller, 'raiseError');
+      spyOn(controller, 'setError');
     });
 
     it("should raise error if form message is empty or null or undefined", function () {
@@ -31,7 +31,7 @@ describe("FeedbackController", function () {
       };
       $scope.send($scope.form);
 
-      expect(controller.raiseError).toHaveBeenCalled();
+      expect(controller.setError).toHaveBeenCalled();
       expect($scope.send($scope.form)).toBeFalsy();
     });
 
@@ -45,7 +45,7 @@ describe("FeedbackController", function () {
       };
       $scope.send($scope.form);
 
-      expect(controller.raiseError).toHaveBeenCalled();
+      expect(controller.setError).toHaveBeenCalled();
       expect($scope.send($scope.form)).toBeFalsy();
     });
   });

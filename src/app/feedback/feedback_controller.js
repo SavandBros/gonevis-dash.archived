@@ -29,11 +29,11 @@ function FeedbackController($scope, toaster, API, ModalsService, $translate) {
   }
 
   /**
-   * @desc Raise an error.
+   * @desc Set form error.
    *
    * @param {string} error
    */
-  vm.raiseError = function(error) {
+  vm.setError = function(error) {
     $translate(error).then(translated => {
       $scope.form.error = translated;
     });
@@ -52,12 +52,12 @@ function FeedbackController($scope, toaster, API, ModalsService, $translate) {
 
     // Check if message is empty
     if (form.data.message === "" || form.data.message === null || form.data.message === undefined) {
-      vm.raiseError("EMPTY_FIELD_ERROR");
+      vm.setError("EMPTY_FIELD_ERROR");
       return false;
     }
     // Check message character length.
     if (form.data.message.length < 10) {
-      vm.raiseError("FEEDBACK_LENGTH_ERROR");
+      vm.setError("FEEDBACK_LENGTH_ERROR");
       return false;
     }
 
