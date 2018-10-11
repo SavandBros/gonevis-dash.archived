@@ -1,26 +1,68 @@
 "use strict";
 import EntryStatus from "../status";
 
+require('../../basement/directives/auto_resize_directive');
 require('ng-quill');
 require('quill/dist/quill.snow.css');
 require('./editor.css');
 require('./editor');
+import CustomIcons from "./editor";
 
-function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout, $q,
+function EntryEditController($scope, $rootScope, UndoService, $state, $stateParams, $timeout, $q,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window) {
+  let editorButtons = [
+    ['back'],
+    ['bold', 'italic', 'underline', 'strike'],
+    ['link', 'blockquote', 'code-block', { 'list': 'bullet' }, 'divider'],
+    [{ 'header': [1, 2, 3, false] }],
+    ['image', 'video'],
+    [{ 'direction': 'rtl' }, { 'align': [] }],
+    ['clean'],
+    ['publish', 'update', 'preview', 'settings', 'light']
+  ];
   var payload;
   var tagsToCreate = [];
   var noneTagsCount = 0;
   let oldData = {};
   let interval;
   let autoSave;
+  let getYoutubeUrl;
+  let vm = this;
 
-  let didScroll;
-  let lastScrollTop = 0;
-  let delta = 5;
-  let toolbarHeight = angular.element(".entry-toolbar").outerHeight();
-  let editorToolbar = angular.element("div.ql-toolbar.ql-snow");
-  let onScroll;
+  /**
+   * @desc Handle entry existion error.
+   */
+  function existionError() {
+    $scope.postInitial = false;
+    $state.go("dash.entry-edit", { entryId: null });
+    $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function (translations) {
+      toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
+    });
+  }
+
+  /**
+   * @desc Remove preview button when writing new post/page.
+   */
+  function hidePreview() {
+    let index = editorButtons.length - 1;
+    editorButtons[index] = editorButtons[index].filter(e => e !== "preview");
+  }
+
+  /**
+   * @desc Watch entry status changes.
+   *
+   * @param {number} status
+   */
+  function onStatusChange(status) {
+    $scope.currentStatus = Codekit.entryStatuses[status];
+    $scope.$watch("form.get.status", function(newValue, oldValue) {
+      if (newValue === oldValue) {
+        return;
+      }
+
+      $scope.currentStatus = Codekit.entryStatuses[newValue];
+    });
+  }
 
   /**
    * @desc Auto-Save
@@ -47,8 +89,12 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   }
 
   function constructor() {
-    $scope.currentSite = AuthService.getAuthenticatedUser(true).getSites()[$stateParams.s];
-    $scope.currentRole = Codekit.teamRoles[$scope.currentSite.role];
+    if(UndoService.validateParam($stateParams.entryId)) {
+      existionError();
+    }
+    $scope.fromState = $stateParams.isPage ? "dash.page-list" : "dash.entry-list";
+    new CustomIcons($translate);
+    $scope.undoService = UndoService;
     $scope.codekit = Codekit;
     $scope.entryStatus = new EntryStatus();
     $scope.tags = [];
@@ -113,6 +159,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           $scope.form.get.id = $stateParams.entryId;
           $scope.form.url = $scope.form.getUrl();
           Codekit.setTitle($scope.form.get.title);
+          onStatusChange(data.status);
 
           // Get entry tags
           angular.forEach($scope.form.get.tags, function (data) {
@@ -129,14 +176,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           initAutoSave();
         },
         function () {
-          $scope.postInitial = false;
-          $state.go("dash.entry-edit", { entryId: null });
-          $translate(["OOPS", "ENTRY_GET_ERROR"]).then(function (translations) {
-            toaster.error(translations.OOPS, translations.ENTRY_GET_ERROR);
-          });
+          existionError();
         }
       );
     } else {
+      hidePreview();
       $scope.editing = false;
       $scope.form = new Entry({
         content: "",
@@ -145,6 +189,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         comment_enabled: true // Commenting is enabled by default
       });
       $scope.form.get.is_page = $stateParams.isPage;
+      onStatusChange($scope.form.get.status);
 
       // Initial auto-save
       initAutoSave();
@@ -160,32 +205,103 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     }
 
     $scope.options = {
+      clipboard: {
+        matchVisual: false
+      },
       toolbar: {
-        container: [
-          ['bold', 'italic', 'underline', 'strike'],
-          ['link', 'image', 'blockquote', 'code-block', { 'list': 'bullet' }],
-          [{ 'header': [1, 2, 3, false] }],
-          [{ 'direction': 'rtl' }, { 'align': [] }],
-          ['clean'],
-          ['light']
-        ],
+        container: editorButtons,
         handlers: {
+          'back': () => $scope.goBack(),
+          'divider': () => {
+            let range = $scope.editor.getSelection(true);
+            // Insert an empty line
+            $scope.editor.insertText(range.index, '\n');
+            // Insert divider
+            $scope.editor.insertEmbed(range.index + 1, 'divider', true);
+            // Set cursor selection
+            $scope.editor.setSelection(range.index + 2);
+          },
+          'publish': () => {
+            if ($scope.form.loading || $scope.form.$invalid) {
+              return;
+            }
+
+            $scope.save($scope.form, $scope.entryStatus.PUBLISH);
+          },
+          'update': () => {
+            if ($scope.form.loading || $scope.form.$invalid) {
+              return;
+            }
+
+            $scope.save($scope.form);
+          },
+          'preview': () => $scope.preview(),
+          'settings': () => {
+            $scope.sidebar = !$scope.sidebar;
+            $scope.$apply();
+          },
           'light': () => {
             $rootScope.set.lights = !$rootScope.set.lights;
-          }
+            $scope.$apply();
+          },
         }
       }
     };
   }
 
   /**
+   * @desc Validate YouTube url.
+   *
+   * @param {string} clipboard
+   */
+  vm.validateYouTubeUrl = function(clipboard) {
+    let regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (clipboard.match(regex)) {
+      getYoutubeUrl = RegExp.$1;
+      return getYoutubeUrl;
+    }
+
+    return false;
+  };
+
+  /**
    * @desc On editor creation callback
    *
    * @param {Quill} editor
    */
-  $scope.onEditorInit = function(editor) {
+  $scope.onEditorInit = function (editor) {
+
     // Editor instance
     $scope.editor = editor;
+
+    // Fix editor dropdowns on small screens
+    if (angular.element($window).width() < 992) {
+      angular.element(".ql-picker").each(function (index, element) {
+        let parent = angular.element(element);
+
+        parent.click(function (event) {
+          let lastChild = angular.element(event.currentTarget.lastChild);
+
+          lastChild.css({
+            position: "fixed",
+            top: "50px",
+            left: event.currentTarget.getBoundingClientRect().left + "px",
+            minWidth: "auto"
+          });
+
+          let width = lastChild[0].offsetWidth;
+          let rect = lastChild[0].getBoundingClientRect();
+
+          if (rect.x < 0 || (rect.x + width) > $window.innerWidth) {
+            if ((rect.x + width) > $window.innerWidth) {
+              lastChild.css("left", $window.innerWidth - width);
+            } else {
+              lastChild.css("left", 0);
+            }
+          }
+        });
+      });
+    }
 
     /**
      * @desc Editor clipboard whitelist
@@ -202,7 +318,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
       'list',
       'header',
       'direction',
-      'align'
+      'align',
+      "allow",
+      "allowfullscreen"
     ];
 
     /**
@@ -220,7 +338,7 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
           });
         }
         // Check insert whitelist
-        if (op.insert && typeof op.insert === 'string' || op.insert.image) {
+        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
@@ -228,6 +346,22 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
         }
       });
       delta.ops = ops;
+      return delta;
+    });
+
+    editor.clipboard.addMatcher(Node.TEXT_NODE, function (node, delta) {
+      if (vm.validateYouTubeUrl(node.data)) {
+        delta.ops = [{
+          attributes: {
+            allow: "encrypted-media",
+            allowfullscreen: "true",
+            frameborder: 0
+          },
+          insert: {
+            video: 'https://www.youtube.com/embed/' + getYoutubeUrl + '?autoplay=0'
+          }
+        }];
+      }
       return delta;
     });
     $scope.cursorIndex = 0;
@@ -321,6 +455,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
 
   };
 
+  /**
+   * @desc Update entry
+   *
+   * @param {object} form Form data to submit
+   */
   $scope.updateEntry = function (form) {
     // If auto-saving mode, remove status property from payload
     if (autoSave) {
@@ -371,6 +510,11 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     );
   };
 
+  /**
+   * @desc Create a new entry.
+   *
+   * @param {object} form Form data to submit
+   */
   $scope.addEntry = function (form) {
     // If auto-saving mode, set status to draft
     if (autoSave) {
@@ -397,6 +541,9 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
     );
   };
 
+  /**
+   * @desc Discard draft changes.
+   */
   $scope.discardChanges = function () {
     if (confirm($translate.instant('DISCARD_CHANGES_PROMPT')) === false) {
       return;
@@ -464,18 +611,6 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   });
 
   /**
-   * @desc Go to entries on entry removal
-   *
-   * @param {Event} event
-   * @param {object} data
-   */
-  $scope.$on("gonevisDash.Entry:remove", function (event, data) {
-    if (data.success) {
-      $state.go("dash.entry-list");
-    }
-  });
-
-  /**
    * @desc Tag create callback
    *
    * @param {Event} event
@@ -525,13 +660,15 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   /**
    * @desc Go to post/page list
    */
-  $scope.goBack = function() {
+  $scope.goBack = function () {
     let state = "dash.entry-list";
 
     // Check if entry has an unsaved changes
-    if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
-      autoSave = true;
-      $scope.save($scope.form);
+    if ($scope.form.get.title) {
+      if (!angular.equals(oldData.form, $scope.form.get) || !angular.equals(oldData.tags, $scope.tagsToSubmit)) {
+        autoSave = true;
+        $scope.save($scope.form);
+      }
     }
     // Check if entry is a page
     if ($stateParams.isPage) {
@@ -541,74 +678,27 @@ function EntryEditController($scope, $rootScope, $state, $stateParams, $timeout,
   };
 
   /**
-   * @desc Go to entries on entry removal
+   * @desc Focus on editor when key "TAB" || "ENTER" is pressed.
    *
    * @param {Event} event
-   * @param {object} data
    */
-  $scope.$on("gonevisDash.Entry:remove", function (event, data) {
-    if (data.success) {
-      $state.go("dash.entry-list");
+  angular.element("textarea").keydown((event) => {
+    let code = event.keyCode || event.which;
+
+    // Check if key "TAB" || "ENTER" is pressed.
+    if (code === 9 || code === 13) {
+      $scope.editor.focus();
+      $scope.editor.setSelection(0, 0);
+
+      return false;
     }
   });
-
-  /**
-   * @desc Check if page has been scrolled.
-   */
-  function checkScroll() {
-    didScroll = true;
-  }
-
-  /**
-   * @desc Hide/show toolbar when scrolled.
-   */
-  function hasScrolled() {
-    let condition = "removeClass";
-    let st = angular.element($window).scrollTop();
-
-    // Make sure they scroll more than delta
-    if(Math.abs(lastScrollTop - st) <= delta) {
-      return;
-    }
-
-    // When scrolling down
-    if (st > lastScrollTop && st > toolbarHeight){
-        $scope.hideToolbar = true;
-    } else {
-      // When scrolling top
-      if(st + angular.element($window).height() < angular.element(document).height()) {
-        $scope.hideToolbar = false;
-      }
-    }
-
-    // Auto hide when true
-    if ($scope.hideToolbar) {
-      condition = "addClass";
-    }
-
-    angular.element("div.ql-toolbar.ql-snow")[condition]("push-out");
-    lastScrollTop = st;
-  }
-
-  // On scroll call function
-  onScroll = $interval(() => {
-    if (didScroll) {
-      hasScrolled();
-      didScroll = false;
-    }
-  }, 250);
-
-
-  // Scroll event
-  angular.element($window).bind("scroll", checkScroll);
 
   /**
    * @desc Cancel events on state change
    */
   $scope.$on("$destroy", function () {
     $interval.cancel(interval);
-    $interval.cancel(onScroll);
-    angular.element($window).off('scroll', checkScroll);
   });
 
   constructor();

@@ -40,6 +40,16 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
         }
       }
     })
+    .state("reader.detail", {
+      url: "/post/:entryId",
+      controller: "ReaderDetailController",
+      template: require("./reader/reader_detail/reader_detail_view.html"),
+      auth: true,
+      title: "Reader",
+      params: {
+        entryId: null
+      }
+    })
     .state("user", {
       url: "/user",
       controller: "UserController",
@@ -201,6 +211,9 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       controller: "EntryController",
       template: require("./entry/entry_view.html"),
       auth: true,
+      params: {
+        deletedEntry: null
+      },
       title: "Posts"
     })
     .state("dash.page-list", {
@@ -208,6 +221,9 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       controller: "EntryController",
       template: require("./entry/entry_view.html"),
       auth: true,
+      params: {
+        deletedEntry: null
+      },
       title: "Pages"
     })
     .state("dash.site", {

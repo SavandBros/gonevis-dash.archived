@@ -1,3 +1,10 @@
+2018.10.1
+========
+
+**Bug Fixes:**
+- Fixed #983: Change sidebar and navbar UI design.
+
+
 2018.9.4
 ========
 

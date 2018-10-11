@@ -2,10 +2,11 @@
 
 import app from "../app";
 
-function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService,
+function EntryController($scope, $state, $stateParams, Entry, UndoService, Codekit, API, AuthService, Pagination, Search, localStorageService,
                         $translate) {
 
   function constructor() {
+    $scope.undoService = UndoService;
     $scope.codekit = Codekit;
     $scope.isPageView = $state.includes("dash.page-list");
     $scope.view = localStorageService.get("entryView") || "list";
@@ -73,6 +74,7 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
         $scope.initialled = true;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Entries.get, data, payload);
+        UndoService.onParamProvided($scope.entries);
       }
     );
   }
@@ -153,6 +155,7 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
         $scope.entries.push(new Entry(data));
       });
       $scope.searchForm = data.form;
+      UndoService.onParamProvided($scope.entries);
     }
   });
 
@@ -163,7 +166,9 @@ app.controller("EntryController", EntryController);
 EntryController.$inject = [
   "$scope",
   "$state",
+  "$stateParams",
   "Entry",
+  "UndoService",
   "Codekit",
   "API",
   "AuthService",
