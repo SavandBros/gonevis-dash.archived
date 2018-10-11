@@ -10,7 +10,7 @@ import app from "../app";
  * ## Purpose
  * It's purpose is to send user's text as feedback.
  */
-function FeedbackController($scope, toaster, API, $translate) {
+function FeedbackController($scope, toaster, API, ModalsService, $translate) {
 
   function constructor() {
     /**
@@ -21,8 +21,22 @@ function FeedbackController($scope, toaster, API, $translate) {
       data: {
         message: "",
       },
-      sending: false
+      sending: false,
+      error: null
     }
+  }
+
+  /**
+   * @desc Raise an error.
+   *
+   * @param {string} error
+   */
+  function raiseError(error) {
+    $translate(error).then(translated => {
+      $scope.form.error = translated;
+    });
+
+    $scope.form.sending = false;
   }
 
   /**
@@ -31,18 +45,30 @@ function FeedbackController($scope, toaster, API, $translate) {
    * @param {object} form
    */
   $scope.send = (form) => {
+    form.error = null;
     form.sending = true;
 
+    // Check if message is empty
+    if (form.data.message === "" || form.data.message === null || form.data.message === undefined) {
+      raiseError("EMPTY_FIELD_ERROR");
+      return false;
+    }
+    // Check message character length.
+    if (form.data.message.length < 10) {
+      raiseError("FEEDBACK_LENGTH_ERROR");
+      return false;
+    }
+
+    // API call
     API.Feedback.save(form.data,
-      function (data) {
-        console.log(data);
-        form.sending = false;
+      () => {
+        ModalsService.close("feedback");
         $translate(["SENT", "FEEDBACK_SENT"]).then(function (translations) {
-          toaster.info(translations.SENT, translations.FEEDBACK_SENT);
+          toaster.success(translations.SENT, translations.FEEDBACK_SENT);
         });
       },
-      function (data) {
-        console.log(data);
+      error => {
+        form.error = error.data.message[0];
         form.sending = false;
       }
     );
