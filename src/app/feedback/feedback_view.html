@@ -16,6 +16,8 @@
           <textarea class="form-control" type="text" ng-model="form.data.message"
             style="min-width: 100%; min-height: 200px;" placeholder="{{ 'FEEDBACK' | translate }}" required>
           </textarea>
+          <!-- Error -->
+          <small class="help-block" ng-show="form.error">{{ form.error }}</small>
           <br>
           <!-- Cancel -->
           <button class="btn btn-default" type="button" data-dismiss="modal" translate>CANCEL</button>
