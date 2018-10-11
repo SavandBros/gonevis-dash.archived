@@ -12,6 +12,8 @@ import app from "../app";
  */
 function FeedbackController($scope, toaster, API, ModalsService, $translate) {
 
+  let vm = this;
+
   function constructor() {
     /**
      * @desc Feedback form.
@@ -31,7 +33,7 @@ function FeedbackController($scope, toaster, API, ModalsService, $translate) {
    *
    * @param {string} error
    */
-  function raiseError(error) {
+  vm.raiseError = function(error) {
     $translate(error).then(translated => {
       $scope.form.error = translated;
     });
@@ -50,12 +52,12 @@ function FeedbackController($scope, toaster, API, ModalsService, $translate) {
 
     // Check if message is empty
     if (form.data.message === "" || form.data.message === null || form.data.message === undefined) {
-      raiseError("EMPTY_FIELD_ERROR");
+      vm.raiseError("EMPTY_FIELD_ERROR");
       return false;
     }
     // Check message character length.
     if (form.data.message.length < 10) {
-      raiseError("FEEDBACK_LENGTH_ERROR");
+      vm.raiseError("FEEDBACK_LENGTH_ERROR");
       return false;
     }
 
