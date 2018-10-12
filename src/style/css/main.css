@@ -1896,3 +1896,27 @@ img.cache {
     width: calc(100% - 250px) !important;
 }
 
+
+/* Settings */
+
+.settings-tab {
+    background: #fff;
+}
+
+.settings-tab li,
+.settings-tab li a {
+    display: inline-block;
+}
+
+.settings-tab li:not(:first-of-type) {
+    margin-left: -3px;
+}
+
+.settings-tab li a {
+    padding: 15px 20px;
+    color: #777;
+}
+
+.settings-tab li a:hover {
+    color: #222;
+}
