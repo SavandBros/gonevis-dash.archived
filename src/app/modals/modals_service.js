@@ -12,6 +12,7 @@ import SiteTemplatesModalView from "../site/site_templates_modal/site_templates_
 import TeamModalView from "../team/team_modal/team_modal_view.html";
 import EmailConfirmationModalView from "../account/email_confirmation/email_confirmation_modal.html";
 import PostPreview from "../entry/preview_modal/preview_modal_view.html";
+import FeedbackModalView from "../feedback/feedback_view.html";
 
 
 /**
@@ -36,7 +37,8 @@ function ModalsService($rootScope, ModalService) {
     siteTemplates: SiteTemplatesModalView,
     team: TeamModalView,
     emailConfirmation: EmailConfirmationModalView,
-    postPreview: PostPreview
+    postPreview: PostPreview,
+    feedback: FeedbackModalView
   };
 
   /**

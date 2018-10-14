@@ -21,6 +21,7 @@
 - Fixed #969: Rename the word "site" to "blog".
 - Fixed #968: Fix long file labels visibility.
 - Fixed #970: Remove theme config section when no configs.
+- Fixed #455: Add feedback form.
 
 
 2018.8.1

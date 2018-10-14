@@ -25,3 +25,4 @@ require('./start');
 require('./header');
 require('./navigation');
 require('./reader');
+require('./feedback');

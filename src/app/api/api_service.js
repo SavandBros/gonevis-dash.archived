@@ -162,6 +162,12 @@ function API($resource, ENV) {
     }, {
       name: "Dolphin",
       endpoint: "dolphin/file/:fileId/" // GET, POST
+    },
+    // Feedback
+    {
+      name: "Feedback",
+      endpoint: "feedback/",
+      isZero: true
     }
   ];
 
