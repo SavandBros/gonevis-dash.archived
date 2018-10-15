@@ -4,6 +4,9 @@
 **Bug Fixes:**
 - Fixed #983: Change sidebar and navbar UI design.
 
+**Features:**
+- Resolved #988: Add a UI for previewing navigations on a navbar.
+
 
 2018.9.4
 ========
