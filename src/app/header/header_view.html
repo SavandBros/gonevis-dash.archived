@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-default navbar-static-top" ng-if="!auth.isAuthenticated()">
+<nav class="navbar navbar-default navbar-fixed-top" ng-class="{'push-out': state.includes('dash.entry-edit')}">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -8,9 +8,72 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ui-sref="start" translate>GONEVIS</a>
+      <a class="navbar-brand" ui-sref="start" translate ng-if="!auth.isAuthenticated()">GONEVIS</a>
     </div>
-    <div class="collapse navbar-collapse" id="navbar">
+    <!-- Authenticated -->
+    <div class="collapse navbar-collapse" id="navbar" ng-if="auth.isAuthenticated()">
+      <ul class="nav navbar-nav">
+        <li class="dropdown dis-g" ng-if="user.getSites().length">
+          <!-- Header -->
+          <a class="main dropdown-toggle t-line" data-toggle="dropdown">
+            <!-- Logo -->
+            <img ng-src="{{ currentSiteLogo(currentSite.media.logo ? currentSite : null) }}">
+            <!-- Title -->
+            <span>{{ currentSite.title }}</span>
+            <!-- Caret -->
+            <i class="fa fa-caret-down o-fade fa-fw"></i>
+          </a>
+          <!-- Header dropdown -->
+          <ul class="dropdown-menu">
+            <!-- Sites -->
+            <li ng-repeat="site in user.getSites()" ng-class="{active: currentSite.id === site.id}">
+              <a ui-sref="dash.main({s: $index})" ng-click="setSite($index)">{{ site.title }}</a>
+            </li>
+            <li class="divider"></li>
+            <!-- New blog -->
+            <li>
+              <a ui-sref="site-new({s: param.s})">
+                <small translate>START_A_BLOG</small>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- New blog -->
+        <li ng-if="!user.getSites().length" ng-class="{active: state.includes('site-new')}">
+          <a ui-sref="site-new">
+            <small translate>START_A_BLOG</small>
+          </a>
+        </li>
+        <li ng-class="{active: state.includes('reader')}">
+          <a ui-sref="reader.explore-feed({view: 'feed'})" translate ng-click="set.sidebar = false">READER</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Account dropdown -->
+        <li class="dropdown" ng-class="{active: state.includes('user')}">
+          <!-- Header -->
+          <a class="main main-light dropdown-toggle t-line" data-toggle="dropdown">
+            <!-- Profile picture -->
+            <img width="30" ng-src="{{ user.getMedia('tiny') }}" alt="{{ user.getDisplayName() }}"/>
+          </a>
+          <!-- Header dropdown -->
+          <ul class="dropdown-menu">
+            <!-- Account settings -->
+            <li ng-class="{active: state.includes('user')}">
+              <a ui-sref="user({s: param.s})">{{ "VIEW_ACCOUNT" | translate }}<br><span
+                class="o-fade">{{ user.get.email }}</span></a>
+            </li>
+            <li class="divider"></li>
+            <!-- Log out -->
+            <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> {{ 'LOG_OUT' | translate }}</a></li>
+          </ul>
+        </li>
+        <!-- Feedback -->
+        <li><a ng-click="feedback()" translate>FEEDBACK</a></li>
+      </ul>
+    </div>
+    <!-- Not authenticated -->
+    <div class="collapse navbar-collapse" id="navbar" ng-if="!auth.isAuthenticated()">
       <ul class="nav navbar-nav">
         <li ng-class="{active: state.includes('start')}">
           <a ui-sref="start" translate>GET_STARTED</a>
@@ -29,75 +92,27 @@
 </nav>
 
 <!-- Sidebar content -->
-<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar}" ng-if="auth.isAuthenticated()">
-  <!-- Blogs dropdown -->
-  <div class="dropdown dis-g">
-    <!-- Header -->
-    <a class="main dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
-      <!-- Logo -->
-      <img ng-src="{{ user.getSites()[param.s].media.logo.thumbnail_48x48 }}"
-           ng-if="user.getSites()[param.s].media.logo.thumbnail_48x48">
-      <!-- Title -->
-      <span ng-if="!set.sidebar">{{ user.getSites()[param.s].title[0] || "DASHBOARD_SHORT" | translate }}</span>
-      <span ng-if="set.sidebar">{{ user.getSites()[param.s].title || "DASHBOARD" | translate }}</span>
-      <!-- Caret -->
-      <i class="fa fa-caret-down o-fade" ng-if="set.sidebar"></i>
-    </a>
-    <!-- Header dropdown -->
-    <ul class="dropdown-menu">
-      <!-- Blogs -->
-      <li ng-repeat="site in user.getSites()" ng-class="{active: param.s == $index}">
-        <a ui-sref="dash.main({s: $index})" ng-click="setSite($index)">{{ site.title }}</a>
-      </li>
-      <li class="divider"></li>
-      <!-- New blog -->
-      <li><a ui-sref="site-new({s: param.s})">
-        <small translate>START_A_BLOG</small>
-      </a></li>
-    </ul>
-  </div>
-  <br>
+<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar || state.includes('dash.entry-edit')}"
+  ng-if="auth.isAuthenticated()">
   <!-- Main navs -->
-  <a ng-href="{{ state.href(nav.sref, {s: param.s}) }}" ng-repeat="nav in mainNavs"
-     ng-class="{active: state.includes(nav.sref)}">
-    <i class="fa fa-fw {{ nav.icon }}"></i> {{ nav.label }} <span class="arrow"></span>
-  </a>
-  <!-- Lights switch -->
-  <br ng-if="param.lights">
-  <a ng-class="{'active-minimal': set.lights}" ng-if="param.lights" ng-click="set.lights = !set.lights">
-    <i class="fa fa-fw fa-lightbulb-o"></i> {{ 'LIGHTS' | translate }}
-  </a>
-  <br>
-  <!-- Account dropdown -->
-  <div class="dropup dis-g">
-    <!-- Header -->
-    <a class="main main-light dropdown-toggle t-line" data-toggle="dropdown" ng-click="set.sidebar = true">
-      <!-- Profile picture -->
-      <img ng-if="user.hasMedia" ng-src="{{ user.getMedia('tiny') }}" alt="{{ user.getDisplayName() }}"/>
-      <!-- Display name -->
-      <span>{{ user.getDisplayName() }}</span>
-      <!-- Caret -->
-      <i class="fa fa-caret-up o-fade"></i>
+  <div class="navigations">
+    <!-- Indicator -->
+    <div class="indicator"></div>
+    <!-- Navigations -->
+    <a ng-href="{{ state.href(nav.sref, {s: param.s ? param.s : set.lastSite}) }}" ng-repeat="nav in mainNavs"
+      ng-class="{active: state.includes(nav.sref)}" name="{{ nav.sref }}">
+      <!-- More -->
+      <div class="more">{{ nav.label }}</div>
+      <i class="fa fa-fw {{ nav.icon }}"></i>
+      <span>{{ nav.label }}</span>
+      <!-- <span class="arrow"></span> -->
     </a>
-    <!-- Header dropdown -->
-    <ul class="dropdown-menu">
-      <!-- Account settings -->
-      <li ng-class="{active: state.includes('user')}">
-        <a ui-sref="user({s: param.s})">{{ "VIEW_ACCOUNT" | translate }}<br><span
-          class="o-fade">{{ user.get.email }}</span></a>
-      </li>
-      <li class="divider"></li>
-      <!-- Feedback -->
-      <li><a ng-href="mailto:hello@gonevis.com"><i class="fa fa-smile-o"></i> {{ 'FEEDBACK' | translate }}</a></li>
-      <!-- Log out -->
-      <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> {{ 'LOG_OUT' | translate }}</a></li>
-    </ul>
   </div>
-  <br>
   <!-- Toggle view -->
-  <button class="btn btn-default" ng-click="set.sidebar = !set.sidebar">
-    <i class="fa fa-fw" ng-class="{'fa-chevron-right': !set.sidebar, 'fa-chevron-left': set.sidebar}"></i>
-  </button>
+  <a class="sidebar-collapse" ng-click="set.sidebar = !set.sidebar">
+    <i class="fa fa-fw" ng-class="{'fa-chevron-circle-right': !set.sidebar, 'fa-chevron-circle-left': set.sidebar}"></i>
+    <span translate>COLLAPSE</span>
+  </a>
 </div>
 
 <!-- Toaster -->

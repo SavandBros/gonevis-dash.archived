@@ -12,6 +12,7 @@ function NavigationController($scope, $rootScope, toaster, $stateParams, API, Au
       return false;
     }
     $scope.navigations = [];
+    $scope.siteTitle = AuthService.getAuthenticatedUser(true).getSites()[$stateParams.s].title;
 
     API.Navigation.get({
         siteId: site

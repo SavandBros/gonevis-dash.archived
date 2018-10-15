@@ -23,8 +23,9 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 </head>
 
-<body ng-app="gonevisDash" class="lights" ng-class="{off: !set.lights, full: !set.sidebar}">
-  <header ng-class="{'no-sidebar': !auth.isAuthenticated()}"></header>
+<body ng-app="gonevisDash" class="lights"
+  ng-class="{off: !set.lights, full: !set.sidebar, 'bg-white': insideEditor}">
+  <header ng-class="{'no-sidebar': !auth.isAuthenticated() || hideSidebar}"></header>
 
   <!-- Content -->
   <div id="content" ng-class="{'full-content': !set.sidebar}" ui-view></div>

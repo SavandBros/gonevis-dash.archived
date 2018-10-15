@@ -66,11 +66,12 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       function(data) {
         if (key === "cover_image" || key === "logo") {
           $scope.site.media[key] = data.media[key];
+          $scope.user.sites[$stateParams.s].media[key] = data.media[key];
         } else {
           $scope.site[key] = data[key];
+          $scope.user.sites[$stateParams.s][key] = data[key];
         }
 
-        $scope.user.sites[$stateParams.s][key] = data[key];
         AuthService.setAuthenticatedUser($scope.user);
 
         $rootScope.$broadcast("gonevisDash.SiteController:update");
