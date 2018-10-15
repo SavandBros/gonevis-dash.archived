@@ -9,8 +9,37 @@
 <!-- Content -->
 <div class="container container-light pad-top" ng-if="!isRestrict">
   <div class="col-md-12">
+    <div class="panel panel-default s-box form-inline" ng-if="initialled">
+      <div class="panel-heading" translate>PREVIEW</div>
+      <div class="panel-body">
+        <nav class="navbar navbar-default navigations-nav s-mar-bottom-no">
+          <div class="container-fluid" style="padding-top: 0; margin: 0;">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navs" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <span class="navbar-brand">{{ siteTitle }}</span>
+            </div>
+            <!-- Navigations -->
+            <div class="collapse navbar-collapse" id="navs">
+              <ul class="nav navbar-nav">
+                <li ng-repeat="nav in navigations">
+                  <a style="color: {{ nav.color }} !important" title="{{ nav.tooltip }}">
+                    <i class="fa fa-{{ nav.icon }} fa-fw" ng-if="nav.icon"></i> {{ nav.label }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
     <!-- Main -->
-    <div class="panel panel-default s-box form-inline animated fadeIn" ng-if="initialled">
+    <div class="panel panel-default s-box form-inline" ng-if="initialled">
       <div class="panel-heading" translate>NAVIGATIONS</div>
       <div class="panel-body">
         <!-- Nothing -->
