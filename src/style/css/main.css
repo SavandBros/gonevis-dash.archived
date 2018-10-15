@@ -171,8 +171,6 @@ header:not(.no-sidebar)~#content .container-fluid {
     transition: all 0.2s ease-in-out;
 }
 
-
-
 .navbar-brand {
     margin-right: 30px;
     color: #fff !important;
