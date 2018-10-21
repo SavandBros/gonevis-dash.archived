@@ -3,7 +3,7 @@
   ng-click="selectImage('cover_image')" style="background-image: url('{{ site.media.cover_image.file }}')">
   <p ng-if="site.media.cover_image"><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
   <p ng-if="!site.media.cover_image" class="init">
-    <i class="fa fa-fw fa-image fa-2x s-mar-bottom-soft"></i> <br> Select cover image
+    <i class="fa fa-fw fa-image fa-2x s-mar-bottom-soft"></i> <br> {{ 'SELECT_COVER_IMAGE' | translate }}
   </p>
 </div>
 
@@ -21,12 +21,16 @@
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
 
       <!-- Settings -->
-      <div ng-if="currentTab.view === 'settings'">
+      <div ng-if="currentTab.view === 'settings'" class="animated fadeIn">
         <div class="panel panel-default">
           <h5 class="panel-heading lower">
-            <span style="line-height: 30px;"><i class="fa fa-cog fa-fw"></i> Blog Settings</span>
+            <span style="line-height: 30px;"><i class="fa fa-cog fa-fw"></i> {{ 'BLOG_SETTINGS' | translate }}</span>
             <!-- Update button -->
             <button class="btn btn-primary btn-sm pull-right" ng-click="updateSite()">
               <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
@@ -36,20 +40,21 @@
           <div class="panel-body s-pad">
             <!-- Title -->
             <div class="form-group">
-              <p class="t-bold" translate>Blog Headline</p>
+              <p class="t-bold" translate>BLOG_HEADLINE</p>
               <input type="text" class="form-control" ng-model="currentTab.form.title">
             </div>
             <!-- Description -->
             <div class="form-group">
-              <p class="t-bold" translate>Blog Description</p>
+              <p class="t-bold" translate>BLOG_DESCRIPTION</p>
               <textarea type="text" class="form-control" ng-model="currentTab.form.description"></textarea>
-              <em class="small">Explain to your audience what this blog is about.</em>
+              <em class="small" translate>BLOG_DESCRIPTION_HELP_TEXT</em>
             </div>
             <!-- URL -->
             <div class="form-group">
               <p class="t-bold" translate>ADDRESS</p>
-              <a class="site-url" ng-href="{{ currentTab.form.absolute_uri }}" target="_blank" title="{{ 'CANT_CHANGE' | translate }}">
-                {{ site.absolute_uri || "NOTHING_HERE" | translate }}
+              <a class="site-url" ng-href="{{ currentTab.form.absolute_uri }}" target="_blank"
+                title="{{ 'CANT_CHANGE' | translate }}">
+                {{ site.absolute_uri }}
               </a>
             </div>
           </div>
@@ -70,7 +75,7 @@
       </div>
 
       <!-- Appearance -->
-      <div ng-if="currentTab.view === 'appearance'">
+      <div ng-if="currentTab.view === 'appearance'" class="animated fadeIn">
         <div class="panel panel-default">
           <!-- Media -->
           <h5 class="panel-heading lower"><i class="fa fa-image fa-fw"></i> {{ 'MEDIA' | translate }}</h5>
@@ -84,8 +89,11 @@
                       ng-src="{{ site.media.cover_image ? site.media.cover_image.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
                   </div>
                   <div class="media-body">
-                    <p class="t-bold" translate>Blog Cover</p>
-                    <button class="btn btn-default btn-sm" ng-click="selectImage('cover_image')">Select Cover</button>
+                    <p class="t-bold" translate>BLOG_COVER</p>
+                    <button class="btn btn-default btn-sm" ng-click="selectImage('cover_image')"
+                      translate>
+                      SELECT_COVER
+                    </button>
                   </div>
                 </div>
               </div>
@@ -97,8 +105,8 @@
                       ng-src="{{ site.media.logo ? site.media.logo.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
                   </div>
                   <div class="media-body">
-                    <p class="t-bold" translate>Blog Logo</p>
-                    <button class="btn btn-default btn-sm" ng-click="selectImage('logo')">Select logo</button>
+                    <p class="t-bold" translate>BLOG_LOGO</p>
+                    <button class="btn btn-default btn-sm" ng-click="selectImage('logo')" translate>SELECT_LOGO</button>
                   </div>
                 </div>
               </div>
@@ -117,27 +125,29 @@
           <div class="panel-body">
             <!-- Template -->
             <div class="form-group">
-              <p class="t-bold" translate>Blog Theme</p>
+              <p class="t-bold" translate>BLOG_THEME</p>
               <div class="row">
                 <div class="col-md-8">
-                  <span class="dis-b">Change your blog look and feel by selecting a theme.</span>
-                  <span>You're currently using <b class="t-cap">{{ siteTemplate.name }}</b></span>
+                  <span class="dis-b" translate>BLOG_THEME_HELP_TEXT</span>
+                  <span>{{ 'CURRENTLY_USING' | translate }} <b class="t-cap">{{ siteTemplate.name }}</b></span>
                 </div>
                 <div class="col-md-4 text-right">
-                  <button class="btn btn-success" ng-click="siteTemplates()" ng-disabled="loadingTemplate">Show available themes</button>
+                  <button class="btn btn-success" ng-click="siteTemplates()" ng-disabled="loadingTemplate"
+                    translate>SHOW_AVAILABLE_THEMES
+                  </button>
                 </div>
               </div>
             </div>
             <!-- Font Name -->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <p class="t-bold" translate>Font Name</p>
               <input type="text" class="form-control" ng-model="currentTab.form.font_name" placeholder="Example: https://fonts.googleapis.com/css?family=Roboto:400,700">
-            </div>
+            </div> -->
             <!-- Google Font -->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <p class="t-bold" translate>Google Font (CSS font family)</p>
               <input type="text" class="form-control" ng-model="currentTab.form.font_url" placeholder="Roboto">
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- Theme options -->
@@ -172,7 +182,7 @@
       </div>
 
       <!-- Advanced -->
-      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
+      <div class="panel panel-default animated fadeIn" ng-if="currentTab.view === 'advanced'">
         <h5 class="panel-heading lower">
           <span style="line-height: 30px;"><i class="fa fa-plus fa-fw"></i> {{ 'ADVANCED' | translate }}</span>
           <!-- Update button -->
@@ -186,7 +196,7 @@
           <div class="form-group">
             <p class="t-bold t-cap" translate>META_DESCRIPTION</p>
             <input type="text" class="form-control" ng-model="currentTab.form.meta_description">
-            <em class="small">Meta Description is used by some search engines to improve your blog visibility in search result.</em>
+            <em class="small" translate>META_DESCRIPTION_HELP_TEXT</em>
           </div>
           <!-- Post Per Page -->
           <div class="form-group">
