@@ -99,8 +99,8 @@
     <!-- Indicator -->
     <div class="indicator"></div>
     <!-- Navigations -->
-    <a ng-href="{{ state.href(nav.sref, {s: param.s ? param.s : set.lastSite}) }}" ng-repeat="nav in mainNavs"
-      ng-class="{active: state.includes(nav.sref)}" name="{{ nav.sref }}">
+    <a ng-href="{{ state.href(nav.sref, {s: param.s ? param.s : set.lastSite, view: nav.view ? nav.view : null}) }}"
+      ng-repeat="nav in mainNavs" ng-class="{active: state.includes(nav.sref)}" name="{{ nav.sref }}">
       <!-- More -->
       <div class="more">{{ nav.label }}</div>
       <i class="fa fa-fw {{ nav.icon }}"></i>
