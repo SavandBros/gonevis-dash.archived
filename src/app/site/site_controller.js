@@ -3,19 +3,39 @@
 import app from "../app";
 
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
-                        API, ModalsService, AuthService, DolphinService, Codekit, $translate) {
+                        API, ModalsService, AuthService, DolphinService, Codekit, $translate, $timeout) {
 
   var site = AuthService.getCurrentSite();
-  var toasters = {};
+  let currentView;
 
+  /**
+   * @desc Set current tab's form data.
+   *
+   * @param {object} currentTab
+   */
+  function setCurrentTabFormData(currentTab) {
+    angular.forEach(currentTab.form, (value, key) => {
+      currentTab.form[key] = $scope.site[key];
+    })
+  }
+
+  /**
+   * @desc Get site settings.
+   */
   function getSiteSettings() {
     API.SiteSettings.get({ siteId: site }, function(data) {
       $scope.site = data;
       Codekit.setTitle($scope.site.title);
+      $scope.initialled = true;
+
+      setCurrentTabFormData($scope.currentTab);
     });
   }
 
   function constructor() {
+    $scope.codekit = Codekit;
+    currentView = $stateParams.view ? $stateParams.view : "settings";
+
     // Check permission
     if ($rootScope.isRestrict) {
       return false;
@@ -35,7 +55,80 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       $scope.siteTemplate = data.template_config;
       $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
     });
+
+    $translate(["SETTINGS", "APPEARANCE", "ADVANCED"]).then(function (translations) {
+      // List of tabs
+      $scope.tabs = [{
+        view: "settings",
+        label: translations.SETTINGS,
+        form: {
+          title: "",
+          description: ""
+        }
+      }, {
+        view: "appearance",
+        label: translations.APPEARANCE,
+        form: {
+          font_name: "",
+          font_url: ""
+        }
+      }, {
+        view: "advanced",
+        label: translations.ADVANCED,
+        form: {
+          meta_description: "",
+          paginate_by: "",
+          commenting: false,
+          voting: false,
+          search_engine_visibility: false,
+          remove_branding: false,
+          footer_text: "",
+          google_analytics_enabled: false,
+          google_analytics_code: ""
+        }
+      }];
+
+      // Set current tab
+      angular.forEach($scope.tabs, (tab, index) => {
+        if (tab.view === currentView) {
+          $scope.setCurrentTab($scope.tabs[index]);
+        }
+      });
+    });
   }
+
+  /**
+   * @desc Set current tab
+   *
+   * @param {object} tab
+   */
+  $scope.setCurrentTab = function(tab) {
+    // Check current tab
+    if ($scope.currentTab === tab) {
+      return;
+    }
+
+    if ($scope.initialled) {
+      setCurrentTabFormData(tab);
+    }
+
+    // Change URL
+    $state.go('dash.site.settings', { view: tab.view });
+
+    // Set current tab
+    $scope.currentTab = tab;
+    currentView = tab.view;
+
+    $timeout(() => {
+      let activeTab = angular.element("li.current");
+      console.log()
+      // console.log(w1)
+      angular.element("span.indicator").css({
+        "left": activeTab[0].offsetLeft,
+        "width": activeTab.width()
+      });
+    })
+  };
 
   /**
    * @desc update site via api call
@@ -43,40 +136,46 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {string} key
    * @param {string} value
    */
-  $scope.updateSite = function(key, value) {
-    var payload = {};
+  $scope.updateSite = function(media, value) {
+    let payload = {};
 
-    // Check for GAC
-    if (key === "google_analytics_code" && value.length && !(/^ua-\d{4,9}-\d{1,4}$/i).test(value.toString())) {
-      $translate(["ERROR_UPDATING_CODE", "INCORRECT_GOOGLE_ANALYTICS"]).then(function(translations) {
-        toaster.error(translations.ERROR_UPDATING_CODE, translations.INCORRECT_GOOGLE_ANALYTICS);
-      });
-      $scope.site.google_analytics_code = null;
-      return;
+    // Check for changed properties
+    if (!media) {
+      angular.forEach($scope.currentTab.form, (value, key) => {
+        if (!angular.equals($scope.site[key], $scope.currentTab.form[key])) {
+          payload[key] = value;
+        }
+      })
+    } else {
+      payload[media] = value;
     }
 
+    // Show toaster
     $translate('UPDATING_BLOG').then(function (updatingBlog) {
-      toasters[key] = toaster.info(updatingBlog);
+      toaster.info(updatingBlog);
     });
-    payload[key] = value;
 
-    API.SiteUpdate.put({
-        siteId: site
-      }, payload,
+    API.SiteUpdate.put({ siteId: site }, payload,
       function(data) {
-        if (key === "cover_image" || key === "logo") {
-          $scope.site.media[key] = data.media[key];
-          $scope.user.sites[$stateParams.s].media[key] = data.media[key];
+        if (!media) {
+          angular.forEach(payload, (value, key) => {
+            $scope.site[key] = data[key];
+            $scope.user.sites[$stateParams.s][key] = data[key];
+          })
         } else {
-          $scope.site[key] = data[key];
-          $scope.user.sites[$stateParams.s][key] = data[key];
+          if (media === "cover_image" || media === "logo") {
+            $scope.site.media[media] = data.media[media];
+            $scope.user.sites[$stateParams.s].media[media] = data.media[media];
+          }
         }
 
         AuthService.setAuthenticatedUser($scope.user);
 
         $rootScope.$broadcast("gonevisDash.SiteController:update");
 
-        toaster.clear(toasters[key]);
+        // Clear all toasters
+        toaster.clear();
+        // Show toaster
         $translate(["DONE", "BLOG_UPDATED"]).then(function(translations) {
           toaster.info(translations.DONE, translations.BLOG_UPDATED);
         });
