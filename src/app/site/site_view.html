@@ -1,27 +1,255 @@
 <!-- Site cover image -->
-<!-- <div class="container-fluid container-image" ng-if="site.media.cover_image" ng-click="selectImage('cover_image')"
-  style="background-image: url('{{ site.media.cover_image.file }}')">
-  <p><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
-</div> -->
+<div class="container-fluid container-image" ng-class="{'has-cover': site.media.cover_image}"
+  ng-click="selectImage('cover_image')" style="background-image: url('{{ site.media.cover_image.file }}')">
+  <p ng-if="site.media.cover_image"><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
+  <p ng-if="!site.media.cover_image" class="init">
+    <i class="fa fa-fw fa-image fa-2x s-mar-bottom-soft"></i> <br> Select cover image
+  </p>
+</div>
 
 <!-- Restricted page -->
 <restricted-page ng-if="isRestrict"></restricted-page>
 
-<div class="container">
+<div class="container site-settings">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="settings-tab">
+        <span class="indicator"></span>
         <ul class="list-unstyled">
-          <li>
-            <a ng-click translate>SETTINGS</a>
-          </li>
-          <li>
-            <a ng-click translate>APPEARANCE</a>
-          </li>
-          <li>
-            <a ng-click translate>ADVANCED</a>
+          <li ng-repeat="tab in tabs" ng-class="{'current': tab.view === currentTab.view}">
+            <a ng-click="setCurrentTab(tab)">{{ tab.label }}</a>
           </li>
         </ul>
+      </div>
+
+      <!-- Settings -->
+      <div ng-if="currentTab.view === 'settings'">
+        <div class="panel panel-default">
+          <h5 class="panel-heading lower">
+            <span style="line-height: 30px;"><i class="fa fa-cog fa-fw"></i> Blog Settings</span>
+            <!-- Update button -->
+            <button class="btn btn-primary btn-sm pull-right" ng-click="updateSite()">
+              <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
+            </button>
+            <div class="clearfix"></div>
+          </h5>
+          <div class="panel-body s-pad">
+            <!-- Title -->
+            <div class="form-group">
+              <p class="t-bold" translate>Blog Headline</p>
+              <input type="text" class="form-control" ng-model="currentTab.form.title">
+            </div>
+            <!-- Description -->
+            <div class="form-group">
+              <p class="t-bold" translate>Blog Description</p>
+              <textarea type="text" class="form-control" ng-model="currentTab.form.description"></textarea>
+              <em class="small">Explain to your audience what this blog is about.</em>
+            </div>
+            <!-- URL -->
+            <div class="form-group">
+              <p class="t-bold" translate>ADDRESS</p>
+              <a class="site-url" ng-href="{{ currentTab.form.absolute_uri }}" target="_blank" title="{{ 'CANT_CHANGE' | translate }}">
+                {{ site.absolute_uri || "NOTHING_HERE" | translate }}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <h5 class="panel-heading lower">
+            <i class="fa fa-globe fa-fw"></i> {{ 'DOMAINS' | translate }}
+          </h5>
+          <div class="panel-body s-pad">
+            <!-- Help text -->
+            <span><i class="fa fa-info-circle fa-fw"></i> {{ 'DOMAINS_HELP_TEXT' | translate }}</span>
+            <hr>
+            <!-- Add domain -->
+            <button class="btn btn-default" ng-click="addDomain()"
+              ng-disabled="site.domains.length == maxCustomDomains" translate>ADD_DOMAIN</button>  
+          </div>
+        </div>
+      </div>
+
+      <!-- Appearance -->
+      <div ng-if="currentTab.view === 'appearance'">
+        <div class="panel panel-default">
+          <!-- Media -->
+          <h5 class="panel-heading lower"><i class="fa fa-image fa-fw"></i> {{ 'MEDIA' | translate }}</h5>
+          <div class="panel-body">
+            <div class="row">
+              <!-- Cover image -->
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left media-middle">
+                    <img class="media-object img-rounded"
+                      ng-src="{{ site.media.cover_image ? site.media.cover_image.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
+                  </div>
+                  <div class="media-body">
+                    <p class="t-bold" translate>Blog Cover</p>
+                    <button class="btn btn-default btn-sm" ng-click="selectImage('cover_image')">Select Cover</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <!-- Logo -->
+                <div class="media">
+                  <div class="media-left media-middle">
+                    <img class="media-object img-rounded"
+                      ng-src="{{ site.media.logo ? site.media.logo.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
+                  </div>
+                  <div class="media-body">
+                    <p class="t-bold" translate>Blog Logo</p>
+                    <button class="btn btn-default btn-sm" ng-click="selectImage('logo')">Select logo</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <h5 class="panel-heading lower">
+            <span style="line-height: 30px;"><i class="fa fa-paint-brush fa-fw"></i> {{ 'THEME' | translate }}</span>
+            <!-- Update button -->
+            <button class="btn btn-primary btn-sm pull-right" ng-click="updateSite()" ng-disabled="loadingTemplate">
+              <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
+            </button>
+            <div class="clearfix"></div>
+          </h5>
+          <div class="panel-body">
+            <!-- Template -->
+            <div class="form-group">
+              <p class="t-bold" translate>Blog Theme</p>
+              <div class="row">
+                <div class="col-md-8">
+                  <span class="dis-b">Change your blog look and feel by selecting a theme.</span>
+                  <span>You're currently using <b class="t-cap">{{ siteTemplate.name }}</b></span>
+                </div>
+                <div class="col-md-4 text-right">
+                  <button class="btn btn-success" ng-click="siteTemplates()" ng-disabled="loadingTemplate">Show available themes</button>
+                </div>
+              </div>
+            </div>
+            <!-- Font Name -->
+            <div class="form-group">
+              <p class="t-bold" translate>Font Name</p>
+              <input type="text" class="form-control" ng-model="currentTab.form.font_name" placeholder="Example: https://fonts.googleapis.com/css?family=Roboto:400,700">
+            </div>
+            <!-- Google Font -->
+            <div class="form-group">
+              <p class="t-bold" translate>Google Font (CSS font family)</p>
+              <input type="text" class="form-control" ng-model="currentTab.form.font_url" placeholder="Roboto">
+            </div>
+          </div>
+        </div>
+        <!-- Theme options -->
+        <div class="panel panel-default" ng-if="siteTemplate.hasFields">
+          <h5 class="panel-heading lower">
+            <span style="line-height: 30px;"><i class="fa fa-cog fa-fw"></i> {{ 'THEME_OPTIONS' | translate }}</span>
+            <!-- Update button -->
+            <button class="btn btn-primary btn-sm pull-right" ng-click="saveConfig()" ng-disabled="loadingTemplate">
+              <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
+            </button>
+            <div class="clearfix"></div>
+          </h5>
+          <div class="panel-body">
+            <!-- Template fields -->
+            <div class="form-group" ng-repeat="(key, field) in siteTemplate.fields"
+              ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
+              <hr ng-if="!$first">
+              <!-- Char and boolean field -->
+              <input id="{{ key }}" name="{{ key }}" type="{{ field.type === 'char' ? 'text' : 'checkbox' }}"
+                class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
+                ng-model="siteTemplate.fields[key].value">
+              <!-- Field label -->
+              <label for="{{ key }}"><b>{{ field.verbose_name }}</b></label>
+              <!-- Text field -->
+              <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
+                placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
+              </textarea>
+              <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced -->
+      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
+        <h5 class="panel-heading lower">
+          <span style="line-height: 30px;"><i class="fa fa-plus fa-fw"></i> {{ 'ADVANCED' | translate }}</span>
+          <!-- Update button -->
+          <button class="btn btn-primary btn-sm pull-right" ng-click="updateSite()">
+            <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
+          </button>
+          <div class="clearfix"></div>
+        </h5>
+        <div class="panel-body s-pad">
+          <!-- Meta Description -->
+          <div class="form-group">
+            <p class="t-bold t-cap" translate>META_DESCRIPTION</p>
+            <input type="text" class="form-control" ng-model="currentTab.form.meta_description">
+            <em class="small">Meta Description is used by some search engines to improve your blog visibility in search result.</em>
+          </div>
+          <!-- Post Per Page -->
+          <div class="form-group">
+            <p class="t-bold" translate>NUMBER_OF_POSTS_PP</p>
+            <select class="form-control" ng-model="currentTab.form.paginate_by">
+              <option ng-value="$index" ng-if="$index" ng-repeat="number in postPerPage track by $index">
+                {{ $index }}
+              </option>
+            </select>
+          </div>
+          <!-- Commenting -->
+          <div class="s-mar-y">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="commenting" type="checkbox" ng-model="currentTab.form.commenting">
+              <label for="commenting" translate>ALLOW_VISITORS_TO_COMMENT</label>
+            </div>
+          </div>
+          <!-- Voting -->
+          <div class="s-mar-y">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="voting" type="checkbox" ng-model="currentTab.form.voting">
+              <label for="voting" translate>ALLOW_VISITORS_TO_VOTE</label>
+            </div>
+          </div>
+          <!-- Search engine visibility -->
+          <div class="s-mar-top">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="search_engine_visibility" type="checkbox" ng-model="currentTab.form.search_engine_visibility">
+              <label for="search_engine_visibility" translate>SEARCH_ENGINE_DISCOVER</label>
+            </div>
+          </div>
+          <!-- Branding -->
+          <div class="s-mar-top">
+            <div class="checkbox checkbox-primary checkbox-small" title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
+              <input id="remove_branding" type="checkbox" ng-model="currentTab.form.remove_branding">
+              <label for="remove_branding" translate>REMOVE_BRANDING</label>
+            </div>
+          </div>
+          <!-- Footer text -->
+          <div class="form-group s-mar-top" ng-if="currentTab.form.remove_branding">
+            <p class="t-bold" translate>FOOTER_TEXT</p>
+            <input type="text" class="form-control" ng-model="currentTab.form.footer_text">
+          </div>
+          <!-- Allow Google Analytics -->
+          <div class="s-mar-top">
+            <div class="checkbox checkbox-primary checkbox-small"
+              title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
+              <input id="google_analytics_enabled" type="checkbox" ng-model="currentTab.form.google_analytics_enabled">
+              <label for="google_analytics_enabled" translate>ALLOW_GOOGLE_ANALYTICS</label>
+            </div>
+          </div>
+          <!-- Google Analytics code -->
+          <div class="form-group s-mar-top" ng-if="currentTab.form.google_analytics_enabled">
+            <p class="t-bold" translate>GOOGLE_ANALYTICS_CODE</p>
+            <input type="text" class="form-control" ng-model="currentTab.form.google_analytics_code">
+          </div>
+        </div>
+        <div class="panel-footer" ng-if="!hideDelete">
+          <!-- Delete -->
+          <button class="btn btn-danger" ng-click="deleteSite()">
+            <i class="fa fa-fw fa-trash"></i> {{ 'DELETE_BLOG' | translate }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
