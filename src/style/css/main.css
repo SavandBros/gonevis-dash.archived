@@ -121,29 +121,39 @@ header:not(.no-sidebar)~#content .container-fluid {
 
 .container-image {
     height: 300px;
-    margin-top: -20px;
     background-size: cover;
     background-position: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
     margin-bottom: -100px;
     color: transparent;
-    padding-top: 70px;
+    margin-top: 45px !important;
 }
 
 .container-image p {
     transition: all 0.1s ease-in-out;
-    text-transform: uppercase;
     text-align: center;
     font-weight: bold;
     padding-top: 100px;
     opacity: 0.9;
-    letter-spacing: 1px;
     font-size: larger;
 }
 
-.container-image:hover p {
+.container-image p.init {
+    color: #222;
+    opacity: 1;
+}
+
+.container-image:hover p:not(.init) {
     color: #fff;
     text-shadow: 1px 1px #000;
+}
+
+.container-image:hover p.init {
+    font-size: 1.4em;
+}
+
+.container-image.has-cover:hover {
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .4);
 }
 
 
@@ -500,7 +510,8 @@ md-toast {
     min-width: 34px;
 }
 
-.panel-heading>.fa:not(.init) {
+.panel-heading>.fa:not(.init),
+.panel-heading>span>.fa:not(.init) {
     float: right;
     color: #d17100;
     background: rgba(0, 0, 0, 0.1);
@@ -510,6 +521,16 @@ md-toast {
     border-radius: 100%;
     padding: 10px 0;
     text-align: center;
+}
+
+.site-settings .panel-heading .fa:not(.init) {
+    float: left;
+    margin-right: 10px;
+    padding-left: 1px;
+}
+
+.site-settings .panel-heading span .fa {
+    margin-top: -2px;
 }
 
 .panel-heading .header-link {
@@ -1899,13 +1920,44 @@ img.cache {
 
 /* Settings */
 
+.site-settings .panel .panel-heading {
+    font-weight: normal;
+    color: #222 !important;
+}
+
+.site-settings p,
+.site-settings b {
+    color: #222;
+}
+
+.site-settings input,
+.site-settings textarea {
+    border-radius: 0;
+}
+
+.site-settings .site-url {
+    border: 1px solid #ddd;
+    padding: 10px;
+    display: block;
+}
+
 .settings-tab {
     background: #fff;
+    position: relative;
+}
+
+.settings-tab .indicator {
+    position: absolute;
+    height: 2px;
+    background: #d17100;
+    bottom: 0;
+    transition: cubic-bezier(1, -0.35, 0, 1.24) all 0.5s;
 }
 
 .settings-tab li,
 .settings-tab li a {
     display: inline-block;
+    position: relative;
 }
 
 .settings-tab li:not(:first-of-type) {
@@ -1915,6 +1967,10 @@ img.cache {
 .settings-tab li a {
     padding: 15px 20px;
     color: #777;
+}
+
+.settings-tab li.current a {
+    color: #d17100 !important;
 }
 
 .settings-tab li a:hover {
