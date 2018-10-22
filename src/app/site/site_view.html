@@ -1,6 +1,7 @@
 <!-- Site cover image -->
 <div class="container-fluid container-image" ng-class="{'has-cover': site.media.cover_image}"
-  ng-click="selectImage('cover_image')" style="background-image: url('{{ site.media.cover_image.file }}')">
+  ng-click="selectImage('cover_image')"
+  style="background-image: url('{{ site.media.cover_image ? site.media.cover_image.file : '' }}')">
   <p ng-if="site.media.cover_image"><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
   <p ng-if="!site.media.cover_image" class="init">
     <i class="fa fa-fw fa-image fa-2x s-mar-bottom-soft"></i> <br> {{ 'SELECT_COVER_IMAGE' | translate }}
