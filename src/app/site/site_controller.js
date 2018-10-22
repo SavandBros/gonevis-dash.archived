@@ -114,6 +114,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         }
       });
     });
+
+    // Get current subscription
+    API.Subscription.get({ siteId: site },
+      data => {
+        if (data.subscription) {
+          $scope.currentPlan = data.subscription.plan.id;
+        }
+      })
   }
 
   /**
@@ -151,8 +159,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
 
   /**
    * @desc Payment
+   *
+   * @param {object} plan
    */
   $scope.pay = function (plan) {
+    if (plan.id === $scope.currentPlan) {
+      return;
+    }
     let payments = new cp.CloudPayments({ language: "en-US" });
     payments.charge({ // options
         publicId: 'pk_b2b11892e0e39d3d22a3f303e2690',
@@ -160,15 +173,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         amount: Number(plan.price),
         currency: 'USD',
         invoiceId: '1234567',
-        accountId: user.get.email,
+        accountId: $scope.user.email,
         data: {
           plan_id: plan.id,
           site_id: site,
-          user_id: user.get.id
+          user_id: $scope.user.id
         }
       },
-      function (options, aa) { // success
-        console.log(options, aa)
+      function (options) { // success
+        // Show toaster
         $('#checkout-result').text('Payment was successful');
       },
       function (reason, options) { // fail
