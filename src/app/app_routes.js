@@ -163,6 +163,13 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
         add: null
       }
     })
+    .state("dash.plans", {
+      url: "/plans",
+      controller: "PlansController",
+      template: require("./plans/plans_view.html"),
+      auth: true,
+      title: "Plans"
+    })
     .state("dash.dolphin", {
       url: "/files",
       controller: "DolphinController",

@@ -1,0 +1,117 @@
+<!-- Content -->
+<div class="container">
+  <div class="plans row text-center">
+    <div class="col-md-4">
+      <div class="plan" id="lite">
+        <!-- Title -->
+        <span class="plan-title">Lite</span>
+        <p>Basic plan</p>
+        <div class="plan-price">
+          <div class="main">
+            <span>FOR</span>
+            <h2>FREE</h2>
+            <span>FOREVER</span>
+          </div>
+        </div>
+        <!-- Detail -->
+        <div class="plan-detail">
+          <p>GoNevis.com subdomain.</p>
+          <p>No Ads</p>
+          <p title="trans 'create or manage as many blog as you like' %}">Unlimited Blogs</p>
+          <p>Free Themes</p>
+          <p>Email Support</p>
+          <p><b>1</b> GB Storagee</p>
+          <p>SEO Optimization</p>
+          <p>Basic UI Customization</p>
+          <p><b>1</b> Team Memberse</p>
+          <p title="trans 'Images' %}">Basic Media Library</p>
+          <p>Your own logo</p>
+        </div>
+        <!-- Button -->
+        <button class="btn btn-success plan-button" ng-disabled=true>
+          <span>Selected</span>
+        </button>
+      </div>
+    </div>
+    <!-- Personal -->
+    <div class="col-md-4">
+      <div class="plan" id="personal">
+        <!-- Title -->
+        <div class="best-choice"><i class="fa fa-star fa-fw"></i>  Best Choice</div>
+        <span class="plan-title">Personal</span>
+        <p>{{ plans[0].description }}</p>
+        <div class="plan-price">
+          <div class="main">
+            <span>ONLY</span>
+            <h2><i class="fa fa-usd"></i> {{ plans[0].price }}</h2>
+            <span>MONTHLY</span>
+          </div>
+        </div>
+        <!-- Detail -->
+        <div class="plan-detail">
+          <p>Custom Domain</p>
+          <p>No Ads</p>
+          <p>Unlimited Blogs</p>
+          <p>Free Themes</p>
+          <p>Email & Live Chat Support</p>
+          <p><b>5</b> GB Storage</p>
+          <p>SEO Optimization</p>
+          <p>Basic UI Customization</p>
+          <p><b>5</b> Team Members</p>
+          <p>All Media Library</p>
+          <p>Your own logo</p>
+        </div>
+        <!-- Button -->
+        <button class="btn btn-success plan-button" ng-click="pay(plans[0])">Upgrade</button>
+      </div>
+    </div>
+    <!-- Ultra -->
+    <div class="col-md-4">
+      <div class="plan" id="ultra">
+        <!-- Title -->
+        <span class="plan-title">Professional</span>
+        <p>{{ plans[1].description }}</p>
+        <div class="plan-price">
+          <div class="main">
+            <span>ONLY</span>
+            <h2><i class="fa fa-usd"></i> {{ plans[1].price }}</h2>
+            <span>MONTHLY</span>
+          </div>
+        </div>
+        <!-- Detail -->
+        <div class="plan-detail">
+          <p>Custom Domain</p>
+          <p>No Ads</p>
+          <p>Unlimited Blogs</p>
+          <p>Premium Themes</p>
+          <p>Email & Live Chat Support</p>
+          <p><b>10</b> GB Storage</p>
+          <p>SEO Optimization</p>
+          <p>Advanced UI Customization</p>
+          <p><b>25</b> Team Members</p>
+          <p>All Media Library</p>
+          <p>Your own logo</p>
+          <p>Your own Google Analytics</p>
+          <p>No GoNevis.com branding</p>
+          <p>Custom Footer</p>
+        </div>
+        <!-- Pay -->
+        <button class="btn btn-success plan-button" ng-click="pay(plans[1])"><span>Upgrade</span></button>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row justify-content-center my-5">
+    <div class="col-12 col-md-8">
+      <h2 class="text-center my-5 t-bold">Frequently Asked Questions</h2>
+      <div class="mb-3">
+        <h5 class="t-bold">What payment methods do you accept? Paypal? What about invoices?</h5>
+        <p>We accept all major credit and debit cards such as Visa, Mastercard or MIR. For annual pre-paid accounts on Business or Enterprise plans we also accept bank transfers, where desired. We do not, under any circumstances, accept Paypal.</p>
+      </div>
+      <span class="d-block">
+        <h5 class="t-bold">How do I cancel my subscription? Delete my account? Can I have a refund?</h5>
+        <p>To cancel your account, log into <a href="https://dash.gonevis.com" target="_blank">account</a> and change your plan from active to "Cancel" — that's all there is to it! To delete your account or if you need any other help just email us on <a href="mailto:hello@gonevis.com">hello@gonevis.com</a>.</p>
+        <p>We also offer refunds! You may ask for a refund after maximum 7 days of plan upgrade (We don’t offer refunds on renewals.).</p>
+      </span>
+    </div>
+  </div> -->
+</div>

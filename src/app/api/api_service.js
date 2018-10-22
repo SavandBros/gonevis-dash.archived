@@ -162,6 +162,11 @@ function API($resource, ENV) {
     }, {
       name: "Dolphin",
       endpoint: "dolphin/file/:fileId/" // GET, POST
+    },
+    // Eskenas
+    {
+      name: "Eskenas",
+      endpoint: "eskenas/plans/" // GET
     }
   ];
 
