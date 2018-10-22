@@ -47,6 +47,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     $scope.maxCustomDomains = 5;
     $scope.hideDelete = true; // Should remove this later
 
+    API.Eskenas.get({},
+      function (data) {
+        $scope.plans = data.results;
+      });
+
     // Get site settings
     getSiteSettings();
 
@@ -56,7 +61,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
     });
 
-    $translate(["SETTINGS", "APPEARANCE", "ADVANCED"]).then(function (translations) {
+    $translate(["SETTINGS", "APPEARANCE", "ADVANCED", "UPGRADE"]).then(function (translations) {
       // List of tabs
       $scope.tabs = [{
         view: "settings",
@@ -75,6 +80,20 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       }, {
         view: "advanced",
         label: translations.ADVANCED,
+        form: {
+          meta_description: "",
+          paginate_by: "",
+          commenting: false,
+          voting: false,
+          search_engine_visibility: false,
+          remove_branding: false,
+          footer_text: "",
+          google_analytics_enabled: false,
+          google_analytics_code: ""
+        }
+      }, {
+        view: "upgrade",
+        label: translations.UPGRADE,
         form: {
           meta_description: "",
           paginate_by: "",
@@ -128,6 +147,33 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         "width": activeTab.width()
       });
     })
+  };
+
+  /**
+   * @desc Payment
+   */
+  $scope.pay = function (plan) {
+    let payments = new cp.CloudPayments({ language: "en-US" });
+    payments.charge({ // options
+        publicId: 'pk_b2b11892e0e39d3d22a3f303e2690',
+        description: plan.description,
+        amount: Number(plan.price),
+        currency: 'USD',
+        invoiceId: '1234567',
+        accountId: user.get.email,
+        data: {
+          plan_id: plan.id,
+          site_id: site,
+          user_id: user.get.id
+        }
+      },
+      function (options, aa) { // success
+        console.log(options, aa)
+        $('#checkout-result').text('Payment was successful');
+      },
+      function (reason, options) { // fail
+        $('#checkout-result').text('Payment failed');
+      });
   };
 
   /**

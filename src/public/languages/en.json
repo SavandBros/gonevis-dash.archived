@@ -296,6 +296,7 @@
   "ADVANCED": "Advanced",
   "CREATE": "Create",
   "UPDATE": "Update",
+  "UPGRADE": "Upgrade",
   "LOADING_DRAFT": "Loading draft",
   "UNPUBLISHED_CHANGES": "You have unpublished changes",
   "DISCARD_CHANGES": "Discard changes",
