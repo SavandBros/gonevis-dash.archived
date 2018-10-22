@@ -1182,6 +1182,12 @@ img.modal-image {
     .dolphin-image {
         margin-right: -30px;
     }
+    .plan .best-choice {
+        top: 10px !important;
+    }
+    #content:not(.full-content) ui-view .plan .best-choice {
+        top: -20px !important;
+    }
 }
 
 
@@ -1983,6 +1989,7 @@ img.cache {
 .plan {
     background: #1e1d2a;
     padding: 30px;
+    margin-bottom: 30px;
 }
 
 .plan#lite {
@@ -2069,11 +2076,12 @@ img.cache {
 }
 
 .plan .best-choice {
+    transition: ease-in-out all 0.1s;
     position: absolute;
     background: #fff;
     color: #1e1d2a;
     padding: 10px 15px;
-    top: 10px;
+    top: -20px;
     box-shadow: 3px 13px 6px -8px rgba(0,0,0,0.3);
     left: 0;
     font-weight: 800;
