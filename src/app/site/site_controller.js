@@ -33,6 +33,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   }
 
   function constructor() {
+    $scope.subscription = {
+      loading: true,
+      data: null
+    }
+
     $scope.codekit = Codekit;
     currentView = $stateParams.view ? $stateParams.view : "settings";
 
@@ -61,7 +66,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
     });
 
-    $translate(["SETTINGS", "APPEARANCE", "ADVANCED", "UPGRADE"]).then(function (translations) {
+    $translate(["SETTINGS", "APPEARANCE", "ADVANCED", "UPGRADE", "BILLING"]).then(function (translations) {
       // List of tabs
       $scope.tabs = [{
         view: "settings",
@@ -93,18 +98,10 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         }
       }, {
         view: "upgrade",
-        label: translations.UPGRADE,
-        form: {
-          meta_description: "",
-          paginate_by: "",
-          commenting: false,
-          voting: false,
-          search_engine_visibility: false,
-          remove_branding: false,
-          footer_text: "",
-          google_analytics_enabled: false,
-          google_analytics_code: ""
-        }
+        label: translations.UPGRADE
+      }, {
+        view: "billing",
+        label: translations.BILLING
       }];
 
       // Set current tab
@@ -118,10 +115,19 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     // Get current subscription
     API.Subscription.get({ siteId: site },
       data => {
-        if (data.subscription) {
-          $scope.currentPlan = data.subscription.plan.id;
-        }
+        // console.log(data);
+        $scope.subscription.data = data.subscription;
+        $scope.subscription.loading = false;
       })
+  }
+
+  $scope.cancel = function() {
+    API.CancelSubscription.save({ planId: $scope.subscription.data.id }, {site_id: site},
+      function(data) {
+        console.log(data);
+      }, function(data) {
+        console.log(data);
+      });
   }
 
   /**
@@ -157,13 +163,17 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     })
   };
 
+  $scope.open = function() {
+    ModalsService.open("paymentValidation", "PaymentValidationModalController");
+  }
+
   /**
    * @desc Payment
    *
    * @param {object} plan
    */
   $scope.pay = function (plan) {
-    if (plan.id === $scope.currentPlan) {
+    if ($scope.subscription && plan.id === $scope.subscription.data.plan.id) {
       return;
     }
     let payments = new cp.CloudPayments({ language: "en-US" });
@@ -181,8 +191,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         }
       },
       function (options) { // success
-        // Show toaster
-        $('#checkout-result').text('Payment was successful');
+        // Show validation modal.
+        ModalsService.open("paymentValidation", "PaymentValidationModalController");
       },
       function (reason, options) { // fail
         $('#checkout-result').text('Payment failed');
@@ -381,6 +391,16 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       getSiteSettings();
     });
   };
+
+  $scope.$watch("subscription.loading", (newValue) => {
+    if (newValue === false) {
+      angular.forEach($scope.plans, (plan) => {
+        if ($scope.subscription && $scope.subscription.data.active && $scope.subscription.data.plan.id === plan.id) {
+          plan.isCurrent = true;
+        }
+      })
+    }
+  })
 
   /**
    * @desc Image selection callback

@@ -1,5 +1,5 @@
 <!-- Site cover image -->
-<div class="container-fluid container-image" ng-class="{'has-cover': site.media.cover_image}"
+<div class="container-fluid container-image" ng-if="!isRestrict" ng-class="{'has-cover': site.media.cover_image}"
   ng-click="selectImage('cover_image')"
   style="background-image: url('{{ site.media.cover_image ? site.media.cover_image.file : '' }}')">
   <p ng-if="site.media.cover_image"><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
@@ -11,7 +11,8 @@
 <!-- Restricted page -->
 <restricted-page ng-if="isRestrict"></restricted-page>
 
-<div class="container">
+<div class="container" ng-if="!isRestrict">
+  <!-- Tabs -->
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="settings-tab">
@@ -24,6 +25,7 @@
       </div>
     </div>
   </div>
+  <!-- Upgrade -->
   <div class="plans row s-mar-top text-center animated fadeIn" ng-if="currentTab.view === 'upgrade' && plans.length">
     <div class="col-md-4">
       <div class="plan" id="lite">
@@ -41,14 +43,14 @@
         <div class="plan-detail">
           <p>GoNevis.com subdomain.</p>
           <p>No Ads</p>
-          <p title="trans 'create or manage as many blog as you like' %}">Unlimited Blogs</p>
+          <p title="Create or manage as many blog as you like">Unlimited Blogs</p>
           <p>Free Themes</p>
           <p>Email Support</p>
           <p><b>1</b> GB Storage</p>
           <p>SEO Optimization</p>
           <p>Basic UI Customization</p>
           <p><b>1</b> Team Members</p>
-          <p title="trans 'Images' %}">Basic Media Library</p>
+          <p title="Images">Basic Media Library</p>
           <p>Your own logo</p>
         </div>
         <!-- Button -->
@@ -62,7 +64,7 @@
       <div class="plan" id="personal">
         <!-- Title -->
         <div class="best-choice"><i class="fa fa-star fa-fw"></i> Best Choice</div>
-        <span class="plan-title">Personal</span>
+        <span class="plan-title">{{ plans[0].name }}</span>
         <p>{{ plans[0].description }}</p>
         <div class="plan-price">
           <div class="main">
@@ -87,8 +89,8 @@
         </div>
         <!-- Pay -->
         <button class="btn btn-success plan-button" ng-click="pay(plans[0])"
-          ng-disabled="plans[0].id === currentPlan">
-          {{ plans[0].id === currentPlan ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
+          ng-disabled="plans[0].isCurrent">
+          {{ plans[0].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
         </button>
       </div>
     </div>
@@ -96,7 +98,7 @@
     <div class="col-md-4">
       <div class="plan" id="ultra">
         <!-- Title -->
-        <span class="plan-title">Professional</span>
+        <span class="plan-title">{{ plans[1].name }}</span>
         <p>{{ plans[1].description }}</p>
         <div class="plan-price">
           <div class="main">
@@ -124,8 +126,8 @@
         </div>
         <!-- Pay -->
         <button class="btn btn-success plan-button" ng-click="pay(plans[1])"
-          ng-disabled="plans[1].id === currentPlan">
-          {{ plans[1].id === currentPlan ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
+          ng-disabled="plans[1].isCurrent">
+          {{ plans[1].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
         </button>
       </div>
     </div>
@@ -366,6 +368,80 @@
           <button class="btn btn-danger" ng-click="deleteSite()">
             <i class="fa fa-fw fa-trash"></i> {{ 'DELETE_BLOG' | translate }}
           </button>
+        </div>
+      </div>
+
+      <!-- Billing -->
+      <div ng-if="currentTab.view === 'billing'">
+        <!-- Nothing -->
+        <nothing text="{{ 'NO_BILLING' | translate }}"
+          ng-if="!subscription.data && !subscription.loading"></nothing>
+
+        <!-- Billing section -->
+        <div ng-if="subscription.data" class="animated fadeIn">
+          <!-- Payment History -->
+          <div class="panel panel-default">
+            <h5 class="panel-heading lower">
+              <i class="fa fa-usd fa-fw"></i> Payment History
+            </h5>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <!-- Table head -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Payment ID</th>
+                      <th>Date</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+
+                  <!-- Table info -->
+                  <tr>
+                    <td>439581</td>
+                    <td>Oct 23, 2018</td>
+                    <td>4.99 USD</td>
+                  </tr>
+                  <tr>
+                    <td>894367</td>
+                    <td>Oct 23, 2018</td>
+                    <td>9.99 USD</td>
+                  </tr>
+                  <tr>
+                    <td>945839</td>
+                    <td>Oct 23, 2018</td>
+                    <td>4.99 USD</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <h5 class="panel-heading lower">
+              <i class="fa fa-line-chart fa-fw"></i> {{ 'SUBSCRIPTION_DETAILS' | translate }}
+            </h5>
+            <!-- Subscription -->
+            <div class="panel-body">
+              <div class="form-group s-mar-bottom-no">
+                <div class="row">
+                  <div class="col-xs-3">
+                    <p class="t-bold s-mar-bottom-no t-cap" style="line-height: 30px;">{{ subscription.data.plan.name }}</p>
+                  </div>
+                  <div class="col-xs-3">
+                    <p class="t-bold s-mar-bottom-no t-cap"
+                      style="line-height: 30px;">$ {{ subscription.data.plan.price }}</p>
+                  </div>
+                  <div class="col-xs-3">
+                    <p class="t-bold s-mar-bottom-no t-cap"
+                      style="line-height: 30px;">{{ subscription.data.created | date }}</p>
+                  </div>
+                  <div class="col-xs-3 text-center">
+                    <button class="btn btn-danger btn-sm" ng-click="cancel()" translate>CANCEL</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
