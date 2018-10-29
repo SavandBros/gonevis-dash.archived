@@ -1932,7 +1932,9 @@ img.cache {
 }
 
 .site-settings p,
-.site-settings b {
+.site-settings b,
+.site-settings thead,
+.site-settings tbody {
     color: #222;
 }
 
