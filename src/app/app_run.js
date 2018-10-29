@@ -61,7 +61,7 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
    * @param transition {Event}
    */
   $transitions.onStart({}, function (transition) {
-
+    let stateName = transition.to().name;
     // No routing if running tour
     if (TourService.isTourOn() && transition.from().name) {
       transition.abort();
@@ -96,9 +96,16 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
 
 
     var isAuthenticated = AuthService.isAuthenticated();
-    var toDash = transition.to().name.indexOf("dash.") !== -1;
+    var toDash = stateName.indexOf("dash.") !== -1;
     var sites = isAuthenticated ? AuthService.getAuthenticatedUser(true).getSites() : [];
 
+    if (stateName.indexOf("reader") !== -1 || stateName.indexOf("dash.entry-edit") !== -1 || sites.length < 1) {
+      $rootScope.hideSidebar = true;
+    } else {
+      $rootScope.hideSidebar = false;
+    }
+
+    $rootScope.insideEditor = stateName.indexOf("dash.entry-edit") !== -1;
 
     // If requires unauthenticated access only and user is authenticated or
     // If state requires authenticated access only and user is not authenticated
@@ -132,7 +139,7 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
         transition.abort();
         // Redirect with the same state but first site
         $state.go(
-          transition.to().name, angular.extend({}, transition.params(), { s: 0 }));
+          stateName, angular.extend({}, transition.params(), { s: 0 }));
       }
     }
   });
