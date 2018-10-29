@@ -61,6 +61,10 @@ function API($resource, ENV) {
     }, {
       name: "UploadUrl",
       endpoint: "website/site/:siteId/upload-url/" // POST
+    }, {
+      name: "ReaderDetail",
+      endpoint: "website/entry/:entryId/", // GET
+      isZero: true
     },
     // Sushial
     {
@@ -69,6 +73,12 @@ function API($resource, ENV) {
     }, {
       name: "Comments",
       endpoint: "sushial/comment/" // GET
+    }, {
+      name: "Explore",
+      endpoint: "sushial/explore/" // GET
+    }, {
+      name: "Feed",
+      endpoint: "sushial/subscribed-entries/" // GET
     },
     // Site
     {
@@ -132,6 +142,10 @@ function API($resource, ENV) {
     }, {
       name: "DomainCheck",
       endpoint: "website/domain-check/" // POST
+    }, {
+      name: "Subscribe",
+      endpoint: "website/site/:siteId/subscribe/", // POST
+      isZero: true
     },
     // Tagool
     {
@@ -148,6 +162,12 @@ function API($resource, ENV) {
     }, {
       name: "Dolphin",
       endpoint: "dolphin/file/:fileId/" // GET, POST
+    },
+    // Feedback
+    {
+      name: "Feedback",
+      endpoint: "feedback/",
+      isZero: true
     }
   ];
 

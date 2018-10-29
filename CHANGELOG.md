@@ -1,8 +1,27 @@
+2018.10.1
+========
+
+**Bug Fixes:**
+- Fixed #983: Change sidebar and navbar UI design.
+
+
+2018.9.4
+========
+
+**Bug Fixes:**
+- Fixed #973: Remove "lead" from editor for both pages and posts.
+
+
 2018.9.1
 ========
 
 **Bug Fixes:**
 - Fixed #958: Do not autosave page/post when its title is being written in the editor.
+- Fixed #962: Use preview parameters when previewing posts at editor.
+- Fixed #969: Rename the word "site" to "blog".
+- Fixed #968: Fix long file labels visibility.
+- Fixed #970: Remove theme config section when no configs.
+- Fixed #455: Add feedback form.
 
 
 2018.8.1
