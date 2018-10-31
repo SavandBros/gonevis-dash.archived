@@ -19,7 +19,7 @@ let devtool = 'eval-source-map';
 
 let envFileName = function () {
   let envFileName = "staging";
-  if (isProd){
+  if (isProd && process.env.GONEVIS_API !== "draft"){
     envFileName = "production";
   } else if (isTest || isDev) {
     envFileName = "dev";
