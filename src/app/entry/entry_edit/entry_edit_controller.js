@@ -160,6 +160,10 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           $scope.form.url = $scope.form.getUrl();
           Codekit.setTitle($scope.form.get.title);
           onStatusChange(data.status);
+          // Clear history
+          $timeout(() => {
+            $scope.editor.history.clear();
+          })
 
           // Get entry tags
           angular.forEach($scope.form.get.tags, function (data) {
