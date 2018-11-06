@@ -167,14 +167,18 @@ function API($resource, ENV) {
     {
       name: "Eskenas",
       endpoint: "eskenas/plans/" // GET
-    },
-    {
+    }, {
       name: "Subscription",
       endpoint: "website/site/:siteId/subscription/" // GET
-    },
-    {
+    }, {
       name: "CancelSubscription",
       endpoint: "eskenas/subscriptions/:planId/cancel-subscription/" // POST
+    },
+    // Feedback
+    {
+      name: "Feedback",
+      endpoint: "feedback/",
+      isZero: true
     }
   ];
 

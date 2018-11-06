@@ -159,25 +159,25 @@ header:not(.no-sidebar)~#content .container-fluid {
 
 /* Navbar */
 
-.navbar {
+.navbar:not(.navigations-nav) {
     background-color: rgb(2, 136, 209);
 }
 
-.navbar .navbar-nav > li > a {
+.navbar:not(.navigations-nav) .navbar-nav > li > a {
     color: #fff;
     transition: ease-in-out all 0.15s;
 }
 
-.navbar .navbar-nav > li > a:hover,
-.navbar .navbar-nav > li.active > a,
-.navbar .navbar-nav > li > a:focus,
-.navbar .navbar-nav > li.open > a {
+.navbar:not(.navigations-nav) .navbar-nav > li > a:hover,
+.navbar:not(.navigations-nav) .navbar-nav > li.active > a,
+.navbar:not(.navigations-nav) .navbar-nav > li > a:focus,
+.navbar:not(.navigations-nav) .navbar-nav > li.open > a {
     color: #fff !important;
     background-color: rgba(0,0,0,0.5) !important;
 }
 
 .navbar,
-.navbar li {
+.navbar:not(.navigations-nav) li {
     transition: all 0.2s ease-in-out;
 }
 

@@ -166,6 +166,13 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   };
 
   /**
+   * Open feedback modal
+   */
+  $scope.feedback = function() {
+    ModalsService.open("feedback", "FeedbackController");
+  };
+
+  /**
    * @desc Dolphin selection used for quick nevis
    *
    * @param {Event} event
