@@ -173,7 +173,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {object} plan
    */
   $scope.pay = function (plan) {
-    if ($scope.subscription && plan.id === $scope.subscription.data.plan.id) {
+    if ($scope.subscription.data && plan.id === $scope.subscription.data.plan.id) {
       return;
     }
     let payments = new cp.CloudPayments({ language: "en-US" });
@@ -395,7 +395,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   $scope.$watch("subscription.loading", (newValue) => {
     if (newValue === false) {
       angular.forEach($scope.plans, (plan) => {
-        if ($scope.subscription && $scope.subscription.data.active && $scope.subscription.data.plan.id === plan.id) {
+        if ($scope.subscription.data && $scope.subscription.data.active && $scope.subscription.data.plan.id === plan.id) {
           plan.isCurrent = true;
         }
       })
