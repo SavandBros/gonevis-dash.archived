@@ -96,56 +96,45 @@
     <!-- Entry list -->
     <div class="panel panel-default s-box s-mar-x-soft animated fadeIn" ng-if="view == 'list'">
       <div class="panel-heading">
-        <!-- Action dropdown -->
-        <div class="dropdown options pull-right" title="options">
-          <button class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" ng-disabled="!selectCount">
-            {{ 'ACTION' | translate }} <i class="fa fa-caret-down"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li ng-repeat="a in actions">
-              <a ng-click="setProperty(a.property, a.value)">
-                <i class="fa fa-{{ a.icon }}"></i>{{ a.label }}
-              </a>
-            </li>
-            <hr>
-            <li>
-              <a ng-click="removeSelected()">
-                <i class="fa fa-trash text-danger"></i> {{ 'REMOVE_SELECTED' | translate}}
-              </a>
-            </li>
-          </ul>
-        </div>
+        <multi-select master="entries" options="options"></multi-select>
         <div class="clearfix"></div>
       </div>
-      <div class="panel-body s-pad-y-no">
+      <div class="panel-body s-pad-no">
         <ul class="list-unstyled s-mar-no">
-          <li class="row list-panel b-left s-fade" ng-class="{'b-color-success': entry.get.status == 1}"
-            ng-repeat="entry in entries" ng-show="!entry.isDeleted">
-            <!--Title and slug-->
-            <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9 t-line">
-              <input type="checkbox" ng-model="entry.isSelected" ng-change="countSelected(entry)">
-              <a ui-sref="dash.entry-edit({entryId: entry.get.id, isPage: isPageView})" ng-click="entry.cache()">{{ entry.get.title }}</a>
-              <small class="dis-b o-fade">/{{ entry.get.slug }}</small>
+          <li class="post-list" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
+            <!-- Select -->
+            <div class="section c-default" ng-class="{'published': entry.get.status === 1}"
+              ng-click="entry.isSelected = !entry.isSelected">
+              <input type="checkbox" class="c-p" ng-model="entry.isSelected">
             </div>
-            <!-- Date -->
-            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 text-right o-fade s-pad-no">
-              <span class="hidden-xs">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
-              <span class="visible-xs small">{{ entry.get.status == 1 ? entry.get.published : entry.get.created | date }}</span>
-              <small class="dis-b o-fade" ng-if="entry.get.status === 1" translate>PUBLICATION</small>
-              <small class="dis-b o-fade" ng-if="entry.get.status === 0" translate>CREATION</small>
+            <a class="section" ui-sref="dash.entry-edit({entryId: entry.get.id, isPage: isPageView})"
+              ng-click="entry.cache()">
+              <!-- Title -->
+              <h4>{{ entry.get.title }}</h4>
+              <!-- Published -->
+              <small class="o-fade" ng-if="entry.get.status === 1" data-translate-values="{ date: entry.get.published }"
+                translate>
+                PUBLISHED_ON
+              </small>
+              <!-- Draft -->
+              <small class="o-fade" ng-if="entry.get.status === 0" data-translate-values="{ date: entry.get.created }"
+                translate>
+                DRAFT_ON
+              </small>
+              <span class="featured" ng-if="entry.get.featured" translate>FEATURED</span>
+            </a>
+            <!-- Comment count -->
+            <div class="section" style="flex: 1;">
+              <i class="fa fa-comment-o fa-fw"></i> <small translate>{{ entry.get.comment_count }}</small>
             </div>
-            <!-- Tools -->
-            <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 text-right s-pad-no">
-              <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown"
-                      style="margin-top: 5px;">
+            <!-- More options -->
+            <div class="dropdown section" style="flex: 0 auto">
+              <button class="btn btn-default btn-circle dropdown-toggle btn-sm o-fade" data-toggle="dropdown">
                 <i class="fa fa-fw fa-ellipsis-v"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-header" ng-if="entry.get.comment_enabled">
                   <i init class="fa fa-fw fa-comments text-muted"></i> {{ 'COMMENTING_ENABLED' | translate }}
-                </li>
-                <li class="dropdown-header" ng-if="entry.get.featured ">
-                  <i init class="fa fa-fw fa-star text-primary"></i> {{ 'FEATURED' | translate }}
                 </li>
                 <li class="dropdown-header" ng-if="entry.get.password ">
                   <i init class="fa fa-fw fa-lock text-danger"></i> {{ 'PASSWORD_PROTECTED' | translate }}
