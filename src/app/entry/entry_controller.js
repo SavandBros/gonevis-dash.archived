@@ -28,37 +28,46 @@ function EntryController($scope, $state, $stateParams, Entry, UndoService, Codek
         $scope.nothingText = translation.NO_POSTS;
       }
 
-      $scope.actions = [{
-        label: translation.DRAFT,
-        icon: "pencil",
+      $scope.options = [{
+        label: "Status",
+        description: "Change status",
         property: "status",
-        value: 0
+        list: [{
+          label: translation.PUBLISHED,
+          icon: "globe",
+          value: 1,
+        }, {
+          label: translation.DRAFT,
+          icon: "pencil",
+          value: 0
+        }]
       }, {
-        label: translation.PUBLISHED,
-        icon: "globe",
-        property: "status",
-        value: 1,
-      }, {
-        label: translation.PIN,
-        icon: "star",
+        label: "Set feature",
+        description: "Pin to front page",
         property: "featured",
-        value: true
+        list: [{
+          label: translation.PIN,
+          icon: "star",
+          value: true
+        }, {
+          label: translation.UNPIN,
+          icon: "star-o",
+          value: false
+        }]
       }, {
-        label: translation.UNPIN,
-        icon: "star-o",
-        property: "featured",
-        value: false
-      }, {
-        label: translation.ENABLE_COMMENTS,
-        icon: "comments",
+        label: "Commenting",
+        description: "Change commenting",
         property: "comment_enabled",
-        value: true
-      }, {
-        label: translation.DISABLE_COMMENTS,
-        icon: "ban",
-        property: "comment_enabled",
-        value: false
-      }];
+        list: [{
+          label: translation.ENABLE_COMMENTS,
+          icon: "comments",
+          value: true
+        }, {
+          label: translation.DISABLE_COMMENTS,
+          icon: "ban",
+          value: false
+        }]
+      }]
     });
 
     var payload = {
@@ -80,20 +89,6 @@ function EntryController($scope, $state, $stateParams, Entry, UndoService, Codek
   }
 
   /**
-   * @desc set property of selected entries
-   *
-   * @param {string} key
-   * @param {boolean|number} value
-   */
-  $scope.setProperty = function(key, value) {
-    angular.forEach($scope.entries, function(entry) {
-      if (entry.isSelected) {
-        entry.setProperty(key, value);
-      }
-    });
-  };
-
-  /**
    * @desc Remove selected entries
    */
   $scope.removeSelected = function() {
@@ -109,17 +104,6 @@ function EntryController($scope, $state, $stateParams, Entry, UndoService, Codek
     }
   };
 
-  /**
-   * @desc Count selected entries
-   */
-  $scope.countSelected = function() {
-    $scope.selectCount = 0;
-    angular.forEach($scope.entries, function(entry) {
-      if (entry.isSelected) {
-        $scope.selectCount++;
-      }
-    });
-  };
 
   /**
    * @desc Load more function for controller
