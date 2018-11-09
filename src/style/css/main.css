@@ -1952,3 +1952,36 @@ img.cache {
     width: calc(100% - 250px) !important;
 }
 
+
+/* Multi selection */
+
+.select-all {
+    font-weight: normal;
+    text-transform: lowercase;
+    line-height: 34px;
+    margin-left: 8px;
+    color: #555;
+}
+
+.select-all input {
+    margin-right: 15px;
+}
+
+.multi-selection {
+    display: inline-block;
+}
+
+.multi-selection:not(:first-child) {
+    margin-left: 5px;
+}
+
+.multi-selection li.dropdown-header {
+    text-transform: none;
+    color: #333;
+    font-size: unset;
+    text-align: center;
+}
+
+.multi-selection ul li a {
+    color: #333 !important;
+}
