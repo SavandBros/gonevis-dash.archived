@@ -1,0 +1,19 @@
+<!-- Action dropdown -->
+<div class="pull-left select-all">
+  <input type="checkbox" ng-model="$ctrl.isAllSelected" ng-change="$ctrl.selectAll()">
+  <span ng-if="$ctrl.countSelected > 0">{{ $ctrl.countSelected }} selected</span>
+</div>
+<div class="dropdown multi-selection pull-right" ng-repeat="option in $ctrl.options">
+  <button ng-disabled="$ctrl.countSelected === 0" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    {{ option.label }} <i class="fa fa-caret-down fa-fw"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right">
+    <li class="dropdown-header" style="text-transform: none;">{{ option.description }}</li>
+    <li class="divider"></li>
+    <li ng-repeat="list in option.list">
+      <a ng-click="$ctrl.onSelect(option.property, list.value)">
+        <i class="fa fa-{{ list.icon }}"></i> {{ list.label }}
+      </a>
+    </li>
+  </ul>
+</div>
