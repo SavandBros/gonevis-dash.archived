@@ -2,7 +2,7 @@
 import MultiSelectTemplate from "./multi_select_view.html";
 import app from "../../app";
 
-function MultiSelect($scope) {
+function MultiSelect($scope, $translate) {
 
   let ctrl = this;
   let mainInput = angular.element(".select-all > input")[0];
@@ -47,9 +47,21 @@ function MultiSelect($scope) {
   /**
    * @desc Call API on option select.
    */
-  ctrl.onSelect = (key, value) => {
+  ctrl.onSelect = (key, value, remove) => {
+
+    // Show prompt on remove
+    if (remove === true && confirm($translate.instant('REMOVE_SELECTED_ENTRY_PROMPT')) !== true) {
+      return false;
+    };
+
     angular.forEach(ctrl.master, item => {
       if (item.isSelected) {
+        // Remove items if prompt passed.
+        if (remove === true) {
+          return item.remove(false);
+        }
+
+        // Update items
         item.setProperty(key, value);
       }
     });
