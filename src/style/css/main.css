@@ -1739,6 +1739,62 @@ img.cache {
 
 /* Entry */
 
+.post-list {
+    display: flex;
+}
+
+.post-list:hover {
+    background: rgb(0, 0, 0, 0.03);
+    color: #222;
+}
+
+.post-list:not(:last-child) {
+    box-shadow: inset 0px -1px #eee;
+}
+
+.post-list .section {
+    padding: 10px;
+    align-self: center;
+}
+
+.post-list .section:first-child {
+    padding-left: 20px;
+    align-self: auto;
+    box-shadow: inset 2px 0 #2588d0;
+    transition: ease-in-out all 0.2s;
+}
+
+.post-list .section:first-child:not(.published) {
+    box-shadow: inset 2px 0 transparent;
+}
+
+.post-list a {
+    flex: 10;
+    color: #222;
+}
+
+.post-list a h4 {
+    word-break: break-word;
+    white-space: normal;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.post-list a:hover h4 {
+    color: #d17100;
+}
+
+.post-list .featured {
+    display: inline-block;
+    padding: 2px 5px;
+    color: #fff;
+    font-weight: 600;
+    background: #2588d0;
+    border-radius: 3px;
+    margin-left: 5px;
+    font-size: 0.7em;
+}
+
 .post {
     margin-bottom: 30px;
     border: 1px solid rgba(0, 0, 0, 0.1);
