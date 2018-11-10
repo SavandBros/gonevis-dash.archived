@@ -28,7 +28,7 @@ function MultiSelect($scope, $translate) {
     } else {
       ctrl.countSelected--;
     }
-  }
+  };
 
   /**
    * @desc Watch item's 'isSelected' property.
@@ -48,7 +48,7 @@ function MultiSelect($scope, $translate) {
 
         angular.forEach(ctrl.master, item => {
           item.isSelected = false;
-        })
+        });
       } else {
         itemCount++;
         if (ctrl.isAllSelected) {
@@ -59,14 +59,14 @@ function MultiSelect($scope, $translate) {
     });
     // Store items
     items.push(item);
-  }
+  };
 
   ctrl.$onInit = () => {
     let initialled = true;
     // Loop into the main list
     angular.forEach(ctrl.master, item => {
       watchItems(item);
-    })
+    });
     // Watch master's new changes.
     $scope.$watchCollection(() => ctrl.master, (newValue) => {
       itemCount = ctrl.master.length;
@@ -78,7 +78,7 @@ function MultiSelect($scope, $translate) {
       // Clear all previuse listeners
       angular.forEach(items, item => {
         item.listener();
-      })
+      });
 
       // Clear items array
       items = [];
@@ -90,8 +90,8 @@ function MultiSelect($scope, $translate) {
       // Watch items
       angular.forEach(newValue, (item) => {
         watchItems(item);
-      })
-    })
+      });
+    });
   };
 
   /**
@@ -102,7 +102,7 @@ function MultiSelect($scope, $translate) {
     // Show prompt on remove
     if (remove === true && confirm($translate.instant('REMOVE_SELECTED_ENTRY_PROMPT')) !== true) {
       return false;
-    };
+    }
 
     angular.forEach(ctrl.master, item => {
       if (item.isSelected) {
@@ -115,7 +115,7 @@ function MultiSelect($scope, $translate) {
         item.setProperty(key, value);
       }
     });
-  }
+  };
 
   /**
    * @desc Watch selection count.
@@ -154,7 +154,7 @@ function MultiSelect($scope, $translate) {
         item.isSelected = ctrl.isAllSelected;
       }
     });
-  }
+  };
 
   /**
    * @desc Load more callback
