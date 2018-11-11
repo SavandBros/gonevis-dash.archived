@@ -379,43 +379,7 @@
 
         <!-- Billing section -->
         <div ng-if="subscription.data" class="animated fadeIn">
-          <!-- Payment History -->
-          <div class="panel panel-default">
-            <h5 class="panel-heading lower">
-              <i class="fa fa-usd fa-fw"></i> Payment History
-            </h5>
-            <div class="panel-body">
-              <div class="table-responsive">
-                <!-- Table head -->
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Payment ID</th>
-                      <th>Date</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-
-                  <!-- Table info -->
-                  <tr>
-                    <td>439581</td>
-                    <td>Oct 23, 2018</td>
-                    <td>4.99 USD</td>
-                  </tr>
-                  <tr>
-                    <td>894367</td>
-                    <td>Oct 23, 2018</td>
-                    <td>9.99 USD</td>
-                  </tr>
-                  <tr>
-                    <td>945839</td>
-                    <td>Oct 23, 2018</td>
-                    <td>4.99 USD</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
+          <!-- Subscription detail -->
           <div class="panel panel-default">
             <h5 class="panel-heading lower">
               <i class="fa fa-line-chart fa-fw"></i> {{ 'SUBSCRIPTION_DETAILS' | translate }}
@@ -425,7 +389,9 @@
               <div class="form-group s-mar-bottom-no">
                 <div class="row">
                   <div class="col-xs-3">
-                    <p class="t-bold s-mar-bottom-no t-cap" style="line-height: 30px;">{{ subscription.data.plan.name }}</p>
+                    <p class="t-bold s-mar-bottom-no t-cap" style="line-height: 30px;">
+                      {{ subscription.data.plan.name }}
+                    </p>
                   </div>
                   <div class="col-xs-3">
                     <p class="t-bold s-mar-bottom-no t-cap"
@@ -436,9 +402,34 @@
                       style="line-height: 30px;">{{ subscription.data.created | date }}</p>
                   </div>
                   <div class="col-xs-3 text-center">
-                    <button class="btn btn-danger btn-sm" ng-click="cancel()" translate>CANCEL</button>
+                    <button class="btn btn-danger btn-sm" ng-click="cancelSubscription()" translate>CANCEL_SUBSCRIPTION</button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <!-- Transactions -->
+          <div class="panel panel-default">
+            <h5 class="panel-heading lower">
+              <i class="fa fa-usd fa-fw"></i> {{ 'TRANSACTIONS' | translate }}
+            </h5>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <!-- Table head -->
+                  <thead>
+                    <tr>
+                      <th translate>AMOUNT</th>
+                      <th translate>DATE</th>
+                    </tr>
+                  </thead>
+
+                  <!-- Table info -->
+                  <tr ng-repeat="transaction in transactions">
+                    <td>$ {{ transaction.total }}</td>
+                    <td>{{ transaction.created | date }}</td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
