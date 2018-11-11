@@ -97,6 +97,7 @@
   "FILE_UPLOAD_TYPE_ERROR": "This type of file is not allowed for upload ( {{type}} )",
   "UPLOAD_ERROR": "Something went wrong, couldn't upload file.",
   "NO_DOLPHINS": "It's lonely here... Go ahead and upload some files.",
+  "IMAGES": "Images",
   "NO_IMAGES": "You have no images",
   "DOLPHIN_DELETED": "Deleted '{{ name }}'",
   "DOLPHIN_UPDATED": "File '{{ name }}' updated",
