@@ -119,6 +119,12 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         $scope.subscription.data = data.subscription;
         $scope.subscription.loading = false;
       })
+
+    // Get transactions list
+    API.Transactions.get({ limit: 12 },
+      data => {
+        $scope.transactions = data.results;
+      });
   }
 
   $scope.cancel = function() {
