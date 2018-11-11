@@ -1,3 +1,10 @@
+2018.12.1
+========
+
+**Bug Fixes:**
+- Resolved #993: Rename "Files" to "Media".
+
+
 2018.10.1
 ========
 
