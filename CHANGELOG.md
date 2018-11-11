@@ -4,6 +4,7 @@
 **Bug Fixes:**
 - Resolved #993: Rename "Files" to "Media".
 - Fixed #991: Fix pressing CTRL + Z (undo) will fully clear editor's content.
+- Resolved #998: Rename "Files" to "Images" at image selection modal.
 
 
 2018.10.1
