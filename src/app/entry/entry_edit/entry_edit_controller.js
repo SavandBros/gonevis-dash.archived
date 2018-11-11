@@ -163,7 +163,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           // Clear history
           $timeout(() => {
             $scope.editor.history.clear();
-          })
+          });
 
           // Get entry tags
           angular.forEach($scope.form.get.tags, function (data) {
