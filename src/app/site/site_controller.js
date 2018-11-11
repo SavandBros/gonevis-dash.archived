@@ -16,7 +16,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   function setCurrentTabFormData(currentTab) {
     angular.forEach(currentTab.form, (value, key) => {
       currentTab.form[key] = $scope.site[key];
-    })
+    });
   }
 
   /**
@@ -36,7 +36,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     $scope.subscription = {
       loading: true,
       data: null
-    }
+    };
 
     $scope.codekit = Codekit;
     currentView = $stateParams.view ? $stateParams.view : "settings";
@@ -118,7 +118,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         // console.log(data);
         $scope.subscription.data = data.subscription;
         $scope.subscription.loading = false;
-      })
+      });
 
     // Get transactions list
     API.Transactions.get({ limit: 12 },
@@ -127,14 +127,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       });
   }
 
-  $scope.cancel = function() {
+  $scope.cancelSubscription = function() {
     API.CancelSubscription.save({ planId: $scope.subscription.data.id }, {site_id: site},
       function(data) {
         console.log(data);
       }, function(data) {
         console.log(data);
       });
-  }
+  };
 
   /**
    * @desc Set current tab
@@ -160,18 +160,12 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
 
     $timeout(() => {
       let activeTab = angular.element("li.current");
-      console.log()
-      // console.log(w1)
       angular.element("span.indicator").css({
         "left": activeTab[0].offsetLeft,
         "width": activeTab.width()
       });
-    })
+    });
   };
-
-  $scope.open = function() {
-    ModalsService.open("paymentValidation", "PaymentValidationModalController");
-  }
 
   /**
    * @desc Payment
@@ -182,7 +176,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     if ($scope.subscription.data && plan.id === $scope.subscription.data.plan.id) {
       return;
     }
-    let payments = new cp.CloudPayments({ language: "en-US" });
+    let payments = new cp.CloudPayments({ language: "en-US" }); // jshint ignore:line
     payments.charge({ // options
         publicId: 'pk_b2b11892e0e39d3d22a3f303e2690',
         description: plan.description,
@@ -196,12 +190,11 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           user_id: $scope.user.id
         }
       },
-      function (options) { // success
+      function () {
         // Show validation modal.
         ModalsService.open("paymentValidation", "PaymentValidationModalController");
       },
-      function (reason, options) { // fail
-        $('#checkout-result').text('Payment failed');
+      function () {
       });
   };
 
@@ -220,7 +213,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         if (!angular.equals($scope.site[key], $scope.currentTab.form[key])) {
           payload[key] = value;
         }
-      })
+      });
     } else {
       payload[media] = value;
     }
@@ -236,7 +229,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           angular.forEach(payload, (value, key) => {
             $scope.site[key] = data[key];
             $scope.user.sites[$stateParams.s][key] = data[key];
-          })
+          });
         } else {
           if (media === "cover_image" || media === "logo") {
             $scope.site.media[media] = data.media[media];
@@ -404,9 +397,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         if ($scope.subscription.data && $scope.subscription.data.active && $scope.subscription.data.plan.id === plan.id) {
           plan.isCurrent = true;
         }
-      })
+      });
     }
-  })
+  });
 
   /**
    * @desc Image selection callback
