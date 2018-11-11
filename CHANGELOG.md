@@ -3,6 +3,7 @@
 
 **Bug Fixes:**
 - Resolved #993: Rename "Files" to "Media".
+- Fixed #991: Fix pressing CTRL + Z (undo) will fully clear editor's content.
 
 
 2018.10.1
