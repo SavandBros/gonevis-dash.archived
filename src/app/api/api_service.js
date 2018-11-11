@@ -168,6 +168,9 @@ function API($resource, ENV) {
       name: "Eskenas",
       endpoint: "eskenas/plans/" // GET
     }, {
+      name: "Transactions",
+      endpoint: "eskenas/transactions/" // GET
+    }, {
       name: "Subscription",
       endpoint: "website/site/:siteId/subscription/" // GET
     }, {
