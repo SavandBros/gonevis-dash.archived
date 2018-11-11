@@ -1,3 +1,10 @@
+2018.12.1
+========
+
+**Bug Fixes:**
+- Fixed #991: Fix pressing CTRL + Z (undo) will fully clear editor's content.
+
+
 2018.10.1
 ========
 
