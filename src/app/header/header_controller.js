@@ -24,7 +24,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
 
     $translate([
       "DASHBOARD", "WRITE", "POSTS", "PAGES", "READER", "TAGS",
-      "COMMENTS", "FILES", "NAVIGATIONS", "TEAM", "SETTINGS"
+      "COMMENTS", "MEDIA", "NAVIGATIONS", "TEAM", "SETTINGS"
     ]).then(function (translations) {
       // Navs
       $scope.mainNavs = [{
@@ -52,7 +52,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         sref: "dash.comment-list",
         icon: "fa-comments-o"
       }, {
-        label: translations.FILES,
+        label: translations.MEDIA,
         sref: "dash.dolphin",
         icon: "fa-file-image-o"
       }, {
