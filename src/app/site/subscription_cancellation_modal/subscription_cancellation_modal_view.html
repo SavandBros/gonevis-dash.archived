@@ -1,0 +1,20 @@
+<div class="modal fade" id="subscriptionCancellation">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+			<div class="modal-header">
+				<h4 class="text-center t-bold">
+					{{ 'CANCEL_SUBSCRIPTION' | translate }}
+					<i class="fa fa-times close" style="position: absolute;right: 20px;" data-dismiss="modal"></i>
+				</h4>
+			</div>
+      <div class="modal-body text-center s-mar-y">
+				<span translate data-translate-values="{ planName : subscription.plan.name }">CANCEL_SUBSCRIPTION_DESCRIPTION</span>
+			</div>
+			<!-- Buttons -->
+			<div class="modal-footer">
+				<button class="btn pull-left" ng-click="cancel()" ng-disabled="loading">Yes, cancel</button>
+				<button class="btn btn-success" ng-click="closeModal()" ng-disabled="loading">No, I changed my mind</button>
+			</div>
+    </div>
+  </div>
+</div>
