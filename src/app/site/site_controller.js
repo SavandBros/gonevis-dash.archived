@@ -127,14 +127,14 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       });
   }
 
-  $scope.cancelSubscription = function() {
-    API.CancelSubscription.save({ planId: $scope.subscription.data.id }, {site_id: site},
-      function(data) {
-        console.log(data);
-      }, function(data) {
-        console.log(data);
-      });
-  };
+  /**
+   * @desc Open subscription cancellation modal
+   */
+  $scope.cancelModal = () => {
+    ModalsService.open("subscriptionCancellation", "SubscriptionCancellationModalController", {
+      subscription: $scope.subscription.data
+    });
+  }
 
   /**
    * @desc Set current tab
