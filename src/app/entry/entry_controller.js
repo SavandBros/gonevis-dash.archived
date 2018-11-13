@@ -19,8 +19,8 @@ function EntryController($scope, $state, $stateParams, Entry, UndoService, Codek
     $scope.entries = [];
 
     $translate([
-      'NO_PAGES', 'NO_POSTS', 'DRAFT', 'PUBLISHED',
-      'PIN', 'UNPIN', "ENABLE_COMMENTS", 'DISABLE_COMMENTS'
+      'NO_PAGES', 'NO_POSTS', 'DRAFT', 'HIDE_FROM_PUBLIC', 'PUBLISHED',
+      'PIN_FRONT_PAGE', 'UNPIN_FRONT_PAGE', "ALLOW_COMMENTING", 'DISABLE_COMMENTING'
     ]).then(function (translation) {
       if ($scope.isPageView) {
         $scope.nothingText = translation.NO_PAGES;
@@ -28,45 +28,37 @@ function EntryController($scope, $state, $stateParams, Entry, UndoService, Codek
         $scope.nothingText = translation.NO_POSTS;
       }
 
-      $scope.options = [{
-        label: "Status",
-        description: "Change status",
+      $scope.actions = [{
+        label: translation.DRAFT,
+        tooltip: translation.HIDE_FROM_PUBLIC,
+        icon: "pencil",
         property: "status",
-        list: [{
-          label: translation.PUBLISHED,
-          icon: "globe",
-          value: 1,
-        }, {
-          label: translation.DRAFT,
-          icon: "pencil",
-          value: 0
-        }]
+        value: 0
       }, {
-        label: "Set feature",
-        description: "Pin to front page",
+        label: translation.PUBLISHED,
+        icon: "globe",
+        property: "status",
+        value: 1
+      }, {
+        label: translation.PIN_FRONT_PAGE,
+        icon: "star",
         property: "featured",
-        list: [{
-          label: translation.PIN,
-          icon: "star",
-          value: true
-        }, {
-          label: translation.UNPIN,
-          icon: "star-o",
-          value: false
-        }]
+        value: true
       }, {
-        label: "Commenting",
-        description: "Change commenting",
+        label: translation.UNPIN_FRONT_PAGE,
+        icon: "star-o",
+        property: "featured",
+        value: false
+      }, {
+        label: translation.ALLOW_COMMENTING,
+        icon: "comments",
         property: "comment_enabled",
-        list: [{
-          label: translation.ENABLE_COMMENTS,
-          icon: "comments",
-          value: true
-        }, {
-          label: translation.DISABLE_COMMENTS,
-          icon: "ban",
-          value: false
-        }]
+        value: true
+      }, {
+        label: translation.DISABLE_COMMENTING,
+        icon: "ban",
+        property: "comment_enabled",
+        value: false
       }];
     });
 
