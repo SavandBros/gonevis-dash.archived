@@ -1968,11 +1968,7 @@ img.cache {
 }
 
 .multi-selection {
-    display: inline-block;
-}
-
-.multi-selection:not(:first-child) {
-    margin-left: 5px;
+    line-height: 32px;
 }
 
 .multi-selection li.dropdown-header {
@@ -1984,4 +1980,9 @@ img.cache {
 
 .multi-selection ul li a {
     color: #333 !important;
+}
+
+.multi-selection ul li a.remove:hover {
+    background: red;
+    color: #fff !important;
 }
