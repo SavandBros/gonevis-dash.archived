@@ -2,7 +2,7 @@
 import MultiSelectTemplate from "./multi_select_view.html";
 import app from "../../app";
 
-function MultiSelect($scope, $translate) {
+function MultiSelect($scope, $rootScope, $translate) {
 
   let ctrl = this;
   let mainInput = angular.element(".select-all > input")[0];
@@ -168,6 +168,17 @@ function MultiSelect($scope, $translate) {
       ctrl.countSelected = 0;
     }
   });
+
+  /**
+   * @desc Deselect all on view change.
+   */
+  $rootScope.$on("gonevisDash.ViewButtons:setView", () => {
+    angular.forEach(ctrl.master, item => {
+      if (!item.isDeleted) {
+        item.isSelected = false;
+      }
+    });
+  });
 }
 
 app.controller("MultiSelect", MultiSelect);
@@ -175,7 +186,7 @@ app.component("multiSelect", {
   template: MultiSelectTemplate,
   controller: MultiSelect,
   bindings: {
-    options: "<",
+    actions: "<",
     master: "="
   }
 });
