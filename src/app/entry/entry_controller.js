@@ -67,7 +67,7 @@ function EntryController($scope, $state, $stateParams, Entry, UndoService, Codek
           icon: "ban",
           value: false
         }]
-      }]
+      }];
     });
 
     var payload = {
