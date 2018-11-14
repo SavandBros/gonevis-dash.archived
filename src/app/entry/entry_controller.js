@@ -81,23 +81,6 @@ function EntryController($scope, $state, $stateParams, Entry, UndoService, Codek
   }
 
   /**
-   * @desc Remove selected entries
-   */
-  $scope.removeSelected = function() {
-
-    if (confirm($translate.instant('REMOVE_SELECTED_ENTRY_PROMPT')) === true) {
-      angular.forEach($scope.entries, function(entry) {
-        if (entry.isSelected) {
-          entry.remove();
-        }
-      });
-    } else {
-      return;
-    }
-  };
-
-
-  /**
    * @desc Load more function for controller
    */
   $scope.loadMore = Pagination.loadMore;
