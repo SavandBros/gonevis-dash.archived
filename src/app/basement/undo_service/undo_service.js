@@ -6,9 +6,8 @@ function UndoService($timeout, $translate, $state, toaster) {
 
   /**
    * @desc Store param item.
-   * @type {object}
    */
-  let paramItem = {};
+  let paramItem = null;
 
   /**
    * @desc Store in progress items.
