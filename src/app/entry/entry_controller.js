@@ -2,8 +2,8 @@
 
 import app from "../app";
 
-function EntryController($scope, $state, $stateParams, Entry, UndoService, Codekit, API, AuthService, Pagination, Search, localStorageService,
-                        $translate) {
+function EntryController($scope, $state, Entry, UndoService, Codekit, API, AuthService, Pagination, Search,
+  localStorageService, $translate) {
 
   function constructor() {
     $scope.undoService = UndoService;
@@ -125,7 +125,6 @@ app.controller("EntryController", EntryController);
 EntryController.$inject = [
   "$scope",
   "$state",
-  "$stateParams",
   "Entry",
   "UndoService",
   "Codekit",
