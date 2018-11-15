@@ -100,7 +100,7 @@ function MultiSelect($scope, $rootScope, $translate) {
   ctrl.onSelect = (key, value, remove) => {
 
     // Show prompt on remove
-    if (remove === true && confirm($translate.instant('REMOVE_SELECTED_ENTRY_PROMPT')) !== true) {
+    if (remove === true && confirm(ctrl.prompt) !== true) {
       return false;
     }
 
@@ -187,6 +187,7 @@ app.component("multiSelect", {
   controller: MultiSelect,
   bindings: {
     actions: "<",
-    master: "="
+    master: "=",
+    prompt: "="
   }
 });
