@@ -1,6 +1,7 @@
 "use strict";
 
 import app from "../app";
+require("./entry.css");
 
 function EntryController($scope, $state, Entry, UndoService, Codekit, API, AuthService, Pagination, Search,
   localStorageService, $translate) {
