@@ -2,7 +2,7 @@
 import MultiSelectTemplate from "./multi_select_view.html";
 import app from "../../app";
 
-function MultiSelect($scope, $rootScope, $translate) {
+function MultiSelect($scope, $rootScope) {
 
   let ctrl = this;
   let mainInput = angular.element(".select-all > input")[0];
