@@ -20,13 +20,15 @@ function EntryController($scope, $state, Entry, UndoService, Codekit, API, AuthS
     $scope.entries = [];
 
     $translate([
-      'NO_PAGES', 'NO_POSTS', 'DRAFT', 'HIDE_FROM_PUBLIC', 'PUBLISHED',
-      'PIN_FRONT_PAGE', 'UNPIN_FRONT_PAGE', "ALLOW_COMMENTING", 'DISABLE_COMMENTING'
+      'NO_PAGES', 'NO_POSTS', 'REMOVE_SELECTED_PAGES_PROMPT', 'REMOVE_SELECTED_POSTS_PROMPT', 'DRAFT',
+      'HIDE_FROM_PUBLIC', 'PUBLISHED', 'PIN_FRONT_PAGE', 'UNPIN_FRONT_PAGE', "ALLOW_COMMENTING", 'DISABLE_COMMENTING'
     ]).then(function (translation) {
       if ($scope.isPageView) {
         $scope.nothingText = translation.NO_PAGES;
+        $scope.removeSelectedPrompt = translation.REMOVE_SELECTED_PAGES_PROMPT;
       } else {
         $scope.nothingText = translation.NO_POSTS;
+        $scope.removeSelectedPrompt = translation.REMOVE_SELECTED_POSTS_PROMPT;
       }
 
       $scope.actions = [{
