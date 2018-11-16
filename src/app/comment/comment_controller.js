@@ -2,8 +2,7 @@
 
 import app from "../app";
 
-function CommentController($scope, $rootScope, API,
-                           AuthService, Comment, Pagination, Search, Codekit) {
+function CommentController($scope, $rootScope, API, $stateParams, AuthService, Comment, Pagination, Search, Codekit) {
 
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(true);
@@ -15,6 +14,13 @@ function CommentController($scope, $rootScope, API,
     var payload = {
       site: AuthService.getCurrentSite()
     };
+
+    // Check param
+    if ($stateParams.entryId) {
+      payload.object_pk = $stateParams.entryId;
+      payload.object_type = 1;
+    }
+
     API.Comments.get(payload,
       function(data) {
         $scope.initialled = true;
