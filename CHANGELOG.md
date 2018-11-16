@@ -6,6 +6,7 @@
 - Fixed #991: Fix pressing CTRL + Z (undo) will fully clear editor's content.
 - Resolved #998: Rename "Files" to "Images" at image selection modal.
 - Resolved #1000: Add a method to multi select and delete selected items.
+- Fixed #1005: Cancel item deletion timeout on undo.
 - Resolved #1008: Filter comments based on post/page.
 
 
