@@ -21,7 +21,7 @@
           <div class="post-img" style="background-image: url({{ entry.get.media.cover_image.thumbnail_256x256 ?
             entry.get.media.cover_image.thumbnail_256x256 : codekit.getDefaultImage('medium') }});">
             <div class="post-featured" ng-if="entry.get.featured">
-              <i class="fa fa-star-o fa-fw text-warning c-white "></i>
+              <i class="fa fa-star-o fa-fw text-warning c-white"></i>
             </div>
             <!-- Options -->
             <div class="dropdown options" title="options">
@@ -125,7 +125,10 @@
             </a>
             <!-- Comment count -->
             <div class="section" style="flex: 1;">
-              <i class="fa fa-comment-o fa-fw"></i> <small translate>{{ entry.get.comment_count }}</small>
+              <a ui-sref="dash.comment-list({ entryId: entry.get.id })">
+                <i class="fa fa-comment-o fa-fw"></i>
+                <span class="small" translate>{{ entry.get.comment_count }}</small>
+              </a>
             </div>
             <!-- More options -->
             <div class="dropdown section" style="flex: 0 auto">
