@@ -150,12 +150,11 @@ header:not(.no-sidebar)~#content .container-fluid {
 /* Navbar */
 
 .navbar:not(.navigations-nav) {
-    background-color: rgb(2, 136, 209);
+    background-color: #d17100;
 }
 
 .navbar:not(.navigations-nav) .navbar-nav > li > a {
     color: #fff;
-    transition: ease-in-out all 0.15s;
 }
 
 .navbar:not(.navigations-nav) .navbar-nav > li > a:hover,
@@ -163,11 +162,10 @@ header:not(.no-sidebar)~#content .container-fluid {
 .navbar:not(.navigations-nav) .navbar-nav > li > a:focus,
 .navbar:not(.navigations-nav) .navbar-nav > li.open > a {
     color: #fff !important;
-    background-color: rgba(0,0,0,0.5) !important;
+    background-color: rgba(0,0,0,0.1) !important;
 }
 
-.navbar,
-.navbar:not(.navigations-nav) li {
+.navbar {
     transition: all 0.2s ease-in-out;
 }
 
@@ -191,7 +189,7 @@ header:not(.no-sidebar)~#content .container-fluid {
 }
 
 .navbar .dropdown img {
-    width: 36px;
+    width: 26px;
     border-radius: 100%;
 }
 

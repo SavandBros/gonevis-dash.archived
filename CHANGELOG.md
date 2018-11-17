@@ -8,6 +8,7 @@
 - Resolved #1000: Add a method to multi select and delete selected items.
 - Fixed #1005: Cancel item deletion timeout on undo.
 - Resolved #1008: Filter comments based on post/page.
+- Resolved #1009: Update new navbar color and remove it's animation.
 
 
 2018.10.1
