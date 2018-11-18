@@ -1,7 +1,7 @@
 "use strict";
 import app from "../../app";
 
-const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils) {
+const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils, toaster) {
 
   /**
    * @desc Automatically attach Authorization header
@@ -28,8 +28,15 @@ const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils) {
    * @return {object}
    */
   function responseError(response) {
-    // Authentication check
+    // Forbidden check
     if (response.status === 403) {
+      // Check if upgrade required
+      if (JSON.stringify(response.data.detail).indexOf(Utils.texts.upgradeRequired) !== -1) {
+        toaster.error(Utils.texts.upgradeRequired);
+        return $q.reject(response);
+      }
+
+      // Check permission
       if (JSON.stringify(response.data).indexOf(Utils.texts.noPermission) === -1) {
         $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
       }
