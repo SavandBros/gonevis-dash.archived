@@ -146,6 +146,9 @@ function API($resource, ENV) {
       name: "Subscribe",
       endpoint: "website/site/:siteId/subscribe/", // POST
       isZero: true
+    }, {
+      name: "RemoveBranding",
+      endpoint: "website/site/:siteId/remove-branding/", // PUT
     },
     // Tagool
     {
