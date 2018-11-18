@@ -6,9 +6,8 @@ function UndoService($timeout, $translate, $state, toaster) {
 
   /**
    * @desc Store param item.
-   * @type {object}
    */
-  let paramItem = {};
+  let paramItem = null;
 
   /**
    * @desc Store in progress items.
@@ -54,6 +53,7 @@ function UndoService($timeout, $translate, $state, toaster) {
     $translate(['UNDO_DELETE', 'UNDO_DELETE_MESSAGE']).then((trans) => {
       item.toaster = toaster.pop("success", trans.UNDO_DELETE, trans.UNDO_DELETE_MESSAGE, 5000, 'trustedHtml', () => {
         item.isDeleted = false;
+        $timeout.cancel(item.timeout);
         clearInProgressItems(item.get.id);
         return true;
       });

@@ -177,10 +177,13 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       }
     })
     .state("dash.comment-list", {
-      url: "/comments",
+      url: "/comments/:entryId",
       controller: "CommentController",
       template: require("./comment/comment_view.html"),
       auth: true,
+      params: {
+        entryId: null,
+      },
       title: "Comments"
     })
     .state("dash.entry-edit", {
