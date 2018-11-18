@@ -162,6 +162,8 @@
   "SEARCH_ENGINE_DISCOVER": "Let search engine discover my blog.",
   "REMOVE_BRANDING": "Remove GoNevis.com branding.",
   "REMOVE_BRANDING_TITLE": "Logo or name of the GoNevis.com will not appear anymore.",
+  "REMOVED_BRANDING": "Branding is now removed!",
+  "UNREMOVED_BRANDING": "Branding is now set to default",
   "FOOTER_TEXT": "Footer text",
   "ALLOW_GOOGLE_ANALYTICS": "Allow Google Analytics",
   "ALLOW_GOOGLE_ANALYTICS_TITLE": "If disabled, GoNevis will no longer use Google Analytics code on the blog, either it own or your provided Google Analytics code.",
