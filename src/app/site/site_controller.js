@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-require("./settings.css")
+require("./settings.css");
 
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
                         API, ModalsService, AuthService, DolphinService, Codekit, $translate, $timeout) {
@@ -93,7 +93,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           commenting: false,
           voting: false,
           search_engine_visibility: false,
-          remove_branding: false,
           footer_text: "",
           google_analytics_enabled: false,
           google_analytics_code: ""
