@@ -2,6 +2,8 @@
 
 import app from "../app";
 
+require("./settings.css")
+
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
                         API, ModalsService, AuthService, DolphinService, Codekit, $translate, $timeout) {
 
