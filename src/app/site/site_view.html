@@ -141,7 +141,7 @@
           <h5 class="panel-heading lower">
             <span style="line-height: 30px;"><i class="fa fa-cog fa-fw"></i> {{ 'BLOG_SETTINGS' | translate }}</span>
             <!-- Update button -->
-            <button class="btn btn-primary btn-sm pull-right" ng-click="updateSite()">
+            <button class="btn btn-primary btn-sm pull-right" disable-on-request="updateSite()">
               <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
             </button>
             <div class="clearfix"></div>
@@ -226,7 +226,7 @@
           <h5 class="panel-heading lower">
             <span style="line-height: 30px;"><i class="fa fa-paint-brush fa-fw"></i> {{ 'THEME' | translate }}</span>
             <!-- Update button -->
-            <button class="btn btn-primary btn-sm pull-right" ng-click="updateSite()" ng-disabled="loadingTemplate">
+            <button class="btn btn-primary btn-sm pull-right" disable-on-request="updateSite()">
               <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
             </button>
             <div class="clearfix"></div>
@@ -295,7 +295,7 @@
         <h5 class="panel-heading lower">
           <span style="line-height: 30px;"><i class="fa fa-plus fa-fw"></i> {{ 'ADVANCED' | translate }}</span>
           <!-- Update button -->
-          <button class="btn btn-primary btn-sm pull-right" ng-click="updateSite()">
+          <button class="btn btn-primary btn-sm pull-right" disable-on-request="updateSite()">
             <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
           </button>
           <div class="clearfix"></div>
@@ -339,16 +339,18 @@
           </div>
           <!-- Branding -->
           <div class="s-mar-top">
-            <div class="checkbox checkbox-primary checkbox-small" title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
-              <input id="remove_branding" type="checkbox" ng-model="currentTab.form.remove_branding">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="remove_branding" type="checkbox" ng-model="site.remove_branding"
+                disable-on-request="removeBranding(site.remove_branding)"
+                title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
               <label for="remove_branding" translate>REMOVE_BRANDING</label>
             </div>
           </div>
           <!-- Footer text -->
-          <div class="form-group s-mar-top" ng-if="currentTab.form.remove_branding">
+          <!-- <div class="form-group s-mar-top" ng-if="site.remove_branding">
             <p class="t-bold" translate>FOOTER_TEXT</p>
             <input type="text" class="form-control" ng-model="currentTab.form.footer_text">
-          </div>
+          </div> -->
           <!-- Allow Google Analytics -->
           <div class="s-mar-top">
             <div class="checkbox checkbox-primary checkbox-small"

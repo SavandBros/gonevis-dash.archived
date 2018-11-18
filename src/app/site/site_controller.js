@@ -2,6 +2,7 @@
 
 import app from "../app";
 
+require("../basement/directives/disable_on_request_directive");
 require("./settings.css");
 
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
@@ -9,6 +10,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
 
   var site = AuthService.getCurrentSite();
   let currentView;
+
 
   /**
    * @desc Set current tab's form data.
@@ -39,7 +41,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       loading: true,
       data: null
     };
-
     $scope.codekit = Codekit;
     currentView = $stateParams.view ? $stateParams.view : "settings";
 
@@ -224,7 +225,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       toaster.info(updatingBlog);
     });
 
-    API.SiteUpdate.put({ siteId: site }, payload,
+    return API.SiteUpdate.put({ siteId: site }, payload,
       function(data) {
         if (!media) {
           angular.forEach(payload, (value, key) => {
@@ -252,6 +253,29 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       function() {
         $translate(["ERROR", "BLOG_UPDATE_ERROR"]).then(function(translations) {
           toaster.error(translations.ERROR, translations.BLOG_UPDATE_ERROR);
+        });
+      }
+    );
+  };
+
+  /**
+   * @desc Remove branding from blog.
+   *
+   * @param {boolean} value
+   */
+  $scope.removeBranding = value => {
+    return API.RemoveBranding.put({ siteId: site }, { remove_branding: !value },
+      data => {
+        // Clear last toaster
+        toaster.clear($scope.brandingToaster);
+        // Translate keys
+        $translate(["DONE", "REMOVED_BRANDING", "UNREMOVED_BRANDING"]).then(translations => {
+          // Show diffrent toasters based on remove branding value
+          if (data.remove_branding) {
+            $scope.brandingToaster = toaster.success(translations.DONE, translations.REMOVED_BRANDING);
+          } else {
+            $scope.brandingToaster = toaster.success(translations.DONE, translations.UNREMOVED_BRANDING);
+          }
         });
       }
     );
