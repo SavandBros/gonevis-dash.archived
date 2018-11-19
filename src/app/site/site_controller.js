@@ -416,16 +416,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     });
   };
 
-  $scope.$watch("subscription.loading", (newValue) => {
-    if (newValue === false) {
-      angular.forEach($scope.plans, (plan) => {
-        if ($scope.subscription.data && $scope.subscription.data.active && $scope.subscription.data.plan.id === plan.id) {
-          plan.isCurrent = true;
-        }
-      });
-    }
-  });
-
   /**
    * @desc Image selection callback
    *
