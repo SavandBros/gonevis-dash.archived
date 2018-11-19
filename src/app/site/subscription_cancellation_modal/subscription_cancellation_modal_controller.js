@@ -55,7 +55,7 @@ function SubscriptionCancellationModalController($scope, $translate, toaster, Mo
    */
   $scope.closeModal = () => {
     showMessage("AWESOME", "CANCELED_CANCELLATION", null, "success");
-  }
+  };
 
   constructor();
 }

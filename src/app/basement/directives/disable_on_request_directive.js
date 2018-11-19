@@ -1,3 +1,5 @@
+"use strict";
+
 import app from '../../app';
 
 /**
@@ -15,9 +17,9 @@ app.directive('disableOnRequest', () => {
         // Disable element
         element.prop('disabled', true);
         // Wait for request to be done, then enable element
-        scope.disableOnRequest()['$promise'].finally(() => {
+        scope.disableOnRequest().$promise.finally(() => {
           element.prop('disabled', false);
-        })
+        });
       });
     }
   };
