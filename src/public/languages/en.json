@@ -327,6 +327,7 @@
   "MANAGE": "Manage",
   "VALIDATING_PAYMENT": "Your payment is being validated...",
   "ACCOUNT_UPGRADED": "Great! Your account upgraded",
+  "UPGRADE_PAID_TO_PAID": "Are you sure you want to upgrade from {{ currentPlan }} to {{ nextPlan }}?",
   "LOADING_DRAFT": "Loading draft",
   "UNPUBLISHED_CHANGES": "You have unpublished changes",
   "DISCARD_CHANGES": "Discard changes",
