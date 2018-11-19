@@ -175,9 +175,40 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {object} plan
    */
   $scope.pay = function (plan) {
+    // Prevent from upgrading to a same plan.
     if ($scope.subscription.data && plan.id === $scope.subscription.data.plan.id) {
       return;
     }
+    // Pay right away if upgrading from a paid plan to another.
+    if ($scope.subscription.data && $scope.subscription.data.active) {
+      let transParam = {
+        currentPlan: $scope.subscription.data.plan.name,
+        nextPlan: plan.name
+      };
+      // Show confirmation on upgrade
+      if (confirm($translate.instant("UPGRADE_PAID_TO_PAID", transParam)) !== true) {
+        return false;
+      }
+      $scope.paying = true;
+
+      return API.UpgradeSubscription.post({ subscriptionId: $scope.subscription.data.id }, { plan_id: plan.id, site_id: site },
+        data => {
+          $scope.subscription.data = data;
+          // Show a message regarding that blog upgraded.
+          $translate(["DONE", "ACCOUNT_UPGRADED"]).then(translation => {
+            toaster.success(translation.DONE, translation.ACCOUNT_UPGRADED, 10000);
+          });
+          // Set current subscription plan
+          setCurrentPlan();
+          // Initial page
+          constructor();
+          $scope.paying = false;
+        }, () => {
+          $scope.paying = false;
+        });
+    }
+
+    // Open payment widget
     let payments = new cp.CloudPayments({ language: "en-US" }); // jshint ignore:line
     payments.charge({ // options
         publicId: 'pk_b2b11892e0e39d3d22a3f303e2690',
@@ -195,8 +226,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       function () {
         // Show validation modal.
         ModalsService.open("paymentValidation", "PaymentValidationModalController");
-      },
-      function () {
       });
   };
 
