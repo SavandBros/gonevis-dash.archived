@@ -11,7 +11,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   var site = AuthService.getCurrentSite();
   let currentView;
 
-
   /**
    * @desc Set current tab's form data.
    *
@@ -36,6 +35,19 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     });
   }
 
+  /**
+   * @desc Loop into subscription plans, and determine which plan is user's current subscription plan.
+   */
+  function setCurrentPlan() {
+    angular.forEach($scope.plans, (plan) => {
+      plan.isCurrent = false;
+
+      if ($scope.subscription.data && $scope.subscription.data.active && $scope.subscription.data.plan.id === plan.id) {
+        plan.isCurrent = true;
+      }
+    });
+  }
+
   function constructor() {
     $scope.subscription = {
       loading: true,
@@ -54,11 +66,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     $scope.postPerPage = new Array(25);
     $scope.maxCustomDomains = 5;
     $scope.hideDelete = true; // Should remove this later
-
-    API.Eskenas.get({},
-      function (data) {
-        $scope.plans = data.results;
-      });
 
     // Get site settings
     getSiteSettings();
@@ -120,6 +127,13 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         // console.log(data);
         $scope.subscription.data = data.subscription;
         $scope.subscription.loading = false;
+
+        // Get upgrade plans
+        API.Eskenas.get(null, data => {
+          $scope.plans = data.results;
+
+          setCurrentPlan();
+        });
       });
 
     // Get transactions list
@@ -136,7 +150,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     ModalsService.open("subscriptionCancellation", "SubscriptionCancellationModalController", {
       subscription: $scope.subscription.data
     });
-  }
+  };
 
   /**
    * @desc Set current tab

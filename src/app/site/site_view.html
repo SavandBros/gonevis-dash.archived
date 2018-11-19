@@ -89,7 +89,7 @@
         </div>
         <!-- Pay -->
         <button class="btn btn-success plan-button" ng-click="pay(plans[0])"
-          ng-disabled="plans[0].isCurrent">
+          ng-disabled="plans[0].isCurrent || paying">
           {{ plans[0].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
         </button>
       </div>
@@ -126,7 +126,7 @@
         </div>
         <!-- Pay -->
         <button class="btn btn-success plan-button" ng-click="pay(plans[1])"
-          ng-disabled="plans[1].isCurrent">
+          ng-disabled="plans[1].isCurrent || paying">
           {{ plans[1].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
         </button>
       </div>
