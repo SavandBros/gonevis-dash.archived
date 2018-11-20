@@ -8,12 +8,18 @@
 				</h4>
 			</div>
       <div class="modal-body text-center s-mar-y">
-				<span translate data-translate-values="{ planName : subscription.plan.name }">CANCEL_SUBSCRIPTION_DESCRIPTION</span>
+				<!-- Text -->
+				<span translate data-translate-values="{ planName : subscription.plan.name }"
+					ng-if="!cancelling">
+					CANCEL_SUBSCRIPTION_DESCRIPTION
+				</span>
+				<!-- Reloading icon -->
+				<i class="fa fa-circle-o-notch fa-3x fa-fw fa-spin" ng-if="cancelling"></i>
 			</div>
 			<!-- Buttons -->
-			<div class="modal-footer">
-				<button class="btn pull-left" ng-click="cancel()" ng-disabled="loading">Yes, cancel</button>
-				<button class="btn btn-success" ng-click="closeModal()" ng-disabled="loading">No, I changed my mind</button>
+			<div class="modal-footer" ng-if="!cancelling">
+				<button class="btn pull-left" disable-on-request="cancel()">Yes, cancel</button>
+				<button class="btn btn-success" ng-click="closeModal()">No, I changed my mind</button>
 			</div>
     </div>
   </div>

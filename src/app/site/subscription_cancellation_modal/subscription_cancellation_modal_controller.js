@@ -2,13 +2,16 @@
 
 import app from "../../app";
 
-function SubscriptionCancellationModalController($scope, $translate, toaster, ModalsService, API, AuthService, subscription) {
+require("../../basement/directives/disable_on_request_directive");
+
+function SubscriptionCancellationModalController($scope, $state, $timeout, $translate, toaster, ModalsService, API,
+  AuthService, subscription) {
 
   let site = AuthService.getCurrentSite();
 
   function constructor() {
+    $scope.cancelling = false;
     $scope.subscription = subscription;
-    $scope.loading = false;
   }
 
   /**
@@ -35,23 +38,26 @@ function SubscriptionCancellationModalController($scope, $translate, toaster, Mo
    * @desc Cancel subscription
    */
   $scope.cancel = () => {
-    $scope.loading = true;
+    $scope.cancelling = true;
     let planName = $scope.subscription.plan.name;
 
-    API.CancelSubscription.save({ planId: $scope.subscription.id }, { site_id: site },
+    return API.CancelSubscription.save({ planId: $scope.subscription.id }, { site_id: site },
       () => {
         // Show message
         showMessage("CANCELLATION_COMPLETED", "CANCELLATION_COMPLETED_MESSAGE", { planName: planName }, "info", 10000);
-        $scope.loading = false;
+        // Redirect user to main page after 500 milliseconds
+        $timeout(() => {
+          $state.go("dash.main");
+        }, 500);
       }, () => {
+        $scope.cancelling = false;
         // Show message
         showMessage("OOPS", "CANCELLATION_FAILED_MESSAGE", null, "error");
-        $scope.loading = false;
       });
   };
 
   /**
-   * @desc Close modal
+   * @desc Close modal and show a message
    */
   $scope.closeModal = () => {
     showMessage("AWESOME", "CANCELED_CANCELLATION", null, "success");
