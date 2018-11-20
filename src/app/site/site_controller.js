@@ -1,6 +1,7 @@
 "use strict";
 
 import app from "../app";
+import UserSiteRole from "../account/user/user_site_role";
 
 require("../basement/directives/disable_on_request_directive");
 require("./settings.css");
@@ -49,6 +50,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   }
 
   function constructor() {
+    $scope.isOwner = false;
     $scope.subscription = {
       loading: true,
       data: null
@@ -60,12 +62,20 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     if ($rootScope.isRestrict) {
       return false;
     }
+    let userSiteRole = new UserSiteRole();
     $scope.user = AuthService.getAuthenticatedUser(false);
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
     $scope.postPerPage = new Array(25);
     $scope.maxCustomDomains = 5;
     $scope.hideDelete = true; // Should remove this later
+
+    // Check user role
+    angular.forEach($scope.user.sites, singleSite => {
+      if (singleSite.id === site && singleSite.role === userSiteRole.OWNER) {
+        $scope.isOwner = true;
+      }
+    });
 
     // Get site settings
     getSiteSettings();
@@ -212,10 +222,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           $translate(["DONE", "ACCOUNT_UPGRADED"]).then(translation => {
             toaster.success(translation.DONE, translation.ACCOUNT_UPGRADED, 10000);
           });
-          // Set current subscription plan
-          setCurrentPlan();
-          // Initial page
-          constructor();
+          $state.go("dash.main", { s: $rootScope.set.lastSite });
           $scope.paying = false;
         }, () => {
           $scope.paying = false;
