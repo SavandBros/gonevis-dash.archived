@@ -408,12 +408,14 @@
 
       <!-- Billing -->
       <div ng-if="currentTab.view === 'billing'">
+        <!-- No permission -->
+        <nothing ng-if="!isOwner" text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
         <!-- Nothing -->
         <nothing text="{{ 'NO_BILLING' | translate }}"
-          ng-if="!subscription.data && !subscription.loading"></nothing>
+          ng-if="!subscription.data && !subscription.loading && isOwner"></nothing>
 
         <!-- Billing section -->
-        <div ng-if="subscription.data" class="animated fadeIn">
+        <div ng-if="subscription.data && isOwner" class="animated fadeIn">
           <!-- Subscription detail -->
           <div class="panel panel-default">
             <h5 class="panel-heading lower">
