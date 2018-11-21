@@ -194,7 +194,9 @@
 }
 
 .plan#lite .plan-button {
-    color: #555;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .plan .plan-button:active {
