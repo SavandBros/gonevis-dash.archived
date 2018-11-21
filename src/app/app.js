@@ -28,6 +28,7 @@ const app = angular.module(MODULE_NAME, deps)
   .constant('Utils', {
     texts: {
       noPermission: 'You do not have permission to perform this action.',
+      upgradeRequired: 'You need to upgrade your subscription plan to make such action.',
       unverifiedEmail: 'Your email is not verified.'
     }
   })

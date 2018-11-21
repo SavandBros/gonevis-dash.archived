@@ -146,6 +146,9 @@ function API($resource, ENV) {
       name: "Subscribe",
       endpoint: "website/site/:siteId/subscribe/", // POST
       isZero: true
+    }, {
+      name: "RemoveBranding",
+      endpoint: "website/site/:siteId/remove-branding/", // PUT
     },
     // Tagool
     {
@@ -162,6 +165,23 @@ function API($resource, ENV) {
     }, {
       name: "Dolphin",
       endpoint: "dolphin/file/:fileId/" // GET, POST
+    },
+    // Eskenas
+    {
+      name: "Eskenas",
+      endpoint: "eskenas/plans/" // GET
+    }, {
+      name: "Transactions",
+      endpoint: "eskenas/transactions/" // GET
+    }, {
+      name: "Subscription",
+      endpoint: "website/site/:siteId/subscription/" // GET
+    }, {
+      name: "UpgradeSubscription",
+      endpoint: "eskenas/subscriptions/:subscriptionId/upgrade-subscription/" // POST
+    }, {
+      name: "CancelSubscription",
+      endpoint: "eskenas/subscriptions/:planId/cancel-subscription/" // POST
     },
     // Feedback
     {

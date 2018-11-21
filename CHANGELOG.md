@@ -5,6 +5,10 @@
 - Resolved #993: Rename "Files" to "Media".
 - Fixed #991: Fix pressing CTRL + Z (undo) will fully clear editor's content.
 - Resolved #998: Rename "Files" to "Images" at image selection modal.
+- Resolved #989: Change blog settings layout.
+- Resolved #1003: Add a method to cancel blog's current subscription.
+- Resolved #1002: Add upgrade plans to blog settings view.
+- Resolved #1001: Add transactions list to blog settings view.
 - Resolved #1000: Add a method to multi select and delete selected items.
 - Fixed #1005: Cancel item deletion timeout on undo.
 - Resolved #1008: Filter comments based on post/page.

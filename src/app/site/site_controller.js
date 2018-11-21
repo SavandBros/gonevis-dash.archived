@@ -1,31 +1,81 @@
 "use strict";
 
 import app from "../app";
+import UserSiteRole from "../account/user/user_site_role";
+
+require("../basement/directives/disable_on_request_directive");
+require("./settings.css");
 
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
-                        API, ModalsService, AuthService, DolphinService, Codekit, $translate) {
+                        API, ModalsService, AuthService, DolphinService, Codekit, $translate, $timeout) {
 
   var site = AuthService.getCurrentSite();
-  var toasters = {};
+  let currentView;
 
+  /**
+   * @desc Set current tab's form data.
+   *
+   * @param {object} currentTab
+   */
+  function setCurrentTabFormData(currentTab) {
+    angular.forEach(currentTab.form, (value, key) => {
+      currentTab.form[key] = $scope.site[key];
+    });
+  }
+
+  /**
+   * @desc Get site settings.
+   */
   function getSiteSettings() {
     API.SiteSettings.get({ siteId: site }, function(data) {
       $scope.site = data;
       Codekit.setTitle($scope.site.title);
+      $scope.initialled = true;
+
+      setCurrentTabFormData($scope.currentTab);
+    });
+  }
+
+  /**
+   * @desc Loop into subscription plans, and determine which plan is user's current subscription plan.
+   */
+  function setCurrentPlan() {
+    angular.forEach($scope.plans, (plan) => {
+      plan.isCurrent = false;
+
+      if ($scope.subscription.data && $scope.subscription.data.active && $scope.subscription.data.plan.id === plan.id) {
+        plan.isCurrent = true;
+      }
     });
   }
 
   function constructor() {
+    $scope.isOwner = false;
+    $scope.subscription = {
+      loading: true,
+      data: null
+    };
+    $scope.codekit = Codekit;
+    currentView = $stateParams.view ? $stateParams.view : "settings";
+
     // Check permission
     if ($rootScope.isRestrict) {
       return false;
     }
+    let userSiteRole = new UserSiteRole();
     $scope.user = AuthService.getAuthenticatedUser(false);
     $scope.site = $scope.user.sites[$stateParams.s];
     $scope.dolphinService = DolphinService;
     $scope.postPerPage = new Array(25);
     $scope.maxCustomDomains = 5;
     $scope.hideDelete = true; // Should remove this later
+
+    // Check user role
+    angular.forEach($scope.user.sites, singleSite => {
+      if (singleSite.id === site && singleSite.role === userSiteRole.OWNER) {
+        $scope.isOwner = true;
+      }
+    });
 
     // Get site settings
     getSiteSettings();
@@ -35,7 +85,170 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       $scope.siteTemplate = data.template_config;
       $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
     });
+
+    $translate(["SETTINGS", "APPEARANCE", "ADVANCED", "UPGRADE", "BILLING"]).then(function (translations) {
+      // List of tabs
+      $scope.tabs = [{
+        view: "settings",
+        label: translations.SETTINGS,
+        form: {
+          title: "",
+          description: ""
+        }
+      }, {
+        view: "appearance",
+        label: translations.APPEARANCE,
+        form: {
+          font_name: "",
+          font_url: ""
+        }
+      }, {
+        view: "advanced",
+        label: translations.ADVANCED,
+        form: {
+          meta_description: "",
+          paginate_by: "",
+          commenting: false,
+          voting: false,
+          search_engine_visibility: false,
+          footer_text: "",
+          google_analytics_enabled: false,
+          google_analytics_code: ""
+        }
+      }, {
+        view: "upgrade",
+        label: translations.UPGRADE
+      }, {
+        view: "billing",
+        label: translations.BILLING
+      }];
+
+      // Set current tab
+      angular.forEach($scope.tabs, (tab, index) => {
+        if (tab.view === currentView) {
+          $scope.setCurrentTab($scope.tabs[index]);
+        }
+      });
+    });
+
+    // Get current subscription
+    API.Subscription.get({ siteId: site },
+      data => {
+        // console.log(data);
+        $scope.subscription.data = data.subscription;
+        $scope.subscription.loading = false;
+
+        // Get upgrade plans
+        API.Eskenas.get(null, data => {
+          $scope.plans = data.results;
+
+          setCurrentPlan();
+        });
+      });
+
+    // Get transactions list
+    API.Transactions.get({ limit: 12 },
+      data => {
+        $scope.transactions = data.results;
+      });
   }
+
+  /**
+   * @desc Open subscription cancellation modal
+   */
+  $scope.cancelModal = () => {
+    ModalsService.open("subscriptionCancellation", "SubscriptionCancellationModalController", {
+      subscription: $scope.subscription.data
+    });
+  };
+
+  /**
+   * @desc Set current tab
+   *
+   * @param {object} tab
+   */
+  $scope.setCurrentTab = function(tab) {
+    // Check current tab
+    if ($scope.currentTab === tab) {
+      return;
+    }
+
+    if ($scope.initialled) {
+      setCurrentTabFormData(tab);
+    }
+
+    // Change URL
+    $state.go('dash.site.settings', { view: tab.view });
+
+    // Set current tab
+    $scope.currentTab = tab;
+    currentView = tab.view;
+
+    $timeout(() => {
+      let activeTab = angular.element("li.current");
+      angular.element("span.indicator").css({
+        "left": activeTab[0].offsetLeft,
+        "width": activeTab.width()
+      });
+    });
+  };
+
+  /**
+   * @desc Payment
+   *
+   * @param {object} plan
+   */
+  $scope.pay = function (plan) {
+    // Prevent from upgrading to a same plan.
+    if ($scope.subscription.data && plan.id === $scope.subscription.data.plan.id) {
+      return;
+    }
+    // Pay right away if upgrading from a paid plan to another.
+    if ($scope.subscription.data && $scope.subscription.data.active) {
+      let transParam = {
+        currentPlan: $scope.subscription.data.plan.name,
+        nextPlan: plan.name
+      };
+      // Show confirmation on upgrade
+      if (confirm($translate.instant("UPGRADE_PAID_TO_PAID", transParam)) !== true) {
+        return false;
+      }
+      $scope.paying = true;
+
+      return API.UpgradeSubscription.post({ subscriptionId: $scope.subscription.data.id }, { plan_id: plan.id, site_id: site },
+        data => {
+          $scope.subscription.data = data;
+          // Show a message regarding that blog upgraded.
+          $translate(["DONE", "ACCOUNT_UPGRADED"]).then(translation => {
+            toaster.success(translation.DONE, translation.ACCOUNT_UPGRADED, 10000);
+          });
+          $state.go("dash.main", { s: $rootScope.set.lastSite });
+          $scope.paying = false;
+        }, () => {
+          $scope.paying = false;
+        });
+    }
+
+    // Open payment widget
+    let payments = new cp.CloudPayments({ language: "en-US" }); // jshint ignore:line
+    payments.charge({ // options
+        publicId: 'pk_b2b11892e0e39d3d22a3f303e2690',
+        description: plan.description,
+        amount: Number(plan.price),
+        currency: 'USD',
+        invoiceId: '1234567',
+        accountId: $scope.user.email,
+        data: {
+          plan_id: plan.id,
+          site_id: site,
+          user_id: $scope.user.id
+        }
+      },
+      function () {
+        // Show validation modal.
+        ModalsService.open("paymentValidation", "PaymentValidationModalController");
+      });
+  };
 
   /**
    * @desc update site via api call
@@ -43,40 +256,46 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {string} key
    * @param {string} value
    */
-  $scope.updateSite = function(key, value) {
-    var payload = {};
+  $scope.updateSite = function(media, value) {
+    let payload = {};
 
-    // Check for GAC
-    if (key === "google_analytics_code" && value.length && !(/^ua-\d{4,9}-\d{1,4}$/i).test(value.toString())) {
-      $translate(["ERROR_UPDATING_CODE", "INCORRECT_GOOGLE_ANALYTICS"]).then(function(translations) {
-        toaster.error(translations.ERROR_UPDATING_CODE, translations.INCORRECT_GOOGLE_ANALYTICS);
+    // Check for changed properties
+    if (!media) {
+      angular.forEach($scope.currentTab.form, (value, key) => {
+        if (!angular.equals($scope.site[key], $scope.currentTab.form[key])) {
+          payload[key] = value;
+        }
       });
-      $scope.site.google_analytics_code = null;
-      return;
+    } else {
+      payload[media] = value;
     }
 
+    // Show toaster
     $translate('UPDATING_BLOG').then(function (updatingBlog) {
-      toasters[key] = toaster.info(updatingBlog);
+      toaster.info(updatingBlog);
     });
-    payload[key] = value;
 
-    API.SiteUpdate.put({
-        siteId: site
-      }, payload,
+    return API.SiteUpdate.put({ siteId: site }, payload,
       function(data) {
-        if (key === "cover_image" || key === "logo") {
-          $scope.site.media[key] = data.media[key];
-          $scope.user.sites[$stateParams.s].media[key] = data.media[key];
+        if (!media) {
+          angular.forEach(payload, (value, key) => {
+            $scope.site[key] = data[key];
+            $scope.user.sites[$stateParams.s][key] = data[key];
+          });
         } else {
-          $scope.site[key] = data[key];
-          $scope.user.sites[$stateParams.s][key] = data[key];
+          if (media === "cover_image" || media === "logo") {
+            $scope.site.media[media] = data.media[media];
+            $scope.user.sites[$stateParams.s].media[media] = data.media[media];
+          }
         }
 
         AuthService.setAuthenticatedUser($scope.user);
 
         $rootScope.$broadcast("gonevisDash.SiteController:update");
 
-        toaster.clear(toasters[key]);
+        // Clear all toasters
+        toaster.clear();
+        // Show toaster
         $translate(["DONE", "BLOG_UPDATED"]).then(function(translations) {
           toaster.info(translations.DONE, translations.BLOG_UPDATED);
         });
@@ -84,6 +303,29 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       function() {
         $translate(["ERROR", "BLOG_UPDATE_ERROR"]).then(function(translations) {
           toaster.error(translations.ERROR, translations.BLOG_UPDATE_ERROR);
+        });
+      }
+    );
+  };
+
+  /**
+   * @desc Remove branding from blog.
+   *
+   * @param {boolean} value
+   */
+  $scope.removeBranding = value => {
+    return API.RemoveBranding.put({ siteId: site }, { remove_branding: !value },
+      data => {
+        // Clear last toaster
+        toaster.clear($scope.brandingToaster);
+        // Translate keys
+        $translate(["DONE", "REMOVED_BRANDING", "UNREMOVED_BRANDING"]).then(translations => {
+          // Show diffrent toasters based on remove branding value
+          if (data.remove_branding) {
+            $scope.brandingToaster = toaster.success(translations.DONE, translations.REMOVED_BRANDING);
+          } else {
+            $scope.brandingToaster = toaster.success(translations.DONE, translations.UNREMOVED_BRANDING);
+          }
         });
       }
     );

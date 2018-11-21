@@ -1,0 +1,231 @@
+/* Settings */
+
+.site-settings .panel .panel-heading {
+    font-weight: normal;
+    color: #222 !important;
+}
+
+.site-settings p,
+.site-settings b,
+.site-settings thead,
+.site-settings tbody {
+    color: #222;
+}
+
+.site-settings input,
+.site-settings textarea {
+    border-radius: 0;
+}
+
+.site-settings .site-url {
+    border: 1px solid #ddd;
+    padding: 10px;
+    display: block;
+}
+
+.settings-tab {
+    background: #fff;
+    position: relative;
+}
+
+.settings-tab .indicator {
+    position: absolute;
+    height: 2px;
+    background: #d17100;
+    bottom: 0;
+    transition: cubic-bezier(1, -0.35, 0, 1.24) all 0.5s;
+}
+
+.settings-tab li,
+.settings-tab li a {
+    display: inline-block;
+    position: relative;
+}
+
+.settings-tab li:not(:first-of-type) {
+    margin-left: -3px;
+}
+
+.settings-tab li a {
+    padding: 15px 20px;
+    color: #777;
+}
+
+.settings-tab li.current a {
+    color: #d17100 !important;
+}
+
+.settings-tab li a:hover {
+    color: #222;
+}
+
+
+/* Plans */
+
+.plan {
+    background: #1e1d2a;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.plan#lite {
+    background: #fff;
+    color: #222;
+    box-shadow: 0px 0px 12px 6px rgba(0,0,0,0.02);
+}
+
+.plan#lite .plan-title,
+.plan#lite .plan-price .main h2 {
+    color: #1e1d2a;
+}
+
+.plan .plan-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+    display: block;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.plan .plan-title::after {
+    content: '';
+    position: absolute;
+    width: 20%;
+    left: 40%;
+    bottom: -15px;
+    border-bottom: 4px solid #d17100;
+}
+
+.plan b {
+    color: #fff;
+}
+
+.plan#lite b {
+    color: #000;
+}
+
+.plan .plan-price {
+    margin: 25px 0;
+    border: 4px solid #1e1d2a;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.plan#ultra {
+    background: #673AB7;
+    color: #ccc;
+}
+
+.plan#ultra .plan-price::before {
+    border: 1px solid;
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+}
+
+.plan#personal .plan-price,
+.plan#ultra .plan-price {
+    border-color: #fff;
+}
+
+.plan .plan-price .main {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.plan .plan-price .main span {
+    font-size: .8em;
+}
+
+.plan .plan-price .main h2 {
+    font-size: 2.5em;
+    font-weight: 600;
+    color: #fff;
+}
+
+.plan .best-choice {
+    transition: ease-in-out all 0.1s;
+    position: absolute;
+    background: #fff;
+    color: #1e1d2a;
+    padding: 10px 15px;
+    top: -20px;
+    box-shadow: 3px 13px 6px -8px rgba(0,0,0,0.3);
+    left: 0;
+    font-weight: 800;
+}
+
+.plan .best-choice::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 15px solid #aaa;
+    border-left: 15px solid transparent;
+    position: absolute;
+    left: 0;
+    top: 40px;
+}
+
+.plan .plan-button {
+    background: rgba(255,255,255,0.06) !important;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 0;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    margin-top: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.plan#lite .plan-button {
+    color: #555;
+}
+
+.plan .plan-button:active {
+    background: rgba(255,255,255,0.1) !important;
+}
+
+.plan .plan-button span {
+    z-index: 20;
+}
+
+.plan .plan-button::after {
+    background: #fff;
+    content: "";
+    height: 155px;
+    left: -75px;
+    opacity: .2;
+    position: absolute;
+    top: -50px;
+    transform: rotate(35deg);
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    width: 50px;
+}
+
+.plan .plan-button:hover::after {
+    left: 120%;
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#paymentValidation .modal-dialog {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 0;
+}

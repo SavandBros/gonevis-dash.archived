@@ -65,7 +65,8 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         icon: "fa-users"
       }, {
         label: translations.SETTINGS,
-        sref: "dash.site",
+        sref: "dash.site.settings",
+        view: "settings",
         icon: "fa-cog"
       }];
     });
@@ -284,7 +285,7 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         if (stateName.indexOf("dash") !== -1) {
           $timeout(() => {
             let activeNav = angular.element(`a[name="${stateName}"]`)[0];
-            angular.element(".indicator").css({
+            angular.element("div.indicator").css({
               "top": activeNav.offsetTop,
               "height": activeNav.offsetHeight
             });

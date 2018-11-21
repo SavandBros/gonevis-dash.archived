@@ -231,9 +231,21 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
     })
     .state("dash.site", {
       url: "/blog",
+      abstract: true,
+      template: "<ui-view/>",
+      auth: true
+    })
+    .state("dash.site.settings", {
+      url: "/:view",
       controller: "SiteController",
       template: require("./site/site_view.html"),
-      auth: true
+      auth: true,
+      params: {
+        view: {
+          name: null,
+          dynamic: true
+        }
+      }
     })
     // .state("dash.tag-edit", {
     //   url: "/tag-list/:tagId",
