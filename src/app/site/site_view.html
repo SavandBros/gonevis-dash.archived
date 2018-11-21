@@ -32,7 +32,7 @@
       <nothing text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
     </div>
     <!-- Plans -->
-    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="isOwner">
+    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="isOwner" equal-height="plan-detail">
       <div class="col-md-4">
         <div class="plan" id="lite">
           <!-- Title -->
@@ -58,11 +58,11 @@
             <p><b>1</b> Team Members</p>
             <p title="Images">Basic Media Library</p>
             <p>Your own logo</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
           </div>
-          <!-- Button -->
-          <button class="btn btn-success plan-button" ng-disabled=true>
-            <span>Selected</span>
-          </button>
+          <button class="btn btn-success plan-button">&nbsp;</button>
         </div>
       </div>
       <!-- Personal -->
@@ -92,6 +92,9 @@
             <p><b>5</b> Team Members</p>
             <p>All Media Library</p>
             <p>Your own logo</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
           </div>
           <!-- Pay -->
           <button class="btn btn-success plan-button" ng-click="pay(plans[0])"
