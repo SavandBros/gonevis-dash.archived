@@ -332,6 +332,22 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   };
 
   /**
+   * @desc Set custom footer for blog.
+   *
+   * @param {boolean} value
+   */
+  $scope.setCustomFooter = value => {
+    return API.SetCustomFooter.put({ siteId: site }, { footer_text: value }, () => {
+      // Clear last toaster
+      toaster.clear($scope.footerText);
+      // Translate keys
+      $translate(["DONE", "FOOTER_UPDATED"]).then(translations => {
+        $scope.$scope.footerText = toaster.success(translations.DONE, translations.FOOTER_UPDATED);
+      });
+    });
+  };
+
+  /**
    * @desc Delete site via API call
    */
   $scope.deleteSite = function() {

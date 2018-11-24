@@ -380,10 +380,18 @@
             </div>
           </div>
           <!-- Footer text -->
-          <!-- <div class="form-group s-mar-top" ng-if="site.remove_branding">
+          <div class="form-group s-mar-top" ng-if="site.remove_branding">
             <p class="t-bold" translate>FOOTER_TEXT</p>
-            <input type="text" class="form-control" ng-model="currentTab.form.footer_text">
-          </div> -->
+            <div class="row">
+              <div class="col-md-10">
+                <textarea type="text" class="form-control" ng-model="site.footer_text"></textarea>
+              </div>
+              <div class="col-md-2 text-center">
+                <button class="btn btn-primary" type="button"
+                  disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}</button>
+              </div>
+            </div>
+          </div>
           <!-- Allow Google Analytics -->
           <div class="s-mar-top">
             <div class="checkbox checkbox-primary checkbox-small"
