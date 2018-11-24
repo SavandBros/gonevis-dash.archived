@@ -13,6 +13,8 @@
 - Fixed #1005: Cancel item deletion timeout on undo.
 - Resolved #1008: Filter comments based on post/page.
 - Resolved #1009: Update new navbar color and remove it's animation.
+- Resolved #1013: Update plans to have equal heights.
+- Resolved #1015: Remove button "Selected" in "Lite" plan.
 - Resolved #1018: Add a method to update blog footer text.
 
 
