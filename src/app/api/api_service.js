@@ -115,6 +115,9 @@ function API($resource, ENV) {
       name: "RemoveCustomDomain",
       endpoint: "website/site/:siteId/remove-custom-domain/" // PUT
     }, {
+      name: "SetCustomFooter",
+      endpoint: "website/site/:siteId/set-custom-footer/" // PUT
+    }, {
       name: "SiteUpdate",
       endpoint: "website/site/:siteId/update-settings/" // GET, PUT
     }, {
