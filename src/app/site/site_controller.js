@@ -355,7 +355,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     let payload = {
       google_analytics_enabled: $scope.site.google_analytics_enabled,
       google_analytics_code: $scope.site.google_analytics_code
-    }
+    };
 
     return API.SetGoogleAnalytics.put({ siteId: site }, payload,
       () => {
