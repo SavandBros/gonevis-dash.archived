@@ -339,7 +339,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       toaster.clear($scope.footerText);
       // Translate keys
       $translate(["DONE", "FOOTER_UPDATED"]).then(translations => {
-        $scope.$scope.footerText = toaster.success(translations.DONE, translations.FOOTER_UPDATED);
+        $scope.footerText = toaster.success(translations.DONE, translations.FOOTER_UPDATED);
       });
     });
   };
