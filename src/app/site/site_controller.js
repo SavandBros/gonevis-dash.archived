@@ -110,10 +110,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           paginate_by: "",
           commenting: false,
           voting: false,
-          search_engine_visibility: false,
-          footer_text: "",
-          google_analytics_enabled: false,
-          google_analytics_code: ""
+          search_engine_visibility: false
         }
       }, {
         view: "upgrade",
