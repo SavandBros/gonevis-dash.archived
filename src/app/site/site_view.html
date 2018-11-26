@@ -389,7 +389,7 @@
               <div class="col-md-10">
                 <textarea type="text" class="form-control" ng-model="site.footer_text"></textarea>
               </div>
-              <div class="col-md-2 text-center">
+              <div class="col-md-2 text-right">
                 <button class="btn btn-primary" type="button"
                   disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}</button>
               </div>
@@ -399,14 +399,16 @@
           <div class="s-mar-top">
             <div class="checkbox checkbox-primary checkbox-small"
               title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
-              <input id="google_analytics_enabled" type="checkbox" ng-model="currentTab.form.google_analytics_enabled">
+              <input id="google_analytics_enabled" type="checkbox" ng-model="site.google_analytics_enabled">
               <label for="google_analytics_enabled" translate>ALLOW_GOOGLE_ANALYTICS</label>
+              <button class="btn btn-primary pull-right" type="button"
+                disable-on-request="setGoogleAnalytics()">{{ 'SAVE' | translate }}</button>
             </div>
           </div>
           <!-- Google Analytics code -->
-          <div class="form-group s-mar-top" ng-if="currentTab.form.google_analytics_enabled">
+          <div class="form-group s-mar-top" ng-if="site.google_analytics_enabled">
             <p class="t-bold" translate>GOOGLE_ANALYTICS_CODE</p>
-            <input type="text" class="form-control" ng-model="currentTab.form.google_analytics_code">
+              <input type="text" class="form-control" placeholder="UA-XXXXX-Y" ng-model="site.google_analytics_code">
           </div>
         </div>
         <div class="panel-footer" ng-if="!hideDelete">

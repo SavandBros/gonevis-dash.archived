@@ -309,6 +309,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @desc Remove branding from blog.
    *
    * @param {boolean} value
+   * @returns {Promise}
    */
   $scope.removeBranding = value => {
     return API.RemoveBranding.put({ siteId: site }, { remove_branding: !value },
@@ -332,6 +333,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @desc Set custom footer for blog.
    *
    * @param {boolean} value
+   * @returns {Promise}
    */
   $scope.setCustomFooter = value => {
     return API.SetCustomFooter.put({ siteId: site }, { footer_text: value }, () => {
@@ -342,6 +344,34 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         $scope.footerText = toaster.success(translations.DONE, translations.FOOTER_UPDATED);
       });
     });
+  };
+
+  /**
+   * @desc Add Google analytics to blog.
+   *
+   * @returns {Promise}
+   */
+  $scope.setGoogleAnalytics = () => {
+    let payload = {
+      google_analytics_enabled: $scope.site.google_analytics_enabled,
+      google_analytics_code: $scope.site.google_analytics_code
+    }
+
+    return API.SetGoogleAnalytics.put({ siteId: site }, payload,
+      () => {
+        // Clear last toaster
+        toaster.clear($scope.googleAnalytics);
+        // Translate and show toaster
+        $translate(["DONE", "BLOG_UPDATED"]).then(translations => {
+          $scope.googleAnalytics = toaster.success(translations.DONE, translations.BLOG_UPDATED);
+        });
+      }, error => {
+        // Clear last toaster
+        toaster.clear($scope.googleAnalytics);
+        // show toaster regarding error
+        $scope.googleAnalytics = toaster.error(error.data.google_analytics_code[0]);
+      }
+    );
   };
 
   /**
