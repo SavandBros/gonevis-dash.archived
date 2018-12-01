@@ -16,6 +16,7 @@
 - Resolved #1013: Update plans to have equal heights.
 - Resolved #1015: Remove button "Selected" in "Lite" plan.
 - Resolved #1018: Add a method to update blog footer text.
+- Added #1027: Ability to select desired code highlight syntax theme.
 
 
 2018.10.1
