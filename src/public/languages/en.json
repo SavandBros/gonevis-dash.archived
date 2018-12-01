@@ -159,6 +159,7 @@
   "NUMBER_OF_POSTS_PP": "Number of Posts Per Page",
   "ALLOW_VISITORS_TO_COMMENT": "Allow visitors to comment on my posts.",
   "ALLOW_VISITORS_TO_VOTE": "Allow visitors to vote on my posts.",
+  "SHOW_VIEWS_COUNTER": "Show views counter on my posts.",
   "SEARCH_ENGINE_DISCOVER": "Let search engine discover my blog.",
   "REMOVE_BRANDING": "Remove GoNevis.com branding.",
   "REMOVE_BRANDING_TITLE": "Logo or name of the GoNevis.com will not appear anymore.",
