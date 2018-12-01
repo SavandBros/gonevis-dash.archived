@@ -203,7 +203,7 @@ function Codekit($timeout, $window, $log, $translate) {
   }, {
     id: 16,
     label: "Zenburn"
-  }]
+  }];
 
   /**
    * @desc All default images.
