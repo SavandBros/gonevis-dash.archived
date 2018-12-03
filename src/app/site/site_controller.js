@@ -100,7 +100,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         label: translations.APPEARANCE,
         form: {
           font_name: "",
-          font_url: ""
+          font_url: "",
+          highlight_theme: null
         }
       }, {
         view: "advanced",
