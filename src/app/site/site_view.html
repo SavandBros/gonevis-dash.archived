@@ -283,6 +283,18 @@
                 </div>
               </div>
             </div>
+            <hr>
+            <!-- Highlight Theme -->
+            <div class="form-group">
+              <p class="t-bold" translate>CODE_HIGHLIGHT_SYNTAX_THEME</p>
+              <select class="form-control" ng-model="currentTab.form.highlight_theme">
+                <option ng-repeat="theme in codekit.highlightThemes"
+                  ng-value="theme.id"
+                  ng-selected="currentTab.form.highlight_theme == theme.id">
+                  {{ theme.label }}
+                </option>
+              </select>
+            </div>
             <!-- Font Name -->
             <!-- <div class="form-group">
               <p class="t-bold" translate>Font Name</p>

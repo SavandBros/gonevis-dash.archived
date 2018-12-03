@@ -148,6 +148,64 @@ function Codekit($timeout, $window, $log, $translate) {
   });
 
   /**
+   * @desc List of all highlight themes.
+   *
+   * @type {array}
+   */
+  let highlightThemes = [{
+    id: 6,
+    label: "Default"
+  }, {
+    id: 0,
+    label: "Atom One Dark"
+  }, {
+    id: 1,
+    label: "Atom One Light"
+  }, {
+    id: 2,
+    label: "Androidstudio"
+  }, {
+    id: 3,
+    label: "Agate"
+  }, {
+    id: 4,
+    label: "Color Brewer"
+  }, {
+    id: 5,
+    label: "Dracula"
+  }, {
+    id: 7,
+    label: "Github"
+  }, {
+    id: 8,
+    label: "Monokai Sublime"
+  }, {
+    id: 9,
+    label: "Mono Blue"
+  }, {
+    id: 10,
+    label: "Rainbow"
+  }, {
+    id: 11,
+    label: "Railscasts"
+  }, {
+    id: 12,
+    label: "Solarized Dark"
+  }, {
+    id: 13,
+    label: "Solarized Light"
+  }, {
+    id: 14,
+    label: "Tomorrow"
+  }, {
+    id: 15,
+    label: "VS"
+  }, {
+    id: 16,
+    label: "Zenburn"
+  }];
+
+  /**
    * @desc All default images.
    *
    * @type {object}
@@ -256,6 +314,7 @@ function Codekit($timeout, $window, $log, $translate) {
     entryStatuses: entryStatuses,
     entryFormats: entryFormats,
     commentStatuses: commentStatuses,
+    highlightThemes: highlightThemes,
     teamRoles: teamRoles,
     timeoutSlice: timeoutSlice,
     isEmptyObj: isEmptyObj,
