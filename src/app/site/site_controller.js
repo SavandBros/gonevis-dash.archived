@@ -205,51 +205,47 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     if ($scope.subscription.data && plan.id === $scope.subscription.data.plan.id) {
       return;
     }
-    // Pay right away if upgrading from a paid plan to another.
-    if ($scope.subscription.data && $scope.subscription.data.active) {
-      let transParam = {
-        currentPlan: $scope.subscription.data.plan.name,
-        nextPlan: plan.name
-      };
-      // Show confirmation on upgrade
-      if (confirm($translate.instant("UPGRADE_PAID_TO_PAID", transParam)) !== true) {
-        return false;
-      }
-      $scope.paying = true;
-
-      return API.UpgradeSubscription.post({ subscriptionId: $scope.subscription.data.id }, { plan_id: plan.id, site_id: site },
-        data => {
-          $scope.subscription.data = data;
-          // Show a message regarding that blog upgraded.
-          $translate(["DONE", "ACCOUNT_UPGRADED"]).then(translation => {
-            toaster.success(translation.DONE, translation.ACCOUNT_UPGRADED, 10000);
-          });
-          $state.go("dash.main", { s: $rootScope.set.lastSite });
-          $scope.paying = false;
-        }, () => {
-          $scope.paying = false;
-        });
-    }
 
     // Open payment widget
     let payments = new cp.CloudPayments({ language: "en-US" }); // jshint ignore:line
     payments.charge({ // options
-        publicId: 'pk_b2b11892e0e39d3d22a3f303e2690',
-        description: plan.description,
-        amount: Number(plan.price),
-        currency: 'USD',
-        invoiceId: '1234567',
-        accountId: $scope.user.email,
-        data: {
-          plan_id: plan.id,
-          site_id: site,
-          user_id: $scope.user.id
+      publicId: "pk_b2b11892e0e39d3d22a3f303e2690",
+      description: plan.description,
+      amount: Number(plan.price),
+      currency: "USD",
+      accountId: $scope.user.email,
+      data: {
+        plan_id: plan.id,
+        site_id: site,
+        cloudPayments: {
+          recurrent: {
+            interval: "Month",
+            period: 1,
+            customerReceipt: {
+              Items: [{
+                label: plan.name,
+                price: plan.price,
+                quantity: "1.00",
+                amount: plan.price,
+                vat: null,
+                method: 4,
+                object: 4
+              }],
+              taxationSystem: 1,
+              amounts: {
+                electronic: plan.price,
+                advancePayment: "0.00",
+                credit: "0.00",
+                provision: "0.00"
+              }
+            }
+          }
         }
-      },
-      function () {
-        // Show validation modal.
-        ModalsService.open("paymentValidation", "PaymentValidationModalController");
-      });
+      }
+    }, function () {
+      // Show validation modal.
+      ModalsService.open("paymentValidation", "PaymentValidationModalController");
+    });
   };
 
   /**
@@ -314,6 +310,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @desc Remove branding from blog.
    *
    * @param {boolean} value
+   * @returns {Promise}
    */
   $scope.removeBranding = value => {
     return API.RemoveBranding.put({ siteId: site }, { remove_branding: !value },
@@ -337,6 +334,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @desc Set custom footer for blog.
    *
    * @param {boolean} value
+   * @returns {Promise}
    */
   $scope.setCustomFooter = value => {
     return API.SetCustomFooter.put({ siteId: site }, { footer_text: value }, () => {
@@ -344,9 +342,37 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       toaster.clear($scope.footerText);
       // Translate keys
       $translate(["DONE", "FOOTER_UPDATED"]).then(translations => {
-        $scope.$scope.footerText = toaster.success(translations.DONE, translations.FOOTER_UPDATED);
+        $scope.footerText = toaster.success(translations.DONE, translations.FOOTER_UPDATED);
       });
     });
+  };
+
+  /**
+   * @desc Add Google analytics to blog.
+   *
+   * @returns {Promise}
+   */
+  $scope.setGoogleAnalytics = () => {
+    let payload = {
+      google_analytics_enabled: $scope.site.google_analytics_enabled,
+      google_analytics_code: $scope.site.google_analytics_code
+    };
+
+    return API.SetGoogleAnalytics.put({ siteId: site }, payload,
+      () => {
+        // Clear last toaster
+        toaster.clear($scope.googleAnalytics);
+        // Translate and show toaster
+        $translate(["DONE", "BLOG_UPDATED"]).then(translations => {
+          $scope.googleAnalytics = toaster.success(translations.DONE, translations.BLOG_UPDATED);
+        });
+      }, error => {
+        // Clear last toaster
+        toaster.clear($scope.googleAnalytics);
+        // show toaster regarding error
+        $scope.googleAnalytics = toaster.error(error.data.google_analytics_code[0]);
+      }
+    );
   };
 
   /**
