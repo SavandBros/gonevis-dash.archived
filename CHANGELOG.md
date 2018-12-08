@@ -16,6 +16,7 @@
 - Resolved #1013: Update plans to have equal heights.
 - Resolved #1015: Remove button "Selected" in "Lite" plan.
 - Resolved #1018: Add a method to update blog footer text.
+- Fixed #1022: Fix editor error related to pasting video URLs.
 - Resolved #1025: Ability to show views counter on posts.
 - Resolved #1020: Google Analytics is now plan based.
 - Resolved #1029: New Payment Flow.

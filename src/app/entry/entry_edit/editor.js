@@ -89,7 +89,9 @@ class VideoBlot extends BlockEmbed {
   }
 
   static value(domNode) {
-    return domNode.firstChild.getAttribute('src');
+    if (domNode.querySelector('iframe')) {
+      return domNode.querySelector('iframe').getAttribute('src');
+    }
   }
 }
 VideoBlot.blotName = 'video';
