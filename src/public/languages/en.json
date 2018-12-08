@@ -160,6 +160,7 @@
   "CODE_HIGHLIGHT_SYNTAX_THEME": "Code Highlight Syntax Theme",
   "ALLOW_VISITORS_TO_COMMENT": "Allow visitors to comment on my posts.",
   "ALLOW_VISITORS_TO_VOTE": "Allow visitors to vote on my posts.",
+  "SHOW_VIEWS_COUNTER": "Show how many times my posts have been visited.",
   "SEARCH_ENGINE_DISCOVER": "Let search engine discover my blog.",
   "REMOVE_BRANDING": "Remove GoNevis.com branding.",
   "REMOVE_BRANDING_TITLE": "Logo or name of the GoNevis.com will not appear anymore.",
