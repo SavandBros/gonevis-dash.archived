@@ -156,6 +156,9 @@ function API($resource, ENV) {
     }, {
       name: "RemoveBranding",
       endpoint: "website/site/:siteId/remove-branding/", // PUT
+    }, {
+      name: "SetGoogleAnalytics",
+      endpoint: "website/site/:siteId/google-analytics/", // PUT
     },
     // Tagool
     {
