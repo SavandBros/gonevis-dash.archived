@@ -124,7 +124,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
       // Update 'is_voted' property by callback variable.
       post.is_voted = data.created;
     });
-  }
+  };
 
   /**
    * @desc Toggle fullscreen mode
