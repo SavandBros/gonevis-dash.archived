@@ -5,6 +5,7 @@ import UserSiteRole from "../../account/user/user_site_role";
 require('./../reader.css');
 require('quill/dist/quill.snow.css');
 require('../../entry/entry_edit/editor.css');
+require('../../basement/directives/disable_on_request_directive');
 
 function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window) {
   let lastScroll;
@@ -107,6 +108,25 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   }
 
   /**
+   * @desc A method to vote on posts.
+   *
+   * @param {object} post
+   *
+   * @returns {Promise}
+   */
+  $scope.vote = post => {
+    return API.EntryVote.save({ entryId: post.id }, null, data => {
+      if (data.created) {
+        post.vote_count++;
+      } else {
+        post.vote_count--;
+      }
+      // Update 'is_voted' property by callback variable.
+      post.is_voted = data.created;
+    });
+  }
+
+  /**
    * @desc Toggle fullscreen mode
    *
    * @returns {void}
@@ -119,12 +139,10 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
    * @desc Subscribe to site.
    *
    * @param {string} siteId
-   * @returns {void}
+   * @returns {Promise}
    */
   $scope.subscribe = function (siteId) {
-    $scope.isFollowing = !$scope.isFollowing;
-
-    API.Subscribe.save({ siteId: siteId }, {},
+    return API.Subscribe.save({ siteId: siteId }, {},
       function (data) {
         $scope.isFollowing = data.subscribed;
   		}
