@@ -24,6 +24,7 @@
 - Fixed #1017: Comment texts is not wrapped properly.
 - Added #978: Add voting to Reader.
 - Added #1032: Change Reader design UI.
+- Added #1036: Add a "Back" button to Reader detail.
 
 
 2018.10.1
