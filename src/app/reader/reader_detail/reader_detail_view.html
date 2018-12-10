@@ -1,3 +1,4 @@
+<!-- Cover image -->
 <div ng-hide="full" class="container-fluid reader-cover s-pad-no text-center" ng-if="post.media.cover_image"
 	ng-style="{'background-image': 'url({{ post.media.cover_image.file }})'}">
 	<div class="container">
@@ -8,14 +9,25 @@
 		</div>
 	</div>
 </div>
+<!-- Content -->
 <div class="reader-wrapper" ng-class="{'full-screen': full}">
 	<div class="container">
 		<nothing text="{{ 'ENTRY_GET_ERROR' | translate }}" ng-if="error"></nothing>
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<div class="reader-content" ng-if="!error && !loading">
-					<h1 ng-if="!post.media.cover_image" class="text-center s-mar-bottom">{{ post.title }}</h1>
-					<div class="ql-editor" ng-bind-html="trustedContent"></div>
+          <!-- Title -->
+          <h1 ng-if="!post.media.cover_image" class="text-center s-mar-bottom">{{ post.title }}</h1>
+          <!-- Content -->
+          <div class="ql-editor" ng-bind-html="trustedContent"></div>
+          <!-- Divider -->
+          <hr>
+          <!-- Voting and vote counts -->
+          <button class="btn btn-light pull-right btn-sm" ng-class="{'btn-danger': post.is_voted}"
+            disable-on-request="readerService.vote(post)">
+            <i class="fa fa-heart fa-fw"></i>
+            <span ng-show="post.vote_count">{{ post.vote_count }}</span>
+          </button>
 				</div>
 			</div>
 		</div>
@@ -38,14 +50,15 @@
 			<img class="img-circle s-mar-right-soft" ng-src="{{ siteLogo }}">
 			<div class="s-mar-right" translate translate-compile>{{ bottomInfo }}</div>
 			<div class="s-mar-left" ng-if="!isOwner">
-				<button class="btn btn-primary" ng-click="subscribe(post.site.id)" ng-class="{active: isFollowing}">
+				<button class="btn btn-primary" disable-on-request="subscribe(post.site.id)" ng-class="{active: isFollowing}">
 					{{ isFollowing ? "UNFOLLOW" : "FOLLOW_FOR_MORE" | translate }}
 				</button>
 			</div>
 			<!-- Full screen -->
 			<div class="flex-auto text-right">
 				<i class="fa fa-expand fa-fw" ng-click="fullScreen()" uib-tooltip="{{ tooltips.size.full }}"
-					tooltip-trigger="'mouseenter'" tooltip-class="init"></i>
+          tooltip-trigger="'mouseenter'" tooltip-class="init">
+        </i>
 			</div>
 		</div>
 	</div>
@@ -55,7 +68,9 @@
 <div class="full-screen-buttons">
 	<!-- Theme -->
 	<i class="fa fa-fw" ng-class="{'fa-sun-o': !set.lights, 'fa-moon-o': set.lights}" ng-click="set.lights = !set.lights"
-		uib-tooltip="{{ set.lights ? tooltips.theme.dark : tooltips.theme.bright }}" tooltip-trigger="'mouseenter'" tooltip-class="init"></i>
+    uib-tooltip="{{ set.lights ? tooltips.theme.dark : tooltips.theme.bright }}"
+    tooltip-trigger="'mouseenter'" tooltip-class="init">
+  </i>
 	<!-- Exit full screen -->
 	<i class="fa fa-compress fa-fw" ng-click="fullScreen()" uib-tooltip="{{ tooltips.size.normal }}"
 		tooltip-trigger="'mouseenter'" tooltip-class="init"></i>

@@ -5,8 +5,10 @@ import UserSiteRole from "../../account/user/user_site_role";
 require('./../reader.css');
 require('quill/dist/quill.snow.css');
 require('../../entry/entry_edit/editor.css');
+require('../../basement/directives/disable_on_request_directive');
 
-function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window) {
+function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window,
+  ReaderService) {
   let lastScroll;
 
   /**
@@ -37,6 +39,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   }
 
   function constructor() {
+    $scope.readerService = ReaderService;
     lastScroll = $window.pageYOffset;
     let postId = $stateParams.entryId;
 
@@ -119,12 +122,10 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
    * @desc Subscribe to site.
    *
    * @param {string} siteId
-   * @returns {void}
+   * @returns {Promise}
    */
   $scope.subscribe = function (siteId) {
-    $scope.isFollowing = !$scope.isFollowing;
-
-    API.Subscribe.save({ siteId: siteId }, {},
+    return API.Subscribe.save({ siteId: siteId }, {},
       function (data) {
         $scope.isFollowing = data.subscribed;
   		}

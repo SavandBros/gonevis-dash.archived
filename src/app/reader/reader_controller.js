@@ -2,13 +2,16 @@
 
 import app from "../app";
 require('./reader.css');
+require('../basement/directives/disable_on_request_directive');
 
-function ReaderController($scope, API, $state, Pagination, Codekit, $translate, $window, $timeout, $stateParams) {
+function ReaderController($scope, API, $state, Pagination, Codekit, $translate, $window, $timeout, $stateParams,
+  ReaderService) {
 
   let bodyHeight;
   let currentView;
 
   function constructor() {
+    $scope.readerService = ReaderService;
     currentView = "feed";
     if ($stateParams.view === "explore") {
       currentView = "explore";

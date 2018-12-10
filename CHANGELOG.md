@@ -22,6 +22,8 @@
 - Resolved #1029: New Payment Flow.
 - Added #1027: Ability to select desired code highlight syntax theme.
 - Fixed #1017: Comment texts is not wrapped properly.
+- Added #978: Add voting to Reader.
+- Added #1032: Change Reader design UI.
 
 
 2018.10.1

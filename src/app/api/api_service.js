@@ -65,6 +65,10 @@ function API($resource, ENV) {
       name: "ReaderDetail",
       endpoint: "website/entry/:entryId/", // GET
       isZero: true
+    }, {
+      name: "EntryVote",
+      endpoint: "website/entry/:entryId/vote/", // POST
+      isZero: true
     },
     // Sushial
     {
