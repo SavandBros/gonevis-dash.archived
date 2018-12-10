@@ -108,25 +108,6 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   }
 
   /**
-   * @desc A method to vote on posts.
-   *
-   * @param {object} post
-   *
-   * @returns {Promise}
-   */
-  $scope.vote = post => {
-    return API.EntryVote.save({ entryId: post.id }, null, data => {
-      if (data.created) {
-        post.vote_count++;
-      } else {
-        post.vote_count--;
-      }
-      // Update 'is_voted' property by callback variable.
-      post.is_voted = data.created;
-    });
-  };
-
-  /**
    * @desc Toggle fullscreen mode
    *
    * @returns {void}
