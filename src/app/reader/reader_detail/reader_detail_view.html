@@ -24,7 +24,7 @@
           <hr>
           <!-- Voting and vote counts -->
           <button class="btn btn-light pull-right btn-sm" ng-class="{'btn-danger': post.is_voted}"
-            disable-on-request="vote(post)">
+            disable-on-request="readerService.vote(post)">
             <i class="fa fa-heart fa-fw"></i>
             <span ng-show="post.vote_count">{{ post.vote_count }}</span>
           </button>

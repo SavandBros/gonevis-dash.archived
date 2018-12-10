@@ -5,13 +5,14 @@ require('./reader.css');
 require('../basement/directives/disable_on_request_directive');
 
 function ReaderController($scope, API, $state, Pagination, Codekit, $translate, $window, $timeout, $stateParams,
-  ReaderSaveService) {
+  ReaderSaveService, ReaderService) {
 
   let bodyHeight;
   let currentView;
   let storedItems;
 
   function constructor() {
+    $scope.readerService = ReaderService;
     currentView = "feed";
     if ($stateParams.view === "explore") {
       currentView = "explore";
@@ -93,25 +94,6 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
         $scope.updateHeight();
       }
     );
-  };
-
-  /**
-   * @desc A method to vote on posts.
-   *
-   * @param {object} post
-   *
-   * @returns {Promise}
-   */
-  $scope.vote = post => {
-    return API.EntryVote.save({ entryId: post.id }, null, data => {
-      if (data.created) {
-        post.vote_count++;
-      } else {
-        post.vote_count--;
-      }
-      // Update 'is_voted' property by callback variable.
-      post.is_voted = data.created;
-    });
   };
 
   /**
