@@ -7,7 +7,8 @@ require('quill/dist/quill.snow.css');
 require('../../entry/entry_edit/editor.css');
 require('../../basement/directives/disable_on_request_directive');
 
-function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window) {
+function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window,
+  ReaderService) {
   let lastScroll;
 
   /**
@@ -38,6 +39,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   }
 
   function constructor() {
+    $scope.readerService = ReaderService;
     lastScroll = $window.pageYOffset;
     let postId = $stateParams.entryId;
 
