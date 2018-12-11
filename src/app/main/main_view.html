@@ -26,7 +26,7 @@
               <div class="col-md-9 col-sm-10 col-xs-8">
                 <p class="list-group-item-text">
                   <span class="o-fade-soft small">{{ comment.user.getFullName() }}:</span>
-                  <span ng-bind-html="comment.get.comment"></span>
+                  <span ng-bind-html="comment.get.comment" class="break-word"></span>
                 </p>
               </div>
               <div class="col-md-3 col-sm-2 col-xs-4">
@@ -121,11 +121,11 @@
           </li>
         </ul>
       </div>
-      <!-- Site Overview -->
+      <!-- Blog Overview -->
       <div class="panel panel-default" ng-if="Metrics.list" id="site">
         <!-- Title -->
         <div class="panel-heading lower">
-          <a ui-sref="dash.site" class="header-link" translate>SITE_OVERVIEW</a>
+          <a ui-sref="dash.site.settings({ view: 'settings' })" class="header-link" translate>BLOG_OVERVIEW</a>
           <div class="panel-label img-circle"><i class="fa fa-globe"></i></div>
         </div>
         <!-- Overview -->
@@ -140,7 +140,7 @@
           <!-- Template -->
           <li class="list-group-item" ng-if="siteTemplate">
             <i class="fa fa-border fa-paint-brush"></i> {{ 'THEME_AND_LAYOUT' | translate }}
-            <a class="pull-right btn btn-primary btn-sm" ui-sref="dash.site">
+            <a class="pull-right btn btn-primary btn-sm" ui-sref="dash.site.settings({ view: 'appearance' })">
               {{ siteTemplate.name | uppercase }}
             </a>
           </li>

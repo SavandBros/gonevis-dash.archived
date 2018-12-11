@@ -61,6 +61,14 @@ function API($resource, ENV) {
     }, {
       name: "UploadUrl",
       endpoint: "website/site/:siteId/upload-url/" // POST
+    }, {
+      name: "ReaderDetail",
+      endpoint: "website/entry/:entryId/", // GET
+      isZero: true
+    }, {
+      name: "EntryVote",
+      endpoint: "website/entry/:entryId/vote/", // POST
+      isZero: true
     },
     // Sushial
     {
@@ -69,6 +77,12 @@ function API($resource, ENV) {
     }, {
       name: "Comments",
       endpoint: "sushial/comment/" // GET
+    }, {
+      name: "Explore",
+      endpoint: "sushial/explore/" // GET
+    }, {
+      name: "Feed",
+      endpoint: "sushial/subscribed-entries/" // GET
     },
     // Site
     {
@@ -105,6 +119,9 @@ function API($resource, ENV) {
       name: "RemoveCustomDomain",
       endpoint: "website/site/:siteId/remove-custom-domain/" // PUT
     }, {
+      name: "SetCustomFooter",
+      endpoint: "website/site/:siteId/set-custom-footer/" // PUT
+    }, {
       name: "SiteUpdate",
       endpoint: "website/site/:siteId/update-settings/" // GET, PUT
     }, {
@@ -132,6 +149,16 @@ function API($resource, ENV) {
     }, {
       name: "DomainCheck",
       endpoint: "website/domain-check/" // POST
+    }, {
+      name: "Subscribe",
+      endpoint: "website/site/:siteId/subscribe/", // POST
+      isZero: true
+    }, {
+      name: "RemoveBranding",
+      endpoint: "website/site/:siteId/remove-branding/", // PUT
+    }, {
+      name: "SetGoogleAnalytics",
+      endpoint: "website/site/:siteId/google-analytics/", // PUT
     },
     // Tagool
     {
@@ -148,6 +175,29 @@ function API($resource, ENV) {
     }, {
       name: "Dolphin",
       endpoint: "dolphin/file/:fileId/" // GET, POST
+    },
+    // Eskenas
+    {
+      name: "Eskenas",
+      endpoint: "eskenas/plans/" // GET
+    }, {
+      name: "Transactions",
+      endpoint: "eskenas/transactions/" // GET
+    }, {
+      name: "Subscription",
+      endpoint: "website/site/:siteId/subscription/" // GET
+    }, {
+      name: "UpgradeSubscription",
+      endpoint: "eskenas/subscriptions/:subscriptionId/upgrade-subscription/" // POST
+    }, {
+      name: "CancelSubscription",
+      endpoint: "eskenas/subscriptions/:planId/cancel-subscription/" // POST
+    },
+    // Feedback
+    {
+      name: "Feedback",
+      endpoint: "feedback/",
+      isZero: true
     }
   ];
 

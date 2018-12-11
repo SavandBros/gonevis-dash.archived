@@ -1,7 +1,7 @@
 "use strict";
 import app from "../../app";
 
-const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils) {
+const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils, toaster) {
 
   /**
    * @desc Automatically attach Authorization header
@@ -13,7 +13,7 @@ const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils) {
   function request(config) {
     var token = $cookies.get("JWT");
 
-    if (config.url.indexOf(ENV.apiEndpoint) === 0 && token) {
+    if (token && (config.url.indexOf(ENV.apiEndpoint) === 0 || config.url.indexOf(ENV.zeroAPI) === 0)) {
       config.headers.Authorization = "JWT " + token;
     }
 
@@ -28,8 +28,15 @@ const AuthInterceptorService = function($rootScope, $cookies, $q, ENV, Utils) {
    * @return {object}
    */
   function responseError(response) {
-    // Authentication check
+    // Forbidden check
     if (response.status === 403) {
+      // Check if upgrade required
+      if (JSON.stringify(response.data.detail).indexOf(Utils.texts.upgradeRequired) !== -1) {
+        toaster.error(Utils.texts.upgradeRequired);
+        return $q.reject(response);
+      }
+
+      // Check permission
       if (JSON.stringify(response.data).indexOf(Utils.texts.noPermission) === -1) {
         $rootScope.$broadcast("gonevisDash.AuthService:SignedOut", true);
       }

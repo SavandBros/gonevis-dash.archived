@@ -1,270 +1,509 @@
 <!-- Site cover image -->
-<div class="container-fluid container-image" ng-if="site.media.cover_image" ng-click="selectImage('cover_image')"
-  style="background-image: url('{{ site.media.cover_image.file }}')">
-  <p><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
+<div class="container-fluid container-image" ng-if="!isRestrict" ng-class="{'has-cover': site.media.cover_image}"
+  ng-click="selectImage('cover_image')"
+  style="background-image: url('{{ site.media.cover_image ? site.media.cover_image.file : '' }}')">
+  <p ng-if="site.media.cover_image"><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
+  <p ng-if="!site.media.cover_image" class="init">
+    <i class="fa fa-fw fa-image fa-2x s-mar-bottom-soft"></i> <br> {{ 'SELECT_COVER_IMAGE' | translate }}
+  </p>
 </div>
 
 <!-- Restricted page -->
 <restricted-page ng-if="isRestrict"></restricted-page>
 
-<!-- Main -->
-<div class="container container-light animated fadeIn" ng-if="!isRestrict">
-
-  <!-- Left panels -->
-  <div class="col-md-8">
-
-    <!-- Settings -->
-    <div class="panel panel-default">
-      <h4 class="panel-heading lower">
-        <!-- Logo -->
-        <img class="img-circle heading-image" ng-if="site.media.logo" ng-src="{{ site.media.logo.thumbnail_48x48 }}">
-        <!-- Title -->
-        <span style="line-height: 40px">{{ site.title }}</span>
-        <!-- Visit -->
-        <a class="btn btn-default pull-right"
-          ng-href="{{ site.absolute_uri }}" target="_blank" title="{{ 'GO_TO_SITE' | translate }}">
-          {{ 'VIEW_SITE' | translate }}
-        </a>
-        <div class="clearfix"></div>
-      </h4>
-      <div class="panel-body s-pad">
-        <!-- Title -->
-        <div class="input-panel">
-          <div class="row">
-            <div class="col-xs-3 col-sm-2"><small class="t-upp" translate>TITLE</small></div>
-            <div class="col-xs-9 col-sm-10">
-              <span editable-text="site.title" onbeforesave="updateSite('title', $data)">
-                {{ site.title || "NOTHING_HERE" | translate }}
-              </span>
+<div class="container" ng-if="!isRestrict">
+  <!-- Tabs -->
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="settings-tab">
+        <span class="indicator"></span>
+        <ul class="list-unstyled">
+          <li ng-repeat="tab in tabs" ng-class="{'current': tab.view === currentTab.view}">
+            <a ng-click="setCurrentTab(tab)">{{ tab.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Upgrade -->
+  <div ng-if="currentTab.view === 'upgrade' && plans.length">
+    <!-- No permission -->
+    <div class="col-md-8 col-md-offset-2 s-pad-soft" ng-if="!isOwner">
+      <nothing text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
+    </div>
+    <!-- Plans -->
+    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="isOwner" equal-height="plan-detail">
+      <div class="col-md-4">
+        <div class="plan" id="lite">
+          <!-- Title -->
+          <span class="plan-title">Lite</span>
+          <p>Basic plan</p>
+          <div class="plan-price">
+            <div class="main">
+              <span>FOR</span>
+              <h2>FREE</h2>
+              <span>FOREVER</span>
             </div>
           </div>
+          <!-- Detail -->
+          <div class="plan-detail">
+            <p>GoNevis.com subdomain.</p>
+            <p>No Ads</p>
+            <p title="Create or manage as many blog as you like">Unlimited Blogs</p>
+            <p>Free Themes</p>
+            <p>Email Support</p>
+            <p><b>1</b> GB Storage</p>
+            <p>SEO Optimization</p>
+            <p>Basic UI Customization</p>
+            <p><b>1</b> Team Members</p>
+            <p title="Images">Basic Media Library</p>
+            <p>Your own logo</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+          </div>
+          <button class="btn btn-success plan-button">&nbsp;</button>
         </div>
-        <!-- URL -->
-        <div class="input-panel">
-          <div class="row">
-            <div class="col-xs-3 col-sm-2"><small translate>URL</small></div>
-            <div class="col-xs-9 col-sm-10 t-line">
-              <a ng-href="{{ site.absolute_uri }}" target="_blank" title="{{ 'CANT_CHANGE' }}">
-                {{ site.absolute_uri || "NOTHING_HERE" | translate }}
+      </div>
+      <!-- Personal -->
+      <div class="col-md-4">
+        <div class="plan" id="personal">
+          <!-- Title -->
+          <div class="best-choice"><i class="fa fa-star fa-fw"></i> Best Choice</div>
+          <span class="plan-title">{{ plans[0].name }}</span>
+          <p>{{ plans[0].description }}</p>
+          <div class="plan-price">
+            <div class="main">
+              <span>ONLY</span>
+              <h2><i class="fa fa-usd"></i> {{ plans[0].price }}</h2>
+              <span>MONTHLY</span>
+            </div>
+          </div>
+          <!-- Detail -->
+          <div class="plan-detail">
+            <p>Custom Domain</p>
+            <p>No Ads</p>
+            <p>Unlimited Blogs</p>
+            <p>Free Themes</p>
+            <p>Email & Live Chat Support</p>
+            <p><b>5</b> GB Storage</p>
+            <p>SEO Optimization</p>
+            <p>Basic UI Customization</p>
+            <p><b>5</b> Team Members</p>
+            <p>All Media Library</p>
+            <p>Your own logo</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+          </div>
+          <!-- Pay -->
+          <button class="btn btn-success plan-button" ng-click="pay(plans[0])"
+            ng-disabled="plans[0].isCurrent || paying">
+            {{ plans[0].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
+          </button>
+        </div>
+      </div>
+      <!-- Ultra -->
+      <div class="col-md-4">
+        <div class="plan" id="ultra">
+          <!-- Title -->
+          <span class="plan-title">{{ plans[1].name }}</span>
+          <p>{{ plans[1].description }}</p>
+          <div class="plan-price">
+            <div class="main">
+              <span>ONLY</span>
+              <h2><i class="fa fa-usd"></i> {{ plans[1].price }}</h2>
+              <span>MONTHLY</span>
+            </div>
+          </div>
+          <!-- Detail -->
+          <div class="plan-detail">
+            <p>Custom Domain</p>
+            <p>No Ads</p>
+            <p>Unlimited Blogs</p>
+            <p>Premium Themes</p>
+            <p>Email & Live Chat Support</p>
+            <p><b>10</b> GB Storage</p>
+            <p>SEO Optimization</p>
+            <p>Advanced UI Customization</p>
+            <p><b>25</b> Team Members</p>
+            <p>All Media Library</p>
+            <p>Your own logo</p>
+            <p>Your own Google Analytics</p>
+            <p>No GoNevis.com branding</p>
+            <p>Custom Footer</p>
+          </div>
+          <!-- Pay -->
+          <button class="btn btn-success plan-button" ng-click="pay(plans[1])"
+            ng-disabled="plans[1].isCurrent || paying">
+            {{ plans[1].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- FAQ -->
+    <div class="row bg-white s-pad s-mar-bottom" ng-if="isOwner">
+      <h1 class="text-center s-mar-bottom t-bold">Frequently Asked Questions</h1>
+      <hr>
+      <div class="col-md-6">
+        <h3 class="t-bold s-mar-bottom-soft">What payment methods do you accept? Paypal? What about invoices?</h3>
+        <p>We accept all major credit and debit cards such as Visa, Mastercard or MIR. For annual pre-paid accounts on Business or Enterprise plans we also accept bank transfers, where desired. We do not, under any circumstances, accept Paypal.</p>
+        <br>
+        <h3 class="t-bold s-mar-bottom-soft">How do you process my payments?</h3>
+        <p>
+          We don't, another company called <a href="https://cloudpayments.ru/en/">CloudPayments</a> with Security
+          PCI DSS Level 1 certification will process all the payments.
+          In this case, no credit/debit card information will be processed by us and all being
+          taken care of a secure and stable payment processing gateway.
+        </p>
+        <br>
+      </div>
+      <div class="col-md-6">
+        <h3 class="t-bold s-mar-bottom-soft">How do I cancel my subscription? Delete my account? Can I have a refund?</h3>
+        <p>To cancel your account, log into <a href="https://dash.gonevis.com" target="_blank">account</a> and change your plan from active to "Cancel" — that's all there is to it! To delete your account or if you need any other help just email us on <a href="mailto:hello@gonevis.com">hello@gonevis.com</a>.</p>
+        <p>We also offer refunds! You may ask for a refund after maximum 7 days of plan upgrade (we don’t offer refunds on renewals).</p>
+        <br>
+        <h3 class="t-bold s-mar-bottom-soft">Can I upgrade from Free to Paid plan later?</h3>
+        <p>Of course you can, you may upgrade or downgrade anytime.</p>  
+      </div>
+    </div>
+  </div>
+  <div class="row site-settings">
+    <div class="col-md-8 col-md-offset-2">
+
+      <!-- Settings -->
+      <div ng-if="currentTab.view === 'settings'" class="animated fadeIn">
+        <div class="panel panel-default">
+          <h5 class="panel-heading lower">
+            <span style="line-height: 30px;"><i class="fa fa-cog fa-fw"></i> {{ 'BLOG_SETTINGS' | translate }}</span>
+            <!-- Update button -->
+            <button class="btn btn-primary btn-sm pull-right" disable-on-request="updateSite()">
+              <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
+            </button>
+            <div class="clearfix"></div>
+          </h5>
+          <div class="panel-body s-pad">
+            <!-- Title -->
+            <div class="form-group">
+              <p class="t-bold" translate>BLOG_HEADLINE</p>
+              <input type="text" class="form-control" ng-model="currentTab.form.title">
+            </div>
+            <!-- Description -->
+            <div class="form-group">
+              <p class="t-bold" translate>BLOG_DESCRIPTION</p>
+              <textarea type="text" class="form-control" ng-model="currentTab.form.description"></textarea>
+              <em class="small" translate>BLOG_DESCRIPTION_HELP_TEXT</em>
+            </div>
+            <!-- URL -->
+            <div class="form-group">
+              <p class="t-bold" translate>ADDRESS</p>
+              <a class="site-url" ng-href="{{ currentTab.form.absolute_uri }}" target="_blank"
+                title="{{ 'CANT_CHANGE' | translate }}">
+                {{ site.absolute_uri }}
               </a>
             </div>
           </div>
         </div>
-        <!-- Description -->
-        <div class="input-panel">
-          <div class="row">
-            <div class="col-xs-12 col-sm-2"><small class="t-upp" translate>DESCRIPTION</small></div>
-            <div class="col-xs-9 col-sm-10">
-              <span editable-textarea="site.description" onbeforesave="updateSite('description', $data)">
-                {{ site.description || "NOTHING_HERE" | translate }}
-              </span>
-            </div>
+        <div class="panel panel-default">
+          <h5 class="panel-heading lower">
+            <i class="fa fa-globe fa-fw"></i> {{ 'DOMAINS' | translate }}
+          </h5>
+          <div class="panel-body s-pad">
+            <!-- Help text -->
+            <span><i class="fa fa-info-circle fa-fw"></i> {{ 'DOMAINS_HELP_TEXT' | translate }}</span>
+            <hr>
+            <!-- Add domain -->
+            <button class="btn btn-default" ng-click="addDomain()"
+              ng-disabled="site.domains.length == maxCustomDomains" translate>ADD_DOMAIN</button>  
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Advanced -->
-    <div class="panel panel-default">
-      <div class="panel-heading lower" translate>ADVANCED</div>
-      <div class="panel-body s-pad">
-        <!-- Meta Description -->
-        <div class="input-panel">
-          <div class="row">
-            <div class="col-sm-3"><small class="t-upp" translate>META_DESCRIPTION</small></div>
-            <div class="col-sm-9">
-              <span editable-textarea="site.meta_description" e-maxlength="160"
-                onbeforesave="updateSite('meta_description', $data)">
-                {{ site.meta_description || "NOTHING_HERE" | translate }}
-              </span>
+      <!-- Appearance -->
+      <div ng-if="currentTab.view === 'appearance'" class="animated fadeIn">
+        <div class="panel panel-default">
+          <!-- Media -->
+          <h5 class="panel-heading lower"><i class="fa fa-image fa-fw"></i> {{ 'MEDIA' | translate }}</h5>
+          <div class="panel-body">
+            <div class="row">
+              <!-- Cover image -->
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left media-middle">
+                    <img class="media-object img-rounded"
+                      ng-src="{{ site.media.cover_image ? site.media.cover_image.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
+                  </div>
+                  <div class="media-body">
+                    <p class="t-bold" translate>BLOG_COVER</p>
+                    <button class="btn btn-default btn-sm" ng-click="selectImage('cover_image')"
+                      translate>
+                      SELECT_COVER
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <!-- Logo -->
+                <div class="media">
+                  <div class="media-left media-middle">
+                    <img class="media-object img-rounded"
+                      ng-src="{{ site.media.logo ? site.media.logo.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
+                  </div>
+                  <div class="media-body">
+                    <p class="t-bold" translate>BLOG_LOGO</p>
+                    <button class="btn btn-default btn-sm" ng-click="selectImage('logo')" translate>SELECT_LOGO</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <!-- Post Per Page -->
-        <div class="input-panel">
-          <div class="row">
-            <div class="col-xs-8 col-sm-9">
-              <small style="margin-top: 10px" class="dis-b" translate>NUMBER_OF_POSTS_PP</small>
+        <div class="panel panel-default">
+          <h5 class="panel-heading lower">
+            <span style="line-height: 30px;"><i class="fa fa-paint-brush fa-fw"></i> {{ 'THEME' | translate }}</span>
+            <!-- Update button -->
+            <button class="btn btn-primary btn-sm pull-right" disable-on-request="updateSite()">
+              <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
+            </button>
+            <div class="clearfix"></div>
+          </h5>
+          <div class="panel-body">
+            <!-- Template -->
+            <div class="form-group">
+              <p class="t-bold" translate>BLOG_THEME</p>
+              <div class="row">
+                <div class="col-md-8">
+                  <span class="dis-b" translate>BLOG_THEME_HELP_TEXT</span>
+                  <span>{{ 'CURRENTLY_USING' | translate }} <b class="t-cap">{{ siteTemplate.name }}</b></span>
+                </div>
+                <div class="col-md-4 text-right">
+                  <button class="btn btn-success" ng-click="siteTemplates()" ng-disabled="loadingTemplate"
+                    translate>SHOW_AVAILABLE_THEMES
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="col-xs-4 col-sm-3">
-              <select class="form-control" ng-model="site.paginate_by"
-                ng-change="updateSite('paginate_by', site.paginate_by)">
-                <option ng-value="$index" ng-if="$index" ng-repeat="number in postPerPage track by $index">
-                  {{ $index }}
+            <hr>
+            <!-- Highlight Theme -->
+            <div class="form-group">
+              <p class="t-bold" translate>CODE_HIGHLIGHT_SYNTAX_THEME</p>
+              <select class="form-control" ng-model="currentTab.form.highlight_theme">
+                <option ng-repeat="theme in codekit.highlightThemes"
+                  ng-value="theme.id"
+                  ng-selected="currentTab.form.highlight_theme == theme.id">
+                  {{ theme.label }}
                 </option>
               </select>
             </div>
+            <!-- Font Name -->
+            <!-- <div class="form-group">
+              <p class="t-bold" translate>Font Name</p>
+              <input type="text" class="form-control" ng-model="currentTab.form.font_name" placeholder="Example: https://fonts.googleapis.com/css?family=Roboto:400,700">
+            </div> -->
+            <!-- Google Font -->
+            <!-- <div class="form-group">
+              <p class="t-bold" translate>Google Font (CSS font family)</p>
+              <input type="text" class="form-control" ng-model="currentTab.form.font_url" placeholder="Roboto">
+            </div> -->
           </div>
-        </div>
-        <!-- Commenting -->
-        <div class="s-mar-y">
-          <div class="checkbox checkbox-primary checkbox-small">
-            <input id="commenting" type="checkbox" ng-model="site.commenting"
-              ng-change="updateSite('commenting', site.commenting)">
-            <label for="commenting" translate>ALLOW_VISITORS_TO_COMMENT</label>
-          </div>
-        </div>
-        <!-- Voting -->
-        <div class="s-mar-y">
-          <div class="checkbox checkbox-primary checkbox-small">
-            <input id="voting" type="checkbox" ng-change="updateSite('voting', site.voting)" ng-model="site.voting">
-            <label for="voting" translate>ALLOW_VISITORS_TO_VOTE</label>
-          </div>
-        </div>
-        <!-- Search engine visibility -->
-        <div class="s-mar-top">
-          <div class="checkbox checkbox-primary checkbox-small">
-            <input id="search_engine_visibility" type="checkbox"
-              ng-change="updateSite('search_engine_visibility', site.search_engine_visibility)"
-              ng-model="site.search_engine_visibility">
-            <label for="search_engine_visibility" translate>SEARCH_ENGINE_DISCOVER</label>
-          </div>
-        </div>
-        <!-- Branding -->
-        <div class="s-mar-top">
-          <div class="checkbox checkbox-primary checkbox-small"
-            title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
-            <input id="remove_branding" type="checkbox"
-              ng-change="updateSite('remove_branding', site.remove_branding)"
-              ng-model="site.remove_branding">
-            <label for="remove_branding" translate>REMOVE_BRANDING</label>
-          </div>
-        </div>
-        <!-- Footer text -->
-        <div class="input-panel s-mar-top" ng-if="site.remove_branding">
-          <div class="row">
-            <div class="col-sm-3"><small class="t-upp" translate>FOOTER_TEXT</small></div>
-            <div class="col-sm-9">
-              <span editable-textarea="site.footer_text" e-maxlength="500"
-                onbeforesave="updateSite('footer_text', $data)">
-                {{ site.footer_text || "NOTHING_HERE" | translate }}
-              </span>
-            </div>
-          </div>
-        </div>
-        <!-- Allow Google Analytics -->
-        <div class="s-mar-top">
-          <div class="checkbox checkbox-primary checkbox-small"
-            title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
-            <input id="google_analytics_enabled" type="checkbox"
-              ng-change="updateSite('google_analytics_enabled', site.google_analytics_enabled)"
-              ng-model="site.google_analytics_enabled">
-            <label for="google_analytics_enabled" translate>ALLOW_GOOGLE_ANALYTICS</label>
-          </div>
-        </div>
-        <!-- Google Analytics code -->
-        <div class="input-panel s-mar-top" ng-if="site.google_analytics_enabled">
-          <div class="row">
-            <div class="col-xs-8 col-sm-9"><small class="t-upp" translate>GOOGLE_ANALYTICS_CODE</small></div>
-            <div class="col-xs-4 col-sm-3">
-              <span editable-text="site.google_analytics_code" e-maxlength="100"
-                onaftersave="updateSite('google_analytics_code', $data)">
-                {{ site.google_analytics_code || "NOTHING_HERE" | translate }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="panel-footer" ng-if="!hideDelete">
-        <!-- Delete -->
-        <button class="btn btn-danger" ng-click="deleteSite()">
-          <i class="fa fa-fw fa-trash"></i> {{ 'DELETE_SITE' | translate }}
-        </button>
-      </div>
-    </div>
-
-    <!-- Custom domains -->
-    <div class="panel panel-default">
-      <div class="panel-heading lower" translate>DOMAINS</div>
-      <div class="panel-body">
-        <!-- Help text -->
-        <p>
-          <i class="fa fa-info-circle"></i>
-          <translate>DOMAINS_HELP_TEXT</translate>
-        </p>
-        <hr>
-        <!-- Domain list -->
-        <table class="table table-hover" ng-if="site.domains.length">
-          <thead>
-            <tr>
-              <th translate>DOMAIN_NAME</th>
-              <th translate>DNS_TARGET</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="domain in site.domains">
-              <!-- Domain link -->
-              <td><a ng-href="https://{{ domain.domain }}" target="_blank">{{ domain.domain }}</a></td>
-              <!-- Domain DNS Target -->
-              <td>{{ domain.cname }}</td>
-              <!-- Remove button -->
-              <td>
-                <button class="btn btn-xs btn-default pull-right o-fade-hard o-fade-hover-full"
-                  title="{{ 'DELETE_THIS_DOMAIN' | translate }}" ng-click="deleteDomain(domain)">
-                  <i class="fa fa-close"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- Add domain -->
-        <button class="btn btn-default" ng-click="addDomain()"
-          ng-disabled="site.domains.length == maxCustomDomains" translate>ADD_DOMAIN</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right panels -->
-  <div class="col-md-4 animated fadeIn" ng-if="siteTemplate">
-
-    <!-- Appearance -->
-    <form class="panel panel-default">
-      <h3 class="panel-heading lower" style="line-height: 40px" translate>APPEARANCE</h3>
-      <div class="panel-body">
-        <!-- Template -->
-        <button class="btn btn-primary btn-block btn-lg" ng-click="siteTemplates()" ng-disabled="loadingTemplate">
-          <small translate>THEME_DD</small> {{ siteTemplate.name | uppercase }}
-        </button>
-        <br>
-        <!-- Site images -->
-        <div class="btn-group stack stack-equal">
-          <button class="btn btn-default" ng-click="selectImage('logo')"
-            title="{{ 'SITE_LOGO_TITLE' | translate }}" translate>
-            SITE_LOGO
-          </button>
-          <button class="btn btn-default" ng-click="selectImage('cover_image')"
-            title="{{ 'SITE_COVER_TITLE' | translate }}" translate>
-            SITE_COVER
-          </button>
         </div>
         <!-- Theme options -->
-        <span ng-if="siteTemplate.hasFields">
-          <!-- Label -->
-          <p class="s-mar-y"><i class="fa fa-cog"></i> <b translate>THEME_OPTIONS</b></p>
-          <!-- Template fields -->
-          <div class="form-group" ng-repeat="(key, field) in siteTemplate.fields"
-            ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
-            <hr ng-if="!$first">
-            <!-- Char and boolean field -->
-            <input id="{{ key }}" name="{{ key }}" type="{{ field.type === 'char' ? 'text' : 'checkbox' }}"
-              class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
-              ng-model="siteTemplate.fields[key].value">
-            <!-- Field label -->
-            <label for="{{ key }}"><b>{{ field.verbose_name }}</b></label>
-            <!-- Text field -->
-            <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
-              placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
-            </textarea>
-            <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
+        <div class="panel panel-default" ng-if="siteTemplate.hasFields">
+          <h5 class="panel-heading lower">
+            <span style="line-height: 30px;"><i class="fa fa-cog fa-fw"></i> {{ 'THEME_OPTIONS' | translate }}</span>
+            <!-- Update button -->
+            <button class="btn btn-primary btn-sm pull-right" ng-click="saveConfig()" ng-disabled="loadingTemplate">
+              <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
+            </button>
+            <div class="clearfix"></div>
+          </h5>
+          <div class="panel-body">
+            <!-- Template fields -->
+            <div class="form-group" ng-repeat="(key, field) in siteTemplate.fields"
+              ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
+              <hr ng-if="!$first">
+              <!-- Char and boolean field -->
+              <input id="{{ key }}" name="{{ key }}" type="{{ field.type === 'char' ? 'text' : 'checkbox' }}"
+                class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
+                ng-model="siteTemplate.fields[key].value">
+              <!-- Field label -->
+              <label for="{{ key }}"><b>{{ field.verbose_name }}</b></label>
+              <!-- Text field -->
+              <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
+                placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
+              </textarea>
+              <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
+            </div>
           </div>
-          <br>
-          <!-- Update button -->
-          <button class="btn btn-default btn-block" ng-click="saveConfig()" ng-disabled="loadingTemplate">
-            <i class="fa fa-fw fa-check text-primary"></i> {{ 'SAVE_CHANGES' | translate }}
-          </button>
-        </span>
+        </div>
       </div>
-    </form>
+
+      <!-- Advanced -->
+      <div class="panel panel-default animated fadeIn" ng-if="currentTab.view === 'advanced'">
+        <h5 class="panel-heading lower">
+          <span style="line-height: 30px;"><i class="fa fa-plus fa-fw"></i> {{ 'ADVANCED' | translate }}</span>
+          <!-- Update button -->
+          <button class="btn btn-primary btn-sm pull-right" disable-on-request="updateSite()">
+            <i class="fa fa-fw fa-check init"></i> {{ 'SAVE_CHANGES' | translate }}
+          </button>
+          <div class="clearfix"></div>
+        </h5>
+        <div class="panel-body s-pad">
+          <!-- Meta Description -->
+          <div class="form-group">
+            <p class="t-bold t-cap" translate>META_DESCRIPTION</p>
+            <input type="text" class="form-control" ng-model="currentTab.form.meta_description">
+            <em class="small" translate>META_DESCRIPTION_HELP_TEXT</em>
+          </div>
+          <!-- Post Per Page -->
+          <div class="form-group">
+            <p class="t-bold" translate>NUMBER_OF_POSTS_PP</p>
+            <select class="form-control" ng-model="currentTab.form.paginate_by">
+              <option ng-value="$index" ng-if="$index" ng-repeat="number in postPerPage track by $index">
+                {{ $index }}
+              </option>
+            </select>
+          </div>
+          <!-- Commenting -->
+          <div class="s-mar-y">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="commenting" type="checkbox" ng-model="currentTab.form.commenting">
+              <label for="commenting" translate>ALLOW_VISITORS_TO_COMMENT</label>
+            </div>
+          </div>
+          <!-- Voting -->
+          <div class="s-mar-y">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="voting" type="checkbox" ng-model="currentTab.form.voting">
+              <label for="voting" translate>ALLOW_VISITORS_TO_VOTE</label>
+            </div>
+          </div>
+          <!-- Show views count -->
+          <div class="s-mar-y">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="show_views_count" type="checkbox" ng-model="currentTab.form.show_views_count">
+              <label for="show_views_count" translate>SHOW_VIEWS_COUNTER</label>
+            </div>
+          </div>
+          <!-- Search engine visibility -->
+          <div class="s-mar-top">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="search_engine_visibility" type="checkbox" ng-model="currentTab.form.search_engine_visibility">
+              <label for="search_engine_visibility" translate>SEARCH_ENGINE_DISCOVER</label>
+            </div>
+          </div>
+          <!-- Branding -->
+          <div class="s-mar-top">
+            <div class="checkbox checkbox-primary checkbox-small">
+              <input id="remove_branding" type="checkbox" ng-model="site.remove_branding"
+                disable-on-request="removeBranding(site.remove_branding)"
+                title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
+              <label for="remove_branding" translate>REMOVE_BRANDING</label>
+            </div>
+          </div>
+          <!-- Footer text -->
+          <div class="form-group s-mar-top" ng-if="site.remove_branding">
+            <p class="t-bold" translate>FOOTER_TEXT</p>
+            <div class="row">
+              <div class="col-md-10">
+                <textarea type="text" class="form-control" ng-model="site.footer_text"></textarea>
+              </div>
+              <div class="col-md-2 text-right">
+                <button class="btn btn-primary" type="button"
+                  disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}</button>
+              </div>
+            </div>
+          </div>
+          <!-- Allow Google Analytics -->
+          <div class="s-mar-top">
+            <div class="checkbox checkbox-primary checkbox-small"
+              title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
+              <input id="google_analytics_enabled" type="checkbox" ng-model="site.google_analytics_enabled">
+              <label for="google_analytics_enabled" translate>ALLOW_GOOGLE_ANALYTICS</label>
+              <button class="btn btn-primary pull-right" type="button"
+                disable-on-request="setGoogleAnalytics()">{{ 'SAVE' | translate }}</button>
+            </div>
+          </div>
+          <!-- Google Analytics code -->
+          <div class="form-group s-mar-top" ng-if="site.google_analytics_enabled">
+            <p class="t-bold" translate>GOOGLE_ANALYTICS_CODE</p>
+              <input type="text" class="form-control" placeholder="UA-XXXXX-Y" ng-model="site.google_analytics_code">
+          </div>
+        </div>
+        <div class="panel-footer" ng-if="!hideDelete">
+          <!-- Delete -->
+          <button class="btn btn-danger" ng-click="deleteSite()">
+            <i class="fa fa-fw fa-trash"></i> {{ 'DELETE_BLOG' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Billing -->
+      <div ng-if="currentTab.view === 'billing'">
+        <!-- No permission -->
+        <nothing ng-if="!isOwner" text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
+        <!-- Nothing -->
+        <nothing text="{{ 'NO_BILLING' | translate }}"
+          ng-if="!subscription.data && !subscription.loading && isOwner"></nothing>
+
+        <!-- Billing section -->
+        <div ng-if="subscription.data && isOwner" class="animated fadeIn">
+          <!-- Subscription detail -->
+          <div class="panel panel-default">
+            <h5 class="panel-heading lower">
+              <i class="fa fa-line-chart fa-fw"></i> {{ 'SUBSCRIPTION_DETAILS' | translate }}
+            </h5>
+            <!-- Subscription -->
+            <div class="panel-body">
+              <div class="form-group s-mar-bottom-no">
+                <div class="row">
+                  <div class="col-xs-3">
+                    <p class="t-bold s-mar-bottom-no t-cap" style="line-height: 30px;">
+                      {{ subscription.data.plan.name }}
+                    </p>
+                  </div>
+                  <div class="col-xs-3">
+                    <p class="t-bold s-mar-bottom-no t-cap"
+                      style="line-height: 30px;">$ {{ subscription.data.plan.price }}</p>
+                  </div>
+                  <div class="col-xs-3">
+                    <p class="t-bold s-mar-bottom-no t-cap"
+                      style="line-height: 30px;">{{ subscription.data.created | date }}</p>
+                  </div>
+                  <div class="col-xs-3 text-center">
+                    <button class="btn btn-danger btn-sm" ng-click="cancelModal()" translate>CANCEL_SUBSCRIPTION</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Transactions -->
+          <div class="panel panel-default">
+            <h5 class="panel-heading lower">
+              <i class="fa fa-usd fa-fw"></i> {{ 'TRANSACTIONS' | translate }}
+            </h5>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <!-- Table head -->
+                  <thead>
+                    <tr>
+                      <th translate>AMOUNT</th>
+                      <th translate>DATE</th>
+                    </tr>
+                  </thead>
+
+                  <!-- Table info -->
+                  <tr ng-repeat="transaction in transactions">
+                    <td>$ {{ transaction.total }}</td>
+                    <td>{{ transaction.created | date }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

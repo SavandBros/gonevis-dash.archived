@@ -1,0 +1,26 @@
+<div class="modal fade" id="subscriptionCancellation">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+			<div class="modal-header">
+				<h4 class="text-center t-bold">
+					{{ 'CANCEL_SUBSCRIPTION' | translate }}
+					<i class="fa fa-times close" style="position: absolute;right: 20px;" data-dismiss="modal"></i>
+				</h4>
+			</div>
+      <div class="modal-body text-center s-mar-y">
+				<!-- Text -->
+				<span translate data-translate-values="{ planName : subscription.plan.name }"
+					ng-if="!cancelling">
+					CANCEL_SUBSCRIPTION_DESCRIPTION
+				</span>
+				<!-- Reloading icon -->
+				<i class="fa fa-circle-o-notch fa-3x fa-fw fa-spin" ng-if="cancelling"></i>
+			</div>
+			<!-- Buttons -->
+			<div class="modal-footer" ng-if="!cancelling">
+				<button class="btn pull-left" disable-on-request="cancel()">Yes, cancel</button>
+				<button class="btn btn-success" ng-click="closeModal()">No, I changed my mind</button>
+			</div>
+    </div>
+  </div>
+</div>

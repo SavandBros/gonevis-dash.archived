@@ -1,3 +1,38 @@
+2018.12.1
+========
+
+**Bug Fixes:**
+- Resolved #993: Rename "Files" to "Media".
+- Fixed #991: Fix pressing CTRL + Z (undo) will fully clear editor's content.
+- Resolved #998: Rename "Files" to "Images" at image selection modal.
+- Resolved #989: Change blog settings layout.
+- Resolved #1003: Add a method to cancel blog's current subscription.
+- Resolved #1002: Add upgrade plans to blog settings view.
+- Resolved #1001: Add transactions list to blog settings view.
+- Resolved #1000: Add a method to multi select and delete selected items.
+- Fixed #1005: Cancel item deletion timeout on undo.
+- Resolved #1008: Filter comments based on post/page.
+- Resolved #1009: Update new navbar color and remove it's animation.
+- Resolved #1013: Update plans to have equal heights.
+- Resolved #1015: Remove button "Selected" in "Lite" plan.
+- Resolved #1018: Add a method to update blog footer text.
+- Fixed #1022: Fix editor error related to pasting video URLs.
+- Resolved #1025: Ability to show views counter on posts.
+- Resolved #1020: Google Analytics is now plan based.
+- Resolved #1029: New Payment Flow.
+- Added #1027: Ability to select desired code highlight syntax theme.
+- Fixed #1017: Comment texts is not wrapped properly.
+- Added #978: Add voting to Reader.
+- Added #1032: Change Reader design UI.
+
+
+2018.10.1
+========
+
+**Bug Fixes:**
+- Fixed #983: Change sidebar and navbar UI design.
+
+
 2018.9.4
 ========
 
@@ -11,8 +46,10 @@
 **Bug Fixes:**
 - Fixed #958: Do not autosave page/post when its title is being written in the editor.
 - Fixed #962: Use preview parameters when previewing posts at editor.
+- Fixed #969: Rename the word "site" to "blog".
 - Fixed #968: Fix long file labels visibility.
 - Fixed #970: Remove theme config section when no configs.
+- Fixed #455: Add feedback form.
 
 
 2018.8.1

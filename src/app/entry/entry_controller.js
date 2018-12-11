@@ -1,11 +1,13 @@
 "use strict";
 
 import app from "../app";
+require("./entry.css");
 
-function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagination, Search, localStorageService,
-                        $translate) {
+function EntryController($scope, $state, Entry, UndoService, Codekit, API, AuthService, Pagination, Search,
+  localStorageService, $translate) {
 
   function constructor() {
+    $scope.undoService = UndoService;
     $scope.codekit = Codekit;
     $scope.isPageView = $state.includes("dash.page-list");
     $scope.view = localStorageService.get("entryView") || "list";
@@ -18,17 +20,20 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
     $scope.entries = [];
 
     $translate([
-      'NO_PAGES', 'NO_POSTS', 'DRAFT', 'PUBLISHED',
-      'PIN', 'UNPIN', "ENABLE_COMMENTS", 'DISABLE_COMMENTS'
+      'NO_PAGES', 'NO_POSTS', 'REMOVE_SELECTED_PAGES_PROMPT', 'REMOVE_SELECTED_POSTS_PROMPT', 'DRAFT',
+      'HIDE_FROM_PUBLIC', 'PUBLISHED', 'PIN_FRONT_PAGE', 'UNPIN_FRONT_PAGE', "ALLOW_COMMENTING", 'DISABLE_COMMENTING'
     ]).then(function (translation) {
       if ($scope.isPageView) {
         $scope.nothingText = translation.NO_PAGES;
+        $scope.removeSelectedPrompt = translation.REMOVE_SELECTED_PAGES_PROMPT;
       } else {
         $scope.nothingText = translation.NO_POSTS;
+        $scope.removeSelectedPrompt = translation.REMOVE_SELECTED_POSTS_PROMPT;
       }
 
       $scope.actions = [{
         label: translation.DRAFT,
+        tooltip: translation.HIDE_FROM_PUBLIC,
         icon: "pencil",
         property: "status",
         value: 0
@@ -36,24 +41,24 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
         label: translation.PUBLISHED,
         icon: "globe",
         property: "status",
-        value: 1,
+        value: 1
       }, {
-        label: translation.PIN,
+        label: translation.PIN_FRONT_PAGE,
         icon: "star",
         property: "featured",
         value: true
       }, {
-        label: translation.UNPIN,
+        label: translation.UNPIN_FRONT_PAGE,
         icon: "star-o",
         property: "featured",
         value: false
       }, {
-        label: translation.ENABLE_COMMENTS,
+        label: translation.ALLOW_COMMENTING,
         icon: "comments",
         property: "comment_enabled",
         value: true
       }, {
-        label: translation.DISABLE_COMMENTS,
+        label: translation.DISABLE_COMMENTING,
         icon: "ban",
         property: "comment_enabled",
         value: false
@@ -73,51 +78,10 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
         $scope.initialled = true;
         $scope.pageForm = Pagination.paginate($scope.pageForm, data, payload);
         $scope.searchForm = Search.searchify($scope.searchForm, $scope.pageForm, API.Entries.get, data, payload);
+        UndoService.onParamProvided($scope.entries);
       }
     );
   }
-
-  /**
-   * @desc set property of selected entries
-   *
-   * @param {string} key
-   * @param {boolean|number} value
-   */
-  $scope.setProperty = function(key, value) {
-    angular.forEach($scope.entries, function(entry) {
-      if (entry.isSelected) {
-        entry.setProperty(key, value);
-      }
-    });
-  };
-
-  /**
-   * @desc Remove selected entries
-   */
-  $scope.removeSelected = function() {
-
-    if (confirm($translate.instant('REMOVE_SELECTED_ENTRY_PROMPT')) === true) {
-      angular.forEach($scope.entries, function(entry) {
-        if (entry.isSelected) {
-          entry.remove();
-        }
-      });
-    } else {
-      return;
-    }
-  };
-
-  /**
-   * @desc Count selected entries
-   */
-  $scope.countSelected = function() {
-    $scope.selectCount = 0;
-    angular.forEach($scope.entries, function(entry) {
-      if (entry.isSelected) {
-        $scope.selectCount++;
-      }
-    });
-  };
 
   /**
    * @desc Load more function for controller
@@ -153,6 +117,7 @@ function EntryController($scope, $state, Entry, Codekit, API, AuthService, Pagin
         $scope.entries.push(new Entry(data));
       });
       $scope.searchForm = data.form;
+      UndoService.onParamProvided($scope.entries);
     }
   });
 
@@ -164,6 +129,7 @@ EntryController.$inject = [
   "$scope",
   "$state",
   "Entry",
+  "UndoService",
   "Codekit",
   "API",
   "AuthService",

@@ -7,11 +7,14 @@ import DolphinSelectionView from "../dolphin/dolphin_selection.html";
 import CommentModalView from "../comment/comment_modal/comment_modal_view.html";
 import InviteModalView from "../team/invite_modal/invite_modal_view.html";
 import ForgotPasswordModalView from "../account/forgot_modal/forgot_modal_view.html";
+import PaymentValidationModalView from "../site/payment_validation_modal/payment_validation_modal_view.html";
 import SiteFollowersModalView from "../site/site_followers/site_followers_view.html";
 import SiteTemplatesModalView from "../site/site_templates_modal/site_templates_modal_view.html";
+import SubscriptionCancellationModalView from "../site/subscription_cancellation_modal/subscription_cancellation_modal_view.html";
 import TeamModalView from "../team/team_modal/team_modal_view.html";
 import EmailConfirmationModalView from "../account/email_confirmation/email_confirmation_modal.html";
 import PostPreview from "../entry/preview_modal/preview_modal_view.html";
+import FeedbackModalView from "../feedback/feedback_view.html";
 
 
 /**
@@ -32,11 +35,14 @@ function ModalsService($rootScope, ModalService) {
     tag: TagModalView,
     invite: InviteModalView,
     forgotPassword: ForgotPasswordModalView,
+    paymentValidation: PaymentValidationModalView,
     siteFollowers: SiteFollowersModalView,
     siteTemplates: SiteTemplatesModalView,
+    subscriptionCancellation: SubscriptionCancellationModalView,
     team: TeamModalView,
     emailConfirmation: EmailConfirmationModalView,
-    postPreview: PostPreview
+    postPreview: PostPreview,
+    feedback: FeedbackModalView
   };
 
   /**
