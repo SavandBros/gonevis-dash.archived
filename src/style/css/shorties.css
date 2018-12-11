@@ -198,7 +198,7 @@
 /* Border */
 
 .b-no {
-    border: none;
+    border: none !important;
 }
 
 .b-left {
