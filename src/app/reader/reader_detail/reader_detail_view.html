@@ -29,6 +29,54 @@
             <span ng-show="post.vote_count">{{ post.vote_count }}</span>
           </button>
 				</div>
+				<!-- ng-if="!post.can_comment && comments.length" -->
+				<div class="s-mar-bottom">
+					<!-- Comment add section -->
+					<div class="bg-white s-pad">
+						<!-- Title -->
+						<h3 class="s-mar-bottom">{{ 'COMMENTS' | translate }} <span class="pull-right">{{ commentCount | number }}</span></h3>
+						<div ng-if="post.can_comment">
+							<div class="form-group">
+								<textarea class="form-control" ng-model="commentForm.comment"
+									placeholder="{{ 'COMMENT_PLACEHOLDER' | translate }}" required>
+								</textarea>
+							</div>
+							<!-- Submit button -->
+							<button class="btn btn-primary pull-right" ng-disabled="!commentForm.comment"
+								disable-on-request="comment(commentForm)">
+								{{ 'COMMENT' | translate }}
+							</button>
+							<div class="clearfix"></div>
+						</div>
+						<!-- Comments are disabled -->
+						<span class="alert alert-danger dis-b text-center"
+							ng-if="!post.can_comment || !post.can_comment && !comments.length" translate>
+							COMMENTING_DISABLED
+						</span>
+					</div>
+					<!-- Comment list -->
+					<nothing text="{{ 'NO_COMMENTS_YET' | translate }}" ng-if="!comments.length && post.can_comment"></nothing>
+					<div class="list-view b-no" ng-if="comments.length">
+						<div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
+							<div class="media-left">
+								<!-- User avatar -->
+								<img class="media-object img-circle" style="max-width: 48px" ng-src="{{ comment.user.getMedia('tiny') }}">
+							</div>
+							<div class="media-body">
+								<div class="media-heading s-mar-no">
+									<!-- Username -->
+									<a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">
+										{{ comment.user.getDisplayName() }}
+									</a>
+									<!-- Date -->
+									<small class="o-fade-soft">&middot; {{ comment.get.created | date }}</small>
+								</div>
+								<!-- Comment -->
+								<p class="s-mar-no" ng-bind-html="comment.get.comment"></p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
