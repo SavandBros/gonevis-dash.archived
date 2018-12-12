@@ -5,10 +5,11 @@ require('./reader.css');
 require('../basement/directives/disable_on_request_directive');
 
 function ReaderController($scope, API, $state, Pagination, Codekit, $translate, $window, $timeout, $stateParams,
-  ReaderService) {
+  ReaderSaveService, ReaderService) {
 
   let bodyHeight;
   let currentView;
+  let storedItems;
 
   function constructor() {
     $scope.readerService = ReaderService;
@@ -17,7 +18,8 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
       currentView = "explore";
     }
 
-    $scope.pageForm = {};
+    // Save last items
+    storedItems = ReaderSaveService.items[currentView];
 
     $translate(["EXPLORE", "FEED", "NO_FEED"]).then(function (translations) {
       // List of tabs
@@ -58,6 +60,7 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
     $scope.currentTab = tab;
     $scope.loading = true;
     currentView = tab.class;
+    storedItems = ReaderSaveService.items[currentView];
 
     $scope.onTabChanged(tab);
   };
@@ -69,6 +72,13 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    * @param {object} tab
    */
   $scope.onTabChanged = (tab) => {
+    if (storedItems.data.results) {
+      $scope.explore = storedItems.data.results;
+      $scope.loading = false;
+      $scope.updateHeight();
+      return;
+    }
+
     let api = currentView.charAt(0).toUpperCase() + currentView.substr(1).toLowerCase();
 
     API[api].get({},
@@ -78,8 +88,9 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
           return;
         }
         $scope.explore = data.results;
+        storedItems.data = data;
         $scope.loading = false;
-        $scope.pageForm = Pagination.paginate($scope.pageForm, data, {});
+        storedItems.pageForm = Pagination.paginate(storedItems.pageForm, storedItems.data, {});
         $scope.updateHeight();
       }
     );
@@ -117,9 +128,9 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    */
   $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
     if (data.success) {
-      $scope.pageForm.page = data.page;
+      storedItems.pageForm.page = data.page;
       angular.forEach(data.data.results, function(data) {
-        $scope.explore.push(data);
+        storedItems.data.results.push(data);
       });
       $scope.updateHeight();
       $scope.coolDown = true;
@@ -135,8 +146,8 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
       // Check if page is requesting for API
       // Check if there is a next URL
       // Check if there is a cooldown
-      if (!$scope.pageForm.page.loading && $scope.pageForm.page.next && !$scope.coolDown) {
-        Pagination.loadMore($scope.pageForm);
+      if (!storedItems.pageForm.page.loading && storedItems.pageForm.page.next && !$scope.coolDown) {
+        Pagination.loadMore(storedItems.pageForm);
       }
     }
   }
