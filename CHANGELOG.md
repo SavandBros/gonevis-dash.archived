@@ -24,6 +24,7 @@
 - Fixed #1017: Comment texts is not wrapped properly.
 - Added #978: Add voting to Reader.
 - Added #1032: Change Reader design UI.
+- Added #1036: Add a "Back" button to Reader detail.
 - Added #1040: Add custom branding to Personal plan.
 - Fixed #1041: Remove email and live support from plans.
 
