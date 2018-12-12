@@ -4,6 +4,8 @@ import app from '../../app';
 
 function BytesFilter() {
   return function(bytes, precision) {
+    bytes = bytes * Math.pow(10, 6);
+
     if (bytes === 0) {
       return "0 bytes";
     }
