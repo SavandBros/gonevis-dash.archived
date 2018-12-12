@@ -17,21 +17,18 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
    * @returns {void}
    */
   function onScroll() {
-    let scrollLimit = $scope.post.media.cover_image ? 400 : 0;
     let bottom = "-70px";
 
     // If user scrolled 400 pixles down.
     if (!$scope.full) {
-      if ($window.scrollY >= scrollLimit) {
-        let currentScroll = $window.scrollY;
+      let currentScroll = $window.scrollY;
 
-        if (lastScroll > currentScroll) {
-          bottom = "0";
-        }
-
-        angular.element(".bottom-bar").css({ 'bottom': bottom });
-        lastScroll = currentScroll;
+      if (lastScroll > currentScroll) {
+        bottom = "0";
       }
+
+      angular.element(".bottom-bar").css({ 'bottom': bottom });
+      lastScroll = currentScroll;
     }
 
     angular.element(".reader-cover")
