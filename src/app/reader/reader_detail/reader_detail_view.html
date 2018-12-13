@@ -53,26 +53,27 @@
 							ng-if="!post.can_comment || !post.can_comment && !comments.length" translate>
 							COMMENTING_DISABLED
 						</span>
-					</div>
-					<!-- Comment list -->
-					<nothing text="{{ 'NO_COMMENTS_YET' | translate }}" ng-if="!comments.length && post.can_comment"></nothing>
-					<div class="list-view b-no" ng-if="comments.length">
-						<div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
-							<div class="media-left">
-								<!-- User avatar -->
-								<img class="media-object img-circle" style="max-width: 48px" ng-src="{{ comment.user.getMedia('tiny') }}">
-							</div>
-							<div class="media-body">
-								<div class="media-heading s-mar-no">
-									<!-- Username -->
-									<a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">
-										{{ comment.user.getDisplayName() }}
-									</a>
-									<!-- Date -->
-									<small class="o-fade-soft">&middot; {{ comment.get.created | date }}</small>
+						<!-- Comment list -->
+						<nothing text="{{ 'NO_COMMENTS_YET' | translate }}" ng-if="!comments.length && post.can_comment"></nothing>
+						<div class="b-no" ng-if="comments.length">
+							<div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
+								<div class="media-left">
+									<!-- User avatar -->
+									<img class="media-object img-circle" style="max-width: 48px"
+										ng-src="{{ comment.user.getMedia('tiny') }}">
 								</div>
-								<!-- Comment -->
-								<p class="s-mar-no" ng-bind-html="comment.get.comment"></p>
+								<div class="media-body break-word">
+									<div class="media-heading s-mar-no">
+										<!-- Username -->
+										<a ng-href="{{ comment.user.get.get_absolute_uri }}" target="_blank">
+											{{ comment.user.getDisplayName() }}
+										</a>
+										<!-- Date -->
+										<small class="o-fade-soft">&middot; {{ comment.get.created | date }}</small>
+									</div>
+									<!-- Comment -->
+									<p class="s-mar-no" ng-bind-html="comment.get.comment"></p>
+								</div>
 							</div>
 						</div>
 					</div>
