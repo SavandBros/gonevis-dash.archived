@@ -56,7 +56,7 @@
 						</span>
 						<!-- Comment list -->
 						<p class="text-center" ng-if="!comments.length && post.can_comment">{{ 'NO_COMMENTS_YET' | translate }}</p>
-						<div class="b-no" ng-if="comments.length">
+						<div ng-if="comments.length">
 							<div class="media" ng-repeat="comment in comments" ng-show="!comment.isDeleted">
 								<div class="media-left">
 									<!-- User avatar -->
