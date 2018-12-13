@@ -8,7 +8,7 @@ require('../../entry/entry_edit/editor.css');
 require('../../basement/directives/disable_on_request_directive');
 
 function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window,
-  ReaderService) {
+  ReaderService, Comment, Pagination) {
   let lastScroll;
 
   /**
@@ -17,29 +17,55 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
    * @returns {void}
    */
   function onScroll() {
-    let scrollLimit = $scope.post.media.cover_image ? 400 : 0;
     let bottom = "-70px";
 
     // If user scrolled 400 pixles down.
     if (!$scope.full) {
-      if ($window.scrollY >= scrollLimit) {
-        let currentScroll = $window.scrollY;
+      let currentScroll = $window.scrollY;
 
-        if (lastScroll > currentScroll) {
-          bottom = "0";
-        }
-
-        angular.element(".bottom-bar").css({ 'bottom': bottom });
-        lastScroll = currentScroll;
+      if (lastScroll > currentScroll) {
+        bottom = "0";
       }
+
+      angular.element(".bottom-bar").css({ 'bottom': bottom });
+      lastScroll = currentScroll;
     }
 
     angular.element(".reader-cover")
       .css({ 'background-position': 'center calc(50% + ' + (0 - $window.scrollY / 2) + 'px)' });
   }
 
+  /**
+   * @desc Get current post comments.
+   *
+   * @param {string} postId
+   */
+  function getComments(postId, siteId) {
+    let payload = {
+      object_pk: postId,
+      object_type: 1,
+      site: siteId
+    };
+    API.Comments.get(payload, data => {
+      angular.forEach(data.results, data => {
+        $scope.comments.push(new Comment(data));
+      });
+      $scope.commentCount = data.count;
+      $scope.commentsInitialled = true;
+      $scope.commentPageForm = Pagination.paginate($scope.commentPageForm, data, payload);
+    });
+  }
+
   function constructor() {
     $scope.readerService = ReaderService;
+    $scope.comments = [];
+    $scope.commentCount = 0;
+    $scope.commentForm = {
+      comment: "",
+      object_pk: $stateParams.entryId,
+      object_type: 1
+    };
+    $scope.commentPageForm = {};
     lastScroll = $window.pageYOffset;
     let postId = $stateParams.entryId;
 
@@ -101,6 +127,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
 
         // Scroll event
         angular.element($window).bind("scroll", onScroll);
+        getComments(postId, data.site.id);
       },
       function () {
         $scope.error = true;
@@ -108,6 +135,14 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
       }
     );
   }
+
+  $scope.comment = (commentForm) => {
+    return API.Comments.save(null, commentForm, data => {
+      $scope.comments.unshift(new Comment(data));
+      commentForm.comment = "";
+      $scope.commentCount++;
+    });
+  };
 
   /**
    * @desc Toggle fullscreen mode

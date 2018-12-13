@@ -1,6 +1,9 @@
 2019.1.1
 ========
 
+**Features:**
+- Added #1045: Add comments and commenting to Reader detail.
+
 **Bug Fixes:**
 - Fixed #1044: Fix Storage metrics on main page.
 
