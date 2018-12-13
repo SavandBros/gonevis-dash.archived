@@ -76,6 +76,10 @@
 									<p class="s-mar-no" ng-bind-html="comment.get.comment"></p>
 								</div>
 							</div>
+							<!-- Load more -->
+							<pagination page-form="commentPageForm" normal="true" minimal="true"
+								ng-if="commentsInitialled">
+							</pagination>
 						</div>
 					</div>
 				</div>

@@ -174,6 +174,21 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
     angular.element($window).off('scroll', onScroll);
   });
 
+  /**
+   * @desc Load more callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
+  $scope.$on("gonevisDash.Pagination:loadedMore", (event, data) => {
+    if (data.success) {
+      $scope.commentPageForm.page = data.page;
+      angular.forEach(data.data.results, data => {
+        $scope.comments.push(new Comment(data));
+      });
+    }
+  });
+
   constructor();
 }
 
