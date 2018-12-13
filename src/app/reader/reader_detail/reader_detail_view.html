@@ -17,7 +17,7 @@
 			<div class="col-md-8 col-md-offset-2">
 				<div class="reader-content" ng-if="!error && !loading">
           <!-- Title -->
-          <h1 ng-if="!post.media.cover_image" class="text-center s-mar-bottom">{{ post.title }}</h1>
+          <h1 ng-if="!post.media.cover_image" class="text-center title s-mar-bottom">{{ post.title }}</h1>
           <!-- Content -->
           <div class="ql-editor" ng-bind-html="trustedContent"></div>
           <!-- Divider -->
@@ -29,12 +29,13 @@
             <span ng-show="post.vote_count">{{ post.vote_count }}</span>
           </button>
 				</div>
-				<!-- ng-if="!post.can_comment && comments.length" -->
-				<div class="s-mar-bottom">
+				<!-- Comments section -->
+				<div class="comments panel panel-default" ng-if="commentsInitialled">
 					<!-- Comment add section -->
-					<div class="bg-white s-pad">
-						<!-- Title -->
-						<h3 class="s-mar-bottom">{{ 'COMMENTS' | translate }} <span class="pull-right">{{ commentCount | number }}</span></h3>
+					<div class="panel-heading lower">
+						{{ 'COMMENTS' | translate }} <span class="pull-right">{{ commentCount | number }}</span>
+					</div>
+					<div class="panel-body">
 						<div ng-if="post.can_comment">
 							<div class="form-group">
 								<textarea class="form-control" ng-model="commentForm.comment"
@@ -50,7 +51,7 @@
 						</div>
 						<!-- Comments are disabled -->
 						<span class="alert alert-danger dis-b text-center"
-							ng-if="!post.can_comment || !post.can_comment && !comments.length" translate>
+							ng-if="!post.can_comment" translate>
 							COMMENTING_DISABLED
 						</span>
 						<!-- Comment list -->
