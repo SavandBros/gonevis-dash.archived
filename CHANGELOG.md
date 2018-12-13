@@ -3,6 +3,7 @@
 
 **Bug Fixes:**
 - Fixed #1044: Fix Storage metrics on main page.
+- Resolved #1045: Add comments and commenting to Reader detail.
 
 
 2018.12.1
