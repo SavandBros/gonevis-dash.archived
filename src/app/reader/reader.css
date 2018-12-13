@@ -105,6 +105,11 @@
     background-color: #111 !important;
 }
 
+.reader-wrapper .title {
+    line-height: 50px;
+    font-weight: 700;
+}
+
 .lights.off .bottom-bar {
     bottom: 0px;
     background: rgb(0, 0, 0);
@@ -128,6 +133,33 @@
 .lights.off .reader-content strong {
     color: #fff;
 }
+
+
+/* Comment section */
+
+.comments {
+    margin-bottom: 100px;
+}
+
+.lights.off .comments.panel,
+.lights.off .comments .panel-heading {
+    color: #fff !important;
+    background-color: #111 !important;
+    border-color: transparent !important;
+}
+
+.lights.off .comments textarea {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: transparent;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.3);
+    color: #fff !important;
+}
+
+.lights.off .panel-body .media:not(:last-child) {
+    border-bottom-color:rgba(0,0,0,0.2);
+}
+
+/* Full screen mode */
 
 .full-screen {
     position: absolute;
