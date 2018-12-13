@@ -1,3 +1,13 @@
+2019.1.1
+========
+
+**Features:**
+- Added #1045: Add comments and commenting to Reader detail.
+
+**Bug Fixes:**
+- Fixed #1044: Fix Storage metrics on main page.
+
+
 2018.12.1
 ========
 
@@ -24,6 +34,7 @@
 - Fixed #1017: Comment texts is not wrapped properly.
 - Added #978: Add voting to Reader.
 - Added #1032: Change Reader design UI.
+- Added #1036: Add a "Back" button to Reader detail.
 - Added #1040: Add custom branding to Personal plan.
 - Fixed #1041: Remove email and live support from plans.
 
