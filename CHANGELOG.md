@@ -1,3 +1,10 @@
+2019.1.1
+========
+
+**Bug Fixes:**
+- Fixed #1044: Fix Storage metrics on main page.
+
+
 2018.12.1
 ========
 
