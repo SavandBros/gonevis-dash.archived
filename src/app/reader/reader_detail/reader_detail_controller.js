@@ -8,7 +8,7 @@ require('../../entry/entry_edit/editor.css');
 require('../../basement/directives/disable_on_request_directive');
 
 function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window,
-  ReaderService, Comment) {
+  ReaderService, Comment, Pagination) {
   let lastScroll;
 
   /**
@@ -45,7 +45,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
       object_pk: postId,
       object_type: 1,
       site: siteId
-    }
+    };
     API.Comments.get(payload, data => {
       angular.forEach(data.results, data => {
         $scope.comments.push(new Comment(data));
@@ -64,7 +64,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
       comment: "",
       object_pk: $stateParams.entryId,
       object_type: 1
-    }
+    };
     $scope.commentPageForm = {};
     lastScroll = $window.pageYOffset;
     let postId = $stateParams.entryId;
@@ -142,7 +142,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
       commentForm.comment = "";
       $scope.commentCount++;
     });
-  }
+  };
 
   /**
    * @desc Toggle fullscreen mode
