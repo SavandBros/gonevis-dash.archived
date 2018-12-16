@@ -324,7 +324,8 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
       'direction',
       'align',
       "allow",
-      "allowfullscreen"
+      "allowfullscreen",
+      "frameborder"
     ];
 
     /**
@@ -342,7 +343,8 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           });
         }
         // Check insert whitelist
-        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider) {
+        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider
+          || op.insert.gist) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
