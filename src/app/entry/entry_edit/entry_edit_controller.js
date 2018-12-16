@@ -726,6 +726,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
    */
   $scope.$on("$destroy", function () {
     $interval.cancel(interval);
+    angular.element($window).off('message', handleEmbedSize);
   });
 
   constructor();
