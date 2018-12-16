@@ -97,6 +97,32 @@ class VideoBlot extends BlockEmbed {
 VideoBlot.blotName = 'video';
 VideoBlot.tagName = 'div';
 
+class GistBlot extends BlockEmbed {
+  static create(url) {
+    let node = super.create();
+    // Handle node's url
+    let src = url;
+    if (!url.includes(EmbedUrl)) {
+      src = EmbedUrl + url;
+    }
+    // Set iframe's attributes
+    node.src = src;
+    node.id = src.split(EmbedUrl)[1];
+    node.width = "100%";
+    node.setAttribute('frameborder', '0');
+    // Add node
+    return node;
+  }
+
+  static value(domNode) {
+    if (domNode.getAttribute('src')) {
+      return domNode.getAttribute('src');
+    }
+  }
+}
+GistBlot.blotName = 'gist';
+GistBlot.tagName = 'iframe';
+
 class DividerBlot extends BlockEmbed {}
 DividerBlot.blotName = 'divider';
 DividerBlot.className = 'divider';
@@ -143,3 +169,4 @@ Quill.register('modules/clipboard', CustomClipboard, true);
 Quill.register(icons, true);
 Quill.register(DividerBlot);
 Quill.register(VideoBlot, true);
+Quill.register(GistBlot, true)
