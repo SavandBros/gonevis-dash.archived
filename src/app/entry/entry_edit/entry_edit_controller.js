@@ -701,6 +701,27 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
   });
 
   /**
+   * @desc Handle embed size.
+   *
+   * @param {Event} event
+   */
+  function handleEmbedSize(event) {
+    event = event.originalEvent;
+    // Check origin
+    if (GoNevisEnv.apiEndpoint.split('/api/v1/')[0] !== event.origin) {
+      return;
+    }
+    // If there was an element ID, then set iframe's height based on given data. 
+    if (event.data.elementId) {
+      let element = angular.element(document.getElementById(event.data.elementId));
+      element[0].setAttribute("height", event.data.height);
+    }
+  }
+
+  // Event listener
+  angular.element($window).bind("message", handleEmbedSize);
+
+  /**
    * @desc Cancel events on state change
    */
   $scope.$on("$destroy", function () {
