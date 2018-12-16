@@ -3,6 +3,8 @@
 import Quill from "quill";
 import Delta from "quill-delta";
 
+const EmbedUrl = GoNevisEnv.apiEndpoint.split('/api/v1/')[0] + '/toodartoo/embed/?media=';
+
 const BlockEmbed = Quill.import("blots/block/embed");
 const Clipboard = Quill.import("modules/clipboard");
 const icons = Quill.import("ui/icons");
@@ -18,6 +20,9 @@ const newIcons = [{
 }, {
   icon: "strike",
   replace: "strikethrough"
+}, {
+  icon: "gist",
+  replace: "github"
 }, {
   icon: "blockquote",
   replace: "quote-right"
