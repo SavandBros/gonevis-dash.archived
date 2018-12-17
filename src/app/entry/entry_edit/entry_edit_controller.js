@@ -711,12 +711,13 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     if (GoNevisEnv.apiEndpoint.split('/api/v1/')[0] !== event.origin) {
       return;
     }
-    // If there was an element ID, then set iframe's height based on given data. 
+    // If there was an element ID, then set iframe's height based on given data.
     if (event.data.elementId) {
-      let element = angular.element(document.getElementById(event.data.elementId));
-      element[0].setAttribute("height", event.data.height);
+      angular.forEach(angular.element(`[data-embed-url='${event.data.elementId}']`), element => {
+        element.setAttribute("height", event.data.height);
+      });
     }
-  }
+  };
 
   // Event listener
   angular.element($window).bind("message", handleEmbedSize);
