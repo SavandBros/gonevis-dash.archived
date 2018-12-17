@@ -368,6 +368,14 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           }
         }];
       }
+      // If pasted string starts with gist URL, then start converting it to embed.
+      if (node.data.startsWith('https://gist.github.com/')) {
+        delta.ops = [{
+          insert: {
+            gist: node.data
+          }
+        }];
+      }
       return delta;
     });
     $scope.cursorIndex = 0;
