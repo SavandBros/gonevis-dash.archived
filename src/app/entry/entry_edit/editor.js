@@ -102,6 +102,30 @@ class VideoBlot extends BlockEmbed {
 VideoBlot.blotName = 'video';
 VideoBlot.tagName = 'div';
 
+
+/**
+ * @class GistBlot
+ *
+ * @description
+ *
+ * ## Purpose
+ * It's purpose is to embed Github Gist.
+ *
+ * ## How?
+ * When user pastes/provides a Gist url, we create an iframe tag with these attributes:
+ * - ### src
+ *   It's value looks like this (`GIST_URL` is the URL that user pastes/provides):
+ *   `https://www.gonevis.com/toodartoo/embed/?media=GIST_URL`
+ *
+ * - ### width
+ *   We set it's value too `100%` so that the iframe could fit to it's mother element.
+ *
+ * - ### data-embed-url
+ *   We set it's value to the URL that user pastes/provides.
+ *
+ * - ### frameborder
+ *   We set it's value to `0` so that the iframe doesn't have any borders around itself.
+ */
 class GistBlot extends BlockEmbed {
   static create(url) {
     let node = super.create();
