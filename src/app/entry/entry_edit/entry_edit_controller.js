@@ -701,7 +701,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
   });
 
   /**
-   * @desc Handle embed size.
+   * @desc It will listen to the messages coming from child iframe to adjust the size of the iframe. 
    *
    * @param {Event} event
    */
