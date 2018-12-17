@@ -112,8 +112,8 @@ class GistBlot extends BlockEmbed {
     }
     // Set iframe's attributes
     node.src = src;
-    node.id = src.split(EmbedUrl)[1];
     node.width = "100%";
+    node.setAttribute('data-embed-url', src.split(EmbedUrl)[1]);
     node.setAttribute('frameborder', '0');
     // Add node
     return node;
