@@ -3,7 +3,7 @@
 import Quill from "quill";
 import Delta from "quill-delta";
 
-const EmbedUrl = GoNevisEnv.apiEndpoint.split('/api/v1/')[0] + '/toodartoo/embed/?media=';
+const iframeOrigin = GoNevisEnv.apiEndpoint.split('/api/v1/')[0] + '/toodartoo/embed/?media=';
 
 const BlockEmbed = Quill.import("blots/block/embed");
 const Clipboard = Quill.import("modules/clipboard");
@@ -107,13 +107,13 @@ class GistBlot extends BlockEmbed {
     let node = super.create();
     // Handle node's url
     let src = url;
-    if (!url.includes(EmbedUrl)) {
-      src = EmbedUrl + url;
+    if (!url.includes(iframeOrigin)) {
+      src = iframeOrigin + url;
     }
     // Set iframe's attributes
     node.src = src;
     node.width = "100%";
-    node.setAttribute('data-embed-url', src.split(EmbedUrl)[1]);
+    node.setAttribute('data-embed-url', src.split(iframeOrigin)[1]);
     node.setAttribute('frameborder', '0');
     // Add node
     return node;
