@@ -343,8 +343,8 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           });
         }
         // Check insert whitelist
-        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider
-          || op.insert.gist) {
+        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider ||
+          op.insert.gist) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
@@ -725,7 +725,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
         element.setAttribute("height", event.data.height);
       });
     }
-  };
+  }
 
   // Event listener
   angular.element($window).bind("message", handleEmbedSize);

@@ -198,4 +198,4 @@ Quill.register('modules/clipboard', CustomClipboard, true);
 Quill.register(icons, true);
 Quill.register(DividerBlot);
 Quill.register(VideoBlot, true);
-Quill.register(GistBlot, true)
+Quill.register(GistBlot, true);
