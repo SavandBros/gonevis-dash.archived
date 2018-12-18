@@ -2,13 +2,13 @@
 
 import app from "../../app";
 import UserSiteRole from "../../account/user/user_site_role";
-require('./../reader.css');
-require('quill/dist/quill.snow.css');
-require('../../entry/entry_edit/editor.css');
-require('../../basement/directives/disable_on_request_directive');
+require("./../reader.css");
+require("quill/dist/quill.snow.css");
+require("../../entry/entry_edit/editor.css");
+require("../../basement/directives/disable_on_request_directive");
 
 function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window,
-  ReaderService, Comment, Pagination) {
+  ReaderService, Comment, Pagination, EmbedListener) {
   let lastScroll;
 
   /**
@@ -27,12 +27,12 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
         bottom = "0";
       }
 
-      angular.element(".bottom-bar").css({ 'bottom': bottom });
+      angular.element(".bottom-bar").css({ "bottom": bottom });
       lastScroll = currentScroll;
     }
 
     angular.element(".reader-cover")
-      .css({ 'background-position': 'center calc(50% + ' + (0 - $window.scrollY / 2) + 'px)' });
+      .css({ "background-position": "center calc(50% + " + (0 - $window.scrollY / 2) + "px)" });
   }
 
   /**
@@ -98,7 +98,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
         // Post data
         $scope.post = data;
         // Post logo
-        $scope.siteLogo = data.site.media.logo ? data.site.media.logo.thumbnail_48x48 : Codekit.getDefaultImage('tiny');
+        $scope.siteLogo = data.site.media.logo ? data.site.media.logo.thumbnail_48x48 : Codekit.getDefaultImage("tiny");
         $scope.isFollowing = data.site.is_following;
         // Trust post content as HTML
         $scope.trustedContent = $sce.trustAsHtml(data.content);
@@ -167,11 +167,30 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
     );
   };
 
+  // Event listener
+  angular.element($window).bind("message", EmbedListener.handleEmbedSize);
+
   /**
    * @desc Cancel events on state change
    */
   $scope.$on("$destroy", function () {
-    angular.element($window).off('scroll', onScroll);
+    angular.element($window).off("scroll", onScroll);
+    angular.element($window).off("message", EmbedListener.handleEmbedSize);
+  });
+
+  /**
+   * @desc Load more callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
+  $scope.$on("gonevisDash.Pagination:loadedMore", (event, data) => {
+    if (data.success) {
+      $scope.commentPageForm.page = data.page;
+      angular.forEach(data.data.results, data => {
+        $scope.comments.push(new Comment(data));
+      });
+    }
   });
 
   constructor();
