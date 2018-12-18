@@ -3,6 +3,8 @@
 import Quill from "quill";
 import Delta from "quill-delta";
 
+const iframeOrigin = GoNevisEnv.apiEndpoint.split('/api/v1/')[0] + '/toodartoo/embed/?media=';
+
 const BlockEmbed = Quill.import("blots/block/embed");
 const Clipboard = Quill.import("modules/clipboard");
 const icons = Quill.import("ui/icons");
@@ -18,6 +20,9 @@ const newIcons = [{
 }, {
   icon: "strike",
   replace: "strikethrough"
+}, {
+  icon: "gist",
+  replace: "github"
 }, {
   icon: "blockquote",
   replace: "quote-right"
@@ -97,6 +102,56 @@ class VideoBlot extends BlockEmbed {
 VideoBlot.blotName = 'video';
 VideoBlot.tagName = 'div';
 
+
+/**
+ * @class GistBlot
+ *
+ * @description
+ *
+ * ## Purpose
+ * It's purpose is to embed Github Gist.
+ *
+ * ## How?
+ * When user pastes/provides a Gist url, we create an iframe tag with these attributes:
+ * - ### src
+ *   It's value looks like this (`GIST_URL` is the URL that user pastes/provides):
+ *   `https://www.gonevis.com/toodartoo/embed/?media=GIST_URL`
+ *
+ * - ### width
+ *   We set it's value too `100%` so that the iframe could fit to it's mother element.
+ *
+ * - ### data-embed-url
+ *   We set it's value to the URL that user pastes/provides.
+ *
+ * - ### frameborder
+ *   We set it's value to `0` so that the iframe doesn't have any borders around itself.
+ */
+class GistBlot extends BlockEmbed {
+  static create(url) {
+    let node = super.create();
+    // Handle node's url
+    let src = url;
+    if (!url.includes(iframeOrigin)) {
+      src = iframeOrigin + url;
+    }
+    // Set iframe's attributes
+    node.src = src;
+    node.width = "100%";
+    node.setAttribute('data-embed-url', src.split(iframeOrigin)[1]);
+    node.setAttribute('frameborder', '0');
+    // Add node
+    return node;
+  }
+
+  static value(domNode) {
+    if (domNode.getAttribute('src')) {
+      return domNode.getAttribute('src');
+    }
+  }
+}
+GistBlot.blotName = 'gist';
+GistBlot.tagName = 'iframe';
+
 class DividerBlot extends BlockEmbed {}
 DividerBlot.blotName = 'divider';
 DividerBlot.className = 'divider';
@@ -143,3 +198,4 @@ Quill.register('modules/clipboard', CustomClipboard, true);
 Quill.register(icons, true);
 Quill.register(DividerBlot);
 Quill.register(VideoBlot, true);
+Quill.register(GistBlot, true);

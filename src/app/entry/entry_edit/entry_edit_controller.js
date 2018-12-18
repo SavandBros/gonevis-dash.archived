@@ -8,14 +8,14 @@ require('./editor.css');
 require('./editor');
 import CustomIcons from "./editor";
 
-function EntryEditController($scope, $rootScope, UndoService, $state, $stateParams, $timeout, $q,
+function EntryEditController($scope, $rootScope, UndoService, $state, $stateParams, $timeout, $q, EmbedListener,
   Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window) {
   let editorButtons = [
     ['back'],
     ['bold', 'italic', 'underline', 'strike'],
     ['link', 'blockquote', 'code-block', { 'list': 'bullet' }, 'divider'],
     [{ 'header': [1, 2, 3, false] }],
-    ['image', 'video'],
+    ['image', 'video', 'gist'],
     [{ 'direction': 'rtl' }, { 'align': [] }],
     ['clean'],
     ['publish', 'update', 'preview', 'settings', 'light']
@@ -324,7 +324,8 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
       'direction',
       'align',
       "allow",
-      "allowfullscreen"
+      "allowfullscreen",
+      "frameborder"
     ];
 
     /**
@@ -342,7 +343,8 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           });
         }
         // Check insert whitelist
-        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider) {
+        if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider ||
+          op.insert.gist) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
@@ -363,6 +365,14 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           },
           insert: {
             video: 'https://www.youtube.com/embed/' + getYoutubeUrl + '?autoplay=0'
+          }
+        }];
+      }
+      // If pasted string starts with gist URL, then start converting it to embed.
+      if (node.data.startsWith('https://gist.github.com/')) {
+        delta.ops = [{
+          insert: {
+            gist: node.data
           }
         }];
       }
@@ -698,11 +708,15 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     }
   });
 
+  // Event listener
+  angular.element($window).bind("message", EmbedListener.handleEmbedSize);
+
   /**
    * @desc Cancel events on state change
    */
   $scope.$on("$destroy", function () {
     $interval.cancel(interval);
+    angular.element($window).off('message', EmbedListener.handleEmbedSize);
   });
 
   constructor();

@@ -7,6 +7,7 @@ require('./tour/tour_service');
 require('./tour/tour_step_service');
 require('./undo_service/undo_service');
 require('./directives/keystroke_directive');
+require('./embed_listener/embed_listener_service');
 require('./filters/timesince_filter');
 require('./filters/timeuntil_filter');
 require('./filters/bytes_filter');
