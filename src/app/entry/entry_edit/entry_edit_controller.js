@@ -722,7 +722,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     // If there was an element ID, then set iframe's height based on given data.
     if (event.data.elementId) {
       angular.forEach(angular.element(`[data-embed-url='${event.data.elementId}']`), element => {
-        element.setAttribute("height", event.data.height);
+        element.setAttribute("height", event.data.height + "px");
       });
     }
   }
