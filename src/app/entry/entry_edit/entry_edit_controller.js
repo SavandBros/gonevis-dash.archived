@@ -15,7 +15,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     ['bold', 'italic', 'underline', 'strike'],
     ['link', 'blockquote', 'code-block', { 'list': 'bullet' }, 'divider'],
     [{ 'header': [1, 2, 3, false] }],
-    ['image', 'video', 'gist'],
+    ['image', 'video'],
     [{ 'direction': 'rtl' }, { 'align': [] }],
     ['clean'],
     ['publish', 'update', 'preview', 'settings', 'light']
