@@ -21,9 +21,6 @@ const newIcons = [{
   icon: "strike",
   replace: "strikethrough"
 }, {
-  icon: "gist",
-  replace: "github"
-}, {
   icon: "blockquote",
   replace: "quote-right"
 }, {
@@ -104,18 +101,18 @@ VideoBlot.tagName = 'div';
 
 
 /**
- * @class GistBlot
+ * @class EmbedBlot
  *
  * @description
  *
  * ## Purpose
- * It's purpose is to embed Github Gist.
+ * It's purpose is to embed Github Gists, Twitter Tweets and Instagram posts.
  *
  * ## How?
- * When user pastes/provides a Gist url, we create an iframe tag with these attributes:
+ * When user pastes/provides an embed url, we create an iframe tag with these attributes:
  * - ### src
- *   It's value looks like this (`GIST_URL` is the URL that user pastes/provides):
- *   `https://www.gonevis.com/toodartoo/embed/?media=GIST_URL`
+ *   It's value looks like this (`MEDIA_URL` is the URL that user pastes/provides):
+ *   `https://www.gonevis.com/toodartoo/embed/?media=MEDIA_URL`
  *
  * - ### width
  *   We set it's value too `100%` so that the iframe could fit to it's mother element.
@@ -126,7 +123,7 @@ VideoBlot.tagName = 'div';
  * - ### frameborder
  *   We set it's value to `0` so that the iframe doesn't have any borders around itself.
  */
-class GistBlot extends BlockEmbed {
+class EmbedBlot extends BlockEmbed {
   static create(url) {
     let node = super.create();
     // Handle node's url
@@ -149,8 +146,8 @@ class GistBlot extends BlockEmbed {
     }
   }
 }
-GistBlot.blotName = 'gist';
-GistBlot.tagName = 'iframe';
+EmbedBlot.blotName = 'embed';
+EmbedBlot.tagName = 'iframe';
 
 class DividerBlot extends BlockEmbed {}
 DividerBlot.blotName = 'divider';
@@ -198,4 +195,4 @@ Quill.register('modules/clipboard', CustomClipboard, true);
 Quill.register(icons, true);
 Quill.register(DividerBlot);
 Quill.register(VideoBlot, true);
-Quill.register(GistBlot, true);
+Quill.register(EmbedBlot, true);
