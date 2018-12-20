@@ -344,7 +344,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
         }
         // Check insert whitelist
         if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider ||
-          op.insert.gist) {
+          op.insert.embed) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
