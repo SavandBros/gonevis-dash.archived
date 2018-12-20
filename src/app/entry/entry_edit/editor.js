@@ -21,9 +21,6 @@ const newIcons = [{
   icon: "strike",
   replace: "strikethrough"
 }, {
-  icon: "gist",
-  replace: "github"
-}, {
   icon: "blockquote",
   replace: "quote-right"
 }, {
