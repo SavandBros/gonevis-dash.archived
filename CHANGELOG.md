@@ -5,6 +5,8 @@
 - Added #1045: Add comments and commenting to Reader detail.
 - Added #1050: Add load more button to comment list on Reader detail page.
 - Added #1033: Add a method to embed Github Gists.
+- Added #943: Embed Instagram on text Editor.
+- Added #942: Embed Twitter on text Editor.
 
 **Bug Fixes:**
 - Fixed #1044: Fix Storage metrics on main page.
