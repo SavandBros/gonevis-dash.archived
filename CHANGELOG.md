@@ -7,6 +7,7 @@
 - Added #1033: Add a method to embed Github Gists.
 - Added #943: Embed Instagram on text Editor.
 - Added #942: Embed Twitter on text Editor.
+- Added #1063: Divide post/page list by their statuses.
 
 **Bug Fixes:**
 - Fixed #1044: Fix Storage metrics on main page.
