@@ -116,8 +116,7 @@
         <ul class="list-unstyled s-mar-no">
           <li class="post-list" ng-repeat="entry in entries" ng-show="!entry.isDeleted">
             <!-- Select -->
-            <div class="section c-default" ng-class="{'published': entry.get.status === 1}"
-              ng-click="entry.isSelected = !entry.isSelected">
+            <div class="section c-default" ng-click="entry.isSelected = !entry.isSelected">
               <input type="checkbox" class="c-p" ng-model="entry.isSelected">
             </div>
             <a class="section" ui-sref="dash.entry-edit({entryId: entry.get.id, isPage: isPageView})"
