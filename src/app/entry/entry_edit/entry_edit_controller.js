@@ -329,6 +329,16 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     ];
 
     /**
+     * @desc Editor embed whitelist
+     */
+    const embedWhitelist = [
+      'https://gist.github.com/',
+      'https://www.instagram.com/p/',
+      'https://twitter.com/',
+      'https://pastebin.com/'
+    ];
+
+    /**
      * @desc On clipboard paste
      */
     editor.clipboard.addMatcher(Node.ELEMENT_NODE, function (node, delta) {
