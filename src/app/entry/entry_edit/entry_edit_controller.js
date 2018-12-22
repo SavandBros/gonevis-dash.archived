@@ -92,7 +92,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     if(UndoService.validateParam($stateParams.entryId)) {
       existionError();
     }
-    $scope.fromState = $stateParams.isPage ? "dash.page-list" : "dash.entry-list";
+    $scope.fromState = $stateParams.isPage ? "dash.page-list.status" : "dash.entry-list.status";
     new CustomIcons($translate);
     $scope.undoService = UndoService;
     $scope.codekit = Codekit;
@@ -677,7 +677,10 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
    * @desc Go to post/page list
    */
   $scope.goBack = function () {
-    let state = "dash.entry-list";
+    let state = "dash.entry-list.status";
+    let param = {
+      view: $scope.form.get.status === $scope.entryStatus.DRAFT ? "draft" : "published"
+    };
 
     // Check if entry has an unsaved changes
     if ($scope.form.get.title) {
@@ -688,9 +691,10 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     }
     // Check if entry is a page
     if ($stateParams.isPage) {
-      state = "dash.page-list";
+      state = "dash.page-list.status";
     }
-    $state.go(state);
+
+    $state.go(state, param);
   };
 
   /**
