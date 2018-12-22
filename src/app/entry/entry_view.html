@@ -4,6 +4,19 @@
 </button>
 <!-- Main -->
 <div class="container container-light pad-top">
+  <!-- Tabs -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="settings-tab animated fadeIn s-mar-x-soft">
+        <span class="indicator"></span>
+        <ul class="list-unstyled">
+          <li ng-repeat="tab in tabs" ng-class="{'current': tab.view === currentTab.view}">
+            <a ng-click="setCurrentTab(tab)">{{ tab.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <!-- Top bar -->
   <top-bar search-form="searchForm" view="view" view-name="entryView"></top-bar>
   <!-- Search noresult -->
