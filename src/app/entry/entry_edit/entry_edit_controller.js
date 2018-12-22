@@ -15,7 +15,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     ['bold', 'italic', 'underline', 'strike'],
     ['link', 'blockquote', 'code-block', { 'list': 'bullet' }, 'divider'],
     [{ 'header': [1, 2, 3, false] }],
-    ['image', 'video', 'gist'],
+    ['image', 'video'],
     [{ 'direction': 'rtl' }, { 'align': [] }],
     ['clean'],
     ['publish', 'update', 'preview', 'settings', 'light']
@@ -344,7 +344,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
         }
         // Check insert whitelist
         if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider ||
-          op.insert.gist) {
+          op.insert.embed) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
@@ -368,11 +368,13 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           }
         }];
       }
-      // If pasted string starts with gist URL, then start converting it to embed.
-      if (node.data.startsWith('https://gist.github.com/')) {
+      // If pasted string starts with Gist, Twitter or Instagramthen URL then start converting it to embed.
+      if (node.data.startsWith('https://gist.github.com/') ||
+        node.data.startsWith('https://www.instagram.com/') ||
+        node.data.startsWith('https://twitter.com/')) {
         delta.ops = [{
           insert: {
-            gist: node.data
+            embed: node.data
           }
         }];
       }
