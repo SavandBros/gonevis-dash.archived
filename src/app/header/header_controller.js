@@ -37,11 +37,13 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         icon: "fa-plus"
       }, {
         label: translations.POSTS,
-        sref: "dash.entry-list",
+        sref: "dash.entry-list.status",
+        view: "published",
         icon: "fa-book"
       }, {
         label: translations.PAGES,
-        sref: "dash.page-list",
+        sref: "dash.page-list.status",
+        view: "published",
         icon: "fa-newspaper-o"
       }, {
         label: translations.TAGS,
