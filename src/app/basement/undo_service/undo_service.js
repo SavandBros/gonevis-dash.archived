@@ -1,8 +1,11 @@
 "use strict";
 
 import app from '../../app';
+import EntryStatus from "../../entry/status";
 
 function UndoService($timeout, $translate, $state, toaster) {
+
+  let entryStatus = new EntryStatus();
 
   /**
    * @desc Store param item.
@@ -86,7 +89,9 @@ function UndoService($timeout, $translate, $state, toaster) {
    * @param {object} item
    */
   function prompt(promptText, stateName, paramName, item) {
-    let routeParam = {};
+    let routeParam = {
+      view: item.get.status === entryStatus.DRAFT ? 'draft' : 'published'
+    };
     routeParam[paramName] = item.get.id;
 
     if (confirm($translate.instant(promptText)) === true) {
