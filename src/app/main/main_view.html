@@ -41,7 +41,7 @@
       <div class="panel panel-default" ng-if="!Entry.loading" id="entries">
         <!-- Title -->
         <div class="panel-heading">
-          <a ui-sref="dash.entry-list" class="header-link" translate>POSTS</a>
+          <a ui-sref="dash.entry-list.status({ status: 'published' })" class="header-link" translate>POSTS</a>
           <span class="panel-label">{{ Metrics.list.entry_count }}</span>
         </div>
         <!-- No entries message -->

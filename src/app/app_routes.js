@@ -211,20 +211,40 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
     })
     .state("dash.entry-list", {
       url: "/posts",
+      abstract: true,
+      template: "<ui-view/>",
+      auth: true
+    })
+    .state("dash.entry-list.status", {
+      url: "/:view",
       controller: "EntryController",
       template: require("./entry/entry_view.html"),
       auth: true,
       params: {
+        view: {
+          name: null,
+          dynamic: true
+        },
         deletedEntry: null
       },
       title: "Posts"
     })
     .state("dash.page-list", {
       url: "/pages",
+      abstract: true,
+      template: "<ui-view/>",
+      auth: true
+    })
+    .state("dash.page-list.status", {
+      url: "/:view",
       controller: "EntryController",
       template: require("./entry/entry_view.html"),
       auth: true,
       params: {
+        view: {
+          name: null,
+          dynamic: true
+        },
         deletedEntry: null
       },
       title: "Pages"

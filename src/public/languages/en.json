@@ -250,6 +250,7 @@
   "PUBLISH": "Publish",
   "SET_PUBLISHED": "Set as Published",
   "DRAFT": "Draft",
+  "DRAFTS": "Drafts",
   "HIDE_FROM_PUBLIC": "Hide from public",
   "DRAFT_ON": "Draft on {{ date | date }}",
   "DRAFT_MODE": "DRAFT MODE",
