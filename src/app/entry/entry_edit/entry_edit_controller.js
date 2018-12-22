@@ -378,16 +378,21 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           }
         }];
       }
-      // If pasted string starts with Gist, Twitter or Instagramthen URL then start converting it to embed.
-      if (node.data.startsWith('https://gist.github.com/') ||
-        node.data.startsWith('https://www.instagram.com/') ||
-        node.data.startsWith('https://twitter.com/')) {
-        delta.ops = [{
-          insert: {
-            embed: node.data
+
+      // If pasted string starts with Gist, Twitter or Instagram then URL then start converting it to embed.
+      angular.forEach(embedWhitelist, host => {
+        if (node.data.startsWith(host)) {
+          // Check if embed was from Pastebin.
+          if (node.data.startsWith('https://pastebin.com/')) {
+            node.data = node.data.replace("pastebin.com/", "pastebin.com/embed_js/");
           }
-        }];
-      }
+          delta.ops = [{
+            insert: {
+              embed: node.data
+            }
+          }];
+        }
+      });
       return delta;
     });
     $scope.cursorIndex = 0;
