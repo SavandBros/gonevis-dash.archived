@@ -11,6 +11,7 @@
 
 **Bug Fixes:**
 - Fixed #1044: Fix Storage metrics on main page.
+- Fixed #1061: Fix navbar text colors when collapsed and remove primary color.
 
 
 2018.12.1
