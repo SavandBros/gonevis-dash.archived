@@ -149,6 +149,29 @@ class EmbedBlot extends BlockEmbed {
 EmbedBlot.blotName = 'embed';
 EmbedBlot.tagName = 'iframe';
 
+class SoundCloudBlot extends BlockEmbed {
+  static create(iframe) {
+    let node = super.create();
+
+    if (typeof iframe === "object") {
+      node.appendChild(iframe);
+    } else {
+      node.innerHTML = iframe;
+    }
+    // Add node
+    return node;
+  }
+
+  static value(domNode) {
+    if (domNode.querySelector('iframe')) {
+      return domNode.querySelector('iframe');
+    }
+  }
+}
+
+SoundCloudBlot.blotName = 'soundcloud';
+SoundCloudBlot.tagName = 'div';
+
 class DividerBlot extends BlockEmbed {}
 DividerBlot.blotName = 'divider';
 DividerBlot.className = 'divider';
@@ -196,3 +219,4 @@ Quill.register(icons, true);
 Quill.register(DividerBlot);
 Quill.register(VideoBlot, true);
 Quill.register(EmbedBlot, true);
+Quill.register(SoundCloudBlot, true);

@@ -9,7 +9,8 @@ require('./editor');
 import CustomIcons from "./editor";
 
 function EntryEditController($scope, $rootScope, UndoService, $state, $stateParams, $timeout, $q, EmbedListener,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window) {
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window,
+  $http) {
   let editorButtons = [
     ['back'],
     ['bold', 'italic', 'underline', 'strike'],
@@ -329,6 +330,16 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     ];
 
     /**
+     * @desc Editor embed whitelist
+     */
+    const embedWhitelist = [
+      'https://gist.github.com/',
+      'https://www.instagram.com/p/',
+      'https://twitter.com/',
+      'https://pastebin.com/'
+    ];
+
+    /**
      * @desc On clipboard paste
      */
     editor.clipboard.addMatcher(Node.ELEMENT_NODE, function (node, delta) {
@@ -344,7 +355,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
         }
         // Check insert whitelist
         if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider ||
-          op.insert.embed) {
+          op.insert.embed || op.insert.soundcloud) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
@@ -368,16 +379,36 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           }
         }];
       }
-      // If pasted string starts with Gist, Twitter or Instagramthen URL then start converting it to embed.
-      if (node.data.startsWith('https://gist.github.com/') ||
-        node.data.startsWith('https://www.instagram.com/') ||
-        node.data.startsWith('https://twitter.com/')) {
-        delta.ops = [{
-          insert: {
-            embed: node.data
+
+      // If pasted string starts with Gist, Twitter or Instagram then URL then start converting it to embed.
+      angular.forEach(embedWhitelist, host => {
+        if (node.data.startsWith(host)) {
+          // Check if embed was from Pastebin.
+          if (node.data.startsWith('https://pastebin.com/')) {
+            node.data = node.data.replace("pastebin.com/", "pastebin.com/embed_js/");
           }
-        }];
+          delta.ops = [{
+            insert: {
+              embed: node.data
+            }
+          }];
+        }
+      });
+
+      if (node.data.startsWith("https://soundcloud.com/")) {
+        $http.get(`https://soundcloud.com/oembed?format=js&url=${node.data}&iframe=true`).then(data => {
+          let rawString = data.data.substr(1, data.data.length - 3);
+          let callback = JSON.parse(rawString);
+          // Get current selection.
+          let range = editor.getSelection();
+          // Insert SoundCloud embed.
+          editor.insertEmbed(range.index + range.length, 'soundcloud', callback.html);
+          // Set cursor selection after SoundCloud embed.
+          editor.setSelection(range.index + range.length + 2);
+        });
+        return { ops: [] };
       }
+
       return delta;
     });
     $scope.cursorIndex = 0;

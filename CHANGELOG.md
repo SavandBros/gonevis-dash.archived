@@ -8,6 +8,8 @@
 - Added #943: Embed Instagram on text Editor.
 - Added #942: Embed Twitter on text Editor.
 - Added #1063: Divide post/page list by their statuses.
+- Added #1034: Embed Pastebin on text Editor.
+- Added #944: Embed Soundcloud on text Editor.
 
 **Bug Fixes:**
 - Fixed #1044: Fix Storage metrics on main page.
