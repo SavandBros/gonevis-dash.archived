@@ -220,4 +220,3 @@ Quill.register(DividerBlot);
 Quill.register(VideoBlot, true);
 Quill.register(EmbedBlot, true);
 Quill.register(SoundCloudBlot, true);
-
