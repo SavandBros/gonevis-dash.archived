@@ -9,7 +9,8 @@ require('./editor');
 import CustomIcons from "./editor";
 
 function EntryEditController($scope, $rootScope, UndoService, $state, $stateParams, $timeout, $q, EmbedListener,
-  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window) {
+  Entry, Tag, Codekit, API, AuthService, DolphinService, toaster, Slug, $translate, $interval, ModalsService, $window,
+  $http) {
   let editorButtons = [
     ['back'],
     ['bold', 'italic', 'underline', 'strike'],
@@ -354,7 +355,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
         }
         // Check insert whitelist
         if (op.insert && typeof op.insert === 'string' || op.insert.image || op.insert.video || op.insert.divider ||
-          op.insert.embed) {
+          op.insert.embed || op.insert.soundcloud) {
           ops.push({
             attributes: op.attributes,
             insert: op.insert
@@ -393,6 +394,21 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
           }];
         }
       });
+
+      if (node.data.startsWith("https://soundcloud.com/")) {
+        $http.get(`https://soundcloud.com/oembed?format=js&url=${node.data}&iframe=true`).then(data => {
+          let rawString = data.data.substr(1, data.data.length - 3);
+          let callback = JSON.parse(rawString);
+          // Get current selection.
+          let range = editor.getSelection();
+          // Insert SoundCloud embed.
+          editor.insertEmbed(range.index + range.length, 'soundcloud', callback.html);
+          // Set cursor selection after SoundCloud embed.
+          editor.setSelection(range.index + range.length + 2);
+        });
+        return { ops: [] };
+      }
+
       return delta;
     });
     $scope.cursorIndex = 0;
