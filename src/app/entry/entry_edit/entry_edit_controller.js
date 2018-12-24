@@ -122,15 +122,14 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     if ($stateParams.entryId) {
       $scope.editing = true;
       $scope.postInitial = false;
+      $scope.form = new Entry({
+        site: AuthService.getCurrentSite(),
+        id: $stateParams.entryId
+      });
       // Load from cache if available
       if ($rootScope.cache.entry && $rootScope.cache.entry.get.id === $stateParams.entryId) {
-        $scope.form = $rootScope.cache.entry;
+        $scope.form.get.title = $rootScope.cache.entry.get.title;
         Codekit.setTitle($scope.form.get.title);
-      } else {
-        $scope.form = new Entry({
-          site: AuthService.getCurrentSite(),
-          id: $stateParams.entryId
-        });
       }
 
       // Get entry from API
@@ -596,6 +595,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
       return;
     }
 
+    delete $scope.form.get;
     let tags = [];
     // Get published post tags
     angular.forEach(oldData.originalPost.tags, function (data) {
