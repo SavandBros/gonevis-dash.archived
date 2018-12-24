@@ -170,7 +170,7 @@ class SoundCloudBlot extends BlockEmbed {
 }
 
 SoundCloudBlot.blotName = 'soundcloud';
-SoundCloudBlot.tagName = 'div';
+SoundCloudBlot.tagName = 'span';
 
 class DividerBlot extends BlockEmbed {}
 DividerBlot.blotName = 'divider';
