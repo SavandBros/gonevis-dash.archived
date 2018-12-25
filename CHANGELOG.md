@@ -16,6 +16,7 @@
 - Fixed #1061: Fix navbar text colors when collapsed and remove primary color.
 - Fixed #1069: Fix YouTube embed getting smaller on page/post update.
 - Fixed #1072: Fix editor being wrapped in code-block.
+- Fixed #1075: Editor on paste error: "Uncaught TypeError: n.appendChild is not a function".
 
 
 2018.12.1
