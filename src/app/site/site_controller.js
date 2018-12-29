@@ -209,7 +209,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     // Open payment widget
     let payments = new cp.CloudPayments({ language: "en-US" }); // jshint ignore:line
     payments.charge({ // options
-      publicId: "pk_b2b11892e0e39d3d22a3f303e2690",
+      publicId: "pk_05c99b78fc3af3c7338276d58b74e",
       description: plan.description,
       amount: Number(plan.price),
       currency: "USD",
