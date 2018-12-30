@@ -17,7 +17,8 @@
 - Fixed #1069: Fix YouTube embed getting smaller on page/post update.
 - Fixed #1072: Fix editor being wrapped in code-block.
 - Fixed #1075: Editor on paste error: "Uncaught TypeError: n.appendChild is not a function".
-- Fixed #1078: Fix payment public ID to production. 
+- Fixed #1078: Fix payment public ID to production.
+- Fixed #1081: Fix design of FAQ section in upgrade section in site settings.
 
 
 2018.12.1
