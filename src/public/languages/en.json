@@ -380,5 +380,6 @@
   "FEED": "Feed",
   "NO_FEED": "Your followings will appear here.",
   "COLLAPSE": "Collapse",
-  "PLANS": "Plans"
+  "PLANS": "Plans",
+  "HAPPY_NEW_YEAR": "Happy new year {{ username }}!"
 }
