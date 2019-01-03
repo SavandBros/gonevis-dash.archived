@@ -38,9 +38,7 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
       function(data) {
         // Check if blog has reached maximum number of team members.
         if (data.data.non_field_errors[0]) {
-          $translate("REACHED_MAX_TEAM_MEMBER").then(function(translations) {
-            toaster.error(translations);
-          });
+          toaster.error(data.data.non_field_errors[0]);
           // Close modal
           ModalsService.close("invite");
         }

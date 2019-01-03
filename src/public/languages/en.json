@@ -127,7 +127,6 @@
   "INVITED": "Invited",
   "REMOVE_FROM_TEAM": "Remove from team",
   "TEAM_MEMBERS": "Team members",
-  "REACHED_MAX_TEAM_MEMBER": "You have reached the maximum number of allowed team members, please upgrade.",
   "TEAM_CHANGED_ROLE": "Changed role to {{ role }}",
   "TEAM_INVITED_MEMBER": "Invited {{ email }} as an {{ role }} into the team.",
   "REMOVE_TEAM_MEMBER_PROMPT": "Remove from team?\n\nAre you sure you want to remove '{{ title }}' from team?",
