@@ -3,6 +3,7 @@
 
 **Features:**
 - Added #1087: Show 2019 year on navbar.
+- Added #1090: Add a link on navbar to visit current blog.
 
 
 2019.1.1
