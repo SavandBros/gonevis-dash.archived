@@ -175,6 +175,15 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   };
 
   /**
+   * Show a toaster that says: 'Happy new year USERNAME'.
+   */
+  $scope.happyNewYear = () => {
+    $translate("HAPPY_NEW_YEAR", { username: $scope.user.get.username }).then(translation => {
+      toaster.info("2019", translation);
+    });
+  };
+
+  /**
    * @desc Dolphin selection used for quick nevis
    *
    * @param {Event} event
