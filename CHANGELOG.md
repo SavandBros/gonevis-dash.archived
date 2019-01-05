@@ -5,6 +5,9 @@
 - Added #1087: Show 2019 year on navbar.
 - Added #1090: Add a link on navbar to visit current blog.
 
+**Bug Fixes:**
+- Fixed #1091: Fix blog settings address not opening.
+
 
 2019.1.1
 ========

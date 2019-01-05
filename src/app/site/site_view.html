@@ -32,7 +32,7 @@
       <nothing text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
     </div>
     <!-- Plans -->
-    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="isOwner" equal-height="plan-detail">
+    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="isOwner">
       <div class="col-md-4">
         <div class="plan" id="lite">
           <!-- Title -->
@@ -196,7 +196,7 @@
             <!-- URL -->
             <div class="form-group">
               <p class="t-bold" translate>ADDRESS</p>
-              <a class="site-url" ng-href="{{ currentTab.form.absolute_uri }}" target="_blank"
+              <a class="site-url" ng-href="{{ site.absolute_uri }}" target="_blank"
                 title="{{ 'CANT_CHANGE' | translate }}">
                 {{ site.absolute_uri }}
               </a>
