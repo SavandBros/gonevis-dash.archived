@@ -1865,3 +1865,29 @@ img.cache {
     background: red;
     color: #fff !important;
 }
+
+
+/* Happy new year */
+
+.new-year a {
+    font-weight: bold;
+    text-shadow: 0 2px rgba(0, 0, 0, 0.1);
+    font-size: 1.8em;
+    letter-spacing: -4px;
+}
+
+.new-year a span:nth-child(1) {
+    color: #e74c3c;
+}
+
+.new-year a span:nth-child(2) {
+    color: #2ecc71;
+}
+
+.new-year a span:nth-child(3) {
+    color: #3498db;
+}
+
+.new-year a span:nth-child(4) {
+    color: #f39c12;
+}
