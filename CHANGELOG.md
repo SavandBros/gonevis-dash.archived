@@ -3,9 +3,11 @@
 
 **Features:**
 - Added #1087: Show 2019 year on navbar.
+- Added #1095: Make post/page preview full screen.
 
 **Bug Fixes:**
 - Fixed #1091: Fix blog settings address not opening.
+- Fixed #965: Post Preview windows make navigation link to be like mobile.
 
 
 2019.1.1
