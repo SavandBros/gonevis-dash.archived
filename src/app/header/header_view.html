@@ -40,9 +40,7 @@
         </li>
         <!-- New blog -->
         <li ng-if="!user.getSites().length" ng-class="{active: state.includes('site-new')}">
-          <a ui-sref="site-new">
-            <small translate>START_A_BLOG</small>
-          </a>
+          <a ui-sref="site-new"><small translate>START_A_BLOG</small></a>
         </li>
         <li ng-class="{active: state.includes('reader')}">
           <a ui-sref="reader.explore-feed({view: 'feed'})" translate ng-click="set.sidebar = false">READER</a>
