@@ -145,11 +145,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
   };
 
   /**
-   * @description Open's current blog's URL in a new tab
-   *
-   * ## Purpose
-   * It's purpose is to show a user's current blog.
-   *
    * @param {string} blogUrl
    */
   $scope.visitBlog = blogUrl => {
