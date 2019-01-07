@@ -29,6 +29,7 @@
 - Fixed #1075: Editor on paste error: "Uncaught TypeError: n.appendChild is not a function".
 - Fixed #1078: Fix payment public ID to production.
 - Fixed #1081: Fix design of FAQ section in upgrade section in site settings.
+- Fixed #1083: Show needed errors on team invitation.
 
 
 2018.12.1
