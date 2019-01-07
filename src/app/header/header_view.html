@@ -40,9 +40,7 @@
         </li>
         <!-- New blog -->
         <li ng-if="!user.getSites().length" ng-class="{active: state.includes('site-new')}">
-          <a ui-sref="site-new">
-            <small translate>START_A_BLOG</small>
-          </a>
+          <a ui-sref="site-new"><small translate>START_A_BLOG</small></a>
         </li>
         <li ng-class="{active: state.includes('reader')}">
           <a ui-sref="reader.explore-feed({view: 'feed'})" translate ng-click="set.sidebar = false">READER</a>
@@ -58,6 +56,8 @@
             <span>9</span>
           </a>
         </li>
+        <!-- Visit Blog -->
+        <li><a ng-click="visitBlog(currentSite.url)" target="_blank" translate>VISIT_BLOG</a></li>
         <!-- Account dropdown -->
         <li class="dropdown" ng-class="{active: state.includes('user')}">
           <!-- Header -->
