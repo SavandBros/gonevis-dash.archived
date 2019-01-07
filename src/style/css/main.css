@@ -644,13 +644,10 @@ md-toast {
     visibility: hidden;
 }
 
-.file-overlay h3 {
+.file-overlay h4 {
     color: #fff !important;
     opacity: 1 !important;
-}
-
-.file-overlay h3 {
-    padding-bottom: 10px;
+    line-height: 30px;
 }
 
 .file-overlay .label-default {
