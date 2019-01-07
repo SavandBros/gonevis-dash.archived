@@ -6,6 +6,7 @@
 
 **Bug Fixes:**
 - Fixed #1091: Fix blog settings address not opening.
+- Fixed #1097: Fix media download does not open in new tab.
 
 
 2019.1.1
