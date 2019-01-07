@@ -4,7 +4,7 @@ import headerTemplate from "./header_view.html";
 import app from "../app";
 
 function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, AuthService, DolphinService, Codekit,
-  Entry, API, ModalsService, TourService, toaster, $translate, $transitions) {
+  Entry, API, ModalsService, TourService, toaster, $translate, $transitions, $window) {
 
   function constructor() {
     $scope.codekit = Codekit;
@@ -142,6 +142,19 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
     if (format === "image") {
       DolphinService.viewSelection("headerNevis");
     }
+  };
+
+  /**
+   * @param {string} blogUrl
+   */
+  $scope.visitBlog = blogUrl => {
+    let schema = "https://";
+    // Check if blog url ends with 'gonevis.com'.
+    if (!blogUrl.endsWith("gonevis.com")) {
+      schema = "//";
+    }
+    // Open blog URL in new tab.
+    $window.open(schema + blogUrl);
   };
 
   /**
@@ -344,5 +357,6 @@ HeaderController.$inject = [
   "TourService",
   "toaster",
   "$translate",
-  "$transitions"
+  "$transitions",
+  "$window"
 ];
