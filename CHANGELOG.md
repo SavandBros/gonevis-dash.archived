@@ -6,6 +6,7 @@
 
 **Bug Fixes:**
 - Fixed #1091: Fix blog settings address not opening.
+- Fixed #1099: Make media modal bigger.
 
 
 2019.1.1
