@@ -3,9 +3,13 @@
 
 **Features:**
 - Added #1087: Show 2019 year on navbar.
+- Added #1090: Add a link on navbar to visit current blog.
+- Added #1095: Make post/page preview full screen.
 
 **Bug Fixes:**
 - Fixed #1091: Fix blog settings address not opening.
+- Fixed #1097: Fix media download does not open in new tab.
+- Fixed #965: Post Preview windows make navigation link to be like mobile.
 - Fixed #1099: Make media modal bigger.
 
 
@@ -30,6 +34,7 @@
 - Fixed #1075: Editor on paste error: "Uncaught TypeError: n.appendChild is not a function".
 - Fixed #1078: Fix payment public ID to production.
 - Fixed #1081: Fix design of FAQ section in upgrade section in site settings.
+- Fixed #1083: Show needed errors on team invitation.
 
 
 2018.12.1

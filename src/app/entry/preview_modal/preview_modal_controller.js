@@ -11,7 +11,7 @@ import app from "../../app";
  * It's purpose is to show a preview of a post/page by the given URL.
  *
  * ## Abilities
- * This controller can show the preview in three diffrent screen sizes:
+ * This controller can show the preview in three different screen sizes:
  * - Desktop (large)
  * - Tablet (medium)
  * - Mobile (small)
@@ -24,7 +24,7 @@ function PreviewModalController($scope, site, preview, $sce) {
   function constructor() {
     $scope.preview = $sce.trustAsResourceUrl(preview);
     $scope.site = $sce.trustAsResourceUrl(site);
-    $scope.currentClass = "modal-lg";
+    $scope.currentWidth = "100%";
 
     /**
      * @desc Preview modes
@@ -32,23 +32,23 @@ function PreviewModalController($scope, site, preview, $sce) {
      */
     $scope.modes = [{
       icon: "desktop",
-      class: "modal-lg"
+      width: "100%"
     }, {
       icon: "tablet",
-      class: "modal-md"
+      width: "75%"
     }, {
       icon: "mobile",
-      class: "modal-sm"
+      width: "30%"
     }];
   }
 
   /**
    * @desc Change preview mode
    *
-   * @param {string} previewClass
+   * @param {string} width
    */
-  $scope.changeMode = (previewClass) => {
-    $scope.currentClass = previewClass;
+  $scope.changeMode = width => {
+    $scope.currentWidth = width;
   };
 
   constructor();
