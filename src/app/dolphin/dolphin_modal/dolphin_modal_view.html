@@ -37,7 +37,7 @@
               type="button" ng-model="advanced" ng-init="advanced = true" ng-click="advanced = !advanced">
               <i class="fa fa-fw text-left" ng-class="{'fa-chevron-up': !advanced, 'fa-chevron-down': advanced}"></i>
             </button>
-            <a ng-href="{{ dolphin.get.file }}" class="btn btn-default btn-sm" download>
+            <a ng-href="{{ dolphin.get.file }}" target="_blank" class="btn btn-default btn-sm" download>
               <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
             </a>
           </div>
