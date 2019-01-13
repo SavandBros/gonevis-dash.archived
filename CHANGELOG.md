@@ -11,6 +11,7 @@
 - Fixed #1097: Fix media download does not open in new tab.
 - Fixed #965: Post Preview windows make navigation link to be like mobile.
 - Fixed #1099: Make media modal bigger.
+- Fixed #1085: Set the correct JWT expiration date in Cookies.
 
 
 2019.1.1

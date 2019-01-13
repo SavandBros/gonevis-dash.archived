@@ -64,7 +64,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
    * @param {string} token
    */
   this.setToken = function(token) {
-    $cookies.put("JWT", token);
+    $cookies.put("JWT", token, self.getTokenOption(token));
   };
 
   /**
@@ -98,7 +98,7 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
       userData.sites = self.getAuthenticatedUser(true).getSites();
     }
     // Store authentication
-    $cookies.put("user", JSON.stringify(userData));
+    $cookies.put("user", JSON.stringify(userData), self.getTokenOption(self.getToken()));
     // Update tracking info
     self.setTrackingInfo();
     // Return account instance
@@ -140,6 +140,24 @@ function AuthService($state, $rootScope, $cookies, $window, $stateParams, API, A
     }
 
     return isValid;
+  };
+
+  /**
+   * @desc Get token's expiration data.
+   *
+   * @param {string} token
+   * @return {object}
+   */
+  this.getTokenOption = token => {
+    let tokenObject = self.parseJwt(token);
+    let options = null;
+    // Set token expiration
+    if (tokenObject) {
+      options = {
+        expires: new Date(tokenObject.exp * 1000)
+      };
+    }
+    return options;
   };
 
   /**
