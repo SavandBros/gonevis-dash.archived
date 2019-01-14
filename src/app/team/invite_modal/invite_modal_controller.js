@@ -36,6 +36,12 @@ function TeamInviteModalController($scope, $rootScope, toaster, API, AuthService
         });
       },
       function(data) {
+        // Check if blog has reached maximum number of team members.
+        if (data.data.non_field_errors[0]) {
+          toaster.error(data.data.non_field_errors[0]);
+          // Close modal
+          ModalsService.close("invite");
+        }
         form.errors = data.data;
         form.loading = false;
       }

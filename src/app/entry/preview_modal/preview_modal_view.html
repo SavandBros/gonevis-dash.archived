@@ -1,14 +1,16 @@
 <div class="modal fade" id="preview">
-  <div class="modal-dialog {{ currentClass }}">
+  <div class="modal-dialog" ng-style="{width: currentWidth }">
     <div class="modal-content">
       <div class="modal-header">
         <!-- Modes -->
-        <button class="btn btn-default s-mar-right-soft hidden-xs" ng-repeat="mode in modes"
-          ng-class="{'active': currentClass === mode.class}" ng-click="changeMode(mode.class)">
-          <i class="fa fa-fw fa-{{ mode.icon }}"></i>
-        </button>
+        <div class="btn-group">
+          <button class="btn btn-default btn-group hidden-xs" ng-repeat="mode in modes"
+                  ng-class="{'active': currentWidth === mode.width}" ng-click="changeMode(mode.width)">
+            <i class="fa fa-fw fa-{{ mode.icon }}"></i>
+          </button>
+        </div>
         <!-- View on blog -->
-        <a class="btn btn-info" ng-href="{{ site }}" target="_blank" translate>VIEW_ON_BLOG</a>
+        <a class="btn btn-info s-mar-left-soft" ng-href="{{ site }}" target="_blank" translate>VIEW_ON_BLOG</a>
         <!-- Close -->
         <button class="btn pull-right bg-no" data-dismiss="modal">
           <i class="fa fa-close"></i>

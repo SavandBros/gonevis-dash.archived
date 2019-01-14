@@ -78,7 +78,7 @@
             <ul class="dropdown-menu dropdown-menu-right">
               <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> {{ 'VIEW' | translate }} </a></li>
               <li>
-                <a ng-href="{{ dolphin.get.file }}" download>
+                <a ng-href="{{ dolphin.get.file }}" target="_blank" download>
                   <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
                 </a>
               </li>
@@ -120,7 +120,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li><a ng-click="dolphin.view()"><i class="fa fa-eye"></i> {{ 'VIEW' | translate }}</a></li>
                   <li>
-                    <a ng-href="{{ dolphin.get.file }}" download>
+                    <a ng-href="{{ dolphin.get.file }}" target="_blank" download>
                       <i class="fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
                     </a>
                   </li>
