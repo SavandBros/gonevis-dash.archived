@@ -289,6 +289,13 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       template: require("./team/team_view.html"),
       auth: true,
       title: "Team"
+    })
+    .state("dash.help", {
+      url: "/help",
+      controller: "HelpController",
+      template: require("./help/help_view.html"),
+      auth: true,
+      title: "Help"
     });
 
   $urlRouterProvider.otherwise(function ($injector) {
