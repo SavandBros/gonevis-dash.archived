@@ -58,6 +58,8 @@
         </li>
         <!-- Visit Blog -->
         <li><a ng-click="visitBlog(currentSite.url)" target="_blank" translate>VISIT_BLOG</a></li>
+        <!-- Feedback -->
+        <li><a ng-click="feedback()" translate>FEEDBACK</a></li>
         <!-- Account dropdown -->
         <li class="dropdown" ng-class="{active: state.includes('user')}">
           <!-- Header -->
@@ -77,8 +79,6 @@
             <li><a ng-click="auth.signOut()"><i class="fa fa-sign-out"></i> {{ 'LOG_OUT' | translate }}</a></li>
           </ul>
         </li>
-        <!-- Feedback -->
-        <li><a ng-click="feedback()" translate>FEEDBACK</a></li>
       </ul>
     </div>
     <!-- Not authenticated -->
