@@ -66,10 +66,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         sref: "dash.team",
         icon: "fa-users"
       }, {
-        label: translations.HELP,
-        sref: "dash.help",
-        icon: "fa-question"
-      }, {
         label: translations.SETTINGS,
         sref: "dash.site.settings",
         view: "settings",
