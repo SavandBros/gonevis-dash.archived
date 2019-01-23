@@ -58,6 +58,8 @@
         </li>
         <!-- Visit Blog -->
         <li><a ng-click="visitBlog(currentSite.url)" target="_blank" translate>VISIT_BLOG</a></li>
+        <!-- Help -->
+        <li ng-class="{active: state.includes('help')}"><a ui-sref="help" translate>HELP</a></li>
         <!-- Feedback -->
         <li><a ng-click="feedback()" translate>FEEDBACK</a></li>
         <!-- Account dropdown -->
