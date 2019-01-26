@@ -33,7 +33,6 @@ body.lights.off {
 /* Panel */
 
 .panel {
-    box-shadow: none;
     border: none !important;
     cursor: default;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
@@ -49,7 +48,7 @@ body.lights.off {
 .panel-heading a {
     color: #6F7A8B !important;
     font-weight: bold;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.03em;
 }
 
 .panel-heading:not(.lower),
@@ -61,6 +60,9 @@ body.lights.off {
     border-top: 2px solid #eaedf1;
 }
 
+.panel-body .btn {
+    margin-bottom: 5px;
+}
 
 /* Panel label */
 
@@ -80,7 +82,6 @@ body.lights.off {
 .sidebar-content {
     background: #fff;
     border-right: 1px solid rgb(221, 221, 221);
-    height: 500px;
     color: #fff;
     position: fixed;
     height: calc(100% - 45px);
