@@ -1,20 +1,19 @@
-version: 2
-
 aliases:
-    - &working_directory ~/gonevis-dash
+	- &working_directory  ~/gonevis-dash
 
-    - &restore_cache
-      key: dependency-cache-{{ checksum "package.json" }}
-
+	- &restore_yarn_cache
+		key: dependency-cache-{{ checksum "package.json" }}
 
 docker_image_and_WD_env: &docker_image_and_WD_env
- 	docker:
+	docker:
 		- image: circleci/node:8.11.3
-	working_directory: *working_directory
+	working_directory:  *working_directory
+
+version: 2
 
 jobs:
   build:
-    << : *docker_image_and_WD_env
+    <<: *docker_image_and_WD_env    
     steps:
       - checkout
       - restore_cache: *restore_cache
@@ -26,15 +25,15 @@ jobs:
           paths:
             - ./node_modules
   jshint:
-    << : *docker_image_and_WD_env
+    <<: *docker_image_and_WD_env    
     steps:
-      - checkout
-      - restore_cache: *restore_cache
-      - run:
-          name: code quality
-          command: npm run code-quality
+    - checkout
+    - restore_cache: *restore_cache
+    - run:
+        name: code quality
+        command: npm run code-quality
   test:
-    <<: *docker_image_and_WD_env
+		<<: *docker_image_and_WD_env
     steps:
       - checkout
       - restore_cache: *restore_cache
@@ -53,7 +52,7 @@ jobs:
       - store_test_results:
           path: test-results.xml
   deploy:
-    <<: *docker_image_and_WD_env
+    <<: *docker_image_and_WD_env    
     steps:
     - checkout
     - restore_cache: *restore_cache
