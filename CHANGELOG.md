@@ -15,6 +15,9 @@
 - Fixed #1085: Set the correct JWT expiration date in Cookies.
 - Fixed #1105: Fix dependency (webpack-dev-server) vulnerability.
 
+**Tasks:**
+- Closed #1111: Hide new year message.
+
 
 2019.1.1
 ========
