@@ -30,7 +30,7 @@ jobs:
     steps:
       - checkout
       - restore_cache: *restore_cache
-			- run:
+      - run:
           name: code quality
           command: npm run code-quality
   test:
