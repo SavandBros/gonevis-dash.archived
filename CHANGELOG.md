@@ -13,6 +13,9 @@
 - Fixed #1099: Make media modal bigger.
 - Fixed #1085: Set the correct JWT expiration date in Cookies.
 
+**Tasks:**
+- Closed #1111: Hide new year message.
+
 
 2019.1.1
 ========
