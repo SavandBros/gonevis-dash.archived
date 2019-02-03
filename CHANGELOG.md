@@ -5,6 +5,7 @@
 - Added #1087: Show 2019 year on navbar.
 - Added #1090: Add a link on navbar to visit current blog.
 - Added #1095: Make post/page preview full screen.
+- Added #1108: Update angular and other packages.
 
 **Bug Fixes:**
 - Fixed #1091: Fix blog settings address not opening.
@@ -12,6 +13,10 @@
 - Fixed #965: Post Preview windows make navigation link to be like mobile.
 - Fixed #1099: Make media modal bigger.
 - Fixed #1085: Set the correct JWT expiration date in Cookies.
+- Fixed #1105: Fix dependency (webpack-dev-server) vulnerability.
+
+**Tasks:**
+- Closed #1111: Hide new year message.
 
 
 2019.1.1
