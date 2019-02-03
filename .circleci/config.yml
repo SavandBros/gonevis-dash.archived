@@ -1,22 +1,21 @@
-version: 2
+version: 2.1
 
 aliases:
   - &working_directory ~/gonevis-dash  
-  - &restore_cache
-    key: dependency-cache-{{ checksum "package.json" }}
 
-docker_image_and_WD_env: &docker_image_and_WD_env
-  docker:
-    - image: circleci/node:8.11.3
-  working_directory:  *working_directory
-
+executors:
+  node:
+    docker:
+      - image: circleci/node:8.11.3
+    working_directory:  *working_directory
 
 jobs:
   build:
-    <<: *docker_image_and_WD_env    
+    executor: node
     steps:
       - checkout
-      - restore_cache: *restore_cache
+      - restore_cache: 
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install-npm-wee
           command: npm install
@@ -24,19 +23,25 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+      - persist_to_workspace:
+          root: *working_directory
+          paths:
+            - .
   jshint:
-    <<: *docker_image_and_WD_env    
+    executor: node
     steps:
     - checkout
-    - restore_cache: *restore_cache
+    - attach_workspace:
+        at: *working_directory
     - run:
         name: code quality
         command: npm run code-quality
   test:
-    <<: *docker_image_and_WD_env
+    executor: node
     steps:
       - checkout
-      - restore_cache: *restore_cache
+      - attach_workspace:
+          at: *working_directory
       - run:
           name: test
           command: npm test
@@ -52,10 +57,11 @@ jobs:
       - store_test_results:
           path: test-results.xml
   deploy:
-    <<: *docker_image_and_WD_env    
+    executor: node
     steps:
     - checkout
-    - restore_cache: *restore_cache
+    - attach_workspace:
+        at: *working_directory
     - run:
         name: Deploying to Production
         command: |
