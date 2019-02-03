@@ -2,9 +2,8 @@ version: 2
 
 aliases:
   - &working_directory ~/gonevis-dash  
-  - &restore_yarn_cache
-    keys: 
-      -dependency-cache-{{ checksum "package.json" }}
+  - &restore_cache
+    key: dependency-cache-{{ checksum "package.json" }}
 
 docker_image_and_WD_env: &docker_image_and_WD_env
   docker:
