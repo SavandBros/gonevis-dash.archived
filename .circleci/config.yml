@@ -27,6 +27,7 @@ jobs:
           root: *working_directory
           paths:
             - .
+
   jshint:
     executor: node
     steps:
@@ -56,6 +57,7 @@ jobs:
           prefix: coverage
       - store_test_results:
           path: test-results.xml
+
   deploy:
     executor: node
     steps:
