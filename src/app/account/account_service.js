@@ -38,7 +38,7 @@ function Account() {
     /**
      * @type {boolean}
      */
-    this.hasMedia = self.media.full;
+    this.hasMedia = !!self.media.full;
 
     /**
      * @desc Get media or default picture
