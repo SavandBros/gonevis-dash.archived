@@ -5,11 +5,11 @@
       <!-- Alerts -->
       <div class="alert alert-info" ng-if="!user.isProfileComplete(true)">
         <translate>INCOMPLETE_PROFILE</translate>
-        <a class="btn btn-default pull-right s-mar-left-soft" ng-click="incompleteCollapse = !incompleteCollapse">
-          <i class="fa" ng-class="{'fa-caret-up': !incompleteCollapse, 'fa-caret-down': incompleteCollapse}"></i>
+        <a class="btn btn-default pull-right s-mar-left-soft" ng-click="incompleteExpand = !incompleteExpand">
+          <i class="fa" ng-class="{'fa-caret-up': incompleteExpand, 'fa-caret-down': !incompleteExpand}"></i>
         </a>
         <a class="btn btn-default pull-right" ui-sref="user({s: param.s})" translate>IMPROVE_PROFILE</a>
-        <ul uib-collapse="incompleteCollapse">
+        <ul uib-collapse="!incompleteExpand">
           <br>
           <li translate ng-class="{'o-fade-hard': user.get.name}">SET_DISPLAY_NAME</li ng-class>
           <li translate ng-class="{'o-fade-hard': user.hasMedia}">SET_PROFILE_PICTURE</li>
