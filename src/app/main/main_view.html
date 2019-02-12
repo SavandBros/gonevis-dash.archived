@@ -3,9 +3,19 @@
     <!-- Left -->
     <div class="col-md-8">
       <!-- Alerts -->
-      <div class="alert alert-danger" ng-if="!user.isProfileComplete(true)">
+      <div class="alert alert-info" ng-if="!user.isProfileComplete(true)">
         <translate>INCOMPLETE_PROFILE</translate>
+        <a class="btn btn-default pull-right s-mar-left-soft" ng-click="incompleteExpand = !incompleteExpand">
+          <i class="fa" ng-class="{'fa-caret-up': incompleteExpand, 'fa-caret-down': !incompleteExpand}"></i>
+        </a>
         <a class="btn btn-default pull-right" ui-sref="user({s: param.s})" translate>IMPROVE_PROFILE</a>
+        <ul uib-collapse="!incompleteExpand">
+          <br>
+          <li translate ng-class="{'o-fade-hard': user.get.name}">SET_DISPLAY_NAME</li>
+          <li translate ng-class="{'o-fade-hard': user.hasMedia}">SET_PROFILE_PICTURE</li>
+          <li translate ng-class="{'o-fade-hard': user.get.about}">SET_ABOUT</li>
+          <li translate ng-class="{'o-fade-hard': user.get.location}">SET_LOCATION</li>
+        </ul>
       </div>
       <!-- Latest comments -->
       <div class="panel panel-default" ng-if="!Comment.loading">
