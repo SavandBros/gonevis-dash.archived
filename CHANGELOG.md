@@ -1,3 +1,10 @@
+2019.3.1
+========
+
+**Features:**
+- Added #1119: Add Vimeo video URL support.
+
+
 2019.2.1
 ========
 
