@@ -1,3 +1,10 @@
+2019.3.1
+========
+
+**Features:**
+- Added #1119: Add Vimeo video URL support.
+
+
 2019.2.1
 ========
 
@@ -14,6 +21,7 @@
 - Fixed #1099: Make media modal bigger.
 - Fixed #1085: Set the correct JWT expiration date in Cookies.
 - Fixed #1105: Fix dependency (webpack-dev-server) vulnerability.
+- Fixed #1117: Fix blog custom domain list doesn't show up.
 
 **Improvements:**
 - Closes #1113: Add details to incomplete-profile alert.
