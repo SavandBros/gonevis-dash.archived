@@ -84,6 +84,8 @@ class VideoBlot extends BlockEmbed {
     // Set styles for iframe
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('allowfullscreen', true);
+    iframe.setAttribute('webkitallowfullscreen', true);
+    iframe.setAttribute('mozallowfullscreen', true);
     iframe.setAttribute('src', url);
     // Append iframe as child to wrapper
     node.appendChild(iframe);
