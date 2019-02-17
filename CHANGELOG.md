@@ -4,6 +4,9 @@
 **Features:**
 - Added #1119: Add Vimeo video URL support.
 
+**Bug Fixes:**
+- Fixed #1122: Only embed url when ever user pastes an URL.
+
 
 2019.2.1
 ========
