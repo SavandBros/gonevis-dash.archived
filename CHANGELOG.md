@@ -25,6 +25,7 @@
 - Fixed #1085: Set the correct JWT expiration date in Cookies.
 - Fixed #1105: Fix dependency (webpack-dev-server) vulnerability.
 - Fixed #1117: Fix blog custom domain list doesn't show up.
+- Fixed #1224: Fix bad UX for 2 settings that require different save buttons.
 
 **Improvements:**
 - Closes #1113: Add details to incomplete-profile alert.
