@@ -211,6 +211,31 @@
             <!-- Help text -->
             <span><i class="fa fa-info-circle fa-fw"></i> {{ 'DOMAINS_HELP_TEXT' | translate }}</span>
             <hr>
+            <!-- Domain list -->
+            <table class="table table-hover" ng-if="site.domains.length">
+              <thead>
+              <tr>
+                <th translate>DOMAIN_NAME</th>
+                <th translate>DNS_TARGET</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="domain in site.domains">
+                <!-- Domain link -->
+                <td><a ng-href="https://{{ domain.domain }}" target="_blank">{{ domain.domain }}</a></td>
+                <!-- Domain DNS Target -->
+                <td>{{ domain.cname }}</td>
+                <!-- Remove button -->
+                <td>
+                  <button class="btn btn-xs btn-default pull-right o-fade-hard o-fade-hover-full"
+                          title="{{ 'DELETE_THIS_DOMAIN' | translate }}" ng-click="deleteDomain(domain)">
+                    <i class="fa fa-close"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
             <!-- Add domain -->
             <button class="btn btn-default" ng-click="addDomain()"
               ng-disabled="site.domains.length == maxCustomDomains" translate>ADD_DOMAIN</button>  

@@ -27,7 +27,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
   let oldData = {};
   let interval;
   let autoSave;
-  let getYoutubeUrl;
+  let getPastedVideoEmbed;
   let vm = this;
 
   /**
@@ -258,14 +258,20 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
    *
    * @param {string} clipboard
    */
-  vm.validateYouTubeUrl = function(clipboard) {
-    let regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-    if (clipboard.match(regex)) {
-      getYoutubeUrl = RegExp.$1;
-      return getYoutubeUrl;
+  vm.validatePastedVideo = function (clipboard) {
+    getPastedVideoEmbed = null;
+    clipboard.match(/^(http:\/\/|https:\/\/|)(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/);
+    let isValid = false;
+    // Check URL regex
+    if (RegExp.$3.indexOf('youtu') > -1) {
+      getPastedVideoEmbed = `https://www.youtube.com/embed/${RegExp.$6}?autoplay=0`;
+      isValid = true;
+    } else if (RegExp.$3.indexOf('vimeo') > -1) {
+      getPastedVideoEmbed = `https://player.vimeo.com/video/${RegExp.$6}`;
+      isValid = true;
     }
 
-    return false;
+    return isValid;
   };
 
   /**
@@ -325,6 +331,8 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
       'align',
       "allow",
       "allowfullscreen",
+      "webkitallowfullscreen",
+      "mozallowfullscreen",
       "frameborder"
     ];
 
@@ -366,15 +374,17 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     });
 
     editor.clipboard.addMatcher(Node.TEXT_NODE, function (node, delta) {
-      if (vm.validateYouTubeUrl(node.data)) {
+      if (vm.validatePastedVideo(node.data)) {
         delta.ops = [{
           attributes: {
             allow: "encrypted-media",
             allowfullscreen: "true",
-            frameborder: 0
+            frameborder: 0,
+            webkitallowfullscreen: true,
+            mozallowfullscreen: true
           },
           insert: {
-            video: 'https://www.youtube.com/embed/' + getYoutubeUrl + '?autoplay=0'
+            video: getPastedVideoEmbed
           }
         }];
       }
