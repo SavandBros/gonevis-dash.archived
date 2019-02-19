@@ -58,6 +58,11 @@
     padding: 0 !important;
 }
 
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker.ql-expanded .ql-stroke {
+    stroke: #d17100;
+}
+
 .lights.off .ql-toolbar.ql-snow .ql-fill,
 .lights.off .ql-toolbar.ql-snow .ql-stroke.ql-fill {
     fill: #fff !important;
