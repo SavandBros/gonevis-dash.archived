@@ -149,6 +149,24 @@ function EntryController($scope, $state, $stateParams, Entry, UndoService, Codek
     getEntries(tab);
   };
 
+  /**
+   * @desc Status change callback
+   *
+   * @param {Event} event
+   * @param {object} data
+   */
+  $scope.$on("gonevisDash.Entry:status-changed", function(event, data) {
+    if (data.success) {
+      if ($scope.currentTab.view === 'draft' && data.entry.get.status === $scope.entryStatus.PUBLISH ||
+        $scope.currentTab.view === 'published' && data.entry.get.status === $scope.entryStatus.DRAFT) {
+        // Remove entry from selected ones.
+        data.entry.isSelected = false;
+        // Remove entry from the list.
+        $scope.entries.splice($scope.entries.indexOf(data.entry), 1);
+      }
+    }
+  });
+
 
   /**
    * @desc Load more function for controller
