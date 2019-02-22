@@ -26,13 +26,13 @@
     </div>
   </div>
   <!-- Upgrade -->
-  <div ng-if="currentTab.view === 'upgrade' && plans.length">
+  <div ng-if="currentTab.view === 'upgrade'">
     <!-- No permission -->
     <div class="col-md-8 col-md-offset-2 s-pad-soft" ng-if="!isOwner">
       <nothing text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
     </div>
     <!-- Plans -->
-    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="isOwner">
+    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="plans.length && isOwner">
       <div class="col-md-4">
         <div class="plan" id="lite">
           <!-- Title -->
