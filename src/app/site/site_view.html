@@ -418,8 +418,9 @@
           </div>
         </div>
       </div>
+
       <!-- Branding and footer text (panel) -->
-      <div class="panel panel-default">
+      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
         <div class="panel-body">
           <!-- Branding -->
           <div class="checkbox checkbox-primary checkbox-small">
@@ -444,8 +445,9 @@
           </div>
         </div>
       </div>
+
       <!-- Allow Google Analytics (panel) -->
-      <div class="panel panel-default">
+      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
         <div class="panel-body">
           <div class="checkbox checkbox-primary checkbox-small"
                title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
