@@ -8,6 +8,7 @@
 - Fixed #1122: Only embed url when ever user pastes an URL.
 - Fixed #1126: Change blue to project's primary color at 'header' option at editor buttons.
 - Fixed #1130: Remove post/page from draft when published.
+- Fixed #1132: Remove "Remove branding" and "Google Analytics" sections and from other setting tabs.
 
 
 2019.2.1
