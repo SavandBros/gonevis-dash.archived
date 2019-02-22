@@ -418,51 +418,6 @@
           </div>
         </div>
       </div>
-      <!-- Branding and footer text (panel) -->
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <!-- Branding -->
-          <div class="checkbox checkbox-primary checkbox-small">
-            <input id="remove_branding" type="checkbox" ng-model="site.remove_branding"
-                   disable-on-request="removeBranding(site.remove_branding)"
-                   title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
-            <label for="remove_branding" translate>REMOVE_BRANDING</label>
-          </div>
-          <!-- Footer text (panel) -->
-          <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.remove_branding">
-            <p class="t-bold" translate>FOOTER_TEXT</p>
-            <div class="row">
-              <div class="col-md-10">
-                <textarea type="text" class="form-control" ng-model="site.footer_text"></textarea>
-              </div>
-              <div class="col-md-2 text-right">
-                <button class="btn btn-primary" type="button"
-                        disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Allow Google Analytics (panel) -->
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="checkbox checkbox-primary checkbox-small"
-               title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
-            <input id="google_analytics_enabled" type="checkbox" ng-model="site.google_analytics_enabled">
-            <label for="google_analytics_enabled" translate>ALLOW_GOOGLE_ANALYTICS</label>
-            <button class="btn btn-primary pull-right" type="button"
-                    disable-on-request="setGoogleAnalytics()">{{ 'SAVE' | translate }}
-            </button>
-          </div>
-          <!-- Google Analytics code -->
-          <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.google_analytics_enabled">
-            <p class="t-bold" translate>GOOGLE_ANALYTICS_CODE</p>
-            <input type="text" class="form-control" placeholder="UA-XXXXX-Y" ng-model="site.google_analytics_code">
-          </div>
-        </div>
-      </div>
-
       <!-- Billing -->
       <div ng-if="currentTab.view === 'billing'">
         <!-- No permission -->
@@ -524,6 +479,50 @@
                     <td>{{ transaction.created | date }}</td>
                   </tr>
                 </table>
+              </div>
+            </div>
+          </div>
+          <!-- Branding and footer text (panel) -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <!-- Branding -->
+              <div class="checkbox checkbox-primary checkbox-small">
+                <input id="remove_branding" type="checkbox" ng-model="site.remove_branding"
+                       disable-on-request="removeBranding(site.remove_branding)"
+                       title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
+                <label for="remove_branding" translate>REMOVE_BRANDING</label>
+              </div>
+              <!-- Footer text (panel) -->
+              <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.remove_branding">
+                <p class="t-bold" translate>FOOTER_TEXT</p>
+                <div class="row">
+                  <div class="col-md-10">
+                    <textarea type="text" class="form-control" ng-model="site.footer_text"></textarea>
+                  </div>
+                  <div class="col-md-2 text-right">
+                    <button class="btn btn-primary" type="button"
+                            disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Allow Google Analytics (panel) -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="checkbox checkbox-primary checkbox-small"
+                   title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
+                <input id="google_analytics_enabled" type="checkbox" ng-model="site.google_analytics_enabled">
+                <label for="google_analytics_enabled" translate>ALLOW_GOOGLE_ANALYTICS</label>
+                <button class="btn btn-primary pull-right" type="button"
+                        disable-on-request="setGoogleAnalytics()">{{ 'SAVE' | translate }}
+                </button>
+              </div>
+              <!-- Google Analytics code -->
+              <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.google_analytics_enabled">
+                <p class="t-bold" translate>GOOGLE_ANALYTICS_CODE</p>
+                <input type="text" class="form-control" placeholder="UA-XXXXX-Y" ng-model="site.google_analytics_code">
               </div>
             </div>
           </div>
