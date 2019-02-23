@@ -260,7 +260,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
    */
   vm.validatePastedVideo = function (clipboard) {
     getPastedVideoEmbed = null;
-    clipboard.match(/(http:\/\/|https:\/\/|)(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/);
+    clipboard.match(/^(http:\/\/|https:\/\/|)(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/);
     let isValid = false;
     // Check URL regex
     if (RegExp.$3.indexOf('youtu') > -1) {

@@ -54,6 +54,12 @@ function Entry($rootScope, $state, API, Codekit, toaster, $translate) {
         function() {
           self.get[key] = value;
           self.isSelected = true;
+          if (key === "status") {
+            $rootScope.$broadcast("gonevisDash.Entry:status-changed", {
+              entry: self,
+              success: true,
+            });
+          }
         }
       );
     };
