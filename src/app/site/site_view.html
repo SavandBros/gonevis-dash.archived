@@ -26,13 +26,13 @@
     </div>
   </div>
   <!-- Upgrade -->
-  <div ng-if="currentTab.view === 'upgrade' && plans.length">
+  <div ng-if="currentTab.view === 'upgrade'">
     <!-- No permission -->
     <div class="col-md-8 col-md-offset-2 s-pad-soft" ng-if="!isOwner">
       <nothing text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
     </div>
     <!-- Plans -->
-    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="isOwner">
+    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="plans.length && isOwner">
       <div class="col-md-4">
         <div class="plan" id="lite">
           <!-- Title -->
@@ -418,8 +418,9 @@
           </div>
         </div>
       </div>
+
       <!-- Branding and footer text (panel) -->
-      <div class="panel panel-default">
+      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
         <div class="panel-body">
           <!-- Branding -->
           <div class="checkbox checkbox-primary checkbox-small">
@@ -444,8 +445,9 @@
           </div>
         </div>
       </div>
+
       <!-- Allow Google Analytics (panel) -->
-      <div class="panel panel-default">
+      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
         <div class="panel-body">
           <div class="checkbox checkbox-primary checkbox-small"
                title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
