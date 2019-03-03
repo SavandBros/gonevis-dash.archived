@@ -1,6 +1,9 @@
 2019.4.1
 ========
 
+**Features:**
+- Added #1138: Add Google AdSense to site settings.
+
 **Bug Fixes:**
 - Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
 
