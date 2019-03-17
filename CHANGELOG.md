@@ -1,3 +1,10 @@
+2019.4.1
+========
+
+**Bug Fixes:**
+- Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
+
+
 2019.3.1
 ========
 
