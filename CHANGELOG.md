@@ -1,3 +1,10 @@
+2019.4.1
+========
+
+**Bug Fixes:**
+- Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
+
+
 2019.3.1
 ========
 
@@ -8,6 +15,7 @@
 - Fixed #1122: Only embed url when ever user pastes an URL.
 - Fixed #1126: Change blue to project's primary color at 'header' option at editor buttons.
 - Fixed #1130: Remove post/page from draft when published.
+- Fixed #1132: Remove "Remove branding" and "Google Analytics" sections and from other setting tabs.
 
 
 2019.2.1
