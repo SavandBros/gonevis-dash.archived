@@ -115,7 +115,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           search_engine_visibility: false,
           footer_text: "",
           google_analytics_enabled: false,
-          google_analytics_code: ""
+          google_analytics_code: "",
+          google_adsense_enabled: false,
+          google_adsense_code: "",
         }
       }, {
         view: "upgrade",
@@ -373,6 +375,31 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         $scope.googleAnalytics = toaster.error(error.data.google_analytics_code[0]);
       }
     );
+  };
+
+  /**
+   * Add Google AdSense to blog
+   * @returns {Promise}
+   */
+  $scope.setGoogleAdSense = () => {
+    let payload = {
+      google_adsense_enabled: $scope.site.google_adsense_enabled,
+      google_adsense_code: $scope.site.google_adsense_code
+    };
+
+    return API.SetGoogleAdSense.put({ siteId: site }, payload, () => {
+      // Clear last toaster
+      toaster.clear($scope.googleAdSense);
+      // Translate and show toaster
+      $translate(["DONE", "BLOG_UPDATED"]).then(translations => {
+        $scope.googleAdSense = toaster.success(translations.DONE, translations.BLOG_UPDATED);
+      });
+    }, error => {
+      // Clear last toaster
+      toaster.clear($scope.googleAdSense);
+      // show toaster regarding error
+      $scope.googleAdSense = toaster.error(error.data.google_adsense_code[0]);
+    });
   };
 
   /**
