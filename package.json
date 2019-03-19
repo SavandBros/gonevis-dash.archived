@@ -65,7 +65,6 @@
     "angular-translate-storage-cookie": "^2.18.1",
     "angular-translate-storage-local": "^2.18.1",
     "angular-ui-bootstrap": "^2.5.6",
-    "angular-ui-router": "^1.0.20",
     "angular-xeditable": "^0.9.0",
     "angularjs-toaster": "^3.0.0",
     "animate.css": "^3.7.0",
