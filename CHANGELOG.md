@@ -3,6 +3,7 @@
 
 **Bug Fixes:**
 - Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
+- Fixed #1143: 2 UI Router packages (1 of them should be removed).
 
 
 2019.3.1
