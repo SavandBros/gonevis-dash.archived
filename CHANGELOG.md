@@ -6,6 +6,7 @@
 
 **Bug Fixes:**
 - Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
+- Fixed #1141: Fix vulnerability alert related to bootstrap.
 
 
 2019.3.1
