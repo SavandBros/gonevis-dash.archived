@@ -1,6 +1,9 @@
 2019.4.1
 ========
 
+**Improvement:**
+- Closed #1142: Update NPM packages.
+
 **Bug Fixes:**
 - Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
 - Fixed #1141: Fix vulnerability alert related to bootstrap.
