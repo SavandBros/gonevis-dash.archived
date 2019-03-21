@@ -178,6 +178,7 @@
   "INCORRECT_GOOGLE_ANALYTICS": "Incorrect google analytics code format (UA-XXXXX-X).",
   "ALLOW_GOOGLE_ADSENSE": "Allow Google AdSense",
   "ALLOW_GOOGLE_ADSENSE_TITLE": "If disabled, GoNevis will no longer use Google AdSense code on the blog.",
+  "GOOGLE_ADSENSE_CODE": "Google AdSense Code",
   "DELETE_BLOG": "Delete Blog",
   "DOMAINS": "Domains",
   "DELETED_CUSTOM_DOMAIN": "Deleted custom domain: '{domain}'.",

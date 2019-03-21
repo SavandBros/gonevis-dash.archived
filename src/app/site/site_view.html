@@ -465,7 +465,7 @@
         </div>
       </div>
 
-      <!-- Allow Google Analytics (panel) -->
+      <!-- Allow Google AdSense (panel) -->
       <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
         <div class="panel-body">
           <div class="checkbox checkbox-primary checkbox-small"
@@ -476,10 +476,11 @@
                     disable-on-request="setGoogleAdSense()">{{ 'SAVE' | translate }}
             </button>
           </div>
-          <!-- Google Analytics code -->
-          <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.google_analytics_enabled">
-            <p class="t-bold" translate>GOOGLE_ANALYTICS_CODE</p>
-            <input type="text" class="form-control" placeholder="UA-XXXXX-Y" ng-model="site.google_analytics_code">
+          <!-- Google AdSense code -->
+          <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.google_adsense_enabled">
+            <p class="t-bold" translate>GOOGLE_ADSENSE_CODE</p>
+            <input type="text" class="form-control" placeholder="ca-pub-XXXXXXXXXXXXXXX"
+                   ng-model="site.google_adsense_code">
           </div>
         </div>
       </div>
