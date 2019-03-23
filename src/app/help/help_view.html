@@ -2,7 +2,7 @@
   <div class="row">
 
     <!-- Left -->
-    <div class="col-md-4">
+    <div class="col-md-3">
       <!-- Shortcuts -->
       <div class="panel">
         <div class="panel-heading">Shortcuts</div>
@@ -16,19 +16,23 @@
           <a class="btn btn-block btn-default" ng-click="feedback()">Give Us Your Feedback</a>
         </div>
       </div>
+    </div>
+
+    <!-- Middle -->
+    <div class="col-md-3">
 
       <!-- Forum -->
       <div class="panel">
         <div class="panel-heading">Forum</div>
         <div class="panel-body text-center">
           <a class="btn btn-block" href="{{ link.link }}" target="_blank" ng-repeat="link in forumLinks"
-            ng-class="{'btn-info': link.special, 'btn-default': !link.special}">{{ link.label }}</a>
+             ng-class="{'btn-info': link.special, 'btn-default': !link.special}">{{ link.label }}</a>
         </div>
       </div>
     </div>
 
     <!-- Right -->
-    <div class="col-md-8">
+    <div class="col-md-6">
 
       <!-- Getting started -->
       <div class="panel">
