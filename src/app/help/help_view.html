@@ -1,28 +1,48 @@
 <div class="container">
-  <div class="row col-md-4">
+  <div class="row">
 
-    <div class="panel">
-      <div class="panel-heading">Shortcuts</div>
-      <div class="panel-body">
-        <a class="btn btn-block btn-default">Change Blog Theme</a>
-        <a class="btn btn-block btn-default">View Plans</a>
-        <br>
-        <a class="btn btn-block btn-default">Explore GoNevis</a>
-        <a class="btn btn-block btn-default">View Subscribed Blogs</a>
-        <br>
-        <a class="btn btn-block btn-default">Give Us Your Feedback</a>
+    <!-- Left -->
+    <div class="col-md-4">
+      <!-- Shortcuts -->
+      <div class="panel">
+        <div class="panel-heading">Shortcuts</div>
+        <div class="panel-body">
+          <a class="btn btn-block btn-default">Change Blog Theme</a>
+          <a class="btn btn-block btn-default">View Plans</a>
+          <br>
+          <a class="btn btn-block btn-default">Explore GoNevis</a>
+          <a class="btn btn-block btn-default">View Subscribed Blogs</a>
+          <br>
+          <a class="btn btn-block btn-default">Give Us Your Feedback</a>
+        </div>
+      </div>
+
+      <!-- Forum -->
+      <div class="panel">
+        <div class="panel-heading">Forum</div>
+        <div class="panel-body text-center">
+          <a class="btn btn-block btn-info">Homepage</a>
+          <a class="btn btn-block btn-info">Create Thread</a>
+          <a class="btn btn-block btn-default">Features</a>
+          <a class="btn btn-block btn-default">Suggestions</a>
+          <a class="btn btn-block btn-default">Bugs</a>
+          <a class="btn btn-block btn-default">In Progress</a>
+        </div>
       </div>
     </div>
 
-    <div class="panel">
-      <div class="panel-heading">Forum</div>
-      <div class="panel-body text-center">
-        <a class="btn btn-block btn-info">Homepage</a>
-        <a class="btn btn-block btn-info">Create Thread</a>
-        <a class="btn btn-block btn-default">Features</a>
-        <a class="btn btn-block btn-default">Suggestions</a>
-        <a class="btn btn-block btn-default">Bugs</a>
-        <a class="btn btn-block btn-default">In Progress</a>
+    <!-- Right -->
+    <div class="col-md-8">
+
+      <!-- Getting started -->
+      <div class="panel">
+        <div class="panel-heading">Getting Started</div>
+        <div class="panel-body t-bold s-pad-y">
+          <a href="{{ link.link }}" ng-repeat="link in getStartedLinks">
+            <h4><i class="fa fa-fw fa-check-circle text-muted o-fade"></i> {{ link.label }}</h4>
+            <hr ng-if="!$last">
+          </a>
+        </div>
       </div>
     </div>
   </div>
