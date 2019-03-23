@@ -3,6 +3,7 @@
 
 **Features:**
 - Added #1138: Add Google AdSense to site settings.
+- Added #1106: Add help page (and make navbar full size).
 
 **Improvement:**
 - Closed #1142: Update NPM packages.
