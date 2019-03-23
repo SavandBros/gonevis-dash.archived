@@ -2,7 +2,7 @@
 
 import app from "../app";
 
-function HelpController($scope) {
+function HelpController(ModalsService, $scope) {
 
   function constructor() {
 
@@ -25,20 +25,20 @@ function HelpController($scope) {
       label: "Homepage",
       link: "https://forum.gonevis.com/",
       special: true,
-    },{
+    }, {
       label: "Create Thread",
       link: "https://forum.gonevis.com/tags",
       special: true,
-    },{
+    }, {
       label: "Features",
       link: "https://forum.gonevis.com/t/feature-requests",
-    },{
+    }, {
       label: "Suggestions",
       link: "https://forum.gonevis.com/t/suggestions",
-    },{
+    }, {
       label: "Bugs",
       link: "https://forum.gonevis.com/t/bugs",
-    },{
+    }, {
       label: "In Progress",
       link: "https://forum.gonevis.com/t/in-progress",
     }];
