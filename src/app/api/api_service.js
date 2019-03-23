@@ -159,6 +159,9 @@ function API($resource, ENV) {
     }, {
       name: "SetGoogleAnalytics",
       endpoint: "website/site/:siteId/google-analytics/", // PUT
+    }, {
+      name: "SetGoogleAdSense",
+      endpoint: "website/site/:siteId/google-adsense/", // PUT
     },
     // Tagool
     {

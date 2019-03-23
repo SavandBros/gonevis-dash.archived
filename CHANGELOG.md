@@ -1,3 +1,18 @@
+2019.4.1
+========
+
+**Features:**
+- Added #1138: Add Google AdSense to site settings.
+
+**Improvement:**
+- Closed #1142: Update NPM packages.
+
+**Bug Fixes:**
+- Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
+- Fixed #1143: 2 UI Router packages (1 of them should be removed).
+- Fixed #1141: Fix vulnerability alert related to bootstrap.
+
+
 2019.3.1
 ========
 
@@ -6,6 +21,9 @@
 
 **Bug Fixes:**
 - Fixed #1122: Only embed url when ever user pastes an URL.
+- Fixed #1126: Change blue to project's primary color at 'header' option at editor buttons.
+- Fixed #1130: Remove post/page from draft when published.
+- Fixed #1132: Remove "Remove branding" and "Google Analytics" sections and from other setting tabs.
 
 
 2019.2.1
@@ -25,6 +43,7 @@
 - Fixed #1085: Set the correct JWT expiration date in Cookies.
 - Fixed #1105: Fix dependency (webpack-dev-server) vulnerability.
 - Fixed #1117: Fix blog custom domain list doesn't show up.
+- Fixed #1224: Fix bad UX for 2 settings that require different save buttons.
 
 **Improvements:**
 - Closes #1113: Add details to incomplete-profile alert.

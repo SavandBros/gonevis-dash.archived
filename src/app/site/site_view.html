@@ -1,7 +1,7 @@
 <!-- Site cover image -->
 <div class="container-fluid container-image" ng-if="!isRestrict" ng-class="{'has-cover': site.media.cover_image}"
-  ng-click="selectImage('cover_image')"
-  style="background-image: url('{{ site.media.cover_image ? site.media.cover_image.file : '' }}')">
+     ng-click="selectImage('cover_image')"
+     style="background-image: url('{{ site.media.cover_image ? site.media.cover_image.file : '' }}')">
   <p ng-if="site.media.cover_image"><i class="fa fa-fw fa-edit"></i> {{ 'CHANGE_COVER_IMAGE' | translate }}</p>
   <p ng-if="!site.media.cover_image" class="init">
     <i class="fa fa-fw fa-image fa-2x s-mar-bottom-soft"></i> <br> {{ 'SELECT_COVER_IMAGE' | translate }}
@@ -26,13 +26,13 @@
     </div>
   </div>
   <!-- Upgrade -->
-  <div ng-if="currentTab.view === 'upgrade' && plans.length">
+  <div ng-if="currentTab.view === 'upgrade'">
     <!-- No permission -->
     <div class="col-md-8 col-md-offset-2 s-pad-soft" ng-if="!isOwner">
       <nothing text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
     </div>
     <!-- Plans -->
-    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="isOwner">
+    <div class="plans row s-mar-top text-center animated fadeIn" ng-if="plans.length && isOwner">
       <div class="col-md-4">
         <div class="plan" id="lite">
           <!-- Title -->
@@ -96,7 +96,7 @@
           </div>
           <!-- Pay -->
           <button class="btn btn-success plan-button" ng-click="pay(plans[0])"
-            ng-disabled="plans[0].isCurrent || paying">
+                  ng-disabled="plans[0].isCurrent || paying">
             {{ plans[0].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
           </button>
         </div>
@@ -132,7 +132,7 @@
           </div>
           <!-- Pay -->
           <button class="btn btn-success plan-button" ng-click="pay(plans[1])"
-            ng-disabled="plans[1].isCurrent || paying">
+                  ng-disabled="plans[1].isCurrent || paying">
             {{ plans[1].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
           </button>
         </div>
@@ -145,7 +145,9 @@
       <div class="row">
         <div class="col-md-6">
           <h3 class="t-bold s-mar-bottom-soft">What payment methods do you accept? Paypal? What about invoices?</h3>
-          <p>We accept all major credit and debit cards such as Visa, Mastercard or MIR. For annual pre-paid accounts on Business or Enterprise plans we also accept bank transfers, where desired. We do not, under any circumstances, accept Paypal.</p>
+          <p>We accept all major credit and debit cards such as Visa, Mastercard or MIR. For annual pre-paid accounts on
+            Business or Enterprise plans we also accept bank transfers, where desired. We do not, under any
+            circumstances, accept Paypal.</p>
           <br>
           <h3 class="t-bold s-mar-bottom-soft">How do you process my payments?</h3>
           <p>
@@ -157,9 +159,13 @@
           <br>
         </div>
         <div class="col-md-6">
-          <h3 class="t-bold s-mar-bottom-soft">How do I cancel my subscription? Delete my account? Can I have a refund?</h3>
-          <p>To cancel your account, log into <a href="https://dash.gonevis.com" target="_blank">account</a> and change your plan from active to "Cancel" — that's all there is to it! To delete your account or if you need any other help just email us on <a href="mailto:hello@gonevis.com">hello@gonevis.com</a>.</p>
-          <p>We also offer refunds! You may ask for a refund after maximum 7 days of plan upgrade (we don’t offer refunds on renewals).</p>
+          <h3 class="t-bold s-mar-bottom-soft">How do I cancel my subscription? Delete my account? Can I have a
+            refund?</h3>
+          <p>To cancel your account, log into <a href="https://dash.gonevis.com" target="_blank">account</a> and change
+            your plan from active to "Cancel" — that's all there is to it! To delete your account or if you need any
+            other help just email us on <a href="mailto:hello@gonevis.com">hello@gonevis.com</a>.</p>
+          <p>We also offer refunds! You may ask for a refund after maximum 7 days of plan upgrade (we don’t offer
+            refunds on renewals).</p>
           <br>
           <h3 class="t-bold s-mar-bottom-soft">Can I upgrade from Free to Paid plan later?</h3>
           <p>Of course you can, you may upgrade or downgrade anytime.</p>
@@ -197,7 +203,7 @@
             <div class="form-group">
               <p class="t-bold" translate>ADDRESS</p>
               <a class="site-url" ng-href="{{ site.absolute_uri }}" target="_blank"
-                title="{{ 'CANT_CHANGE' | translate }}">
+                 title="{{ 'CANT_CHANGE' | translate }}">
                 {{ site.absolute_uri }}
               </a>
             </div>
@@ -238,7 +244,8 @@
             </table>
             <!-- Add domain -->
             <button class="btn btn-default" ng-click="addDomain()"
-              ng-disabled="site.domains.length == maxCustomDomains" translate>ADD_DOMAIN</button>  
+                    ng-disabled="site.domains.length == maxCustomDomains" translate>ADD_DOMAIN
+            </button>
           </div>
         </div>
       </div>
@@ -255,12 +262,12 @@
                 <div class="media">
                   <div class="media-left media-middle">
                     <img class="media-object img-rounded"
-                      ng-src="{{ site.media.cover_image ? site.media.cover_image.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
+                         ng-src="{{ site.media.cover_image ? site.media.cover_image.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
                   </div>
                   <div class="media-body">
                     <p class="t-bold" translate>BLOG_COVER</p>
                     <button class="btn btn-default btn-sm" ng-click="selectImage('cover_image')"
-                      translate>
+                            translate>
                       SELECT_COVER
                     </button>
                   </div>
@@ -271,7 +278,7 @@
                 <div class="media">
                   <div class="media-left media-middle">
                     <img class="media-object img-rounded"
-                      ng-src="{{ site.media.logo ? site.media.logo.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
+                         ng-src="{{ site.media.logo ? site.media.logo.thumbnail_48x48 : codekit.getDefaultImage('tiny') }}">
                   </div>
                   <div class="media-body">
                     <p class="t-bold" translate>BLOG_LOGO</p>
@@ -302,7 +309,7 @@
                 </div>
                 <div class="col-md-4 text-right">
                   <button class="btn btn-success" ng-click="siteTemplates()" ng-disabled="loadingTemplate"
-                    translate>SHOW_AVAILABLE_THEMES
+                          translate>SHOW_AVAILABLE_THEMES
                   </button>
                 </div>
               </div>
@@ -313,8 +320,8 @@
               <p class="t-bold" translate>CODE_HIGHLIGHT_SYNTAX_THEME</p>
               <select class="form-control" ng-model="currentTab.form.highlight_theme">
                 <option ng-repeat="theme in codekit.highlightThemes"
-                  ng-value="theme.id"
-                  ng-selected="currentTab.form.highlight_theme == theme.id">
+                        ng-value="theme.id"
+                        ng-selected="currentTab.form.highlight_theme == theme.id">
                   {{ theme.label }}
                 </option>
               </select>
@@ -344,17 +351,17 @@
           <div class="panel-body">
             <!-- Template fields -->
             <div class="form-group" ng-repeat="(key, field) in siteTemplate.fields"
-              ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
+                 ng-class="{'checkbox checkbox-primary': field.type === 'boolean'}">
               <hr ng-if="!$first">
               <!-- Char and boolean field -->
               <input id="{{ key }}" name="{{ key }}" type="{{ field.type === 'char' ? 'text' : 'checkbox' }}"
-                class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
-                ng-model="siteTemplate.fields[key].value">
+                     class="form-control" ng-if="field.type !== 'text'" placeholder="{{ field.verbose_name }}"
+                     ng-model="siteTemplate.fields[key].value">
               <!-- Field label -->
               <label for="{{ key }}"><b>{{ field.verbose_name }}</b></label>
               <!-- Text field -->
               <textarea name="{{ key }}" type="text" class="form-control" ng-if="field.type === 'text'"
-                placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
+                        placeholder="{{ field.verbose_name }}" ng-model="siteTemplate.fields[key].value">
               </textarea>
               <span class="help-block" style="margin-left: 20px">{{ field.help_text }}</span>
             </div>
@@ -416,49 +423,65 @@
               <label for="search_engine_visibility" translate>SEARCH_ENGINE_DISCOVER</label>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Branding and footer text (panel) -->
+      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
+        <div class="panel-body">
           <!-- Branding -->
-          <div class="s-mar-top">
-            <div class="checkbox checkbox-primary checkbox-small">
-              <input id="remove_branding" type="checkbox" ng-model="site.remove_branding"
-                disable-on-request="removeBranding(site.remove_branding)"
-                title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
-              <label for="remove_branding" translate>REMOVE_BRANDING</label>
-            </div>
+          <div class="checkbox checkbox-primary checkbox-small">
+            <input id="remove_branding" type="checkbox" ng-model="site.remove_branding"
+                   title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
+            <label for="remove_branding" translate>REMOVE_BRANDING</label>
+            <button class="btn btn-primary pull-right" type="button"
+                    disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}
+            </button>
           </div>
-          <!-- Footer text -->
-          <div class="form-group s-mar-top" ng-if="site.remove_branding">
+          <!-- Footer text (panel) -->
+          <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.remove_branding">
             <p class="t-bold" translate>FOOTER_TEXT</p>
-            <div class="row">
-              <div class="col-md-10">
-                <textarea type="text" class="form-control" ng-model="site.footer_text"></textarea>
-              </div>
-              <div class="col-md-2 text-right">
-                <button class="btn btn-primary" type="button"
-                  disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}</button>
-              </div>
-            </div>
-          </div>
-          <!-- Allow Google Analytics -->
-          <div class="s-mar-top">
-            <div class="checkbox checkbox-primary checkbox-small"
-              title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
-              <input id="google_analytics_enabled" type="checkbox" ng-model="site.google_analytics_enabled">
-              <label for="google_analytics_enabled" translate>ALLOW_GOOGLE_ANALYTICS</label>
-              <button class="btn btn-primary pull-right" type="button"
-                disable-on-request="setGoogleAnalytics()">{{ 'SAVE' | translate }}</button>
-            </div>
-          </div>
-          <!-- Google Analytics code -->
-          <div class="form-group s-mar-top" ng-if="site.google_analytics_enabled">
-            <p class="t-bold" translate>GOOGLE_ANALYTICS_CODE</p>
-              <input type="text" class="form-control" placeholder="UA-XXXXX-Y" ng-model="site.google_analytics_code">
+            <textarea class="form-control" ng-model="site.footer_text"></textarea>
           </div>
         </div>
-        <div class="panel-footer" ng-if="!hideDelete">
-          <!-- Delete -->
-          <button class="btn btn-danger" ng-click="deleteSite()">
-            <i class="fa fa-fw fa-trash"></i> {{ 'DELETE_BLOG' | translate }}
-          </button>
+      </div>
+
+      <!-- Allow Google Analytics (panel) -->
+      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
+        <div class="panel-body">
+          <div class="checkbox checkbox-primary checkbox-small"
+               title="{{ 'ALLOW_GOOGLE_ANALYTICS_TITLE' | translate }}">
+            <input id="google_analytics_enabled" type="checkbox" ng-model="site.google_analytics_enabled">
+            <label for="google_analytics_enabled" translate>ALLOW_GOOGLE_ANALYTICS</label>
+            <button class="btn btn-primary pull-right" type="button"
+                    disable-on-request="setGoogleAnalytics()">{{ 'SAVE' | translate }}
+            </button>
+          </div>
+          <!-- Google Analytics code -->
+          <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.google_analytics_enabled">
+            <p class="t-bold" translate>GOOGLE_ANALYTICS_CODE</p>
+            <input type="text" class="form-control" placeholder="UA-XXXXX-Y" ng-model="site.google_analytics_code">
+          </div>
+        </div>
+      </div>
+
+      <!-- Allow Google AdSense (panel) -->
+      <div class="panel panel-default" ng-if="currentTab.view === 'advanced'">
+        <div class="panel-body">
+          <div class="checkbox checkbox-primary checkbox-small"
+               title="{{ 'ALLOW_GOOGLE_ADSENSE_TITLE' | translate }}">
+            <input id="google_adsense_enabled" type="checkbox" ng-model="site.google_adsense_enabled">
+            <label for="google_adsense_enabled" translate>ALLOW_GOOGLE_ADSENSE</label>
+            <button class="btn btn-primary pull-right" type="button"
+                    disable-on-request="setGoogleAdSense()">{{ 'SAVE' | translate }}
+            </button>
+          </div>
+          <!-- Google AdSense code -->
+          <div class="form-group s-mar-bottom-no s-mar-top" ng-if="site.google_adsense_enabled">
+            <p class="t-bold" translate>GOOGLE_ADSENSE_CODE</p>
+            <input type="text" class="form-control" placeholder="ca-pub-XXXXXXXXXXXXXXX"
+                   ng-model="site.google_adsense_code">
+          </div>
         </div>
       </div>
 
@@ -468,7 +491,7 @@
         <nothing ng-if="!isOwner" text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
         <!-- Nothing -->
         <nothing text="{{ 'NO_BILLING' | translate }}"
-          ng-if="!subscription.data && !subscription.loading && isOwner"></nothing>
+                 ng-if="!subscription.data && !subscription.loading && isOwner"></nothing>
 
         <!-- Billing section -->
         <div ng-if="subscription.data && isOwner" class="animated fadeIn">
@@ -488,14 +511,15 @@
                   </div>
                   <div class="col-xs-3">
                     <p class="t-bold s-mar-bottom-no t-cap"
-                      style="line-height: 30px;">$ {{ subscription.data.plan.price }}</p>
+                       style="line-height: 30px;">$ {{ subscription.data.plan.price }}</p>
                   </div>
                   <div class="col-xs-3">
                     <p class="t-bold s-mar-bottom-no t-cap"
-                      style="line-height: 30px;">{{ subscription.data.created | date }}</p>
+                       style="line-height: 30px;">{{ subscription.data.created | date }}</p>
                   </div>
                   <div class="col-xs-3 text-center">
-                    <button class="btn btn-danger btn-sm" ng-click="cancelModal()" translate>CANCEL_SUBSCRIPTION</button>
+                    <button class="btn btn-danger btn-sm" ng-click="cancelModal()" translate>CANCEL_SUBSCRIPTION
+                    </button>
                   </div>
                 </div>
               </div>
@@ -511,10 +535,10 @@
                 <table class="table">
                   <!-- Table head -->
                   <thead>
-                    <tr>
-                      <th translate>AMOUNT</th>
-                      <th translate>DATE</th>
-                    </tr>
+                  <tr>
+                    <th translate>AMOUNT</th>
+                    <th translate>DATE</th>
+                  </tr>
                   </thead>
 
                   <!-- Table info -->
