@@ -267,6 +267,12 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
         }
       }
     })
+    .state("dash.help", {
+      url: "/help",
+      controller: "HelpController",
+      template: require("./help/help_view.html"),
+      title: "Help"
+    })
     // .state("dash.tag-edit", {
     //   url: "/tag-list/:tagId",
     //   controller: "TagEditController",
