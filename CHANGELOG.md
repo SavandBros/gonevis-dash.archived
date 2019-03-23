@@ -3,6 +3,7 @@
 
 **Features:**
 - Added #1138: Add Google AdSense to site settings.
+- Added #1106: Add help page (and make navbar full size).
 
 **Improvement:**
 - Closed #1142: Update NPM packages.
@@ -11,6 +12,7 @@
 - Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
 - Fixed #1143: 2 UI Router packages (1 of them should be removed).
 - Fixed #1141: Fix vulnerability alert related to bootstrap.
+- Fixed #1148: Fix JSHint issue.
 
 
 2019.3.1

@@ -20,6 +20,7 @@ require('./comment');
 require('./entry');
 require('./tag');
 require('./team');
+require('./help');
 require('./dolphin');
 require('./start');
 require('./header');

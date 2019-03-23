@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+
+    <!-- Left -->
+    <div class="col-md-3">
+      <!-- Shortcuts -->
+      <div class="panel">
+        <div class="panel-heading">Shortcuts</div>
+        <div class="panel-body">
+          <a class="btn btn-block btn-default" ui-sref="dash.site.settings({view: 'appearance'})">Change Blog Theme</a>
+          <a class="btn btn-block btn-default" ui-sref="dash.site.settings({view: 'upgrade'})">View Plans</a>
+          <br>
+          <a class="btn btn-block btn-default" ui-sref="reader.explore-feed({view: 'explore'})">Explore GoNevis</a>
+          <a class="btn btn-block btn-default" ui-sref="reader.explore-feed({view: 'feed'})">View Subscribed Blogs</a>
+          <br>
+          <a class="btn btn-block btn-default" ng-click="feedback()">Give Us Your Feedback</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle -->
+    <div class="col-md-3">
+
+      <!-- Forum -->
+      <div class="panel">
+        <div class="panel-heading">Forum</div>
+        <div class="panel-body text-center">
+          <a class="btn btn-block" href="{{ link.link }}" target="_blank" ng-repeat="link in forumLinks"
+             ng-class="{'btn-info': link.special, 'btn-default': !link.special}">{{ link.label }}</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div class="col-md-6">
+
+      <!-- Getting started -->
+      <div class="panel">
+        <div class="panel-heading">Getting Started</div>
+        <div class="panel-body t-bold s-pad-y">
+          <a href="{{ link.link }}" target="_blank" ng-repeat="link in getStartedLinks">
+            <h4><i class="fa fa-fw fa-check-circle text-muted o-fade"></i> {{ link.label }}</h4>
+            <hr ng-if="!$last">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
