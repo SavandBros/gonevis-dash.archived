@@ -7,13 +7,13 @@
       <div class="panel">
         <div class="panel-heading">Shortcuts</div>
         <div class="panel-body">
-          <a class="btn btn-block btn-default">Change Blog Theme</a>
-          <a class="btn btn-block btn-default">View Plans</a>
+          <a class="btn btn-block btn-default" ui-sref="dash.site.settings({view: 'appearance'})">Change Blog Theme</a>
+          <a class="btn btn-block btn-default" ui-sref="dash.site.settings({view: 'upgrade'})">View Plans</a>
           <br>
-          <a class="btn btn-block btn-default">Explore GoNevis</a>
-          <a class="btn btn-block btn-default">View Subscribed Blogs</a>
+          <a class="btn btn-block btn-default" ui-sref="reader.explore-feed({view: 'explore'})">Explore GoNevis</a>
+          <a class="btn btn-block btn-default" ui-sref="reader.explore-feed({view: 'feed'})">View Subscribed Blogs</a>
           <br>
-          <a class="btn btn-block btn-default">Give Us Your Feedback</a>
+          <a class="btn btn-block btn-default" ng-click="feedback()">Give Us Your Feedback</a>
         </div>
       </div>
 
