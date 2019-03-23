@@ -11,6 +11,7 @@
 - Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
 - Fixed #1143: 2 UI Router packages (1 of them should be removed).
 - Fixed #1141: Fix vulnerability alert related to bootstrap.
+- Fixed #1148: Fix JSHint issue.
 
 
 2019.3.1

@@ -144,7 +144,7 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       lazyLoad: ($transition$) => {
         const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
 
-        return import ( /* webpackChunkName: "main" */ "./main/main_controller")
+        return import ( /* webpackChunkName: "main" */ "./main/main_controller") // jshint ignore:line
           .then(mod => {
             $ocLazyLoad.load([mod.MAIN_DASH_MODULE]);
           })
@@ -202,7 +202,7 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
       lazyLoad: ($transition$) => {
         const $ocLazyLoad = $transition$.injector().get("$ocLazyLoad");
 
-        return import ( /* webpackChunkName: "entry-edit" */ "./entry/entry_edit/entry_edit_controller")
+        return import ( /* webpackChunkName: "entry-edit" */ "./entry/entry_edit/entry_edit_controller") // jshint ignore:line
           .then(mod => $ocLazyLoad.load(["ngQuill", mod.EDIT_ENTRY_MODULE]))
           .catch(err => {
             throw new Error("Ooops, something went wrong, " + err);
@@ -303,7 +303,7 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
     const AuthService = $injector.get("AuthService");
 
     if (AuthService.isAuthenticated()) {
-      $state.go("dash.main", { s: $rootScope.set.lastSite });
+      $state.go("dash.main", {s: $rootScope.set.lastSite});
     } else {
       $state.go("start");
     }
