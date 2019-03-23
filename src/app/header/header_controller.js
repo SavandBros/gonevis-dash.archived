@@ -70,6 +70,11 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
         sref: "dash.site.settings",
         view: "settings",
         icon: "fa-cog"
+      }, {
+        label: translations.HELP,
+        sref: "dash.help",
+        view: "help",
+        icon: "fa-info-circle"
       }];
     });
   }
