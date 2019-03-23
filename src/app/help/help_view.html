@@ -21,12 +21,8 @@
       <div class="panel">
         <div class="panel-heading">Forum</div>
         <div class="panel-body text-center">
-          <a class="btn btn-block btn-info">Homepage</a>
-          <a class="btn btn-block btn-info">Create Thread</a>
-          <a class="btn btn-block btn-default">Features</a>
-          <a class="btn btn-block btn-default">Suggestions</a>
-          <a class="btn btn-block btn-default">Bugs</a>
-          <a class="btn btn-block btn-default">In Progress</a>
+          <a class="btn btn-block" href="{{ link.link }}" target="_blank" ng-repeat="link in forumLinks"
+            ng-class="{'btn-info': link.special, 'btn-default': !link.special}">{{ link.label }}</a>
         </div>
       </div>
     </div>
