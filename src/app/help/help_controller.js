@@ -44,6 +44,13 @@ function HelpController($scope) {
     }];
   }
 
+  /**
+   * Open feedback modal
+   */
+  $scope.feedback = function () {
+    ModalsService.open("feedback", "FeedbackController");
+  };
+
   constructor();
 }
 
