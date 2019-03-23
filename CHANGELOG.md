@@ -1,6 +1,9 @@
 2019.4.1
 ========
 
+**Features:**
+- Added #1138: Add Google AdSense to site settings.
+
 **Improvement:**
 - Closed #1142: Update NPM packages.
 
