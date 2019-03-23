@@ -123,12 +123,6 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
         s: 0,
         token: null
       }
-    })
-    .state("help", {
-      url: "/help",
-      controller: "HelpController",
-      template: require("./help/help_view.html"),
-      title: "Help"
     });
 
   // Dash states that require authentication and site index
@@ -272,6 +266,12 @@ angular.module("gonevisDash").config(function ($stateProvider, $urlRouterProvide
           dynamic: true
         }
       }
+    })
+    .state("dash.help", {
+      url: "/help",
+      controller: "HelpController",
+      template: require("./help/help_view.html"),
+      title: "Help"
     })
     // .state("dash.tag-edit", {
     //   url: "/tag-list/:tagId",
