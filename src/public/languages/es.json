@@ -1,1 +1,7 @@
-{}
+{
+    "GET_STARTED": "Empezar",
+    "GONEVIS": "GoNevis",
+    "HELP": "Ayuda",
+    "LOGIN": "Iniciar sesión",
+    "LOGGED_IN": "Iniciado sesión"
+}
