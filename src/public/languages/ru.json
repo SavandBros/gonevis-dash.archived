@@ -6,5 +6,6 @@
     "LOGGED_IN": "Войти в систему",
     "REGISTER_PASSWORD_TOOLTIP": "Должно быть не менее 8 символов.",
     "FORGOT_PASSWORD": "Забыли пароль",
-    "FORGOT_PASSWORD_Q": "Забыли пароль?"
+    "FORGOT_PASSWORD_Q": "Забыли пароль?",
+    "REGISTER": "регистр"
 }
