@@ -1,3 +1,10 @@
+2019.5.1
+========
+
+**Bug Fixes:**
+- Fixed #1153: Fix dark mode on reader and post/page edition.
+
+
 2019.4.1
 ========
 
