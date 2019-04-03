@@ -21,6 +21,7 @@
 }
 
 .reader-tabs {
+    padding-top: 15px;
     display: flex;
     margin-bottom: 20px;
 }
