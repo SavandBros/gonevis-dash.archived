@@ -1,3 +1,11 @@
+2019.5.1
+========
+
+**Bug Fixes:**
+- Fixed #1155: Fix top margin on main wrapper.
+- Fixed #1153: Fix dark mode on reader and post/page edition.
+
+
 2019.4.1
 ========
 
@@ -13,6 +21,7 @@
 - Fixed #1143: 2 UI Router packages (1 of them should be removed).
 - Fixed #1141: Fix vulnerability alert related to bootstrap.
 - Fixed #1148: Fix JSHint issue.
+- Fixed #1140: Bring back excerpt.
 
 
 2019.3.1

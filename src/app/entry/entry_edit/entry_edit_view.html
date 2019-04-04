@@ -103,6 +103,12 @@
       <i class="fa fa-plus fa-fw"></i> {{ 'MORE_OPTIONS' | translate }} <i class="fa fa-angle-down fa-fw"></i>
     </button>
     <div ng-show="moreOptions" class="expandable s-pad-soft">
+      <!-- Excerpt -->
+      <div class="form-group" ng-class="{'has-error': form.errors.excerpt}">
+        <p class="small" translate>EXCERPT</p>
+        <input class="form-control" type="text" ng-model="form.get.excerpt" placeholder="{{ 'EXCERPT' | translate }}">
+        <small class="help-block">{{ form.errors.excerpt[0] }}</small>
+      </div>
       <!-- Slug -->
       <div class="form-group" ng-class="{'has-error': form.errors.slug}">
         <p class="small" translate>SLUG</p>
