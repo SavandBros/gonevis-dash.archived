@@ -336,10 +336,6 @@ iframe.post-preview {
     border: none;
 }
 
-.lights.off .container-fluid {
-    box-shadow: 0 0 0 10000px #333;
-}
-
 .lights.off .container-fluid,
 .lights.off .editor-container,
 .lights.off .editor .form-control {

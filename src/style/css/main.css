@@ -91,7 +91,7 @@ hr[soft] {
 
 #content div.container,
 #content div.container-fluid {
-    margin-top: 60px;
+    margin-top: 45px;
 }
 
 header:not(.no-sidebar) ~ #content .container,
