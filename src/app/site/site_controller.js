@@ -101,6 +101,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         form: {
           font_name: "",
           font_url: "",
+          template_primary_color: null,
           highlight_theme: null
         }
       }, {
@@ -155,6 +156,57 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       data => {
         $scope.transactions = data.results;
       });
+
+    // Template primary colors
+    $scope.templatePrimaryColors = [{
+      label: "Default",
+      color: "#007bff"
+    }, {
+      label: "Alizarin",
+      color: "#e74c3c"
+    }, {
+      label: "Amethyst",
+      color: "#9b59b6"
+    }, {
+      label: "Belize Hole",
+      color: "#2980b9"
+    }, {
+      label: "Carrot",
+      color: "#e67e22"
+    }, {
+      label: "Emerald",
+      color: "#2ecc71"
+    }, {
+      label: "Green Sea",
+      color: "#16a085"
+    }, {
+      label: "Midnight Blue",
+      color: "#2c3e50"
+    }, {
+      label: "Nephritis",
+      color: "#27ae60"
+    }, {
+      label: "Peter River",
+      color: "#3498db"
+    }, {
+      label: "Pomegranate",
+      color: "#c0392b"
+    }, {
+      label: "Pumpkin",
+      color: "#d35400"
+    }, {
+      label: "Sun Flower",
+      color: "#f1c40f"
+    }, {
+      label: "Turquoise",
+      color: "#1abc9c"
+    }, {
+      label: "Wet Asphalt",
+      color: "#34495e"
+    }, {
+      label: "Wisteria",
+      color: "#8e44ad"
+    }];
   }
 
   /**
