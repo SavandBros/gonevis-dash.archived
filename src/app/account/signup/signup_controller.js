@@ -2,10 +2,10 @@
 
 import app from "../../app";
 
-function SignupController($scope, $stateParams, AuthService, API, Password, toaster, $translate) {
+function SignupController($scope, $stateParams, $window, AuthService, API, Password, toaster, $translate) {
 
   function constructor() {
-    // Forn with username (param)
+    // Form with username (param)
     $scope.form = {
       data: {
         username: $stateParams.username
@@ -43,6 +43,8 @@ function SignupController($scope, $stateParams, AuthService, API, Password, toas
     API.SignupAccount.post(payload,
       function() {
         form.errors = [];
+        // Send to Google
+        $window.gtag('event', 'conversion', {'send_to': 'AW-830696480/6qhhCL6HnJEBEKDYjYwD'});
         // Sign user in
         AuthService.signIn(
           form.data.username,
