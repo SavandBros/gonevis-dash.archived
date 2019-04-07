@@ -5,6 +5,9 @@
 - Fixed #1155: Fix top margin on main wrapper.
 - Fixed #1153: Fix dark mode on reader and post/page edition.
 
+**Improvement:**
+- Closes #1158: Google AdService Conversion.
+
 
 2019.4.1
 ========
@@ -16,6 +19,7 @@
 
 **Improvement:**
 - Closed #1142: Update NPM packages.
+- Closed #1163: Change account setting inputs style.
 
 **Bug Fixes:**
 - Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
