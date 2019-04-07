@@ -1888,3 +1888,11 @@ img.cache {
 .new-year a span:nth-child(4) {
     color: #f39c12;
 }
+
+.panel-body .checkbox:last-child {
+    margin-bottom: 0;
+}
+
+.user-settings p {
+    color: #000;
+}

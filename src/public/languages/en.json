@@ -375,7 +375,7 @@
   "SET_ABOUT": "Set your about.",
   "SET_LOCATION": "Set your location",
   "RECEIVE_EMAIL_NOTIFICATION": "Receive email notification",
-  "UPDATING_PROFILE": "Updating {{ profileKey }}...",
+  "UPDATING_PROFILE": "Updating profile...",
   "PROFILE_UPDATED": "Profile {{ profileKey }} updated",
   "PROFILE_UPDATE_ERROR": "An error has occurred while updating profile, try again.",
   "PROFILE_PICTURE_UPDATED": "Profile picture updated",

@@ -1,12 +1,12 @@
 <div class="container container-light">
   <div class="col-md-6 col-md-offset-3">
     <div class="panel panel-default s-box avatar-outside-wrapper">
-      <div class="panel-body s-pad">
+      <div class="panel-body s-pad user-settings">
         <div class="row">
           <div class="col-sm-4">
-            <div class="avatar avatar-outside">
+            <div class="avatar text-center">
               <span ng-if="!user.hasMedia" class="text-uppercase">{{ user.getDisplayName()[0] }}</span>
-              <img ng-if="user.hasMedia" class="img-circle" ng-src="{{ user.getMedia('small') }}" />
+              <img ng-if="user.hasMedia" class="img-circle" ng-src="{{ user.getMedia('small') }}"/>
               <div class="dropdown">
                 <h3 class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i></h3>
                 <ul class="dropdown-menu">
@@ -14,7 +14,7 @@
                     <a ngf-select="uploadFile($file)"><i class="fa fa-upload"></i> {{ 'CHANGE_PHOTO' | translate }}</a>
                   </li>
                   <li>
-                    <a ng-click="updateProfile('picture', null)">
+                    <a ng-click="updateProfile(true)">
                       <i class="fa fa-trash text-danger"></i> {{ 'REMOVE' | translate }}
                     </a>
                   </li>
@@ -22,48 +22,30 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-8">
-            <br class="hidden visible-xs">
-            <h3 class="text-left o-fade-soft" editable-text="user.get.name" onbeforesave="updateProfile('name', $data)">
-              <!-- TODO: Translate -->
-              {{ user.get.name || 'NO_NAME' | translate }}
-            </h3>
+          <div class="col-md-8">
+            <!-- Name -->
+            <div class="form-group">
+              <p class="t-bold" translate>NAME</p>
+              <input class="form-control" placeholder="{{ 'NAME' | translate }}" ng-model="user.get.name"/>
+            </div>
+            <!-- Location -->
+            <div class="form-group">
+              <p class="t-bold" translate>LOCATION</p>
+              <input class="form-control" placeholder="Location" ng-model="user.get.location"/>
+            </div>
           </div>
         </div>
-        <div class="s-mar-top">
+        <div class="s-mar-top-soft">
           <!-- About -->
-          <div class="input-panel">
-            <div class="row">
-              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-                <small class="o-fade t-upp" translate>ABOUT</small>
-              </div>
-              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-                <span editable-textarea="user.get.about" onbeforesave="updateProfile('about', $data)">
-                  {{ user.get.about || 'NOTHING_HERE' | translate }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <!-- Location -->
-          <div class="input-panel">
-            <div class="row">
-              <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
-                <small class="o-fade t-upp" translate>LOCATION</small>
-              </div>
-              <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-                <span editable-text="user.get.location" onbeforesave="updateProfile('location', $data)">
-                  {{ user.get.location || 'NOTHING_HERE' | translate }}
-                </span>
-              </div>
-            </div>
+          <div class="form-group">
+            <p class="t-bold" translate>ABOUT</p>
+            <textarea class="form-control" placeholder="Write your bio here..."
+                      ng-model="user.get.about" rows="4"></textarea>
           </div>
           <!-- Receive email notification -->
-          <div class="input-panel s-pad-y-no">
-            <div class="checkbox checkbox-primary">
-              <input id="receive_email_notification" type="checkbox" ng-model="user.get.receive_email_notification"
-                ng-change="updateProfile('receive_email_notification', user.get.receive_email_notification)">
-              <label for="receive_email_notification" translate>RECEIVE_EMAIL_NOTIFICATION</label>
-            </div>
+          <div class="checkbox checkbox-primary s-mar-top-softer">
+            <input id="receive_email_notification" type="checkbox" ng-model="user.get.receive_email_notification">
+            <label for="receive_email_notification" translate>RECEIVE_EMAIL_NOTIFICATION</label>
           </div>
         </div>
       </div>
@@ -71,6 +53,7 @@
         <a ui-sref="change-password({s: param.s})" class="btn btn-danger btn-sm">
           <i class="fa fa-lock fa-fw"></i> {{ 'CHANGE_PASSWORD' | translate }}
         </a>
+        <button class="btn btn-primary btn-sm pull-right" ng-click="updateProfile()" translate>SAVE_CHANGES</button>
         <div ng-show="errors">
           <small class="help-block">{{ errors.picture[0] }}</small>
         </div>

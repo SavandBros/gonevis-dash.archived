@@ -5,7 +5,7 @@ import app from "../../app";
 function UserController($scope, $rootScope, $stateParams,
                         AuthService, API, DolphinService, Upload, ENV, Account, toaster, $translate) {
 
-  var toasters = {};
+  var toasters = null;
 
   function constructor() {
     $scope.user = AuthService.getAuthenticatedUser(true);
@@ -15,7 +15,7 @@ function UserController($scope, $rootScope, $stateParams,
     API.User.get({
         user_id: $scope.user.get.id
       },
-      function(data) {
+      function (data) {
         $scope.user = AuthService.setAuthenticatedUser(data, true);
         $scope.viewLoaded = true;
       }
@@ -25,38 +25,44 @@ function UserController($scope, $rootScope, $stateParams,
   /**
    * @desc update user profile via api call
    *
-   * @param {string} key
-   * @param {string} value
+   * @param {boolean} removeAvatar
    */
-  $scope.updateProfile = function(key, value) {
-    var translatedKey = $translate.instant(key.toUpperCase()).toLowerCase();
-
-    $translate("UPDATING_PROFILE", {"profileKey": translatedKey}).then(function(updating) {
-      toasters[key] = toaster.info("", updating, 30000);
+  $scope.updateProfile = function (removeAvatar) {
+    $translate("UPDATING_PROFILE").then(function (updating) {
+      toasters = toaster.info("", updating, 30000);
     });
 
-    var payload = {};
-    payload[key] = value;
+    let payload = {
+      name: this.user.get.name,
+      about: this.user.get.about,
+      location: this.user.get.location,
+      receive_email_notification: this.user.get.receive_email_notification
+    };
+
+    if (removeAvatar) {
+      this.user.get.media.picture = null;
+      payload.picture = null;
+    }
 
     API.UserUpdate.put(payload,
-      function(data) {
-        if (key === "picture") {
-          $scope.user.get.media[key] = data.media[null];
+      function (data) {
+        if (removeAvatar) {
+          $scope.user.get.media = null;
         } else {
-          $scope.user[key] = data[key];
+          $scope.user = data;
         }
 
         $scope.user = new Account(data);
         $scope.user = AuthService.setAuthenticatedUser(data, true);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
-        toaster.clear(toasters[key]);
-        $translate(["DONE", "PROFILE_UPDATED"], {"profileKey": translatedKey}).then(function(translations) {
+        toaster.clear(toasters);
+        $translate(["DONE", "PROFILE_UPDATED"]).then(function (translations) {
           toaster.info(translations.DONE, translations.PROFILE_UPDATED, 3000);
         });
       },
-      function() {
-        $translate(["ERROR", "PROFILE_UPDATE_ERROR"]).then(function(translations) {
+      function () {
+        $translate(["ERROR", "PROFILE_UPDATE_ERROR"]).then(function (translations) {
           toaster.error(translations.ERROR, translations.PROFILE_UPDATE_ERROR);
         });
       }
@@ -115,7 +121,7 @@ function UserController($scope, $rootScope, $stateParams,
    *
    * @param {object} file
    */
-  $scope.uploadFile = function(file) {
+  $scope.uploadFile = function (file) {
     Upload.upload({
       url: ENV.apiEndpoint + "account/update-profile/",
       data: {
@@ -123,16 +129,16 @@ function UserController($scope, $rootScope, $stateParams,
         key: file.name
       },
       method: "PUT"
-    }).then(function(data) {
-      $translate(["DONE", "PROFILE_PICTURE_UPDATED"]).then(function(translations) {
+    }).then(function (data) {
+      $translate(["DONE", "PROFILE_PICTURE_UPDATED"]).then(function (translations) {
         toaster.info(translations.DONE, translations.PROFILE_PICTURE_UPDATED);
       });
       $scope.user = new Account(data.data);
       $scope.user = AuthService.setAuthenticatedUser(data.data, true);
       $rootScope.$broadcast("gonevisDash.UserController:update");
-    }, function(data) {
+    }, function (data) {
       $scope.errors = data.data;
-      $translate(["ERROR", "PROFILE_PICTURE_UPDATE_ERROR"]).then(function(translations) {
+      $translate(["ERROR", "PROFILE_PICTURE_UPDATE_ERROR"]).then(function (translations) {
         toaster.error(translations.ERROR, translations.PROFILE_PICTURE_UPDATE_ERROR);
       });
     });

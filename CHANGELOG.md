@@ -19,6 +19,7 @@
 
 **Improvement:**
 - Closed #1142: Update NPM packages.
+- Closed #1163: Change account setting inputs style.
 
 **Bug Fixes:**
 - Fixed #1136: Same style for both "Remove Branding" and "Google Analytics" in blog settings.
