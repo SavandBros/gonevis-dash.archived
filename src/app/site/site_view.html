@@ -315,6 +315,24 @@
               </div>
             </div>
             <hr>
+            <!-- Template primary colors -->
+            <div class="form-group">
+              <p class="t-bold" translate>TEMPLATE_PRIMARY_COLOR</p>
+              <div class="input-group">
+                <span class="input-group-addon" id="templatePrimaryColors"
+                      ng-style="{
+                        'background-color': templatePrimaryColors[currentTab.form.template_primary_color].color
+                      }">
+                </span>
+                <select class="form-control" aria-describedby="templatePrimaryColors"
+                        ng-model="currentTab.form.template_primary_color">
+                  <option ng-repeat="primary in templatePrimaryColors" ng-value="$index"
+                          ng-selected="currentTab.form.template_primary_color == $index">
+                    {{ primary.label }}
+                  </option>
+                </select>
+              </div>
+            </div>
             <!-- Highlight Theme -->
             <div class="form-group">
               <p class="t-bold" translate>CODE_HIGHLIGHT_SYNTAX_THEME</p>
