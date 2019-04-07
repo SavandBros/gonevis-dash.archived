@@ -20,6 +20,10 @@
     padding: 0 !important;
 }
 
+.s-pad-top-soft {
+    padding-top: 15px;
+}
+
 .s-pad-y-no {
     padding-top: 0;
     padding-bottom: 0;

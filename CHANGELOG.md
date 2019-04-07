@@ -27,6 +27,7 @@
 - Fixed #1141: Fix vulnerability alert related to bootstrap.
 - Fixed #1148: Fix JSHint issue.
 - Fixed #1140: Bring back excerpt.
+- Fixed #1165: Fix top space of login and sign up panels.
 
 
 2019.3.1
