@@ -231,3 +231,19 @@
     transform: translateY(-50%);
     margin-top: 0;
 }
+
+
+/* Import */
+
+.imports .form-group {
+    display: flex;
+    align-items: center;
+}
+
+.imports .form-group h3 {
+    color: #222;
+}
+
+.imports .form-group .description {
+    flex-grow: 1;
+}
