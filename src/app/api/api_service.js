@@ -162,6 +162,9 @@ function API($resource, ENV) {
     }, {
       name: "SetGoogleAdSense",
       endpoint: "website/site/:siteId/google-adsense/", // PUT
+    },{
+      name: "SiteImport",
+      endpoint: "website/site/:siteId/import-blog/", // POST
     },
     // Tagool
     {
