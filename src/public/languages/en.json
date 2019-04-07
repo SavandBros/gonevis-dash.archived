@@ -162,7 +162,7 @@
   "SUPPLY_URL_TO_DNS": "Supply {{absolute_uri}} to your DNS provider for the destination of CNAME or ALIAS records.",
   "CANT_CHANGE": "Can not be changed.",
   "NUMBER_OF_POSTS_PP": "Number of Posts Per Page",
-  "PRIMARY_COLOR": "Primary Color",
+  "TEMPLATE_PRIMARY_COLOR": "Template Primary Color",
   "CODE_HIGHLIGHT_SYNTAX_THEME": "Code Highlight Syntax Theme",
   "ALLOW_VISITORS_TO_COMMENT": "Allow visitors to comment on my posts.",
   "ALLOW_VISITORS_TO_VOTE": "Allow visitors to vote on my posts.",
