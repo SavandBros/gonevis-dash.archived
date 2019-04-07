@@ -570,6 +570,34 @@
           </div>
         </div>
       </div>
+
+      <!-- Import -->
+      <div ng-if="currentTab.view === 'import'">
+        <!-- No permission -->
+        <nothing ng-if="!isOwner" text="{{ 'RESTRICTED_PAGE' | translate }}"></nothing>
+
+        <div ng-if="isOwner" class="animated fadeIn">
+          <div class="panel panel-default">
+            <h5 class="panel-heading lower">
+              <i class="fa fa-upload fa-fw"></i> Import Content
+            </h5>
+            <!-- WordPress -->
+            <div class="panel-body imports">
+              <p>Import your blog content from other blogging platforms.</p>
+              <div class="form-group s-mar-bottom-no">
+                <div class="description">
+                  <h3 class="t-bold">WordPress</h3>
+                  <p>Import your blog content from WordPress. ( posts, pages, media and etc. )</p>
+                </div>
+                <button class="btn btn-primary" ngf-select="importBlog($file, $invalidFiles)"
+                        ngf-accept="text/xml" accept="text/xml" ngf-max-size="100MB">
+                  Import
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
