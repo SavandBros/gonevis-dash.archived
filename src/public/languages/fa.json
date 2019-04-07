@@ -168,5 +168,6 @@
     "BLOG_TEMPLATE_UPDATE_ERROR": "چیزی اشتباه شد، نمیتوانستیم قالب وبلاگ را به روز کنیم.",
     "ENTER_DOMAIN_ADDRESS": "آدرس دامنه سفارشی خود را وارد کنید:",
     "ENTER_BLOG_ADDRESS": "آدرس وبلاگ را وارد کنید",
-    "CUSTOM_DOMAIN_SET": "دامنه دلخواه ثبت شد"
+    "CUSTOM_DOMAIN_SET": "دامنه دلخواه ثبت شد",
+    "NAVIGATION_UPDATE_ERROR": "چیزی بدرستی پیش نرفت، نتوانستیم منوی ناوبری را بروزرسانی کنیم."
 }

@@ -12,6 +12,7 @@
 **Features:**
 - Added #1138: Add Google AdSense to site settings.
 - Added #1106: Add help page (and make navbar full size).
+- Added #1159: Add an ability to change theme's primary color.
 
 **Improvement:**
 - Closed #1142: Update NPM packages.
