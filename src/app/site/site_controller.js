@@ -6,7 +6,7 @@ import UserSiteRole from "../account/user/user_site_role";
 require("../basement/directives/disable_on_request_directive");
 require("./settings.css");
 
-function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
+function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster, Upload,
                         API, ModalsService, AuthService, DolphinService, Codekit, $translate, $timeout) {
 
   var site = AuthService.getCurrentSite();
@@ -27,7 +27,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @desc Get site settings.
    */
   function getSiteSettings() {
-    API.SiteSettings.get({ siteId: site }, function(data) {
+    API.SiteSettings.get({siteId: site}, function (data) {
       $scope.site = data;
       Codekit.setTitle($scope.site.title);
       $scope.initialled = true;
@@ -81,12 +81,12 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     getSiteSettings();
 
     // Get site template config
-    API.SiteTemplateConfig.get({ siteId: site }, function(data) {
+    API.SiteTemplateConfig.get({siteId: site}, function (data) {
       $scope.siteTemplate = data.template_config;
       $scope.siteTemplate.hasFields = !Codekit.isEmptyObj($scope.siteTemplate.fields);
     });
 
-    $translate(["SETTINGS", "APPEARANCE", "ADVANCED", "UPGRADE", "BILLING"]).then(function (translations) {
+    $translate(["SETTINGS", "APPEARANCE", "ADVANCED", "UPGRADE", "BILLING", "IMPORT"]).then(function (translations) {
       // List of tabs
       $scope.tabs = [{
         view: "settings",
@@ -126,6 +126,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       }, {
         view: "billing",
         label: translations.BILLING
+      }, {
+        view: "import",
+        label: translations.IMPORT
       }];
 
       // Set current tab
@@ -137,7 +140,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     });
 
     // Get current subscription
-    API.Subscription.get({ siteId: site },
+    API.Subscription.get({siteId: site},
       data => {
         // console.log(data);
         $scope.subscription.data = data.subscription;
@@ -152,7 +155,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       });
 
     // Get transactions list
-    API.Transactions.get({ limit: 12 },
+    API.Transactions.get({limit: 12},
       data => {
         $scope.transactions = data.results;
       });
@@ -223,7 +226,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    *
    * @param {object} tab
    */
-  $scope.setCurrentTab = function(tab) {
+  $scope.setCurrentTab = function (tab) {
     // Check current tab
     if ($scope.currentTab === tab) {
       return;
@@ -234,7 +237,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     }
 
     // Change URL
-    $state.go('dash.site.settings', { view: tab.view });
+    $state.go('dash.site.settings', {view: tab.view});
 
     // Set current tab
     $scope.currentTab = tab;
@@ -261,7 +264,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     }
 
     // Open payment widget
-    let payments = new cp.CloudPayments({ language: "en-US" }); // jshint ignore:line
+    let payments = new cp.CloudPayments({language: "en-US"}); // jshint ignore:line
     payments.charge({ // options
       publicId: "pk_05c99b78fc3af3c7338276d58b74e",
       description: plan.description,
@@ -308,7 +311,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {string} key
    * @param {string} value
    */
-  $scope.updateSite = function(media, value) {
+  $scope.updateSite = function (media, value) {
     let payload = {};
 
     // Check for changed properties
@@ -327,8 +330,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       toaster.info(updatingBlog);
     });
 
-    return API.SiteUpdate.put({ siteId: site }, payload,
-      function(data) {
+    return API.SiteUpdate.put({siteId: site}, payload,
+      function (data) {
         if (!media) {
           angular.forEach(payload, (value, key) => {
             $scope.site[key] = data[key];
@@ -348,12 +351,12 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         // Clear all toasters
         toaster.clear();
         // Show toaster
-        $translate(["DONE", "BLOG_UPDATED"]).then(function(translations) {
+        $translate(["DONE", "BLOG_UPDATED"]).then(function (translations) {
           toaster.info(translations.DONE, translations.BLOG_UPDATED);
         });
       },
-      function() {
-        $translate(["ERROR", "BLOG_UPDATE_ERROR"]).then(function(translations) {
+      function () {
+        $translate(["ERROR", "BLOG_UPDATE_ERROR"]).then(function (translations) {
           toaster.error(translations.ERROR, translations.BLOG_UPDATE_ERROR);
         });
       }
@@ -367,7 +370,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @returns {Promise}
    */
   $scope.removeBranding = value => {
-    return API.RemoveBranding.put({ siteId: site }, { remove_branding: !value },
+    return API.RemoveBranding.put({siteId: site}, {remove_branding: !value},
       data => {
         // Clear last toaster
         toaster.clear($scope.brandingToaster);
@@ -391,7 +394,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @returns {Promise}
    */
   $scope.setCustomFooter = value => {
-    return API.SetCustomFooter.put({ siteId: site }, { footer_text: value }, () => {
+    return API.SetCustomFooter.put({siteId: site}, {footer_text: value}, () => {
       // Clear last toaster
       toaster.clear($scope.footerText);
       // Translate keys
@@ -412,7 +415,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       google_analytics_code: $scope.site.google_analytics_code
     };
 
-    return API.SetGoogleAnalytics.put({ siteId: site }, payload,
+    return API.SetGoogleAnalytics.put({siteId: site}, payload,
       () => {
         // Clear last toaster
         toaster.clear($scope.googleAnalytics);
@@ -439,7 +442,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       google_adsense_code: $scope.site.google_adsense_code
     };
 
-    return API.SetGoogleAdSense.put({ siteId: site }, payload, () => {
+    return API.SetGoogleAdSense.put({siteId: site}, payload, () => {
       // Clear last toaster
       toaster.clear($scope.googleAdSense);
       // Translate and show toaster
@@ -457,29 +460,29 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   /**
    * @desc Delete site via API call
    */
-  $scope.deleteSite = function() {
+  $scope.deleteSite = function () {
     // How sure? Like confirm-a-confirm sure?
     const text = $translate.instant("DELETE_BLOG_PROMPT");
     if ($window.prompt(text) !== $scope.site.title) {
       return;
     }
 
-    API.Site.delete({ siteId: site },
-      function() {
+    API.Site.delete({siteId: site},
+      function () {
         // Remove site from user object
         $scope.user.sites.splice($stateParams.s, 1);
         // Update local user object
         AuthService.setAuthenticatedUser($scope.user);
         // Announce site removal
         $rootScope.$broadcast("gonevisDash.SiteController:remove");
-        $translate(["DONE", "BLOG_DELETED"]).then(function(translations) {
+        $translate(["DONE", "BLOG_DELETED"]).then(function (translations) {
           toaster.success(translations.DONE, translations.BLOG_DELETED);
         });
         // Go to main or new site page if has no other sites
         $state.go($scope.user.sites.length > 0 ? "dash.main" : "site-new");
       },
-      function() {
-        $translate(["ERROR", "BLOG_DELETE_ERROR"]).then(function(translations) {
+      function () {
+        $translate(["ERROR", "BLOG_DELETE_ERROR"]).then(function (translations) {
           toaster.error(translations.ERROR, translations.BLOG_DELETE_ERROR);
         });
       }
@@ -491,7 +494,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    *
    * @param {string} image Image property of site (logo, cover, etc)
    */
-  $scope.selectImage = function(image) {
+  $scope.selectImage = function (image) {
     $scope.editing = image;
     $scope.dolphinService.viewSelection("siteImage");
   };
@@ -499,7 +502,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   /**
    * @desc Save template config
    */
-  $scope.saveConfig = function() {
+  $scope.saveConfig = function () {
     $scope.loadingTemplate = true;
 
     API.SetSiteTemplateConfig.put({
@@ -507,15 +510,15 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       }, {
         config_fields: $scope.siteTemplate.fields
       },
-      function() {
+      function () {
         $scope.loadingTemplate = false;
-        $translate(["DONE", "BLOG_TEMPLATE_UPDATED"]).then(function(translations) {
+        $translate(["DONE", "BLOG_TEMPLATE_UPDATED"]).then(function (translations) {
           toaster.info(translations.DONE, translations.BLOG_TEMPLATE_UPDATED);
         });
       },
-      function(data) {
+      function (data) {
         $scope.loadingTemplate = false;
-        $translate(["ERROR", "BLOG_TEMPLATE_UPDATE_ERROR"]).then(function(translations) {
+        $translate(["ERROR", "BLOG_TEMPLATE_UPDATE_ERROR"]).then(function (translations) {
           toaster.error(translations.ERROR, data.detail ? data.detail : translations.BLOG_TEMPLATE_UPDATE_ERROR);
         });
       }
@@ -525,7 +528,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   /**
    * @desc Open modal
    */
-  $scope.siteTemplates = function() {
+  $scope.siteTemplates = function () {
     ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
       site: $scope.site,
       currentTemplate: $scope.siteTemplate
@@ -535,7 +538,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   /**
    * @desc Open themes modal
    */
-  $scope.siteTemplates = function() {
+  $scope.siteTemplates = function () {
     ModalsService.open("siteTemplates", "SiteTemplatesModalController", {
       site: $scope.site,
       currentTemplate: $scope.siteTemplate
@@ -545,7 +548,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   /**
    * @desc Add/set new custom domain for the site (instead of the current sub domain)
    */
-  $scope.addDomain = function() {
+  $scope.addDomain = function () {
     // Domain url
     const domain = $window.prompt($translate.instant("ENTER_DOMAIN_ADDRESS"));
 
@@ -554,16 +557,16 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       return;
     }
 
-    API.SetCustomDomain.put({ siteId: site }, { domain: domain },
-      function() {
+    API.SetCustomDomain.put({siteId: site}, {domain: domain},
+      function () {
         $translate(["CUSTOM_DOMAIN_SET", "SUPPLY_URL_TO_DNS"], {"absolute_uri": $scope.site.absolute_uri}).then(
           function (translations) {
             toaster.success(translations.CUSTOM_DOMAIN_SET, translations.SUPPLY_URL_TO_DNS);
-        });
+          });
         getSiteSettings();
       },
-      function() {
-        $translate(["ERROR", "DOMAIN_TAKEN_INVALID"]).then(function(translations) {
+      function () {
+        $translate(["ERROR", "DOMAIN_TAKEN_INVALID"]).then(function (translations) {
           toaster.error(translations.ERROR, translations.DOMAIN_TAKEN_INVALID);
         });
       }
@@ -575,18 +578,107 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    *
    * @param {string} domain
    */
-  $scope.deleteDomain = function(domain) {
+  $scope.deleteDomain = function (domain) {
     // How sure? Like confirm-a-confirm sure?
     if (!$window.confirm($translate.instant('CUSTOM_DOMAIN_DELETE_PROMPT', {domain: domain.domain}))) {
       return;
     }
 
-    API.RemoveCustomDomain.put({ siteId: site }, { domain_id: domain.id }, function() {
-      $translate(["DONE", "DELETED_CUSTOM_DOMAIN"], {domain: domain.domain}).then(function(translations) {
+    API.RemoveCustomDomain.put({siteId: site}, {domain_id: domain.id}, function () {
+      $translate(["DONE", "DELETED_CUSTOM_DOMAIN"], {domain: domain.domain}).then(function (translations) {
         toaster.success(translations.DONE, translations.DELETED_CUSTOM_DOMAIN);
       });
       getSiteSettings();
     });
+  };
+
+  /**
+   * @desc Handle for file uploads
+   *
+   * @param {file} file
+   * @param {array} errorFiles
+   */
+  $scope.importBlog = function (file, errorFiles) {
+
+    // If there was error, show toaster
+    if (errorFiles.length) {
+      return $translate(
+        ["ERROR", "FILE_UPLOAD_TYPE_ERROR"], {"type": file.name.slice(file.name.lastIndexOf("."))}
+      ).then(function (translations) {
+        toaster.error(translations.ERROR, translations.FILE_UPLOAD_TYPE_ERROR);
+      });
+    }
+
+    console.log(file)
+    // UploadUrl payload
+    var payload = {
+      file_name: file.name,
+      file_size: file.size,
+      mime_type: file.type
+    };
+
+    // Get data from UploadUrl
+    API.UploadUrl.post({ siteId: site }, payload,
+      function(data) {
+      console.log(data)
+        data.post_data.fields.file = file;
+
+        let uploadPayload = {
+          url: data.post_data.url,
+          data: data.post_data.fields
+        };
+
+        /**
+         * If `site` is in the data of the backend for UploadURL
+         * Than means we are dealing with LocalFileSystem uploads and the file
+         * object should be send to the backend as well.
+         * As usual, backend needs the `site` in post data.
+         * In this case we add the `site` to the POST data alongside file blog.
+         */
+        if ("site" in data.post_data) {
+          uploadPayload.data.site = data.post_data.site;
+        }
+        console.log("aaa")
+
+        // Upload the file
+        file.upload = Upload.upload(uploadPayload);
+
+        console.log("aaa")
+
+        file.key = data.post_data.fields.key;
+        payload = {
+          file_key: file.key,
+          site: site
+        };
+        file.upload.then(
+          function(data) {
+            // Not local server, make API call then add to files
+            API.Dolphins.post(payload,
+              function(data) {
+                // Get data from UploadUrl
+                API.SiteImport.post({siteId: site}, { file_id: data.id, platform: 0 },
+                  function (data) {
+                    console.log(data);
+                  }, function (data) {
+                    console.log(data);
+                  });
+              }
+            );
+          },
+          function() {
+            $translate(["ERROR", "UPLOAD_ERROR"]).then(function(translations) {
+              toaster.error(translations.ERROR, translations.UPLOAD_ERROR);
+            });
+          }
+        );
+      }
+    );
+
+    // let payload = {
+    //   file_id: file.id,
+    //   platform: 0
+    // };
+
   };
 
   /**
@@ -596,7 +688,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {Dolphin} dolphin
    * @param {string} source
    */
-  $scope.$on("gonevisDash.Dolphin:select", function(data, dolphin, source) {
+  $scope.$on("gonevisDash.Dolphin:select", function (data, dolphin, source) {
     if (source === "siteImage") {
       $scope.site.media[$scope.editing] = dolphin ? dolphin.get.id : null;
       $scope.updateSite($scope.editing, dolphin ? dolphin.get.id : null);
@@ -609,7 +701,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function(event, data) {
+  $scope.$on("gonevisDash.SiteTemplatesModalController:setTemplate", function (event, data) {
     $scope.loadingTemplate = true;
 
     API.SiteSetTemplate.put({
@@ -617,19 +709,19 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       }, {
         site_template_id: data.template.id
       },
-      function() {
+      function () {
         $scope.loadingTemplate = false;
         $scope.siteTemplate = data.template.config;
         $scope.siteTemplate.hasFields = !Codekit.isEmptyObj(
           $scope.siteTemplate.fields
         );
 
-        $translate(["DONE", "BLOG_TEMPLATE_UPDATED"]).then(function(translations) {
+        $translate(["DONE", "BLOG_TEMPLATE_UPDATED"]).then(function (translations) {
           toaster.info(translations.DONE, translations.BLOG_TEMPLATE_UPDATED);
         });
       },
-      function() {
-        $translate(["ERROR", "BLOG_TEMPLATE_UPDATE_ERROR"]).then(function(translations) {
+      function () {
+        $translate(["ERROR", "BLOG_TEMPLATE_UPDATE_ERROR"]).then(function (translations) {
           toaster.error(translations.ERROR, translations.BLOG_TEMPLATE_UPDATE_ERROR);
         });
       }
