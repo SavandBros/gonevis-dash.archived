@@ -31,15 +31,15 @@
   <!-- Content -->
   <div id="content" ng-class="{'full-content': !set.sidebar}" ui-view></div>
 
-  <!-- Google analytics -->
+  <!-- Google Tag and Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58251754-3"></script>
   <script>
-    ! function(A, n, g, u, l, a, r) {
-      A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
-          (A[l].q = A[l].q || []).push(arguments)
-        }, A[l].l = +new Date, a = n.createElement(g),
-        r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-    }(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
-    ga("create", "UA-58251754-3");
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-58251754-3');
+    gtag('config', 'AW-830696480');
   </script>
 
 </body>

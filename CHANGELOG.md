@@ -5,6 +5,9 @@
 - Fixed #1155: Fix top margin on main wrapper.
 - Fixed #1153: Fix dark mode on reader and post/page edition.
 
+**Improvement:**
+- Closes #1158: Google AdService Conversion.
+
 
 2019.4.1
 ========
