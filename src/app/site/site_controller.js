@@ -617,69 +617,62 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     };
 
     // Get data from UploadUrl
-    API.UploadUrl.post({siteId: site}, payload,
-      function (data) {
-        console.info(data);
-        data.post_data.fields.file = file;
+    API.UploadUrl.post({siteId: site}, payload, function (data) {
 
-        let uploadPayload = {
-          url: data.post_data.url,
-          data: data.post_data.fields
-        };
+      data.post_data.fields.file = file;
 
-        /**
-         * If `site` is in the data of the backend for UploadURL
-         * Than means we are dealing with LocalFileSystem uploads and the file
-         * object should be send to the backend as well.
-         * As usual, backend needs the `site` in post data.
-         * In this case we add the `site` to the POST data alongside file blog.
-         */
-        if ("site" in data.post_data) {
-          uploadPayload.data.site = data.post_data.site;
-        }
+      let uploadPayload = {
+        url: data.post_data.url,
+        data: data.post_data.fields
+      };
 
-        // Upload the file
-        file.upload = Upload.upload(uploadPayload);
-
-        file.key = data.post_data.fields.key;
-        payload = {
-          file_key: file.key,
-          site: site
-        };
-        // Make an API call to upload the file
-        file.upload.then(
-          function (data) {
-            console.info(data);
-            // Make an API call to upload the file to dolphins.
-            API.Dolphins.post(payload,
-              function (data) {
-                console.info(data);
-                // Start importing blog from uploaded file.
-                API.SiteImport.post({siteId: site}, {file_id: data.id, platform: 0},
-                  function (data) {
-                    console.info(data);
-                    // Show toaster
-                    $translate(["DONE", "IMPORT_IN_PROGRESS"]).then(function (translations) {
-                      toaster.success(translations.DONE, translations.IMPORT_IN_PROGRESS);
-                    });
-                  }, function (data) {
-                    console.info(data);
-                    // Show toaster
-                    $translate(["OOPS", "IMPORT_IN_PROGRESS"]).then(function (translations) {
-                      toaster.success(translations.DONE, translations.IMPORT_IN_PROGRESS);
-                    });
-                  });
-              }
-            );
-          },
-          function () {
-            $translate(["ERROR", "UPLOAD_ERROR"]).then(function (translations) {
-              toaster.error(translations.ERROR, translations.UPLOAD_ERROR);
-            });
-          }
-        );
+      /**
+       * If `site` is in the data of the backend for UploadURL
+       * Than means we are dealing with LocalFileSystem uploads and the file
+       * object should be send to the backend as well.
+       * As usual, backend needs the `site` in post data.
+       * In this case we add the `site` to the POST data alongside file blog.
+       */
+      if ("site" in data.post_data) {
+        uploadPayload.data.site = data.post_data.site;
       }
-    );
+
+      // Upload the file
+      file.upload = Upload.upload(uploadPayload);
+      file.key = data.post_data.fields.key;
+
+      payload = {
+        file_key: file.key,
+        site: site
+      };
+
+      // Make an API call to upload the file
+      file.upload.then(function (data) {
+        console.info(data);
+        // Make an API call to upload the file to dolphins.
+        API.Dolphins.post(payload, function (data) {
+          console.info(data);
+          // Start importing blog from uploaded file.
+          API.SiteImport.post({siteId: site}, {file_id: data.id, platform: 0}, function (data) {
+            console.info(data);
+            // Show toaster
+            $translate(["DONE", "IMPORT_IN_PROGRESS"]).then(function (translations) {
+              toaster.success(translations.DONE, translations.IMPORT_IN_PROGRESS);
+            });
+          }, function (data) {
+            console.info(data);
+            // Show toaster
+            $translate(["OOPS", "IMPORT_IN_PROGRESS"]).then(function (translations) {
+              toaster.success(translations.DONE, translations.IMPORT_IN_PROGRESS);
+            });
+          });
+        });
+      }, function () {
+        $translate(["ERROR", "UPLOAD_ERROR"]).then(function (translations) {
+          toaster.error(translations.ERROR, translations.UPLOAD_ERROR);
+        });
+      });
+    });
   };
 
   /**
