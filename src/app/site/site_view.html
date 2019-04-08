@@ -579,19 +579,19 @@
         <div ng-if="isOwner" class="animated fadeIn">
           <div class="panel panel-default">
             <h5 class="panel-heading lower">
-              <i class="fa fa-upload fa-fw"></i> Import Content
+              <i class="fa fa-upload fa-fw"></i> {{ 'IMPORT_CONTENT' | translate }}
             </h5>
             <!-- WordPress -->
             <div class="panel-body imports">
-              <p>Import your blog content from other blogging platforms.</p>
+              <p translate>IMPORT_BLOG_CONTENT</p>
               <div class="form-group s-mar-bottom-no">
                 <div class="description">
-                  <h3 class="t-bold">WordPress</h3>
-                  <p>Import your blog content from WordPress. ( posts, pages, media and etc. )</p>
+                  <h3 class="t-bold" translate>WORD_PRESS</h3>
+                  <p translate data-translate-values="{ platform: '{{ 'WORD_PRESS'| translate}}' }">IMPORT_BLOG_FROM</p>
                 </div>
                 <button class="btn btn-primary" ngf-select="importBlog($file, $invalidFiles)"
-                        ngf-accept="text/xml" accept="text/xml" ngf-max-size="100MB">
-                  Import
+                        ngf-accept="text/xml" accept="text/xml" translate>
+                  IMPORT
                 </button>
               </div>
             </div>
