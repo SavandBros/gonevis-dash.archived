@@ -593,7 +593,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
   };
 
   /**
-   * @desc Handle for file uploads
+   * @desc Handle file uploads for blog importing.
    *
    * @param {file} file
    * @param {array} errorFiles
@@ -609,7 +609,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       });
     }
 
-    console.log(file)
     // UploadUrl payload
     var payload = {
       file_name: file.name,
@@ -620,7 +619,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     // Get data from UploadUrl
     API.UploadUrl.post({ siteId: site }, payload,
       function(data) {
-      console.log(data)
         data.post_data.fields.file = file;
 
         let uploadPayload = {
@@ -638,12 +636,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         if ("site" in data.post_data) {
           uploadPayload.data.site = data.post_data.site;
         }
-        console.log("aaa")
 
         // Upload the file
         file.upload = Upload.upload(uploadPayload);
-
-        console.log("aaa")
 
         file.key = data.post_data.fields.key;
         payload = {
@@ -651,16 +646,21 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           site: site
         };
         file.upload.then(
-          function(data) {
-            // Not local server, make API call then add to files
+          function() {
             API.Dolphins.post(payload,
               function(data) {
                 // Get data from UploadUrl
                 API.SiteImport.post({siteId: site}, { file_id: data.id, platform: 0 },
-                  function (data) {
-                    console.log(data);
-                  }, function (data) {
-                    console.log(data);
+                  function () {
+                    // Show toaster
+                    $translate(["DONE", "IMPORT_IN_PROGRESS"]).then(function (translations) {
+                      toaster.success(translations.DONE, translations.IMPORT_IN_PROGRESS);
+                    });
+                  }, function () {
+                    // Show toaster
+                    $translate(["OOPS", "IMPORT_IN_PROGRESS"]).then(function (translations) {
+                      toaster.success(translations.DONE, translations.IMPORT_IN_PROGRESS);
+                    });
                   });
               }
             );
@@ -673,12 +673,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         );
       }
     );
-
-    // let payload = {
-    //   file_id: file.id,
-    //   platform: 0
-    // };
-
   };
 
   /**
