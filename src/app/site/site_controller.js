@@ -617,8 +617,9 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     };
 
     // Get data from UploadUrl
-    API.UploadUrl.post({ siteId: site }, payload,
-      function(data) {
+    API.UploadUrl.post({siteId: site}, payload,
+      function (data) {
+        console.info(data);
         data.post_data.fields.file = file;
 
         let uploadPayload = {
@@ -645,18 +646,24 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           file_key: file.key,
           site: site
         };
+        // Make an API call to upload the file
         file.upload.then(
-          function() {
+          function (data) {
+            console.info(data);
+            // Make an API call to upload the file to dolphins.
             API.Dolphins.post(payload,
-              function(data) {
-                // Get data from UploadUrl
-                API.SiteImport.post({siteId: site}, { file_id: data.id, platform: 0 },
-                  function () {
+              function (data) {
+                console.info(data);
+                // Start importing blog from uploaded file.
+                API.SiteImport.post({siteId: site}, {file_id: data.id, platform: 0},
+                  function (data) {
+                    console.info(data);
                     // Show toaster
                     $translate(["DONE", "IMPORT_IN_PROGRESS"]).then(function (translations) {
                       toaster.success(translations.DONE, translations.IMPORT_IN_PROGRESS);
                     });
-                  }, function () {
+                  }, function (data) {
+                    console.info(data);
                     // Show toaster
                     $translate(["OOPS", "IMPORT_IN_PROGRESS"]).then(function (translations) {
                       toaster.success(translations.DONE, translations.IMPORT_IN_PROGRESS);
@@ -665,8 +672,8 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
               }
             );
           },
-          function() {
-            $translate(["ERROR", "UPLOAD_ERROR"]).then(function(translations) {
+          function () {
+            $translate(["ERROR", "UPLOAD_ERROR"]).then(function (translations) {
               toaster.error(translations.ERROR, translations.UPLOAD_ERROR);
             });
           }
