@@ -1,5 +1,7 @@
 "use strict";
 
+require("./main.css");
+
 function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry, ModalsService) {
 
   let site = AuthService.getCurrentSite();
