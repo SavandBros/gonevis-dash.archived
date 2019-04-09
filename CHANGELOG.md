@@ -1,6 +1,9 @@
 2019.5.1
 ========
 
+**Features:**
+- Added #1171: Show start writing message when no posts.
+
 **Bug Fixes:**
 - Fixed #1155: Fix top margin on main wrapper.
 - Fixed #1153: Fix dark mode on reader and post/page edition.
