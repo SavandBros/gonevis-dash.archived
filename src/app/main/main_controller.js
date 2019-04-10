@@ -1,5 +1,7 @@
 "use strict";
 
+require("./main.css");
+
 function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry, ModalsService) {
 
   let site = AuthService.getCurrentSite();
@@ -113,6 +115,25 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
   };
 
   /**
+   * Check entries, if there are no entries or there's only the default one
+   * Also check the about page.
+   *
+   * @returns {boolean}
+   */
+  $scope.showStartWriting = function() {
+    const entries = $scope.Entry.list;
+    const defaultSlugs = ["about", "hello-world"];
+    if ($scope.Entry.loading || !entries) {
+      return false;
+    }
+    if (entries.length === 0 || entries.length === 2 &&
+      defaultSlugs.indexOf(entries[0].get.slug) !== -1 ||
+      defaultSlugs.indexOf(entries[1].get.slug) !== -1) {
+      return true;
+    }
+  };
+
+  /**
    * @desc Open site followers modal
    */
   $scope.siteFollowers = function() {
@@ -133,4 +154,4 @@ function MainController($scope, $rootScope, $state, $stateParams, AuthService, A
 }
 
 const MAIN_DASH_MODULE = angular.module('gonevisDash').controller("MainController", MainController);
-export { MAIN_DASH_MODULE };
+export {MAIN_DASH_MODULE};
