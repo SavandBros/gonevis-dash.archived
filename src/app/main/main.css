@@ -1,0 +1,27 @@
+.page-cover {
+    background: #2F323B;
+    padding: 0;
+    margin: 45px 0 0;
+}
+
+.page-cover .container {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    margin-top: 0;
+    color: #eee;
+}
+
+.page-cover h1,
+.page-cover .btn {
+    font-weight: bold;
+}
+
+.page-cover h1 {
+    letter-spacing: 1px;
+}
+.page-cover .btn {
+    text-transform: uppercase;
+    padding: 10px 25px;
+    letter-spacing: 2px;
+    font-size: 1.5em;
+}
