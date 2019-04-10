@@ -287,7 +287,7 @@
   "SELECT": "Select",
   "SELECTED": "Selected",
   "SELECT_FILE": "Select File",
-  "SELECT_IMAGE" : "Select an image",
+  "SELECT_IMAGE": "Select an image",
   "SIZE": "Size",
   "EXTENSION": "Extension",
   "IMAGE": "Image",
@@ -329,7 +329,7 @@
   "BILLING": "Billing",
   "YOUR_PLAN": "Your Plan",
   "CANCEL_SUBSCRIPTION": "Cancel Subscription",
-  "CANCEL_SUBSCRIPTION_DESCRIPTION": "If you cancel, you no longer have the great features that come with {{ planName }} plan, are you sure ?", 
+  "CANCEL_SUBSCRIPTION_DESCRIPTION": "If you cancel, you no longer have the great features that come with {{ planName }} plan, are you sure ?",
   "CANCELED_CANCELLATION": "Good decision",
   "CANCELLATION_COMPLETED": "Cancellation completed",
   "CANCELLATION_COMPLETED_MESSAGE": "Sorry to see you cancel your {{ planName }} plan!",
@@ -392,5 +392,11 @@
   "NO_FEED": "Your followings will appear here.",
   "COLLAPSE": "Collapse",
   "PLANS": "Plans",
-  "HAPPY_NEW_YEAR": "Happy new year {{ username }}!"
+  "HAPPY_NEW_YEAR": "Happy new year {{ username }}!",
+  "START": "Start",
+  "START_WRITING_TITLE": "Let's start writing...",
+  "START_WRITING_LONELY": "Looks like your blog is lonely and needs some content.",
+  "START_WRITING_CLICK": "Click on the start button to start writing a new post.",
+  "NEW": "New",
+  "DISCORD_JOIN": "Feel free to join our new Discord server!"
 }
