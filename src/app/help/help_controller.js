@@ -1,10 +1,18 @@
 "use strict";
 
+require("./help.css");
+
 import app from "../app";
 
-function HelpController(ModalsService, $scope) {
+function HelpController(ModalsService, $scope, ENV) {
 
   function constructor() {
+
+    /**
+     * Discord link
+     * @type {string}
+     */
+    $scope.discord = ENV.DISCORD_LINK;
 
     /**
      * Links related to getting started on GoNevis
