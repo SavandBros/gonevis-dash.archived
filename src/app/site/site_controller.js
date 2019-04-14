@@ -239,14 +239,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     // Set current tab
     $scope.currentTab = tab;
     currentView = tab.view;
-
-    $timeout(() => {
-      let activeTab = angular.element("li.current");
-      angular.element("span.indicator").css({
-        "left": activeTab[0].offsetLeft,
-        "width": activeTab.width()
-      });
-    });
   };
 
   /**
