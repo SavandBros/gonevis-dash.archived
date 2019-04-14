@@ -11,6 +11,7 @@
 
 **Improvement:**
 - Closes #1158: Google AdService Conversion.
+- CLoses #1162: Move post status tabs next to search bar to save space.
 
 
 2019.4.1
