@@ -126,3 +126,17 @@
         top: 62px;
     }
 }
+
+
+/* Top bar wrapper */
+
+.top-bar-wrapper > div:first-child {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+@media (min-width: 992px) {
+    .top-bar-wrapper > div:first-child {
+        padding-right: 0;
+    }
+}
