@@ -7,7 +7,7 @@ require("../basement/directives/disable_on_request_directive");
 require("./settings.css");
 
 function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
-                        API, ModalsService, AuthService, DolphinService, Codekit, $translate, $timeout) {
+                        API, ModalsService, AuthService, DolphinService, Codekit, $translate) {
 
   var site = AuthService.getCurrentSite();
   let currentView;

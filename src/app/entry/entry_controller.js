@@ -5,7 +5,7 @@ import EntryStatus from "./status";
 require("./entry.css");
 
 function EntryController($scope, $state, $stateParams, Entry, UndoService, Codekit, API, AuthService, Pagination, Search,
-  localStorageService, $translate, $timeout) {
+  localStorageService, $translate) {
 
   let currentView;
 
@@ -214,5 +214,4 @@ EntryController.$inject = [
   "Search",
   "localStorageService",
   "$translate",
-  "$timeout"
 ];
