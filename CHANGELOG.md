@@ -8,6 +8,8 @@
 **Bug Fixes:**
 - Fixed #1155: Fix top margin on main wrapper.
 - Fixed #1153: Fix dark mode on reader and post/page edition.
+- Fixed #1129: Sidebar link is still active when in account state.
+- Fixed #1180: Hide sidebar when navigating through 'site-new' state.
 
 **Improvement:**
 - Closes #1158: Google AdService Conversion.
