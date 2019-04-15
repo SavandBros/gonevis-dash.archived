@@ -99,7 +99,8 @@ angular.module("gonevisDash").run(function ($rootScope, $window, $location, $coo
     var toDash = stateName.indexOf("dash.") !== -1;
     var sites = isAuthenticated ? AuthService.getAuthenticatedUser(true).getSites() : [];
 
-    if (stateName.indexOf("reader") !== -1 || stateName.indexOf("dash.entry-edit") !== -1 || sites.length < 1) {
+    if (stateName.indexOf("reader") !== -1 || stateName.indexOf("dash.entry-edit") !== -1 || sites.length < 1 ||
+      stateName.indexOf("user") !== -1 || stateName.indexOf("site-new") !== -1) {
       $rootScope.hideSidebar = true;
     } else {
       $rootScope.hideSidebar = false;
