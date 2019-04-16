@@ -40,19 +40,15 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
    *
    * @param {string} postId
    */
-  function getComments(postId, siteId) {
-    let payload = {
-      object_pk: postId,
-      object_type: 1,
-      site: siteId
-    };
-    API.Comments.get(payload, data => {
+  function getComments(postId) {
+    API.ReaderComments.get({ entryId: postId }, data => {
+      console.log(data);
       angular.forEach(data.results, data => {
         $scope.comments.push(new Comment(data));
       });
       $scope.commentCount = data.count;
       $scope.commentsInitialled = true;
-      $scope.commentPageForm = Pagination.paginate($scope.commentPageForm, data, payload);
+      $scope.commentPageForm = Pagination.paginate($scope.commentPageForm, data, { entryId: postId });
     });
   }
 
@@ -127,7 +123,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
 
         // Scroll event
         angular.element($window).bind("scroll", onScroll);
-        getComments(postId, data.site.id);
+        getComments(postId);
       },
       function () {
         $scope.error = true;
@@ -137,8 +133,9 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   }
 
   $scope.comment = (commentForm) => {
-    return API.Comments.save(null, commentForm, data => {
-      $scope.comments.unshift(new Comment(data));
+    // @Todo Check if 'user' exists in response.
+    return API.ReaderComment.save({ entryId: commentForm.object_pk }, { comment: commentForm.comment }, data => {
+      $scope.comments.push(new Comment(data));
       commentForm.comment = "";
       $scope.commentCount++;
     });
