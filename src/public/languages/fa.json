@@ -396,5 +396,7 @@
   "START": "Start",
   "START_WRITING_TITLE": "Let's start writing...",
   "START_WRITING_LONELY": "Looks like your blog is lonely and needs some content.",
-  "START_WRITING_CLICK": "Click on the start button to start writing a new post."
+  "START_WRITING_CLICK": "Click on the start button to start writing a new post.",
+  "NEW": "New",
+  "DISCORD_JOIN": "Feel free to join our new Discord server!"
 }

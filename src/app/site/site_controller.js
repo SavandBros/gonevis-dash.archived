@@ -6,8 +6,8 @@ import UserSiteRole from "../account/user/user_site_role";
 require("../basement/directives/disable_on_request_directive");
 require("./settings.css");
 
-function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster, Upload,
-                        API, ModalsService, AuthService, DolphinService, Codekit, $translate, $timeout) {
+function SiteController($scope, $rootScope, $state, $stateParams, $window, toaster,
+                        API, ModalsService, AuthService, DolphinService, Codekit, $translate) {
 
   var site = AuthService.getCurrentSite();
   let currentView;
@@ -242,14 +242,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
     // Set current tab
     $scope.currentTab = tab;
     currentView = tab.view;
-
-    $timeout(() => {
-      let activeTab = angular.element("li.current");
-      angular.element("span.indicator").css({
-        "left": activeTab[0].offsetLeft,
-        "width": activeTab.width()
-      });
-    });
   };
 
   /**

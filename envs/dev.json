@@ -2,5 +2,6 @@
   "name": "development",
   "apiEndpoint": "http://gonevis.local:8000/api/v1/",
   "zeroAPI": "http://gonevis.local:8000/api/zero/",
-  "SENTRY_DSN": "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809"
+  "SENTRY_DSN": "https://4c24bb4af47748a8882052418c4ad175@sentry.io/199809",
+  "DISCORD_LINK": "https://discord.gg/gKhhubs"
 }

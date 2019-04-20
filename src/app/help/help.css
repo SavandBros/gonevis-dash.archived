@@ -1,0 +1,23 @@
+.panel-discord {
+    background: #2c2f33;
+    color: white;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
+}
+
+.panel-discord:hover,
+.panel-discord:focus {
+    background: #7289da;
+    color: white;
+}
+
+.panel-discord small {
+    margin-right: 2px;
+}
+
+.panel-discord img {
+    float: right;
+    margin: -8px 0 -12px 0;
+    height: 40px;
+}

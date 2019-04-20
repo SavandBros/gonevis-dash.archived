@@ -2,11 +2,13 @@
 
 require("./main.css");
 
-function MainController($scope, $rootScope, $state, $stateParams, AuthService, API, Comment, Entry, ModalsService) {
+function MainController($scope, $rootScope, $state, $stateParams,
+                        AuthService, API, Comment, Entry, ModalsService, ENV) {
 
   let site = AuthService.getCurrentSite();
 
   function constructor() {
+    $scope.discord = ENV.DISCORD_LINK;
     $scope.state = $state;
     $scope.param = $stateParams;
     $scope.user = AuthService.getAuthenticatedUser(true);
