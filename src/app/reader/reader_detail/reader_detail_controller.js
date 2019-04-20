@@ -135,7 +135,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   $scope.comment = (commentForm) => {
     // @Todo Check if 'user' exists in response.
     return API.ReaderComment.save({ entryId: commentForm.object_pk }, { comment: commentForm.comment }, data => {
-      $scope.comments.push(new Comment(data));
+      $scope.comments.unshift(new Comment(data));
       commentForm.comment = "";
       $scope.commentCount++;
     });
