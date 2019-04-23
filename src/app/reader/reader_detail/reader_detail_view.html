@@ -71,6 +71,23 @@
 										</a>
 										<!-- Date -->
 										<small class="o-fade-soft">&middot; {{ comment.get.created | date }}</small>
+                    <!-- Date -->
+                    <div class="pull-right">
+                      <button class="btn btn-link">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <div class="dropdown pull-right show">
+                        <button class="btn btn-link text-secondary" data-toggle="dropdown" title="More options"
+                                aria-expanded="true">
+                          <i class="fa fa-fw fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li>
+                            <a ng-click="comment.remove()">Delete comment</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
 									</div>
 									<!-- Comment -->
 									<p class="s-mar-no" ng-bind-html="comment.get.comment"></p>
