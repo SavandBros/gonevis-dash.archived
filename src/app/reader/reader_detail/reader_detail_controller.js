@@ -7,8 +7,8 @@ require("quill/dist/quill.snow.css");
 require("../../entry/entry_edit/editor.css");
 require("../../basement/directives/disable_on_request_directive");
 
-function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window,
-  ReaderService, Comment, Pagination, EmbedListener) {
+function ReaderDetailController($scope, $rootScope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit,
+                                $window, ReaderService, Comment, Pagination, EmbedListener) {
   let lastScroll;
 
   /**
@@ -133,13 +133,13 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   }
 
   $scope.comment = (commentForm) => {
-    // @Todo Check if 'user' exists in response.
     return API.ReaderComment.save({ entryId: commentForm.object_pk }, { comment: commentForm.comment }, data => {
       $scope.comments.unshift(new Comment(data));
       commentForm.comment = "";
       $scope.commentCount++;
     });
   };
+
 
   /**
    * @desc Toggle fullscreen mode
@@ -173,6 +173,13 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   $scope.$on("$destroy", function () {
     angular.element($window).off("scroll", onScroll);
     angular.element($window).off("message", EmbedListener.handleEmbedSize);
+  });
+
+  /**
+   * @desc Remove comment
+   */
+  $rootScope.$on("gonevisDash.Comment:remove", function() {
+    Codekit.timeoutSlice($scope.comments);
   });
 
   /**
