@@ -142,6 +142,11 @@
     margin-bottom: 100px;
 }
 
+.comments .media,
+.comments .media .media-body {
+    overflow: visible;
+}
+
 .lights.off .comments.panel,
 .lights.off .comments .panel-heading {
     color: #fff !important;
