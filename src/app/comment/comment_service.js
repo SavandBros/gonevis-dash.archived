@@ -32,6 +32,18 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
     this.isDeleted = false;
 
     /**
+     * @name isEditing
+     * @type {Boolean}
+     */
+    this.isEditing = false;
+
+    /**
+     * @name editedComment
+     * @type {string}
+     */
+    this.editedComment = data.comment;
+
+    /**
      * @type {boolean}
      */
     this.isLoading = false;
@@ -101,6 +113,24 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
     };
 
     /**
+     * @desc Edit comment.
+     *
+     * @param {string} comment
+     */
+    this.edit = function(comment) {
+
+      this.isLoading = true;
+
+      API.Comment.put({ comment_id: this.get.id }, { comment: comment },
+        function(data) {
+          self.get.comment = data.comment;
+          self.cancelEdit();
+          self.isLoading = false;
+        }
+      );
+    };
+
+    /**
      * @desc Get comment's current status.
      */
     this.getStatus = function() {
@@ -134,6 +164,14 @@ function Comment($rootScope, toaster, API, ModalsService, Codekit, Account, $tra
       ModalsService.open("comment", "CommentModalController", {
         comment: self
       });
+    };
+
+    /**
+     * @desc Cancel editing and reset edited comment.
+     */
+    this.cancelEdit = function () {
+      this.isEditing = false;
+      this.editedComment = this.get.comment;
     };
 
   };
