@@ -132,6 +132,12 @@ function ReaderDetailController($scope, $rootScope, $state, $sce, $stateParams, 
     );
   }
 
+  /**
+   * @desc Remove comment with prompt.
+   *
+   * @param {Comment} comment
+   * @returns {function}
+   */
   $scope.comment = (commentForm) => {
     return API.ReaderComment.save({ entryId: commentForm.object_pk }, { comment: commentForm.comment }, data => {
       $scope.comments.unshift(new Comment(data));
@@ -140,6 +146,17 @@ function ReaderDetailController($scope, $rootScope, $state, $sce, $stateParams, 
     });
   };
 
+  /**
+   * @desc Remove comment with prompt.
+   *
+   * @param {Comment} comment
+   * @returns {void}
+   */
+  $scope.removeComment = (comment) => {
+    if (confirm($translate.instant('REMOVE_COMMENT_PROMPT'))) {
+      comment.remove();
+    }
+  };
 
   /**
    * @desc Toggle fullscreen mode
