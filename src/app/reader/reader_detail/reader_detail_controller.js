@@ -78,14 +78,14 @@ function ReaderDetailController($scope, $rootScope, $state, $sce, $stateParams, 
 
     // Get user
     let userSiteRole = new UserSiteRole();
-    let user = AuthService.getAuthenticatedUser(true);
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.loading = true;
 
     // API call
     API.ReaderDetail.get({ entryId: postId },
       function (data) {
         // Check if owner
-        angular.forEach(user.getSites(), (site) => {
+        angular.forEach($scope.user.getSites(), (site) => {
           if (data.site.id === site.id && site.role === userSiteRole.OWNER) {
             $scope.isOwner = true;
           }

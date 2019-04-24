@@ -72,7 +72,7 @@
 										<!-- Date -->
 										<small class="o-fade-soft">&middot; {{ comment.get.created | date }}</small>
                     <!-- Edit and remove -->
-                    <div class="pull-right">
+                    <div class="pull-right" ng-if="comment.get.user.id === user.get.id">
                       <!-- Edit comment toggle -->
                       <button class="btn btn-link" ng-click="comment.isEditing = !comment.isEditing">
                         <i class="fa fa-pencil"></i>
@@ -95,7 +95,7 @@
 									<!-- Comment -->
 									<p class="s-mar-no" ng-bind-html="comment.get.comment" ng-if="!comment.isEditing"></p>
                   <!-- Editing input -->
-                  <div ng-if="comment.isEditing">
+                  <div ng-if="comment.isEditing && comment.get.user.id === user.get.id">
                     <textarea aria-label="" class="form-control" ng-model="comment.editedComment"></textarea>
                     <div class="pull-right s-mar-top-soft">
                       <!-- Cancel -->
