@@ -20,38 +20,8 @@
     line-height: 25px;
 }
 
-.reader-tabs {
-    padding-top: 15px;
-    display: flex;
-    margin-bottom: 20px;
-}
-
-.tab {
-    flex: 1;
-    color: #222;
-    padding: 10px;
-    background-color: #fff;
-    transition: cubic-bezier(1, 0.02, 0, 0.99) 0.8s all;
-    text-transform: uppercase;
-}
-
-.tab.feed {
-    clip-path: polygon(calc(100% - 20px) 0, 100% 100%, 0px 100%, 0 0);
-}
-
-.tab.explore {
-    clip-path: polygon(100% 0px, 100% 100%, 20px 100%, 0px 0px);
-}
-
-.tab.is-active {
-    flex: 2;
-    color: #fff;
-    background-color: #d17100;
-    letter-spacing: 7px;
-}
-
-.tab.is-active h3 {
-    font-weight: bold;
+.reader-tabs a:not(.active) {
+    color: #555;
 }
 
 
