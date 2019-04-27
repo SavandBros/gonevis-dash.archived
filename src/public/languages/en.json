@@ -391,6 +391,7 @@
   "FEED": "Feed",
   "BOOKMARKS": "Bookmarks",
   "NO_FEED": "Your followings will appear here.",
+  "READER_NO_BOOKMARKS": "Your bookmarked posts will appear here.",
   "COLLAPSE": "Collapse",
   "PLANS": "Plans",
   "HAPPY_NEW_YEAR": "Happy new year {{ username }}!",

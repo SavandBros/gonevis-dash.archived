@@ -10,7 +10,8 @@
           </li>
         </ul>
         <!-- Nothing text -->
-        <nothing text="{{ nothingText }}" view="true" ng-if="!explore.length && !loading"></nothing>
+        <nothing text="{{ currentTab.url === 'bookmarks' ? ('READER_NO_BOOKMARKS' | translate) : nothingText }}"
+                 view="true" ng-if="!explore.length && !loading"></nothing>
         <!-- Reader -->
         <div ng-if="!loading && explore.length">
           <!-- Posts -->
