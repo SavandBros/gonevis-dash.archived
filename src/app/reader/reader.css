@@ -112,6 +112,15 @@
     margin-bottom: 100px;
 }
 
+.comments .media,
+.comments .media .media-body {
+    overflow: visible;
+}
+
+.comments textarea {
+    resize: vertical;
+}
+
 .lights.off .comments.panel,
 .lights.off .comments .panel-heading {
     color: #fff !important;
