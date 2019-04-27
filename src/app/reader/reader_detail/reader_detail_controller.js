@@ -19,7 +19,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   function onScroll() {
     let bottom = "-70px";
 
-    // If user scrolled 400 pixles down.
+    // If user scrolled 400 pixels down.
     if (!$scope.full) {
       let currentScroll = $window.scrollY;
 
