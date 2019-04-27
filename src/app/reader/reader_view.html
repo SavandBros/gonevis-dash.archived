@@ -4,14 +4,11 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <!-- Reader tabs -->
-        <div class="reader-tabs text-center">
-          <div class="tab {{ tab.class }}" ng-repeat="tab in tabs"
-            ng-class="{'is-active': currentTab == tab}"
-            ng-click="setCurrentTab(tab)">
-            <h3>{{ tab.label }}</h3>
-          </div>
-        </div>
+        <ul class="nav nav-pills s-mar-y reader-tabs">
+          <li role="presentation" ng-class="{'active': currentTab == tab}" ng-repeat="tab in tabs">
+            <a ng-click="setCurrentTab(tab)"><h4>{{ tab.label }}</h4></a>
+          </li>
+        </ul>
         <!-- Nothing text -->
         <nothing text="{{ nothingText }}" view="true" ng-if="!explore.length && !loading"></nothing>
         <!-- Reader -->
@@ -48,6 +45,11 @@
                   disable-on-request="readerService.vote(post)">
                   <i class="fa fa-heart fa-fw"></i>
                   <span ng-show="post.vote_count">{{ post.vote_count }}</span>
+                </button>
+                <!-- Bookmark -->
+                <button class="btn btn-light btn-sm"
+                  disable-on-request="readerService.bookmark(post)">
+                  <i class="fa fa-bookmark fa-fw"></i>
                 </button>
               </div>
             </div>
