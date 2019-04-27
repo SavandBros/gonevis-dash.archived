@@ -26,8 +26,27 @@ function ReaderService(API) {
     });
   }
 
+  /**
+   * @desc A method to bookmark posts.
+   *
+   * @param {object} post
+   *
+   * @returns {Promise}
+   */
+  function bookmark(post) {
+    return API.Bookmark.save({entry_id: post.id}, null, data => {
+      // `created` means that Bookmark objects has been created for this post,
+      // if the bookmark has been created, then it means user has bookmarked the object.
+      // If it says "created" is a`false` or `undefined` then the bookmark has been removed
+      // In such case, user has not bookmark the object
+      // @todo Remember to change this once backend has updated.
+      // post.is_bookmarked = data.created;
+    });
+  }
+
   return {
-    vote: vote
+    vote: vote,
+    bookmark: bookmark
   };
 }
 
