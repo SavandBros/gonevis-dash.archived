@@ -1,11 +1,12 @@
 "use strict";
 
 import app from "../app";
+
 require('./reader.css');
 require('../basement/directives/disable_on_request_directive');
 
 function ReaderController($scope, API, $state, Pagination, Codekit, $translate, $window, $timeout, $stateParams,
-  ReaderSaveService, ReaderService) {
+                          ReaderSaveService, ReaderService, AuthService) {
 
   let bodyHeight;
   let currentView;
@@ -16,24 +17,29 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
     currentView = "feed";
     if ($stateParams.view === "explore") {
       currentView = "explore";
+    } else if ($stateParams.view === "bookmarks") {
+      currentView = "bookmarks";
     }
 
     // Save last items
     storedItems = ReaderSaveService.items[currentView];
 
-    $translate(["EXPLORE", "FEED", "NO_FEED"]).then(function (translations) {
+    $translate(["EXPLORE", "FEED", "NO_FEED", "BOOKMARKS"]).then(function (translations) {
       // List of tabs
       $scope.tabs = [{
-        class: "feed",
+        url: "feed",
         label: translations.FEED
       }, {
-        class: "explore",
+        url: "explore",
         label: translations.EXPLORE
+      }, {
+        url: "bookmarks",
+        label: translations.BOOKMARKS
       }];
 
       // Set current tab
       angular.forEach($scope.tabs, (tab, index) => {
-        if (tab.class === currentView) {
+        if (tab.url === currentView) {
           $scope.setCurrentTab($scope.tabs[index]);
         }
       });
@@ -47,19 +53,19 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    *
    * @param {object} tab
    */
-  $scope.setCurrentTab = function(tab) {
+  $scope.setCurrentTab = function (tab) {
     // Check current tab
     if ($scope.currentTab === tab) {
       return;
     }
 
     // Change URL
-    $state.go('reader.explore-feed', { view: tab.class });
+    $state.go('reader.explore-feed', {view: tab.url});
 
     // Set current tab
     $scope.currentTab = tab;
     $scope.loading = true;
-    currentView = tab.class;
+    currentView = tab.url;
     storedItems = ReaderSaveService.items[currentView];
 
     $scope.onTabChanged(tab);
@@ -72,6 +78,14 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    * @param {object} tab
    */
   $scope.onTabChanged = (tab) => {
+    let payload = {};
+    // Check if current view.
+    if (currentView === 'bookmarks') {
+      storedItems.data.results = null;
+      payload = {
+        entry_id: AuthService.getCurrentSite()
+      };
+    }
     if (storedItems.data.results) {
       $scope.explore = storedItems.data.results;
       $scope.loading = false;
@@ -81,7 +95,7 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
 
     let api = currentView.charAt(0).toUpperCase() + currentView.substr(1).toLowerCase();
 
-    API[api].get({},
+    API[api].get(payload,
       function (data) {
         // Check current tab before storing data.
         if ($scope.currentTab !== tab) {
@@ -89,8 +103,8 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
         }
         $scope.explore = data.results;
         storedItems.data = data;
-        $scope.loading = false;
         storedItems.pageForm = Pagination.paginate(storedItems.pageForm, storedItems.data, {});
+        $scope.loading = false;
         $scope.updateHeight();
       }
     );
@@ -103,7 +117,7 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    *
    * @returns {string}
    */
-  $scope.bottomImage = function(post) {
+  $scope.bottomImage = function (post) {
     if (post.user.media.thumbnail_48x48) {
       return post.user.media.thumbnail_48x48;
     } else if (post.site.media.cover_image) {
@@ -126,10 +140,10 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
+  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
     if (data.success) {
       storedItems.pageForm.page = data.page;
-      angular.forEach(data.data.results, function(data) {
+      angular.forEach(data.data.results, function (data) {
         storedItems.data.results.push(data);
       });
       $scope.updateHeight();
