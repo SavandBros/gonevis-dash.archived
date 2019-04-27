@@ -4,6 +4,7 @@
 **Features:**
 - Added #1171: Show start writing message when no posts.
 - Added #1173: Discord link to dashboard.
+- Added #1185: Implement bookmarking at Reader.
 
 **Bug Fixes:**
 - Fixed #1155: Fix top margin on main wrapper.
