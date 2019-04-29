@@ -293,9 +293,6 @@ function HeaderController($scope, $rootScope, $state, $stateParams, $timeout, Au
     let stateName = transition.to().name;
 
     if (AuthService.isAuthenticated()) {
-      if (stateName.indexOf("site-new") !== -1) {
-        $rootScope.set.sidebar = false;
-      }
       let index = $rootScope.set.lastSite;
 
       // Check if current state is includes dash in it's name.

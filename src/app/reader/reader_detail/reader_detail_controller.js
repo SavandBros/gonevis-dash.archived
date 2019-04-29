@@ -7,8 +7,8 @@ require("quill/dist/quill.snow.css");
 require("../../entry/entry_edit/editor.css");
 require("../../basement/directives/disable_on_request_directive");
 
-function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit, $window,
-  ReaderService, Comment, Pagination, EmbedListener) {
+function ReaderDetailController($scope, $rootScope, $state, $sce, $stateParams, $translate, API, AuthService, Codekit,
+                                $window, ReaderService, Comment, Pagination, EmbedListener) {
   let lastScroll;
 
   /**
@@ -40,19 +40,15 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
    *
    * @param {string} postId
    */
-  function getComments(postId, siteId) {
-    let payload = {
-      object_pk: postId,
-      object_type: 1,
-      site: siteId
-    };
-    API.Comments.get(payload, data => {
+  function getComments(postId) {
+    API.ReaderComments.get({ entryId: postId }, data => {
+      console.log(data);
       angular.forEach(data.results, data => {
         $scope.comments.push(new Comment(data));
       });
       $scope.commentCount = data.count;
       $scope.commentsInitialled = true;
-      $scope.commentPageForm = Pagination.paginate($scope.commentPageForm, data, payload);
+      $scope.commentPageForm = Pagination.paginate($scope.commentPageForm, data, { entryId: postId });
     });
   }
 
@@ -82,14 +78,14 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
 
     // Get user
     let userSiteRole = new UserSiteRole();
-    let user = AuthService.getAuthenticatedUser(true);
+    $scope.user = AuthService.getAuthenticatedUser(true);
     $scope.loading = true;
 
     // API call
     API.ReaderDetail.get({ entryId: postId },
       function (data) {
         // Check if owner
-        angular.forEach(user.getSites(), (site) => {
+        angular.forEach($scope.user.getSites(), (site) => {
           if (data.site.id === site.id && site.role === userSiteRole.OWNER) {
             $scope.isOwner = true;
           }
@@ -127,7 +123,7 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
 
         // Scroll event
         angular.element($window).bind("scroll", onScroll);
-        getComments(postId, data.site.id);
+        getComments(postId);
       },
       function () {
         $scope.error = true;
@@ -136,12 +132,30 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
     );
   }
 
+  /**
+   * @desc Remove comment with prompt.
+   *
+   * @param {Comment} comment
+   * @returns {function}
+   */
   $scope.comment = (commentForm) => {
-    return API.Comments.save(null, commentForm, data => {
+    return API.ReaderComment.save({ entryId: commentForm.object_pk }, { comment: commentForm.comment }, data => {
       $scope.comments.unshift(new Comment(data));
       commentForm.comment = "";
       $scope.commentCount++;
     });
+  };
+
+  /**
+   * @desc Remove comment with prompt.
+   *
+   * @param {Comment} comment
+   * @returns {void}
+   */
+  $scope.removeComment = (comment) => {
+    if (confirm($translate.instant('REMOVE_COMMENT_PROMPT'))) {
+      comment.remove();
+    }
   };
 
   /**
@@ -176,6 +190,13 @@ function ReaderDetailController($scope, $state, $sce, $stateParams, $translate, 
   $scope.$on("$destroy", function () {
     angular.element($window).off("scroll", onScroll);
     angular.element($window).off("message", EmbedListener.handleEmbedSize);
+  });
+
+  /**
+   * @desc Remove comment
+   */
+  $rootScope.$on("gonevisDash.Comment:remove", function() {
+    Codekit.timeoutSlice($scope.comments);
   });
 
   /**

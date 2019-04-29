@@ -230,6 +230,7 @@
   "REMOVE_SELECTED_POSTS_PROMPT": "You're about to delete the selected posts, you CANNOT recover them. Are you sure ?",
   "REMOVE_SELECTED_PAGES_PROMPT": "You're about to delete the selected pages, you CANNOT recover them. Are you sure ?",
   "REMOVE_ENTRY_PROMPT": "Are you sure you want to delete this post?",
+  "REMOVE_COMMENT_PROMPT": "Are you sure you want to delete this comment?",
   "OPEN_SETTINGS_SIDEBAR": "Open Settings Sidebar",
   "AWESOME": "Awesome",
   "ERROR": "Error",
