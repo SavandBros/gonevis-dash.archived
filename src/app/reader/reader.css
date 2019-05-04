@@ -98,12 +98,13 @@
 
 .lights.off .reader-content {
     color: #fff;
-    background-color: #111;
+    background-color: #222437;
 }
 
 .lights.off .container-fluid.reader-cover,
 .lights.off .reader-wrapper {
-    background-color: #111 !important;
+    background-color: #222437 !important;
+    box-shadow: none;
 }
 
 .reader-wrapper .title {
@@ -113,7 +114,7 @@
 
 .lights.off .bottom-bar {
     bottom: 0px;
-    background: rgb(0, 0, 0);
+    background: #1a1b2c;
     color: #ccc;
 }
 
@@ -154,7 +155,7 @@
 .lights.off .comments.panel,
 .lights.off .comments .panel-heading {
     color: #fff !important;
-    background-color: #111 !important;
+    background-color: #222437 !important;
     border-color: transparent !important;
 }
 
