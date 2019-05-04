@@ -1,3 +1,10 @@
+2019.6.1
+========
+
+**Bug Fixes:**
+- Fixed #1187: Update dark mode colors of Reader.
+
+
 2019.5.1
 ========
 
