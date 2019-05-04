@@ -1,3 +1,10 @@
+2019.6.1
+========
+
+**Bug Fixes:**
+- Fixed #1189: Fix Jquery security vulnerability error.
+
+
 2019.5.1
 ========
 
