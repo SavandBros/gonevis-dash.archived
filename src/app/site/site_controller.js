@@ -413,8 +413,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
           $scope.googleAnalytics = toaster.success(translations.DONE, translations.BLOG_UPDATED);
         });
       }, error => {
-        // Clear last toaster
-        toaster.clear($scope.googleAnalytics);
         // show toaster regarding error
         $scope.googleAnalytics = toaster.error(error.data.google_analytics_code[0]);
       }
@@ -439,8 +437,6 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
         $scope.googleAdSense = toaster.success(translations.DONE, translations.BLOG_UPDATED);
       });
     }, error => {
-      // Clear last toaster
-      toaster.clear($scope.googleAdSense);
       // show toaster regarding error
       $scope.googleAdSense = toaster.error(error.data.google_adsense_code[0]);
     });
