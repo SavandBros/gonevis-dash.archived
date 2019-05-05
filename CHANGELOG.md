@@ -2,6 +2,8 @@
 ========
 
 **Bug Fixes:**
+
+- Fixed #1189: Fix jQuery security vulnerability error.
 - Fixed #1192: Fix toaster for permission error at settings page.
 
 
