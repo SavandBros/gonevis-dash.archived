@@ -5,6 +5,7 @@
 
 - Fixed #1189: Fix jQuery security vulnerability error.
 - Fixed #1192: Fix toaster for permission error at settings page.
+- Fixed #1194: Remove discord link from main page (it's still in help page).
 
 
 2019.5.1
