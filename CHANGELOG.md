@@ -1,3 +1,12 @@
+2019.6.1
+========
+
+**Bug Fixes:**
+
+- Fixed #1189: Fix jQuery security vulnerability error.
+- Fixed #1192: Fix toaster for permission error at settings page.
+
+
 2019.5.1
 ========
 
@@ -10,6 +19,7 @@
 - Fixed #1153: Fix dark mode on reader and post/page edition.
 - Fixed #1129: Sidebar link is still active when in account state.
 - Fixed #1180: Hide sidebar when navigating through 'site-new' state.
+- Fixed #1182: Add comment support to Reader.
 
 **Improvement:**
 - Closes #1158: Google AdService Conversion.

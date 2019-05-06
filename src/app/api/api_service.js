@@ -78,6 +78,14 @@ function API($resource, ENV) {
       name: "Comments",
       endpoint: "sushial/comment/" // GET
     }, {
+      name: "ReaderComment",
+      endpoint: "website/entry/:entryId/comment/", // POST
+      isZero: true
+    }, {
+      name: "ReaderComments",
+      endpoint: "website/entry/:entryId/comments/", // GET
+      isZero: true
+    }, {
       name: "Explore",
       endpoint: "sushial/explore/" // GET
     }, {
