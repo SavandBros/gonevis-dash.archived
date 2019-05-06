@@ -76,7 +76,7 @@
 
 .container-fluid.reader-cover h1 {
     font-weight: 700;
-    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     font-size: 42px;
 }
 
@@ -136,6 +136,10 @@
     color: #fff;
 }
 
+.lights.off .reader-wrapper hr {
+    border-color: #1a1b2c;
+}
+
 
 /* Comment section */
 
@@ -162,12 +166,12 @@
 .lights.off .comments textarea {
     background: rgba(0, 0, 0, 0.5);
     border-color: transparent;
-    box-shadow: 0px 5px 5px rgba(0,0,0,0.3);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
     color: #fff !important;
 }
 
 .lights.off .panel-body .media:not(:last-child) {
-    border-bottom-color:rgba(0,0,0,0.2);
+    border-bottom-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Full screen mode */
@@ -246,7 +250,7 @@
     left: 0;
     right: 0;
     background: #fff;
-    box-shadow: 0 -3px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.06);
     padding: 10px;
     color: #444;
     transition: ease-in-out 0.2s;
