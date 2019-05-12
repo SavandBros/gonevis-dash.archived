@@ -340,10 +340,10 @@ iframe.post-preview {
     border-color: #1a1b2c;
 }
 
-.lights.off .container-fluid,
+.lights.off .container-fluid:not(.reader-cover),
 .lights.off .editor-container,
 .lights.off .editor .form-control {
-    background: #1a1b2c !important;
+    background: #222222 !important;
     border-color: #222 !important;
     color: #fff !important;
 }
