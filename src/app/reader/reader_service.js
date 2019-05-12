@@ -46,7 +46,7 @@ function ReaderService(API) {
 
   return {
     vote: vote,
-    bookmark: bookmark
+    bookmark: bookmark,
   };
 }
 
