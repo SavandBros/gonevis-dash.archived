@@ -60,7 +60,7 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
     }
 
     // Change URL
-    $state.go('reader.explore-feed', {view: tab.url});
+    $state.go('reader.explore-feed', { view: tab.url });
 
     // Set current tab
     $scope.currentTab = tab;
@@ -117,7 +117,7 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    *
    * @returns {string}
    */
-  $scope.bottomImage = function (post) {
+  $scope.bottomImage = function(post) {
     if (post.user.media.thumbnail_48x48) {
       return post.user.media.thumbnail_48x48;
     } else if (post.site.media.cover_image) {
@@ -140,10 +140,10 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    * @param {Event} event
    * @param {object} data
    */
-  $scope.$on("gonevisDash.Pagination:loadedMore", function (event, data) {
+  $scope.$on("gonevisDash.Pagination:loadedMore", function(event, data) {
     if (data.success) {
       storedItems.pageForm.page = data.page;
-      angular.forEach(data.data.results, function (data) {
+      angular.forEach(data.data.results, function(data) {
         storedItems.data.results.push(data);
       });
       $scope.updateHeight();
