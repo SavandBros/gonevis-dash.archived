@@ -34,7 +34,7 @@ function ReaderService(API) {
    * @returns {Promise}
    */
   function bookmark(post) {
-    return API.Bookmark.save({entry_id: post.id}, null, data => {
+    return API.Bookmark.save({entry_id: post.id}, null, () => {
       // `created` means that Bookmark objects has been created for this post,
       // if the bookmark has been created, then it means user has bookmarked the object.
       // If it says "created" is a`false` or `undefined` then the bookmark has been removed
