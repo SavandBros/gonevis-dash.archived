@@ -53,7 +53,7 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
    *
    * @param {object} tab
    */
-  $scope.setCurrentTab = function (tab) {
+  $scope.setCurrentTab = function(tab) {
     // Check current tab
     if ($scope.currentTab === tab) {
       return;
