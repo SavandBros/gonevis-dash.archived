@@ -336,10 +336,14 @@ iframe.post-preview {
     border: none;
 }
 
-.lights.off .container-fluid,
+.lights.off .navbar-default {
+    border-color: #1a1b2c;
+}
+
+.lights.off .container-fluid:not(.reader-cover),
 .lights.off .editor-container,
 .lights.off .editor .form-control {
-    background: #333 !important;
+    background: #222222 !important;
     border-color: #222 !important;
     color: #fff !important;
 }

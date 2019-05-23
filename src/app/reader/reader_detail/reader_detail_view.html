@@ -1,5 +1,5 @@
 <!-- Cover image -->
-<div ng-hide="full" class="container-fluid reader-cover s-pad-no text-center" ng-if="post.media.cover_image"
+<div class="container-fluid reader-cover s-pad-no text-center" ng-if="post.media.cover_image && !full"
 	ng-style="{'background-image': 'url({{ post.media.cover_image.file }})'}">
 	<div class="container">
 		<div class="row">
@@ -14,7 +14,7 @@
 	<div class="container">
 		<nothing text="{{ 'ENTRY_GET_ERROR' | translate }}" ng-if="error"></nothing>
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-10 col-md-offset-1">
 				<div class="reader-content" ng-if="!error && !loading">
           <!-- Title -->
           <h1 ng-if="!post.media.cover_image" class="text-center title s-mar-bottom">{{ post.title }}</h1>
