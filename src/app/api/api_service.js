@@ -95,7 +95,8 @@ function API($resource, ENV) {
       isZero: true
     }, {
       name: "Explore",
-      endpoint: "sushial/explore/" // GET
+      endpoint: "website/entry/", // GET
+      isZero: true
     }, {
       name: "Feed",
       endpoint: "sushial/subscribed-entries/" // GET
