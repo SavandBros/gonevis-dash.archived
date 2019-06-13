@@ -83,7 +83,7 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
     if (currentView === 'bookmarks') {
       storedItems.data.results = null;
       payload = {
-        entry_id: AuthService.getCurrentSite()
+        user_id: AuthService.getAuthenticatedUser(false).id
       };
     }
     if (storedItems.data.results) {
