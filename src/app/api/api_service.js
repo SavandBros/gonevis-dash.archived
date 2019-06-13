@@ -75,7 +75,7 @@ function API($resource, ENV) {
       isZero: true
     }, {
       name: "Bookmarks",
-      endpoint: "website/entry/:entry_id/bookmarks/", // GET
+      endpoint: "website/entry/:user_id/bookmarks/", // GET
       isZero: true
     },
     // Sushial
