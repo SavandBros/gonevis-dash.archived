@@ -49,7 +49,8 @@
                 </button>
                 <!-- Bookmark -->
                 <button class="btn btn-light btn-sm" disable-on-request="readerService.bookmark(post)">
-                  <i class="fa fa-bookmark fa-fw"></i>
+                  <i class="fa fa-fw"
+                     ng-class="{'fa-bookmark': post.is_bookmarked, 'fa-bookmark-o': !post.is_bookmarked}"></i>
                 </button>
               </div>
             </div>
