@@ -44,7 +44,7 @@ function UserController($scope, $rootScope, $stateParams,
       payload.picture = null;
     }
 
-    API.UserUpdate.put(payload,
+    API.UserUpdate.patch(payload,
       function (data) {
         if (removeAvatar) {
           $scope.user.get.media = null;
