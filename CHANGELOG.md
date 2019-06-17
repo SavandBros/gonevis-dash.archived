@@ -5,7 +5,7 @@
 
 - Fixed #1197: Fix potential security vulnerabilities.
 - Fixed #1200: Fix user settings page.
-- Fixed #1204: Fix remove branding does not work
+- Fixed #1204: Fix remove branding does not work.
 
 
 2019.6.1
