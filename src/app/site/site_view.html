@@ -453,7 +453,8 @@
                    title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
             <label for="remove_branding" translate>REMOVE_BRANDING</label>
             <button class="btn btn-primary pull-right" type="button"
-                    disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}
+                    disable-on-request="setCustomFooter(site.footer_text); removeBranding(!site.remove_branding)">
+              {{ 'SAVE' | translate }}
             </button>
           </div>
           <!-- Footer text (panel) -->
