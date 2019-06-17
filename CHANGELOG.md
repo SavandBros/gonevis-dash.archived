@@ -1,3 +1,12 @@
+2019.7.1
+========
+
+**Bug Fixes:**
+
+- Fixed #1197: Fix potential security vulnerabilities.
+- Fixed #1200: Fix user settings page.
+
+
 2019.6.1
 ========
 
