@@ -6,6 +6,7 @@
 - Fixed #1197: Fix potential security vulnerabilities.
 - Fixed #1200: Fix user settings page.
 - Fixed #1204: Fix remove branding does not work.
+- Fixed #1206: Cannot read property 'get' of undefined.
 
 
 2019.6.1
