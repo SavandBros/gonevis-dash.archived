@@ -69,6 +69,14 @@ function API($resource, ENV) {
       name: "EntryVote",
       endpoint: "website/entry/:entryId/vote/", // POST
       isZero: true
+    }, {
+      name: "Bookmark",
+      endpoint: "website/entry/:entry_id/bookmark/", // POST
+      isZero: true
+    }, {
+      name: "Bookmarks",
+      endpoint: "website/entry/:user_id/bookmarks/", // GET
+      isZero: true
     },
     // Sushial
     {
@@ -87,7 +95,8 @@ function API($resource, ENV) {
       isZero: true
     }, {
       name: "Explore",
-      endpoint: "sushial/explore/" // GET
+      endpoint: "website/entry/", // GET
+      isZero: true
     }, {
       name: "Feed",
       endpoint: "sushial/subscribed-entries/" // GET
