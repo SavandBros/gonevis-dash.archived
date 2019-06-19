@@ -42,6 +42,10 @@ function MainController($scope, $rootScope, $state, $stateParams,
    */
   $scope.Comment = {
     /**
+     * @type {boolean}
+     */
+    loading: false,
+    /**
      * @type {array}
      */
     list: [],
@@ -70,6 +74,10 @@ function MainController($scope, $rootScope, $state, $stateParams,
    * @type {object}
    */
   $scope.Entry = {
+    /**
+     * @type {boolean}
+     */
+    loading: false,
     /**
      * @type {array}
      */
@@ -100,6 +108,10 @@ function MainController($scope, $rootScope, $state, $stateParams,
    */
   $scope.Metrics = {
     /**
+     * @type {boolean}
+     */
+    loading: false,
+    /**
      * @desc Initialize metrics
      */
     initialize: function() {
@@ -129,7 +141,9 @@ function MainController($scope, $rootScope, $state, $stateParams,
       return false;
     }
     if (entries.length === 0 || entries.length === 2 &&
+      entries[0] &&
       defaultSlugs.indexOf(entries[0].get.slug) !== -1 ||
+      entries[1] &&
       defaultSlugs.indexOf(entries[1].get.slug) !== -1) {
       return true;
     }
