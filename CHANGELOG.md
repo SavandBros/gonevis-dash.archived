@@ -7,6 +7,7 @@
 - Fixed #1200: Fix user settings page.
 - Fixed #1204: Fix remove branding does not work.
 - Fixed #1206: Cannot read property 'get' of undefined.
+- Fixed #1208: Fix editor indent getting bleached.
 
 
 2019.6.1
