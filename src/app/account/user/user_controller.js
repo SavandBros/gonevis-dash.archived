@@ -40,20 +40,22 @@ function UserController($scope, $rootScope, $stateParams,
     };
 
     if (removeAvatar) {
-      this.user.get.media.picture = null;
+      $scope.user.get.media.picture = null;
+      $scope.user.get.media.thumbnail_48x48 = null;
+      $scope.user.get.media.thumbnail_128x128 = null;
+      $scope.user.get.media.thumbnail_256x256 = null;
       payload.picture = null;
     }
 
     API.UserUpdate.patch(payload,
       function (data) {
-        if (removeAvatar) {
-          $scope.user.get.media = null;
-        } else {
-          $scope.user = data;
+        if (!removeAvatar) {
+          $scope.user.get.name = data.name;
+          $scope.user.get.about = data.about;
+          $scope.user.get.location = data.location;
+          $scope.user.get.receive_email_notification = data.receive_email_notification;
         }
-
-        $scope.user = new Account(data);
-        $scope.user = AuthService.setAuthenticatedUser(data, true);
+        $scope.user = AuthService.setAuthenticatedUser($scope.user.get, true);
         $rootScope.$broadcast("gonevisDash.UserController:update");
 
         toaster.clear(toasters);
@@ -128,13 +130,13 @@ function UserController($scope, $rootScope, $stateParams,
         picture: file,
         key: file.name
       },
-      method: "PUT"
+      method: "PATCH"
     }).then(function (data) {
       $translate(["DONE", "PROFILE_PICTURE_UPDATED"]).then(function (translations) {
         toaster.info(translations.DONE, translations.PROFILE_PICTURE_UPDATED);
       });
-      $scope.user = new Account(data.data);
-      $scope.user = AuthService.setAuthenticatedUser(data.data, true);
+      $scope.user.get.media = data.data.media;
+      $scope.user = AuthService.setAuthenticatedUser($scope.user.get, true);
       $rootScope.$broadcast("gonevisDash.UserController:update");
     }, function (data) {
       $scope.errors = data.data;
