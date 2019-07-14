@@ -101,12 +101,14 @@
 </nav>
 
 <!-- Sidebar content -->
-<div class="sidebar-content noselect" ng-class="{'sidebar-close': !set.sidebar || state.includes('dash.entry-edit')}"
+<div class="sidebar-content noselect"
+     ng-class="{
+          'sidebar-close': !set.sidebar || state.includes('dash.entry-edit') ||
+           state.includes('site-new') && user.getSites().length < 1
+        }"
   ng-if="auth.isAuthenticated()">
   <!-- Main navs -->
   <div class="navigations">
-    <!-- Indicator -->
-    <div class="indicator"></div>
     <!-- Navigations -->
     <a ng-href="{{ state.href(nav.sref, {s: param.s ? param.s : set.lastSite, view: nav.view ? nav.view : null}) }}"
       ng-repeat="nav in mainNavs" ng-class="{active: state.includes(nav.sref)}" name="{{ nav.sref }}">
