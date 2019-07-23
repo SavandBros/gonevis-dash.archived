@@ -41,15 +41,14 @@ function UserController($scope, $rootScope, $stateParams,
 
     if (removeAvatar) {
       $scope.user.get.media.picture = null;
-      $scope.user.get.media.thumbnail_48x48 = null;
-      $scope.user.get.media.thumbnail_128x128 = null;
-      $scope.user.get.media.thumbnail_256x256 = null;
       payload.picture = null;
     }
 
     API.UserUpdate.patch(payload,
       function (data) {
-        if (!removeAvatar) {
+        if (removeAvatar) {
+          $scope.user.get.media = data.media;
+        } else {
           $scope.user.get.name = data.name;
           $scope.user.get.about = data.about;
           $scope.user.get.location = data.location;
