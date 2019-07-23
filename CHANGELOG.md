@@ -1,3 +1,14 @@
+2019.8.1
+========
+
+**Bug Fixes:**
+
+- Fixed #1213: Fix profile completion conditions.
+- Fixed #1212: Remove sidebar page indicator.
+- Fixed #1211: Fix sidebar not closing on new blog page.
+- Fixed #1210: Fix user settings not updating.
+
+
 2019.7.1
 ========
 
