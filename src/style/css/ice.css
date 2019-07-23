@@ -115,10 +115,6 @@ body.lights.off {
     white-space: nowrap;
 }
 
-.sidebar-content .navigations a:first-of-type {
-    margin-top: -46px;
-}
-
 .sidebar-content .navigations a>.arrow {
     width: 0;
     height: 0;
@@ -148,7 +144,7 @@ body.lights.off {
 }
 
 .sidebar-content .navigations a.active {
-    border-left-color: #d17100;
+    box-shadow: inset 3px 0 0 #d17100;
 }
 
 .sidebar-content a.active,
@@ -195,14 +191,6 @@ body.lights.off {
     height: 32px;
 }
 
-.sidebar-content .indicator {
-    position: relative;
-    width: 3px;
-    height: 46px;
-    background-color: #d17100;
-    transition: cubic-bezier(1, -0.35, 0, 1.24) all 0.5s;
-}
-
 .sidebar-content .navigations a .more {
     position: absolute;
     background: #ffffff;
@@ -234,12 +222,6 @@ body.lights.off {
 @media (max-height: 650px) {
     .sidebar-content a:not(.main) {
         padding: 8px 20px !important;
-    }
-    .sidebar-content .navigations a:first-of-type {
-        margin-top: -36px;
-    }
-    .sidebar-content .indicator {
-        height: 36px;
     }
 }
 
