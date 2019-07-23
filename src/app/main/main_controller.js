@@ -15,11 +15,9 @@ function MainController($scope, $rootScope, $state, $stateParams,
 
     $scope.isProfileCompleted = false;
 
-    API.User.get({
-        user_id: $scope.user.get.id
-      },
+    API.User.get({ user_id: $scope.user.get.id },
       function (data) {
-        $scope.userInformation = data;
+        $scope.userSettings = data;
         if (data.name && data.media.picture && data.about && data.location)  {
           $scope.isProfileCompleted = true;
         }
