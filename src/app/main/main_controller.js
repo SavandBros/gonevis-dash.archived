@@ -13,6 +13,17 @@ function MainController($scope, $rootScope, $state, $stateParams,
     $scope.param = $stateParams;
     $scope.user = AuthService.getAuthenticatedUser(true);
 
+    $scope.isProfileCompleted = false;
+
+    API.User.get({ user_id: $scope.user.get.id },
+      function (data) {
+        $scope.userSettings = data;
+        if (data.name && data.media.picture && data.about && data.location)  {
+          $scope.isProfileCompleted = true;
+        }
+      }
+    );
+
     $scope.Comment.initialize();
     $scope.Entry.initialize();
     $scope.Metrics.initialize();
@@ -21,8 +32,8 @@ function MainController($scope, $rootScope, $state, $stateParams,
     if (!$rootScope.isRestrict) {
       // Get site template
       API.SiteTemplateConfig.get({
-        siteId: site
-      }, function(data) {
+        siteId: site,
+      }, function (data) {
         $scope.siteTemplate = data.template_config;
       });
     }

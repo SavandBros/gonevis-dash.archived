@@ -28,14 +28,6 @@
     position: relative;
 }
 
-.settings-tab .indicator {
-    position: absolute;
-    height: 2px;
-    background: #d17100;
-    bottom: 0;
-    transition: cubic-bezier(1, -0.35, 0, 1.24) all 0.5s;
-}
-
 .settings-tab li,
 .settings-tab li a {
     display: inline-block;
