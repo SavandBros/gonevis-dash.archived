@@ -7,6 +7,17 @@
 - Fixed #1212: Remove sidebar page indicator.
 - Fixed #1211: Fix sidebar not closing on new blog page.
 - Fixed #1210: Fix user settings not updating.
+- Fixed #1204: Fix remove branding does not work.
+- Fixed #1206: Cannot read property 'get' of undefined.
+- Fixed #1208: Fix editor indent getting bleached.
+
+**Improvements:**
+
+- Closed #1215: Update pricing plans (Add google AdSense).
+
+**Features:**
+
+- Added #1185: Bookmarking for Reader.
 
 
 2019.7.1
@@ -16,14 +27,6 @@
 
 - Fixed #1197: Fix potential security vulnerabilities.
 - Fixed #1200: Fix user settings page.
-- Fixed #1204: Fix remove branding does not work.
-- Fixed #1206: Cannot read property 'get' of undefined.
-- Fixed #1208: Fix editor indent getting bleached.
-
-**Improvements:**
-
-- Closed #1215: Update pricing plans (Add google AdSense).
-
 
 2019.6.1
 ========
@@ -42,7 +45,6 @@
 **Features:**
 - Added #1171: Show start writing message when no posts.
 - Added #1173: Discord link to dashboard.
-- Added #1185: Bookmarking for Reader.
 
 **Bug Fixes:**
 - Fixed #1155: Fix top margin on main wrapper.
