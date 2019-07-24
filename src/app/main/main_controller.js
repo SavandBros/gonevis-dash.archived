@@ -143,6 +143,7 @@ function MainController($scope, $rootScope, $state, $stateParams,
     if (entries.length === 0 || entries.length === 2 &&
       entries[0] &&
       defaultSlugs.indexOf(entries[0].get.slug) !== -1 ||
+      entries.length === 2 &&
       entries[1] &&
       defaultSlugs.indexOf(entries[1].get.slug) !== -1) {
       return true;
