@@ -1,3 +1,14 @@
+2019.8.1
+========
+
+**Bug Fixes:**
+
+- Fixed #1213: Fix profile completion conditions.
+- Fixed #1212: Remove sidebar page indicator.
+- Fixed #1211: Fix sidebar not closing on new blog page.
+- Fixed #1210: Fix user settings not updating.
+
+
 2019.7.1
 ========
 
@@ -8,6 +19,10 @@
 - Fixed #1204: Fix remove branding does not work.
 - Fixed #1206: Cannot read property 'get' of undefined.
 - Fixed #1208: Fix editor indent getting bleached.
+
+**Improvements:**
+
+- Closed #1215: Update pricing plans (Add google AdSense).
 
 
 2019.6.1
@@ -38,7 +53,7 @@
 
 **Improvement:**
 - Closes #1158: Google AdService Conversion.
-- CLoses #1162: Move post status tabs next to search bar to save space.
+- Closes #1162: Move post status tabs next to search bar to save space.
 
 
 2019.4.1
