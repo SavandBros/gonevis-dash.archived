@@ -60,6 +60,7 @@
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
+            <p>&nbsp;</p>
           </div>
           <button class="btn btn-success plan-button">&nbsp;</button>
         </div>
@@ -91,6 +92,7 @@
             <p>All Media Library</p>
             <p>Your own logo</p>
             <p>No GoNevis.com branding</p>
+            <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
           </div>
@@ -127,6 +129,7 @@
             <p>All Media Library</p>
             <p>Your own logo</p>
             <p>No GoNevis.com branding</p>
+            <p>Google AdSense (Monetization)</p>
             <p>Your own Google Analytics</p>
             <p>Custom Footer</p>
           </div>
@@ -453,7 +456,8 @@
                    title="{{ 'REMOVE_BRANDING_TITLE' | translate }}">
             <label for="remove_branding" translate>REMOVE_BRANDING</label>
             <button class="btn btn-primary pull-right" type="button"
-                    disable-on-request="setCustomFooter(site.footer_text)">{{ 'SAVE' | translate }}
+                    disable-on-request="setCustomFooter(site.footer_text); removeBranding(!site.remove_branding)">
+              {{ 'SAVE' | translate }}
             </button>
           </div>
           <!-- Footer text (panel) -->

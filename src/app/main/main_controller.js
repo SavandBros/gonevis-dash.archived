@@ -13,6 +13,17 @@ function MainController($scope, $rootScope, $state, $stateParams,
     $scope.param = $stateParams;
     $scope.user = AuthService.getAuthenticatedUser(true);
 
+    $scope.isProfileCompleted = false;
+
+    API.User.get({ user_id: $scope.user.get.id },
+      function (data) {
+        $scope.userSettings = data;
+        if (data.name && data.media.picture && data.about && data.location)  {
+          $scope.isProfileCompleted = true;
+        }
+      }
+    );
+
     $scope.Comment.initialize();
     $scope.Entry.initialize();
     $scope.Metrics.initialize();
@@ -21,8 +32,8 @@ function MainController($scope, $rootScope, $state, $stateParams,
     if (!$rootScope.isRestrict) {
       // Get site template
       API.SiteTemplateConfig.get({
-        siteId: site
-      }, function(data) {
+        siteId: site,
+      }, function (data) {
         $scope.siteTemplate = data.template_config;
       });
     }
@@ -41,6 +52,10 @@ function MainController($scope, $rootScope, $state, $stateParams,
    * @type {object}
    */
   $scope.Comment = {
+    /**
+     * @type {boolean}
+     */
+    loading: false,
     /**
      * @type {array}
      */
@@ -71,6 +86,10 @@ function MainController($scope, $rootScope, $state, $stateParams,
    */
   $scope.Entry = {
     /**
+     * @type {boolean}
+     */
+    loading: false,
+    /**
      * @type {array}
      */
     list: [],
@@ -99,6 +118,10 @@ function MainController($scope, $rootScope, $state, $stateParams,
    * @type {object}
    */
   $scope.Metrics = {
+    /**
+     * @type {boolean}
+     */
+    loading: false,
     /**
      * @desc Initialize metrics
      */
@@ -129,7 +152,10 @@ function MainController($scope, $rootScope, $state, $stateParams,
       return false;
     }
     if (entries.length === 0 || entries.length === 2 &&
+      entries[0] &&
       defaultSlugs.indexOf(entries[0].get.slug) !== -1 ||
+      entries.length === 2 &&
+      entries[1] &&
       defaultSlugs.indexOf(entries[1].get.slug) !== -1) {
       return true;
     }

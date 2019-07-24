@@ -260,6 +260,7 @@ function SiteController($scope, $rootScope, $state, $stateParams, $window, toast
       amount: Number(plan.price),
       currency: "USD",
       accountId: $scope.user.email,
+      skin: 'modern',
       data: {
         plan_id: plan.id,
         site_id: site,

@@ -329,6 +329,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
       'header',
       'direction',
       'align',
+      'indent',
       "allow",
       "allowfullscreen",
       "webkitallowfullscreen",

@@ -15,6 +15,10 @@ function ReaderSaveService() {
     explore: {
       data: {},
       pageForm: {}
+    },
+    bookmarks: {
+      data: {},
+      pageForm: {}
     }
   };
 
