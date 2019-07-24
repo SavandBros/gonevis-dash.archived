@@ -26,7 +26,19 @@
 
 
 2019.6.1
-@@ -24,6 +42,7 @@
+========
+
+**Bug Fixes:**
+
+- Fixed #1187: Update dark mode colors of Reader.
+- Fixed #1189: Fix jQuery security vulnerability error.
+- Fixed #1192: Fix toaster for permission error at settings page.
+- Fixed #1194: Remove discord link from main page (it's still in help page).
+
+
+2019.5.1
+========
+
 **Features:**
 - Added #1171: Show start writing message when no posts.
 - Added #1173: Discord link to dashboard.
@@ -34,11 +46,13 @@
 
 **Bug Fixes:**
 - Fixed #1155: Fix top margin on main wrapper.
-@@ -34,7 +53,7 @@
+- Fixed #1153: Fix dark mode on reader and post/page edition.
+- Fixed #1129: Sidebar link is still active when in account state.
+- Fixed #1180: Hide sidebar when navigating through 'site-new' state.
+- Fixed #1182: Add comment support to Reader.
 
 **Improvement:**
 - Closes #1158: Google AdService Conversion.
-- CLoses #1162: Move post status tabs next to search bar to save space.
 - Closes #1162: Move post status tabs next to search bar to save space.
 
 
