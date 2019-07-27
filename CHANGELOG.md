@@ -7,6 +7,7 @@
 - Fixed #1212: Remove sidebar page indicator.
 - Fixed #1211: Fix sidebar not closing on new blog page.
 - Fixed #1210: Fix user settings not updating.
+- Fixed #1220: Fix reader list and detail.
 
 
 2019.7.1

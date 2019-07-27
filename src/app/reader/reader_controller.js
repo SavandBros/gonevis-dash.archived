@@ -120,8 +120,8 @@ function ReaderController($scope, API, $state, Pagination, Codekit, $translate, 
   $scope.bottomImage = function(post) {
     if (post.user.media.thumbnail_48x48) {
       return post.user.media.thumbnail_48x48;
-    } else if (post.site.media.cover_image) {
-      return post.site.media.cover_image.thumbnail_48x48;
+    } else if (post.site.logo) {
+      return post.site.logo.thumbnail_48x48;
     }
 
     return Codekit.getDefaultImage('tiny');
