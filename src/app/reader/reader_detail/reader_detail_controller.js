@@ -94,7 +94,7 @@ function ReaderDetailController($scope, $rootScope, $state, $sce, $stateParams, 
         // Post data
         $scope.post = data;
         // Post logo
-        $scope.siteLogo = data.site.media.logo ? data.site.media.logo.thumbnail_48x48 : Codekit.getDefaultImage("tiny");
+        $scope.siteLogo = data.site.logo ? data.site.logo.thumbnail_48x48 : Codekit.getDefaultImage("tiny");
         $scope.isFollowing = data.site.is_following;
         // Trust post content as HTML
         $scope.trustedContent = $sce.trustAsHtml(data.content);
