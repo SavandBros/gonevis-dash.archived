@@ -109,6 +109,10 @@
     color: #ccc;
 }
 
+.bottom-bar>.container {
+    padding-top: 0 !important;
+}
+
 .lights.off .bottom-bar a {
     color: #fff;
 }
