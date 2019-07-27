@@ -36,13 +36,23 @@ function ReaderDetailController($scope, $rootScope, $state, $sce, $stateParams, 
   }
 
   /**
+   * @desc Generate user profile link by given username
+   *
+   * @param {string} username User username
+   *
+   * @returns {string} URL address to user profile
+   */
+  function userProfileLink(username) {
+    return `${GoNevisEnv.apiEndpoint.split('/api/v1/')[0]}/@${username}/`;
+  }
+
+  /**
    * @desc Get current post comments.
    *
    * @param {string} postId
    */
   function getComments(postId) {
     API.ReaderComments.get({ entryId: postId }, data => {
-      console.log(data);
       angular.forEach(data.results, data => {
         $scope.comments.push(new Comment(data));
       });
@@ -102,7 +112,7 @@ function ReaderDetailController($scope, $rootScope, $state, $sce, $stateParams, 
         $translate(
           ["READER_DETAIL_INFO"], {
             site: { title: data.site.title, link: data.site.absolute_uri, subscribers: data.site.followers_count },
-            author: { name: data.user.name, link: data.user.get_absolute_uri }
+            author: { name: data.user.name, link: userProfileLink(data.user.username) }
           }
         ).then(function (translations) {
           $scope.bottomInfo = translations.READER_DETAIL_INFO;
