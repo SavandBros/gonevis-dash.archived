@@ -656,6 +656,7 @@ function EntryEditController($scope, $rootScope, UndoService, $state, $statePara
     // Inserting an image to editor
     else if (source === "editorAddImage") {
       $scope.editor.insertEmbed($scope.cursorIndex, 'image', dolphin.get.file);
+      $scope.editor.setContents($scope.editor.getContents());
       // If has no cover image, set this image as cover image
       if (!$scope.form.hasCoverImage()) {
         // Store to upload

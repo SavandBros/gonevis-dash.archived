@@ -8,6 +8,7 @@
 - Fixed #1211: Fix sidebar not closing on new blog page.
 - Fixed #1210: Fix user settings not updating.
 - Fixed #1220: Fix reader list and detail.
+- Fixed #1223: Fix editor not getting updated after image insertion.
 
 
 2019.7.1
