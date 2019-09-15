@@ -44,7 +44,7 @@ function SignupController($scope, $stateParams, $window, AuthService, API, Passw
       function() {
         form.errors = [];
         // Send to Google
-        $window.gtag('event', 'conversion', {'send_to': 'AW-830696480/6qhhCL6HnJEBEKDYjYwD'});
+        $window.gtag('event', 'conversion', {'send_to': 'AW-761190808/050HCLzP_qoBEJiz--oC'});
         // Sign user in
         AuthService.signIn(
           form.data.username,
