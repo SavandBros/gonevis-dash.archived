@@ -1,3 +1,10 @@
+2019.9.1
+========
+
+**Improvement:**
+- Closes #1158: Change Google AdService Conversion code.
+
+
 2019.8.1
 ========
 
