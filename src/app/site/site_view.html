@@ -70,12 +70,12 @@
         <div class="plan" id="personal">
           <!-- Title -->
           <div class="best-choice"><i class="fa fa-star fa-fw"></i> Best Choice</div>
-          <span class="plan-title">{{ plans[0].name }}</span>
-          <p>{{ plans[0].description }}</p>
+          <span class="plan-title">{{ plans[1].name }}</span>
+          <p>{{ plans[1].description }}</p>
           <div class="plan-price">
             <div class="main">
               <span>ONLY</span>
-              <h2><i class="fa fa-usd"></i> {{ plans[0].price }}</h2>
+              <h2><i class="fa fa-usd"></i> {{ plans[1].price }}</h2>
               <span>MONTHLY</span>
             </div>
           </div>
@@ -97,9 +97,9 @@
             <p>&nbsp;</p>
           </div>
           <!-- Pay -->
-          <button class="btn btn-success plan-button" ng-click="pay(plans[0])"
-                  ng-disabled="plans[0].isCurrent || paying">
-            {{ plans[0].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
+          <button class="btn btn-success plan-button" ng-click="pay(plans[1])"
+                  ng-disabled="plans[1].isCurrent || paying">
+            {{ plans[1].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
           </button>
         </div>
       </div>
@@ -107,12 +107,12 @@
       <div class="col-md-4">
         <div class="plan" id="ultra">
           <!-- Title -->
-          <span class="plan-title">{{ plans[1].name }}</span>
-          <p>{{ plans[1].description }}</p>
+          <span class="plan-title">{{ plans[0].name }}</span>
+          <p>{{ plans[0].description }}</p>
           <div class="plan-price">
             <div class="main">
               <span>ONLY</span>
-              <h2><i class="fa fa-usd"></i> {{ plans[1].price }}</h2>
+              <h2><i class="fa fa-usd"></i> {{ plans[0].price }}</h2>
               <span>MONTHLY</span>
             </div>
           </div>
@@ -134,9 +134,9 @@
             <p>Custom Footer</p>
           </div>
           <!-- Pay -->
-          <button class="btn btn-success plan-button" ng-click="pay(plans[1])"
-                  ng-disabled="plans[1].isCurrent || paying">
-            {{ plans[1].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
+          <button class="btn btn-success plan-button" ng-click="pay(plans[0])"
+                  ng-disabled="plans[0].isCurrent || paying">
+            {{ plans[0].isCurrent ? 'YOUR_PLAN' : 'UPGRADE' | translate }}
           </button>
         </div>
       </div>
