@@ -1,3 +1,7 @@
+This project is not being developed anymore and the new version is at [SavandBros/gonevis-dash-2](https://github.com/SavandBros/gonevis-dash-2).
+
+----
+
 # GoNevis Dash
 
 [![Build Status](https://travis-ci.org/SavandBros/gonevis-dash.svg?branch=master)](https://travis-ci.org/SavandBros/gonevis-dash)
